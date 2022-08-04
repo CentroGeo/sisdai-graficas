@@ -64,6 +64,9 @@ export default {
       type: Number,
       default: .33
     },
+    alto_vis: {
+      type: Number
+    },
     textoTooltip: {
       type: Function,
       default : function(){
@@ -114,7 +117,7 @@ export default {
       this.actualizandoDona();
     }
   },
-  mounted: function () {
+  mounted() {
     this.svg = d3.select("#"+this.dona_id+" svg.svg-dona");
     this.grupo_contenedor = this.svg.select("g.grupo-contenedor-de-dona");
     this.tooltip = d3.select("div#" + this.dona_id)
@@ -143,21 +146,40 @@ export default {
     window.removeEventListener("resize", this.reescalandoPantalla)
   },
   methods: {
-    configurandoDimensionesParaDona: function () {
+    configurandoDimensionesParaDona() {
+      let limites = d3.min([this.ancho, this.alto])
       this.pie.value((d) => d.cantidad);
       this.data_para_pay = this.pie(this.datos);
-      this.arc.innerRadius(this.ancho * this.radio_interno)
-          .outerRadius(this.ancho * this.radio_externo);
-      this.arc_texto.innerRadius(this.ancho * this.radio_texto)
-          .outerRadius(this.ancho * this.radio_texto);
+      this.arc.innerRadius(limites * this.radio_interno)
+          .outerRadius(limites * this.radio_externo);
+      this.arc_texto.innerRadius(limites * this.radio_texto)
+          .outerRadius(limites * this.radio_texto);
     },
-    configurandoDimensionesParaSVG: function () {
-      this.ancho = document.getElementById(this.dona_id).clientWidth;
-      this.alto = this.ancho;
-      this.svg.attr("width", this.ancho).attr("height", this.ancho);
+    configurandoDimensionesParaSVG() {
+      /*
+        El ancho siempre es responsivo, pero el alto sí se puede delimitar siempre y cuando
+        el alto sea menor que el ancho. Si lo que se busca es que haya un espacio en blanco
+        más pronunciado arriba y/o abajo de la dona, lo ideal es especificar márgenes con css
+
+      
+      */
+     this.ancho = document.getElementById(this.dona_id).clientWidth;
+      if(this.alto_vis){
+        if(this.alto_vis < this.ancho){
+          this.alto = this.alto_vis;
+        }
+        else{
+          this.alto = this.ancho
+        }
+      }else{
+          this.alto = this.ancho
+
+      }
+
+      this.svg.attr("width", this.ancho).attr("height", this.alto);
       this.grupo_contenedor.attr("transform", `translate(${this.ancho * .5}, ${this.alto * .5})`);
     },
-    creandoDona: function () {
+    creandoDona() {
       this.segmentos = this.grupo_contenedor
           .selectAll("paths")
           .data(this.data_para_pay)
@@ -181,7 +203,7 @@ export default {
       }
 
     },
-    actualizandoDona: function () {
+    actualizandoDona() {
       this.segmentos
           .attr('d', this.arc)
           .attr('fill', (d) => d.data.color)
@@ -220,12 +242,12 @@ export default {
 
       }
     },
-    reescalandoPantalla: function () {
+    reescalandoPantalla() {
       this.configurandoDimensionesParaSVG();
       this.configurandoDimensionesParaDona();
       this.actualizandoDona();
     },
-    clickButtonCategoria: function(indice) {
+    clickButtonCategoria(indice) {
       this.segmentos.interrupt()
           .transition()
           .duration(500)
@@ -268,7 +290,7 @@ export default {
       this.svg.select("path.rebanada-"+indice)
           .classed("activo", !this.svg.select("path.rebanada-"+indice).classed("activo"));
     },
-    mostrarTooltip: function(indice) {
+    mostrarTooltip(indice) {
 
       let pos = this.arc_texto.centroid(this.data_para_pay[indice]);
 
@@ -315,7 +337,7 @@ export default {
 
     },
 
-    reestablecerVista: function () {
+    reestablecerVista() {
       this.tooltip.style("visibility", "hidden");
       this.segmentos.interrupt()
           .transition()
