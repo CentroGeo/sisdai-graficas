@@ -26,7 +26,9 @@ libertad de customizar el componente al modificarlos.
 * `radio_texto`: (_Number_) Cantidad que se multiplica por el ancho del svg para dar un valor a la funciones
   `innerRadius` y `outerRadius` de d3 y que determinan la posición de los textos de porcentaje afuera de la dona. El 
   valor por defecto esde 0.33.
-
+* `textoTooltip`: (_Function_) que debe regresar el texto que queremos en el tooltip. Para usar los datos del segmento de dona, podemos acceder mediante `this.$refs['nombre_referencia'].tooltip_data_seleccionada.
+* `alto_vis`: (_Number_) Por defecto, una dona estará en un SVG cuadrado, en dónde el ancho y el alto midan lo mismo, y el alto esté definido por el tamaño del contenedor. Sin embargo, si se desea controlar la altura de la dona, se puede usar esta propiedad para especificarlo. En caso de que el ancho sea mayor que `alto_vis`, la dona se centrará y su altura se ajustará para caber siempre en el svg. Si el `alto_vis` es mayor que el ancho, entonces se ignora el valor y se genera un svg cuadrado. Si el/la usuara desea una separacion vertical entre la dona y el resto del contenido, deberá generarlo con css, con márgenes auto para el svg por ejemplo 
+ 
 ## Ejemplos de uso
 
 En esta sección se detallan dos distintos casos de uso de este componente.

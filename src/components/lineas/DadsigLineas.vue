@@ -29,7 +29,8 @@
         </defs>
         <g class="eje-x"></g>
         <g class="eje-y"></g>
-        <g class="gupo-contenedor-de-lineas">
+        <g class="grupo-fondo"></g>
+        <g class="grupo-contenedor-de-lineas">
           <line class="guia-x"></line>
           <line class="guia-y"></line>
         </g>
@@ -167,7 +168,7 @@ export default {
   mounted() {
     this.claves = this.variables.map(d => d.cve)
     this.svg = d3.select("div#" + this.linea_id + " svg.svg-lineas");
-    this.grupo_contenedor = this.svg.select("g.gupo-contenedor-de-lineas");
+    this.grupo_contenedor = this.svg.select("g.grupo-contenedor-de-lineas");
 
     this.guia_x = this.grupo_contenedor.select("line.guia-x")
     this.guia_y = this.grupo_contenedor.select("line.guia-y")
@@ -180,6 +181,7 @@ export default {
         .select("g.eje-y");
 
     this.grupo_frente = this.svg.select("g.grupo-frente")
+    this.grupo_fondo = this.svg.select("g.grupo-fondo")
 
     this.configurandoDimensionesParaSVG();
     this.configurandoDimensionesParaLinea();
@@ -451,7 +453,6 @@ export default {
             .style("stroke", "gray")
         this.tooltip
             .style("visibility", "visible")
-
             .style("left", evento.layerX - this.margen.izquierda < .6 * this.width ? (evento.layerX + 10 + this.ancho_leyenda_y) + "px" : (+evento.layerX - this.ancho_tooltip - 20 + this.ancho_leyenda_y) + "px")
             .style("top", evento.layerY + "px")
             .attr("width", this.ancho_tooltip)
