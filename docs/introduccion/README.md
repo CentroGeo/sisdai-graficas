@@ -60,6 +60,7 @@ Se listan a continuación las visualizaciones de datos que se pueden construir u
 | `<DadsigDonas/>` |Donas|
 | `<DadsigCajasBigotes/>` |Diagrama de cajas y bigotes; Boxplot|
 | `<DadsigLineas/>` |Líneas|
+| `<DadsigAreasApiladas/>` |Áreas apiladas|
 
 Se puede notar que distintos tipos de barras (sencillas, horizontales, verticales, etc.) se construyen usando el 
 mismo componente de visualización. Esto es porque por medio de parámetros se puede customizar un mismo gráfico de barras.

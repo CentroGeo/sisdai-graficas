@@ -1,0 +1,50 @@
+{
+  "VTODAS":{
+    "color":"#726013",
+    "title":"Todas",
+    "title2":"del virus SARS-CoV-2"
+  },
+  "VOC": {
+    "color" : "#98280D",
+    "title":"Preocupación (VOC)",
+    "title2":"de preocupación (VOC)",
+    "variantes":{
+      "Omicron": "#FFCE00",
+      "Delta": "#FA5600",
+      "Gamma": "#C7690D",
+      "Beta": "#FF9F4D",
+      "Alpha": "#FFAC99"
+    }
+  },
+  "VOI":{
+    "color":"#58508D",
+    "title":"Interés (VOI)",
+    "title2":"de interés (VOI)",
+    "variantes":{
+      "Mu": "#29037B",
+      "Lambda": "#A359D9"
+    }
+  },
+  "VUM":{
+    "color":"#128984",
+    "title":"Monitoreo (VUM)",
+    "title2":"de monitoreo (VUM)",
+    "variantes":{
+      "B.1.526":"#033545",
+      "B.1.617.1":"#0D7163"
+    }
+  },
+  "VSIN":{
+    "title":"Sin clasificación",
+    "title2":"sin clasificación",
+    "color":"#085373",
+    "*":"#085373"
+  }
+  ,
+  "VRESTANTES":{
+    "variantes":{
+      "variantes_restantes": "#bcbcbc"
+    }
+  }
+
+}

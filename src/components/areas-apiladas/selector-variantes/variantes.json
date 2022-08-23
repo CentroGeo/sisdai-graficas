@@ -1,0 +1,27 @@
+[
+  {
+    "orden": 1,
+    "clave": "VTODAS",
+    "nombre": "Todas las variantes"
+  },
+  {
+    "orden": 2,
+    "clave": "VOC",
+    "nombre": "Variantes de preocupación"
+  },
+  {
+    "orden": 3,
+    "clave": "VOI",
+    "nombre": "Variantes de interés"
+  },
+  {
+    "orden": 4,
+    "clave": "VUM",
+    "nombre": "Variantes de monitoreo"
+  },
+  {
+    "orden": 5,
+    "clave": "VSIN",
+    "nombre": "Variantes sin clasificación"
+  }
+]
