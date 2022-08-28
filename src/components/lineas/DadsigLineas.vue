@@ -198,13 +198,13 @@ export default {
     this.guia_y
         .attr("x1", 0)
         .attr("y1", 0)
-        .attr("x2", this.width)
+        .attr("x2", this.ancho)
         .attr("y2", 0)
     this.guia_x
         .attr("x1", 0)
         .attr("y1", 0)
         .attr("x2", 0)
-        .attr("y2", this.height)
+        .attr("y2", this.alto)
 
     window.addEventListener("resize", this.reescalandoPantalla);
   },
@@ -248,10 +248,12 @@ export default {
     configurandoDimensionesParaSVG() {
       this.ancho_leyenda_y = document.querySelector("#" + this.linea_id + " .rotation-wrapper-outer .element-to-rotate")
           .clientHeight
-      this.width = document.querySelector(`#${this.linea_id} .contenedor-tooltip-svg`).clientWidth - this.margen.izquierda - this.margen.derecha - this.ancho_leyenda_y;
-      this.height = this.alto_vis - this.margen.arriba - this.margen.abajo;
-      this.svg.attr("width", this.width + this.margen.izquierda + this.margen.derecha)
-          .attr("height", this.height + this.margen.arriba + this.margen.abajo)
+      this.ancho = document.querySelector(`#${this.linea_id}`).clientWidth - this.margen.derecha - this.margen.izquierda - this.ancho_leyenda_y
+      this.alto = this.alto_vis - this.margen.arriba - this.margen.abajo;
+
+      this.svg
+          .attr("width", this.ancho + this.margen.derecha + this.margen.izquierda)
+          .attr("height", this.alto + this.margen.arriba + this.margen.abajo)
           .style("left", this.ancho_leyenda_y + "px");
 
       this.grupo_contenedor
@@ -264,7 +266,7 @@ export default {
       })
       this.escalaX = d3.scaleTime()
           .domain(d3.extent(this.datos.map((d) => d.fech)))
-          .range([0, this.width])
+          .range([0, this.ancho])
 
       this.claves = this.variables.map(d => d.cve);
       if (this.escala_logaritmica) {
@@ -273,7 +275,7 @@ export default {
               d3.min(this.datos.map((d) => d3.min(this.claves.map((dd) => d[dd])))),
               d3.max(this.datos.map((d) => d3.max(this.claves.map((dd) => d[dd]))))
             ])
-            .range([this.height, 0])
+            .range([this.alto, 0])
       } else {
         if (this.claves.length != 0) {
           this.escalaY = d3.scaleLinear()
@@ -281,13 +283,13 @@ export default {
                 d3.min(this.datos.map((d) => d3.min(this.claves.map((dd) => d[dd])))),
                 d3.max(this.datos.map((d) => d3.max(this.claves.map((dd) => d[dd]))))
               ])
-              .range([this.height, 0])
+              .range([this.alto, 0])
         } else {
           this.escalaY = d3.scaleLinear()
               .domain([
                 0, 0
               ])
-              .range([this.height, 0])
+              .range([this.alto, 0])
         }
 
       }
@@ -379,7 +381,7 @@ export default {
       }
 
 
-      this.eje_x.attr("transform", `translate(${this.margen.izquierda}, ${this.height + this.margen.arriba})`)
+      this.eje_x.attr("transform", `translate(${this.margen.izquierda}, ${this.alto + this.margen.arriba})`)
           .call(
               d3.axisBottom(this.escalaX)
                   .ticks(5)
@@ -398,7 +400,7 @@ export default {
           .call(d3.axisLeft(this.escalaY).ticks(5));
       this.eje_y.select("path").style("opacity", 0);
       this.eje_y.selectAll("line")
-          .attr("x2", this.width)
+          .attr("x2", this.ancho)
           .style("stroke-dasharray", "3 2 ")
           .style("stroke", "gray");
     },
@@ -440,7 +442,7 @@ export default {
             .duration(50)
             .attr("x1", 0)
             .attr("y1", this.escalaY(this.tooltip_data_seleccionada.cat))
-            .attr("x2", this.width)
+            .attr("x2", this.ancho)
             .attr("y2", this.escalaY(this.tooltip_data_seleccionada.cat))
             .style("stroke", "gray")
         this.guia_x
@@ -449,11 +451,11 @@ export default {
             .attr("x1", this.escalaX(this.tooltip_data_seleccionada.fech))
             .attr("y1", 0)
             .attr("x2", this.escalaX(this.tooltip_data_seleccionada.fech))
-            .attr("y2", this.height)
+            .attr("y2", this.alto)
             .style("stroke", "gray")
         this.tooltip
             .style("visibility", "visible")
-            .style("left", evento.layerX - this.margen.izquierda < .6 * this.width ? (evento.layerX + 10 + this.ancho_leyenda_y) + "px" : (+evento.layerX - this.ancho_tooltip - 20 + this.ancho_leyenda_y) + "px")
+            .style("left", evento.layerX - this.margen.izquierda < .6 * this.ancho ? (evento.layerX + 10 + this.ancho_leyenda_y) + "px" : (+evento.layerX - this.ancho_tooltip - 20 + this.ancho_leyenda_y) + "px")
             .style("top", evento.layerY + "px")
             .attr("width", this.ancho_tooltip)
             .attr("height", 30)
@@ -463,8 +465,7 @@ export default {
             .style("min-width", this.ancho_tooltip + "px")
             .style("border-radius", "8px")
             .style("width", this.ancho_tooltip + "px")
-            .attr("height", 70)
-            .style("padding", "0 3px 0 10px");
+            .style("padding", "0 3px 0 10px")
 
         contenido_tooltip
             .select("div.tooltip-cifras")
@@ -496,12 +497,12 @@ export default {
             .attr("x1", this.escalaX(this.tooltip_data_seleccionada.fech))
             .attr("y1", 0)
             .attr("x2", this.escalaX(this.tooltip_data_seleccionada.fech))
-            .attr("y2", this.height)
+            .attr("y2", this.alto)
             .style("stroke", "gray")
 
         this.tooltip
             .style("visibility", "visible")
-            .style("left", evento.layerX - this.margen.izquierda < .5 * this.width ? (evento.layerX + 20 + 1 * this.margen.izquierda) + "px" : (+evento.layerX - this.ancho_tooltip - 20 + this.ancho_leyenda_y) + "px")
+            .style("left", evento.layerX - this.margen.izquierda < .5 * this.ancho ? (evento.layerX + 20 + 1 * this.margen.izquierda) + "px" : (+evento.layerX - this.ancho_tooltip - 20 + this.ancho_leyenda_y) + "px")
             .style("top", 0 + "px")
             .attr("width", this.ancho_tooltip)
             .attr("height", 30)
