@@ -1,22 +1,7 @@
 <template>
-  <div :id="stream_graph_id" class="contenedor-stream-graph">    
+  <div :id="areas_apiladas_id" class="contenedor-stream-graph">    
     <slot name="encabezado"></slot>
     <div class="contenedor-tooltip-svg">
-      <!--<div class="tooltip">
-        <div class="tooltip-contenido">
-          <div class="contenedor-boton-cerrar">
-            <p class="tooltip-encabezado"></p>
-            <button class="boton-cerrar-tooltip" @click="mouseOutStreams">
-              &times;
-            </button>
-          </div>
-          <hr class="no-margin">
-          <p class="tooltip-positivos"></p>
-          <hr class="no-margin">
-          <p class="tooltip-cifra"></p>
-          <div class="tooltip-contenido-ul"></div>
-        </div>
-      </div>-->
       <div class="tooltip">
         <div class="tooltip-contenido">
           <div class="contenedor-boton-cerrar">
@@ -36,11 +21,9 @@
         </div>
       </div>
       <svg class="svg-streamgraph">
-        
         <g class="grupo-fondo"></g>
         <g class="grupo-contenedor-de-streams"></g>
         <g class="grupo-contenedor-de-ejes"></g>
-        
         <g class="grupo-frente">
 					<g class="eje-x"></g>
         	<g class="eje-y"></g>
@@ -54,52 +37,6 @@
       </div>
     </div>
     <slot name="pie"></slot>
-    <!---<div id="leyenda-streams-apilados">
-      <div class="leyenda-stream">
-        <p class="titulo-leyenda">{{ titulo_leyenda }}</p>
-        <button class="quita-pon" @click="quitaPon">{{ status_button }}</button>
-      </div>
-      <div class="checks">
-        <div v-for="(variable,i) in variables" :key="variable.id" class="label-1">
-          <CheckboxColor v-model="lista_filtros_activos[i]" :color="variable.color">
-            <span v-if="variable.nombre === 'variantes_restantes'"  class="categoria-texto">Otras variantes</span>
-            <span v-else class="categoria-texto">{{ variable.nombre }}</span>
-          </CheckboxColor>
-          <button v-if="i === variables.length-1 && $store.getters.varianteSeleccionada === 'VTODAS'" 
-            id="boton_otras"
-            class="boton-info-otras" 
-            @click="toggleTooltip"
-            >
-            <span>i</span>
-            <div class="tooltip" :class="{ mostrar: tooltip_is_showing }">
-              La categoría “otras variantes” hace referencia a las variantes que
-              actualmente no pertenecen a ninguna de las clasificaciones VOC,
-              VOI o VUM, debido a que sus niveles de circulación actual son poco
-              significativas para la salud pública mundial, su presencia durante
-              un periodo prolongado no ha resultado en una afectación de la
-              situación epidemiológica general y/o no hay evidencia científica
-              que demuestre que las variantes dentro de esta categoría poseen
-              características preocupantes
-              <a href="https://www.who.int/es/activities/tracking-SARS-CoV-2-variants">(OMS, 2022)</a>.
-            </div>
-          </button>
-        </div>
-      </div>
-      <div class="notas">
-        <hr />
-        <h4 class="titulo-notas">Notas</h4>
-        <p class="texto-notas">
-          La gráfica muestra por cada semana epidemiológica del año 1) el número de muestras analizadas, así como a qué variante pertenecieron, según el día en que se tomó la muestra y 2) el número de casos positivos a COVID-19 registrados de acuerdo a la fecha de ingreso del paciente (datos obtenidos de la Secretaría de Salud DGE en Secretaría de Salud.DGE.
-          <a
-            class="link-externo"
-            href="https://www.gob.mx/salud/documentos/datos-abiertos-152127"
-            target="_blank"
-            rel="noopener"
-            >https://www.gob.mx/salud/documentos/datos-abiertos-152127</a>).
-        </p>
-      </div>
-    </div>
-    -->
     <div v-show="logo_conacyt" class="grid-column-4 grid-column-6-esc">
       <a class="boton boton-conacyt" href="https://conacyt.mx/" target="_blank">
         <img src="https://conacyt.mx/wp-content/uploads/2021/10/logo_conacyt_con_sintagma_azul_completo.svg" alt="Conacyt" height="28px">
@@ -119,16 +56,11 @@ export default {
     CheckboxColor,
   },
   props: {
-    stream_graph_id: String,
+    areas_apiladas_id: String,
     datos: Array,
     variables: Array,
     titulo_eje_y: String,
     titulo_eje_x: String,
-    
-    
-    nombre_variables: {
-      type: Object,
-    },
     nombre_columna_horizontal:String,
     conversionTemporal: {
       type: Function,
@@ -154,7 +86,7 @@ export default {
       default: 200,
     },
 		tickFormat:{
-			default: (d) => d + "%",
+			default: (d) => d.toLocaleString("en"),
 			type: Function
 		},
     margen: {
@@ -190,8 +122,6 @@ export default {
       this.actualizandoStreams();
     },
     datos() {
-
-			console.log("cambiando datos")
       this.configurandoDimensionesParaSVG();
 			this.configurandoDimensionesParaStream();
       this.creandoStreams()
@@ -204,33 +134,14 @@ export default {
   },
   data: () => (
     {
-      notas_open: false,
-      orden_inicial: true,
-      zoom_activo: 'hidden',
-      width: 200,
-      height: 0,
-      height_vis: Number,
-      lista_filtros_activos: Array,
-      data_porcentual: [],
-      status_button: "Quitar todos",
-      tooltip_is_showing: false,
-      width: 200,
       ancho_leyenda_y: 0,
       tooltip_data_seleccionada: Object
     }
   ),
   mounted() {
-    //this.boton_otras = document.getElementById('boton_otras');
     this.alto_vis = this.alto_vis;
-
-    /*this.lista_filtros_activos = this.variables.map(d => true);
-    this.categorias_checkeadas = this.variables.map((d, i) => this.lista_filtros_activos[i] ? d.id : "").filter((d) => d != "");*/
-
-    this.svg = d3.select(`div#${this.stream_graph_id} svg.svg-streamgraph`);
+    this.svg = d3.select(`div#${this.areas_apiladas_id} svg.svg-streamgraph`);
     this.grupo_contenedor = this.svg.select('g.grupo-contenedor-de-streams');
-    
-    
-    
     this.grupo_frente = this.svg.select("g.grupo-frente")
     this.grupo_fondo = this.svg.select("g.grupo-fondo")
 
@@ -246,9 +157,12 @@ export default {
     this.creandoStreams();
     this.actualizandoStreams();
 
-    this.tooltip = d3.select("div#" + this.stream_graph_id + " div.tooltip")
+    this.tooltip = d3.select("div#" + this.areas_apiladas_id + " div.tooltip")
     window.addEventListener('resize', this.reescalandoPantalla);
 
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.reescalandoPantalla)
   },
   methods: {
     multiFormat(date) {
@@ -288,10 +202,10 @@ export default {
                               : this.formatMonthYear)(date);
     },
     configurandoDimensionesParaSVG() {
-      this.ancho_leyenda_y = document.querySelector("#" + this.stream_graph_id + " .rotation-wrapper-outer .element-to-rotate")
+      this.ancho_leyenda_y = document.querySelector("#" + this.areas_apiladas_id + " .rotation-wrapper-outer .element-to-rotate")
           .clientHeight
 
-      this.ancho = document.querySelector(`#${this.stream_graph_id}`).clientWidth - this.margen.derecha - this.margen.izquierda - this.ancho_leyenda_y
+      this.ancho = document.querySelector(`#${this.areas_apiladas_id}`).clientWidth - this.margen.derecha - this.margen.izquierda - this.ancho_leyenda_y
       this.alto = this.alto_vis - this.margen.arriba - this.margen.abajo;
 
       this.svg
@@ -311,6 +225,8 @@ export default {
 
     },
     configurandoDimensionesParaStream() {
+      console.log(this.datos)
+
       this.datos.forEach((d) => {
         d.fech = this.conversionTemporal(d[this.nombre_columna_horizontal])
       })
@@ -325,7 +241,6 @@ export default {
       this.escalaY = d3.scaleLinear()
         .domain([0, d3.max(this.datos.map((d) => d3.sum(this.variables.map((dd) => d[dd.id]))))])
         .range([this.alto, 0]);
-
 
       this.escalaX = d3.scaleTime()
         .domain(d3.extent(this.datos.map((d) => d.fech)))
@@ -456,94 +371,6 @@ export default {
             .style("height", contenidoTooltip.style("height"))
             .style("width", contenidoTooltip.style("width"))
       }
-
-      /*
-      let datum = x0 - d0.fech > d1.fech - x0 ? d1 : d0;
-      let total_muestras = d3.sum(this.categorias_checkeadas.map((d) => this.datos.filter((dd) => dd[this.nombre_variables.info_extra_1] == datum[this.nombre_variables.info_extra_1])[0][d]));
-  
-
-      let cifras_variables = this.categorias_checkeadas.map((d) =>  {
-        if(this.variables.filter(dd => dd.id == d)[0].nombre === 'variantes_restantes'){
-          return `<li>
-            <span class="span-tooltip-color" style="background: ${this.variables.filter(dd => dd.id == d)[0].color} "></span>
-            Otras variantes
-            <b>${Math.round(10 * datum[d]) / 10}%</b>
-            ${this.datos.filter((dd) => dd[this.nombre_variables.info_extra_1] == datum[this.nombre_variables.info_extra_1])[0][d]}
-          </li>`
-       } else {
-        return `<li>
-        <span class="span-tooltip-color" style="background: ${this.variables.filter(dd => dd.id == d)[0].color} "></span>
-          ${this.variables.filter(dd => dd.id == d)[0].nombre} <b>${Math.round(10 * datum[d]) / 10}%</b>
-          ${this.datos.filter((dd) => dd[this.nombre_variables.info_extra_1] == datum[this.nombre_variables.info_extra_1])[0][d]}
-        </li>`
-       }
-      })
-      this.linea_guia
-        .transition().duration(100)
-        .attr("x1", this.escalaX(datum.fech))
-        .attr("x2", this.escalaX(datum.fech))
-        .attr("y1", this.escalaY(0))
-        .attr("y2", this.escalaY(100))
-        .style("stroke-opacity", 1)
-
-
-      this.tooltip.style('visibility', 'visible');
-      this.tooltip
-        .style('width', this.ancho_tooltip + "px")
-        .style('height', 30 + "px");
-      // Estilo del tooltip
-      const contenidoTooltip = this.tooltip.select('div.tooltip-contenido')
-        .style('background', 'rgba(0, 0, 0,.8)')
-        .style('min-width', this.ancho_tooltip)
-        .style('border-radius', '8px')
-        .style('width', `${this.ancho_tooltip}px`)
-        // Aquí se agrega padding o margen interno de 10px para todo el contenedor del contenido del tooltip
-        .style('padding', '10px');
-
-
-      contenidoTooltip
-        .select('p.tooltip-encabezado')
-        .html(`<b>Semana epidemiológica ${datum[this.nombre_variables.nombre].slice(2,4)} <br/>
-          ${datum[this.nombre_variables.info_extra_1]} - ${datum[this.nombre_variables.info_extra_2]}
-        </b>`)
-        .style('margin', '0')
-        .style('padding', '0 0 5px 0');
-
-      // Casos positivos a COVID
-      let casos_positivos;
-      this.datos_positivos.map(d => { datum["se"] === d.se ? casos_positivos = d.positivos : '' })
-      contenidoTooltip
-        .select('p.tooltip-positivos')
-        .html(`Casos positivos a COVID: <b>${casos_positivos.toLocaleString()}</b>`)
-        .style('margin', '0')
-        .style('padding', '0 0 5px 0');
-
-      contenidoTooltip
-        .select('p.tooltip-cifras')
-        // Bold para las cifras y/o porcentajes
-        .html(`Total de muestras: <b>${total_muestras.toLocaleString()}</b>`)
-        .style('margin', '0')
-        .style('padding', '0 0 5px 0');
-      cifras_variables
-
-      contenidoTooltip
-        .select('div.tooltip-contenido-ul')
-        .html(`<ul>${cifras_variables.join("")}</ul>`)
-        .style('margin', '0')
-        .style('padding', '0');
-      console.log(contenidoTooltip.style('height'))
-      this.tooltip
-        .style('height', contenidoTooltip.style('height') + "px")
-        .style('width', (parseInt(contenidoTooltip.style('width'), 10) + 13) + "px")
-      if (window.innerWidth > 798) {
-        this.tooltip
-          .style('left', (evento.layerX < 0.5 * this.ancho ? evento.layerX + 20 : evento.layerX - this.ancho_tooltip - 20) + "px")
-          .style('top', (this.alto * .5 - .4 * parseInt(contenidoTooltip.style('height')) + this.margen.arriba) + "px");
-      } else {
-        this.tooltip
-          .style('left', (this.ancho * .5 - .5 * parseInt(contenidoTooltip.style('width')) + this.margen.izquierda) + "px")
-          .style('top', (this.alto * .5 - .5 * parseInt(contenidoTooltip.style('height'))) + "px");
-      }*/
     },
 
     cerrarTooltip() {
@@ -551,10 +378,8 @@ export default {
     },
   },
 };
-/* eslint-enable */
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 
 svg.svg-streamgraph {
@@ -653,5 +478,4 @@ div.contenedor-tooltip-svg {
     }
   }
 }
-
 </style>

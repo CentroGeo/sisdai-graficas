@@ -84,10 +84,6 @@ export default {
       type: String,
       default: ""
     },
-    color_linea: {
-      type: String,
-      default: () => '#000'
-    },
     ancho_tooltip: {
       type: Number,
       default: 180

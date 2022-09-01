@@ -60,8 +60,7 @@ Los siguiente parámetros se pueden usar para modificar la visualización.
 
 * `escala_logaritmica` (_Boolean_) Valor booleano para cambiar de la escala default (cuando es `false`) lineal a la 
 escala logarítmica.`falso` por default.
-* `titulo_tooltip` (_String_) Cadena de caracteres para agregar un título de tooltip, es `""` por default.
-* `color_linea` (_String_) Por default el color de la(s) línea(s) a graficar será `#000`.
+
 * `tooltip_activo` (_Boolean_) Indica si se quiere activar el tooltip. Es `true` por default.
 * `tipo_tooltip` (_String_) Cadena de caracteres que indica el tipo de tooltip. Por default es `"general"` y 
 muestra todos los datos.
