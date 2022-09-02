@@ -12,7 +12,7 @@
 //import  DaiMaps from "../../src/index.js"
 
 
-import { DadsigBarras, DadsigDonas, DadsigLineas, DadsigCajasBigotes, DadsigDiagramaProcesos} from "../../src/index.js"
+import { DadsigBarras, DadsigDonas, DadsigLineas, DadsigCajasBigotes, DadsigDiagramaProcesos, DadsigAreasApiladas} from "../../src/index.js"
 import "./styles/index.scss"
 
 /*export default ({
@@ -26,6 +26,8 @@ import "./styles/index.scss"
 }
 */
 
+import Vuex from 'vuex';
+
 export default ({
   Vue, // the version of Vue being used in the VuePress app
   options, // the options for the root Vue instance
@@ -37,5 +39,11 @@ export default ({
   Vue.use(DadsigDonas)
   Vue.use(DadsigLineas)
   Vue.use(DadsigDiagramaProcesos)
+  Vue.use(DadsigAreasApiladas)
   // ...apply enhancements for the site.
+  
+
+
+  Vue.use(Vuex);
+
 }

@@ -1,6 +1,6 @@
 {
   "name": "dadsig-graficas",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "private": true,
   "licence": "MIT",
   "files": [
@@ -17,7 +17,8 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
-    "d3": "^7.0.0"
+    "d3": "^7.0.0",
+    "vuex": "^3.4.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.13",

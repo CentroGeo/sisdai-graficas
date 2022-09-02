@@ -3,7 +3,8 @@ import {
     DadsigDonas,
     DadsigLineas,
     DadsigCajasBigotes,
-    DadsigDiagramaProcesos
+    DadsigDiagramaProcesos,
+    DadsigAreasApiladas,
 } from "./components"
 
 import "./scss/estilogeneral.scss"
@@ -18,8 +19,7 @@ export default function plugin(Vue) {
     Vue.use(DadsigLineas)
     Vue.use(DadsigCajasBigotes)
     Vue.use(DadsigDiagramaProcesos)
-
-
+    Vue.use(DadsigAreasApiladas)
 }
 
 export {
@@ -28,5 +28,6 @@ export {
     DadsigDonas,
     DadsigLineas,
     DadsigCajasBigotes,
-    DadsigDiagramaProcesos
+    DadsigDiagramaProcesos,
+    DadsigAreasApiladas,
 }
