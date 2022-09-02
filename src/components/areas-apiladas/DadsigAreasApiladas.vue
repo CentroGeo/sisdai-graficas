@@ -1,127 +1,93 @@
 <template>
-  <div :id="stream_graph_id" class="contenedor-stream-graph">    
-    <div class="header-barras">
-      <h3 v-if="titulo" class="titulo-visualizacion">{{ titulo }}</h3>
-    </div>
-    <div class="contenedor-svg">
-      <div class="tooltip-fo">
+  <div :id="areas_apiladas_id" class="contenedor-stream-graph">
+    <slot name="encabezado"></slot>
+    <div class="contenedor-tooltip-svg">
+      <div class="tooltip">
         <div class="tooltip-contenido">
           <div class="contenedor-boton-cerrar">
-            <p class="tooltip-encabezado"></p>
-            <button class="boton-cerrar-tooltip" @click="mouseOutStreams">
-              <!-- <img alt="Cerrar Tooltip" src="@/assets/imgs/cerrar.svg"> -->
+            <button class="boton-cerrar-tooltip" @click="cerrarTooltip">
+              &times;
             </button>
           </div>
-          <hr class="no-margin">
-          <p class="tooltip-positivos"></p>
-          <hr class="no-margin">
-          <p class="tooltip-cifra"></p>
-          <div class="tooltip-contenido-ul"></div>
+          <div class="tooltip-cifras"></div>
+        </div>
+      </div>
+      <div class="rotation-wrapper-outer">
+        <div class="rotation-wrapper-inner">
+          <div
+            :style="{
+              width: `${alto_vis - margen.arriba - margen.abajo}px`,
+              transform: `rotate(-90deg)translateX(calc(-100% - ${
+                0.5 * margen.arriba
+              }px))`,
+            }"
+            class="element-to-rotate"
+          >
+            <p style="padding: 10px 0 5px 0" v-html="titulo_eje_y"></p>
+          </div>
         </div>
       </div>
       <svg class="svg-streamgraph">
+        <g class="grupo-fondo"></g>
         <g class="grupo-contenedor-de-streams"></g>
         <g class="grupo-contenedor-de-ejes"></g>
-        <g class="grupo-rect">
-          <rect></rect>
+        <g class="grupo-frente">
+          <g class="eje-x"></g>
+          <g class="eje-y"></g>
+          <line class="guia-x"></line>
         </g>
       </svg>
-    </div>
-    <div id="leyenda-streams-apilados">
-      <div class="leyenda-stream">
-        <p class="titulo-leyenda">{{ titulo_leyenda }}</p>
-        <button class="quita-pon" @click="quitaPon">{{ status_button }}</button>
-      </div>
-      <div class="checks">
-        <div v-for="(variable,i) in variables" :key="variable.id" class="label-1">
-          <CheckboxColor v-model="lista_filtros_activos[i]" :color="variable.color">
-            <span v-if="variable.nombre === 'variantes_restantes'"  class="categoria-texto">Otras variantes</span>
-            <span v-else class="categoria-texto">{{ variable.nombre }}</span>
-          </CheckboxColor>
-          <button v-if="i === variables.length-1 && $store.getters.varianteSeleccionada === 'VTODAS'" 
-            id="boton_otras"
-            class="boton-info-otras" 
-            @click="toggleTooltip"
-            >
-            <span>i</span>
-            <div class="tooltip" :class="{ mostrar: tooltip_is_showing }">
-              La categoría “otras variantes” hace referencia a las variantes que
-              actualmente no pertenecen a ninguna de las clasificaciones VOC,
-              VOI o VUM, debido a que sus niveles de circulación actual son poco
-              significativas para la salud pública mundial, su presencia durante
-              un periodo prolongado no ha resultado en una afectación de la
-              situación epidemiológica general y/o no hay evidencia científica
-              que demuestre que las variantes dentro de esta categoría poseen
-              características preocupantes
-              <a href="https://www.who.int/es/activities/tracking-SARS-CoV-2-variants">(OMS, 2022)</a>.
-            </div>
-          </button>
-        </div>
-      </div>
-      <div class="notas">
-        <hr />
-        <h4 class="titulo-notas">Notas</h4>
-        <p class="texto-notas">
-          La gráfica muestra por cada semana epidemiológica del año 1) el número de muestras analizadas, así como a qué variante pertenecieron, según el día en que se tomó la muestra y 2) el número de casos positivos a COVID-19 registrados de acuerdo a la fecha de ingreso del paciente (datos obtenidos de la Secretaría de Salud DGE en Secretaría de Salud.DGE.
-          <a
-            class="link-externo"
-            href="https://www.gob.mx/salud/documentos/datos-abiertos-152127"
-            target="_blank"
-            rel="noopener"
-            >https://www.gob.mx/salud/documentos/datos-abiertos-152127</a>).
-        </p>
+      <div class="eje-x">
+        <p
+          :style="{
+            padding: `${margen.abajo + 10}px ${margen.derecha}px 0 ${
+              margen.izquierda + ancho_leyenda_y
+            }px `,
+          }"
+          v-html="titulo_eje_x"
+        ></p>
       </div>
     </div>
-    <div class="stream-footer">
-      <!-- <PieComponenteLibreria :absoluto="true"/> -->
+    <slot name="pie"></slot>
+    <div v-show="logo_conacyt" class="grid-column-4 grid-column-6-esc">
+      <a class="boton boton-conacyt" href="https://conacyt.mx/" target="_blank">
+        <img
+          src="https://conacyt.mx/wp-content/uploads/2021/10/logo_conacyt_con_sintagma_azul_completo.svg"
+          alt="Conacyt"
+          height="28px"
+        />
+      </a>
     </div>
-    <!---<div id="leyenda-streams-apilados" >
-      <p class="titulo-leyenda">{{titulo_leyenda}}</p>
-      <label class="checkbox" v-for="(variable) in variables" :key="variable.id">
-        <input type="checkbox" :value="variable.id" v-model="categorias_checkeadas">
-        <span class="color" v-bind:style="{background: variable.color}"></span>
-        <span class="nombre">{{variable.nombre}}</span>
-      </label>
-    </div>-->
   </div>
 </template>
 
 <script>
-import * as d3 from 'd3';
-import CheckboxColor from "./checkbox-color/CheckboxColor.vue";
-import PieComponenteLibreria from './pie-componente-libreria/PieComponenteLibreria.vue';
+import * as d3 from "d3";
 
 export default {
-  name: 'DadsigAreasApiladas',
-  components: {
-    CheckboxColor,
-    PieComponenteLibreria
-  },
+  name: "DadsigAreasApiladas",
   props: {
-    nombre_variables: {
-      type: Object,
-    },
-    titulo_leyenda: String,
-    stream_graph_id: {
-      type: String,
-      default: () => 'streamgraph',
-    },
-    datos: {
-      type: Array,
-      default: () => [{fecha: '2021-01-01', "v": 120, cantidad_2: 30}],
-    },
-    datos_positivos: {
-      type: Array,
-      default: () => [{fecha: '2021-01-01', "v": 120, cantidad_2: 30}],
-    },
-    titulo: String,
-    nombre_eje_y: String,
-    nombre_eje_x: String,
-    titulo_tooltip: {
-      type: String,
-      default: '',
-    },
+    areas_apiladas_id: String,
+    datos: Array,
     variables: Array,
+    titulo_eje_y: String,
+    titulo_eje_x: String,
+    nombre_columna_horizontal: String,
+    conversionTemporal: {
+      type: Function,
+      default: d3.timeParse("%d-%m-%Y"),
+    },
+    logo_conacyt: {
+      type: Boolean,
+      default: function () {
+        return true;
+      },
+    },
+    tooltip_activo: {
+      default: true,
+      type: Boolean,
+    },
+
     ancho_tooltip: {
       type: Number,
       default: 250,
@@ -130,290 +96,293 @@ export default {
       type: Number,
       default: 200,
     },
+    formatoEtiquetasY: {
+      default: (d) => d.toLocaleString("en"),
+      type: Function,
+    },
     margen: {
       type: Object,
       default: () => ({
         arriba: 10,
-        abajo: 40,
-        izquierda: 60,
+        abajo: 20,
+        izquierda: 50,
         derecha: 10,
       }),
     },
-
-
+    textoTooltip: {
+      type: Function,
+      default: function () {
+        let total_muestras = d3.sum(
+          this.variables.map((d) => this.tooltip_data_seleccionada[d.id])
+        );
+        let cifras_variables = this.variables.map(
+          (d) => `<p>
+							<span class="nomenclatura-tooltip" style="background: ${d.color} "></span>
+							${d.nombre} <b>${this.tooltip_data_seleccionada[d.id].toLocaleString("en")}</b>
+							(${Math.round((100 * this.tooltip_data_seleccionada[d.id]) / total_muestras)}%)
+							</p>`
+        );
+        return `${cifras_variables.join("")}`;
+      },
+    },
   },
   watch: {
-    lista_filtros_activos(nv) {
-      this.categorias_checkeadas = this.variables.map((d, i) => this.lista_filtros_activos[i] ? d.id : "").filter((d) => d != "");
+    variables() {
       this.configurandoDimensionesParaSVG();
       this.configurandoDimensionesParaStream();
-
-
+      this.creandoStreams();
       this.actualizandoStreams();
     },
-    datos(nv) {
-      this.datos = nv;
-      let dict_meses = {
-        'ene': '01', 'feb': '02', 'mar': '03', 'abr': '04',
-        'may': '05', 'jun': '06', 'jul': '07', 'ago': '08',
-        'sep': '09', 'oct': '10', 'nov': '11', 'dic': '12'
-      }
-      this.parseDate = d3.timeParse("%d-%m-%Y")
-      this.datos.forEach((d) => {
-        let fecha_sep = d.fecha_1.split("/")
-        d.fech = this.parseDate([fecha_sep[0], dict_meses[fecha_sep[1]], fecha_sep[2]].join("-"))
-      })
-      this.lista_filtros_activos = this.variables.map(d => true);
-      this.categorias_checkeadas = this.variables.map((d, i) => this.lista_filtros_activos[i] ? d.id : "").filter((d) => d != "");
+    datos() {
       this.configurandoDimensionesParaSVG();
       this.configurandoDimensionesParaStream();
-      this.creandoStreams()
-
-
-      this.reestablecerVista();
+      this.creandoStreams();
       this.actualizandoStreams();
     },
-
+    margen() {
+      this.reescalandoPantalla();
+    },
   },
-  data: () => (
-    {
-      notas_open: false,
-      orden_inicial: true,
-      zoom_activo: 'hidden',
-      width: 200,
-      height: 0,
-      height_vis: Number,
-      lista_filtros_activos: Array,
-      data_porcentual: [],
-      status_button: "Quitar todos",
-      tooltip_is_showing: false
-    }
-  ),
+  data: () => ({
+    ancho_leyenda_y: 0,
+    tooltip_data_seleccionada: Object,
+  }),
   mounted() {
-    //this.boton_otras = document.getElementById('boton_otras');
-    this.height_vis = this.alto_vis;
+    this.svg = d3.select(`div#${this.areas_apiladas_id} svg.svg-streamgraph`);
+    this.grupo_contenedor = this.svg.select("g.grupo-contenedor-de-streams");
+    this.grupo_frente = this.svg.select("g.grupo-frente");
+    this.grupo_fondo = this.svg.select("g.grupo-fondo");
 
-    this.lista_filtros_activos = this.variables.map(d => true);
-    this.categorias_checkeadas = this.variables.map((d, i) => this.lista_filtros_activos[i] ? d.id : "").filter((d) => d != "");
+    this.eje_x = this.grupo_frente.select("g.eje-x");
+    this.eje_y = this.grupo_frente.select("g.eje-y");
 
-    this.svg = d3.select(`div#${this.stream_graph_id} svg.svg-streamgraph`);
-    this.grupo_contenedor = this.svg.select('g.grupo-contenedor-de-streams');
-    this.grupo_contenedor_ejes = this.svg.select("g.grupo-contenedor-de-ejes");
-    this.grupo_contenedor_rect = this.svg.select("g.grupo-rect")
-    this.rect_over = this.grupo_contenedor_rect.select("rect")
-      .style("fill-opacity", "0")
-    this.texto_x = this.grupo_contenedor_ejes.append("text").text(this.nombre_eje_x).attr("class", "label-x").style("font-weight", "600")
-    this.texto_y = this.grupo_contenedor_ejes.append("text").text(this.nombre_eje_y).attr("class", "label-y").style("font-weight", "600")
+    this.guia_x = this.grupo_frente
+      .select("line.guia-x")
+      .style("stroke", "gray");
 
-
-    this.eje_x = this.grupo_contenedor_ejes
-      .append('g')
-      .attr('class', 'eje-x');
-    this.eje_y = this.grupo_contenedor_ejes
-      .append('g')
-      .attr('class', 'eje-y');
-    this.linea_guia = this.grupo_contenedor_ejes.append("line").attr("class", "linea-guia").style("stroke", "#fff")
     this.configurandoDimensionesParaSVG();
     this.configurandoDimensionesParaStream();
     this.creandoStreams();
     this.actualizandoStreams();
 
-    this.tooltip = d3.select("div#" + this.stream_graph_id + " div.tooltip-fo")
-    window.addEventListener('resize', this.reescalandoPantalla);
-
+    this.tooltip = d3.select("div#" + this.areas_apiladas_id + " div.tooltip");
+    window.addEventListener("resize", this.reescalandoPantalla);
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.reescalandoPantalla);
   },
   methods: {
-    quitaPon() {
-      if (!this.lista_filtros_activos.includes(false)) {
-        this.status_button = "Poner todos"
-        this.lista_filtros_activos = this.lista_filtros_activos.map(() => false)
-      } else {
-        this.status_button = "Quitar todos"
-        this.lista_filtros_activos = this.lista_filtros_activos.map(() => true)
-
-      }
-    },
-    toggleTooltip (){
-      this.tooltip_is_showing = !this.tooltip_is_showing;
+    multiFormat(date) {
+      /**
+       * Método para traducir el formato de fecha
+       */
+      this.locale = d3.timeFormatLocale({
+        decimal: ",",
+        thousands: ".",
+        grouping: [3],
+        currency: ["€", ""],
+        dateTime: "%A, %e %B %Y г. %X",
+        date: "%d.%m.%Y",
+        time: "%H:%M:%S",
+        periods: ["AM", "PM"],
+        days: [
+          "Domingo",
+          "Lunes",
+          "Martes",
+          "Miércoles",
+          "Jueves",
+          "Viernes",
+          "Sábado",
+        ],
+        shortDays: ["Dom", "Lun", "Mar", "Mi", "Jue", "Vie", "Sab"],
+        months: [
+          "Enero",
+          "Febrero",
+          "Marzo",
+          "Abril",
+          "Mayo",
+          "Junio",
+          "Julio",
+          "Agosto",
+          "Septiembre",
+          "Octubre",
+          "Noviembre",
+          "Diciembre",
+        ],
+        shortMonths: [
+          "ene",
+          "feb",
+          "mar",
+          "abr",
+          "may",
+          "jun",
+          "jul",
+          "ago",
+          "sep",
+          "oct",
+          "nov",
+          "dic",
+        ],
+      });
+      this.formatMillisecond = this.locale.format(".%L");
+      this.formatSecond = this.locale.format(":%S");
+      this.formatMinute = this.locale.format("%I:%M");
+      this.formatHour = this.locale.format("%I %p");
+      this.formatDay = this.locale.format("%a %d");
+      this.formatWeek = this.locale.format("%b %d");
+      this.formatMonth = this.locale.format("%b");
+      this.formatMonthYear = this.locale.format("%b/%Y");
+      this.formatYear = this.locale.format("%Y");
+      // console.log(date)
+      return (
+        d3.timeSecond(date) < date
+          ? this.formatMillisecond
+          : d3.timeMinute(date) < date
+          ? this.formatSecond
+          : d3.timeHour(date) < date
+          ? this.formatMinute
+          : d3.timeDay(date) < date
+          ? this.formatHour
+          : d3.timeMonth(date) < date
+          ? d3.timeWeek(date) < date
+            ? this.formatDay
+            : this.formatWeek
+          : d3.timeYear(date) < date
+          ? this.formatMonthYear
+          : this.formatMonthYear
+      )(date);
     },
     configurandoDimensionesParaSVG() {
-      window.innerWidth > 768 ? this.height_vis = 310 : this.height_vis = 350;
-      this.width = document.getElementById(this.stream_graph_id).clientWidth
-        - this.margen.izquierda - this.margen.derecha;
-      this.height = this.height_vis - this.margen.arriba - this.margen.abajo;
-      this.svg.attr('width', this.width + this.margen.izquierda + this.margen.derecha)
-        .attr('height', this.height + this.margen.arriba + this.margen.abajo);
+      this.ancho_leyenda_y = document.querySelector(
+        "#" +
+          this.areas_apiladas_id +
+          " .rotation-wrapper-outer .element-to-rotate"
+      ).clientHeight;
 
-      this.grupo_contenedor
-        .attr('transform', `translate(${this.margen.izquierda},${this.margen.arriba})`);
-      this.grupo_contenedor_rect
-        .attr('transform', `translate(${this.margen.izquierda},${this.margen.arriba})`);
-      this.rect_over.attr('width', this.width + this.margen.izquierda + this.margen.derecha)
-        .attr('height', this.height + this.margen.arriba + this.margen.abajo);
+      this.ancho =
+        document.querySelector(`#${this.areas_apiladas_id}`).clientWidth -
+        this.margen.derecha -
+        this.margen.izquierda -
+        this.ancho_leyenda_y;
+      this.alto = this.alto_vis - this.margen.arriba - this.margen.abajo;
 
-      this.grupo_contenedor_ejes
-        .attr('transform', `translate(${this.margen.izquierda},${this.margen.arriba})`);
+      this.svg
+        .attr("width", this.ancho + this.margen.derecha + this.margen.izquierda)
+        .attr("height", this.alto + this.margen.arriba + this.margen.abajo)
+        .style("left", this.ancho_leyenda_y + "px");
 
-      window.innerWidth > 768 ? this.margen.abajo = 50 : this.margen.abajo = 80;
+      this.grupo_contenedor.attr(
+        "transform",
+        `translate(${this.margen.izquierda},${this.margen.arriba})`
+      );
 
-      this.texto_x
-        .attr("transform", window.innerWidth > 768 ? `translate(${this.width * .5},${this.height + this.margen.abajo - 10})`:`translate(${this.width * .5},${this.height + this.margen.abajo - 20})`)
-        .style("text-anchor", "middle")
-        .style("font-size", "10px")
-        .style("dominant-baseline", "hanging")
+      this.grupo_fondo.attr(
+        "transform",
+        `translate(${this.margen.izquierda},${this.margen.arriba})`
+      );
 
-      this.texto_y
-
-        .style("text-anchor", "middle")
-        .attr("transform", `translate(${-45},${this.height * .5}) rotate(-90)`)
-        .style("font-size", "10px")
-        .style("dominant-baseline", "hanging")
-
-
-    },
-    calculoPorcentual() {
-      this.data_porcentual = this.datos.map((d, i) => {
-        let dic_ef = {};
-        this.variables.map((dd) => {
-          if (this.categorias_checkeadas.includes(dd.id)) {
-            dic_ef[dd.id] = d3.sum(this.categorias_checkeadas.map(cat_check => this.datos[i][cat_check])) != 0 ? 100 * this.datos[i][dd.id] / d3.sum(this.categorias_checkeadas.map(cat_check => this.datos[i][cat_check])) : 0;
-          } else {
-            dic_ef[dd.id] = 0
-          }
-
-        })
-        for (let z in this.nombre_variables) {
-          dic_ef[this.nombre_variables[z]] = d[this.nombre_variables[z]]
-        }
-
-        return dic_ef
-      })
-
+      this.grupo_frente.attr(
+        "transform",
+        `translate(${this.margen.izquierda},${this.margen.arriba})`
+      );
     },
     configurandoDimensionesParaStream() {
-
-
-      let dict_meses = {
-        'ene': '01', 'feb': '02', 'mar': '03', 'abr': '04',
-        'may': '05', 'jun': '06', 'jul': '07', 'ago': '08',
-        'sep': '09', 'oct': '10', 'nov': '11', 'dic': '12'
-      }
-      let dict_meses_invert = {}
-      Object.keys(dict_meses).map(d => dict_meses_invert[dict_meses[d]] = d);
-
-      this.parseDate = d3.timeParse("%d-%m-%Y")
-
-      this.calculoPorcentual()
-      this.data_porcentual.forEach((d) => {
-        let fecha_sep = d.fecha_1.split("/")
-        d.fech = this.parseDate([fecha_sep[0], dict_meses[fecha_sep[1]], fecha_sep[2]].join("-"))
-      })
-      this.data_apilada = d3.stack()
-        .keys(this.variables.map((d) => d.id))(this.data_porcentual);
+      this.datos.forEach((d) => {
+        d.fech = this.conversionTemporal(d[this.nombre_columna_horizontal]);
+      });
+      this.data_apilada = d3.stack().keys(this.variables.map((d) => d.id))(
+        this.datos
+      );
       for (let i = this.variables.length - 1; i >= 0; i -= 1) {
         this.data_apilada[i].forEach((dd) => {
-          dd.data = Object.assign({}, dd.data, {key: this.data_apilada[i].key});
+          dd.data = Object.assign({}, dd.data, {
+            key: this.data_apilada[i].key,
+          });
         });
       }
 
-      this.escalaY = d3.scaleLinear()
-        .domain([0, d3.max(this.data_porcentual.map((d) => d3.sum(this.variables.map((dd) => d[dd.id]))))])
-        .range([this.height, 0]);
+      this.escalaY = d3
+        .scaleLinear()
+        .domain([
+          0,
+          d3.max(
+            this.datos.map((d) => d3.sum(this.variables.map((dd) => d[dd.id])))
+          ),
+        ])
+        .range([this.alto, 0]);
 
-      /* this.escalaX = d3.scaleBand()
-        .domain(this.data_porcentual.map((d) => d[this.nombre_variables.nombre]))
-        .range([0, this.width])
-        .padding(0);
-      */
-      this.escalaX = d3.scaleTime()
-        .domain(d3.extent(this.data_porcentual.map((d) => d.fech)))
-        .range([0, this.width])
+      this.escalaX = d3
+        .scaleTime()
+        .domain(d3.extent(this.datos.map((d) => d.fech)))
+        .range([0, this.ancho]);
 
-      this.linea_guia
+      this.guia_x
         .attr("x1", 0)
         .attr("y1", this.escalaY(0))
         .attr("x2", 0)
         .attr("y2", this.escalaY(100))
-        .style("stroke-opacity", 0)
-      this.area = d3.area()
+        .style("stroke-opacity", 0);
+      this.area = d3
+        .area()
         //.x((d)=> this.escalaX.bandwidth()*.5  +this.escalaX(d.data[this.nombre_variables.nombre]))
         .x((d) => this.escalaX(d.data.fech))
         .y0((d) => this.escalaY(d[0]))
         .y1((d) => this.escalaY(d[1]))
-        .curve(d3.curveLinear)
+        .curve(d3.curveLinear);
 
+      this.eje_y.call(
+        d3.axisLeft(this.escalaY).ticks(4).tickFormat(this.formatoEtiquetasY)
+      );
+      this.eje_y.select("path").style("opacity", 0);
+      this.eje_y
+        .selectAll("line")
+        .attr("x2", this.ancho)
+        .style("stroke-dasharray", "3 2 ")
+        .style("stroke", "gray");
 
-      this.eje_y.attr('transform', `translate(${0},${0})`).transition().duration(100).call(
-        d3.axisLeft(this.escalaY)
-          .ticks(4)
-          .tickFormat((d) => d + "%")
-      )
-      ;
+      this.eje_x
+        .call(d3.axisBottom(this.escalaX).ticks(5).tickFormat(this.multiFormat))
+        .attr("transform", `translate(${0}, ${this.alto})`);
+      this.eje_x
+        .selectAll("text")
+        //.style("text-anchor","middle")
+        .style("dominant-baseline", "middle");
+      this.eje_x
+        .selectAll("line")
+        .attr("y1", -this.alto)
+        .style("stroke-dasharray", "3 2")
+        .style("stroke", "#707070");
+      this.eje_x.select("path").remove();
 
-      this.eje_x.call(d3.axisBottom(this.escalaX).tickFormat(d3.timeFormat("%d-%m-%Y")))
-        .attr('transform', `translate(${0},${this.height})`);
-      this.eje_x.select('path.domain').remove();
-      this.eje_x.selectAll("text")
-        .text(function(d){
-          let dd = d3.select(this)._groups[0][0].textContent.split("-")
-          return `${dd[0]}/${dict_meses_invert[dd[1]]}/ ${dd[2]}`
-        })
-        .attr("transform", window.innerWidth > 768 ? `translate(0,0)rotate(-20)` : `translate(0,0)rotate(-45)`)
-        .style("text-anchor", `end`)
-        .attr("dy", window.innerWidth > 768 ? `5` : `-2`)
-        .attr("y", window.innerWidth > 768 ? `9` : `15`)
-
-      this.eje_y.selectAll('path').remove()
-      this.eje_y.selectAll('line').remove()
-
+      this.eje_y.selectAll("path").remove();
+      this.eje_y.selectAll("line").remove();
     },
     creandoStreams() {
-      this.grupo_contenedor.selectAll("path.paths-streams")
-        .remove()
+      this.grupo_contenedor.selectAll("path.paths-streams").remove();
+
+      this.grupo_contenedor.selectAll("path.paths-streams").remove();
       this.streams_apilados = this.grupo_contenedor
-        .selectAll('gpaths')
+        .selectAll("gpaths")
         .data(this.data_apilada)
         .enter()
-        .append('path')
-        .attr('class', (d) => `${d.key} paths-streams`)
-        .style('fill', (d, i) => this.variables[i].color)
-
-      this.rect_over.on('mousemove', (evento, datum) => {
-        this.mostrarTooltip(evento, datum)
-      })
-
-      this.svg
-        .on('mouseleave', (event) => {
-          if (window.innerWidth >= 769) {
-            this.mouseOutStreams();
-          }
-        })
-
+        .append("path")
+        .attr("class", (d) => `${d.key} paths-streams`)
+        .style("fill", (d, i) => this.variables[i].color);
+      if (this.tooltip_activo) {
+        this.svg
+          .on("mousemove", (evento) => {
+            this.mostrarTooltip(evento);
+          })
+          .on("mouseout", this.cerrarTooltip);
+      }
     },
 
-    mouseOutStreams() {
-      this.tooltip.style('visibility', 'hidden');
-
-    },
     actualizandoStreams() {
-
       this.streams_apilados
         .data(this.data_apilada)
         .transition()
         .duration(500)
-        .attr("d", this.area)
-
-      this.eje_y.selectAll('line')
-      //.attr('x1', this.width)
-      //.style('stroke-dasharray', '3 2')
-      //.style('stroke', '#707070');
-      this.eje_y.select('path')
-        .style('opacity', 0);
-      this.eje_x.selectAll('line')
-        .attr('y1', -this.height)
-        .style('stroke-dasharray', '3 2')
-        .style('stroke', '#707070')
-
+        .attr("d", this.area);
     },
     reescalandoPantalla() {
       this.configurandoDimensionesParaSVG();
@@ -422,372 +391,155 @@ export default {
     },
     mostrarTooltip(evento) {
       let bisecetDate = d3.bisector((d) => d.fech).left;
-      let x0 = this.escalaX.invert(evento.layerX - this.margen.izquierda)
-      let indice = bisecetDate(this.data_porcentual, x0, 1);
-      let d0 = this.data_porcentual[indice - 1]
-      let d1 = this.data_porcentual[indice];
-      let datum = x0 - d0.fech > d1.fech - x0 ? d1 : d0;
-      let total_muestras = d3.sum(this.categorias_checkeadas.map((d) => this.datos.filter((dd) => dd[this.nombre_variables.info_extra_1] == datum[this.nombre_variables.info_extra_1])[0][d]));
-      // let cifras_variables = this.categorias_checkeadas.map((d) => `<li>
-      //   <span class="span-tooltip-color" style="background: ${this.variables.filter(dd => dd.id == d)[0].color} "></span>
-      //     ${this.variables.filter(dd => dd.id == d)[0].nombre} <b>${Math.round(10 * datum[d]) / 10}%</b>
-      //     ${this.datos.filter((dd) => dd[this.nombre_variables.info_extra_1] == datum[this.nombre_variables.info_extra_1])[0][d]}
-      //   </li>`)
-      let cifras_variables = this.categorias_checkeadas.map((d) =>  {
-        if(this.variables.filter(dd => dd.id == d)[0].nombre === 'variantes_restantes'){
-          return `<li>
-            <span class="span-tooltip-color" style="background: ${this.variables.filter(dd => dd.id == d)[0].color} "></span>
-            Otras variantes
-            <b>${Math.round(10 * datum[d]) / 10}%</b>
-            ${this.datos.filter((dd) => dd[this.nombre_variables.info_extra_1] == datum[this.nombre_variables.info_extra_1])[0][d]}
-          </li>`
-       } else {
-        return `<li>
-        <span class="span-tooltip-color" style="background: ${this.variables.filter(dd => dd.id == d)[0].color} "></span>
-          ${this.variables.filter(dd => dd.id == d)[0].nombre} <b>${Math.round(10 * datum[d]) / 10}%</b>
-          ${this.datos.filter((dd) => dd[this.nombre_variables.info_extra_1] == datum[this.nombre_variables.info_extra_1])[0][d]}
-        </li>`
-       }
-      })
-      this.linea_guia
-        .transition().duration(100)
-        //.attr("x1", this.escalaX(semana)+ .5 * this.escalaX.bandwidth()).attr("x2", this.escalaX(semana) + .5 * this.escalaX.bandwidth())
-        .attr("x1", this.escalaX(datum.fech))
-        .attr("x2", this.escalaX(datum.fech))
-        .attr("y1", this.escalaY(0))
-        .attr("y2", this.escalaY(100))
-        .style("stroke-opacity", 1)
+      let x0 = this.escalaX.invert(evento.layerX - this.margen.izquierda);
+      let indice = bisecetDate(this.datos, x0, 1);
+      let d0 = this.datos[indice - 1];
+      let d1 = this.datos[indice];
+      if ((d0 != undefined) & (d1 != undefined)) {
+        this.tooltip_data_seleccionada = x0 - d0.fech > d1.fech - x0 ? d1 : d0;
+        this.guia_x
+          .transition()
+          .duration(100)
+          .attr("x1", this.escalaX(this.tooltip_data_seleccionada.fech))
+          .attr("x2", this.escalaX(this.tooltip_data_seleccionada.fech))
+          .attr("y1", 0)
+          .attr("y2", this.alto)
+          .style("stroke-opacity", 1);
 
-
-      this.tooltip.style('visibility', 'visible');
-      this.tooltip
-        .style('width', this.ancho_tooltip + "px")
-        .style('height', 30 + "px");
-      // Estilo del tooltip
-      const contenidoTooltip = this.tooltip.select('div.tooltip-contenido')
-        .style('background', 'rgba(0, 0, 0,.8)')
-        .style('min-width', this.ancho_tooltip)
-        .style('border-radius', '8px')
-        .style('width', `${this.ancho_tooltip}px`)
-        // Aquí se agrega padding o margen interno de 10px para todo el contenedor del contenido del tooltip
-        .style('padding', '10px');
-
-      /*
-        <p class="tooltip-encabezado">Nombre de variable 2 </p>
-        <p class="tooltip-cifra">120 | <b> 29.3%<b></b></b></p>
-        <div class="tooltip-contenido"></div>
-      */
-      contenidoTooltip
-        .select('p.tooltip-encabezado')
-        .html(`<b>Semana epidemiológica ${datum[this.nombre_variables.nombre].slice(2,4)} <br/>
-          ${datum[this.nombre_variables.info_extra_1]} - ${datum[this.nombre_variables.info_extra_2]}
-        </b>`)
-        .style('margin', '0')
-        .style('padding', '0 0 5px 0');
-
-      // Casos positivos a COVID
-      let casos_positivos;
-      this.datos_positivos.map(d => { datum["se"] === d.se ? casos_positivos = d.positivos : '' })
-      contenidoTooltip
-        .select('p.tooltip-positivos')
-        .html(`Casos positivos a COVID: <b>${casos_positivos.toLocaleString()}</b>`)
-        .style('margin', '0')
-        .style('padding', '0 0 5px 0');
-
-      contenidoTooltip
-        .select('p.tooltip-cifra')
-        // Bold para las cifras y/o porcentajes
-        .html(`Total de muestras: <b>${total_muestras.toLocaleString()}</b>`)
-        .style('margin', '0')
-        .style('padding', '0 0 5px 0');
-      cifras_variables
-
-      contenidoTooltip
-        .select('div.tooltip-contenido-ul')
-        .html(`<ul>${cifras_variables.join("")}</ul>`)
-        .style('margin', '0')
-        .style('padding', '0');
-      console.log(contenidoTooltip.style('height'))
-      this.tooltip
-        .style('height', contenidoTooltip.style('height') + "px")
-        .style('width', (parseInt(contenidoTooltip.style('width'), 10) + 13) + "px")
-      if (window.innerWidth > 798) {
         this.tooltip
-          .style('left', (evento.layerX < 0.5 * this.width ? evento.layerX + 20 : evento.layerX - this.ancho_tooltip - 20) + "px")
-          .style('top', (this.height * .5 - .4 * parseInt(contenidoTooltip.style('height')) + this.margen.arriba) + "px");
-      } else {
+          .style("visibility", "visible")
+          .style(
+            "left",
+            evento.layerX >
+              0.5 * (this.ancho + this.margen.izquierda + this.margen.derecha)
+              ? `${
+                  evento.layerX - this.ancho_tooltip + this.ancho_leyenda_y - 20
+                }px`
+              : `${evento.layerX + this.ancho_leyenda_y + 20}px`
+          )
+          .style("top", 0 + "px")
+          .attr("width", this.ancho_tooltip)
+          .attr("height", 30);
+
+        const contenidoTooltip = this.tooltip
+          .select("div.tooltip-contenido")
+          .style("background", "rgba(0, 0, 0,.8)")
+          .style("min-width", this.ancho_tooltip)
+          .style("border-radius", "8px")
+          .style("width", `${this.ancho_tooltip}px`)
+          .style("padding", "0 3px 0 10px");
+
+        contenidoTooltip
+          .select("div.tooltip-cifras")
+          .html(this.textoTooltip())
+          .style("margin", "0")
+          .style("padding", "0 0 5px 0");
+
         this.tooltip
-          .style('left', (this.width * .5 - .5 * parseInt(contenidoTooltip.style('width')) + this.margen.izquierda) + "px")
-          .style('top', (this.height * .5 - .5 * parseInt(contenidoTooltip.style('height'))) + "px");
+          .style("height", contenidoTooltip.style("height"))
+          .style("width", contenidoTooltip.style("width"));
       }
     },
 
-    reestablecerVista() {
-      this.tooltip.style('visibility', 'hidden');
+    cerrarTooltip() {
+      this.tooltip.style("visibility", "hidden");
     },
   },
 };
-/* eslint-enable */
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-$border-radius-tarjeta: 10px;
-button.button-volver {
-  background: #fff;
-  color: #000;
-  height: 40px;
-  width: 40px;
-  float: right;
-
-  &:hover,
-  &:focus {
-    background: #000;
-    color: #fff;
-  }
+svg.svg-streamgraph {
+  position: absolute;
+  top: 0;
 }
 
-.titulo-proyecto {
-  padding: 10px 10px 0px 10px;
-  text-align: right;
-  font-size: 14px;
-  display: inherit;
+svg.svg-streamgraph::v-deep text {
+  font-family: "Montserrat";
 }
 
-.titulo-visualizacion {
-  font-size: 16px;
-  padding: 10px;
-  margin: 0;
-}
-
-p.instruccional {
-  font-size: 12px;
-  padding: 0 10px;
-  margin: 5px 0;
-}
-
-
-.contenedor-svg {
-  overflow-x: auto;
-  width: 100%;
+div.contenedor-tooltip-svg {
   position: relative;
-  .tooltip-fo {
-    visibility: hidden;
-    position: absolute;
-    color: #fff; // Color de tipografía blanca
-    font-size: 12px !important;
-  }
-  .tooltip-contenido {
-    .no-margin {
-      margin: 5px 0px;
-    }
-    div.contenedor-boton-cerrar {
-      height: auto;
-      display: flex;
-      width: 100%;
-      justify-content: space-between;
-    }
 
-    button.boton-cerrar-tooltip {
-      background: none;
-      border: none;
-      padding: 0 0 0 5px;
-      cursor: pointer;
-      min-width: 35px;
-      align-self: flex-start;
-      @media (min-width: 769px) {
-        display: none;
-      }
+  .rotation-wrapper-outer {
+    display: table;
 
-      img {
-        width: 30px;
-        height: 30px;
+    .rotation-wrapper-inner {
+      padding: 50% 0;
+      height: 0;
+
+      .element-to-rotate {
+        display: block;
+        transform-origin: top left;
+        //transform: rotate(-90deg) translate(-100%);
+        margin-top: -50%;
+        font-size: 12px;
+        text-align: center;
+        font-weight: 600;
       }
     }
-
-    div.tooltip-contenido-ul:deep() {
-      ul {
-        margin: 0;
-        padding: 5px 0 0 0;
-
-        li {
-          list-style: none;
-          margin: 0 0 5px 0;
-          font-size: 12px;
-
-          &::before {
-            background: transparent;
-          }
-
-          span.span-tooltip-color {
-            transform: translateY(2px);
-            width: 12px;
-            height: 12px;
-            display: inline-block;
-            border-radius: 50%;
-          }
-        }
-      }
-    }
-
-  }
-}
-
-div#leyenda-streams-apilados {
-  border-radius: $border-radius-tarjeta;
-  box-shadow: 0px -5px 5px -1px rgb(221, 221, 221);
-  margin-top: 0;
-  @media (min-width: 769px) {
-    margin-top: 8px;
   }
 
-  div.leyenda-stream {
+  div.eje-x {
+    position: relative;
     width: 100%;
-    display: flex;
-
-    p.titulo-leyenda {
-      text-align: center;
-      font-size: 12px;
-      font-weight: 700;
-      flex: auto;
-    }
-
-    button.quita-pon {
-      position: relative;
-      right: 0px;
-      margin: 5px 10px 5px auto;
-      font-size: 12px;
-      padding: 0 10px;
-      color: #000;
-      border: 1px solid #000000;
-      border-radius: 5px;
-      background: #fff;
-    }
+    text-align: center;
+    font-size: 12px;
+    text-align: center;
+    font-weight: 600;
   }
 
-  div.checks {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    div.label-1 {
-      margin-top: 10px;
-      width: 50%;
-      -ms-flex: 0 0 50%;
-      flex: 0 0 50%;
-      @media (min-width: 769px) {
-        width: 11%;
-        -ms-flex: 0 0 auto;
-        flex: 0 0 auto;
-        padding: 0;
-      }
-      max-width: 50%;
-      padding: 0px 15px;
-      display: flex;
-      span.categoria-color {
-        width: 25px;
-        height: 25px;
-        min-width: 25px;
-        display: inline-block;
+  div.tooltip {
+    color: #fff;
+    font-size: 12px;
+    position: absolute;
+    z-index: 2;
+    visibility: hidden;
+  }
+
+  div.tooltip::v-deep div.tooltip-cifras {
+    padding-bottom: 5px;
+
+    p {
+      margin: 3px;
+
+      span.nomenclatura-tooltip {
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
-        position: relative;
-      }
-      span.categoria-texto {
+        border: solid 1px rgba(255, 255, 255, 0.7);
         display: inline-block;
-        position: relative;
-        padding-left: 5px;
-        font-size: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        margin-bottom: auto;
-        @media (min-width: 769px) {
-          width: 80px;
-        }
-      }
-      &.active {
-        color: #000;
-      }
-      &.inactive {
-        color: gray;
-        span.categoria-color {
-          background: #dbdbdb !important;
-        }
-      }
-    }
-    .boton-info-otras {
-      height: 20px;
-      width: 20px;
-      margin: 10px;
-      border-radius: 50%;
-      position: relative;
-      .tooltip {
-        background: #000;
-        color: #fff;
-        position: absolute;
-        width: 300px;
-        top: 35px;
-        left: -250px;
-        text-align: left;
-        padding: 15px;
-        border-radius: 8px;
-        font-size: 12px;
-        display: none;
-        z-index: 1;
-        @media (min-width: 769px) {
-          width: 400px;
-          top: -10px;
-          left: 30px;
-        }
-        &.mostrar{
-          display: block;
-        }
-        a {
-          font-size: 12px;
-        }
-        // &::before{
-        //   content: "";
-        //   display: block;
-        //   width: 0;
-        //   height: 0;
-        //   border-style: solid;
-        //   border-width: 10px 15px 10px 0;
-        //   border-color: transparent rgba(0,0,0,.8) transparent transparent;
-        //   position: absolute;
-        //   right: 24px;
-        //   top: -18px;
-        //   transform: rotate(90deg);
-        //   @media (min-width: 769px) {
-        //     transform: rotate(0deg);
-        //     left: -15px;
-        //     top: 0px;
-        //   }
-        // }
       }
     }
   }
-  .notas {
-    margin: 0 10px;
-    hr {
-      margin: 15px 0;
-      border-top: 1px solid #ddd;
+
+  div.tooltip div.contenedor-boton-cerrar {
+    height: auto;
+    display: flex;
+    width: 100%;
+    padding-top: 5px;
+    font-weight: 600;
+  }
+
+  div.tooltip button.boton-cerrar-tooltip {
+    background: #fff;
+    border: none;
+    font-size: 30px;
+    line-height: 0.9;
+    font-weight: 300;
+    padding: 0 5px;
+    border-radius: 5px;
+    margin: 0 0 0 auto;
+    @media (min-width: 768px) {
+      display: none;
     }
-    .titulo-notas {
-      font-size: 14px;
-      margin: 0;
-    }
-    .texto-notas {
-      margin: 10px 0;
-      .link-externo {
-        font-size: 12px;
-      }
+    cursor: pointer;
+
+    img {
+      width: 30px;
+      height: 30px;
+      float: right;
     }
   }
-}
-.stream-footer {
-  height: 40px;
 }
 </style>

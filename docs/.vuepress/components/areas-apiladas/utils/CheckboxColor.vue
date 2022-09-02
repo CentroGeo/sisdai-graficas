@@ -56,6 +56,18 @@ export default {
             .custom-checkbox{
                 font-size: 15px;
                 padding-top: 5px;
+                &.dai-icon-check::before{
+                    content:"";
+                    display: block;
+                    position: relative;
+                    width: 10px;
+                    height: 5px;
+                    border-left: 1px solid #000;
+                    border-bottom: 1px solid #000;
+                    left: 2px;
+                    top: 5px;
+                    transform: rotate(-45deg);
+                }
             }
             .color{
                 background-color: black;
