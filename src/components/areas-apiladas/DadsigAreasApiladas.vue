@@ -32,8 +32,8 @@
       </svg>
       <div class="eje-x">
         <p :style="{
-                    padding: `${margen.abajo +10}px ${margen.derecha}px 0 ${margen.izquierda + ancho_leyenda_y}px `
-                }" v-html="titulo_eje_x"></p>
+            padding: `${margen.abajo +10}px ${margen.derecha}px 0 ${margen.izquierda + ancho_leyenda_y}px `
+        }" v-html="titulo_eje_x"></p>
       </div>
     </div>
     <slot name="pie"></slot>
@@ -48,13 +48,9 @@
 
 <script>
 import * as d3 from 'd3';
-import CheckboxColor from "./checkbox-color/CheckboxColor.vue";
 
 export default {
   name: 'DadsigAreasApiladas',
-  components: {
-    CheckboxColor,
-  },
   props: {
     areas_apiladas_id: String,
     datos: Array,
@@ -85,7 +81,7 @@ export default {
       type: Number,
       default: 200,
     },
-		tickFormat:{
+		formatoEtiquetasY:{
 			default: (d) => d.toLocaleString("en"),
 			type: Function
 		},
@@ -263,7 +259,7 @@ export default {
       this.eje_y.call(
           d3.axisLeft(this.escalaY)
             .ticks(4)
-            .tickFormat(this.tickFormat)
+            .tickFormat(this.formatoEtiquetasY)
         )
       this.eje_y.select("path").style("opacity", 0);
       this.eje_y.selectAll("line")

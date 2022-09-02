@@ -7,8 +7,8 @@
       :alto_vis="300"
       nombre_columna_horizontal="fecha_1"
       titulo_eje_x="Fecha"
-      titulo_eje_y="Distribución de variantes de la muestra"
-      :tickFormat="formatoY"
+      titulo_eje_y="Distribución de variantes de la muestra "
+      :formatoEtiquetasY="formatoY"
       class="contenedor-areas-apiladas-slots-tooltip"
     >
     <template slot="encabezado">

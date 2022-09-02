@@ -5,8 +5,6 @@ import {
     DadsigCajasBigotes,
     DadsigDiagramaProcesos,
     DadsigAreasApiladas,
-    SelectorVariantes,
-    SelectorEstados
 } from "./components"
 
 import "./scss/estilogeneral.scss"
@@ -22,9 +20,6 @@ export default function plugin(Vue) {
     Vue.use(DadsigCajasBigotes)
     Vue.use(DadsigDiagramaProcesos)
     Vue.use(DadsigAreasApiladas)
-    Vue.use(SelectorVariantes)
-    Vue.use(SelectorEstados)
-
 }
 
 export {
@@ -35,6 +30,4 @@ export {
     DadsigCajasBigotes,
     DadsigDiagramaProcesos,
     DadsigAreasApiladas,
-    SelectorVariantes,
-    SelectorEstados
 }

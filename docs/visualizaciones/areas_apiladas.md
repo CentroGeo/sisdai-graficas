@@ -55,7 +55,7 @@ de ejemplo se dan métricas como nombres de variantes de coronavirus y la fecha 
 * `nombre_columna_horizontal` (_String_) Es el nombre que lleva la variable que va a usarse en el eje horizontal.
   Normalmente es temporal y en el ejemplo anterior sería `"fecha_1"` o `"fecha_2"`.
 * `variables` (_Array_) Lista de diccionarios que contiene atributos de cada una de las líneas. Las claves
-  obligatorias son `cve` y `nombre`, y se refieren al nombre de la línea en la base de datos y al nombre que se quiere 
+  obligatorias son `id` y `nombre`, y se refieren al nombre de la línea en la base de datos y al nombre que se quiere 
   mostrar el tooltip de cada línea graficada.
 
   ```json
@@ -116,7 +116,7 @@ de ejemplo se dan métricas como nombres de variantes de coronavirus y la fecha 
 * `titulo_eje_x`: (_String_) Etiqueta del eje horizontal.
 * `conversionTemporal`: (_Function_) Función que por default es `d3.timeParse("%d-%m-%Y")` sirve para especificar el
   formato de la variable temporal.
-* `tickFormat`: (_Function_) Función que por default es `(d) =>  d.toLocaleString("en")` sirve para especificar el
+* `formatoEtiquetasY`: (_Function_) Función que por default es `(d) =>  d.toLocaleString("en")` sirve para especificar el
   formato del eje x.
 * `textoTooltip` (_Function_) Esta función se usa para modificar el texto que aparece en los tooltips.
 Los siguiente parámetros se pueden usar para modificar la visualización.
@@ -185,7 +185,7 @@ Entonces el HTML estará estructurado de la siguiente manera:
         nombre_columna_horizontal="fecha_1"
         titulo_eje_x="Fecha"
         titulo_eje_y="Distribución de variantes de la muestra"
-        :tickFormat="formatoY"
+        :formatoEtiquetasY="formatoY"
         class="contenedor-areas-apiladas-slots-tooltip"
     >
     <template slot="encabezado">
