@@ -4,6 +4,7 @@ import * as DadsigLineas from "./lineas"
 import * as DadsigCajasBigotes from "./cajas-bigotes"
 import * as DadsigDiagramaProcesos from "./diagrama-procesos"
 import * as DadsigAreasApiladas from "./areas-apiladas"
+import * as DadsigLineaTiempo from "./linea-tiempo"
 
 export {
   DadsigBarras,
@@ -12,4 +13,5 @@ export {
   DadsigCajasBigotes,
   DadsigDiagramaProcesos,
   DadsigAreasApiladas,
+  DadsigLineaTiempo
 }

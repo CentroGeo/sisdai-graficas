@@ -54,9 +54,9 @@ de ejemplo se dan métricas como nombres de variantes de coronavirus y la fecha 
 
 * `nombre_columna_horizontal` (_String_) Es el nombre que lleva la variable que va a usarse en el eje horizontal.
   Normalmente es temporal y en el ejemplo anterior sería `"fecha_1"` o `"fecha_2"`.
-* `variables` (_Array_) Lista de diccionarios que contiene atributos de cada una de las líneas. Las claves
-  obligatorias son `id` y `nombre`, y se refieren al nombre de la línea en la base de datos y al nombre que se quiere 
-  mostrar el tooltip de cada línea graficada.
+* `variables` (_Array_) Lista de diccionarios que contiene atributos de cada una de las áreas/franjas. Las claves
+  obligatorias son `id` y `nombre`, y se refieren al nombre de la área/franja en la base de datos y al nombre que se quiere 
+  mostrar el tooltip de cada área/franja graficada.
 
   ```json
   [
@@ -117,14 +117,14 @@ de ejemplo se dan métricas como nombres de variantes de coronavirus y la fecha 
 * `conversionTemporal`: (_Function_) Función que por default es `d3.timeParse("%d-%m-%Y")` sirve para especificar el
   formato de la variable temporal.
 * `formatoEtiquetasY`: (_Function_) Función que por default es `(d) =>  d.toLocaleString("en")` sirve para especificar el
-  formato del eje x.
+  formato del eje y.
 * `textoTooltip` (_Function_) Esta función se usa para modificar el texto que aparece en los tooltips.
 Los siguiente parámetros se pueden usar para modificar la visualización.
 
 
 ## Ejemplos de uso
 
-En esta sección se detallan tres diferentes tipos casos de uso de este componente. El componente `<DadsigLineas/>`
+En esta sección se detallan tres diferentes tipos casos de uso de este componente. El componente `<DadsigAreasApiladas/>`
 requiere que los datos se encuentren en un archivo `.json` externo, que se importa por medio de un `import`en el 
 apartado `<script/>`. Para los diferentes ejemplos de esta sección, ya se tienen los datos importados.
 
