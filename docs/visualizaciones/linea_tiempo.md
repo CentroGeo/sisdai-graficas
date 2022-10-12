@@ -1,3 +1,3 @@
-# linea de tiempo
+# línea de tiempo
 
 <linea-tiempo-basico/>
