@@ -55,10 +55,12 @@ module.exports = {
           title: 'Visualizaciones',
           collapsable: false,
           children: [
+            'barras',
             'barras_horizontales',
             'barras_horizontales_apiladas',
             'barras_verticales',
             'barras_verticales_apiladas',
+            'barras_agrupadas',
             'cajas_bigotes',
             'donas',
             'lineas',

@@ -9,9 +9,8 @@
         :nombre_color="'nombre_colores'"
         titulo_eje_x="Eje horizontal (numérico)"
         titulo_eje_y="Eje vertical (categórico)"
-        orientacion="horizontal"
-        :tooltip_activo="true"
-        :variables="[{id:'cantidad', nombre_colores:'cantidad', color: '#7fcdbb'}]"/>
+        :variables="[{id:'cantidad', nombre_colores:'cantidad', color: '#7fcdbb'}]"
+        :orientacion="'horizontal'"/>
   </div>
 </template>
 
