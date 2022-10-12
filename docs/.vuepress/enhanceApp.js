@@ -12,7 +12,7 @@
 //import  DaiMaps from "../../src/index.js"
 
 
-import { DadsigBarras, DadsigDonas, DadsigLineas, DadsigCajasBigotes, DadsigDiagramaProcesos, DadsigAreasApiladas} from "../../src/index.js"
+import { DadsigBarras, DadsigDonas, DadsigLineas, DadsigCajasBigotes, DadsigDiagramaProcesos, DadsigAreasApiladas, DadsigLineaTiempo} from "../../src/index.js"
 import "./styles/index.scss"
 
 /*export default ({
@@ -40,6 +40,8 @@ export default ({
   Vue.use(DadsigLineas)
   Vue.use(DadsigDiagramaProcesos)
   Vue.use(DadsigAreasApiladas)
+  Vue.use(DadsigLineaTiempo)
+
   // ...apply enhancements for the site.
   
 

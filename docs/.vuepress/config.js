@@ -63,7 +63,8 @@ module.exports = {
             'donas',
             'lineas',
             "diagramas_procesos",
-            "areas_apiladas"
+            "areas_apiladas",
+            "linea_tiempo"
           ]
         }
       ],
