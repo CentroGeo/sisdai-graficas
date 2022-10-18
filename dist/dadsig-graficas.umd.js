@@ -66914,12 +66914,12 @@ function areas_apiladas_plugin(Vue) {
 
 /* harmony default export */ var areas_apiladas = (areas_apiladas_plugin);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"dcd61418-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/linea-tiempo/DadsigLineaTiempo.vue?vue&type=template&id=037650a4&
-var DadsigLineaTiempovue_type_template_id_037650a4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":_vm.id_linea_tiempo}},[_vm._v(" timeline "),_c('div',{staticClass:"linea-de-tiempo tema-oscuro"}),_c('svg',[_c('g',{staticClass:"eje-x"}),_c('g',{staticClass:"contenedor-objetos"}),_c('g',{staticClass:"brush"})])])}
-var DadsigLineaTiempovue_type_template_id_037650a4_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"dcd61418-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/linea-tiempo/DadsigLineaTiempo.vue?vue&type=template&id=212e55a1&
+var DadsigLineaTiempovue_type_template_id_212e55a1_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":_vm.id_linea_tiempo}},[_vm._v(" timeline "),_c('div',{staticClass:"linea-de-tiempo tema-oscuro"}),_c('svg',[_c('g',{staticClass:"eje-x"}),_c('g',{staticClass:"contenedor-objetos"}),_c('g',{staticClass:"brush"})])])}
+var DadsigLineaTiempovue_type_template_id_212e55a1_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/linea-tiempo/DadsigLineaTiempo.vue?vue&type=template&id=037650a4&
+// CONCATENATED MODULE: ./src/components/linea-tiempo/DadsigLineaTiempo.vue?vue&type=template&id=212e55a1&
 
 // EXTERNAL MODULE: ./node_modules/vis-timeline/standalone/esm/vis-timeline-graph2d.js
 var vis_timeline_graph2d = __webpack_require__("5a45");
@@ -67102,8 +67102,8 @@ var DadsigLineaTiempovue_type_style_index_0_lang_scss_ = __webpack_require__("e3
 
 var DadsigLineaTiempo_component = normalizeComponent(
   linea_tiempo_DadsigLineaTiempovue_type_script_lang_js_,
-  DadsigLineaTiempovue_type_template_id_037650a4_render,
-  DadsigLineaTiempovue_type_template_id_037650a4_staticRenderFns,
+  DadsigLineaTiempovue_type_template_id_212e55a1_render,
+  DadsigLineaTiempovue_type_template_id_212e55a1_staticRenderFns,
   false,
   null,
   null,

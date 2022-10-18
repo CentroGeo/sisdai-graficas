@@ -274,20 +274,24 @@ div.linea-de-tiempo {
       color: #ffffff;
     }
     .vis-item.vis-box.vis-readonly{
-      &.vis-selected{
-        border-color:#80AEFF;
-        background-color: #676e9f;
-
-      }
       border: none;
-      border-left: 4px solid #80AEFF;
-      background-color: #373737;
+      background:none;
+      &.vis-selected{
+        div.vis-item-content {
+          border-color:#80AEFF;
+          background-color: #676e9f;
+        }
+      }
+
       div.vis-item-content {
+        position: relative;
+        left: 50%;
+        border-left: 4px solid #80AEFF;
+        background-color: #373737;
         border-radius: 4px;
         white-space: normal;
         text-align: left;
         color: #fff;
-        border: none;
       }
     }
     div.vis-item.vis-line.vis-selected {
