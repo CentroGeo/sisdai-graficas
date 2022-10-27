@@ -436,6 +436,9 @@ svg.svg-barras::v-deep text {
 
 div.contenedor-tooltip-svg {
   position: relative;
+  svg{
+    z-index: 1;
+  }
 
   .rotation-wrapper-outer {
     display: table;
