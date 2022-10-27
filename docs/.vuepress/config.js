@@ -55,15 +55,14 @@ module.exports = {
           title: 'Visualizaciones',
           collapsable: false,
           children: [
-            'barras_horizontales',
-            'barras_horizontales_apiladas',
-            'barras_verticales',
-            'barras_verticales_apiladas',
+            'barras',
             'cajas_bigotes',
             'donas',
             'lineas',
             "diagramas_procesos",
-            "areas_apiladas"
+            "areas_apiladas",
+            "linea_tiempo",
+            "personaliza_graficas"
           ]
         }
       ],

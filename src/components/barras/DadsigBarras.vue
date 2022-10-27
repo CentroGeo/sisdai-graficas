@@ -111,6 +111,14 @@ export default {
 						${txt.reverse().join(" ")}`
       }
     },
+    apiladas_o_agrupadas:{
+      default: () => "apiladas",
+      type: String
+    },
+    padding_agrupadas: {
+      type: Number,
+      default: () => .1
+    }
   },
   watch: {
     variables() {
@@ -192,13 +200,28 @@ export default {
       }
 
       if (this.orientacion === 'vertical') {
-        this.escalaY = d3.scaleLinear()
-            .domain([0, d3.max(this.datos.map(d => d3.sum(this.variables.map(dd => d[dd.id]))))])
+        if(this.apiladas_o_agrupadas === "apiladas"){
+          
+          this.escalaY = d3.scaleLinear()
+            .domain([0, d3.max(this.datos.map((d) => d3.sum(this.variables.map(dd => d[dd.id]))))])
             .range([this.alto, 0]);
+        }
+        else{
+          this.escalaY = d3.scaleLinear()
+            .domain([0, d3.max(this.datos.map((d) => d3.max(this.variables.map((dd) => d[dd.id]))))])
+            .range([this.alto, 0]);
+        }
+        
         this.escalaX = d3.scaleBand()
             .domain(this.datos.map(d => d[this.nombre_barra]))
             .range([0, this.ancho])
             .padding(this.espaciado_barras)
+        
+        // Esta escala se usará sólo para agrupadas
+        this.escalaXSub = d3.scaleBand()
+          .domain(this.variables.map((d) => d.id))
+          .range([0, this.escalaX.bandwidth()])
+          .padding(this.padding_agrupadas);
 
         this.eje_y.call(d3.axisLeft(this.escalaY).ticks(4))
         this.eje_y.select("path.domain")
@@ -214,13 +237,27 @@ export default {
         this.eje_x.selectAll("line").remove()
       }
       else {
-        this.escalaX = d3.scaleLinear()
+        if(this.apiladas_o_agrupadas === "apiladas"){
+          this.escalaX = d3.scaleLinear()
             .domain([0, d3.max(this.datos.map(d => d3.sum(this.variables.map(dd => d[dd.id]))))])
             .range([0, this.ancho]);
+        }
+        else{
+          this.escalaX = d3.scaleLinear()
+            .domain([0, d3.max(this.datos.map(d => d3.max(this.variables.map(dd => d[dd.id]))))])
+            .range([0, this.ancho]);
+        }
+
         this.escalaY = d3.scaleBand()
             .domain(this.datos.map(d => d[this.nombre_barra]))
             .range([0, this.alto])
             .padding(this.espaciado_barras)
+        
+            // Esta escala se usará sólo para agrupadas
+        this.escalaYSub = d3.scaleBand()
+          .domain(this.variables.map((d) => d.id))
+          .range([0, this.escalaY.bandwidth()])
+          .padding(this.padding_agrupadas);
 
         this.eje_y.call(d3.axisLeft(this.escalaY))
         this.eje_y.select("path.domain").remove()
@@ -238,7 +275,7 @@ export default {
     creandoBarras() {
       this.grupo_contenedor.selectAll(".g-rects").remove();
 
-      this.barras_apiladas = this.grupo_contenedor
+      this.barras_juntadas = this.grupo_contenedor
           .selectAll(".g-rects")
           .data(this.data_apilada)
           .enter()
@@ -246,7 +283,7 @@ export default {
           .attr("class", (d) => `${d.key} g-rects`)
           .style("fill", (d, i) => this.variables[i].color)
 
-      this.barras_individuales = this.barras_apiladas
+      this.barras_individuales = this.barras_juntadas
           .selectAll("rect")
           .data((d) => d)
           .enter()
@@ -263,18 +300,36 @@ export default {
     },
     actualizandoBarras() {
       if(this.orientacion === 'vertical') {
-        this.barras_individuales
+        if(this.apiladas_o_agrupadas === "apiladas"){
+          this.barras_individuales
             .attr("width", this.escalaX.bandwidth)
             .attr("height", d => this.escalaY(d[0]) - this.escalaY(d[1]))
             .attr("x", d => this.escalaX(d.data[this.nombre_barra]))
             .attr("y", d => this.escalaY(d[1]))
+        }
+        else{
+          this.barras_individuales
+            .attr("width", this.escalaXSub.bandwidth)
+            .attr("height", (d) => this.escalaY(d[0]) - this.escalaY(d[1]))
+            .attr("x", (d) => this.escalaX(d.data[this.nombre_barra]) + this.escalaXSub(d.data.key))
+            .attr("y", (d) => this.escalaY(d[1] - d[0]));
+        }
+        
       }
       else {
-        this.barras_individuales
-            .attr("width", d => this.escalaX(d[1]) - this.escalaX(d[0]))
-            .attr("height", this.escalaY.bandwidth)
-            .attr("x", d => this.escalaX(d[0]))
-            .attr("y", d => this.escalaY(d.data[this.nombre_barra]))
+        if(this.apiladas_o_agrupadas === "apiladas"){
+          this.barras_individuales
+              .attr("width", d => this.escalaX(d[1]) - this.escalaX(d[0]))
+              .attr("height", this.escalaY.bandwidth)
+              .attr("x", d => this.escalaX(d[0]))
+              .attr("y", d => this.escalaY(d.data[this.nombre_barra]))
+        }else{
+          this.barras_individuales
+              .attr("width", d => this.escalaX(d[1]) - this.escalaX(d[0]))
+              .attr("height", this.escalaYSub.bandwidth)
+              .attr("x", d => d3.min(this.escalaX.domain()))
+              .attr("y", d => this.escalaY(d.data[this.nombre_barra]) + this.escalaYSub(d.data.key))
+        }
       }
     },
 
@@ -381,6 +436,9 @@ svg.svg-barras::v-deep text {
 
 div.contenedor-tooltip-svg {
   position: relative;
+  svg{
+    z-index: 1;
+  }
 
   .rotation-wrapper-outer {
     display: table;

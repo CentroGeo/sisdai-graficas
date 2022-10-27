@@ -1,7 +1,7 @@
 <template>
-  <div v-bind:id=dona_id class="contenedor-dona">
+  <div v-bind:id="dona_id" class="contenedor-dona">
     <slot name="encabezado"></slot>
-     <div class="contenedor-tooltip-svg">
+    <div class="contenedor-tooltip-svg">
       <div class="tooltip">
         <div class="tooltip-contenido">
           <div class="contenedor-boton-cerrar">
@@ -13,8 +13,7 @@
         </div>
       </div>
       <svg class="svg-dona">
-        <defs>
-        </defs>
+        <defs></defs>
         <g class="grupo-contenedor-de-dona"></g>
         <g class="grupo-frente"></g>
       </svg>
@@ -22,7 +21,11 @@
     <slot name="pie"></slot>
     <div v-show="logo_conacyt" class="grid-column-4 grid-column-6-esc">
       <a class="boton boton-conacyt" href="https://conacyt.mx/" target="_blank">
-        <img src="https://conacyt.mx/wp-content/uploads/2021/10/logo_conacyt_con_sintagma_azul_completo.svg" alt="Conacyt" height="28px">
+        <img
+          src="https://conacyt.mx/wp-content/uploads/2021/10/logo_conacyt_con_sintagma_azul_completo.svg"
+          alt="Conacyt"
+          height="28px"
+        />
       </a>
     </div>
   </div>
@@ -32,7 +35,7 @@
 import * as d3 from "d3";
 
 export default {
-  name: 'DadsigDonas',
+  name: "DadsigDonas",
   props: {
     dona_id: String,
     datos: Array,
@@ -45,69 +48,78 @@ export default {
     logo_conacyt: {
       type: Boolean,
       default: function () {
-        return true
-      }
+        return true;
+      },
     },
     ancho_tooltip: {
       type: Number,
-      default: 100
+      default: 100,
     },
     radio_interno: {
-      type:Number,
-      default: .18
+      type: Number,
+      default: 0.18,
     },
     radio_externo: {
       type: Number,
-      default: .32
+      default: 0.32,
     },
     radio_texto: {
       type: Number,
-      default: .33
+      default: 0.33,
     },
     alto_vis: {
-      type: Number
+      type: Number,
     },
     textoTooltip: {
       type: Function,
-      default : function(){
-        return `${this.tooltip_data_seleccionada["nombre"]}<br>${this.tooltip_data_seleccionada["cantidad"].toLocaleString("en")} | <b>${(Math.round(1000 * this.tooltip_data_seleccionada["cantidad"] / d3.sum(this.datos.map(d=>d.cantidad))) / 10 ) +"%"}<b>`
-      }
-    }
+      default: function () {
+        return `${
+          this.tooltip_data_seleccionada["nombre"]
+        }<br>${this.tooltip_data_seleccionada["cantidad"].toLocaleString(
+          "en"
+        )} | <b>${
+          Math.round(
+            (1000 * this.tooltip_data_seleccionada["cantidad"]) /
+              d3.sum(this.datos.map((d) => d.cantidad))
+          ) /
+            10 +
+          "%"
+        }<b>`;
+      },
+    },
   },
   watch: {
-    datos: function(new_val,old_val) {
+    datos: function (new_val, old_val) {
       this.configurandoDimensionesParaDona();
       if (new_val.length > old_val.length) {
         //Actualizamos paths
         this.segmentos = this.grupo_contenedor
-            .selectAll("path")
-            .data(this.data_para_pay);
+          .selectAll("path")
+          .data(this.data_para_pay);
 
-        this.segmentos = this.segmentos.enter()
-            .append("path").style("cursor","pointer")
-            .merge(this.segmentos);
+        this.segmentos = this.segmentos
+          .enter()
+          .append("path")
+          .style("cursor", "pointer")
+          .merge(this.segmentos);
 
         this.segmentos.exit().remove();
 
         //Actualizamos textos
         this.textos_porcentajes = this.grupo_contenedor
-            .selectAll("text")
-            .data(this.data_para_pay);
+          .selectAll("text")
+          .data(this.data_para_pay);
 
-        this.textos_porcentajes = this.textos_porcentajes.enter()
-            .append("text")
-            .merge(this.textos_porcentajes);
+        this.textos_porcentajes = this.textos_porcentajes
+          .enter()
+          .append("text")
+          .merge(this.textos_porcentajes);
 
         this.textos_porcentajes.exit().remove();
-      }
-      else {
-        this.segmentos.data(this.data_para_pay)
-            .exit()
-            .remove();
+      } else {
+        this.segmentos.data(this.data_para_pay).exit().remove();
 
-        this.textos_porcentajes.data(this.data_para_pay)
-            .exit()
-            .remove();
+        this.textos_porcentajes.data(this.data_para_pay).exit().remove();
       }
 
       //Ajustes
@@ -115,16 +127,14 @@ export default {
       // this.reestablecerVista();
 
       this.actualizandoDona();
-    }
+    },
   },
   mounted() {
-    this.svg = d3.select("#"+this.dona_id+" svg.svg-dona");
+    this.svg = d3.select("#" + this.dona_id + " svg.svg-dona");
     this.grupo_contenedor = this.svg.select("g.grupo-contenedor-de-dona");
-    this.tooltip = d3.select("div#" + this.dona_id)
-        .select("div.tooltip");
+    this.tooltip = d3.select("div#" + this.dona_id).select("div.tooltip");
 
     this.configurandoDimensionesParaSVG();
-
     /*
      Creando la funcion y dimensiones para el pie:
      Es importante que el pie no tenga ninguna funcion sort y que las
@@ -138,22 +148,23 @@ export default {
     this.configurandoDimensionesParaDona();
     this.creandoDona();
     this.actualizandoDona();
-    this.contenedor_leyenda = d3.select("#"+this.dona_id+"-leyenda");
 
     window.addEventListener("resize", this.reescalandoPantalla);
   },
   destroyed() {
-    window.removeEventListener("resize", this.reescalandoPantalla)
+    window.removeEventListener("resize", this.reescalandoPantalla);
   },
   methods: {
     configurandoDimensionesParaDona() {
-      let limites = d3.min([this.ancho, this.alto])
+      let limites = d3.min([this.ancho, this.alto]);
       this.pie.value((d) => d.cantidad);
       this.data_para_pay = this.pie(this.datos);
-      this.arc.innerRadius(limites * this.radio_interno)
-          .outerRadius(limites * this.radio_externo);
-      this.arc_texto.innerRadius(limites * this.radio_texto)
-          .outerRadius(limites * this.radio_texto);
+      this.arc
+        .innerRadius(limites * this.radio_interno)
+        .outerRadius(limites * this.radio_externo);
+      this.arc_texto
+        .innerRadius(limites * this.radio_texto)
+        .outerRadius(limites * this.radio_texto);
     },
     configurandoDimensionesParaSVG() {
       /*
@@ -163,83 +174,86 @@ export default {
 
       
       */
-     this.ancho = document.getElementById(this.dona_id).clientWidth;
-      if(this.alto_vis){
-        if(this.alto_vis < this.ancho){
+      this.ancho = document.getElementById(this.dona_id).clientWidth;
+      if (this.alto_vis) {
+        if (this.alto_vis < this.ancho) {
           this.alto = this.alto_vis;
+        } else {
+          this.alto = this.ancho;
         }
-        else{
-          this.alto = this.ancho
-        }
-      }else{
-          this.alto = this.ancho
-
+      } else {
+        this.alto = this.ancho;
       }
 
       this.svg.attr("width", this.ancho).attr("height", this.alto);
-      this.grupo_contenedor.attr("transform", `translate(${this.ancho * .5}, ${this.alto * .5})`);
+      this.grupo_contenedor.attr(
+        "transform",
+        `translate(${this.ancho * 0.5}, ${this.alto * 0.5})`
+      );
     },
     creandoDona() {
       this.segmentos = this.grupo_contenedor
-          .selectAll("paths")
-          .data(this.data_para_pay)
-          .enter()
-          .append('path')
-          .style("cursor", "pointer");
+        .selectAll("paths")
+        .data(this.data_para_pay)
+        .enter()
+        .append("path")
+        .style("cursor", "pointer");
 
       this.textos_porcentajes = this.grupo_contenedor
-          .selectAll('allLabels')
-          .data(this.data_para_pay)
-          .enter()
-          .append("text");
-
-      if (this.tooltip_activo) {
-        this.svg
-            .on("mousemove", (evento) => {
-              this.mostrarTooltip(evento)
-            })
-            .on("mouseout", this.cerrarTooltip)
-
-      }
-
+        .selectAll("allLabels")
+        .data(this.data_para_pay)
+        .enter()
+        .append("text");
+      this.svg
+        .on("mousemove", (evento) => {
+          this.mostrarTooltip(evento);
+        })
+        .on("mouseout", this.cerrarTooltip);
     },
     actualizandoDona() {
       this.segmentos
-          .attr('d', this.arc)
-          .attr('fill', (d) => d.data.color)
-          .attr("class", (d,i) => "rebanada-"+i)
-          .attr("stroke-opacity", 0)
-          .on("mouseover", (event,d) => this.clickButtonCategoria(d.index));
+        .attr("d", this.arc)
+        .attr("fill", (d) => d.data.color)
+        .attr("class", (d, i) => "rebanada-" + i)
+        .attr("stroke-opacity", 0);
 
       this.textos_porcentajes
-          .text((d) => (Math.round(1000 * d.data.cantidad / d3.sum(this.datos.map(d => d.cantidad))) / 10 ) +"%")
-          .attr("class", (d,i) => "texto-"+i)
-          .style("font-size", "20px")
-          .style("fill", d => d.data.color)
-          .style("font-weight", "700")
-          .attr('transform', (d) => {
-            var pos = this.arc_texto.centroid(d);
-            return 'translate(' + pos + ')';
-          })
-          .style("fill-opacity", 1)
-          //
-          // Los siguientes dos estilos alinean el texto segun el angulo en el que se encuentre
-          .style('text-anchor', (d) => {
-            var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
-            return (midangle < Math.PI ? 'start' : 'end');
-          })
-          .style('dominant-baseline', (d) => {
-            var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
-            return (midangle < .5 * Math.PI || midangle > 1.5 * Math.PI ? 'auto' : 'hanging');
-          });
+        .text(
+          (d) =>
+            Math.round(
+              (1000 * d.data.cantidad) /
+                d3.sum(this.datos.map((d) => d.cantidad))
+            ) /
+              10 +
+            "%"
+        )
+        .attr("class", (d, i) => "texto-" + i)
+        .style("font-size", "20px")
+        .style("fill", (d) => d.data.color)
+        .style("font-weight", "700")
+        .attr("transform", (d) => {
+          var pos = this.arc_texto.centroid(d);
+          return "translate(" + pos + ")";
+        })
+        .style("fill-opacity", 1)
+        //
+        // Los siguientes dos estilos alinean el texto segun el angulo en el que se encuentre
+        .style("text-anchor", (d) => {
+          var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+          return midangle < Math.PI ? "start" : "end";
+        })
+        .style("dominant-baseline", (d) => {
+          var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+          return midangle < 0.5 * Math.PI || midangle > 1.5 * Math.PI
+            ? "auto"
+            : "hanging";
+        });
       if (this.tooltip_activo) {
         this.svg
-            .on("mousemove", (evento) => {
-              this.mostrarTooltip(evento)
-            })
-            .on("mouseout", this.cerrarTooltip)
-            .on("mouseout", this.reestablecerVista)
-
+          .on("mousemove", (evento) => {
+            this.mostrarTooltip(evento);
+          })
+          .on("mouseout", this.cerrarTooltip);
       }
     },
     reescalandoPantalla() {
@@ -247,115 +261,77 @@ export default {
       this.configurandoDimensionesParaDona();
       this.actualizandoDona();
     },
-    clickButtonCategoria(indice) {
-      this.segmentos.interrupt()
-          .transition()
-          .duration(500)
-          .style("fill-opacity", .25);
-      this.textos_porcentajes.interrupt()
-          .transition()
-          .duration(500)
-          .style("fill-opacity", 0);
-      //
-      // Si el click ocurrio en un elemento que no esta seleccionado, este se resalta
-      if (!this.svg.select("path.rebanada-"+indice).classed("activo")) {
-        this.svg.select("path.rebanada-"+indice)
-            .interrupt()
-            .transition()
-            .duration(500)
-            .style("fill-opacity", 1);
-
-        this.svg.select("text.texto-"+indice).interrupt()
-            .transition()
-            .duration(500)
-            .style("fill-opacity", 1);
-        this.svg.selectAll("path")
-            .classed("activo", false);
-
-        this.contenedor_leyenda
-            .selectAll(".boton-categoria")
-            .classed("inactivo", true);
-        this.contenedor_leyenda
-            .select(".boton-categoria.label-"+indice)
-            .classed("activo", true)
-            .classed("inactivo", false);
-        this.mostrarTooltip(indice);
+    mostrarTooltip(evento) {
+      let x = evento.layerX - 0.5 * this.ancho;
+      let y = evento.layerY - 0.5 * this.alto;
+      let angulo = Math.atan(y / x) + 0.5 * Math.PI;
+      if (x >= 0) {
+        angulo = angulo;
+      } else {
+        angulo = angulo + Math.PI;
       }
-          //
-      // Si el click ocurrio en un elemento que ya estaba seleccionado, este se regresa a su estado original
-      else {
-        this.cerrarTooltip();
-        this.reestablecerVista();
-      }
-      this.svg.select("path.rebanada-"+indice)
-          .classed("activo", !this.svg.select("path.rebanada-"+indice).classed("activo"));
-    },
-    mostrarTooltip(indice) {
 
-      let pos = this.arc_texto.centroid(this.data_para_pay[indice]);
+      this.segmentos.style("fill-opacity", 0.25);
+      var segmento_over = this.segmentos
+        .filter((d) => d.startAngle <= angulo && angulo < d.endAngle)
+        .style("fill-opacity", 1);
 
-      let angulo_medio = this.data_para_pay[indice].startAngle + (this.data_para_pay[indice].endAngle - this.data_para_pay[indice].startAngle) / 2;
+      this.textos_porcentajes.style("fill-opacity", 0.25);
 
-      this.tooltip_data_seleccionada = this.datos[indice]
+      this.textos_porcentajes
+        .filter((d) => d.startAngle <= angulo && angulo < d.endAngle)
+        .style("fill-opacity", 1);
+
+      let indice = segmento_over._groups[0][0].__data__.index;
+      this.tooltip_data_seleccionada = this.datos[indice];
       this.tooltip
         .style("visibility", "visible")
-        .style("left", ((angulo_medio > Math.PI ? pos[0] : pos[0] - this.ancho_tooltip) + this.ancho * .5) + "px")
-        .style("top", (pos[1] + this.alto*.5) + "px")
+        .style(
+          "left",
+          `${
+            angulo < Math.PI
+              ? evento.layerX - this.ancho_tooltip - 15
+              : evento.layerX + 15
+          }px`
+        )
+
         .attr("width", this.ancho_tooltip)
         .attr("height", 30);
 
-      let contenido_tooltip = this.tooltip.select("div.tooltip-contenido")
-          .style("background", "rgba(0, 0, 0, .8)")
-          .style("min-width", this.ancho_tooltip)
-          .style("border-radius", "8px")
-          .style("width", this.ancho_tooltip+"px")
-          .attr("height", 70 )
-          .style("padding", "0 3px 0 10px");
-
-      // this.svg.select("button.boton-cerrar-tooltip")
-      //     .on("click", this.reestablecerVista);
-
-
+      let contenido_tooltip = this.tooltip
+        .select("div.tooltip-contenido")
+        .style("background", "rgba(0, 0, 0, .8)")
+        .style("min-width", this.ancho_tooltip)
+        .style("border-radius", "8px")
+        .style("width", this.ancho_tooltip + "px")
+        .attr("height", 70)
+        .style("padding", "0 3px 0 10px");
 
       contenido_tooltip
-          .select("div.tooltip-cifras")
-          .html(this.textoTooltip())
-          .style("margin", "0")
-          .style("padding", "0 0 5px 0");
-      
+        .select("div.tooltip-cifras")
+        .html(this.textoTooltip())
+        .style("margin", "0")
+        .style("padding", "0 0 5px 0");
 
       this.tooltip
-          .style("height", contenido_tooltip.style("height"))
-          .style("width", contenido_tooltip.style("width"))
+        .style("height", contenido_tooltip.style("height"))
+        .style("width", contenido_tooltip.style("width"));
+      this.tooltip.style(
+        "top",
+        `${
+          angulo > 0.5 * Math.PI && angulo < 1.5 * Math.PI
+            ? evento.layerY - parseInt(contenido_tooltip.style("height")) - 10
+            : evento.layerY + 15
+        }px`
+      );
     },
-
     cerrarTooltip() {
-      this.tooltip
-          .style("visibility", "hidden");
-      this.segmentos
-          .style("fill-opacity", "1")
-
-    },
-
-    reestablecerVista() {
       this.tooltip.style("visibility", "hidden");
-      this.segmentos.interrupt()
-          .transition()
-          .duration(500)
-          .style("fill", d => d.color)
-          .style("fill-opacity", 1);
-      this.textos_porcentajes.interrupt()
-          .transition()
-          .duration(500)
-          .style("fill-opacity", 1);
-
-      this.contenedor_leyenda
-          .selectAll(".boton-categoria")
-          .classed("activo", false)
-          .classed("inactivo", false);
+      this.segmentos.style("fill-opacity", "1");
+      this.textos_porcentajes.style("fill-opacity", "1");
     },
-  }
-}
+  },
+};
 </script>
 
 <style scoped lang="scss">
@@ -370,6 +346,9 @@ svg.svg-donas::v-deep text {
 
 div.contenedor-tooltip-svg {
   position: relative;
+  svg{
+    z-index: 1;
+  }
 
   .rotation-wrapper-outer {
     display: table;
@@ -399,7 +378,6 @@ div.contenedor-tooltip-svg {
     font-weight: 600;
   }
 
-
   div.tooltip {
     color: #fff;
     font-size: 12px;
@@ -408,8 +386,7 @@ div.contenedor-tooltip-svg {
     visibility: hidden;
   }
 
-  div.tooltip::v-deep
-  div.tooltip-cifras {
+  div.tooltip::v-deep div.tooltip-cifras {
     padding-bottom: 5px;
 
     p {
@@ -419,11 +396,10 @@ div.contenedor-tooltip-svg {
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        border: solid 1px rgba(255, 255, 255, .7);
+        border: solid 1px rgba(255, 255, 255, 0.7);
         display: inline-block;
       }
     }
-
   }
 
   div.tooltip div.contenedor-boton-cerrar {
@@ -438,7 +414,7 @@ div.contenedor-tooltip-svg {
     background: #fff;
     border: none;
     font-size: 30px;
-    line-height: .9;
+    line-height: 0.9;
     font-weight: 300;
     padding: 0 5px;
     border-radius: 5px;
