@@ -447,6 +447,9 @@ svg.svg-cajas ::v-deep text {
 div.contenedor-tooltip-svg {
   width: 100%;
   position: relative;
+  svg{
+    z-index: 1;
+  }
 
   .rotation-wrapper-outer {
     display: table;
