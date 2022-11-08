@@ -1,4 +1,4 @@
-# Dadsig-Graficas
+# sidai-graficas
 
 Esta es una biblioteca de visualización de datos creada desde la Dirección de Análisis de Datos y Sistemas de 
 Información Geográfica (Dadsig) perteneciente a [Conacyt](https://conacyt.mx/). Esta biblioteca es de código abierto y 
@@ -14,8 +14,8 @@ está desarrollada usando software libre. Así mismo sigue los lineamientos de l
 ## Dependencias e instalación
 
 Las gráficas de esta biblioteca están desarrolladas como [componentes](https://es.vuejs.org/v2/guide/components.html) de
-[Vue.js](https://es.vuejs.org/) usando [d3](https://d3js.org/), por lo tanto se recomienda a la persona usuaria tener 
-conocimientos básicos de lo anterior así como de desarrollo en [javascript](https://www.javascript.com/).
+[Vue.js](https://es.vuejs.org/) usando [D3.js](https://d3js.org/), por lo tanto se recomienda a la persona usuaria tener 
+conocimientos básicos de lo anterior así como de desarrollo en [JavaScript](https://www.javascript.com/).
 
 Para instalar la biblioteca se puede hacer:
 
@@ -24,7 +24,7 @@ Para instalar la biblioteca se puede hacer:
 Por medio de [npm](https://www.npmjs.com/) ejecutar la siguiente línea de comando en la terminal de la computadora,
 
 ```shell
-npm install https://github.com/salsa-community/dadsig-graficas.git
+npm install https://github.com/salsa-community/sisdai-graficas.git
 ```
 
 **Opción B**
@@ -36,9 +36,9 @@ como realizarlo.
 Una vez clonado el repositorio, se puede instalar en la terminal con `npm` ejecutando la siguiente línea de comando,
 
 ```shell
-npm install ruta_al_repositorio/dadsig-graficas
+npm install ruta_al_repositorio/sisdai-graficas
 ```
-
+(Sustituir `ruta_al_repositorio` por la ruta en local de la persona usuaria)
 
 ## Inicio rápido
 
