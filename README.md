@@ -89,7 +89,7 @@ de Vue como se muestra a continuación.
 
 En el script anterior se especifican los parámetros del componente `DadsigBarras` como pueden ser el `id`, los
 datos que se usarán para construir las barras, las variables para construir la gráfica, etc. Una lista completa de los 
-parámetros usados en cada uno de los componentes de visualización se puede hallar en la [documentación en línea]().
+parámetros usados en cada uno de los componentes de visualización se puede hallar en la [documentación en línea](https://sisdai.conacyt.mx/).
 
 ## Licencia
 
