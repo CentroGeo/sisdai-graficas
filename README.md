@@ -1,4 +1,4 @@
-# sidai-graficas
+# sisdai-graficas
 
 Esta es una biblioteca de visualización de datos creada desde la Dirección de Análisis de Datos y Sistemas de 
 Información Geográfica (Dadsig) perteneciente a [Conacyt](https://conacyt.mx/). Esta biblioteca es de código abierto y 
