@@ -1,9 +1,6 @@
 # sisdai-graficas
 
-Esta es una biblioteca de visualización de datos creada desde la Dirección de Análisis de Datos y Sistemas de 
-Información Geográfica (Dadsig) perteneciente a [Conacyt](https://conacyt.mx/). Esta biblioteca es de código abierto y 
-está desarrollada usando software libre. Así mismo sigue los lineamientos de la estrategia
-[SALSA](https://salsa.crip.conacyt.mx/) creada en Conacyt.
+Ésta es una biblioteca de visualización de datos que forma parte del Sistema de Diseño y Accesibilidad para la Investigación, proyecto que potencia el impacto social de la investigación al promover la autonomía e independencia tecnológica con el uso de componentes de software libre. Esta biblioteca está alineada a [SALSA](https://salsa.crip.conacyt.mx/).
 
 > **_Limitación de responsabilidad_**
 > 
@@ -95,7 +92,7 @@ parámetros usados en cada uno de los componentes de visualización se puede hal
 
 **SOFTWARE LIBRE Y ESTÁNDARES ABIERTOS**
 
-Sisdai está alineado a las disposiciones establecidas por la Coordinación de Estrategia Digital Nacional (DOF: 06/09/2021) en donde se estipula que las "políticas y disposiciones tienen como objetivo fortalecer el uso del software libre y los estándares abiertos, fomentar el desarrollo de aplicaciones institucionales con utilidad pública, lograr la autonomía, soberanía e independencia tecnológicas dentro de la APF". En el artículo 63 se explicita que "cuando se trate de desarrollos basados en software libre, se respetarán las condiciones de su licenciamiento original [...]", en este sentido este proyecto está alineado a lo que se define desde [Salsa](https://salsa.crip.conacyt.mx/).
+Sisdai está alineado a las disposiciones establecidas por la Coordinación de Estrategia Digital Nacional (DOF: 06/09/2021) en donde se estipula que las "políticas y disposiciones tienen como objetivo fortalecer el uso del software libre y los estándares abiertos, fomentar el desarrollo de aplicaciones institucionales con utilidad pública, lograr la autonomía, soberanía e independencia tecnológicas dentro de la APF". En el artículo 63 se explicita que "cuando se trate de desarrollos basados en software libre, se respetarán las condiciones de su licenciamiento original [...]", en este sentido este proyecto está alineado a lo que se define desde [SALSA](https://salsa.crip.conacyt.mx/).
 
 ## Contribuir
 
@@ -104,7 +101,3 @@ pueden consultar [aquí](https://salsa.crip.conacyt.mx/guidelines/contribute/).
 
 *En los lineamientos de contribución se lista la rama _master_ como principal, sin embargo en este proyecto, dicha 
 rama es _main_.
-
-## Contacto
-
-_Sección en construcción_
