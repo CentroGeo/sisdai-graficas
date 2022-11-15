@@ -93,7 +93,9 @@ parámetros usados en cada uno de los componentes de visualización se puede hal
 
 ## Licencia
 
-Bajo la licencia [MIT](https://mit-license.org/).
+**SOFTWARE LIBRE Y ESTÁNDARES ABIERTOS:**
+
+Sisdai está alineado a las disposiciones establecidas por la Coordinación de Estrategia Digital Nacional (DOF: 06/09/2021) en donde se estipula que las "políticas y disposiciones tienen como objetivo fortalecer el uso del software libre y los estándares abiertos, fomentar el desarrollo de aplicaciones institucionales con utilidad pública, lograr la autonomía, soberanía e independencia tecnológicas dentro de la APF". En el artículo 63 se explicita que "cuando se trate de desarrollos basados en software libre, se respetarán las condiciones de su licenciamiento original [...]", en este sentido este proyecto está alineado a lo que se define desde Salsa.
 
 ## Contribuir
 
