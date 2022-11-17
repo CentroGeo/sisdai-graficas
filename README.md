@@ -1,9 +1,6 @@
-# Dadsig-Graficas
+# sisdai-graficas
 
-Esta es una biblioteca de visualización de datos creada desde la Dirección de Análisis de Datos y Sistemas de 
-Información Geográfica (Dadsig) perteneciente a [Conacyt](https://conacyt.mx/). Esta biblioteca es de código abierto y 
-está desarrollada usando software libre. Así mismo sigue los lineamientos de la estrategia
-[SALSA](https://salsa.crip.conacyt.mx/) creada en Conacyt.
+Ésta es una biblioteca de visualización de datos que forma parte del Sistema de Diseño y Accesibilidad para la Investigación, proyecto que potencia el impacto social de la investigación al promover la autonomía e independencia tecnológica con el uso de componentes de software libre. Esta biblioteca está alineada a [SALSA](https://salsa.crip.conacyt.mx/).
 
 > **_Limitación de responsabilidad_**
 > 
@@ -14,8 +11,8 @@ está desarrollada usando software libre. Así mismo sigue los lineamientos de l
 ## Dependencias e instalación
 
 Las gráficas de esta biblioteca están desarrolladas como [componentes](https://es.vuejs.org/v2/guide/components.html) de
-[Vue.js](https://es.vuejs.org/) usando [d3](https://d3js.org/), por lo tanto se recomienda a la persona usuaria tener 
-conocimientos básicos de lo anterior así como de desarrollo en [javascript](https://www.javascript.com/).
+[Vue.js](https://es.vuejs.org/) usando [D3.js](https://d3js.org/), por lo tanto se recomienda a la persona usuaria tener 
+conocimientos básicos de lo anterior así como de desarrollo en [JavaScript](https://www.javascript.com/).
 
 Para instalar la biblioteca se puede hacer:
 
@@ -24,7 +21,7 @@ Para instalar la biblioteca se puede hacer:
 Por medio de [npm](https://www.npmjs.com/) ejecutar la siguiente línea de comando en la terminal de la computadora,
 
 ```shell
-npm install https://github.com/salsa-community/dadsig-graficas.git
+npm install https://github.com/salsa-community/sisdai-graficas.git
 ```
 
 **Opción B**
@@ -36,9 +33,9 @@ como realizarlo.
 Una vez clonado el repositorio, se puede instalar en la terminal con `npm` ejecutando la siguiente línea de comando,
 
 ```shell
-npm install ruta_al_repositorio/dadsig-graficas
+npm install ruta_al_repositorio/sisdai-graficas
 ```
-
+(Sustituir `ruta_al_repositorio` por la ruta en local de la persona usuaria)
 
 ## Inicio rápido
 
@@ -89,11 +86,13 @@ de Vue como se muestra a continuación.
 
 En el script anterior se especifican los parámetros del componente `DadsigBarras` como pueden ser el `id`, los
 datos que se usarán para construir las barras, las variables para construir la gráfica, etc. Una lista completa de los 
-parámetros usados en cada uno de los componentes de visualización se puede hallar en la [documentación en línea]().
+parámetros usados en cada uno de los componentes de visualización se puede hallar en la [documentación en línea](https://sisdai.conacyt.mx/).
 
 ## Licencia
 
-Bajo la licencia [MIT](https://mit-license.org/).
+**SOFTWARE LIBRE Y ESTÁNDARES ABIERTOS**
+
+Sisdai está alineado a las disposiciones establecidas por la Coordinación de Estrategia Digital Nacional (DOF: 06/09/2021) en donde se estipula que las "políticas y disposiciones tienen como objetivo fortalecer el uso del software libre y los estándares abiertos, fomentar el desarrollo de aplicaciones institucionales con utilidad pública, lograr la autonomía, soberanía e independencia tecnológicas dentro de la APF". En el artículo 63 se explicita que "cuando se trate de desarrollos basados en software libre, se respetarán las condiciones de su licenciamiento original [...]", en este sentido este proyecto está alineado a lo que se define desde [SALSA](https://salsa.crip.conacyt.mx/).
 
 ## Contribuir
 
@@ -102,7 +101,3 @@ pueden consultar [aquí](https://salsa.crip.conacyt.mx/guidelines/contribute/).
 
 *En los lineamientos de contribución se lista la rama _master_ como principal, sin embargo en este proyecto, dicha 
 rama es _main_.
-
-## Contacto
-
-_Sección en construcción_
