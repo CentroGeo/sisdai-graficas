@@ -79,7 +79,7 @@ componente de `DadsigBarras` de esta biblioteca.
 import Vue from 'Vue'
 import App from './App.Vue'
 import {DadsigBarras} from "dadsig-graficas";
-import 'dadsig-graficas/dist/dadsig-graficas.css';
+import 'dadsig-graficas/dist/sisdai-graficas.css';
 
 Vue.use(DadsigBarras)
 

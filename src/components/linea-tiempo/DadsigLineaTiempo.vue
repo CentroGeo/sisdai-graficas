@@ -20,7 +20,7 @@ export default {
       type: Array,
     },
     opciones: {
-      default: {},
+      "default": {},
       type: Object,
     },
     id_linea_tiempo: {

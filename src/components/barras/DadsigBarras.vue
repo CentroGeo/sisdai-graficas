@@ -327,7 +327,7 @@ export default {
           this.barras_individuales
               .attr("width", d => this.escalaX(d[1]) - this.escalaX(d[0]))
               .attr("height", this.escalaYSub.bandwidth)
-              .attr("x", d => d3.min(this.escalaX.domain()))
+              .attr("x", () => d3.min(this.escalaX.domain()))
               .attr("y", d => this.escalaY(d.data[this.nombre_barra]) + this.escalaYSub(d.data.key))
         }
       }

@@ -266,6 +266,7 @@ export default {
       let y = evento.layerY - 0.5 * this.alto;
       let angulo = Math.atan(y / x) + 0.5 * Math.PI;
       if (x >= 0) {
+        // eslint-disable-next-line no-self-assign
         angulo = angulo;
       } else {
         angulo = angulo + Math.PI;
