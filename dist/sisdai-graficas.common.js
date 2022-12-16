@@ -5411,7 +5411,7 @@ function requireMoment() {
       }
 
       function diff(input, units, asFloat) {
-        var that, zoneDelta, output;
+        var that, zoneVariable_2, output;
 
         if (!this.isValid()) {
           return NaN;
@@ -5423,7 +5423,7 @@ function requireMoment() {
           return NaN;
         }
 
-        zoneDelta = (that.utcOffset() - this.utcOffset()) * 6e4;
+        zoneVariable_2 = (that.utcOffset() - this.utcOffset()) * 6e4;
         units = normalizeUnits(units);
 
         switch (units) {
@@ -5455,12 +5455,12 @@ function requireMoment() {
           // 1000 * 60 * 60
 
           case 'day':
-            output = (this - that - zoneDelta) / 864e5;
+            output = (this - that - zoneVariable_2) / 864e5;
             break;
           // 1000 * 60 * 60 * 24, negate dst
 
           case 'week':
-            output = (this - that - zoneDelta) / 6048e5;
+            output = (this - that - zoneVariable_2) / 6048e5;
             break;
           // 1000 * 60 * 60 * 24 * 7, negate dst
 
@@ -13096,27 +13096,27 @@ function getDirection(x, y) {
   return y < 0 ? DIRECTION_UP : DIRECTION_DOWN;
 }
 
-function computeDeltaXY(session, input) {
-  var center = input.center; // let { offsetDelta:offset = {}, prevDelta = {}, prevInput = {} } = session;
+function computeVariable_2XY(session, input) {
+  var center = input.center; // let { offsetVariable_2:offset = {}, prevVariable_2 = {}, prevInput = {} } = session;
   // jscs throwing error on defalut destructured values and without defaults tests fail
 
-  var offset = session.offsetDelta || {};
-  var prevDelta = session.prevDelta || {};
+  var offset = session.offsetVariable_2 || {};
+  var prevVariable_2 = session.prevVariable_2 || {};
   var prevInput = session.prevInput || {};
 
   if (input.eventType === INPUT_START || prevInput.eventType === INPUT_END) {
-    prevDelta = session.prevDelta = {
+    prevVariable_2 = session.prevVariable_2 = {
       x: prevInput.deltaX || 0,
       y: prevInput.deltaY || 0
     };
-    offset = session.offsetDelta = {
+    offset = session.offsetVariable_2 = {
       x: center.x,
       y: center.y
     };
   }
 
-  input.deltaX = prevDelta.x + (center.x - offset.x);
-  input.deltaY = prevDelta.y + (center.y - offset.y);
+  input.deltaX = prevVariable_2.x + (center.x - offset.x);
+  input.deltaY = prevVariable_2.y + (center.y - offset.y);
 }
 /**
  * @private
@@ -13229,7 +13229,7 @@ function computeInputData(manager, input) {
   input.deltaTime = input.timeStamp - firstInput.timeStamp;
   input.angle = getAngle(offsetCenter, center);
   input.distance = getDistance(offsetCenter, center);
-  computeDeltaXY(session, input);
+  computeVariable_2XY(session, input);
   input.offsetDirection = getDirection(input.deltaX, input.deltaY);
   var overallVelocity = getVelocity(input.deltaTime, input.deltaX, input.deltaY);
   input.overallVelocityX = overallVelocity.x;
@@ -30222,7 +30222,7 @@ var Range = /*#__PURE__*/function (_Component) {
      */
     function _onDragStart(event) {
       this.deltaDifference = 0;
-      this.previousDelta = 0; // only allow dragging when configured as movable
+      this.previousVariable_2 = 0; // only allow dragging when configured as movable
 
       if (!this.options.moveable) return; // only start dragging when the mouse is inside the current range
 
@@ -30276,8 +30276,8 @@ var Range = /*#__PURE__*/function (_Component) {
       var newStart = this.props.touch.start + diffRange;
       var newEnd = this.props.touch.end + diffRange; // snapping times away from hidden zones
 
-      var safeStart = snapAwayFromHidden(this.body.hiddenDates, newStart, this.previousDelta - delta, true);
-      var safeEnd = snapAwayFromHidden(this.body.hiddenDates, newEnd, this.previousDelta - delta, true);
+      var safeStart = snapAwayFromHidden(this.body.hiddenDates, newStart, this.previousVariable_2 - delta, true);
+      var safeEnd = snapAwayFromHidden(this.body.hiddenDates, newEnd, this.previousVariable_2 - delta, true);
 
       if (safeStart != newStart || safeEnd != newEnd) {
         this.deltaDifference += delta;
@@ -30289,7 +30289,7 @@ var Range = /*#__PURE__*/function (_Component) {
         return;
       }
 
-      this.previousDelta = delta;
+      this.previousVariable_2 = delta;
 
       this._applyRange(newStart, newEnd);
 
@@ -30348,9 +30348,9 @@ var Range = /*#__PURE__*/function (_Component) {
       // retrieve delta
       var delta = 0;
 
-      if (event.wheelDelta) {
+      if (event.wheelVariable_2) {
         /* IE/Opera. */
-        delta = event.wheelDelta / 120;
+        delta = event.wheelVariable_2 / 120;
       } else if (event.detail) {
         /* Mozilla case. */
         // In Mozilla, sign of delta is different than in IE.
@@ -30373,7 +30373,7 @@ var Range = /*#__PURE__*/function (_Component) {
       // and negative, if wheel was scrolled down.
 
       if (delta) {
-        // perform the zoom action. Delta is normally 1 or -1
+        // perform the zoom action. Variable_2 is normally 1 or -1
         // adjust a negative delta such that zooming in with delta 0.1
         // equals zooming out with a delta -0.1
         var zoomFriction = this.options.zoomFriction || 5;
@@ -33750,16 +33750,16 @@ var Core = /*#__PURE__*/function () {
           deltaY = event.detail * -1;
         }
 
-        if ('wheelDelta' in event) {
-          deltaY = event.wheelDelta;
+        if ('wheelVariable_2' in event) {
+          deltaY = event.wheelVariable_2;
         }
 
-        if ('wheelDeltaY' in event) {
-          deltaY = event.wheelDeltaY;
+        if ('wheelVariable_2Y' in event) {
+          deltaY = event.wheelVariable_2Y;
         }
 
-        if ('wheelDeltaX' in event) {
-          deltaX = event.wheelDeltaX * -1;
+        if ('wheelVariable_2X' in event) {
+          deltaX = event.wheelVariable_2X * -1;
         } // Firefox < 17 horizontal scrolling related to DOMMouseScroll event
 
 
@@ -58568,7 +58568,7 @@ function nogamma(a, b) {
 
 
 
-/* harmony default export */ var src_rgb = ((function rgbGamma(y) {
+/* harmony default export */ var src_rgb = ((function rgbVariable_3(y) {
   var color = gamma(y);
 
   function rgb(start, end) {
@@ -58585,7 +58585,7 @@ function nogamma(a, b) {
     };
   }
 
-  rgb.gamma = rgbGamma;
+  rgb.gamma = rgbVariable_3;
 
   return rgb;
 })(1));
@@ -64140,7 +64140,7 @@ function defaultTransform() {
   return this.__zoom || transform_identity;
 }
 
-function defaultWheelDelta(event) {
+function defaultWheelVariable_2(event) {
   return -event.deltaY * (event.deltaMode === 1 ? 0.05 : event.deltaMode ? 1 : 0.002) * (event.ctrlKey ? 10 : 1);
 }
 
@@ -64163,7 +64163,7 @@ function defaultConstrain(transform, extent, translateExtent) {
   var filter = zoom_defaultFilter,
       extent = zoom_defaultExtent,
       constrain = defaultConstrain,
-      wheelDelta = defaultWheelDelta,
+      wheelVariable_2 = defaultWheelVariable_2,
       touchable = zoom_defaultTouchable,
       scaleExtent = [0, Infinity],
       translateExtent = [[-Infinity, -Infinity], [Infinity, Infinity]],
@@ -64344,7 +64344,7 @@ function defaultConstrain(transform, extent, translateExtent) {
     if (!filter.apply(this, arguments)) return;
     var g = gesture(this, args).event(event),
         t = this.__zoom,
-        k = Math.max(scaleExtent[0], Math.min(scaleExtent[1], t.k * Math.pow(2, wheelDelta.apply(this, arguments)))),
+        k = Math.max(scaleExtent[0], Math.min(scaleExtent[1], t.k * Math.pow(2, wheelVariable_2.apply(this, arguments)))),
         p = pointer(event);
 
     // If the mouse is in the same location as before, reuse it.
@@ -64503,8 +64503,8 @@ function defaultConstrain(transform, extent, translateExtent) {
     }
   }
 
-  zoom.wheelDelta = function(_) {
-    return arguments.length ? (wheelDelta = typeof _ === "function" ? _ : d3_zoom_src_constant(+_), zoom) : wheelDelta;
+  zoom.wheelVariable_2 = function(_) {
+    return arguments.length ? (wheelVariable_2 = typeof _ === "function" ? _ : d3_zoom_src_constant(+_), zoom) : wheelVariable_2;
   };
 
   zoom.filter = function(_) {
