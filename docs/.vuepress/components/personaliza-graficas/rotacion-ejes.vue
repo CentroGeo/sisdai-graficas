@@ -1,6 +1,6 @@
 <template>
     <div>
-      <DadsigBarras
+      <SisdaiBarras
           :barras_id="'verticales_simples'"
           :datos="[{categoria: 'Variable A', cantidad: 120},
                    {categoria: 'Variable B', cantidad: 150},

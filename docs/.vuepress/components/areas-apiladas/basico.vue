@@ -1,7 +1,7 @@
 <template>
   <div>
     
-    <DadsigAreasApiladas
+    <SisdaiAreasApiladas
         areas_apiladas_id="streamgraphbasico"
         :datos="datos_grafica"
         :variables='[

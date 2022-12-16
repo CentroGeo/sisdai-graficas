@@ -1,6 +1,6 @@
 # Diagrama de cajas y bigotes
 
-A continuación se describe la utilización del componente de visualización `<DadsigCajasBigotes/>` para construir un
+A continuación se describe la utilización del componente de visualización `<SisdaiCajasBigotes/>` para construir un
 gráfico de cajas y bigotes o también conocido como _Boxplot_.
 
 ## Parámetros
@@ -96,7 +96,7 @@ En el caso contrario en el que se quieran agregar los datos directamente como un
 éstos se deberán de colocar de la siguiente manera (nótese que aquí se abrevia el conjunto de datos usando "..."),
 
 ```html 
-<DadsigCajasBigotes
+<SisdaiCajasBigotes
         ref="cajas_bigotes_basica"
         :caja_id="'cajas_bigotes_basica'"
         :datos=[
@@ -134,7 +134,7 @@ o no dentro de los límites de los cuartiles dependiendo del valor de la métric
 En este ejemplo, el componente se escribe de la siguiente manera
 
 ```html
-    <DadsigCajasBigotes
+    <SisdaiCajasBigotes
         ref="cajas_bigotes_basica"
         :caja_id="'cajas_bigotes_basica'"
         :datos="datos"
@@ -160,7 +160,7 @@ _Visualizaciones_ de esa documentación) para insertar encabezados y pies de gr�
 controles, nomenclaturas, etc. dentro del componente. El HTML es el siguiente,
 
 ```html
-<DadsigCajasBigotes
+<SisdaiCajasBigotes
         ref="cajas_slots"
         :caja_id="'cajas_bigotes_slots'"
         :datos="datos"
@@ -190,7 +190,7 @@ controles, nomenclaturas, etc. dentro del componente. El HTML es el siguiente,
             </p>
         </div>
     </template>
-</DadsigCajasBigotes>
+</SisdaiCajasBigotes>
 ```
 
 El gráfico resultante es el siguiente, en el cual se empleo una tipografía distinta en los `slots` para hacer énfasis en
@@ -208,7 +208,7 @@ archivos `.json`.
 ```html
 <template>
     <div id="app">
-        <DadsigCajasBigotes
+        <SisdaiCajasBigotes
                 ref="cajas_bigotes_cambio_base"
                 :caja_id="'cajas_bigotes_cambio_base'"
                 :datos="datos"
@@ -231,7 +231,7 @@ archivos `.json`.
                     <button @click="alternandoBase">Cambia la data</button>
                 </div>
             </template>
-        </DadsigCajasBigotes>
+        </SisdaiCajasBigotes>
     </div>
 </template>
 ```

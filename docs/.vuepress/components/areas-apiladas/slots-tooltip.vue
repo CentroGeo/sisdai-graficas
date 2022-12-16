@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DadsigAreasApiladas
+    <SisdaiAreasApiladas
       :areas_apiladas_id="id_stream"
       :datos="datos_grafica"
       :variables="variables"
@@ -33,7 +33,7 @@
         </div>
       </div>
     </template>
-    </DadsigAreasApiladas>
+    </SisdaiAreasApiladas>
   </div>
 </template>
 

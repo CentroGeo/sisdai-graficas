@@ -1,6 +1,6 @@
 # Donas
 
-A continuación se describe la utilización del componente de visualización `<DadsigDonas/>` para construir un gráfico de 
+A continuación se describe la utilización del componente de visualización `<SisdaiDonas/>` para construir un gráfico de 
 donas.
 
 ## Parámetros
@@ -41,7 +41,7 @@ _Visualizaciones_ de esa documentación) para insertar encabezados y pies de gr�
 controles, nomenclaturas, etc. dentro del componente. El HTML es el siguiente,
 
 ```html
-    <DadsigDonas
+    <SisdaiDonas
         ref="donas-slots-tooltip"
         :dona_id="'dona'"
         :datos="datos"
@@ -66,7 +66,7 @@ controles, nomenclaturas, etc. dentro del componente. El HTML es el siguiente,
             </p>
         </div>
     </template>
-</DadsigDonas>
+</SisdaiDonas>
 ```
 
 El gráfico resultante es el siguiente, en el cual se empleo una tipografía distinta en los `slots` para hacer énfasis en
@@ -85,7 +85,7 @@ archivos `.json`.
 ```html
 <template>
     <div id="app">
-        <DadsigDonas
+        <SisdaiDonas
                 ref="donas_cambio_base"
                 :datos="datos"
                 :dona_id="'donas_cambio_base'">
@@ -103,7 +103,7 @@ archivos `.json`.
                     <button @click="alternandoBase">Cambia la data</button>
                 </div>
             </template>
-        </DadsigDonas>
+        </SisdaiDonas>
     </div>
 </template>
 ```

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <DadsigCajasBigotes
+    <SisdaiCajasBigotes
         ref="cajas_bigotes_cambio_base"
         :caja_id="'cajas_bigotes_cambio_base'"
         :datos="datos"
@@ -22,7 +22,7 @@
           <button @click="alternandoBase">Cambia la data</button>
         </div>
       </template>
-    </DadsigCajasBigotes>
+    </SisdaiCajasBigotes>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DadsigLineaTiempo
+    <SisdaiLineaTiempo
       :id_linea_tiempo="'linea_tiempo_basica'"
       :eventos="eventos"
       :opciones="opciones"

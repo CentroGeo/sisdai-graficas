@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DadsigBarras
+    <SisdaiBarras
       :barras_id="'verticales_agrupadas_slots_tooltip'"
       :datos="[
         {
@@ -72,7 +72,7 @@
           </p>
         </div>
       </template>
-    </DadsigBarras>
+    </SisdaiBarras>
   </div>
 </template>
 <script>

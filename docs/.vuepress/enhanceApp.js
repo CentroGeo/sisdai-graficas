@@ -4,48 +4,36 @@
  * https://v1.vuepress.vuejs.org/guide/basic-config.html#app-level-enhancements
  */
 
-//import "dai-maps/dist/dai-maps.css"
 
-//import "../../src/styles/main.scss"
-
-//import DaiMaps from "dai-maps"
-//import  DaiMaps from "../../src/index.js"
-
-
-import { DadsigBarras, DadsigDonas, DadsigLineas, DadsigCajasBigotes, DadsigDiagramaProcesos, DadsigAreasApiladas, DadsigLineaTiempo} from "../../src/index.js"
+import {
+    SisdaiBarras,
+    SisdaiDonas,
+    SisdaiLineas,
+    SisdaiCajasBigotes,
+    SisdaiDiagramaProcesos,
+    SisdaiAreasApiladas,
+    SisdaiLineaTiempo
+} from "../../src/index.js"
 import "./styles/index.scss"
-
-/*export default ({
-  Vue, // the version of Vue being used in the VuePress app
-  options, // the options for the root Vue instance
-  router, // the router instance for the app
-  siteData // site metadata
-}) => {
-  Vue.use(DaiMaps)
-  // ...apply enhancements for the site.
-}
-*/
-
 import Vuex from 'vuex';
 
 export default ({
-  Vue, // the version of Vue being used in the VuePress app
-  options, // the options for the root Vue instance
-  router, // the router instance for the app
-  siteData // site metadata
-}) => {
-  Vue.use(DadsigBarras)
-  Vue.use(DadsigCajasBigotes)
-  Vue.use(DadsigDonas)
-  Vue.use(DadsigLineas)
-  Vue.use(DadsigDiagramaProcesos)
-  Vue.use(DadsigAreasApiladas)
-  Vue.use(DadsigLineaTiempo)
+                    Vue, // the version of Vue being used in the VuePress app
+                    options, // the options for the root Vue instance
+                    router, // the router instance for the app
+                    siteData // site metadata
+                }) => {
+    Vue.use(SisdaiBarras)
+    Vue.use(SisdaiCajasBigotes)
+    Vue.use(SisdaiDonas)
+    Vue.use(SisdaiLineas)
+    Vue.use(SisdaiDiagramaProcesos)
+    Vue.use(SisdaiAreasApiladas)
+    Vue.use(SisdaiLineaTiempo)
 
-  // ...apply enhancements for the site.
-  
+    // ...apply enhancements for the site.
 
 
-  Vue.use(Vuex);
+    Vue.use(Vuex);
 
 }

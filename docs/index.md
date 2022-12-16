@@ -1,7 +1,7 @@
 ---
 home: true
 heroImage: conacyt2.png
-tagline: Biblioteca para construir gráficas interactivas
+tagline: Biblioteca de visualización de datos
 actionText: Introducción →
 actionLink: /introduccion/
 #features:
@@ -11,7 +11,7 @@ actionLink: /introduccion/
 #  details: Feature 2 Description
 #- title: Feature 3 Title
 #  details: Feature 3 Description
-footer: Made by DADSIG - CONACYT with ❤️
+footer: Sisdai ❤️
 ---
 
 v{{ $themeConfig.version }}

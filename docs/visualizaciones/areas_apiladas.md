@@ -1,6 +1,6 @@
 # Áreas apiladas
 
-A continuación se describe la utilización del componente de visualización `<DadsigAreasApiladas/>` para construir un
+A continuación se describe la utilización del componente de visualización `<SisdaiAreasApiladas/>` para construir un
 gráfico de áreas apiladas.
 
 <areas-apiladas-slots-tooltip/>
@@ -124,7 +124,7 @@ Los siguiente parámetros se pueden usar para modificar la visualización.
 
 ## Ejemplos de uso
 
-En esta sección se detallan tres diferentes tipos casos de uso de este componente. El componente `<DadsigAreasApiladas/>`
+En esta sección se detallan tres diferentes tipos casos de uso de este componente. El componente `<SisdaiAreasApiladas/>`
 requiere que los datos se encuentren en un archivo `.json` externo, que se importa por medio de un `import`en el 
 apartado `<script/>`. Para los diferentes ejemplos de esta sección, ya se tienen los datos importados.
 
@@ -138,7 +138,7 @@ El `<template>` queda entonces estructurado de la siguiente manera:
 
 ```html
 <template>
-  <DadsigAreasApiladas
+  <SisdaiAreasApiladas
         areas_apiladas_id="streamgraphbasico"
         :datos="datos_grafica"
         :variables='[
@@ -177,7 +177,7 @@ Entonces el HTML estará estructurado de la siguiente manera:
 ```html
 <template>
   <div>
-    <DadsigAreasApiladas
+    <SisdaiAreasApiladas
         :areas_apiladas_id="id_stream"
         :datos="datos_grafica"
         :variables="variables"
@@ -208,7 +208,7 @@ Entonces el HTML estará estructurado de la siguiente manera:
         </div>
       </div>
     </template>
-    </DadsigAreasApiladas>
+    </SisdaiAreasApiladas>
   </div>
 </template>
 ```

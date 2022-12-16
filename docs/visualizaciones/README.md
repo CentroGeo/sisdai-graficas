@@ -46,16 +46,16 @@ thead {
         <tr>
             <td>Cambios temporales</td>
             <td>Gráfica de líneas</td>
-            <td class="componente">&ltDadsigLineas/&gt</td>
+            <td class="componente">&ltSisdaiLineas/&gt</td>
         </tr>
         <tr>
             <td rowspan=2>Distribución</td>
             <td>Diagrama de cajas y bigotes</td>
-            <td class="componente">&ltDadsigCajasBigotes/&gt</td>
+            <td class="componente">&ltSisdaiCajasBigotes/&gt</td>
         </tr>
         <tr>
             <td>Barras (horizontales o verticales)</td>
-            <td class="componente" rowspan=2>&ltDadsigBarras/&gt</td>
+            <td class="componente" rowspan=2>&ltSisdaiBarras/&gt</td>
         </tr>
         <tr>
             <td>Comparación</td>
@@ -63,12 +63,12 @@ thead {
         </tr>
             <td>Composición (parte de un todo)</td>
             <td>Donas</td>
-            <td class="componente">&ltDadsigDonas/&gt</td>
+            <td class="componente">&ltSisdaiDonas/&gt</td>
         </tr>
         <tr>
             <td>Datos geográficos</td>
             <td>Mapas coropléticos</td>
-            <td class="componente">&ltDadsigMapas/&gt</td>
+            <td class="componente">&ltSisdaiMapas/&gt</td>
         </tr>
     </tbody>
 </table>
@@ -105,7 +105,7 @@ se especifica su valor como `false`,
 ```vue
 <template>
   <div>
-    <DadsigLineas
+    <SisdaiLineas
         ref="lineas_sin_boton"
         :conversionTemporal="conversionTemporal"
         :datos="datos"

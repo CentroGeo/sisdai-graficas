@@ -1,6 +1,6 @@
 # Diagramas de procesos
 
-A continuación se describe la utilización del componente de visualización `<DadsigDiagramaProcesos/>` para construir un
+A continuación se describe la utilización del componente de visualización `<SisdaiDiagramaProcesos/>` para construir un
 gráfico de diagrama de procesos
 
 ## Parámetros
@@ -90,7 +90,7 @@ Ejemplo básico que consiste en procesos lineales, con sólo un paso por etapa, 
 ```html
 <template>
   <div>
-    <DadsigDiagramaProcesos
+    <SisdaiDiagramaProcesos
         :datos="datos"
     />
   </div>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <DadsigDiagramaProcesos
+        <SisdaiDiagramaProcesos
             :datos="datos"
         />
     </div>

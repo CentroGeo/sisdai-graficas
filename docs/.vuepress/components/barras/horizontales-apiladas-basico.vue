@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DadsigBarras
+    <SisdaiBarras
       :barras_id="'horizontales-apiladas-basico'"
       :datos="[
         {
