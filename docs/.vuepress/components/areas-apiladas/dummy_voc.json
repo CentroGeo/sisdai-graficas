@@ -5,11 +5,11 @@
                 "fecha_2": "09/ene/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 8,
-                "Delta": 1,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 8,
+                "Variable_2": 1,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE02-21",
@@ -17,11 +17,11 @@
                 "fecha_2": "16/ene/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 3,
-                "Delta": 0,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 1
+                "Variable_1": 3,
+                "Variable_2": 0,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 1
         },
         {
                 "se": "SE03-21",
@@ -29,11 +29,11 @@
                 "fecha_2": "23/ene/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 2,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 4
+                "Variable_1": 0,
+                "Variable_2": 2,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 4
         },
         {
                 "se": "SE04-21",
@@ -41,11 +41,11 @@
                 "fecha_2": "30/ene/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 1,
-                "Gamma": 1,
-                "Beta": 0,
-                "Alpha": 1
+                "Variable_1": 0,
+                "Variable_2": 1,
+                "Variable_3": 1,
+                "Variable_4": 0,
+                "Variable_5": 1
         },
         {
                 "se": "SE05-21",
@@ -53,11 +53,11 @@
                 "fecha_2": "06/feb/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 1,
-                "Gamma": 1,
-                "Beta": 0,
-                "Alpha": 1
+                "Variable_1": 0,
+                "Variable_2": 1,
+                "Variable_3": 1,
+                "Variable_4": 0,
+                "Variable_5": 1
         },
         {
                 "se": "SE06-21",
@@ -65,11 +65,11 @@
                 "fecha_2": "13/feb/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 9,
-                "Delta": 0,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 3
+                "Variable_1": 9,
+                "Variable_2": 0,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 3
         },
         {
                 "se": "SE07-21",
@@ -77,11 +77,11 @@
                 "fecha_2": "20/feb/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 0,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 8
+                "Variable_1": 0,
+                "Variable_2": 0,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 8
         },
         {
                 "se": "SE08-21",
@@ -89,11 +89,11 @@
                 "fecha_2": "27/feb/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 1,
-                "Gamma": 1,
-                "Beta": 0,
-                "Alpha": 4
+                "Variable_1": 0,
+                "Variable_2": 1,
+                "Variable_3": 1,
+                "Variable_4": 0,
+                "Variable_5": 4
         },
         {
                 "se": "SE09-21",
@@ -101,11 +101,11 @@
                 "fecha_2": "06/mar/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 1,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 13
+                "Variable_1": 0,
+                "Variable_2": 1,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 13
         },
         {
                 "se": "SE10-21",
@@ -113,11 +113,11 @@
                 "fecha_2": "13/mar/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 0,
-                "Gamma": 2,
-                "Beta": 0,
-                "Alpha": 14
+                "Variable_1": 0,
+                "Variable_2": 0,
+                "Variable_3": 2,
+                "Variable_4": 0,
+                "Variable_5": 14
         },
         {
                 "se": "SE11-21",
@@ -125,11 +125,11 @@
                 "fecha_2": "20/mar/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 0,
-                "Gamma": 1,
-                "Beta": 0,
-                "Alpha": 13
+                "Variable_1": 0,
+                "Variable_2": 0,
+                "Variable_3": 1,
+                "Variable_4": 0,
+                "Variable_5": 13
         },
         {
                 "se": "SE12-21",
@@ -137,11 +137,11 @@
                 "fecha_2": "27/mar/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 1,
-                "Gamma": 5,
-                "Beta": 0,
-                "Alpha": 19
+                "Variable_1": 0,
+                "Variable_2": 1,
+                "Variable_3": 5,
+                "Variable_4": 0,
+                "Variable_5": 19
         },
         {
                 "se": "SE13-21",
@@ -149,11 +149,11 @@
                 "fecha_2": "03/abr/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 0,
-                "Gamma": 13,
-                "Beta": 1,
-                "Alpha": 14
+                "Variable_1": 0,
+                "Variable_2": 0,
+                "Variable_3": 13,
+                "Variable_4": 1,
+                "Variable_5": 14
         },
         {
                 "se": "SE14-21",
@@ -161,11 +161,11 @@
                 "fecha_2": "10/abr/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 0,
-                "Gamma": 8,
-                "Beta": 4,
-                "Alpha": 40
+                "Variable_1": 0,
+                "Variable_2": 0,
+                "Variable_3": 8,
+                "Variable_4": 4,
+                "Variable_5": 40
         },
         {
                 "se": "SE15-21",
@@ -173,11 +173,11 @@
                 "fecha_2": "17/abr/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 0,
-                "Gamma": 24,
-                "Beta": 0,
-                "Alpha": 49
+                "Variable_1": 0,
+                "Variable_2": 0,
+                "Variable_3": 24,
+                "Variable_4": 0,
+                "Variable_5": 49
         },
         {
                 "se": "SE16-21",
@@ -185,11 +185,11 @@
                 "fecha_2": "24/abr/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 1,
-                "Gamma": 35,
-                "Beta": 2,
-                "Alpha": 68
+                "Variable_1": 0,
+                "Variable_2": 1,
+                "Variable_3": 35,
+                "Variable_4": 2,
+                "Variable_5": 68
         },
         {
                 "se": "SE17-21",
@@ -197,11 +197,11 @@
                 "fecha_2": "01/may/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 0,
-                "Gamma": 56,
-                "Beta": 6,
-                "Alpha": 110
+                "Variable_1": 0,
+                "Variable_2": 0,
+                "Variable_3": 56,
+                "Variable_4": 6,
+                "Variable_5": 110
         },
         {
                 "se": "SE18-21",
@@ -209,11 +209,11 @@
                 "fecha_2": "08/may/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 11,
-                "Gamma": 102,
-                "Beta": 4,
-                "Alpha": 169
+                "Variable_1": 0,
+                "Variable_2": 11,
+                "Variable_3": 102,
+                "Variable_4": 4,
+                "Variable_5": 169
         },
         {
                 "se": "SE19-21",
@@ -221,11 +221,11 @@
                 "fecha_2": "15/may/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 17,
-                "Gamma": 91,
-                "Beta": 1,
-                "Alpha": 128
+                "Variable_1": 0,
+                "Variable_2": 17,
+                "Variable_3": 91,
+                "Variable_4": 1,
+                "Variable_5": 128
         },
         {
                 "se": "SE20-21",
@@ -233,11 +233,11 @@
                 "fecha_2": "22/may/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 18,
-                "Gamma": 231,
-                "Beta": 1,
-                "Alpha": 188
+                "Variable_1": 0,
+                "Variable_2": 18,
+                "Variable_3": 231,
+                "Variable_4": 1,
+                "Variable_5": 188
         },
         {
                 "se": "SE21-21",
@@ -245,11 +245,11 @@
                 "fecha_2": "29/may/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 41,
-                "Gamma": 184,
-                "Beta": 0,
-                "Alpha": 152
+                "Variable_1": 0,
+                "Variable_2": 41,
+                "Variable_3": 184,
+                "Variable_4": 0,
+                "Variable_5": 152
         },
         {
                 "se": "SE22-21",
@@ -257,11 +257,11 @@
                 "fecha_2": "05/jun/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 124,
-                "Gamma": 432,
-                "Beta": 0,
-                "Alpha": 242
+                "Variable_1": 0,
+                "Variable_2": 124,
+                "Variable_3": 432,
+                "Variable_4": 0,
+                "Variable_5": 242
         },
         {
                 "se": "SE23-21",
@@ -269,11 +269,11 @@
                 "fecha_2": "12/jun/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 107,
-                "Gamma": 420,
-                "Beta": 0,
-                "Alpha": 193
+                "Variable_1": 0,
+                "Variable_2": 107,
+                "Variable_3": 420,
+                "Variable_4": 0,
+                "Variable_5": 193
         },
         {
                 "se": "SE24-21",
@@ -281,11 +281,11 @@
                 "fecha_2": "19/jun/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 188,
-                "Gamma": 252,
-                "Beta": 0,
-                "Alpha": 128
+                "Variable_1": 0,
+                "Variable_2": 188,
+                "Variable_3": 252,
+                "Variable_4": 0,
+                "Variable_5": 128
         },
         {
                 "se": "SE25-21",
@@ -293,11 +293,11 @@
                 "fecha_2": "26/jun/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 417,
-                "Gamma": 277,
-                "Beta": 0,
-                "Alpha": 117
+                "Variable_1": 0,
+                "Variable_2": 417,
+                "Variable_3": 277,
+                "Variable_4": 0,
+                "Variable_5": 117
         },
         {
                 "se": "SE26-21",
@@ -305,11 +305,11 @@
                 "fecha_2": "03/jul/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 682,
-                "Gamma": 172,
-                "Beta": 0,
-                "Alpha": 59
+                "Variable_1": 0,
+                "Variable_2": 682,
+                "Variable_3": 172,
+                "Variable_4": 0,
+                "Variable_5": 59
         },
         {
                 "se": "SE27-21",
@@ -317,11 +317,11 @@
                 "fecha_2": "10/jul/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 700,
-                "Gamma": 125,
-                "Beta": 0,
-                "Alpha": 40
+                "Variable_1": 0,
+                "Variable_2": 700,
+                "Variable_3": 125,
+                "Variable_4": 0,
+                "Variable_5": 40
         },
         {
                 "se": "SE28-21",
@@ -329,11 +329,11 @@
                 "fecha_2": "17/jul/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 705,
-                "Gamma": 87,
-                "Beta": 0,
-                "Alpha": 22
+                "Variable_1": 0,
+                "Variable_2": 705,
+                "Variable_3": 87,
+                "Variable_4": 0,
+                "Variable_5": 22
         },
         {
                 "se": "SE29-21",
@@ -341,11 +341,11 @@
                 "fecha_2": "24/jul/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 1253,
-                "Gamma": 88,
-                "Beta": 0,
-                "Alpha": 21
+                "Variable_1": 0,
+                "Variable_2": 1253,
+                "Variable_3": 88,
+                "Variable_4": 0,
+                "Variable_5": 21
         },
         {
                 "se": "SE30-21",
@@ -353,11 +353,11 @@
                 "fecha_2": "31/jul/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 1163,
-                "Gamma": 68,
-                "Beta": 0,
-                "Alpha": 17
+                "Variable_1": 0,
+                "Variable_2": 1163,
+                "Variable_3": 68,
+                "Variable_4": 0,
+                "Variable_5": 17
         },
         {
                 "se": "SE31-21",
@@ -365,11 +365,11 @@
                 "fecha_2": "07/ago/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 1358,
-                "Gamma": 40,
-                "Beta": 0,
-                "Alpha": 5
+                "Variable_1": 0,
+                "Variable_2": 1358,
+                "Variable_3": 40,
+                "Variable_4": 0,
+                "Variable_5": 5
         },
         {
                 "se": "SE32-21",
@@ -377,11 +377,11 @@
                 "fecha_2": "14/ago/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 1039,
-                "Gamma": 17,
-                "Beta": 0,
-                "Alpha": 2
+                "Variable_1": 0,
+                "Variable_2": 1039,
+                "Variable_3": 17,
+                "Variable_4": 0,
+                "Variable_5": 2
         },
         {
                 "se": "SE33-21",
@@ -389,11 +389,11 @@
                 "fecha_2": "21/ago/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 1278,
-                "Gamma": 21,
-                "Beta": 0,
-                "Alpha": 2
+                "Variable_1": 0,
+                "Variable_2": 1278,
+                "Variable_3": 21,
+                "Variable_4": 0,
+                "Variable_5": 2
         },
         {
                 "se": "SE34-21",
@@ -401,11 +401,11 @@
                 "fecha_2": "28/ago/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 921,
-                "Gamma": 8,
-                "Beta": 0,
-                "Alpha": 1
+                "Variable_1": 0,
+                "Variable_2": 921,
+                "Variable_3": 8,
+                "Variable_4": 0,
+                "Variable_5": 1
         },
         {
                 "se": "SE35-21",
@@ -413,11 +413,11 @@
                 "fecha_2": "04/sep/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 1210,
-                "Gamma": 9,
-                "Beta": 0,
-                "Alpha": 1
+                "Variable_1": 0,
+                "Variable_2": 1210,
+                "Variable_3": 9,
+                "Variable_4": 0,
+                "Variable_5": 1
         },
         {
                 "se": "SE36-21",
@@ -425,11 +425,11 @@
                 "fecha_2": "11/sep/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 1103,
-                "Gamma": 5,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 0,
+                "Variable_2": 1103,
+                "Variable_3": 5,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE37-21",
@@ -437,11 +437,11 @@
                 "fecha_2": "18/sep/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 1024,
-                "Gamma": 2,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 0,
+                "Variable_2": 1024,
+                "Variable_3": 2,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE38-21",
@@ -449,11 +449,11 @@
                 "fecha_2": "25/sep/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 1307,
-                "Gamma": 2,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 0,
+                "Variable_2": 1307,
+                "Variable_3": 2,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE39-21",
@@ -461,11 +461,11 @@
                 "fecha_2": "02/oct/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 1248,
-                "Gamma": 2,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 0,
+                "Variable_2": 1248,
+                "Variable_3": 2,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE40-21",
@@ -473,11 +473,11 @@
                 "fecha_2": "09/oct/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 1077,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 0,
+                "Variable_2": 1077,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE41-21",
@@ -485,11 +485,11 @@
                 "fecha_2": "16/oct/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 872,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 1
+                "Variable_1": 0,
+                "Variable_2": 872,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 1
         },
         {
                 "se": "SE42-21",
@@ -497,11 +497,11 @@
                 "fecha_2": "23/oct/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 960,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 0,
+                "Variable_2": 960,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE43-21",
@@ -509,11 +509,11 @@
                 "fecha_2": "30/oct/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 886,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 0,
+                "Variable_2": 886,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE44-21",
@@ -521,11 +521,11 @@
                 "fecha_2": "06/nov/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 848,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 0,
+                "Variable_2": 848,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE45-21",
@@ -533,11 +533,11 @@
                 "fecha_2": "13/nov/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 0,
-                "Delta": 708,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 0,
+                "Variable_2": 708,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE46-21",
@@ -545,11 +545,11 @@
                 "fecha_2": "20/nov/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 2,
-                "Delta": 598,
-                "Gamma": 1,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 2,
+                "Variable_2": 598,
+                "Variable_3": 1,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE47-21",
@@ -557,11 +557,11 @@
                 "fecha_2": "27/nov/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 1,
-                "Delta": 572,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 1,
+                "Variable_2": 572,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE48-21",
@@ -569,11 +569,11 @@
                 "fecha_2": "04/dic/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 9,
-                "Delta": 728,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 9,
+                "Variable_2": 728,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE49-21",
@@ -581,11 +581,11 @@
                 "fecha_2": "11/dic/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 19,
-                "Delta": 526,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 19,
+                "Variable_2": 526,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE50-21",
@@ -593,11 +593,11 @@
                 "fecha_2": "18/dic/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 186,
-                "Delta": 700,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 186,
+                "Variable_2": 700,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE51-21",
@@ -605,11 +605,11 @@
                 "fecha_2": "25/dic/2021",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 676,
-                "Delta": 413,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 676,
+                "Variable_2": 413,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE52-21",
@@ -617,11 +617,11 @@
                 "fecha_2": "01/ene/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 1562,
-                "Delta": 407,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 1562,
+                "Variable_2": 407,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE01-22",
@@ -629,11 +629,11 @@
                 "fecha_2": "08/ene/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 2011,
-                "Delta": 129,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 2011,
+                "Variable_2": 129,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE02-22",
@@ -641,11 +641,11 @@
                 "fecha_2": "15/ene/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 1518,
-                "Delta": 79,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 1518,
+                "Variable_2": 79,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE03-22",
@@ -653,11 +653,11 @@
                 "fecha_2": "22/ene/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 1792,
-                "Delta": 32,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 1792,
+                "Variable_2": 32,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE04-22",
@@ -665,11 +665,11 @@
                 "fecha_2": "29/ene/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 1466,
-                "Delta": 10,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 1466,
+                "Variable_2": 10,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE05-22",
@@ -677,11 +677,11 @@
                 "fecha_2": "05/feb/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 1137,
-                "Delta": 4,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 1137,
+                "Variable_2": 4,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE06-22",
@@ -689,11 +689,11 @@
                 "fecha_2": "12/feb/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 855,
-                "Delta": 4,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 855,
+                "Variable_2": 4,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE07-22",
@@ -701,11 +701,11 @@
                 "fecha_2": "19/feb/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 749,
-                "Delta": 2,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 749,
+                "Variable_2": 2,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE08-22",
@@ -713,11 +713,11 @@
                 "fecha_2": "26/feb/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 811,
-                "Delta": 1,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 811,
+                "Variable_2": 1,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE09-22",
@@ -725,11 +725,11 @@
                 "fecha_2": "05/mar/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 528,
-                "Delta": 2,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 528,
+                "Variable_2": 2,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE10-22",
@@ -737,11 +737,11 @@
                 "fecha_2": "12/mar/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 318,
-                "Delta": 1,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 318,
+                "Variable_2": 1,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE11-22",
@@ -749,11 +749,11 @@
                 "fecha_2": "19/mar/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 210,
-                "Delta": 1,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 210,
+                "Variable_2": 1,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE12-22",
@@ -761,11 +761,11 @@
                 "fecha_2": "26/mar/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 194,
-                "Delta": 2,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 194,
+                "Variable_2": 2,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE13-22",
@@ -773,11 +773,11 @@
                 "fecha_2": "02/abr/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 232,
-                "Delta": 0,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 232,
+                "Variable_2": 0,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE14-22",
@@ -785,11 +785,11 @@
                 "fecha_2": "09/abr/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 199,
-                "Delta": 1,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 199,
+                "Variable_2": 1,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE15-22",
@@ -797,11 +797,11 @@
                 "fecha_2": "16/abr/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 121,
-                "Delta": 2,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 121,
+                "Variable_2": 2,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE16-22",
@@ -809,11 +809,11 @@
                 "fecha_2": "23/abr/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 213,
-                "Delta": 0,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 213,
+                "Variable_2": 0,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE17-22",
@@ -821,11 +821,11 @@
                 "fecha_2": "30/abr/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 198,
-                "Delta": 0,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 198,
+                "Variable_2": 0,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE18-22",
@@ -833,11 +833,11 @@
                 "fecha_2": "07/may/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 269,
-                "Delta": 1,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 269,
+                "Variable_2": 1,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE19-22",
@@ -845,11 +845,11 @@
                 "fecha_2": "14/may/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 366,
-                "Delta": 2,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 366,
+                "Variable_2": 2,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE20-22",
@@ -857,11 +857,11 @@
                 "fecha_2": "21/may/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 513,
-                "Delta": 0,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 513,
+                "Variable_2": 0,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE21-22",
@@ -869,11 +869,11 @@
                 "fecha_2": "28/may/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 582,
-                "Delta": 1,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 582,
+                "Variable_2": 1,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE22-22",
@@ -881,11 +881,11 @@
                 "fecha_2": "04/jun/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 759,
-                "Delta": 0,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 759,
+                "Variable_2": 0,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE23-22",
@@ -893,11 +893,11 @@
                 "fecha_2": "11/jun/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 904,
-                "Delta": 0,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 904,
+                "Variable_2": 0,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE24-22",
@@ -905,11 +905,11 @@
                 "fecha_2": "18/jun/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 1032,
-                "Delta": 0,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 1032,
+                "Variable_2": 0,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE25-22",
@@ -917,11 +917,11 @@
                 "fecha_2": "25/jun/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 1328,
-                "Delta": 0,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 1328,
+                "Variable_2": 0,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE26-22",
@@ -929,11 +929,11 @@
                 "fecha_2": "02/jul/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 1479,
-                "Delta": 0,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 1479,
+                "Variable_2": 0,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE27-22",
@@ -941,11 +941,11 @@
                 "fecha_2": "09/jul/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 1024,
-                "Delta": 0,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 1024,
+                "Variable_2": 0,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE28-22",
@@ -953,11 +953,11 @@
                 "fecha_2": "16/jul/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 955,
-                "Delta": 0,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 955,
+                "Variable_2": 0,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE29-22",
@@ -965,11 +965,11 @@
                 "fecha_2": "23/jul/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 1414,
-                "Delta": 0,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 1414,
+                "Variable_2": 0,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         },
         {
                 "se": "SE30-22",
@@ -977,10 +977,10 @@
                 "fecha_2": "30/jul/2022",
                 "cve_ent": "00",
                 "ent": "Nacional",
-                "Omicron": 526,
-                "Delta": 0,
-                "Gamma": 0,
-                "Beta": 0,
-                "Alpha": 0
+                "Variable_1": 526,
+                "Variable_2": 0,
+                "Variable_3": 0,
+                "Variable_4": 0,
+                "Variable_5": 0
         }
 ]

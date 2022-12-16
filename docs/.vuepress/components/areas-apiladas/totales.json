@@ -5,7 +5,7 @@
         "fecha_2":"09/Jan/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":108269
+        "totales":108269
     },
     {
         "se":"SE02-21",
@@ -13,7 +13,7 @@
         "fecha_2":"16/Jan/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":110187
+        "totales":110187
     },
     {
         "se":"SE03-21",
@@ -21,7 +21,7 @@
         "fecha_2":"23/Jan/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":103736
+        "totales":103736
     },
     {
         "se":"SE04-21",
@@ -29,7 +29,7 @@
         "fecha_2":"30/Jan/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":88132
+        "totales":88132
     },
     {
         "se":"SE05-21",
@@ -37,7 +37,7 @@
         "fecha_2":"06/Feb/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":60131
+        "totales":60131
     },
     {
         "se":"SE06-21",
@@ -45,7 +45,7 @@
         "fecha_2":"13/Feb/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":51848
+        "totales":51848
     },
     {
         "se":"SE07-21",
@@ -53,7 +53,7 @@
         "fecha_2":"20/Feb/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":42568
+        "totales":42568
     },
     {
         "se":"SE08-21",
@@ -61,7 +61,7 @@
         "fecha_2":"27/Feb/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":42280
+        "totales":42280
     },
     {
         "se":"SE09-21",
@@ -69,7 +69,7 @@
         "fecha_2":"06/Mar/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":39749
+        "totales":39749
     },
     {
         "se":"SE10-21",
@@ -77,7 +77,7 @@
         "fecha_2":"13/Mar/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":33910
+        "totales":33910
     },
     {
         "se":"SE11-21",
@@ -85,7 +85,7 @@
         "fecha_2":"20/Mar/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":28072
+        "totales":28072
     },
     {
         "se":"SE12-21",
@@ -93,7 +93,7 @@
         "fecha_2":"27/Mar/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":28486
+        "totales":28486
     },
     {
         "se":"SE13-21",
@@ -101,7 +101,7 @@
         "fecha_2":"03/Apr/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":20572
+        "totales":20572
     },
     {
         "se":"SE14-21",
@@ -109,7 +109,7 @@
         "fecha_2":"10/Apr/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":26625
+        "totales":26625
     },
     {
         "se":"SE15-21",
@@ -117,7 +117,7 @@
         "fecha_2":"17/Apr/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":23226
+        "totales":23226
     },
     {
         "se":"SE16-21",
@@ -125,7 +125,7 @@
         "fecha_2":"24/Apr/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":20983
+        "totales":20983
     },
     {
         "se":"SE17-21",
@@ -133,7 +133,7 @@
         "fecha_2":"01/May/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":18396
+        "totales":18396
     },
     {
         "se":"SE18-21",
@@ -141,7 +141,7 @@
         "fecha_2":"08/May/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":16453
+        "totales":16453
     },
     {
         "se":"SE19-21",
@@ -149,7 +149,7 @@
         "fecha_2":"15/May/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":14414
+        "totales":14414
     },
     {
         "se":"SE20-21",
@@ -157,7 +157,7 @@
         "fecha_2":"22/May/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":14688
+        "totales":14688
     },
     {
         "se":"SE21-21",
@@ -165,7 +165,7 @@
         "fecha_2":"29/May/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":15302
+        "totales":15302
     },
     {
         "se":"SE22-21",
@@ -173,7 +173,7 @@
         "fecha_2":"05/Jun/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":16404
+        "totales":16404
     },
     {
         "se":"SE23-21",
@@ -181,7 +181,7 @@
         "fecha_2":"12/Jun/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":19811
+        "totales":19811
     },
     {
         "se":"SE24-21",
@@ -189,7 +189,7 @@
         "fecha_2":"19/Jun/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":23133
+        "totales":23133
     },
     {
         "se":"SE25-21",
@@ -197,7 +197,7 @@
         "fecha_2":"26/Jun/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":30423
+        "totales":30423
     },
     {
         "se":"SE26-21",
@@ -205,7 +205,7 @@
         "fecha_2":"03/Jul/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":38140
+        "totales":38140
     },
     {
         "se":"SE27-21",
@@ -213,7 +213,7 @@
         "fecha_2":"10/Jul/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":56963
+        "totales":56963
     },
     {
         "se":"SE28-21",
@@ -221,7 +221,7 @@
         "fecha_2":"17/Jul/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":80097
+        "totales":80097
     },
     {
         "se":"SE29-21",
@@ -229,7 +229,7 @@
         "fecha_2":"24/Jul/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":104820
+        "totales":104820
     },
     {
         "se":"SE30-21",
@@ -237,7 +237,7 @@
         "fecha_2":"31/Jul/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":122967
+        "totales":122967
     },
     {
         "se":"SE31-21",
@@ -245,7 +245,7 @@
         "fecha_2":"07/Aug/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":128986
+        "totales":128986
     },
     {
         "se":"SE32-21",
@@ -253,7 +253,7 @@
         "fecha_2":"14/Aug/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":134576
+        "totales":134576
     },
     {
         "se":"SE33-21",
@@ -261,7 +261,7 @@
         "fecha_2":"21/Aug/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":119026
+        "totales":119026
     },
     {
         "se":"SE34-21",
@@ -269,7 +269,7 @@
         "fecha_2":"28/Aug/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":102409
+        "totales":102409
     },
     {
         "se":"SE35-21",
@@ -277,7 +277,7 @@
         "fecha_2":"04/Sep/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":86647
+        "totales":86647
     },
     {
         "se":"SE36-21",
@@ -285,7 +285,7 @@
         "fecha_2":"11/Sep/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":75150
+        "totales":75150
     },
     {
         "se":"SE37-21",
@@ -293,7 +293,7 @@
         "fecha_2":"18/Sep/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":57450
+        "totales":57450
     },
     {
         "se":"SE38-21",
@@ -301,7 +301,7 @@
         "fecha_2":"25/Sep/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":57940
+        "totales":57940
     },
     {
         "se":"SE39-21",
@@ -309,7 +309,7 @@
         "fecha_2":"02/Oct/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":43783
+        "totales":43783
     },
     {
         "se":"SE40-21",
@@ -317,7 +317,7 @@
         "fecha_2":"09/Oct/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":35793
+        "totales":35793
     },
     {
         "se":"SE41-21",
@@ -325,7 +325,7 @@
         "fecha_2":"16/Oct/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":30511
+        "totales":30511
     },
     {
         "se":"SE42-21",
@@ -333,7 +333,7 @@
         "fecha_2":"23/Oct/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":25597
+        "totales":25597
     },
     {
         "se":"SE43-21",
@@ -341,7 +341,7 @@
         "fecha_2":"30/Oct/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":23026
+        "totales":23026
     },
     {
         "se":"SE44-21",
@@ -349,7 +349,7 @@
         "fecha_2":"06/Nov/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":19024
+        "totales":19024
     },
     {
         "se":"SE45-21",
@@ -357,7 +357,7 @@
         "fecha_2":"13/Nov/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":19821
+        "totales":19821
     },
     {
         "se":"SE46-21",
@@ -365,7 +365,7 @@
         "fecha_2":"20/Nov/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":17299
+        "totales":17299
     },
     {
         "se":"SE47-21",
@@ -373,7 +373,7 @@
         "fecha_2":"27/Nov/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":19207
+        "totales":19207
     },
     {
         "se":"SE48-21",
@@ -381,7 +381,7 @@
         "fecha_2":"04/Dec/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":18156
+        "totales":18156
     },
     {
         "se":"SE49-21",
@@ -389,7 +389,7 @@
         "fecha_2":"11/Dec/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":17349
+        "totales":17349
     },
     {
         "se":"SE50-21",
@@ -397,7 +397,7 @@
         "fecha_2":"18/Dec/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":16358
+        "totales":16358
     },
     {
         "se":"SE51-21",
@@ -405,7 +405,7 @@
         "fecha_2":"25/Dec/2021",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":20960
+        "totales":20960
     },
     {
         "se":"SE52-21",
@@ -413,7 +413,7 @@
         "fecha_2":"01/Jan/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":59549
+        "totales":59549
     },
     {
         "se":"SE01-22",
@@ -421,7 +421,7 @@
         "fecha_2":"08/Jan/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":212514
+        "totales":212514
     },
     {
         "se":"SE02-22",
@@ -429,7 +429,7 @@
         "fecha_2":"15/Jan/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":413902
+        "totales":413902
     },
     {
         "se":"SE03-22",
@@ -437,7 +437,7 @@
         "fecha_2":"22/Jan/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":398860
+        "totales":398860
     },
     {
         "se":"SE04-22",
@@ -445,7 +445,7 @@
         "fecha_2":"29/Jan/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":271854
+        "totales":271854
     },
     {
         "se":"SE05-22",
@@ -453,7 +453,7 @@
         "fecha_2":"05/Feb/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":156836
+        "totales":156836
     },
     {
         "se":"SE06-22",
@@ -461,7 +461,7 @@
         "fecha_2":"12/Feb/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":82018
+        "totales":82018
     },
     {
         "se":"SE07-22",
@@ -469,7 +469,7 @@
         "fecha_2":"19/Feb/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":58455
+        "totales":58455
     },
     {
         "se":"SE08-22",
@@ -477,7 +477,7 @@
         "fecha_2":"26/Feb/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":34603
+        "totales":34603
     },
     {
         "se":"SE09-22",
@@ -485,7 +485,7 @@
         "fecha_2":"05/Mar/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":20191
+        "totales":20191
     },
     {
         "se":"SE10-22",
@@ -493,7 +493,7 @@
         "fecha_2":"12/Mar/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":13467
+        "totales":13467
     },
     {
         "se":"SE11-22",
@@ -501,7 +501,7 @@
         "fecha_2":"19/Mar/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":9571
+        "totales":9571
     },
     {
         "se":"SE12-22",
@@ -509,7 +509,7 @@
         "fecha_2":"26/Mar/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":6578
+        "totales":6578
     },
     {
         "se":"SE13-22",
@@ -517,7 +517,7 @@
         "fecha_2":"02/Apr/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":6201
+        "totales":6201
     },
     {
         "se":"SE14-22",
@@ -525,7 +525,7 @@
         "fecha_2":"09/Apr/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":4628
+        "totales":4628
     },
     {
         "se":"SE15-22",
@@ -533,7 +533,7 @@
         "fecha_2":"16/Apr/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":3009
+        "totales":3009
     },
     {
         "se":"SE16-22",
@@ -541,7 +541,7 @@
         "fecha_2":"23/Apr/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":3733
+        "totales":3733
     },
     {
         "se":"SE17-22",
@@ -549,7 +549,7 @@
         "fecha_2":"30/Apr/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":3761
+        "totales":3761
     },
     {
         "se":"SE18-22",
@@ -557,7 +557,7 @@
         "fecha_2":"07/May/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":4138
+        "totales":4138
     },
     {
         "se":"SE19-22",
@@ -565,7 +565,7 @@
         "fecha_2":"14/May/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":5200
+        "totales":5200
     },
     {
         "se":"SE20-22",
@@ -573,7 +573,7 @@
         "fecha_2":"21/May/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":7765
+        "totales":7765
     },
     {
         "se":"SE21-22",
@@ -581,7 +581,7 @@
         "fecha_2":"28/May/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":12329
+        "totales":12329
     },
     {
         "se":"SE22-22",
@@ -589,7 +589,7 @@
         "fecha_2":"04/Jun/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":19827
+        "totales":19827
     },
     {
         "se":"SE23-22",
@@ -597,7 +597,7 @@
         "fecha_2":"11/Jun/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":34848
+        "totales":34848
     },
     {
         "se":"SE24-22",
@@ -605,7 +605,7 @@
         "fecha_2":"18/Jun/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":55715
+        "totales":55715
     },
     {
         "se":"SE25-22",
@@ -613,7 +613,7 @@
         "fecha_2":"25/Jun/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":99198
+        "totales":99198
     },
     {
         "se":"SE26-22",
@@ -621,7 +621,7 @@
         "fecha_2":"02/Jul/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":153440
+        "totales":153440
     },
     {
         "se":"SE27-22",
@@ -629,7 +629,7 @@
         "fecha_2":"09/Jul/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":197275
+        "totales":197275
     },
     {
         "se":"SE28-22",
@@ -637,7 +637,7 @@
         "fecha_2":"16/Jul/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":201693
+        "totales":201693
     },
     {
         "se":"SE29-22",
@@ -645,7 +645,7 @@
         "fecha_2":"23/Jul/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":163222
+        "totales":163222
     },
     {
         "se":"SE30-22",
@@ -653,7 +653,7 @@
         "fecha_2":"30/Jul/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":105601
+        "totales":105601
     },
     {
         "se":"SE31-22",
@@ -661,7 +661,7 @@
         "fecha_2":"06/Aug/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":67426
+        "totales":67426
     },
     {
         "se":"SE32-22",
@@ -669,7 +669,7 @@
         "fecha_2":"13/Aug/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":38115
+        "totales":38115
     },
     {
         "se":"SE33-22",
@@ -677,6 +677,6 @@
         "fecha_2":"20/Aug/2022",
         "cve_ent":"00",
         "ent":"Nacional",
-        "positivos":389
+        "totales":389
     }
 ]
