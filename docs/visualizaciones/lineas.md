@@ -1,6 +1,6 @@
 # Líneas
 
-A continuación se describe la utilización del componente de visualización `<DadsigLineas/>` para construir un
+A continuación se describe la utilización del componente de visualización `<SisdaiLineas/>` para construir un
 gráfico de líneas cuyo eje horizontal es temporal, es decir una serie de tiempo.
 
 ## Parámetros
@@ -76,7 +76,7 @@ muestra todos los datos.
 
 ## Ejemplos de uso
 
-En esta sección se detallan tres diferentes tipos casos de uso de este componente. El componente `<DadsigLineas/>`
+En esta sección se detallan tres diferentes tipos casos de uso de este componente. El componente `<SisdaiLineas/>`
 requiere que los datos se encuentren en un archivo `.json` externo, que se importa por medio de un `import`en el 
 apartado `<script/>`. Para los diferentes ejemplos de esta sección, ya se tienen los datos importados.
 
@@ -90,7 +90,7 @@ El `<template>` queda entonces estructurado de la siguiente manera:
 ```html
 <template>
   <div>
-    <DadsigLineas
+    <SisdaiLineas
             ref="lineas1"
             :conversionTemporal="conversionTemporal"
             :datos="datos"
@@ -124,7 +124,7 @@ Entonces el HTML estará estructurado de la siguiente manera:
 
 ```html
 <template>
-  <DadsigLineas
+  <SisdaiLineas
           ref="lineas2"
           :conversionTemporal="conversionTemporal"
           :datos="datos"
@@ -156,7 +156,7 @@ Entonces el HTML estará estructurado de la siguiente manera:
         </p>
       </div>
     </template>
-  </DadsigLineas>
+  </SisdaiLineas>
 </template>
 ```
 El gráfico resultante es el siguiente, en el cual se empleó una tipografía distinta en los `slots` para
@@ -175,7 +175,7 @@ sistema de diseño.
 Se tiene entonces como resultado el siguiente `HTML`:
  ```html
 <template>
-  <DadsigLineas
+  <SisdaiLineas
           ref="lineas3"
           :conversionTemporal="conversionTemporal"
           :datos="datos"
@@ -203,7 +203,7 @@ Se tiene entonces como resultado el siguiente `HTML`:
         <button @click="alternandoBase">Cambia la data</button>
       </div>
     </template>
-  </DadsigLineas>
+  </SisdaiLineas>
 </template>
 ```
 <lineas-cambiando-base/>

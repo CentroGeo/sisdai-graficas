@@ -1,5 +1,5 @@
 <template>
-  <DadsigLineas
+  <SisdaiLineas
       ref="lineas3"
       :conversionTemporal="conversionTemporal"
       :datos="datos"
@@ -27,7 +27,7 @@
         <button @click="alternandoBase">Cambia la data</button>
       </div>
     </template>
-  </DadsigLineas>
+  </SisdaiLineas>
 </template>
 
 <script>

@@ -1,13 +1,13 @@
 <template>
   <div>
-    <DadsigAreasApiladas
+    <SisdaiAreasApiladas
       :areas_apiladas_id="id_stream"
       :datos="datos_grafica"
       :variables="variables"
       :alto_vis="300"
       nombre_columna_horizontal="fecha_1"
       titulo_eje_x="Fecha"
-      titulo_eje_y="Distribución de variantes de la muestra "
+      titulo_eje_y="Distribución de variables "
       :formatoEtiquetasY="formatoY"
       class="contenedor-areas-apiladas-slots-tooltip"
     >
@@ -26,14 +26,14 @@
         <div class="checks">
           <div v-for="(variable,i) in variables_all" :key="variable.id" class="label-1">
             <CheckboxColor v-model="lista_filtros_activos[i]" :color="variable.color">
-              <span v-if="variable.nombre === 'variantes_restantes'"  class="categoria-texto">Otras variantes</span>
+              <span v-if="variable.nombre === 'variables_restantes'"  class="categoria-texto">Otras variables</span>
               <span v-else class="categoria-texto">{{ variable.nombre }}</span>
             </CheckboxColor>
           </div>
         </div>
       </div>
     </template>
-    </DadsigAreasApiladas>
+    </SisdaiAreasApiladas>
   </div>
 </template>
 
@@ -41,17 +41,12 @@
 import CheckboxColor from "./utils/CheckboxColor.vue";
 
 import * as d3 from "d3";
-import Variantes from './consorcio_variantes_todas.json';
-import Variantes1 from './consorcio_variantes_todas.json';
-
-import Variantes_voc from './consorcio_variantes_voc.json';
-import Variantes_voi from './consorcio_variantes_voi.json';
-
+import Variables from './dummy_todas.json';
+import Variables1 from './dummy_todas.json';
 import diccionarioColores from './diccionario-colores.json';
+import Totales from './totales.json';
 
-import N_positivos from './N_positivos.json';
-
-let colores_all = {...diccionarioColores.VOC.variantes, ...diccionarioColores.VOI.variantes, ...diccionarioColores.VRESTANTES.variantes}
+let colores_all = {...diccionarioColores.CATEGORIA_UNO.variables, ...diccionarioColores.CATEGORIA_DOS.variables, ...diccionarioColores.CATEGORIA_RESTANTES.variables}
 
 let variables_all = Object.keys(colores_all).map((d) => ({"id": d, "nombre": d, "color":colores_all[d]}));
  let dict_meses = {
@@ -61,7 +56,7 @@ let variables_all = Object.keys(colores_all).map((d) => ({"id": d, "nombre": d, 
 }
 let dict_meses_invert = {}
 Object.keys(dict_meses).map(d => dict_meses_invert[dict_meses[d]] = d);
-Variantes.map((d) => {
+Variables.map((d) => {
   if(d.fecha_1.includes("/")){
     let fecha_sep = d.fecha_1.split("/")
     d.fecha_1 = [fecha_sep[0], dict_meses[fecha_sep[1]], fecha_sep[2]].join("-")
@@ -81,10 +76,8 @@ export default {
   },
   data() {
     return {
-      // diccionarioDatos: diccionarioNacional,
-      
       datos_grafica: Array,
-      casos_positivos: N_positivos.filter(d => d.cve_ent == "00"),
+      totales: Totales.filter(d => d.cve_ent == "00"),
       variables_all: variables_all,
       variables: variables_all,
       lista_filtros_activos: variables_all.map(d => true),
@@ -99,7 +92,7 @@ export default {
   },
 
   beforeMount(){
-    this.datos_grafica = [...Variantes]
+    this.datos_grafica = [...Variables]
   },
   methods:{
 
@@ -111,7 +104,7 @@ export default {
       this.categorias_checkeadas = this.variables.map((d, i) => this.lista_filtros_activos[i] ? d.id : "").filter((d) => d != "");
       
       if(this.alternar_absolutos_porcentaje =="absolutos"){
-        let data_porcentual = [...Variantes].map((d)=>{
+        let data_porcentual = [...Variables].map((d)=>{
           var dict_ef = {};
           let total_muestras = d3.sum(this.variables.map(dd=>d[dd.id]));
           for(let i = 0 ; i<this.variables.length; i++){
@@ -135,7 +128,7 @@ export default {
     },
     alternar_absolutos_porcentaje(nv,ov){
       if(ov =="porcentaje"){
-        let data_porcentual = [...Variantes].map((d)=>{
+        let data_porcentual = [...Variables].map((d)=>{
           var dict_ef = {};
           let total_muestras = d3.sum(this.variables.map(dd=>d[dd.id]));
           for(let i = 0 ; i<this.variables.length; i++){
@@ -157,7 +150,7 @@ export default {
       }
       else{
         this.formatoY = (d) => d.toLocaleString("en")
-        this.datos_grafica = [...Variantes1]
+        this.datos_grafica = [...Variables1]
       }
 
     }

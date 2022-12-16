@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <DadsigDonas
+    <SisdaiDonas
         ref="donas-slots-tooltip"
         :dona_id="'dona'"
         :datos="datos"
@@ -25,7 +25,7 @@
           </p>
         </div>
       </template>
-    </DadsigDonas>
+    </SisdaiDonas>
   </div>
 </template>
 

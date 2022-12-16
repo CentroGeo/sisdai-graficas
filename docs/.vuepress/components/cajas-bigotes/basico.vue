@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <DadsigCajasBigotes
+    <SisdaiCajasBigotes
         ref="cajas_bigotes_basica"
         :caja_id="'cajas_bigotes_basica'"
         :datos="datos"

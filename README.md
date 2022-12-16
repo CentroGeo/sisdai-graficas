@@ -1,6 +1,6 @@
 # sisdai-graficas
 
-Ésta es una biblioteca de visualización de datos que forma parte del Sistema de Diseño y Accesibilidad para la Investigación, proyecto que potencia el impacto social de la investigación al promover la autonomía e independencia tecnológica con el uso de componentes de software libre. Esta biblioteca está alineada a [SALSA](https://salsa.crip.conacyt.mx/).
+Esta es una biblioteca de visualización de datos que forma parte del Sistema de Diseño y Accesibilidad para la Investigación, proyecto que potencia el impacto social de la investigación al promover la autonomía e independencia tecnológica con el uso de componentes de software libre. Esta biblioteca está alineada a [SALSA](https://salsa.crip.conacyt.mx/).
 
 > **_Limitación de responsabilidad_**
 > 
@@ -43,15 +43,15 @@ npm install ruta_al_repositorio/sisdai-graficas
 
 Para poder utilizar un componente de visualización de esta biblioteca, es necesario importar y registrarlo en el
 archivo `src/main.js` del proyecto (de Vue) a trabajar, por ejemplo en el siguiente script se está registrando e 
-importando el componente de `DadsigBarras` de esta biblioteca (que construye una gráfica de barras).
+importando el componente de `SisdaiBarras` de esta biblioteca (que construye una gráfica de barras).
 
 ```javascript
 import Vue from 'Vue'
 import App from './App.Vue'
-import {DadsigBarras} from "dadsig-graficas";
-import 'dadsig-graficas/dist/dadsig-graficas.css';
+import {SisdaiBarras} from "sisdai-graficas";
+import 'sisdai-graficas/dist/sisdai-graficas.css';
 
-Vue.use(DadsigBarras)
+Vue.use(SisdaiBarras)
 
 new Vue({
     render: h => h(App),
@@ -64,7 +64,7 @@ Una vez instalado y registrado el componente, ya se puede usar dentro de un `<te
 de Vue como se muestra a continuación.
 
 ```vue
-<DadsigBarras
+<SisdaiBarras
   :barras_id="'mi_proyecto_de_barras'"
   :datos="
     [
@@ -84,7 +84,7 @@ de Vue como se muestra a continuación.
 />
 ```
 
-En el script anterior se especifican los parámetros del componente `DadsigBarras` como pueden ser el `id`, los
+En el script anterior se especifican los parámetros del componente `SisdaiBarras` como pueden ser el `id`, los
 datos que se usarán para construir las barras, las variables para construir la gráfica, etc. Una lista completa de los 
 parámetros usados en cada uno de los componentes de visualización se puede hallar en la [documentación en línea](https://sisdai.conacyt.mx/).
 

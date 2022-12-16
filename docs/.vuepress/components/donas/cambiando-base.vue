@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <DadsigDonas
+    <SisdaiDonas
         ref="donas_cambio_base"
         :datos="datos"
         :dona_id="'donas_cambio_base'"
@@ -20,7 +20,7 @@
           <button @click="alternandoBase">Cambia la data</button>
         </div>
       </template>
-    </DadsigDonas>
+    </SisdaiDonas>
   </div>
 </template>
 

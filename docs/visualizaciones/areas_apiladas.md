@@ -1,6 +1,6 @@
 # Áreas apiladas
 
-A continuación se describe la utilización del componente de visualización `<DadsigAreasApiladas/>` para construir un
+A continuación se describe la utilización del componente de visualización `<SisdaiAreasApiladas/>` para construir un
 gráfico de áreas apiladas.
 
 <areas-apiladas-slots-tooltip/>
@@ -14,7 +14,7 @@ La siguiente es una lista de propiedades que admite el componente y que se tiene
 * `areas_apiladas_id` (_String_) Identificador único del componente.
 * `datos` (_Array_) Base de datos como arreglo de objetos, en donde cada elemento debe tener el valor de las variables 
 numéricas (métricas) de cada franja a graficar y su correspondiente valor temporal. En el siguiente conjunto de datos 
-de ejemplo se dan métricas como nombres de variantes de coronavirus y la fecha correspondiente a cada una.
+de ejemplo se dan métricas como nombres de variables y la fecha correspondiente a cada una.
 
     ```json
       [
@@ -24,14 +24,14 @@ de ejemplo se dan métricas como nombres de variantes de coronavirus y la fecha 
           "fecha_2": "09-01-2021",
           "cve_ent": "00",
           "ent": "Nacional",
-          "Omicron": 8,
-          "Delta": 1,
-          "Gamma": 0,
-          "Beta": 0,
-          "Alpha": 0,
-          "Mu": 0,
-          "Lambda": 0,
-          "variantes_restantes": 163,
+          "Variable_1": 8,
+          "Variable_2": 1,
+          "Variable_3": 0,
+          "Variable_4": 0,
+          "Variable_5": 0,
+          "Variable_6": 0,
+          "Variable_7": 0,
+          "Variables_restantes": 163,
         }
         {
             "se": "SE02-21",
@@ -39,14 +39,14 @@ de ejemplo se dan métricas como nombres de variantes de coronavirus y la fecha 
             "fecha_2": "16-01-2021",
             "cve_ent": "00",
             "ent": "Nacional",
-            "Omicron": 3,
-            "Delta": 0,
-            "Gamma": 0,
-            "Beta": 0,
-            "Alpha": 1,
-            "Mu": 0,
-            "Lambda": 0,
-            "variantes_restantes": 155,
+            "Variable_1": 3,
+            "Variable_2": 0,
+            "Variable_3": 0,
+            "Variable_4": 0,
+            "Variable_5": 1,
+            "Variable_6": 0,
+            "Variable_7": 0,
+            "Variables_restantes": 155,
         },
         ...
       ]
@@ -61,43 +61,43 @@ de ejemplo se dan métricas como nombres de variantes de coronavirus y la fecha 
   ```json
   [
     {
-        "id": "Omicron",
-        "nombre": "Omicron",
+        "id": "Variable_1",
+        "nombre": "Variable_1",
         "color": "#FFCE00"
     },
     {
-        "id": "Delta",
-        "nombre": "Delta",
+        "id": "Variable_2",
+        "nombre": "Variable_2",
         "color": "#FA5600"
     },
     {
-        "id": "Gamma",
-        "nombre": "Gamma",
+        "id": "Variable_3",
+        "nombre": "Variable_3",
         "color": "#C7690D"
     },
     {
-        "id": "Beta",
-        "nombre": "Beta",
+        "id": "Variable_4",
+        "nombre": "Variable_4",
         "color": "#FF9F4D"
     },
     {
-        "id": "Alpha",
-        "nombre": "Alpha",
+        "id": "Variable_5",
+        "nombre": "Variable_5",
         "color": "#FFAC99"
     },
     {
-        "id": "Mu",
-        "nombre": "Mu",
+        "id": "Variable_6",
+        "nombre": "Variable_6",
         "color": "#29037B"
     },
     {
-        "id": "Lambda",
-        "nombre": "Lambda",
+        "id": "Variable_7",
+        "nombre": "Variable_7",
         "color": "#A359D9"
     },
     {
-        "id": "variantes_restantes",
-        "nombre": "variantes_restantes",
+        "id": "Variables_restantes",
+        "nombre": "Variables_restantes",
         "color": "#bcbcbc"
     }
   ]
@@ -124,7 +124,7 @@ Los siguiente parámetros se pueden usar para modificar la visualización.
 
 ## Ejemplos de uso
 
-En esta sección se detallan tres diferentes tipos casos de uso de este componente. El componente `<DadsigAreasApiladas/>`
+En esta sección se detallan tres diferentes tipos casos de uso de este componente. El componente `<SisdaiAreasApiladas/>`
 requiere que los datos se encuentren en un archivo `.json` externo, que se importa por medio de un `import`en el 
 apartado `<script/>`. Para los diferentes ejemplos de esta sección, ya se tienen los datos importados.
 
@@ -138,15 +138,15 @@ El `<template>` queda entonces estructurado de la siguiente manera:
 
 ```html
 <template>
-  <DadsigAreasApiladas
+  <SisdaiAreasApiladas
         areas_apiladas_id="streamgraphbasico"
         :datos="datos_grafica"
         :variables='[
-          {"id":"Omicron","nombre":"Omicron", "color": "#C2E7D9"},
-          {"id":"Delta","nombre":"Delta", "color":"#A6CFD5"},
-          {"id":"Gamma","nombre":"Gamma","color": "#26408B"},
-          {"id":"Beta","nombre":"Beta", "color": "#0F084B"},
-          {"id":"Alpha","nombre":"Alpha", "color": "#0D0221"},
+          {"id":"Variable_1","nombre":"Variable_1", "color": "#C2E7D9"},
+          {"id":"Variable_2","nombre":"Variable_2", "color":"#A6CFD5"},
+          {"id":"Variable_3","nombre":"Variable_3","color": "#26408B"},
+          {"id":"Variable_4","nombre":"Variable_4", "color": "#0F084B"},
+          {"id":"Variable_5","nombre":"Variable_5", "color": "#0D0221"},
         ]'
         :alto_vis="300"
         nombre_columna_horizontal="fecha_1"
@@ -171,20 +171,20 @@ las gráficas. Para poder agregar el uso de los slots y el tooltip, se hará de 
 * Slots: se pueden agregar tanto en el título como en el pie de la gráfica. En `<template slot>` se agrega el
   `"encabezado"` y el `"pie"`, y adentro de cada uno, lo que se necesite que aparezca en cada una de estas secciones.
 
-En este ejemplo se agregaron controles que modifican la propiedad `variables` para quitar y poner variantes. También hay un botón que modifica la propiedad `datos` para intercalar entre porcentajes y valores totales.
+En este ejemplo se agregaron controles que modifican la propiedad `variables` para quitar y poner variables. También hay un botón que modifica la propiedad `datos` para intercalar entre porcentajes y valores totales.
 Entonces el HTML estará estructurado de la siguiente manera:
 
 ```html
 <template>
   <div>
-    <DadsigAreasApiladas
+    <SisdaiAreasApiladas
         :areas_apiladas_id="id_stream"
         :datos="datos_grafica"
         :variables="variables"
         :alto_vis="300"
         nombre_columna_horizontal="fecha_1"
         titulo_eje_x="Fecha"
-        titulo_eje_y="Distribución de variantes de la muestra"
+        titulo_eje_y="Distribución de variables"
         :formatoEtiquetasY="formatoY"
         class="contenedor-areas-apiladas-slots-tooltip"
     >
@@ -201,14 +201,14 @@ Entonces el HTML estará estructurado de la siguiente manera:
         <div class="checks">
           <div v-for="(variable,i) in variables_all" :key="variable.id" class="label-1">
             <CheckboxColor v-model="lista_filtros_activos[i]" :color="variable.color">
-              <span v-if="variable.nombre === 'variantes_restantes'"  class="categoria-texto">Otras variantes</span>
+              <span v-if="variable.nombre === 'variables_restantes'"  class="categoria-texto">Otras variables</span>
               <span v-else class="categoria-texto">{{ variable.nombre }}</span>
             </CheckboxColor>
           </div>
         </div>
       </div>
     </template>
-    </DadsigAreasApiladas>
+    </SisdaiAreasApiladas>
   </div>
 </template>
 ```

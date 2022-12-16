@@ -1,6 +1,6 @@
 # Barras
 
-A continuación se describe la utilización del componente de visualización `<DadsigBarras/>` para construir un gráfico de
+A continuación se describe la utilización del componente de visualización `<SisdaiBarras/>` para construir un gráfico de
 barras. Este componente puede ser utilizado para crear barras apiladas, barras agrupadas y controlar la orientación si es que se desea una vista vertical o una horizontal
 
 ## Parámetros
@@ -86,7 +86,7 @@ A continuación se presentan varios ejemplos que se pueden ir complejizando seg�
 
 ### Barras simples
 Cuando los datos introducidos sólo describen una variable categorica y una variable numérica (métrica),
-el componente de visualizacion `<DadsigBarras/>` construirá una gráfica de barras verticales simples.
+el componente de visualizacion `<SisdaiBarras/>` construirá una gráfica de barras verticales simples.
 
 Por ejemplo, teniendo el siguientee arreglo para `datos`,
 
@@ -106,12 +106,12 @@ y el arreglo `variables` como sigue,
 ]
 ``` 
 
-Entonces se usa el componente `<DadsigBarras/>` de la siguiente manera.
+Entonces se usa el componente `<SisdaiBarras/>` de la siguiente manera.
 
 ```html
 <template>
   <div>
-    <DadsigBarras
+    <SisdaiBarras
         :barras_id="'verticales_simples'"
         :datos="[{categoria: 'Variable A', cantidad: 120},
                  {categoria: 'Variable B', cantidad: 150},
@@ -133,7 +133,7 @@ Lo que producirá el siguiente gráfico de barras verticales simples,
 Si agregamos la propiedad `orientacion="horizontal"`, para modificar el estado que por default es `'vertical'`, como se muestra en el siguiente código, obtendremos un gráfico de barras horizontales. 
 
 ```html
-<DadsigBarras
+<SisdaiBarras
         :barras_id="'horizontales_simples'"
         :datos="[{categoria: 'Variable A', cantidad: 120},
                  {categoria: 'Variable B', cantidad: 150},
@@ -162,7 +162,7 @@ El siguiente ejemplo resulta muy ilustrativo
 
 
 ```html 
-<DadsigBarras
+<SisdaiBarras
       :barras_id="'barras_apiladas_estaticas'"
       :datos="[
         {
@@ -206,7 +206,7 @@ En estos ejemplos se ilustra otra forma de graficar barras con subcategorías. S
 A continuación se muestra un ejemplo que parece ser más extenso, en el que se agregan slots de encabezado y pie. Estos son útiles para colocar títulos y algunas notas respectivamente 
 
 ```html
-<DadsigBarras
+<SisdaiBarras
       :barras_id="'verticales_agrupadas_slots_tooltip'"
       :datos="[
         {
@@ -278,7 +278,7 @@ A continuación se muestra un ejemplo que parece ser más extenso, en el que se 
           </p>
         </div>
       </template>
-    </DadsigBarras>
+    </SisdaiBarras>
 ```
 
 
@@ -288,7 +288,7 @@ Por último, escribiremos otro ejemplo de barras agrupadas, en donde se agregó 
 
 El html es como se muestra a continuación:
 ```html
-<DadsigBarras
+<SisdaiBarras
         :barras_id="'verticales_apiladas_cambiando_base'"
         :datos="datos"
         :margen="{arriba: 10, abajo: 20, derecha:10, izquierda:30}"
@@ -315,7 +315,7 @@ El html es como se muestra a continuación:
           <button @click="alternandoBase">Cambia la data</button>
         </div>
       </template>
-    </DadsigBarras>
+    </SisdaiBarras>
 ```
 mientras que el script luce como sigue: 
 

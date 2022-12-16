@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DadsigLineas
+    <SisdaiLineas
         ref="lineas_sin_boton"
         :conversionTemporal="conversionTemporal"
         :datos="datos"

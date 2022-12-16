@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DadsigBarras
+    <SisdaiBarras
         :barras_id="'horizontales_apiladas_cambiando_base'"
         :datos="datos"
         :margen="{arriba: 10, abajo: 20, derecha:10, izquierda:30}"
@@ -25,7 +25,7 @@
           <button @click="alternandoBase">Cambia la data</button>
         </div>
       </template>
-    </DadsigBarras>
+    </SisdaiBarras>
   </div>
 </template>
 
