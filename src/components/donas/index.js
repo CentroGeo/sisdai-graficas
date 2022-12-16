@@ -1,11 +1,11 @@
-import DadsigDonas from './DadsigDonas.vue'
+import SisdaiDonas from './SisdaiDonas.vue'
 
 function plugin(Vue){
     if(plugin.installed){
         return
     }
     plugin.installed = true;
-    Vue.component(DadsigDonas.name,DadsigDonas);
+    Vue.component(SisdaiDonas.name,SisdaiDonas);
 }
 
 export default plugin;
@@ -13,5 +13,5 @@ export default plugin;
 
 export {
     plugin as install,
-    DadsigDonas
+    SisdaiDonas
 };

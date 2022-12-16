@@ -65,7 +65,7 @@
 import * as d3 from "d3";
 
 export default {
-  name: "DadsigAreasApiladas",
+  name: "SisdaiAreasApiladas",
   props: {
     areas_apiladas_id: String,
     datos: Array,

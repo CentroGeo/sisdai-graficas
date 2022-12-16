@@ -1,11 +1,11 @@
-import DadsigAreasApiladas from './DadsigAreasApiladas.vue'
+import SisdaiAreasApiladas from './SisdaiAreasApiladas.vue'
 
 function plugin(Vue){
     if(plugin.installed){
         return
     }
     plugin.installed = true;
-    Vue.component(DadsigAreasApiladas.name,DadsigAreasApiladas);
+    Vue.component(SisdaiAreasApiladas.name,SisdaiAreasApiladas);
 }
 
 export default plugin;
@@ -13,5 +13,5 @@ export default plugin;
 
 export { 
     plugin as install,
-    DadsigAreasApiladas
+    SisdaiAreasApiladas
 };

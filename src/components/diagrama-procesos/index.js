@@ -1,11 +1,11 @@
-import DadsigDiagramaProcesos from './DadsigDiagramaProcesos.vue'
+import SisdaiDiagramaProcesos from './SisdaiDiagramaProcesos.vue'
 
 function plugin(Vue){
     if(plugin.installed){
         return
     }
     plugin.installed = true;
-    Vue.component(DadsigDiagramaProcesos.name,DadsigDiagramaProcesos);
+    Vue.component(SisdaiDiagramaProcesos.name,SisdaiDiagramaProcesos);
 }
 
 export default plugin;
@@ -13,5 +13,5 @@ export default plugin;
 
 export { 
     plugin as install,
-    DadsigDiagramaProcesos
+    SisdaiDiagramaProcesos
 };

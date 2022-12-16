@@ -57,7 +57,7 @@
 import * as d3 from "d3";
 
 export default {
-  name: 'DadsigLineas',
+  name: 'SisdaiLineas',
   components: {},
   props: {
     linea_id: String,

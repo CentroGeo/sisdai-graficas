@@ -1,17 +1,17 @@
-import * as DadsigBarras from "./barras"
-import * as DadsigDonas from "./donas"
-import * as DadsigLineas from "./lineas"
-import * as DadsigCajasBigotes from "./cajas-bigotes"
-import * as DadsigDiagramaProcesos from "./diagrama-procesos"
-import * as DadsigAreasApiladas from "./areas-apiladas"
-import * as DadsigLineaTiempo from "./linea-tiempo"
+import * as SisdaiBarras from "./barras"
+import * as SisdaiDonas from "./donas"
+import * as SisdaiLineas from "./lineas"
+import * as SisdaiCajasBigotes from "./cajas-bigotes"
+import * as SisdaiDiagramaProcesos from "./diagrama-procesos"
+import * as SisdaiAreasApiladas from "./areas-apiladas"
+import * as SisdaiLineaTiempo from "./linea-tiempo"
 
 export {
-  DadsigBarras,
-  DadsigDonas,
-  DadsigLineas,
-  DadsigCajasBigotes,
-  DadsigDiagramaProcesos,
-  DadsigAreasApiladas,
-  DadsigLineaTiempo
+  SisdaiBarras,
+  SisdaiDonas,
+  SisdaiLineas,
+  SisdaiCajasBigotes,
+  SisdaiDiagramaProcesos,
+  SisdaiAreasApiladas,
+  SisdaiLineaTiempo
 }

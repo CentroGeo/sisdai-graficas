@@ -1,6 +1,6 @@
 # sisdai-graficas
 
-Ésta es una biblioteca de visualización de datos que forma parte del Sistema de Diseño y Accesibilidad para la Investigación, proyecto que potencia el impacto social de la investigación al promover la autonomía e independencia tecnológica con el uso de componentes de software libre. Esta biblioteca está alineada a [SALSA](https://salsa.crip.conacyt.mx/).
+Esta es una biblioteca de visualización de datos que forma parte del Sistema de Diseño y Accesibilidad para la Investigación, proyecto que potencia el impacto social de la investigación al promover la autonomía e independencia tecnológica con el uso de componentes de software libre. Esta biblioteca está alineada a [SALSA](https://salsa.crip.conacyt.mx/).
 
 > **_Limitación de responsabilidad_**
 > 
@@ -48,8 +48,8 @@ importando el componente de `DadsigBarras` de esta biblioteca (que construye una
 ```javascript
 import Vue from 'Vue'
 import App from './App.Vue'
-import {DadsigBarras} from "dadsig-graficas";
-import 'dadsig-graficas/dist/dadsig-graficas.css';
+import {DadsigBarras} from "sisdai-graficas";
+import 'sisdai-graficas/dist/sisdai-graficas.css';
 
 Vue.use(DadsigBarras)
 

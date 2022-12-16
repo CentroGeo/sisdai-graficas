@@ -46,7 +46,7 @@
 import * as d3 from "d3";
 
 export default {
-  name: 'DadsigCajasBigotes',
+  name: 'SisdaiCajasBigotes',
   props: {
     caja_id: String,
     datos: Array,

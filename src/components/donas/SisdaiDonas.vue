@@ -35,7 +35,7 @@
 import * as d3 from "d3";
 
 export default {
-  name: "DadsigDonas",
+  name: "SisdaiDonas",
   props: {
     dona_id: String,
     datos: Array,

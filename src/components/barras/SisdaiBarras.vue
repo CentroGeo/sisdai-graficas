@@ -45,7 +45,7 @@
 import * as d3 from "d3";
 
 export default {
-  name: 'DadsigBarras',
+  name: 'SisdaiBarras',
   props: {
     barras_id: String,
     datos: Array,

@@ -14,7 +14,7 @@ import * as d3 from "d3";
 import { DataSet, Timeline } from "vis-timeline/standalone";
 import "vis-timeline/styles/vis-timeline-graph2d.css";
 export default {
-  name: "DadsigLineaTiempo",
+  name: "SisdaiLineaTiempo",
   props: {
     eventos: {
       type: Array,

@@ -1,11 +1,11 @@
-import DadsigCajasBigotes from './DadsigCajasBigotes.vue'
+import SisdaiCajasBigotes from './SisdaiCajasBigotes.vue'
 
 function plugin(Vue){
     if(plugin.installed){
         return
     }
     plugin.installed = true;
-    Vue.component(DadsigCajasBigotes.name,DadsigCajasBigotes);
+    Vue.component(SisdaiCajasBigotes.name,SisdaiCajasBigotes);
 }
 
 export default plugin;
@@ -13,5 +13,5 @@ export default plugin;
 
 export { 
     plugin as install,
-    DadsigCajasBigotes
+    SisdaiCajasBigotes
 };

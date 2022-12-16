@@ -41,7 +41,7 @@
 
 <script>
 export default {
-    name: "DadsigDiagramaProcesos",
+    name: "SisdaiDiagramaProcesos",
     props: {
         datos: Array
     }
