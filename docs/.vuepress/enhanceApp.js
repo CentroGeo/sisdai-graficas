@@ -12,10 +12,10 @@ import {
     SisdaiCajasBigotes,
     SisdaiDiagramaProcesos,
     SisdaiAreasApiladas,
-    SisdaiLineaTiempo
+    SisdaiLineaTiempo,
+    SisdaiBarrasPrueba
 } from "../../src/index.js"
 import "./styles/index.scss"
-import Vuex from 'vuex';
 
 export default ({
                     Vue, // the version of Vue being used in the VuePress app
@@ -30,10 +30,10 @@ export default ({
     Vue.use(SisdaiDiagramaProcesos)
     Vue.use(SisdaiAreasApiladas)
     Vue.use(SisdaiLineaTiempo)
+    Vue.use(SisdaiBarrasPrueba)
 
     // ...apply enhancements for the site.
 
 
-    Vue.use(Vuex);
 
 }

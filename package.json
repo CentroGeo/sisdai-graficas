@@ -12,47 +12,36 @@
     "docs:build": "vuepress build docs",
     "docs:build-nossr": "vuepress buildnossr docs",
     "build": "vue-cli-service build --target lib src/index.js",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "format": "prettier . --write",
+    "format-lint": "npm run format && npm run lint"
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "d3": "^7.0.0",
+    "d3": "^7.8.2",
+    "sisdai-css": "github:salsa-community/sisdai-css",
     "vis-timeline": "^7.7.0",
-    "vue": "^2.6.11",
-    "vuex": "^3.4.0"
+    "vue": "^2.7.14"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.13",
-    "@vue/cli-plugin-eslint": "~4.5.13",
-    "@vue/cli-service": "~4.5.13",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "vue-template-compiler": "^2.6.11",
-    "sass": "^1.42.1",
-    "sass-loader": "^10.2.0",
-    "vuepress": "^1.8.2"
+    "@babel/core": "^7.20.12",
+    "@babel/eslint-parser": "^7.19.1",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-eslint": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-html": "^7.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.8.0",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.2",
+    "sass": "^1.57.1",
+    "sass-loader": "^10.4.1",
+    "vue-template-compiler": "^2.7.14",
+    "vuepress": "^1.9.8",
+    "vuepress-html-webpack-plugin": "^3.2.0"
   },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/salsa-community/sisdai-graficas"

@@ -5,7 +5,8 @@ import {
     SisdaiCajasBigotes,
     SisdaiDiagramaProcesos,
     SisdaiAreasApiladas,
-    SisdaiLineaTiempo
+    SisdaiLineaTiempo,
+    SisdaiBarrasPrueba
 } from "./components"
 
 import "./scss/estilogeneral.scss"
@@ -22,6 +23,7 @@ export default function plugin(Vue) {
     Vue.use(SisdaiDiagramaProcesos)
     Vue.use(SisdaiAreasApiladas)
     Vue.use(SisdaiLineaTiempo)
+    Vue.use(SisdaiBarrasPrueba)
 }
 
 export {
@@ -32,5 +34,5 @@ export {
     SisdaiCajasBigotes,
     SisdaiDiagramaProcesos,
     SisdaiAreasApiladas,
-    SisdaiLineaTiempo
+    SisdaiBarrasPrueba
 }

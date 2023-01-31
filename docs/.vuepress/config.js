@@ -55,6 +55,7 @@ module.exports = {
           title: 'Visualizaciones',
           collapsable: false,
           children: [
+            'barras_prueba',
             'barras',
             'cajas_bigotes',
             'donas',
