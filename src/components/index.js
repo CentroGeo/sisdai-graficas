@@ -6,7 +6,7 @@ import * as SisdaiDiagramaProcesos from "./diagrama-procesos"
 import * as SisdaiAreasApiladas from "./areas-apiladas"
 import * as SisdaiLineaTiempo from "./linea-tiempo"
 
-import * as SisdaiBarrasPrueba from "./grafica"
+//import * as SisdaiBarrasPrueba from "./grafica"
 export {
   SisdaiBarras,
   SisdaiDonas,
@@ -16,5 +16,5 @@ export {
   SisdaiAreasApiladas,
   SisdaiLineaTiempo,
 
-  SisdaiBarrasPrueba
+  //SisdaiBarrasPrueba
 }

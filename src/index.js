@@ -6,8 +6,10 @@ import {
     SisdaiDiagramaProcesos,
     SisdaiAreasApiladas,
     SisdaiLineaTiempo,
-    SisdaiBarrasPrueba
+    //SisdaiBarrasPrueba
 } from "./components"
+
+import SisdaiBarrasPrueba from "./components/grafica/SisdaiBarrasPrueba.vue"
 
 import "./scss/estilogeneral.scss"
 
@@ -23,7 +25,9 @@ export default function plugin(Vue) {
     Vue.use(SisdaiDiagramaProcesos)
     Vue.use(SisdaiAreasApiladas)
     Vue.use(SisdaiLineaTiempo)
-    Vue.use(SisdaiBarrasPrueba)
+    //Vue.use(SisdaiBarrasPrueba)
+    Vue.component(SisdaiBarrasPrueba.__name, SisdaiBarrasPrueba)
+
 }
 
 export {
@@ -34,5 +38,5 @@ export {
     SisdaiCajasBigotes,
     SisdaiDiagramaProcesos,
     SisdaiAreasApiladas,
-    SisdaiBarrasPrueba
+    
 }

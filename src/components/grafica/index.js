@@ -4,7 +4,7 @@ function plugin(Vue){
         return
     }
     plugin.installed = true;
-    Vue.component(SisdaiBarrasPrueba.name,SisdaiBarrasPrueba)
+    Vue.component(SisdaiBarrasPrueba.__name,SisdaiBarrasPrueba)
 }
 
 export default plugin;
