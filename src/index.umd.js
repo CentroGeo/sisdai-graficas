@@ -1,6 +1,5 @@
-import * as SisdaiGraficas from "./index"
+import * as SisdaiGraficas from './index'
 
-
-export default{
-    ...SisdaiGraficas,
+export default {
+  ...SisdaiGraficas,
 }
