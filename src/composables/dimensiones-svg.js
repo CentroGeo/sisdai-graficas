@@ -26,16 +26,14 @@ export default function(){
       svg.value.select(".grupo-frente")
       .attr("transform", `translate(${margen.izquierda},${margen.arriba})`)
     
-
-
-
-
   }
 
 
   return {
     configurandoDimensionesParaSVG,
-    ancho_leyenda_y
+    ancho_leyenda_y,
+    alto,
+    ancho
   }
 
 }
