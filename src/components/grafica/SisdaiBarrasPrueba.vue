@@ -12,6 +12,7 @@ import ejeAbajo from "../../composables/ejes/crea-eje-abajo.js"
 
 import Barras from "../../composables/crea-graficos/crea-barras.js"
 
+
 const propsSetup = defineProps({
   barras_id: String,
   margen: {
@@ -71,7 +72,9 @@ const { datos, variables } = toRefs(propsSetup)
 
 
 const { configurandoDimensionesParaSVG, ancho_leyenda_y, alto, ancho } = dimensionesSVG()
+
 const { datos_apilados } = apilarDatos(datos, variables);
+
 const dominio_lineal = ref(propsSetup.apiladas_o_agrupadas === "apiladas" ?
   (propsSetup.dominio_lineal_fijo ? dominio_lineal_fijo : [0, Math.max(...datos.value.map((d) => sum([...variables.value.map((dd) => d[dd.id])])))]) :
   (propsSetup.dominio_lineal_fijo ? dominio_lineal_fijo : [0, Math.max(...datos.value.map((d) => Math.max(...variables.value.map((dd) => d[dd.id]))))]));
@@ -107,9 +110,9 @@ onMounted(() => {
     (propsSetup.dominio_lineal_fijo ? dominio_lineal_fijo : [0, Math.max(...datos.value.map((d) => Math.max(...variables.value.map((dd) => d[dd.id]))))]);
 
   /**
-   * calbulo dominio bandas
+   * calculo dominio bandas
    */
-   dominio_bandas.value = datos.value.map(d => d[propsSetup.nombre_barra])
+  dominio_bandas.value = datos.value.map(d => d[propsSetup.nombre_barra])
   /**
    * Creando escala líneal, el rango depende de si es horizontal u vertical
    */
@@ -136,20 +139,16 @@ onMounted(() => {
 
 })
 
-
-
-
 watch(datos, () => {
   dominio_lineal.value = propsSetup.apiladas_o_agrupadas === "apiladas" ?
     (propsSetup.dominio_lineal_fijo ? dominio_lineal_fijo : [0, Math.max(...datos.value.map((d) => sum([...variables.value.map((dd) => d[dd.id])])))]) :
     (propsSetup.dominio_lineal_fijo ? dominio_lineal_fijo : [0, Math.max(...datos.value.map((d) => Math.max(...variables.value.map((dd) => d[dd.id]))))]);
   // Actualizamos el rango de la escala lineal  
   escalaLineal.value.range(propsSetup.orientacion == 'vertical' ? [alto.value, 0] : [0, ancho.value])
-  
+
   dominio_bandas.value = datos.value.map(d => d[propsSetup.nombre_barra]);
   escalaBandas.value.range(propsSetup.orientacion == 'vertical' ? [0, ancho.value] : [alto.value, 0])
   escalaBandas.value.padding(.3)
-console.log(escalaBandas.value.bandwidth())
   actualizaEjeIzquierdo(eje_y.value, escalaLineal.value, ancho.value);
   actualizaEjeAbajo(eje_x.value, escalaBandas.value, alto.value);
 
@@ -172,11 +171,8 @@ watch(variables, () => {
 
   actualizaEjeIzquierdo(eje_y.value, escalaLineal.value, ancho.value);
   actualizaEjeAbajo(eje_x.value, escalaBandas.value, alto.value);
+  
 })
-
-
-
-
 
 </script>
 

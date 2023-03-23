@@ -10,9 +10,9 @@
 <script setup>
 
 import { ref } from "vue";
-const datos = ref([{ categoria: 'Variable A', h: 120, m: 120 },
-{ categoria: 'Variable B', h: 150, m: 30 },
-{ categoria: 'Variable C', h: 72, m: 181 }]);
+const datos = ref([{ categoria: '2012', h: 120, m: 120 },
+{ categoria: '2013', h: 150, m: 30 },
+{ categoria: '2014', h: 72, m: 181 }]);
 
 const variables = ref([{ id: 'h', nombre_colores: 'Hombres', color: '#7fcdbb' },
 { id: 'm', nombre_colores: 'Mujeres', color: '#7fcd01' }
