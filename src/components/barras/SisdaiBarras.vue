@@ -345,7 +345,7 @@ export default {
         this.tooltip_bandas = this.escalaX.step();
         this.tooltip_indice = parseInt((evento.layerX - this.margen.izquierda - this.margen.derecha) / this.tooltip_bandas)
 
-        if (this.tooltip_indice < this.datos.length) {
+        if (0 <= this.tooltip_indice && this.tooltip_indice < this.datos.length) {
           this.tooltip_categoria = this.escalaX.domain()[this.tooltip_indice]
           this.tooltip_data_seleccionada = this.data_apilada[0].filter(dd => (dd.data[this.nombre_barra] == this.tooltip_categoria))[0].data;
 
@@ -379,7 +379,7 @@ export default {
         this.tooltip_bandas = this.escalaY.step();
         this.tooltip_indice = parseInt((evento.layerY - this.margen.arriba + this.espaciado_barras) / this.tooltip_bandas)
 
-        if (this.tooltip_indice < this.datos.length) {
+        if (0 <= this.tooltip_indice && this.tooltip_indice < this.datos.length) {
           this.tooltip_categoria = this.escalaY.domain()[this.tooltip_indice]
           this.tooltip_data_seleccionada = this.data_apilada[0].filter(dd => (dd.data[this.nombre_barra] == this.tooltip_categoria))[0].data;
 
