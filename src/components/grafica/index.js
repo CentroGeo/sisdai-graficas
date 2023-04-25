@@ -1,4 +1,5 @@
 import SisdaiBarrasPrueba from './SisdaiBarrasPrueba.vue'
+import SisdaiGraficas from './SisdaiGraficas.vue'
 
 export default function plugin(Vue) {
   if (plugin.installed) {
@@ -12,6 +13,7 @@ export default function plugin(Vue) {
   }
 
   agregarComponente(SisdaiBarrasPrueba)
+  agregarComponente(SisdaiGraficas)
 }
 
 export { plugin as install }

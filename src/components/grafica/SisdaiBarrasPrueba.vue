@@ -12,7 +12,7 @@ import ejeAbajo from "../../composables/ejes/crea-eje-abajo.js"
 
 import Barras from "../../composables/crea-graficos/crea-barras.js"
 
-
+// eslint-disable-next-line
 const propsSetup = defineProps({
   barras_id: String,
   margen: {

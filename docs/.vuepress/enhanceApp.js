@@ -5,7 +5,7 @@
  */
 
 import SisdaiBarrasPrueba from '../../src/components/grafica/index'
-
+import SisdaiGraficas from '../../src/components/grafica/index'
 import './styles/index.scss'
 
 export default ({
@@ -15,4 +15,5 @@ export default ({
   siteData, // site metadata
 }) => {
   Vue.use(SisdaiBarrasPrueba)
+  Vue.use(SisdaiGraficas)
 }
