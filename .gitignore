@@ -3,6 +3,7 @@ node_modules
 
 #docs
 docs/.vuepress/dist/
+docs/.vitepress/dist/
 
 # local env files
 .env.local
@@ -16,9 +17,12 @@ pnpm-debug.log*
 
 # Editor directories and files
 .idea
-#.vscode
+# .vscode
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+dist/demo.html
+
+deprecated/

@@ -13,7 +13,7 @@ module.exports = defineConfig({
    *
    * @see https://cli.vuejs.org/config/#transpiledependencies
    */
-  transpileDependencies: [],
+  transpileDependencies: false,
 
   /**
    * @property {boolean} [productionSourceMap=true] Establecer esto en falso puede acelerar las
@@ -30,7 +30,7 @@ module.exports = defineConfig({
    *
    * @see https://cli.vuejs.org/config/#css-extract
    */
-  css: { extract: false },
+  css: { extract: true },
 
   /**
    * @property {object} [] Si el valor es un Objeto, se fusionará en la configuración final usando
@@ -42,6 +42,12 @@ module.exports = defineConfig({
     devtool: false,
     performance: {
       hints: false,
+    },
+    output: {
+      libraryExport: 'default',
+    },
+    externals: {
+      '@popperjs/core': '@popperjs/core',
     },
   },
 })
