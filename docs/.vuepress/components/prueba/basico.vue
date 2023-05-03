@@ -1,0 +1,3 @@
+<template>
+  <SisdaiGraficas></SisdaiGraficas>
+</template>

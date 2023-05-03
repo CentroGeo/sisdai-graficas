@@ -1,4 +1,5 @@
 import SisdaiComponentes from 'sisdai-componentes'
+import SisdaiGraficas from './../../src'
 import pageComponents from '@internal/page-components'
 import Vuex from 'vuex'
 import store from './store'
@@ -18,6 +19,8 @@ export default ({
   Vue.mixin({ store: store })
 
   Vue.use(SisdaiComponentes)
+
+  Vue.use(SisdaiGraficas)
 
   for (const [name, component] of Object.entries(pageComponents)) {
     Vue.component(name, component)
