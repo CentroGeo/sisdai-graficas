@@ -30,5 +30,7 @@ defineProps({
 </script>
 
 <template>
-  <div>hola soy una barra</div>
+  <g>
+    <circle r="10"></circle>
+  </g>
 </template>
