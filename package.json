@@ -8,7 +8,7 @@
   ],
   "main": "./dist/sisdai-graficas.umd.js",
   "scripts": {
-    "docs:serve": "vuepress dev docs",
+    "docs": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "docs:build-nossr": "vuepress buildnossr docs",
     "build": "vue-cli-service build --target lib src/index.js",
