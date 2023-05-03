@@ -50,11 +50,6 @@ import store from './../../store'
 
     <SisdaiPiePaginaGobMx />
 
-    <SisdaiMenuAccesibilidad
-      @alSeleccionarOpcion="
-        ({ accion }) => store.commit(`accesibilidad/${accion}`)
-      "
-      @restablecer="store.commit('accesibilidad/limpiarClasesAccesibles')"
-    />
+    <SisdaiMenuAccesibilidad :objetoStore="store" />
   </div>
 </template>

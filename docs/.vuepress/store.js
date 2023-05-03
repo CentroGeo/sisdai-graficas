@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import accesibilidad from './stores/accesibilidad'
+import { accesibilidad } from 'sisdai-componentes/src/stores'
 
 Vue.use(Vuex)
 
