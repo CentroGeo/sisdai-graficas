@@ -46,7 +46,7 @@ console.log(svg)
       <!--<g :transform="`translate(${margen.izquierda}, ${margen.arriba})`">
         <circle r="10"></circle>
       </g>-->
-      <slot></slot>
+      <slot />
     </svg>
   </div>
 </template>

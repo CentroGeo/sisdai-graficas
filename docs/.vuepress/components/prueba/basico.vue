@@ -1,3 +1,5 @@
 <template>
-  <SisdaiGraficas :id="'id-grafica-basica'"></SisdaiGraficas>
+  <SisdaiGraficas :id="'id-grafica-basica'">
+    <SisdaiBarras></SisdaiBarras>
+  </SisdaiGraficas>
 </template>
