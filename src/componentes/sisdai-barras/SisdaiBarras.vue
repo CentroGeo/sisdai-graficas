@@ -37,30 +37,25 @@ const props = defineProps({
     default: 'categoria',
   },
 })
-const { margen } = usarDimensiones()
-console.log(margen)
-const { ancho, alto } = usarDimensiones()
-
+const { margen, ancho, id_svg } = usarDimensiones()
 const escalaBanda = ref()
 
-watch(ancho, (nv, ov) => {
+watch(ancho, nv => {
   if (nv !== 0) {
     escalaBanda.value = scaleBand()
       .domain(props.datos.map(d => d[props.clave_categorias]))
       .range([0, ancho.value])
-
-    select('g g.eje-x')
-      .call(axisBottom(escalaBanda.value))
-
-      .attr('transform', `translate(${0}, ${alto.value})`)
+    console.log(id_svg.value)
+    select(`div#${id_svg.value} svg g.eje-x`).call(
+      axisBottom(escalaBanda.value)
+    )
   }
-  console.log(nv, ov)
+  //console.log(svg.value)
 })
 </script>
 
 <template>
   <g :transform="`translate(${margen.izquierda},${margen.arriba})`">
-    <g class="eje-x"></g>
     <circle r="10"></circle>
   </g>
 </template>

@@ -37,6 +37,9 @@ onMounted(async () => {
 </template>
 
 <style scoped>
+.componente {
+  width: 100%;
+}
 .ejemplo {
   margin-bottom: 3rem;
 }
