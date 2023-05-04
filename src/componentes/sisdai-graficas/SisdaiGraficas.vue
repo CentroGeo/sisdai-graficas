@@ -1,6 +1,7 @@
 <script setup>
 import { select } from 'd3-selection'
 import { ref, onMounted } from 'vue'
+import usarDimensiones from '../../composables/usarDimensiones'
 const props = defineProps({
   id: {
     type: String,
@@ -18,9 +19,13 @@ const props = defineProps({
     default: () => ({ arriba: 20, abajo: 20, derecha: 20, izquierda: 20 }),
   },
 })
-const ancho = ref()
-const alto = ref()
+const ancho = ref(0)
+const alto = ref(0)
 const svg = ref()
+
+const { guardarMargenes } = usarDimensiones()
+guardarMargenes(props.margen)
+
 onMounted(() => {
   ancho.value =
     document.querySelector(`div#${props.id}`).clientWidth -
@@ -28,9 +33,9 @@ onMounted(() => {
     props.margen.derecha
   alto.value = ancho.value * 0.5 - props.margen.arriba - props.margen.abajo
   svg.value = select(`div#${props.id} svg`)
+  const { guardaDimensiones } = usarDimensiones()
+  guardaDimensiones(ancho.value, alto.value)
 })
-
-console.log(svg)
 </script>
 
 <template>
@@ -43,9 +48,6 @@ console.log(svg)
       :width="ancho + margen.izquierda + margen.derecha"
       :height="alto + margen.arriba + margen.abajo"
     >
-      <!--<g :transform="`translate(${margen.izquierda}, ${margen.arriba})`">
-        <circle r="10"></circle>
-      </g>-->
       <slot />
     </svg>
   </div>
