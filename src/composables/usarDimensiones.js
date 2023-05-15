@@ -2,9 +2,8 @@ import { ref } from 'vue'
 const margen = ref()
 const ancho = ref()
 const alto = ref()
-const svg = ref()
 const id_svg = ref()
-export default function () {
+export default function (svg) {
   function guardarMargenes(_margen) {
     margen.value = _margen
   }
