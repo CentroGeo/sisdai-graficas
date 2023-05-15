@@ -37,7 +37,7 @@ const props = defineProps({
     default: 'categoria',
   },
 })
-const { margen, ancho, id_svg } = usarDimensiones()
+const { margenes, ancho, id_svg } = usarDimensiones()
 const escalaBanda = ref()
 
 watch(ancho, nv => {
@@ -55,7 +55,7 @@ watch(ancho, nv => {
 </script>
 
 <template>
-  <g :transform="`translate(${margen.izquierda},${margen.arriba})`">
+  <g :transform="`translate(${margenes.izquierda},${margenes.arriba})`">
     <circle r="10"></circle>
   </g>
 </template>

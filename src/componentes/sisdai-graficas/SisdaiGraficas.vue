@@ -1,7 +1,8 @@
 <script setup>
-import { select } from 'd3-selection'
-import { ref, onMounted } from 'vue'
-import usarDimensiones from '../../composables/usarDimensiones'
+//import { select } from 'd3-selection'
+import { ref, onMounted, onUnmounted, toRefs, watch } from 'vue'
+
+import usarRegistroGraficas from '../../composables/usarRegistroGraficas'
 const props = defineProps({
   id: {
     type: String,
@@ -14,49 +15,61 @@ const props = defineProps({
   tooltip: {
     type: Function,
   },
-  margen: {
+  margenes: {
     type: Object,
     default: () => ({ arriba: 20, abajo: 20, derecha: 20, izquierda: 20 }),
   },
 })
-const ancho = ref(0)
-const alto = ref(0)
-const svg = ref()
+const { borrar, usarDimensiones } = usarRegistroGraficas(props.id)
 
-const { guardarMargenes } = usarDimensiones()
-guardarMargenes(props.margen)
+const { guardarMargenes, alto, guardarAlto, ancho, guardarAncho } =
+  usarDimensiones(props.id)
+
+const { margenes } = toRefs(props)
+
+guardarMargenes(margenes.value)
+
+watch(margenes, guardarMargenes)
+
+guardarAlto(0)
+guardarAncho(0)
+const contenedorSisdaiGraficas = ref(null)
 
 onMounted(() => {
-  ancho.value =
-    document.querySelector(`div#${props.id}`).clientWidth -
-    props.margen.izquierda -
-    props.margen.derecha
-
-  console.log(document.querySelector(`div#${props.id}`).clientWidth)
-
-  alto.value = ancho.value * 0.5 - props.margen.arriba - props.margen.abajo
-  svg.value = select(`div#${props.id} svg`)
-  const { guardaId } = usarDimensiones()
-  const { guardaDimensiones } = usarDimensiones()
-  guardaId(props.id)
-  guardaDimensiones(ancho.value, alto.value)
+  guardarAncho(
+    contenedorSisdaiGraficas.value.clientWidth -
+      margenes.value.izquierda -
+      margenes.value.derecha
+  )
+  guardarAlto(ancho.value * 0.5)
+  console.log(
+    contenedorSisdaiGraficas.value.clientWidth -
+      margenes.value.izquierda -
+      margenes.value.derecha
+  )
+})
+onUnmounted(() => {
+  borrar()
 })
 </script>
 
 <template>
   <div
     :id="id"
+    ref="contenedorSisdaiGraficas"
     class="grafica"
   >
     hola soy una grafica
     <svg
-      :width="ancho + margen.izquierda + margen.derecha"
-      :height="alto + margen.arriba + margen.abajo"
+      :width="ancho + margenes.izquierda + margenes.derecha"
+      :height="alto + margenes.arriba + margenes.abajo"
     >
       <slot />
       <g
         class="eje-x"
-        :transform="`translate(${margen.izquierda}, ${alto + margen.arriba})`"
+        :transform="`translate(${margenes.izquierda}, ${
+          alto + margenes.arriba
+        })`"
       ></g>
       <g class="eje-y-derecha"></g>
     </svg>

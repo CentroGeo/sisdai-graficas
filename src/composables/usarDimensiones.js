@@ -1,33 +1,29 @@
-import { ref } from 'vue'
-const margen = ref()
-const ancho = ref()
-const alto = ref()
-const id_svg = ref()
-export default function (svg) {
-  function guardarMargenes(_margen) {
-    margen.value = _margen
-  }
+import { computed, watch } from 'vue'
+import usarRegistroGraficas from './usarRegistroGraficas'
 
-  function guardaDimensiones(_ancho, _alto) {
-    ancho.value = _ancho
-    alto.value = _alto
+export default function (idGrafica) {
+  const grafica = usarRegistroGraficas().grafica(idGrafica)
+
+  const alto = computed(() => grafica?.alto)
+  const guardarAlto = _alto => (grafica.alto = _alto)
+
+  const ancho = computed(() => grafica?.ancho)
+  const guardarAncho = _ancho => {
+    console.log(_ancho)
+    grafica.ancho = _ancho
   }
-  function guardaSvg(_svg) {
-    svg.value = _svg
-  }
-  function guardaId(_id) {
-    id_svg.value = _id
-  }
+  watch(ancho, (nv, ov) => {
+    console.log(nv, ov)
+  })
+  const margenes = computed(() => grafica?.margenes)
+  const guardarMargenes = _margenes => (grafica.margenes = _margenes)
 
   return {
-    guardarMargenes,
-    guardaDimensiones,
-    guardaSvg,
-    guardaId,
-    margen,
-    ancho,
     alto,
-    svg,
-    id_svg,
+    guardarAlto,
+    ancho,
+    guardarAncho,
+    margenes,
+    guardarMargenes,
   }
 }
