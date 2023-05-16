@@ -36,6 +36,9 @@ guardarAncho(0)
 const contenedorSisdaiGraficas = ref(null)
 
 onMounted(() => {
+  // Aquí el guardarAncho recibe además la
+  // diferencia de los márgenes izquierda
+  // y derecha
   guardarAncho(
     contenedorSisdaiGraficas.value.clientWidth -
       margenes.value.izquierda -
@@ -116,6 +119,11 @@ const contenedorSisdaiGraficas = ref(null)
 
 onMounted(() => {
   guardarAncho(contenedorSisdaiGraficas.value.clientWidth)
+  // guardarAncho(
+  //   contenedorSisdaiGraficas.value.clientWidth -
+  //     margenes.value.izquierda -
+  //     margenes.value.derecha
+  // )
   guardarAlto(ancho.value * 0.5)
 })
 
@@ -133,9 +141,13 @@ onUnmounted(() => {
     <h1>Hola soy el contenedor de gráficas {{ id }}</h1>
 
     <svg
+      :width="ancho + margenes.izquierda + margenes.derecha"
+      :height="alto + margenes.arriba + margenes.abajo"
+    >
+      <!-- <svg
       :width="ancho"
       :height="alto"
-    >
+    > -->
       <g class="eje-x-arriba" />
       <g class="eje-y-derecha" />
       <slot />

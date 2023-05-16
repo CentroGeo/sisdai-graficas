@@ -37,13 +37,18 @@ const props = defineProps({
     default: 'categoria',
   },
 })
+// Estos valores los obtiene del onMounted
+// y no del setup como aquí
 const { margenes, ancho, id_svg } = usarDimensiones()
+
 const escalaBanda = ref()
 
 watch(ancho, nv => {
   if (nv !== 0) {
     escalaBanda.value = scaleBand()
       .domain(props.datos.map(d => d[props.clave_categorias]))
+      // Aquí también hace juego con los márgenes
+      // los quitan, pero luego los ponen, etc.
       .range([0, ancho.value])
     console.log(id_svg.value)
     select(`div#${id_svg.value} svg g.eje-x`).call(
@@ -62,11 +67,13 @@ watch(ancho, nv => {
 
 <script setup>
 import { onMounted, ref, toRefs, watch } from 'vue'
-// import usarDimenciones from '@/composables/usarDimenciones'
-import usarDimenciones from '../../composables/usarDimenciones'
+
 import { scaleBand } from 'd3-scale'
 import { select } from 'd3-selection'
 import { axisBottom } from 'd3-axis'
+
+// import usarDimenciones from '@/composables/usarDimenciones'
+import usarDimenciones from '../../composables/usarDimenciones'
 
 const props = defineProps({
   datos: {
@@ -112,6 +119,10 @@ const margenesPadre = ref({}),
   anchoPadre = ref(0),
   escalaBanda = ref()
 
+// En dado caso que cambie el valor de anchoPadre
+// rescala la banda donde se va a pintar la gráfica.
+// Los valores de datos y clave_categorias
+// se hacen reactivas sus referencias.
 watch(anchoPadre, nv => {
   if (nv && nv !== 0) {
     escalaBanda.value = scaleBand()
@@ -122,12 +133,27 @@ watch(anchoPadre, nv => {
           margenesPadre.value.izquierda -
           margenesPadre.value.derecha,
       ])
-    // console.log(select(`div#${obteniendoIdPadre()} svg g.eje-x`))
+    // console.log(select(`div#${obteniendoIdPadre()} svg g.eje-x-abajo`))
     select(`div#${obteniendoIdPadre()} svg g.eje-x-abajo`).call(
       axisBottom(escalaBanda.value)
     )
   }
 })
+
+// watch(ancho, nv => {
+//   if (nv !== 0) {
+//     escalaBanda.value = scaleBand()
+//       .domain(props.datos.map(d => d[props.clave_categorias]))
+//       // Aquí también hace juego con los márgenes
+//       // los quitan, pero luego los ponen, etc.
+//       .range([0, ancho.value])
+//     console.log(id_svg.value)
+//     select(`div#${id_svg.value} svg g.eje-x`).call(
+//       axisBottom(escalaBanda.value)
+//     )
+//   }
+//   //console.log(svg.value)
+// })
 
 onMounted(() => {
   const { margenes, ancho } = usarDimenciones(obteniendoIdPadre())

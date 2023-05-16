@@ -4,6 +4,7 @@ import _usarDimensiones from './usarDimensiones'
 let graficas_registradas = {}
 
 export default function (idGrafica) {
+  // Esto regresa verdadero o falso
   const graficaExiste = _idGrafica =>
     Object.keys(graficas_registradas).includes(_idGrafica)
 
@@ -21,6 +22,8 @@ export default function (idGrafica) {
   }
 
   function borrar(_idGrafica) {
+    // Si la gráfica con el id existe
+    // remueve la gráfica registrada
     const graficaParaBorrar = idGrafica || _idGrafica
     if (graficaExiste(graficaParaBorrar)) {
       delete graficas_registradas[graficaParaBorrar]
@@ -36,6 +39,9 @@ export default function (idGrafica) {
     console.warn(`No se encontró la gráfica ${graficaParaConsultar}`)
   }
   function usarDimensiones(_idGrafica) {
+    // Aquí en lugar de que _usarDimensiones
+    // utilice graficaParaConsultar, debe
+    // utilizar _idGrafica
     const graficaParaConsultar = idGrafica || _idGrafica
     if (graficaExiste(graficaParaConsultar)) {
       return _usarDimensiones(graficaParaConsultar)

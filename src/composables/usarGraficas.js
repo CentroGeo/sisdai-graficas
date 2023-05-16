@@ -4,6 +4,7 @@ import _usarDimenciones from '../composables/usarDimenciones'
 let graficas = {}
 
 export default function (idGrafica) {
+  // Esto regresa verdadero o falso
   const graficaEsxiste = _idGrafica =>
     Object.keys(graficas).includes(_idGrafica)
 
@@ -22,6 +23,8 @@ export default function (idGrafica) {
   }
 
   function borrarGrafica(_idGrafica) {
+    // Si la gráfica con el id existe
+    // remueve la gráfica registrada
     const graficaParaBorrar = idGrafica || _idGrafica
     if (graficaEsxiste(graficaParaBorrar)) {
       delete graficas[graficaParaBorrar]
@@ -30,6 +33,9 @@ export default function (idGrafica) {
   }
 
   function grafica(_idGrafica) {
+    // Sirve como consulta para conocer
+    // si existen gráfica o gráficas
+    // regresa el objeto
     const graficaParaConsultar = idGrafica || _idGrafica
     if (graficaEsxiste(graficaParaConsultar)) {
       return graficas[_idGrafica]
