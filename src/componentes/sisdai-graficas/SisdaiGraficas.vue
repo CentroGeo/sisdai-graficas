@@ -28,25 +28,21 @@ const { guardarMargenes, alto, guardarAlto, ancho, guardarAncho } =
 const { margenes } = toRefs(props)
 
 guardarMargenes(margenes.value)
-
 watch(margenes, guardarMargenes)
 
+const contenedorSisdaiGraficas = ref(null)
 guardarAlto(0)
 guardarAncho(0)
-const contenedorSisdaiGraficas = ref(null)
-
 onMounted(() => {
   guardarAncho(
     contenedorSisdaiGraficas.value.clientWidth -
       margenes.value.izquierda -
       margenes.value.derecha
   )
+  console.log(ancho.value)
+
   guardarAlto(ancho.value * 0.5)
-  console.log(
-    contenedorSisdaiGraficas.value.clientWidth -
-      margenes.value.izquierda -
-      margenes.value.derecha
-  )
+  console.log(ancho)
 })
 onUnmounted(() => {
   borrar()
