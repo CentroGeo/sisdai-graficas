@@ -3,6 +3,7 @@ import { ref } from 'vue'
 
 const margen = ref(30)
 </script>
+
 <template>
   <div>
     <input
@@ -32,7 +33,9 @@ const margen = ref(30)
         ]"
       ></SisdaiBarras>
     </SisdaiGraficas>
+
     <hr />
+
     <SisdaiGraficas>
       <SisdaiBarras
         :datos="[
@@ -46,6 +49,7 @@ const margen = ref(30)
         ]"
       ></SisdaiBarras>
     </SisdaiGraficas>
+
     <!--<SisdaiGraficas :id="'id-grafica-basica'">
       <SisdaiBarras
         :datos="[
