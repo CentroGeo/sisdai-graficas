@@ -15,13 +15,13 @@ export function idAleatorio() {
  * su valor.
  * @param {String} tipo puede ser contenedor de grafica, mapa o algun derivado de los mismos.
  * @param {HTMLElement} html de cualquier elemento.
- * @returns {String} id del mapa contenedor.
+ * @returns {String} valor del atrubutos sisdai-contenedor.
  */
 export function buscarIdContenedorHtmlSisdai(tipo, { parentElement }) {
   // console.log('buscarIdContenedorHtmlSisdai', parentElement)
 
   if (parentElement.getAttribute(`sisdai-${tipo}`) !== null) {
-    // console.log('es SisdaiMapas')
+    // console.log('es sisdai-contenedor')
     return parentElement.getAttribute(`sisdai-${tipo}`)
   }
 
@@ -31,6 +31,6 @@ export function buscarIdContenedorHtmlSisdai(tipo, { parentElement }) {
   } else {
     // console.log('ya no hay más hijos')
     // eslint-disable-next-line
-    console.warn(`No se encontro el mapa para agregar la capa`)
+    console.warn(`No se encontro el contenedor`)
   }
 }

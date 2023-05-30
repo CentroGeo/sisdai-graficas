@@ -1,12 +1,12 @@
 import { reactive } from 'vue'
 import RegistroObjetos from './../clases/ResgistroObjetos'
-import SisdaiGrafica from './../clases/SisdaiGrafica'
+import Svg from './../clases/Svg'
 
 const registroGraficas = new RegistroObjetos('grafica')
 
 export default function (idGrafica) {
   function registrarGrafica(_idGrafica) {
-    registroGraficas.registrar(_idGrafica, reactive(new SisdaiGrafica({})))
+    registroGraficas.registrar(_idGrafica, reactive(new Svg({})))
   }
 
   if (idValido(idGrafica)) {

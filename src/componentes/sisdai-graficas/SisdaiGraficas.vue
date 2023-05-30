@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted, reactive, ref, toRefs, watch } from 'vue'
+import { onMounted, onUnmounted, ref, toRefs, watch } from 'vue'
 import { idAleatorio } from '../../utils'
 import usarRegistroGraficas from './../../composables/usarRegistroGraficas'
 import * as valoresPorDefecto from './../../valores/grafica'
@@ -21,28 +21,17 @@ function grafica() {
 }
 
 const { margenes } = toRefs(props)
-grafica().dimensiones.margenes = margenes.value
+grafica().margenes = margenes.value
 watch(margenes, nv => {
-  grafica().dimensiones.margenes = nv
+  grafica().margenes = nv
 })
 
 const contenedorSisdaiGraficas = ref(null)
 
-const dimenciones = reactive({
-  ancho: 0,
-  alto: 0,
-})
-watch(
-  () => dimenciones.ancho,
-  nv => {
-    console.log('ancho cambiado')
-    dimenciones.alto = nv * 0.5
-  }
-)
-
 onMounted(() => {
   console.log('SisdaiGraficas')
-  dimenciones.ancho = contenedorSisdaiGraficas.value.clientWidth
+  grafica().ancho = contenedorSisdaiGraficas.value.clientWidth
+  grafica().alto = valoresPorDefecto.altoVis
 })
 
 onUnmounted(() => {
@@ -60,8 +49,8 @@ onUnmounted(() => {
 
     <figure>
       <svg
-        :width="dimenciones.ancho"
-        :height="dimenciones.alto"
+        :width="grafica().ancho"
+        :height="grafica().alto"
       >
         <g class="eje-x-arriba" />
         <g class="eje-y-derecha" />
@@ -69,7 +58,7 @@ onUnmounted(() => {
         <g
           class="eje-x-abajo"
           :transform="`translate(${margenes.izquierda}, ${
-            dimenciones.alto - margenes.abajo
+            grafica().alto - margenes.abajo
           })`"
         >
           <rect
