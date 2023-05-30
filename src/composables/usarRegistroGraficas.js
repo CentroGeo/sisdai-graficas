@@ -1,52 +1,38 @@
 import { reactive } from 'vue'
-import _usarDimensiones from './usarDimensiones'
+import RegistroObjetos from './../clases/ResgistroObjetos'
+import Svg from './../clases/Svg'
 
-let graficas_registradas = {}
+const registroGraficas = new RegistroObjetos('grafica')
 
 export default function (idGrafica) {
-  const graficaExiste = _idGrafica =>
-    Object.keys(graficas_registradas).includes(_idGrafica)
-
-  function registrar(_idGrafica) {
-    if (!graficaExiste(_idGrafica)) {
-      graficas_registradas[_idGrafica] = reactive({})
-      //console.log(`grafica ${_idGrafica} instanciada`)
-    }
-  }
-  const idGraficaValida = () =>
-    idGrafica !== undefined && typeof idGrafica === typeof String()
-
-  if (idGraficaValida()) {
-    registrar(idGrafica)
+  function registrarGrafica(_idGrafica) {
+    registroGraficas.registrar(_idGrafica, reactive(new Svg({})))
   }
 
-  function borrar(_idGrafica) {
-    const graficaParaBorrar = idGrafica || _idGrafica
-    if (graficaExiste(graficaParaBorrar)) {
-      delete graficas_registradas[graficaParaBorrar]
-      //console.log(`grafica ${graficaParaBorrar} borrada`)
-    }
+  if (idValido(idGrafica)) {
+    registrarGrafica(idGrafica)
   }
+
   function grafica(_idGrafica) {
-    const graficaParaConsultar = idGrafica || _idGrafica
-    if (graficaExiste(graficaParaConsultar)) {
-      return graficas_registradas[graficaParaConsultar]
-    }
-    // eslint-disable-next-line
-    console.warn(`No se encontró la gráfica ${graficaParaConsultar}`)
+    return registroGraficas.objeto(_idGrafica || idGrafica)
   }
-  function usarDimensiones(_idGrafica) {
-    const graficaParaConsultar = idGrafica || _idGrafica
-    if (graficaExiste(graficaParaConsultar)) {
-      return _usarDimensiones(graficaParaConsultar)
-    }
-    // eslint-disable-next-line
-    console.warn(`No se encontró la gráfica ${graficaParaConsultar}`)
+
+  function graficaPromesa(_idGrafica) {
+    return registroGraficas.objetoPromesa(_idGrafica || idGrafica)
   }
+
+  function borrarGrafica(_idGrafica) {
+    registroGraficas.borrar(_idGrafica || idGrafica)
+  }
+
   return {
-    registrar,
-    borrar,
+    registrarGrafica,
     grafica,
-    usarDimensiones,
+    graficaPromesa,
+    borrarGrafica,
   }
+}
+
+function idValido(id) {
+  return id !== undefined && typeof id === typeof String()
 }
