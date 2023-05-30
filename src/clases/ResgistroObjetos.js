@@ -76,7 +76,7 @@ export default class RegistroObjetos {
    * Regresa el valor u objeto de un registro como promesa, util cuando se trata de consultar un
    * objeo cuando este no ha sido registrado aún.
    * @param {String} id del objeto que se desea registrar.
-   * @returns
+   * @returns {Promise}
    */
   objetoPromesa(id) {
     return new Promise(resolve => {

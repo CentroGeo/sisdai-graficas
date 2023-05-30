@@ -13,9 +13,27 @@ class Dimensiones {
     // console.log('margenes', opciones?.margenes)
     this.alto = Number(opciones?.alto) | 0
     this.ancho = Number(opciones?.ancho) | 0
-    this.margenes = new Margenes({
+
+    // this._margenes = new Margenes({
+    //   ...valoresPorDefecto.margenes,
+    //   ...opciones?.margenes,
+    // })
+
+    this.margenes = {
       ...valoresPorDefecto.margenes,
       ...opciones?.margenes,
+    }
+  }
+
+  get margenes() {
+    return this._margenes
+  }
+
+  set margenes(opciones) {
+    // console.log('modificando margenes')
+    this._margenes = new Margenes({
+      ...this._margenes,
+      ...opciones,
     })
   }
 }

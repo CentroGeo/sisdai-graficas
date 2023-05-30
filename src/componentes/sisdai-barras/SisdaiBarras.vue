@@ -1,4 +1,7 @@
 <script setup>
+import { axisBottom } from 'd3-axis'
+import { scaleBand } from 'd3-scale'
+import { select } from 'd3-selection'
 import { onMounted, onUnmounted, ref, shallowRef, toRefs, watch } from 'vue'
 import usarRegistroGraficas from './../../composables/usarRegistroGraficas'
 import { buscarIdContenedorHtmlSisdai } from './../../utils'
@@ -38,33 +41,36 @@ const props = defineProps({
 })
 
 const sisdaiBarras = shallowRef()
-// const { datos, clave_categorias } =
-toRefs(props)
+const { datos, clave_categorias } = toRefs(props)
 
 const margenesSvg = ref({})
-const anchoSvg = ref(0)
-watch(anchoSvg, nv => {
-  console.log('anchoSvg', nv)
-})
+
+function calcularEscalas(grupoVis) {
+  if (!grupoVis && grupoVis.ancho === 0) return
+
+  const escalaBanda = scaleBand()
+    .domain(datos.value?.map(d => d[clave_categorias.value]))
+    .range([0, grupoVis.ancho])
+
+  select(`div#${idGrafica} svg g.eje-x-abajo`).call(axisBottom(escalaBanda))
+}
 
 onMounted(() => {
-  console.log('SisdaiBarras', sisdaiBarras)
+  console.log('SisdaiBarras')
   idGrafica = buscarIdContenedorHtmlSisdai('grafica', sisdaiBarras.value)
 
   // console.log(usarRegistroGraficas().grafica(idGrafica))
 
-  const { ancho, margenes } = usarRegistroGraficas().grafica(idGrafica)
-
-  anchoSvg.value = ancho
-  watch(
-    () => usarRegistroGraficas().grafica(idGrafica).ancho,
-    nv => (anchoSvg.value = nv)
-  )
-
-  margenesSvg.value = margenes
+  margenesSvg.value = usarRegistroGraficas().grafica(idGrafica).margenes
   watch(
     () => usarRegistroGraficas().grafica(idGrafica).margenes,
     nv => (margenesSvg.value = nv)
+  )
+
+  calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+  watch(
+    () => usarRegistroGraficas().grafica(idGrafica).grupoVis,
+    calcularEscalas
   )
 })
 

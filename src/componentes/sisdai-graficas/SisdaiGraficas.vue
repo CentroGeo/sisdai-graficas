@@ -44,6 +44,7 @@ onUnmounted(() => {
     ref="contenedorSisdaiGraficas"
     :sisdai-grafica="id"
     class="contenedor-sisdai-graficas"
+    :id="id"
   >
     <h1>Hola, soy un contenedor de gráficas [{{ id }}]</h1>
 
@@ -60,13 +61,7 @@ onUnmounted(() => {
           :transform="`translate(${margenes.izquierda}, ${
             grafica().alto - margenes.abajo
           })`"
-        >
-          <rect
-            width="20"
-            height="20"
-            style="fill: #ab7c94"
-          />
-        </g>
+        />
         <g class="eje-y-izquierda" />
       </svg>
     </figure>
