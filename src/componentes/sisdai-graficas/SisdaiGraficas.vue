@@ -62,7 +62,10 @@ onUnmounted(() => {
             grafica().alto - margenes.abajo
           })`"
         />
-        <g class="eje-y-izquierda" />
+        <g
+          class="eje-y-izquierda"
+          :transform="`translate(${margenes.izquierda}, ${+margenes.arriba})`"
+        />
       </svg>
     </figure>
   </div>

@@ -35,7 +35,7 @@ export default class Svg {
   set margenes(opciones) {
     this._margenes = new Margenes(opciones)
     this.grupoVis = {
-      alto: 0,
+      alto: this._alto - this.margenes.vertical,
       ancho: this._ancho - this.margenes.horizontal,
     }
   }

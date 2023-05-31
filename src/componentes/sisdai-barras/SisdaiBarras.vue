@@ -1,7 +1,9 @@
 <script setup>
-import { axisBottom } from 'd3-axis'
-import { scaleBand } from 'd3-scale'
+import { max, sum } from 'd3-array'
+import { axisBottom, axisLeft } from 'd3-axis'
+import { scaleBand, scaleLinear } from 'd3-scale'
 import { select } from 'd3-selection'
+
 import { onMounted, onUnmounted, ref, shallowRef, toRefs, watch } from 'vue'
 import usarRegistroGraficas from './../../composables/usarRegistroGraficas'
 import { buscarIdContenedorHtmlSisdai } from './../../utils'
@@ -45,14 +47,28 @@ const { datos, clave_categorias } = toRefs(props)
 
 const margenesSvg = ref({})
 
+const escalaBanda = ref(),
+  escalaLineal = ref()
 function calcularEscalas(grupoVis) {
   if (!grupoVis && grupoVis.ancho === 0) return
 
-  const escalaBanda = scaleBand()
+  escalaBanda.value = scaleBand()
     .domain(datos.value?.map(d => d[clave_categorias.value]))
     .range([0, grupoVis.ancho])
 
-  select(`div#${idGrafica} svg g.eje-x-abajo`).call(axisBottom(escalaBanda))
+  escalaLineal.value = scaleLinear()
+    .domain([
+      0,
+      max(datos.value?.map(d => sum(props.variables.map(dd => d[dd.id])))),
+    ])
+    .range([0, grupoVis.alto])
+
+  select(`div#${idGrafica} svg g.eje-x-abajo`).call(
+    axisBottom(escalaBanda.value)
+  )
+  select(`div#${idGrafica} svg g.eje-y-izquierda`).call(
+    axisLeft(escalaLineal.value)
+  )
 }
 
 onMounted(() => {
