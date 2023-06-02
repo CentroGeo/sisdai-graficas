@@ -83,8 +83,6 @@ function creaBarras() {
   grupoBarras.value = grupoContenedor.value
     .selectAll('g.subcategoria-barras')
     .data(data_apilada.value)
-    .enter()
-    .append('g')
     .join(
       enter => enter.append('g'),
       null, // no update function
@@ -101,7 +99,7 @@ function creaBarras() {
     .join(
       enter => enter.append('rect'),
 
-      join => join,
+      update => update,
       exit => {
         exit.remove()
       }
@@ -110,10 +108,14 @@ function creaBarras() {
   console.log(rectangulos.value)
 }
 function configurarBarras() {
+  console.log('Config Barras')
   rectangulos.value
     .transition()
     .duration(500)
-    .attr('x', d => escalaBanda.value(d.data[clave_categorias.value]))
+    .attr('x', d => {
+      //console.log(d.data[clave_categorias.value])
+      return escalaBanda.value(d.data[clave_categorias.value])
+    })
     .attr('y', d => escalaLineal.value(d[1]))
     .attr('width', escalaBanda.value.bandwidth())
     .attr('height', d => escalaLineal.value(d[0]) - escalaLineal.value(d[1]))
@@ -129,14 +131,15 @@ onMounted(() => {
     () => usarRegistroGraficas().grafica(idGrafica).margenes,
     nv => (margenesSvg.value = nv)
   )
-  creaBarras()
   calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+  creaBarras()
 
   watch(
     () => usarRegistroGraficas().grafica(idGrafica).grupoVis,
     () => {
       calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
       if (usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho > 0) {
+        creaBarras()
         configurarBarras()
       }
     }
