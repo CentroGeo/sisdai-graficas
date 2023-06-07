@@ -97,7 +97,13 @@ function creaBarras() {
     .selectAll('rect.barras')
     .data(d => d)
     .join(
-      enter => enter.append('rect'),
+      enter =>
+        enter
+          .append('rect')
+          .attr('y', escalaLineal.value.range()[0])
+          .attr('x', d => escalaBanda.value(d.data[clave_categorias.value]))
+          .attr('height', 0)
+          .attr('width', escalaBanda.value.bandwidth()),
 
       update => update,
       exit => {
@@ -157,9 +163,5 @@ onUnmounted(() => {})
     })`"
     class="contenedor-barras"
   >
-    <circle
-      r="10"
-      fill="#AB7C94"
-    />
   </g>
 </template>
