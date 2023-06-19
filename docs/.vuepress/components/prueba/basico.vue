@@ -78,6 +78,8 @@ function modificandoVariables() {
         derecha: Number(margen),
         izquierda: Number(margen),
       }"
+      :titulo_eje_y="'título del eje y'"
+      :titulo_eje_x="'título del eje x'"
     >
       <SisdaiBarras
         :datos="datos_dinamicos"
@@ -87,7 +89,7 @@ function modificandoVariables() {
 
     <hr />
 
-    <SisdaiGraficas>
+    <SisdaiGraficas :titulo_eje_y="'título del eje'">
       <SisdaiBarras
         :datos="[
           { categoria: 'aguascalientes', cantidad: 100 },

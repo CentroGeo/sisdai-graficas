@@ -6,7 +6,7 @@ import { select } from 'd3-selection'
 import { stack } from 'd3-shape'
 import { transition } from 'd3-transition'
 
-import { onMounted, onUnmounted, ref, shallowRef, toRefs, watch } from 'vue'
+import { onMounted, ref, shallowRef, toRefs, watch } from 'vue'
 import usarRegistroGraficas from './../../composables/usarRegistroGraficas'
 import { buscarIdContenedorHtmlSisdai } from './../../utils'
 
@@ -30,11 +30,9 @@ const props = defineProps({
           color !== undefined
         )
       })
-
       if (!validado) {
         console.error('El objeto no cumple con las especificaciones')
       }
-
       return validado
     },
   },
@@ -111,10 +109,8 @@ function creaBarras() {
       }
     )
     .attr('class', 'barras')
-  console.log(rectangulos.value)
 }
 function configurarBarras() {
-  console.log('Config Barras')
   rectangulos.value
     .transition()
     .duration(500)
@@ -127,7 +123,6 @@ function configurarBarras() {
     .attr('height', d => escalaLineal.value(d[0]) - escalaLineal.value(d[1]))
 }
 onMounted(() => {
-  console.log('SisdaiBarras')
   idGrafica = buscarIdContenedorHtmlSisdai('grafica', sisdaiBarras.value)
   grupoContenedor.value = select('#' + idGrafica + ' svg g.contenedor-barras')
   // console.log(usarRegistroGraficas().grafica(idGrafica))
@@ -143,6 +138,7 @@ onMounted(() => {
   watch(
     () => usarRegistroGraficas().grafica(idGrafica).grupoVis,
     () => {
+      console.log('grupoVis')
       calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
       if (usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho > 0) {
         creaBarras()
@@ -151,8 +147,6 @@ onMounted(() => {
     }
   )
 })
-
-onUnmounted(() => {})
 </script>
 
 <template>

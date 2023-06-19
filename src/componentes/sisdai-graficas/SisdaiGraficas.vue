@@ -13,6 +13,12 @@ const props = defineProps({
     type: Object,
     default: () => valoresPorDefecto.margenes,
   },
+  titulo_eje_y: {
+    type: String,
+  },
+  titulo_eje_x: {
+    type: String,
+  },
 })
 
 usarRegistroGraficas().registrarGrafica(props.id)
@@ -27,15 +33,24 @@ watch(margenes, nv => {
 })
 
 const contenedorSisdaiGraficas = ref(null)
-
+const espacio_eje_y = ref(0)
 onMounted(() => {
   console.log('SisdaiGraficas')
-  grafica().ancho = contenedorSisdaiGraficas.value.clientWidth
-  grafica().alto = valoresPorDefecto.altoVis
+  obteniendoDimensiones()
+  window.addEventListener('resize', obteniendoDimensiones)
 })
+function obteniendoDimensiones() {
+  espacio_eje_y.value = document.querySelector(
+    `#${props.id}  .titulo-eje-y`
+  ).clientHeight
+  grafica().ancho =
+    contenedorSisdaiGraficas.value.clientWidth - espacio_eje_y.value
+  grafica().alto = valoresPorDefecto.altoVis
+}
 
 onUnmounted(() => {
   usarRegistroGraficas().borrarGrafica(props.id)
+  window.removeEventListener('resize', obteniendoDimensiones)
 })
 </script>
 
@@ -47,33 +62,95 @@ onUnmounted(() => {
     :id="id"
   >
     <h1>Hola, soy un contenedor de gráficas [{{ id }}]</h1>
-
-    <figure>
-      <svg
-        :width="grafica().ancho"
-        :height="grafica().alto"
+    <div
+      class="contenedor-svg-ejes-tooltip"
+      :style="{
+        height: !grafica().alto ? '100%' : grafica().alto + 'px',
+      }"
+    >
+      <div
+        class="contenedor-titulo-eje-y"
+        :style="{
+          height: !grafica().alto ? '100%' : grafica().alto + 'px',
+        }"
       >
-        <g class="eje-x-arriba" />
-        <g class="eje-y-derecha" />
-        <slot />
-        <g
-          class="eje-x-abajo"
-          :transform="`translate(${margenes.izquierda}, ${
-            grafica().alto - margenes.abajo
-          })`"
-        />
-        <g
-          class="eje-y-izquierda"
-          :transform="`translate(${margenes.izquierda}, ${+margenes.arriba})`"
-        />
-      </svg>
-    </figure>
+        <div
+          :style="{
+            width: !grafica().alto ? '100%' : grafica().alto + 'px',
+            transform: `rotate(-90deg)translateX(calc(-100% - ${
+              0.5 * margenes.arriba
+            }px))`,
+          }"
+          class="titulo-eje-y"
+          style="padding: 10px 0 5px 0"
+          v-html="titulo_eje_y"
+        ></div>
+      </div>
+      <figure :style="{ left: espacio_eje_y + 'px' }">
+        <svg
+          :width="grafica().ancho"
+          :height="grafica().alto"
+        >
+          <g class="eje-x-arriba" />
+          <g class="eje-y-derecha" />
+          <slot />
+          <g
+            class="eje-x-abajo"
+            :transform="`translate(${margenes.izquierda}, ${
+              grafica().alto - margenes.abajo
+            })`"
+          />
+          <g
+            class="eje-y-izquierda"
+            :transform="`translate(${margenes.izquierda}, ${+margenes.arriba})`"
+          />
+        </svg>
+      </figure>
+      <div class="contenedor-titulo-eje-x">
+        <div
+          class="titulo-eje-x"
+          v-html="titulo_eje_x"
+        ></div>
+      </div>
+    </div>
   </div>
 </template>
 
-<style>
+<style lang="scss">
 .contenedor-sisdai-graficas {
   width: 100%;
   border: solid 1px tomato;
+  div.contenedor-svg-ejes-tooltip {
+    position: relative;
+    width: 100%;
+    display: inline-block;
+
+    .contenedor-titulo-eje-y {
+      display: inline-block;
+      .titulo-eje-y {
+        display: block;
+        transform-origin: top left;
+        //transform: rotate(-90deg) translate(-100%);
+        font-size: 12px;
+        text-align: center;
+        font-weight: 600;
+      }
+    }
+    div.contenedor-titulo-eje-x {
+      position: relative;
+      width: 100%;
+      .titulo-eje-x {
+        font-size: 12px;
+        text-align: center;
+        font-weight: 600;
+      }
+    }
+
+    figure {
+      position: absolute;
+      top: 0;
+      margin: 0;
+    }
+  }
 }
 </style>
