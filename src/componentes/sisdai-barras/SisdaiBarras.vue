@@ -1,10 +1,12 @@
 <script setup>
-import { watch, ref } from 'vue'
-import { scaleBand } from 'd3-scale'
 import { axisBottom } from 'd3-axis'
-
-import usarDimensiones from '../../composables/usarDimensiones'
+import { scaleBand } from 'd3-scale'
 import { select } from 'd3-selection'
+import { onMounted, onUnmounted, ref, shallowRef, toRefs, watch } from 'vue'
+import usarRegistroGraficas from './../../composables/usarRegistroGraficas'
+import { buscarIdContenedorHtmlSisdai } from './../../utils'
+
+var idGrafica
 
 const props = defineProps({
   datos: {
@@ -37,25 +39,54 @@ const props = defineProps({
     default: 'categoria',
   },
 })
-const { margenes, ancho, id_svg } = usarDimensiones()
-const escalaBanda = ref()
 
-watch(ancho, nv => {
-  if (nv !== 0) {
-    escalaBanda.value = scaleBand()
-      .domain(props.datos.map(d => d[props.clave_categorias]))
-      .range([0, ancho.value])
-    console.log(id_svg.value)
-    select(`div#${id_svg.value} svg g.eje-x`).call(
-      axisBottom(escalaBanda.value)
-    )
-  }
-  //console.log(svg.value)
+const sisdaiBarras = shallowRef()
+const { datos, clave_categorias } = toRefs(props)
+
+const margenesSvg = ref({})
+
+function calcularEscalas(grupoVis) {
+  if (!grupoVis && grupoVis.ancho === 0) return
+
+  const escalaBanda = scaleBand()
+    .domain(datos.value?.map(d => d[clave_categorias.value]))
+    .range([0, grupoVis.ancho])
+
+  select(`div#${idGrafica} svg g.eje-x-abajo`).call(axisBottom(escalaBanda))
+}
+
+onMounted(() => {
+  console.log('SisdaiBarras')
+  idGrafica = buscarIdContenedorHtmlSisdai('grafica', sisdaiBarras.value)
+
+  // console.log(usarRegistroGraficas().grafica(idGrafica))
+
+  margenesSvg.value = usarRegistroGraficas().grafica(idGrafica).margenes
+  watch(
+    () => usarRegistroGraficas().grafica(idGrafica).margenes,
+    nv => (margenesSvg.value = nv)
+  )
+
+  calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+  watch(
+    () => usarRegistroGraficas().grafica(idGrafica).grupoVis,
+    calcularEscalas
+  )
 })
+
+onUnmounted(() => {})
 </script>
 
 <template>
-  <g :transform="`translate(${margenes.izquierda},${margenes.arriba})`">
-    <circle r="10"></circle>
+  <g
+    ref="sisdaiBarras"
+    :transform="`translate(${margenesSvg?.izquierda || 0},${
+      margenesSvg?.arriba || 0
+    })`"
+  >
+    <circle
+      r="10"
+      fill="#AB7C94"
+    />
   </g>
 </template>

@@ -20,7 +20,7 @@
     "editor.formatOnSave": true
   },
   "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
   },
   "[markdown]": {
@@ -37,11 +37,10 @@
   },
   "eslint.validate": ["javascript", "javascriptreact", "vue"],
   "editor.codeActionsOnSave": {
-    "source.organizeImports": false,
+    "source.organizeImports": true,
     "source.fixAll": true,
     "source.fixAll.eslint": true,
     "source.fixAll.stylelint": true
   },
-  "editor.fontLigatures": true,
   "editor.tabSize": 2
 }

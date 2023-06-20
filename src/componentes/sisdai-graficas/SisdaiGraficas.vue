@@ -1,79 +1,76 @@
 <script setup>
-//import { select } from 'd3-selection'
-import { ref, onMounted, onUnmounted, toRefs, watch } from 'vue'
+import { onMounted, onUnmounted, ref, toRefs, watch } from 'vue'
+import { idAleatorio } from '../../utils'
+import usarRegistroGraficas from './../../composables/usarRegistroGraficas'
+import * as valoresPorDefecto from './../../valores/grafica'
 
-import usarRegistroGraficas from '../../composables/usarRegistroGraficas'
 const props = defineProps({
   id: {
     type: String,
-    require: true,
-  },
-  tituloEje: {
-    type: String,
-    default: 'este es el titulo',
-  },
-  tooltip: {
-    type: Function,
+    default: () => idAleatorio(),
   },
   margenes: {
     type: Object,
-    default: () => ({ arriba: 20, abajo: 20, derecha: 20, izquierda: 20 }),
+    default: () => valoresPorDefecto.margenes,
   },
 })
-const { borrar, usarDimensiones } = usarRegistroGraficas(props.id)
 
-const { guardarMargenes, alto, guardarAlto, ancho, guardarAncho } =
-  usarDimensiones(props.id)
+usarRegistroGraficas().registrarGrafica(props.id)
+function grafica() {
+  return usarRegistroGraficas().grafica(props.id)
+}
 
 const { margenes } = toRefs(props)
-
-guardarMargenes(margenes.value)
-watch(margenes, guardarMargenes)
+grafica().margenes = margenes.value
+watch(margenes, nv => {
+  grafica().margenes = nv
+})
 
 const contenedorSisdaiGraficas = ref(null)
-guardarAlto(0)
-guardarAncho(0)
-onMounted(() => {
-  guardarAncho(
-    contenedorSisdaiGraficas.value.clientWidth -
-      margenes.value.izquierda -
-      margenes.value.derecha
-  )
-  console.log(ancho.value)
 
-  guardarAlto(ancho.value * 0.5)
-  console.log(ancho)
+onMounted(() => {
+  console.log('SisdaiGraficas')
+  grafica().ancho = contenedorSisdaiGraficas.value.clientWidth
+  grafica().alto = valoresPorDefecto.altoVis
 })
+
 onUnmounted(() => {
-  borrar()
+  usarRegistroGraficas().borrarGrafica(props.id)
 })
 </script>
 
 <template>
   <div
-    :id="id"
     ref="contenedorSisdaiGraficas"
-    class="grafica"
+    :sisdai-grafica="id"
+    class="contenedor-sisdai-graficas"
+    :id="id"
   >
-    hola soy una grafica
-    <svg
-      :width="ancho + margenes.izquierda + margenes.derecha"
-      :height="alto + margenes.arriba + margenes.abajo"
-    >
-      <slot />
-      <g
-        class="eje-x"
-        :transform="`translate(${margenes.izquierda}, ${
-          alto + margenes.arriba
-        })`"
-      ></g>
-      <g class="eje-y-derecha"></g>
-    </svg>
+    <h1>Hola, soy un contenedor de gráficas [{{ id }}]</h1>
+
+    <figure>
+      <svg
+        :width="grafica().ancho"
+        :height="grafica().alto"
+      >
+        <g class="eje-x-arriba" />
+        <g class="eje-y-derecha" />
+        <slot />
+        <g
+          class="eje-x-abajo"
+          :transform="`translate(${margenes.izquierda}, ${
+            grafica().alto - margenes.abajo
+          })`"
+        />
+        <g class="eje-y-izquierda" />
+      </svg>
+    </figure>
   </div>
 </template>
 
 <style>
-.grafica {
+.contenedor-sisdai-graficas {
   width: 100%;
+  border: solid 1px tomato;
 }
 </style>
