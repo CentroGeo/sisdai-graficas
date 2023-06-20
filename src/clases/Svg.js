@@ -13,7 +13,7 @@ export default class Svg {
 
   set alto(v) {
     this._alto = v
-    this.grupoVis.alto = this._alto - this.margenes.vertical
+    this.calcularGrupoVis()
   }
 
   get alto() {
@@ -22,10 +22,7 @@ export default class Svg {
 
   set ancho(v) {
     this._ancho = v
-    this.grupoVis = {
-      alto: 0,
-      ancho: this._ancho - this.margenes.horizontal,
-    }
+    this.calcularGrupoVis()
   }
 
   get ancho() {
@@ -34,10 +31,7 @@ export default class Svg {
 
   set margenes(opciones) {
     this._margenes = new Margenes(opciones)
-    this.grupoVis = {
-      alto: 0,
-      ancho: this._ancho - this.margenes.horizontal,
-    }
+    this.calcularGrupoVis()
   }
 
   get margenes() {
@@ -50,6 +44,12 @@ export default class Svg {
 
   get grupoVis() {
     return this._grupoVis
+  }
+  calcularGrupoVis() {
+    this.grupoVis = {
+      alto: this._alto - this.margenes.vertical,
+      ancho: this._ancho - this.margenes.horizontal,
+    }
   }
 }
 
