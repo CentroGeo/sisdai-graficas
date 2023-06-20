@@ -61,7 +61,6 @@ onUnmounted(() => {
     class="contenedor-sisdai-graficas"
     :id="id"
   >
-    <h1>Hola, soy un contenedor de gráficas [{{ id }}]</h1>
     <div
       class="contenedor-svg-ejes-tooltip"
       :style="{
