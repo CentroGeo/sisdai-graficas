@@ -11,6 +11,7 @@
         :titulo_eje_y="'Eje vertical (numérico)'"
         :tooltip_activo="false"
         :variables="edos_seleccionados"
+        :alto_vis="500"
     />
   </div>
 </template>

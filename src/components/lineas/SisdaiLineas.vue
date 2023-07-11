@@ -13,7 +13,10 @@
           <div class="tooltip-cifras"></div>
         </div>
       </div>
-      <div class="rotation-wrapper-outer">
+      <div class="rotation-wrapper-outer" :style="{
+          height: alto_vis + 'px',
+        }"
+>
         <div class="rotation-wrapper-inner">
           <div :style="{width: `${alto_vis - margen.arriba - margen.abajo}px`,
                     transform: `rotate(-90deg)translateX(calc(-100% - ${.5 * margen.arriba}px))`}" class="element-to-rotate">
@@ -542,15 +545,19 @@ svg.svg-lineas::v-deep text {
 
 div.contenedor-tooltip-svg {
   position: relative;
+  display: inline-block;
+
   svg{
     z-index: 1;
   }
   .rotation-wrapper-outer {
-    display: table;
+    display: inline-block;
 
     .rotation-wrapper-inner {
-      padding: 50% 0;
+      //padding: 50% 0;
+      
       height: 0;
+      display: block;
 
       .element-to-rotate {
         display: block;
