@@ -1,4 +1,5 @@
-import SisdaiGraficas from './sisdai-graficas'
 import SisdaiBarras from './sisdai-barras'
+import SisdaiCajasBigotes from './sisdai-cajas-bigotes'
+import SisdaiGraficas from './sisdai-graficas'
 
-export { SisdaiGraficas, SisdaiBarras }
+export { SisdaiBarras, SisdaiCajasBigotes, SisdaiGraficas }

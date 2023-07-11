@@ -1,13 +1,14 @@
-import { SisdaiGraficas, SisdaiBarras } from './componentes'
+import { SisdaiBarras, SisdaiCajasBigotes, SisdaiGraficas } from './componentes'
 
 const plugin = {
   install: function (Vue) {
     //UI base
     Vue.use(SisdaiGraficas)
     Vue.use(SisdaiBarras)
+    Vue.use(SisdaiCajasBigotes)
   },
 }
 
-export { SisdaiGraficas, SisdaiBarras }
+export { SisdaiBarras, SisdaiCajasBigotes, SisdaiGraficas }
 
 export default plugin
