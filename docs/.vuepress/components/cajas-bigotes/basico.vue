@@ -5,8 +5,9 @@
         :caja_id="'cajas_bigotes_basica'"
         :datos="datos"
         :titulo_eje_x="'Empresa'"
-        :titulo_eje_y="'Acciones vendidas'"
+        :titulo_eje_y="''"
         :tooltip_activo="false"
+        :alto_vis="500"
         :variables="{'grupos':'nombre_empresa','variable_dist':'acciones_vendidas','color':'#2c7fb8'}"
     />
   </div>

@@ -13,16 +13,23 @@
           <div class="tooltip-cifras"></div>
         </div>
       </div>
-      <div class="rotation-wrapper-outer" :style="{
+      <div
+        class="contenedor-titulo-eje-y"
+        :style="{
           height: alto_vis + 'px',
         }"
->
-        <div class="rotation-wrapper-inner">
-          <div :style="{width: `${alto_vis - margen.arriba - margen.abajo}px`,
-                    transform: `rotate(-90deg)translateX(calc(-100% - ${.5 * margen.arriba}px))`}" class="element-to-rotate">
-            <p style="padding:10px 0 5px 0" v-html="titulo_eje_y"></p>
-          </div>
-        </div>
+      >
+        <div
+          :style="{
+            width: alto_vis + 'px',
+            transform: `rotate(-90deg)translate(calc(-100% - ${
+              0.5 * margen.arriba
+            }px), ${ancho ? 0 : ancho}px)`,
+          }"
+          class="titulo-eje-y"
+          style="padding: 10px 0 5px 0"
+          v-html="titulo_eje_y"
+        ></div>
       </div>
       <svg class="svg-lineas">
         <defs>
@@ -39,10 +46,12 @@
         </g>
         <g class="grupo-frente"></g>
       </svg>
-      <div class="eje-x">
-        <p :style="{
-                    padding: `${margen.abajo +10}px ${margen.derecha}px 0 ${margen.izquierda + ancho_leyenda_y}px `
-                }" v-html="titulo_eje_x"></p>
+      <div class="contenedor-titulo-eje-x">
+        <div
+          class="titulo-eje-x"
+          :style="{paddingLeft:(ancho_leyenda_y + margen.izquierda) +'px'}"
+          v-html="titulo_eje_x"
+        ></div>
       </div>
 
     </div>
@@ -160,6 +169,8 @@ export default {
     return {
       width: 200,
       ancho_leyenda_y: 0,
+      ancho:0,
+
       tooltip_data_seleccionada: Object
 
     }
@@ -245,7 +256,7 @@ export default {
                               : this.formatMonthYear)(date);
     },
     configurandoDimensionesParaSVG() {
-      this.ancho_leyenda_y = document.querySelector("#" + this.linea_id + " .rotation-wrapper-outer .element-to-rotate")
+      this.ancho_leyenda_y = document.querySelector("#" + this.linea_id + " .titulo-eje-y")
           .clientHeight
       this.ancho = document.querySelector(`#${this.linea_id}`).clientWidth - this.margen.derecha - this.margen.izquierda - this.ancho_leyenda_y
       this.alto = this.alto_vis - this.margen.arriba - this.margen.abajo;
@@ -546,39 +557,33 @@ svg.svg-lineas::v-deep text {
 div.contenedor-tooltip-svg {
   position: relative;
   display: inline-block;
+  width: 100%;
 
   svg{
     z-index: 1;
   }
-  .rotation-wrapper-outer {
-    display: inline-block;
-
-    .rotation-wrapper-inner {
-      //padding: 50% 0;
-      
-      height: 0;
-      display: block;
-
-      .element-to-rotate {
+  .contenedor-titulo-eje-y {
+      display: inline-block;
+      width: inherit;
+      .titulo-eje-y {
         display: block;
         transform-origin: top left;
         //transform: rotate(-90deg) translate(-100%);
-        margin-top: -50%;
         font-size: 12px;
         text-align: center;
         font-weight: 600;
       }
     }
-  }
 
-  div.eje-x {
-    position: relative;
-    width: 100%;
-    text-align: center;
-    font-size: 12px;
-    text-align: center;
-    font-weight: 600;
-  }
+    div.contenedor-titulo-eje-x {
+      position: relative;
+      width: 100%;
+      .titulo-eje-x {
+        font-size: 12px;
+        text-align: center;
+        font-weight: 600;
+      }
+    }
 
 
   div.tooltip {

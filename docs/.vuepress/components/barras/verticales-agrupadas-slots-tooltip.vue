@@ -47,9 +47,11 @@
       ]"
       :nombre_barra="'nombre_rectangulos'"
       :nombre_color="'nombre_colores'"
-      titulo_eje_y="Eje vertical (numérico)"
+      titulo_eje_y=""
       titulo_eje_x="Eje horizontal (categórico)"
       :apiladas_o_agrupadas="'agrupadas'"
+      :alto_vis="600"
+      :margen="{arriba: 20, abajo: 20, izquierda: 30, derecha: 20}"
 
     >
       <template slot="encabezado">

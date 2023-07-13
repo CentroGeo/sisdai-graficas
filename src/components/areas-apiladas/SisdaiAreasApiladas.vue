@@ -12,20 +12,23 @@
           <div class="tooltip-cifras"></div>
         </div>
       </div>
-      <div class="rotation-wrapper-outer">
-        <div class="rotation-wrapper-inner">
-          <div
-            :style="{
-              width: `${alto_vis - margen.arriba - margen.abajo}px`,
-              transform: `rotate(-90deg)translateX(calc(-100% - ${
-                0.5 * margen.arriba
-              }px))`,
-            }"
-            class="element-to-rotate"
-          >
-            <p style="padding: 10px 0 5px 0" v-html="titulo_eje_y"></p>
-          </div>
-        </div>
+      <div
+        class="contenedor-titulo-eje-y"
+        :style="{
+          height: alto_vis + 'px',
+        }"
+      >
+        <div
+          :style="{
+            width: alto_vis + 'px',
+            transform: `rotate(-90deg)translate(calc(-100% - ${
+              0.5 * margen.arriba
+            }px), ${ancho ? 0 : ancho}px)`,
+          }"
+          class="titulo-eje-y"
+          style="padding: 10px 0 5px 0"
+          v-html="titulo_eje_y"
+        ></div>
       </div>
       <svg class="svg-streamgraph">
         <g class="grupo-fondo"></g>
@@ -37,15 +40,12 @@
           <line class="guia-x"></line>
         </g>
       </svg>
-      <div class="eje-x">
-        <p
-          :style="{
-            padding: `${margen.abajo + 10}px ${margen.derecha}px 0 ${
-              margen.izquierda + ancho_leyenda_y
-            }px `,
-          }"
+      <div class="contenedor-titulo-eje-x">
+        <div
+          class="titulo-eje-x"
+          :style="{paddingLeft:(ancho_leyenda_y + margen.izquierda) +'px'}"
           v-html="titulo_eje_x"
-        ></p>
+        ></div>
       </div>
     </div>
     <slot name="pie"></slot>
@@ -145,6 +145,8 @@ export default {
   },
   data: () => ({
     ancho_leyenda_y: 0,
+    ancho:0,
+
     tooltip_data_seleccionada: Object,
   }),
   mounted() {
@@ -256,7 +258,7 @@ export default {
       this.ancho_leyenda_y = document.querySelector(
         "#" +
           this.areas_apiladas_id +
-          " .rotation-wrapper-outer .element-to-rotate"
+          " .titulo-eje-y"
       ).clientHeight;
 
       this.ancho =
@@ -460,36 +462,33 @@ svg.svg-streamgraph::v-deep text {
 
 div.contenedor-tooltip-svg {
   position: relative;
+  width: 100%;
+  display: inline-block;
   svg{
     z-index: 1;
   }
-  .rotation-wrapper-outer {
-    display: table;
-
-    .rotation-wrapper-inner {
-      padding: 50% 0;
-      height: 0;
-
-      .element-to-rotate {
+  .contenedor-titulo-eje-y {
+      display: inline-block;
+      width: inherit;
+      .titulo-eje-y {
         display: block;
         transform-origin: top left;
         //transform: rotate(-90deg) translate(-100%);
-        margin-top: -50%;
         font-size: 12px;
         text-align: center;
         font-weight: 600;
       }
     }
-  }
 
-  div.eje-x {
-    position: relative;
-    width: 100%;
-    text-align: center;
-    font-size: 12px;
-    text-align: center;
-    font-weight: 600;
-  }
+    div.contenedor-titulo-eje-x {
+      position: relative;
+      width: 100%;
+      .titulo-eje-x {
+        font-size: 12px;
+        text-align: center;
+        font-weight: 600;
+      }
+    }
 
   div.tooltip {
     color: #fff;
