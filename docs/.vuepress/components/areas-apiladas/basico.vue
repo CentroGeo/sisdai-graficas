@@ -2,7 +2,7 @@
   <div>
 
     <SisdaiAreasApiladas
-        :alto_vis="300"
+        :alto_vis="500"
         :datos="datos_grafica"
         :tooltip_activo="false"
         :variables='[
