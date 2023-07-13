@@ -74,7 +74,7 @@ libertad de customizar el componente al modificarlos.
 * `alto_vis` : (_Number_) Altura del svg, 195 por defecto.
 * `tooltip_activo`: (_Boolean_) `true` por default lo que hace que se muestre el tooltip.
 * `textoTooltip`: (_Function_) que debe regresar el texto que queremos en el tooltip. Para usar los datos de la barra
-  más cercana al cursor, podemos acceder mediante `this.$refs['barras1'].tooltip_data_seleccionada` suponiendo que
+  más cercana al cursor, podemos acceder mediante `this.$refs['barras1'] .tooltip_data_seleccionada` suponiendo que
   se agrega al componente `ref="barras1"`.
 
 * `orientacion`: (_String_) Especifica si se desea que las barras estén verticales u horizontales. Los valores que admite son `'vertical'` u `'horizontal'` y por defecto es `'vertical'`

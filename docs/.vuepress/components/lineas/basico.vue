@@ -5,12 +5,13 @@
         :conversionTemporal="conversionTemporal"
         :datos="datos"
         :linea_id="'lineas1'"
-        :margen="{arriba: 10, abajo: 20, izquierda: 30, derecha: 30}"
+        :margen="{arriba: 10, abajo: 40, izquierda: 30, derecha: 30}"
         :nombre_columna_horizontal="'fecha'"
         :titulo_eje_x="'Eje horizontal (temporal)'"
         :titulo_eje_y="'Eje vertical (numérico)'"
         :tooltip_activo="false"
         :variables="edos_seleccionados"
+        :alto_vis="500"
     />
   </div>
 </template>

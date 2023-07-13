@@ -14,23 +14,35 @@
           <div class="tooltip-cifras"></div>
         </div>
       </div>
-      <div class="rotation-wrapper-outer">
-        <div class="rotation-wrapper-inner">
-          <div
-              :style="{width: `${alto_vis - margen.arriba - margen.abajo}px`, transform: `rotate(-90deg)translateX(calc(-100% - ${.5 * margen.arriba}px))`}"
-              class="element-to-rotate">
-            <p style="padding:10px 0 5px 0" v-html="titulo_eje_y"></p>
-          </div>
-        </div>
+      <div
+        class="contenedor-titulo-eje-y"
+        :style="{
+          height: alto_vis + 'px',
+        }"
+      >
+        <div
+          :style="{
+            width: alto_vis + 'px',
+            transform: `rotate(-90deg)translate(calc(-100% - ${
+              0.5 * margen.arriba
+            }px), ${ancho ? 0 : ancho}px)`,
+          }"
+          class="titulo-eje-y"
+          style="padding: 10px 0 5px 0"
+          v-html="titulo_eje_y"
+        ></div>
       </div>
       <svg class="svg-cajas">
         <defs></defs>
         <g class="contenedor-fondo"></g>
         <g class="gupo-contenedor-de-cajas"></g>
       </svg>
-      <div class="eje-x">
-        <p :style="{padding: `${margen.abajo + 10}px ${margen.derecha}px 0 ${margen.izquierda}px `}"
-           v-html="titulo_eje_x"></p>
+      <div class="contenedor-titulo-eje-x">
+        <div
+          class="titulo-eje-x"
+          :style="{paddingLeft:(ancho_leyenda_y + margen.izquierda) +'px'}"
+          v-html="titulo_eje_x"
+        ></div>
       </div>
     </div>
     <slot name="pie"></slot>
@@ -51,7 +63,7 @@ export default {
     caja_id: String,
     datos: Array,
     variables: Object,
-    titulo_eje_y: String,
+    titulo_eje_y: {default: "",type:String},
     titulo_eje_x: String,
     ancho_tooltip: {
       type: Number,
@@ -60,7 +72,7 @@ export default {
     margen: {
       type: Object,
       default: function () {
-        return {arriba: 30, abajo: 40, izquierda: 40, derecha: 20}
+        return {arriba: 30, abajo: 20, izquierda: 40, derecha: 20}
       }
     },
     alto_vis: {
@@ -117,7 +129,8 @@ export default {
     return {
       orden_inicial: true,
       zoom_activo: "hidden",
-      ancho_leyenda_y: 0
+      ancho_leyenda_y: 0,
+      ancho:0,
     }
   },
   mounted() {
@@ -149,7 +162,7 @@ export default {
   },
   methods: {
     configurandoDimensionesParaSVG() {
-      this.ancho_leyenda_y = document.querySelector("#" + this.caja_id + " .rotation-wrapper-outer .element-to-rotate")
+      this.ancho_leyenda_y = document.querySelector("#" + this.caja_id + " .titulo-eje-y")
           .clientHeight
       this.width = document.querySelector("#" + this.caja_id + " .contenedor-tooltip-svg").clientWidth - this.margen.izquierda - this.margen.derecha - this.ancho_leyenda_y;
 
@@ -447,37 +460,34 @@ svg.svg-cajas ::v-deep text {
 div.contenedor-tooltip-svg {
   width: 100%;
   position: relative;
+  display: inline-block;
+
   svg{
     z-index: 1;
   }
 
-  .rotation-wrapper-outer {
-    display: table;
-
-    .rotation-wrapper-inner {
-      padding: 50% 0;
-      height: 0;
-
-      .element-to-rotate {
+  .contenedor-titulo-eje-y {
+      display: inline-block;
+      width: inherit;
+      .titulo-eje-y {
         display: block;
         transform-origin: top left;
         //transform: rotate(-90deg) translate(-100%);
-        margin-top: -50%;
         font-size: 12px;
         text-align: center;
         font-weight: 600;
       }
     }
-  }
 
-  div.eje-x {
-    position: relative;
-    width: 100%;
-    text-align: center;
-    font-size: 12px;
-    text-align: center;
-    font-weight: 600;
-  }
+    div.contenedor-titulo-eje-x {
+      position: relative;
+      width: 100%;
+      .titulo-eje-x {
+        font-size: 12px;
+        text-align: center;
+        font-weight: 600;
+      }
+    }
 
 
   div.tooltip {
