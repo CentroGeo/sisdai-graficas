@@ -264,11 +264,12 @@ export default {
     mostrarTooltip(evento) {
       let x = evento.layerX - 0.5 * this.ancho;
       let y = evento.layerY - 0.5 * this.alto;
-      let angulo = Math.atan(y / x) + 0.5 * Math.PI;
+      let ang = Math.atan(y / x) + 0.5 * Math.PI;
+      let angulo
       if (x >= 0) {
-        angulo = angulo;
+        angulo = ang;
       } else {
-        angulo = angulo + Math.PI;
+        angulo = ang + Math.PI;
       }
 
       this.segmentos.style("fill-opacity", 0.25);
