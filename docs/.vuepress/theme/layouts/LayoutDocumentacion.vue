@@ -1,5 +1,5 @@
 <script setup>
-import { useRoute } from 'vue2-helpers/vue-router'
+import { useRoute } from 'vue-router/composables'
 import store from './../../store'
 
 import { onMounted, ref, watch } from 'vue'
@@ -85,6 +85,11 @@ function actualizaContenidoIndice() {
                 >
               </li>
               <li>
+                <router-link to="/documentacion/graficas">
+                  SisdaiGraficas</router-link
+                >
+              </li>
+              <li>
                 <router-link to="/documentacion/barras">
                   SisdaiBarras</router-link
                 >
@@ -134,7 +139,7 @@ function actualizaContenidoIndice() {
       </div>
     </div>
 
-    <SisdaiPiePaginaConacyt />
+    <SisdaiPiePaginaConahcyt />
 
     <SisdaiPiePaginaGobMx />
 

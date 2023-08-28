@@ -88,19 +88,5 @@ function modificandoVariables() {
     </SisdaiGraficas>
 
     <hr />
-
-    <SisdaiGraficas :titulo_eje_y="'título del eje'">
-      <SisdaiBarras
-        :datos="[
-          { categoria: 'aguascalientes', cantidad: 100 },
-          { categoria: 'baja_cal', cantidad: 80 },
-          { categoria: 'baja_cal_sur', cantidad: 20 },
-          { categoria: 'zacatecas', cantidad: 20 },
-        ]"
-        :variables="[
-          { id: 'cantidad', nombre_subcategoria: '$ pesos', color: 'red' },
-        ]"
-      />
-    </SisdaiGraficas>
   </div>
 </template>

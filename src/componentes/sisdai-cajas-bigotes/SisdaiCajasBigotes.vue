@@ -1,5 +1,5 @@
 <script setup>
-import { max, sum, rollup } from 'd3-array'
+import { max, rollup, sum } from 'd3-array'
 import { axisBottom, axisLeft } from 'd3-axis'
 import { scaleBand, scaleLinear } from 'd3-scale'
 import { select } from 'd3-selection'
@@ -23,8 +23,12 @@ const props = defineProps({
     validator(value) {
       // debe tener: id, nombre_subcategoria, color
 
-      const validado = value.some(({ variable_distribucion, color }) => {
-        return variable_distribucion !== undefined || color !== undefined
+      const validado = value.some(({ id, nombre_subcategoria, color }) => {
+        return (
+          id !== undefined ||
+          nombre_subcategoria !== undefined ||
+          color !== undefined
+        )
       })
       if (!validado) {
         console.error('El objeto no cumple con las especificaciones')
