@@ -1,19 +1,21 @@
 # sisdai-graficas
 
-Esta es una biblioteca de visualización de datos que forma parte del Sistema de Diseño y Accesibilidad para la Investigación, proyecto que potencia el impacto social de la investigación al promover la autonomía e independencia tecnológica con el uso de componentes de software libre. Esta biblioteca está alineada a [SALSA](https://salsa.crip.conacyt.mx/).
+Esta es una biblioteca de visualización de datos que forma parte del Sistema de
+Diseño y Accesibilidad para la Investigación ([Sisdai](https://sisdai.conahcyt.mx)).
 
 > **_Limitación de responsabilidad_**
-> 
-> El presente es un proyecto en construcción, por tanto ni el equipo del Sisdai 
-> ni el de Salsa son responsables del uso y contenido del presente recurso, 
-> toda vez que se trata de una versión en su modalidad prueba, y no de una 
-> versión pública, por lo que una vez que sea lanzada la versión final, 
+>
+> El presente es un proyecto en construcción, por tanto el equipo del Sisdai
+> no es responsable del uso y contenido del presente recurso,
+> toda vez que se trata de una versión en su modalidad prueba, y no de una
+> versión liberada al público, por lo que una vez que sea lanzada la versión
+> final,
 > se invita a la persona usuaria a consultarla y validar sus requisitos.
 
 ## Dependencias e instalación
 
 Las gráficas de esta biblioteca están desarrolladas como [componentes](https://es.vuejs.org/v2/guide/components.html) de
-[Vue.js](https://es.vuejs.org/) usando [D3.js](https://d3js.org/), por lo tanto se recomienda a la persona usuaria tener 
+[Vue.js](https://es.vuejs.org/) usando [D3.js](https://d3js.org/), por lo tanto se recomienda a la persona usuaria tener
 conocimientos básicos de lo anterior así como de desarrollo en [JavaScript](https://www.javascript.com/).
 
 Para instalar la biblioteca se puede hacer:
@@ -23,7 +25,7 @@ Para instalar la biblioteca se puede hacer:
 Por medio de [npm](https://www.npmjs.com/) ejecutar la siguiente línea de comando en la terminal de la computadora,
 
 ```shell
-npm install https://github.com/salsa-community/sisdai-graficas.git
+npm install https://codigo.conahcyt.mx/sisdai/sisdai-graficas.git
 ```
 
 **Opción B**
@@ -37,6 +39,7 @@ Una vez clonado el repositorio, se puede instalar en la terminal con `npm` ejecu
 ```shell
 npm install ruta_al_repositorio/sisdai-graficas
 ```
+
 (Sustituir `ruta_al_repositorio` por la ruta en local de la persona usuaria)
 
 ## Inicio rápido
@@ -44,7 +47,7 @@ npm install ruta_al_repositorio/sisdai-graficas
 ### Registrando el componente en un proyecto de Vue
 
 Para poder utilizar un componente de visualización de esta biblioteca, es necesario importar y registrarlo en el
-archivo `src/main.js` del proyecto (de Vue) a trabajar, por ejemplo en el siguiente script se está registrando e 
+archivo `src/main.js` del proyecto (de Vue) a trabajar, por ejemplo en el siguiente script se está registrando e
 importando el componente de `SisdaiBarras` de esta biblioteca (que construye una gráfica de barras).
 
 ```javascript
@@ -66,40 +69,48 @@ Una vez instalado y registrado el componente, ya se puede usar dentro de un `<te
 de Vue como se muestra a continuación.
 
 ```vue
+
 <SisdaiBarras
-  :barras_id="'mi_proyecto_de_barras'"
-  :datos="
+    :barras_id="'mi_proyecto_de_barras'"
+    :datos="
     [
       {nombre_rectangulos:'Nombre de variable 1', cantidad_1:120, cantidad_2:40, cantidad_3:40 },
 	  {nombre_rectangulos:'Nombre de variable 2', cantidad_1:100, cantidad_2:30, cantidad_3:40 },
 	  {nombre_rectangulos:'Nombre de variable 3', cantidad_1:20, cantidad_2:130, cantidad_3:540 },
 	  {nombre_rectangulos:'Nombre de variable 4', cantidad_1:20, cantidad_2:130, cantidad_3:540 },
 	]"
-  :variables='
+    :variables='
     [
 	  {"id":"cantidad_1","nombre_colores":"cantidad 1","color":"yellow"},
 	  {"id":"cantidad_2","nombre_colores":"cantidad 2","color":"magenta"},
 	  {"id":"cantidad_3","nombre_colores":"cantidad 3","color":"blue"},
 	]'
-  :nombre_barra="'nombre_rectangulos'"
-  :nombre_color="'nombre_colores'"
+    :nombre_barra="'nombre_rectangulos'"
+    :nombre_color="'nombre_colores'"
 />
 ```
 
 En el script anterior se especifican los parámetros del componente `SisdaiBarras` como pueden ser el `id`, los
-datos que se usarán para construir las barras, las variables para construir la gráfica, etc. Una lista completa de los 
-parámetros usados en cada uno de los componentes de visualización se puede hallar en la [documentación en línea](https://sisdai.conacyt.mx/).
-
-## Licencia
+datos que se usarán para construir las barras, las variables para construir la gráfica, etc. Una lista completa de los
+parámetros usados en cada uno de los componentes de visualización se puede hallar en
+la [documentación en línea](https://sisdai.conahcyt.mx/).
 
 **SOFTWARE LIBRE Y ESTÁNDARES ABIERTOS**
 
-Sisdai está alineado a las disposiciones establecidas por la Coordinación de Estrategia Digital Nacional (DOF: 06/09/2021) en donde se estipula que las "políticas y disposiciones tienen como objetivo fortalecer el uso del software libre y los estándares abiertos, fomentar el desarrollo de aplicaciones institucionales con utilidad pública, lograr la autonomía, soberanía e independencia tecnológicas dentro de la APF". En el artículo 63 se explicita que "cuando se trate de desarrollos basados en software libre, se respetarán las condiciones de su licenciamiento original [...]", en este sentido este proyecto está alineado a lo que se define desde [SALSA](https://salsa.crip.conacyt.mx/).
+Sisdai y sisdai-graficas están alineadas a las disposiciones establecidas por
+la Coordinación de Estrategia Digital Nacional (
+DOF:06/09/2021) en donde se estipula que las "políticas y disposiciones tienen
+como objetivo fortalecer el uso del software
+libre y los estándares abiertos, fomentar el desarrollo de aplicaciones
+institucionales con utilidad pública, lograr la
+autonomía, soberanía e independencia tecnológicas dentro de la APF". En el
+artículo 63 se explicita que "cuando se trate
+de desarrollos basados en software libre, se respetarán las condiciones de su
+licenciamiento original [...]".
 
 ## Contribuir
 
-Para contribuir al proyecto, se pide que se haga por medio de los lineamientos de contribución de SALSA que se 
-pueden consultar [aquí](https://salsa.crip.conacyt.mx/guidelines/contribute/).
-
-*En los lineamientos de contribución se lista la rama _master_ como principal, sin embargo en este proyecto, dicha 
-rama es _main_.
+Para contribuir al proyecto, se pide que se haga tomando en cuenta la guía de
+contribución
+de [git](https://git-scm.com/book/es/v2/Git-en-entornos-distribuidos-Contribuyendo-a-un-Proyecto)
+.
