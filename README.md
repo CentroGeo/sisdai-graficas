@@ -95,6 +95,8 @@ datos que se usarán para construir las barras, las variables para construir la 
 parámetros usados en cada uno de los componentes de visualización se puede hallar en
 la [documentación en línea](https://sisdai.conahcyt.mx/).
 
+## Licencia
+
 **SOFTWARE LIBRE Y ESTÁNDARES ABIERTOS**
 
 Sisdai y sisdai-graficas están alineadas a las disposiciones establecidas por
