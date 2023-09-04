@@ -9,8 +9,6 @@ El componente de `<SisdaiGraficas>` consiste en un contenedor en el cual se pued
 
 ## Propiedades
 
-### Opcionales
-
 - `id`: (_String_) Por default genera un string alfanumérico aleatorio que funciona como identificado único. Se puede ingresar un string específico si se desea.
 - `margenes`: (_Object_) Por default es `{ arriba: 20, abajo: 20, derecha: 20, izquierda: 30 }` y se puede ingresar un objeto con las mismas claves, pero valores distintos. Sus valores idican la los márgenes que habrá entre los bordes del svg y los límites de la(s) graficas que se agreguen dentro de dicho svg respectivamente.
 - `titulo_eje_y`: (_String_) Nombre del eje vertical

@@ -3,14 +3,12 @@ layout: LayoutDocumentacion
 sectionName: Documentación
 ---
 
-# Barras
+# SisdaiBarras
 
 A continuación se describe la utilización del componente de visualización `<SisdaiBarras/>` para construir un gráfico de
 barras. Este componente puede ser utilizado para crear barras simples o apiladas.
 
 ## Propiedades
-
-### Obligatorios
 
 - `datos`: (_Array_) Base de datos a visualizar, consiste en una arreglo de objetos en dónde cada objeto corresponde a una categoría principal y contiene la información necesaria para construir una barra, una barra conformada por otros rectángulos apilados, o bien, un conjunto de barras agupadas
 
@@ -85,10 +83,7 @@ barras. Este componente puede ser utilizado para crear barras simples o apiladas
 > - `nombre_subcategoria`: su valor es un string que da más información sobre el id y es un _String_ que puede ser empleado para globos de información
 > - `color`: Es un _String_ que especifica en rgb, hexagesimal u otro formato reconoconocido por css que indicará el color que tomará cada subcategoría
 
-### Opcionales
-
 - `clave_categorias`: (_String_) Indica la clave empleada para las categorías principales, por default es `"categoria"` y con el ejemplo anterior de `datos` podría no especificarse esta propiedad, pero si `datos` emplea otra clave para la categoría principal, esta propiedad tendrá que especificarse
 
 <utils-ejemplo-doc ruta="barras/basico.vue"/>
 <utils-ejemplo-doc ruta="barras/modificando-datos.vue"/>
-```

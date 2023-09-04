@@ -1,0 +1,51 @@
+<script setup>
+import cajasbigotesejemplos1 from 'cajas_bigotes_ejemplo_1.json'
+import cajasbigotesejemplos2 from 'cajas_bigotes_ejemplo_2.json'
+import { ref } from 'vue'
+const base = ref(1)
+const datos_dinamicos = ref(cajasbigotesejemplos1)
+const variables_dinamicas = ref({
+  id: 'acciones_vendidas',
+  nombre_subcategoria: 'Acciones vendidas',
+  color: 'red',
+})
+function alternaDatos() {
+  console.log('alternando')
+  if (base.value == 1) {
+    variables_dinamicas.value = {
+      id: 'metrica',
+      nombre_subcategoria: 'Metrica',
+      color: '#2c7fb8',
+    }
+    datos_dinamicos.value = cajasbigotesejemplos2
+
+    base.value = 2
+  } else {
+    variables_dinamicas.value = {
+      id: 'acciones_vendidas',
+      nombre_subcategoria: 'Acciones vendidas',
+      color: 'red',
+    }
+    datos_dinamicos.value = cajasbigotesejemplos1
+
+    base.value = 1
+  }
+}
+</script>
+
+<template>
+  <div>
+    <button @click="alternaDatos">Alternar datos</button>
+    <hr />
+    <SisdaiGraficas
+      :titulo_eje_y="'título del eje y'"
+      :titulo_eje_x="'título del eje x'"
+    >
+      <SisdaiCajasBigotes
+        :datos="datos_dinamicos"
+        :variables="variables_dinamicas"
+        :clave_categorias="base == 1 ? 'nombre_empresa' : 'nombre_categoria'"
+      />
+    </SisdaiGraficas>
+  </div>
+</template>

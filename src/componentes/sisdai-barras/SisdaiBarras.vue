@@ -22,7 +22,6 @@ const props = defineProps({
     require: true,
     validator(value) {
       // debe tener: id, nombre_subcategoria, color
-
       const validado = value.some(({ id, nombre_subcategoria, color }) => {
         return (
           id !== undefined ||
@@ -114,10 +113,7 @@ function configurarBarras() {
   rectangulos.value
     .transition()
     .duration(500)
-    .attr('x', d => {
-      //console.log(d.data[clave_categorias.value])
-      return escalaBanda.value(d.data[clave_categorias.value])
-    })
+    .attr('x', d => escalaBanda.value(d.data[clave_categorias.value]))
     .attr('y', d => escalaLineal.value(d[1]))
     .attr('width', escalaBanda.value.bandwidth())
     .attr('height', d => escalaLineal.value(d[0]) - escalaLineal.value(d[1]))
@@ -125,7 +121,6 @@ function configurarBarras() {
 onMounted(() => {
   idGrafica = buscarIdContenedorHtmlSisdai('grafica', sisdaiBarras.value)
   grupoContenedor.value = select('#' + idGrafica + ' svg g.contenedor-barras')
-  // console.log(usarRegistroGraficas().grafica(idGrafica))
 
   margenesSvg.value = usarRegistroGraficas().grafica(idGrafica).margenes
   watch(
