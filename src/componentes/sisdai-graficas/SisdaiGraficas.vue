@@ -12,6 +12,19 @@ const props = defineProps({
   margenes: {
     type: Object,
     default: () => valoresPorDefecto.margenes,
+    validator(objeto) {
+      // Debe tener las claves arriba, abajo, derecha e izquierda
+      const validado =
+        'arriba' in objeto &&
+        'abajo' in objeto &&
+        'derecha' in objeto &&
+        'izquierda' in objeto
+
+      if (!validado) {
+        console.error('El objeto no cumple con las especificaciones', objeto)
+      }
+      return validado
+    },
   },
   titulo_eje_y: {
     type: String,
@@ -19,13 +32,20 @@ const props = defineProps({
   titulo_eje_x: {
     type: String,
   },
+  ancho: {
+    type: Number,
+  },
+  alto: {
+    type: Number,
+  },
 })
+const ancho_grafica = ref()
+const alto_grafica = ref()
 
 usarRegistroGraficas().registrarGrafica(props.id)
-function grafica() {
+const grafica = () => {
   return usarRegistroGraficas().grafica(props.id)
 }
-
 const { margenes } = toRefs(props)
 grafica().margenes = margenes.value
 watch(margenes, nv => {
@@ -43,11 +63,21 @@ function obteniendoDimensiones() {
   espacio_eje_y.value = document.querySelector(
     `#${props.id}  .titulo-eje-y`
   ).clientHeight
-  grafica().ancho =
-    contenedorSisdaiGraficas.value.clientWidth - espacio_eje_y.value
-  grafica().alto = valoresPorDefecto.altoVis
-}
+  grafica().ancho = props.ancho
+    ? props.ancho
+    : contenedorSisdaiGraficas.value.clientWidth - espacio_eje_y.value
+  grafica().alto = props.alto ? props.alto : valoresPorDefecto.altoVis
 
+  ancho_grafica.value = props.ancho
+    ? props.ancho
+    : contenedorSisdaiGraficas.value.clientWidth - espacio_eje_y.value
+  alto_grafica.value = props.alto ? props.alto : valoresPorDefecto.altoVis
+}
+defineExpose({
+  ancho_grafica,
+  alto_grafica,
+  grafica,
+})
 onUnmounted(() => {
   usarRegistroGraficas().borrarGrafica(props.id)
   window.removeEventListener('resize', obteniendoDimensiones)
@@ -77,7 +107,7 @@ onUnmounted(() => {
           :style="{
             width: !grafica().alto ? '100%' : grafica().alto + 'px',
             transform: `rotate(-90deg)translateX(calc(-100% - ${
-              0.5 * margenes.arriba
+              0.5 * (margenes.arriba - margenes.abajo)
             }px))`,
           }"
           class="titulo-eje-y"
@@ -118,7 +148,6 @@ onUnmounted(() => {
 <style lang="scss">
 .contenedor-sisdai-graficas {
   width: 100%;
-  border: solid 1px tomato;
   div.contenedor-svg-ejes-tooltip {
     position: relative;
     width: 100%;

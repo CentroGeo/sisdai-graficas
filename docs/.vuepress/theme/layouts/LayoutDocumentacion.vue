@@ -1,8 +1,8 @@
 <script setup>
-import { useRoute } from 'vue2-helpers/vue-router'
+import { useRoute } from 'vue-router/composables'
 import store from './../../store'
 
-import { ref, onMounted, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 const lista_elementos = ref([])
 
 const route = useRoute()
@@ -84,6 +84,21 @@ function actualizaContenidoIndice() {
                   Introducción</router-link
                 >
               </li>
+              <li>
+                <router-link to="/documentacion/graficas">
+                  SisdaiGraficas</router-link
+                >
+              </li>
+              <li>
+                <router-link to="/documentacion/barras">
+                  SisdaiBarras</router-link
+                >
+              </li>
+              <li>
+                <router-link to="/documentacion/cajas-bigotes">
+                  SisdaiCajasBigotes</router-link
+                >
+              </li>
             </ul>
             <a
               href="https://github.com/salsa-community/sisdai-graficas"
@@ -124,7 +139,7 @@ function actualizaContenidoIndice() {
       </div>
     </div>
 
-    <SisdaiPiePaginaConacyt />
+    <SisdaiPiePaginaConahcyt />
 
     <SisdaiPiePaginaGobMx />
 

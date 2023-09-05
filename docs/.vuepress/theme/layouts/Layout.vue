@@ -46,7 +46,7 @@ import store from './../../store'
       <Content />
     </main>
 
-    <SisdaiPiePaginaConacyt />
+    <SisdaiPiePaginaConahcyt />
 
     <SisdaiPiePaginaGobMx />
 

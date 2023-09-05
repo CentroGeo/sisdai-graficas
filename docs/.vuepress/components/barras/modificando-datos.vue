@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import lista_estados from './lista-estados.json'
 const margen = ref(30)
+const acomodo = ref('apiladas')
 const cantidad_variables = ref(1)
 const datos_dinamicos = ref([
   { categoria: 'aguascalientes', cantidad_1: 100, cantidad_2: 100 },
@@ -69,6 +70,13 @@ function modificandoVariables() {
     <label for="margenes">margen: {{ margen }}</label>
     <button @click="modificandoDatos">Modifica datos</button>
     <button @click="modificandoVariables">Modifica variables</button>
+    <button
+      @click="
+        acomodo == 'apiladas' ? (acomodo = 'agrupadas') : (acomodo = 'apiladas')
+      "
+    >
+      {{ acomodo == 'apiladas' ? 'Agrupar' : 'Apilar' }}
+    </button>
 
     <hr />
     <SisdaiGraficas
@@ -84,23 +92,10 @@ function modificandoVariables() {
       <SisdaiBarras
         :datos="datos_dinamicos"
         :variables="variables_dinamicas"
+        :acomodo="acomodo"
       />
     </SisdaiGraficas>
 
     <hr />
-
-    <SisdaiGraficas :titulo_eje_y="'título del eje'">
-      <SisdaiBarras
-        :datos="[
-          { categoria: 'aguascalientes', cantidad: 100 },
-          { categoria: 'baja_cal', cantidad: 80 },
-          { categoria: 'baja_cal_sur', cantidad: 20 },
-          { categoria: 'zacatecas', cantidad: 20 },
-        ]"
-        :variables="[
-          { id: 'cantidad', nombre_subcategoria: '$ pesos', color: 'red' },
-        ]"
-      />
-    </SisdaiGraficas>
   </div>
 </template>

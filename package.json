@@ -19,7 +19,7 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "d3": "^7.8.2",
-    "sisdai-css": "github:salsa-community/sisdai-css#v0.37.3",
+    "sisdai-css": "github:salsa-community/sisdai-css#v0.39.0",
     "vis-timeline": "^7.7.0",
     "vue": "^2.7.14"
   },
@@ -39,9 +39,8 @@
     "raw-loader": "^4.0.2",
     "sass": "^1.57.1",
     "sass-loader": "^10.4.1",
-    "sisdai-componentes": "github:salsa-community/sisdai-componentes#v0.13.6",
+    "sisdai-componentes": "github:salsa-community/sisdai-componentes#v2.3.3",
     "vue-template-compiler": "^2.7.14",
-    "vue2-helpers": "^2.1.1",
     "vuepress": "^1.9.8",
     "vuepress-html-webpack-plugin": "^3.2.0",
     "vuex": "^3.6.2"
