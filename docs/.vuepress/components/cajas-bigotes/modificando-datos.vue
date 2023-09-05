@@ -1,7 +1,7 @@
 <script setup>
-import cajasbigotesejemplos1 from 'cajas_bigotes_ejemplo_1.json'
-import cajasbigotesejemplos2 from 'cajas_bigotes_ejemplo_2.json'
 import { ref } from 'vue'
+import cajasbigotesejemplos1 from './cajas_bigotes_ejemplo_1.json'
+import cajasbigotesejemplos2 from './cajas_bigotes_ejemplo_2.json'
 const base = ref(1)
 const datos_dinamicos = ref(cajasbigotesejemplos1)
 const variables_dinamicas = ref({

@@ -10,6 +10,8 @@ barras. Este componente puede ser utilizado para crear barras simples o apiladas
 
 ## Propiedades
 
+### Obligatorias
+
 - `datos`: (_Array_) Base de datos a visualizar, consiste en una arreglo de objetos en dónde cada objeto corresponde a una categoría principal y contiene la información necesaria para construir una barra, una barra conformada por otros rectángulos apilados, o bien, un conjunto de barras agupadas
 
 > Ejemplo de `datos`:
@@ -84,6 +86,14 @@ barras. Este componente puede ser utilizado para crear barras simples o apiladas
 > - `color`: Es un _String_ que especifica en rgb, hexagesimal u otro formato reconoconocido por css que indicará el color que tomará cada subcategoría
 
 - `clave_categorias`: (_String_) Indica la clave empleada para las categorías principales, por default es `"categoria"` y con el ejemplo anterior de `datos` podría no especificarse esta propiedad, pero si `datos` emplea otra clave para la categoría principal, esta propiedad tendrá que especificarse
+
+- `clave_categorias`: (_String_) Indica la clave empleada para las categorías principales, por default es `"categoria"` y con el ejemplo anterior de `datos` podría no especificarse esta propiedad, pero si `datos` emplea otra clave para la categoría principal, esta propiedad tendrá que especificarse
+
+### Opcionales
+
+-`separacion`: (_Number_) Valor numérico entre 0 y 1 que determina la separación de las barras. Por default es `0.2` y significa que el 20% de la gráfica será espacio en blanco
+
+- `acomodo`: (_String_) Admite los valores `"apiladas"` o `"agrupadas"` y determina la forma en la que se mostrarán las barras en caso de que existan varias subcategorías. -`padding_agrupadas`: (_Number_) Valor numérico entre 0 y 1 que determina la separación de las barras agrupadas. Para ver su efecto, se debe tener la propiedad `acomodo` en `"agrupadas"`. Por default es 0.1 y significa que para un subgrupo barras el 10% será espacio en blanco.
 
 <utils-ejemplo-doc ruta="barras/basico.vue"/>
 <utils-ejemplo-doc ruta="barras/modificando-datos.vue"/>

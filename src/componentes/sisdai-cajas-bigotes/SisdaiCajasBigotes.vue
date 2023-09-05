@@ -250,7 +250,6 @@ function creaCajasBigotes() {
           .attr('r', 2)
       },
       update => {
-        console.log(update.selectAll('g.grupo-caja'))
         let grupo = update.call(update1 =>
           update1
             .transition()
