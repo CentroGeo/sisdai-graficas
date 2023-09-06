@@ -52,6 +52,7 @@ function calcularEscalas(grupoVis) {
     .domain(datos.value?.map(d => d[clave_categorias.value]))
     .range([0, grupoVis.ancho])
     .padding(0.5)
+
   escalaLineal.value = scaleLinear()
     .domain(extent(datos.value.map(d => d[variables.value.id])))
     .range([grupoVis.alto, 0])
