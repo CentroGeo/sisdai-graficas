@@ -37,6 +37,7 @@ const variables_dinamicas = ref({
           },
         ]"
         :separacion="0.6"
+        :alineacion_eje_y="'derecha'"
       />
       <SisdaiCajasBigotes
         :datos="datos_dinamicos"

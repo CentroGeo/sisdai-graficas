@@ -121,8 +121,6 @@ onUnmounted(() => {
           :height="grafica().alto"
         >
           <g class="eje-x-arriba" />
-          <g class="eje-y-derecha" />
-          <slot />
           <g
             class="eje-x-abajo"
             :transform="`translate(${margenes.izquierda}, ${
@@ -133,6 +131,13 @@ onUnmounted(() => {
             class="eje-y-izquierda"
             :transform="`translate(${margenes.izquierda}, ${+margenes.arriba})`"
           />
+          <g
+            class="eje-y-derecha"
+            :transform="`translate(${
+              grafica().ancho - margenes.derecha
+            }, ${+margenes.arriba})`"
+          />
+          <slot />
         </svg>
       </figure>
       <div class="contenedor-titulo-eje-x">
