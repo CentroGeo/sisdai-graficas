@@ -61,24 +61,46 @@ function modificandoVariables() {
 </script>
 
 <template>
-  <div>
-    <input
-      id="margenes"
-      type="range"
-      v-model="margen"
-    />
-    <label for="margenes">margen: {{ margen }}</label>
-    <button @click="modificandoDatos">Modifica datos</button>
-    <button @click="modificandoVariables">Modifica variables</button>
-    <button
-      @click="
-        acomodo == 'apiladas' ? (acomodo = 'agrupadas') : (acomodo = 'apiladas')
-      "
-    >
-      {{ acomodo == 'apiladas' ? 'Agrupar' : 'Apilar' }}
-    </button>
+  <div class="contenedor-vis borde-redondeado-8 con-panel-encabezado-vis">
+    <div class="panel-encabezado-vis p-x-2">
+      <p class="vis-titulo-visualizacion">Ejemplo con propiedades dinámicas</p>
+      <p class="vis-instruccional">
+        Usa el <i>slider</i> para modificar los márgenes, y los botones para
+        modificar los datos aleatoriamente, para modificar las variables que se
+        visualizan o para cambiar la disposición de las barras
+      </p>
 
-    <hr />
+      <div class="m-b-3">
+        <input
+          id="margenes"
+          type="range"
+          v-model="margen"
+        />
+        <label for="margenes">margen: {{ margen }}</label>
+      </div>
+      <button
+        class="boton-chico"
+        @click="modificandoDatos"
+      >
+        Modifica datos
+      </button>
+      <button
+        class="boton-chico"
+        @click="modificandoVariables"
+      >
+        Modifica variables
+      </button>
+      <button
+        class="boton-chico"
+        @click="
+          acomodo == 'apiladas'
+            ? (acomodo = 'agrupadas')
+            : (acomodo = 'apiladas')
+        "
+      >
+        {{ acomodo == 'apiladas' ? 'Agrupar' : 'Apilar' }}
+      </button>
+    </div>
     <SisdaiGraficas
       :margenes="{
         arriba: Number(margen),
@@ -95,7 +117,5 @@ function modificandoVariables() {
         :acomodo="acomodo"
       />
     </SisdaiGraficas>
-
-    <hr />
   </div>
 </template>

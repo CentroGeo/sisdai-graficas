@@ -23,14 +23,22 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <input
-      id="margenes"
-      type="range"
-      v-model="margen"
-    />
-    <label for="margenes">margen: {{ margen }}</label>
-    <hr />
+  <div
+    class="contenedor-vis borde-redondeado-8 con-panel-encabezado-vis con-panel-pie-vis"
+  >
+    <div class="panel-encabezado-vis p-x-2">
+      <p class="vis-titulo-visualizacion">Titulo de visualizacion</p>
+      <p class="vis-instruccional">
+        Modifica el margen para ver su efecto en el componente
+      </p>
+      <input
+        id="margenes"
+        type="range"
+        v-model="margen"
+      />
+      <label for="margenes">margen: {{ margen }}</label>
+    </div>
+
     <SisdaiGraficas
       ref="sisdaiGraficaEditable"
       :margenes="{
@@ -49,7 +57,8 @@ onMounted(() => {
         :width="ancho_rectangulo"
       ></rect>
     </SisdaiGraficas>
-
-    <hr />
+    <div class="panel-pie-vis p-x-2">
+      <p class="vis-leyenda">Leyenda al pie de gráfica</p>
+    </div>
   </div>
 </template>

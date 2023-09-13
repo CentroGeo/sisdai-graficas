@@ -34,9 +34,20 @@ function alternaDatos() {
 </script>
 
 <template>
-  <div>
-    <button @click="alternaDatos">Alternar datos</button>
-    <hr />
+  <div class="contenedor-vis borde-redondeado-8 con-panel-encabezado-vis">
+    <div class="panel-encabezado-vis p-x-2">
+      <p class="vis-titulo-visualizacion">Ejemplo con datos dinámicos</p>
+      <p class="vis-instruccional">
+        Da click en el botón para alternar la base de datos
+      </p>
+      <button
+        @click="alternaDatos"
+        class="boton-chico"
+      >
+        Alternar datos
+      </button>
+    </div>
+
     <SisdaiGraficas
       :titulo_eje_y="'título del eje y'"
       :titulo_eje_x="'título del eje x'"

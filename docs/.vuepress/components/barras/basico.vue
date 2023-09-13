@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="contenedor-vis borde-redondeado-8">
     <SisdaiGraficas
       :titulo_eje_y="'título del eje y'"
       :titulo_eje_x="'título del eje x'"
