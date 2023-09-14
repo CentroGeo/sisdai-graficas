@@ -161,6 +161,7 @@ onUnmounted(() => {
     .contenedor-titulo-eje-y {
       display: inline-block;
       .titulo-eje-y {
+        position: absolute;
         display: block;
         transform-origin: top left;
         //transform: rotate(-90deg) translate(-100%);

@@ -97,3 +97,4 @@ barras. Este componente puede ser utilizado para crear barras simples o apiladas
 
 <utils-ejemplo-doc ruta="barras/basico.vue"/>
 <utils-ejemplo-doc ruta="barras/modificando-datos.vue"/>
+<utils-ejemplo-doc ruta="barras/checks.vue"/>
