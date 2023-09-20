@@ -61,8 +61,10 @@ function modificandoVariables() {
 </script>
 
 <template>
-  <div class="contenedor-vis borde-redondeado-8 con-panel-encabezado-vis">
-    <div class="panel-encabezado-vis p-x-2">
+  <div
+    class="contenedor-vis borde-redondeado-8 con-panel-encabezado-vis con-panel-pie-vis"
+  >
+    <div class="panel-encabezado-vis">
       <p class="vis-titulo-visualizacion">Ejemplo con propiedades dinámicas</p>
       <p class="vis-instruccional">
         Usa el <i>slider</i> para modificar los márgenes, y los botones para
@@ -70,7 +72,7 @@ function modificandoVariables() {
         visualizan o para cambiar la disposición de las barras
       </p>
 
-      <div class="m-b-3">
+      <div class="m-b-3 p-x-minimo">
         <input
           id="margenes"
           type="range"
@@ -117,8 +119,12 @@ function modificandoVariables() {
         :acomodo="acomodo"
       />
     </SisdaiGraficas>
-    <div class="boton boton-conahcyt-vis">
+    <div class="panel-pie-vis">
+      <hr />
+    </div>
+    <div class="contenedor-vis-atribuciones">
       <a
+        class="logo-conacyt"
         href="https://conahcyt.mx"
         target="_blank"
         rel="noopener noreferrer"

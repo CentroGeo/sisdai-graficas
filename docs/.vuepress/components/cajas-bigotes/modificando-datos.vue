@@ -10,7 +10,6 @@ const variables_dinamicas = ref({
   color: 'red',
 })
 function alternaDatos() {
-  console.log('alternando')
   if (base.value == 1) {
     variables_dinamicas.value = {
       id: 'metrica',
@@ -34,8 +33,10 @@ function alternaDatos() {
 </script>
 
 <template>
-  <div class="contenedor-vis borde-redondeado-8 con-panel-encabezado-vis">
-    <div class="panel-encabezado-vis p-x-2">
+  <div
+    class="contenedor-vis borde-redondeado-8 con-panel-encabezado-vis con-panel-pie-vis"
+  >
+    <div class="panel-encabezado-vis">
       <p class="vis-titulo-visualizacion">Ejemplo con datos dinámicos</p>
       <p class="vis-instruccional">
         Da click en el botón para alternar la base de datos
@@ -58,8 +59,12 @@ function alternaDatos() {
         :clave_categorias="base == 1 ? 'nombre_empresa' : 'nombre_categoria'"
       />
     </SisdaiGraficas>
-    <div class="boton boton-conahcyt-vis">
+    <div class="panel-pie-vis">
+      <hr />
+    </div>
+    <div class="contenedor-vis-atribuciones">
       <a
+        class="logo-conacyt"
         href="https://conahcyt.mx"
         target="_blank"
         rel="noopener noreferrer"

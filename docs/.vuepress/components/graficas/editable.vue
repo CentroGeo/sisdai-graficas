@@ -26,7 +26,7 @@ onMounted(() => {
   <div
     class="contenedor-vis borde-redondeado-8 con-panel-encabezado-vis con-panel-pie-vis"
   >
-    <div class="panel-encabezado-vis p-x-2">
+    <div class="panel-encabezado-vis">
       <p class="vis-titulo-visualizacion">Titulo de visualizacion</p>
       <p class="vis-instruccional">
         Modifica el margen para ver su efecto en el componente
@@ -57,11 +57,13 @@ onMounted(() => {
         :width="ancho_rectangulo"
       ></rect>
     </SisdaiGraficas>
-    <div class="panel-pie-vis p-x-2">
+    <div class="panel-pie-vis">
       <p class="vis-leyenda">Leyenda al pie de gráfica</p>
+      <hr />
     </div>
-    <div class="boton boton-conahcyt-vis">
+    <div class="contenedor-vis-atribuciones">
       <a
+        class="logo-conacyt"
         href="https://conahcyt.mx"
         target="_blank"
         rel="noopener noreferrer"

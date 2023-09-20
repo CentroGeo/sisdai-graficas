@@ -118,11 +118,14 @@ function calcularEscalas(grupoVis) {
   select(`div#${idGrafica} svg g.eje-x-abajo`).call(
     axisBottom(escalaBanda.value)
   )
-  select(`div#${idGrafica} svg g.eje-y-${props.alineacion_eje_y}`).call(
-    props.alineacion_eje_y === 'izquierda'
-      ? axisLeft(escalaLineal.value)
-      : axisRight(escalaLineal.value)
-  )
+  select(`div#${idGrafica} svg g.eje-y-${props.alineacion_eje_y}`)
+    .transition()
+    .duration(500)
+    .call(
+      props.alineacion_eje_y === 'izquierda'
+        ? axisLeft(escalaLineal.value)
+        : axisRight(escalaLineal.value)
+    )
   escalaSubBanda.value = scaleBand()
     .domain(variables.value.map(d => d.id))
     .range([0, escalaBanda.value.bandwidth()])

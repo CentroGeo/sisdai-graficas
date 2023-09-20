@@ -20,10 +20,11 @@ const props = defineProps({
   },
 })
 
-const variables_checkeadas = ref([...variables.value].map(d => d.id))
-const variables_computadas = computed(() =>
-  variables.value.filter(d => variables_checkeadas.value.includes(d.id))
+const variables_checkeadas = ref([...props.variables].map(d => d.id))
+const variables_activas = computed(() =>
+  props.variables.filter(d => variables_checkeadas.value.includes(d.id))
 )
+defineExpose({ variables_activas })
 </script>
 <template>
   <div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="contenedor-vis borde-redondeado-8">
+  <div class="contenedor-vis borde-redondeado-8 con-panel-pie-vis">
     <SisdaiGraficas
       :titulo_eje_y="'título del eje y'"
       :titulo_eje_x="'título del eje x'"
@@ -25,8 +25,12 @@
         ]"
       />
     </SisdaiGraficas>
-    <div class="boton boton-conahcyt-vis">
+    <div class="panel-pie-vis">
+      <hr />
+    </div>
+    <div class="contenedor-vis-atribuciones">
       <a
+        class="logo-conacyt"
         href="https://conahcyt.mx"
         target="_blank"
         rel="noopener noreferrer"

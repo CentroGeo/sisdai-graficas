@@ -55,7 +55,6 @@ watch(margenes, nv => {
 const contenedorSisdaiGraficas = ref(null)
 const espacio_eje_y = ref(0)
 onMounted(() => {
-  console.log('SisdaiGraficas')
   obteniendoDimensiones()
   window.addEventListener('resize', obteniendoDimensiones)
 })
@@ -111,7 +110,7 @@ onUnmounted(() => {
             }px))`,
           }"
           class="titulo-eje-y vis-titulo-ejes"
-          style="padding: 10px 0 5px 0"
+          style="padding: 0 0 5px 0"
           v-html="titulo_eje_y"
         ></div>
       </div>

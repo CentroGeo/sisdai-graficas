@@ -89,6 +89,7 @@ En esta sección se describe el uso del componente de visualización `<SisdaiCaj
 > - `color`: Es un _String_ que especifica en rgb, hexagesimal u otro formato reconoconocido por css que indicará el color que tomarán los diagramas
 
 - `clave_categorias`: (_String_) Indica la clave empleada para las categorías que se usarán para agrupar al conjunto de datos, por default es `"categoria"` y con el ejemplo anterior de `datos` tendría que especificarse como `"nombre_empresa"`
+- `alineacion_eje_y`: (_String_) Esta propiedad indica de qué lado se acomodará el eje vertical, las opciones validas son `'izquierda'` o `'derecha'`, y su valor por _default_ es `'izquierda'`.
 
 ### Ejemplo básico de componente
 

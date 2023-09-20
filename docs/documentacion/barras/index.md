@@ -89,6 +89,8 @@ barras. Este componente puede ser utilizado para crear barras simples o apiladas
 
 - `clave_categorias`: (_String_) Indica la clave empleada para las categorías principales, por default es `"categoria"` y con el ejemplo anterior de `datos` podría no especificarse esta propiedad, pero si `datos` emplea otra clave para la categoría principal, esta propiedad tendrá que especificarse
 
+- `alineacion_eje_y`: (_String_) Esta propiedad indica de qué lado se acomodará el eje vertical, las opciones validas son `'izquierda'` o `'derecha'`, y su valor por _default_ es `'izquierda'`.
+
 ### Opcionales
 
 -`separacion`: (_Number_) Valor numérico entre 0 y 1 que determina la separación de las barras. Por default es `0.2` y significa que el 20% de la gráfica será espacio en blanco

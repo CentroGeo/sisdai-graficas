@@ -1,6 +1,8 @@
 <script setup>
-import { computed, ref } from 'vue'
-const variables_completas = ref([
+import { ref } from 'vue'
+const variablesCheckeadas = ref()
+
+const variables = ref([
   {
     id: 'cantidad_1',
     nombre_subcategoria: 'Cantidad 1',
@@ -17,12 +19,6 @@ const variables_completas = ref([
     color: 'cyan',
   },
 ])
-const variables_checkeadas = ref([...variables_completas.value].map(d => d.id))
-const variables = computed(() =>
-  variables_completas.value.filter(d =>
-    variables_checkeadas.value.includes(d.id)
-  )
-)
 </script>
 
 <template>
@@ -30,7 +26,7 @@ const variables = computed(() =>
     class="contenedor-vis borde-redondeado-8 con-panel-encabezado-vis con-panel-pie-vis"
   >
     <div class="panel-encabezado-vis">
-      <div class="p-x-2">
+      <div>
         <p class="vis-titulo-visualizacion">Ejemplo con checks</p>
       </div>
     </div>
@@ -65,35 +61,23 @@ const variables = computed(() =>
             cantidad_3: 60,
           },
         ]"
-        :variables="variables"
+        :variables="
+          variablesCheckeadas
+            ? variablesCheckeadas.variables_activas
+            : variables
+        "
       />
     </SisdaiGraficas>
-    <div class="panel-pie-vis p-x-2 p-y-1">
-      <span
-        class="controlador-vis"
-        v-for="variable in variables_completas"
-        :key="variable.id"
-      >
-        <span
-          class="figura-variable"
-          :style="{ background: variable.color }"
-        ></span>
-        <input
-          :id="variable.id"
-          type="checkbox"
-          :value="variable.id"
-          v-model="variables_checkeadas"
-        />
-        <label
-          class="nombre-variable"
-          :for="variable.id"
-          >{{ variable.nombre_subcategoria }}</label
-        >
-      </span>
-      <hr class="p-x-2" />
+    <div class="panel-pie-vis">
+      <SisdaiChecks
+        :variables="variables"
+        ref="variablesCheckeadas"
+      ></SisdaiChecks>
+      <hr />
     </div>
-    <div class="boton boton-conahcyt-vis">
+    <div class="contenedor-vis-atribuciones">
       <a
+        class="logo-conacyt"
         href="https://conahcyt.mx"
         target="_blank"
         rel="noopener noreferrer"
