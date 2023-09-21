@@ -3,6 +3,7 @@ import {
   SisdaiCajasBigotes,
   SisdaiChecks,
   SisdaiGraficas,
+  SisdaiNomenclatura,
 } from './componentes'
 
 const plugin = {
@@ -12,9 +13,16 @@ const plugin = {
     Vue.use(SisdaiBarras)
     Vue.use(SisdaiCajasBigotes)
     Vue.use(SisdaiChecks)
+    Vue.use(SisdaiNomenclatura)
   },
 }
 
-export { SisdaiBarras, SisdaiCajasBigotes, SisdaiChecks, SisdaiGraficas }
+export {
+  SisdaiBarras,
+  SisdaiCajasBigotes,
+  SisdaiChecks,
+  SisdaiGraficas,
+  SisdaiNomenclatura,
+}
 
 export default plugin
