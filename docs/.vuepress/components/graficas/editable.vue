@@ -23,14 +23,22 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <input
-      id="margenes"
-      type="range"
-      v-model="margen"
-    />
-    <label for="margenes">margen: {{ margen }}</label>
-    <hr />
+  <div
+    class="contenedor-vis borde-redondeado-8 con-panel-encabezado-vis con-panel-pie-vis"
+  >
+    <div class="panel-encabezado-vis">
+      <p class="vis-titulo-visualizacion">Titulo de visualizacion</p>
+      <p class="vis-instruccional">
+        Modifica el margen para ver su efecto en el componente
+      </p>
+      <input
+        id="margenes"
+        type="range"
+        v-model="margen"
+      />
+      <label for="margenes">margen: {{ margen }}</label>
+    </div>
+
     <SisdaiGraficas
       ref="sisdaiGraficaEditable"
       :margenes="{
@@ -49,7 +57,30 @@ onMounted(() => {
         :width="ancho_rectangulo"
       ></rect>
     </SisdaiGraficas>
+    <div class="panel-pie-vis">
+      <p class="vis-leyenda">Leyenda al pie de gráfica</p>
+      <hr />
+    </div>
+    <div class="contenedor-vis-atribuciones">
+      <a
+        class="logo-conacyt"
+        href="https://conahcyt.mx"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src="https://conahcyt.mx/wp-content/uploads/2021/10/logo_conacyt_con_sintagma_azul_completo.svg"
+          alt="Conahcyt"
+        />
+      </a>
 
-    <hr />
+      <a
+        href="https://sisdai.conahcyt.mx/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Sisdai
+      </a>
+    </div>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <script setup>
 import { max, sum } from 'd3-array'
-import { axisBottom, axisLeft } from 'd3-axis'
+import { axisBottom, axisLeft, axisRight } from 'd3-axis'
 import { scaleBand, scaleLinear } from 'd3-scale'
 import { select } from 'd3-selection'
 import { stack } from 'd3-shape'
@@ -73,6 +73,19 @@ const props = defineProps({
     type: String,
     default: 'categoria',
   },
+  alineacion_eje_y: {
+    type: String,
+    default: 'izquierda',
+    validator(value) {
+      const validado = value === 'izquierda' || value === 'derecha'
+      if (!validado) {
+        console.error(
+          "la propiedad 'alineacion_eje_y' sólo admite los valores 'izquierda' o 'derecha'"
+        )
+      }
+      return validado
+    },
+  },
 })
 
 const sisdaiBarras = shallowRef()
@@ -105,9 +118,14 @@ function calcularEscalas(grupoVis) {
   select(`div#${idGrafica} svg g.eje-x-abajo`).call(
     axisBottom(escalaBanda.value)
   )
-  select(`div#${idGrafica} svg g.eje-y-izquierda`).call(
-    axisLeft(escalaLineal.value)
-  )
+  select(`div#${idGrafica} svg g.eje-y-${props.alineacion_eje_y}`)
+    .transition()
+    .duration(500)
+    .call(
+      props.alineacion_eje_y === 'izquierda'
+        ? axisLeft(escalaLineal.value)
+        : axisRight(escalaLineal.value)
+    )
   escalaSubBanda.value = scaleBand()
     .domain(variables.value.map(d => d.id))
     .range([0, escalaBanda.value.bandwidth()])

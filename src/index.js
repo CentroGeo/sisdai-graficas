@@ -1,4 +1,10 @@
-import { SisdaiBarras, SisdaiCajasBigotes, SisdaiGraficas } from './componentes'
+import {
+  SisdaiBarras,
+  SisdaiCajasBigotes,
+  SisdaiChecks,
+  SisdaiGraficas,
+  SisdaiNomenclatura,
+} from './componentes'
 
 const plugin = {
   install: function (Vue) {
@@ -6,9 +12,17 @@ const plugin = {
     Vue.use(SisdaiGraficas)
     Vue.use(SisdaiBarras)
     Vue.use(SisdaiCajasBigotes)
+    Vue.use(SisdaiChecks)
+    Vue.use(SisdaiNomenclatura)
   },
 }
 
-export { SisdaiBarras, SisdaiCajasBigotes, SisdaiGraficas }
+export {
+  SisdaiBarras,
+  SisdaiCajasBigotes,
+  SisdaiChecks,
+  SisdaiGraficas,
+  SisdaiNomenclatura,
+}
 
 export default plugin

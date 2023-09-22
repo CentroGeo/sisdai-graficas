@@ -1,6 +1,6 @@
 <script setup>
 import { ascending, descending, extent, mean, quantile, rollup } from 'd3-array'
-import { axisBottom, axisLeft } from 'd3-axis'
+import { axisBottom, axisLeft, axisRight } from 'd3-axis'
 import { scaleBand, scaleLinear } from 'd3-scale'
 import { select } from 'd3-selection'
 import { transition } from 'd3-transition'
@@ -33,6 +33,19 @@ const props = defineProps({
     type: String,
     default: 'categoria',
   },
+  alineacion_eje_y: {
+    type: String,
+    default: 'izquierda',
+    validator(value) {
+      const validado = value === 'izquierda' || value === 'derecha'
+      if (!validado) {
+        console.error(
+          "la propiedad 'alineacion_eje_y' sólo admite los valores 'izquierda' o 'derecha'"
+        )
+      }
+      return validado
+    },
+  },
 })
 
 const sisdaiCajasBigotes = shallowRef()
@@ -52,6 +65,7 @@ function calcularEscalas(grupoVis) {
     .domain(datos.value?.map(d => d[clave_categorias.value]))
     .range([0, grupoVis.ancho])
     .padding(0.5)
+
   escalaLineal.value = scaleLinear()
     .domain(extent(datos.value.map(d => d[variables.value.id])))
     .range([grupoVis.alto, 0])
@@ -60,10 +74,14 @@ function calcularEscalas(grupoVis) {
     .transition()
     .duration(500)
     .call(axisBottom(escalaBanda.value))
-  select(`div#${idGrafica} svg g.eje-y-izquierda`)
+  select(`div#${idGrafica} svg g.eje-y-${props.alineacion_eje_y}`)
     .transition()
     .duration(500)
-    .call(axisLeft(escalaLineal.value))
+    .call(
+      props.alineacion_eje_y === 'izquierda'
+        ? axisLeft(escalaLineal.value)
+        : axisRight(escalaLineal.value)
+    )
 }
 function creaCajasBigotes() {
   data_agrupada.value = rollup(
@@ -229,12 +247,7 @@ function creaCajasBigotes() {
           .attr('r', 4)
         grupo
           .selectAll('circle.atipicos')
-          .data(d => {
-            console.log(
-              d[1].puntos.filter(dd => dd < d[1].min || d[1].max < dd)
-            )
-            return d[1].puntos.filter(dd => dd < d[1].min || d[1].max < dd)
-          })
+          .data(d => d[1].puntos.filter(dd => dd < d[1].min || d[1].max < dd))
           .enter()
           .append('circle')
           .attr('class', 'atipicos')
@@ -377,7 +390,6 @@ onMounted(() => {
   grupoContenedor.value = select(
     '#' + idGrafica + ' svg g.contenedor-cajas-bigotes'
   )
-  // console.log(usarRegistroGraficas().grafica(idGrafica))
 
   margenesSvg.value = usarRegistroGraficas().grafica(idGrafica).margenes
   watch(

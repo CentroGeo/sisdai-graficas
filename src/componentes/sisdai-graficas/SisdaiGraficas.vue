@@ -55,7 +55,6 @@ watch(margenes, nv => {
 const contenedorSisdaiGraficas = ref(null)
 const espacio_eje_y = ref(0)
 onMounted(() => {
-  console.log('SisdaiGraficas')
   obteniendoDimensiones()
   window.addEventListener('resize', obteniendoDimensiones)
 })
@@ -88,7 +87,7 @@ onUnmounted(() => {
   <div
     ref="contenedorSisdaiGraficas"
     :sisdai-grafica="id"
-    class="contenedor-sisdai-graficas"
+    class="contenido-vis"
     :id="id"
   >
     <div
@@ -110,8 +109,8 @@ onUnmounted(() => {
               0.5 * (margenes.arriba - margenes.abajo)
             }px))`,
           }"
-          class="titulo-eje-y"
-          style="padding: 10px 0 5px 0"
+          class="titulo-eje-y vis-titulo-ejes"
+          style="padding: 0 0 5px 0"
           v-html="titulo_eje_y"
         ></div>
       </div>
@@ -121,8 +120,6 @@ onUnmounted(() => {
           :height="grafica().alto"
         >
           <g class="eje-x-arriba" />
-          <g class="eje-y-derecha" />
-          <slot />
           <g
             class="eje-x-abajo"
             :transform="`translate(${margenes.izquierda}, ${
@@ -133,11 +130,18 @@ onUnmounted(() => {
             class="eje-y-izquierda"
             :transform="`translate(${margenes.izquierda}, ${+margenes.arriba})`"
           />
+          <g
+            class="eje-y-derecha"
+            :transform="`translate(${
+              grafica().ancho - margenes.derecha
+            }, ${+margenes.arriba})`"
+          />
+          <slot />
         </svg>
       </figure>
       <div class="contenedor-titulo-eje-x">
         <div
-          class="titulo-eje-x"
+          class="titulo-eje-x vis-titulo-ejes"
           v-html="titulo_eje_x"
         ></div>
       </div>
@@ -146,7 +150,7 @@ onUnmounted(() => {
 </template>
 
 <style lang="scss">
-.contenedor-sisdai-graficas {
+.contenido-vis {
   width: 100%;
   div.contenedor-svg-ejes-tooltip {
     position: relative;
@@ -156,21 +160,18 @@ onUnmounted(() => {
     .contenedor-titulo-eje-y {
       display: inline-block;
       .titulo-eje-y {
+        position: absolute;
         display: block;
         transform-origin: top left;
         //transform: rotate(-90deg) translate(-100%);
-        font-size: 12px;
         text-align: center;
-        font-weight: 600;
       }
     }
     div.contenedor-titulo-eje-x {
       position: relative;
       width: 100%;
       .titulo-eje-x {
-        font-size: 12px;
         text-align: center;
-        font-weight: 600;
       }
     }
 
