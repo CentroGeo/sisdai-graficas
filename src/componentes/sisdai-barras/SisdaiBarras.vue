@@ -88,6 +88,30 @@ const props = defineProps({
       return validado
     },
   },
+  angulo_etiquetas_eje_x: {
+    type: Number,
+    default: 0,
+    validator(value) {
+      // debe estar entre -90 y 90
+      const validado = -90 <= value && value <= 90
+      if (!validado) {
+        console.error('El número debe estar entre -90 y 90')
+      }
+      return validado
+    },
+  },
+  angulo_etiquetas_eje_y: {
+    type: Number,
+    default: 0,
+    validator(value) {
+      // debe estar entre -90 y 90
+      const validado = -90 <= value && value <= 90
+      if (!validado) {
+        console.error('El número debe estar entre -90 y 90')
+      }
+      return validado
+    },
+  },
 })
 
 const sisdaiBarras = shallowRef()
