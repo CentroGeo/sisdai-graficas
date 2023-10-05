@@ -1,9 +1,9 @@
 <script setup>
+import { select } from 'd3-selection'
 import { onMounted, onUnmounted, ref, toRefs, watch } from 'vue'
 import { idAleatorio } from '../../utils'
 import usarRegistroGraficas from './../../composables/usarRegistroGraficas'
 import * as valoresPorDefecto from './../../valores/grafica'
-
 const props = defineProps({
   id: {
     type: String,
@@ -54,8 +54,12 @@ watch(margenes, nv => {
 
 const contenedorSisdaiGraficas = ref(null)
 const espacio_eje_y = ref(0)
+const grupoFondo = ref()
+const grupoFrente = ref()
 onMounted(() => {
   obteniendoDimensiones()
+  grupoFondo.value = select(`#${props.id}  g.grupo-fondo`)
+  grupoFrente.value = select(`#${props.id}  g.grupo-frente`)
   window.addEventListener('resize', obteniendoDimensiones)
 })
 function obteniendoDimensiones() {
@@ -76,6 +80,8 @@ defineExpose({
   ancho_grafica,
   alto_grafica,
   grafica,
+  grupoFondo,
+  grupoFrente,
 })
 onUnmounted(() => {
   usarRegistroGraficas().borrarGrafica(props.id)
@@ -119,6 +125,10 @@ onUnmounted(() => {
           :width="grafica().ancho"
           :height="grafica().alto"
         >
+          <g
+            class="grupo-fondo"
+            :transform="`translate(${margenes.izquierda}, ${margenes.arriba})`"
+          />
           <g class="eje-x-arriba" />
           <g
             class="eje-x-abajo"
@@ -137,6 +147,10 @@ onUnmounted(() => {
             }, ${+margenes.arriba})`"
           />
           <slot />
+          <g
+            class="grupo-frente"
+            :transform="`translate(${margenes.izquierda}, ${margenes.arriba})`"
+          />
         </svg>
       </figure>
       <div class="contenedor-titulo-eje-x">

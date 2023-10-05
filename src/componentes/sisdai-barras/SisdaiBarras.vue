@@ -1,15 +1,17 @@
 <script setup>
 import { max, sum } from 'd3-array'
-import { axisBottom, axisLeft, axisRight } from 'd3-axis'
 import { scaleBand, scaleLinear } from 'd3-scale'
 import { select } from 'd3-selection'
 import { stack } from 'd3-shape'
 import { transition } from 'd3-transition'
 
 import { onMounted, ref, shallowRef, toRefs, watch } from 'vue'
+import {
+  buscarIdContenedorHtmlSisdai,
+  creaEjeHorizontal,
+  creaEjeVertical,
+} from '../../utils'
 import usarRegistroGraficas from './../../composables/usarRegistroGraficas'
-import { buscarIdContenedorHtmlSisdai } from './../../utils'
-
 var idGrafica
 
 const props = defineProps({
@@ -114,22 +116,20 @@ function calcularEscalas(grupoVis) {
       max(datos.value?.map(d => sum(variables.value.map(dd => d[dd.id])))),
     ])
     .range([grupoVis.alto, 0])
-
-  select(`div#${idGrafica} svg g.eje-x-abajo`).call(
-    axisBottom(escalaBanda.value)
-  )
-  select(`div#${idGrafica} svg g.eje-y-${props.alineacion_eje_y}`)
-    .transition()
-    .duration(500)
-    .call(
-      props.alineacion_eje_y === 'izquierda'
-        ? axisLeft(escalaLineal.value)
-        : axisRight(escalaLineal.value)
-    )
   escalaSubBanda.value = scaleBand()
     .domain(variables.value.map(d => d.id))
     .range([0, escalaBanda.value.bandwidth()])
     .padding(props.separacion_agrupadas)
+
+  creaEjeHorizontal(idGrafica, escalaBanda.value, props.angulo_etiquetas_eje_x)
+
+  creaEjeVertical(
+    idGrafica,
+    escalaLineal.value,
+    props.angulo_etiquetas_eje_y,
+    props.alineacion_eje_y,
+    grupoVis.ancho
+  )
 }
 function creaBarras() {
   let apilada = stack().keys(variables.value.map(d => d.id))(datos.value)
@@ -304,6 +304,11 @@ onMounted(() => {
     calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
     creaBarras()
   })
+})
+defineExpose({
+  escalaBanda,
+  escalaLineal,
+  escalaSubBanda,
 })
 </script>
 
