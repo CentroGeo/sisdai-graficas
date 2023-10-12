@@ -32,7 +32,7 @@ const angulo_y = ref(0)
         max="90"
         step="1"
       />
-      <label for="margenes">ángulo x: {{ angulo_x }}</label>
+      <label for="angulo-x">ángulo x: {{ angulo_x }}</label>
       <input
         id="angulo-y"
         type="range"
@@ -41,13 +41,13 @@ const angulo_y = ref(0)
         max="90"
         step="1"
       />
-      <label for="margenes">ángulo y: {{ angulo_y }}</label>
+      <label for="angulo-y">ángulo y: {{ angulo_y }}</label>
     </div>
     <SisdaiGraficas
       ref="laGrafica"
       :titulo_eje_y="'título del eje y'"
       :titulo_eje_x="'título del eje x'"
-      :margenes="{ arriba: 30, abajo: 60, derecha: 30, izquierda: 40 }"
+      :margenes="{ arriba: 30, abajo: 70, derecha: 30, izquierda: 40 }"
     >
       <SisdaiCajasBigotes
         :datos="datos_dinamicos"

@@ -3,10 +3,10 @@ layout: LayoutDocumentacion
 sectionName: Documentación
 ---
 
-# SisdaiBarras
+# SisdaiSeriesTiempo
 
-A continuación se describe la utilización del componente de visualización `<SisdaiBarras/>` para construir un gráfico de
-barras. Este componente puede ser utilizado para crear barras simples o apiladas.
+A continuación se describe la utilización del componente de visualización `<SisdaiSeriesTiempo/>` para construir un gráfico de
+series de tiempo.
 
 ## Propiedades
 
@@ -87,14 +87,5 @@ barras. Este componente puede ser utilizado para crear barras simples o apiladas
 
 - `clave_categorias`: (_String_) Indica la clave empleada para las categorías principales, por default es `"categoria"` y con el ejemplo anterior de `datos` podría no especificarse esta propiedad, pero si `datos` emplea otra clave para la categoría principal, esta propiedad tendrá que especificarse
 
-- `alineacion_eje_y`: (_String_) Esta propiedad indica de qué lado se acomodará el eje vertical, las opciones validas son `'izquierda'` o `'derecha'`, y su valor por _default_ es `'izquierda'`.
-
-### Opcionales
-
--`separacion`: (_Number_) Valor numérico entre 0 y 1 que determina la separación de las barras. Por default es `0.2` y significa que el 20% de la gráfica será espacio en blanco
-
-- `acomodo`: (_String_) Admite los valores `"apiladas"` o `"agrupadas"` y determina la forma en la que se mostrarán las barras en caso de que existan varias subcategorías. -`padding_agrupadas`: (_Number_) Valor numérico entre 0 y 1 que determina la separación de las barras agrupadas. Para ver su efecto, se debe tener la propiedad `acomodo` en `"agrupadas"`. Por default es 0.1 y significa que para un subgrupo barras el 10% será espacio en blanco.
-
-<utils-ejemplo-doc ruta="barras/basico.vue"/>
-<utils-ejemplo-doc ruta="barras/modificando-datos.vue"/>
-<utils-ejemplo-doc ruta="barras/checks.vue"/>
+<utils-ejemplo-doc ruta="series-tiempo/basico.vue"/>
+<utils-ejemplo-doc ruta="series-tiempo/modificando-datos.vue"/>

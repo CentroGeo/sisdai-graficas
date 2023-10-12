@@ -1,25 +1,31 @@
 <script setup>
-import cajasbigotesejemplos from './cajas_bigotes_ejemplo_1.json'
-
 import { ref } from 'vue'
-const datos_dinamicos = ref(cajasbigotesejemplos)
-const variables_dinamicas = ref({
-  id: 'acciones_vendidas',
-  nombre: 'Acciones vendidas',
-  color: '#2c7fb8',
-})
-</script>
+import data_edos from './data_edos.json'
+import diccionario_estados from './diccionario_estados.json'
+diccionario_estados.forEach(
+  d =>
+    (d.color = `rgb(${220 * Math.random()},${220 * Math.random()},${
+      220 * Math.random()
+    })`)
+)
+const variables = ref(diccionario_estados)
+variables
+const datos = ref(data_edos)
 
+const edos = ref()
+</script>
 <template>
   <div class="contenedor-vis borde-redondeado-8 con-panel-pie-vis">
     <SisdaiGraficas
       :titulo_eje_y="'título del eje y'"
       :titulo_eje_x="'título del eje x'"
+      :margenes="{ arriba: 30, abajo: 70, derecha: 30, izquierda: 40 }"
     >
-      <SisdaiCajasBigotes
-        :datos="datos_dinamicos"
-        :variables="variables_dinamicas"
-        :clave_categorias="'nombre_empresa'"
+      <SisdaiSeriesTiempo
+        :datos="datos"
+        :variables="variables"
+        :clave_categorias="'fecha'"
+        :angulo_etiquetas_eje_x="-45"
       />
     </SisdaiGraficas>
     <div class="panel-pie-vis">

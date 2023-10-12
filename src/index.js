@@ -4,6 +4,7 @@ import {
   SisdaiChecks,
   SisdaiGraficas,
   SisdaiNomenclatura,
+  SisdaiSeriesTiempo,
 } from './componentes'
 
 const plugin = {
@@ -14,6 +15,7 @@ const plugin = {
     Vue.use(SisdaiCajasBigotes)
     Vue.use(SisdaiChecks)
     Vue.use(SisdaiNomenclatura)
+    Vue.use(SisdaiSeriesTiempo)
   },
 }
 
@@ -23,6 +25,7 @@ export {
   SisdaiChecks,
   SisdaiGraficas,
   SisdaiNomenclatura,
+  SisdaiSeriesTiempo,
 }
 
 export default plugin

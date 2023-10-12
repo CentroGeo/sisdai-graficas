@@ -100,6 +100,11 @@ function actualizaContenidoIndice() {
                 >
               </li>
               <li>
+                <router-link to="/documentacion/series-tiempo">
+                  SisdaiSeriesTiempo</router-link
+                >
+              </li>
+              <li>
                 <router-link to="/documentacion/opciones-avanzadas">
                   Opciones avanzadas</router-link
                 >
