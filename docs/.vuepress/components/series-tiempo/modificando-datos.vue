@@ -11,11 +11,12 @@ diccionario_estados.forEach(
 const variables = ref(diccionario_estados)
 variables
 const datos = ref(data_edos)
-
-const edos = ref()
 </script>
 <template>
-  <div class="contenedor-vis borde-redondeado-8 con-panel-pie-vis">
+  <div
+    class="contenedor-vis borde-redondeado-8 con-panel-pie-vis con-panel-encabezado-vis"
+  >
+    <div class="panel-encabezado-vis"></div>
     <SisdaiGraficas
       :titulo_eje_y="'título del eje y'"
       :titulo_eje_x="'título del eje x'"
