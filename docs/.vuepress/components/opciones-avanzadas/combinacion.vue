@@ -5,7 +5,7 @@ import { ref } from 'vue'
 const datos_dinamicos = ref(cajasbigotesejemplos)
 const variables_dinamicas = ref({
   id: 'acciones_vendidas',
-  nombre_subcategoria: 'Acciones vendidas',
+  nombre: 'Acciones vendidas',
   color: '#2c7fb8',
 })
 </script>
@@ -26,12 +26,12 @@ const variables_dinamicas = ref({
         :variables="[
           {
             id: 'cantidad_1',
-            nombre_subcategoria: 'Cantidad 1',
+            nombre: 'Cantidad 1',
             color: 'pink',
           },
           {
             id: 'cantidad_2',
-            nombre_subcategoria: 'Cantidad 2',
+            nombre: 'Cantidad 2',
             color: 'orange',
           },
         ]"

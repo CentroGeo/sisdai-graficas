@@ -25,7 +25,6 @@ const datos = ref(data_edos)
       <SisdaiSeriesTiempo
         :datos="datos"
         :variables="variables"
-        :clave_categorias="'fecha'"
         :angulo_etiquetas_eje_x="-45"
       />
     </SisdaiGraficas>

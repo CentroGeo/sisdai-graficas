@@ -7,7 +7,7 @@ const cajasBigotes = ref()
 const datos_dinamicos = ref(cajasbigotesejemplos)
 const variables_dinamicas = ref({
   id: 'acciones_vendidas',
-  nombre_subcategoria: 'Acciones vendidas',
+  nombre: 'Acciones vendidas',
   color: '#2c7fb8',
 })
 const angulo_x = ref(0)

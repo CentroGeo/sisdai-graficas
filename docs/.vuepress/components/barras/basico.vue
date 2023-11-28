@@ -14,12 +14,12 @@
         :variables="[
           {
             id: 'cantidad_1',
-            nombre_subcategoria: 'Cantidad 1',
+            nombre: 'Cantidad 1',
             color: 'pink',
           },
           {
             id: 'cantidad_2',
-            nombre_subcategoria: 'Cantidad 2',
+            nombre: 'Cantidad 2',
             color: 'orange',
           },
         ]"

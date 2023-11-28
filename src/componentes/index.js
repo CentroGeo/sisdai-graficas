@@ -1,3 +1,4 @@
+import SisdaiAreasApiladas from './sisdai-areas-apiladas'
 import SisdaiBarras from './sisdai-barras'
 import SisdaiCajasBigotes from './sisdai-cajas-bigotes'
 import SisdaiChecks from './sisdai-checks'
@@ -6,6 +7,7 @@ import SisdaiNomenclatura from './sisdai-nomenclatura'
 import SisdaiSeriesTiempo from './sisdai-series-tiempo'
 
 export {
+  SisdaiAreasApiladas,
   SisdaiBarras,
   SisdaiCajasBigotes,
   SisdaiChecks,

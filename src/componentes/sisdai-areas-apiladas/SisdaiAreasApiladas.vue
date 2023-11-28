@@ -1,8 +1,10 @@
 <script setup>
-import { extent, max, min } from 'd3-array'
+import { extent, max, sum } from 'd3-array'
 import { scaleLinear, scaleTime } from 'd3-scale'
 import { select } from 'd3-selection'
-import { line } from 'd3-shape'
+import { stack } from 'd3-shape'
+
+import { area } from 'd3-shape'
 import { timeParse } from 'd3-time-format'
 import { transition } from 'd3-transition'
 import { onMounted, ref, shallowRef, toRefs, watch } from 'vue'
@@ -81,16 +83,16 @@ const props = defineProps({
   },
 })
 
-const sisdaiSeriesTiempo = shallowRef()
+const sisdaiAreasApiladas = shallowRef()
 const { datos, clave_fecha, variables } = toRefs(props)
 transition
 const margenesSvg = ref({})
-
+const datos_apilados = ref([])
 const conversionTemporal = timeParse(props.formato_temporal)
 const escalaTemporal = ref(),
   escalaLineal = ref()
 const grupoContenedor = ref(),
-  grupoSeries = ref()
+  grupoAreas = ref()
 
 function calcularEscalas(grupoVis) {
   if (!grupoVis && grupoVis.ancho === 0) return
@@ -99,8 +101,8 @@ function calcularEscalas(grupoVis) {
     .range([0, grupoVis.ancho])
   escalaLineal.value = scaleLinear()
     .domain([
-      min(datos.value?.map(d => min(variables.value.map(dd => d[dd.id])))),
-      max(datos.value?.map(d => max(variables.value.map(dd => d[dd.id])))),
+      0,
+      max(datos.value?.map(d => sum(variables.value.map(dd => d[dd.id])))),
     ])
     .range([grupoVis.alto, 0])
 
@@ -118,88 +120,52 @@ function calcularEscalas(grupoVis) {
     grupoVis.ancho
   )
 }
-function creaSeries() {
+function creaAreas() {
   datos.value.forEach(
     d => (d.la_fecha = conversionTemporal(d[clave_fecha.value]))
   )
+  datos_apilados.value = stack().keys(variables.value.map(d => d.id))(
+    datos.value
+  )
 
-  grupoSeries.value = grupoContenedor.value
-    .selectAll('g.serie-temporal')
-    .data(variables.value)
+  grupoAreas.value = grupoContenedor.value
+    .selectAll('path.area')
+    .data(datos_apilados.value)
     .join(
       enter => {
-        let grupo = enter
-          .append('g')
-          .attr('class', 'serie-temporal')
-          .style('fill', 'none')
-          .style('stroke', d => d.color)
-          .style('stroke-width', '1px')
-        grupo
-          .selectAll('path.linea')
-          .data(d => [{ ...d, datos: datos.value }])
-          .enter()
+        console.log('enter')
+
+        enter
           .append('path')
-          .attr('class', 'linea')
+          .attr('class', 'area')
           .attr('d', dd =>
-            line()
-              .x(d => escalaTemporal.value(d.la_fecha))
-              .y(d => escalaLineal.value(d[dd.id]))(dd.datos)
+            area()
+              .x(d => escalaTemporal.value(d.data.la_fecha))
+              .y0(d => escalaLineal.value(d[0]))
+              .y1(d => escalaLineal.value(d[1]))(dd)
           )
-        grupo
-          .selectAll('circle.puntos')
-          .data(d =>
-            datos.value.map(datum => ({
-              la_fecha: datum.la_fecha,
-              valor: datum[d.id],
-              ...d,
-            }))
+          .attr(
+            'fill',
+            d => variables.value.filter(dd => dd.id === d.key)[0].color
           )
-          .enter()
-          .append('circle')
-          .attr('class', 'puntos')
-          .attr('r', 0)
-          .attr('cx', d => escalaTemporal.value(d.la_fecha))
-          .attr('cy', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto)
-          .style('stroke', '#fff')
-          .style('fill', d => d.color)
       },
       update => {
-        let grupo = update.call(update1 =>
-          update1
-            .transition()
-            .duration(500)
-            .style('fill', 'none')
-            .style('stroke', d => d.color)
-            .style('stroke-width', '1px')
-        )
-        grupo
-          .selectAll('path.linea')
-          .data(d => [{ ...d, datos: datos.value }])
-
-          .attr('d', dd =>
-            line()
-              .x(d => escalaTemporal.value(d.la_fecha))
-              .y(d => escalaLineal.value(d[dd.id]))(dd.datos)
-          )
-          .style('stroke', d => d.color)
-
-        grupo
-          .selectAll('circle.puntos')
-          .data(d =>
-            datos.value.map(datum => ({
-              la_fecha: datum.la_fecha,
-              valor: datum[d.id],
-              ...d,
-            }))
-          )
+        console.log('update')
+        update
           .transition()
           .duration(500)
-          .attr('r', variables.value.length > 1 ? 0 : 4)
-          .attr('cx', d => escalaTemporal.value(d.la_fecha))
-          .attr('cy', d => escalaLineal.value(d.valor))
-          .style('stroke', '#fff')
-          .style('fill', d => d.color)
-      }, // no update function
+          .attr('d', dd =>
+            area()
+              .x(d => escalaTemporal.value(d.data.la_fecha))
+              .y0(d => escalaLineal.value(d[0]))
+              .y1(d => escalaLineal.value(d[1]))(dd)
+          )
+          .attr(
+            'fill',
+            d => variables.value.filter(dd => dd.id === d.key)[0].color
+          )
+          .selection()
+      },
       exit => {
         exit.remove()
       }
@@ -207,8 +173,8 @@ function creaSeries() {
 }
 
 onMounted(() => {
-  idGrafica = buscarIdContenedorHtmlSisdai('grafica', sisdaiSeriesTiempo.value)
-  grupoContenedor.value = select('#' + idGrafica + ' svg g.contenedor-series')
+  idGrafica = buscarIdContenedorHtmlSisdai('grafica', sisdaiAreasApiladas.value)
+  grupoContenedor.value = select('#' + idGrafica + ' svg g.contenedor-areas')
 
   margenesSvg.value = usarRegistroGraficas().grafica(idGrafica).margenes
   watch(
@@ -219,14 +185,14 @@ onMounted(() => {
     d => (d.la_fecha = conversionTemporal(d[clave_fecha.value]))
   )
   calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
-  creaSeries()
+  creaAreas()
 
   watch(
     () => usarRegistroGraficas().grafica(idGrafica).grupoVis,
     () => {
       calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
       if (usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho > 0) {
-        creaSeries()
+        creaAreas()
       }
     }
   )
@@ -235,11 +201,11 @@ onMounted(() => {
       d => (d.la_fecha = conversionTemporal(d[clave_fecha.value]))
     )
     calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
-    creaSeries()
+    creaAreas()
   })
   watch(variables, () => {
     calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
-    creaSeries()
+    creaAreas()
   })
 })
 defineExpose({
@@ -250,11 +216,11 @@ defineExpose({
 
 <template>
   <g
-    ref="sisdaiSeriesTiempo"
+    ref="sisdaiAreasApiladas"
     :transform="`translate(${margenesSvg?.izquierda || 0},${
       margenesSvg?.arriba || 0
     })`"
-    class="contenedor-series"
+    class="contenedor-areas"
   >
   </g>
 </template>

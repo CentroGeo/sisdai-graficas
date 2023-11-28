@@ -3,9 +3,9 @@ layout: LayoutDocumentacion
 sectionName: Documentación
 ---
 
-# SisdaiSeriesTiempo
+# SisdaiAreasApiladas
 
-A continuación se describe la utilización del componente de visualización `<SisdaiSeriesTiempo/>` para construir un gráfico de
+A continuación se describe la utilización del componente de visualización `<SisdaiAreasApiladas/>` para construir un gráfico de
 series de tiempo.
 
 ## Propiedades
@@ -84,7 +84,7 @@ series de tiempo.
 > - `nombre`: su valor es un string que da más información sobre el id y es un _String_ que puede ser empleado para globos de información
 > - `color`: Es un _String_ que especifica en rgb, hexagesimal u otro formato reconoconocido por css que indicará el color que tomará cada subcategoría
 
-- `clave_fecha`: (_String_) Indica la clave empleada para la columna temporal, por default es `"fecha"` y con el ejemplo anterior de `datos` podría no especificarse esta propiedad, pero si `datos` emplea otra clave para la temporalidad, esta propiedad tendrá que especificarse
+- `clave_fecha`: (_String_) Indica la clave empleada para la columna temporal, por default es `"fecha"` y con el ejemplo anterior de `datos` podría no especificarse esta propiedad, pero si `datos` emplea otra clave para la temporalidad, esta propiedad tendrá que especificarse.
 - `formato_temporal`: (_String_) Especifica el formato temporal que tiene la variable de tiempo. Es un parámetro que se introduce a la función de d3 `d3.timeParse` y que sirve para transformar un formato de texto a un formato temporal dentro del contexto de javascript. En esta [documentación](https://d3-wiki.readthedocs.io/zh-cn/master/Time-Formatting/) se explica como espeficiar formatos para d3.
 
 ### Opcionales
@@ -95,5 +95,5 @@ series de tiempo.
 
 ## Ejemplos
 
-<utils-ejemplo-doc ruta="series-tiempo/basico.vue"/>
-<utils-ejemplo-doc ruta="series-tiempo/modificando-datos.vue"/>
+<utils-ejemplo-doc ruta="areas-apiladas/basico.vue"/>
+<utils-ejemplo-doc ruta="areas-apiladas/modificando-datos.vue"/>

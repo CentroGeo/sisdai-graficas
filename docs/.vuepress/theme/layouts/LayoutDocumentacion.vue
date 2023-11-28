@@ -105,6 +105,11 @@ function actualizaContenidoIndice() {
                 >
               </li>
               <li>
+                <router-link to="/documentacion/areas-apiladas">
+                  SisdaiAreasApiladas</router-link
+                >
+              </li>
+              <li>
                 <router-link to="/documentacion/opciones-avanzadas">
                   Opciones avanzadas</router-link
                 >

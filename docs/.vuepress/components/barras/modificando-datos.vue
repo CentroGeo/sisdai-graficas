@@ -11,8 +11,8 @@ const datos_dinamicos = ref([
   { categoria: 'zacatecas', cantidad_1: 20, cantidad_2: 100 },
 ])
 const variables_dinamicas = ref([
-  { id: 'cantidad_1', nombre_subcategoria: '$ pesos 1', color: 'red' },
-  { id: 'cantidad_2', nombre_subcategoria: '$ pesos 2', color: 'blue' },
+  { id: 'cantidad_1', nombre: '$ pesos 1', color: 'red' },
+  { id: 'cantidad_2', nombre: '$ pesos 2', color: 'blue' },
 ])
 function modificandoDatos() {
   let cantidad_datos = 2 + parseInt(17 * Math.random())
@@ -32,14 +32,14 @@ function modificandoVariables() {
     variables_dinamicas.value = [
       {
         id: 'cantidad_1',
-        nombre_subcategoria: '$ pesos 1',
+        nombre: '$ pesos 1',
         color: `rgb(${Math.random() * 255},${Math.random() * 255},${
           Math.random() * 255
         })`,
       },
       {
         id: 'cantidad_2',
-        nombre_subcategoria: '$ pesos 2',
+        nombre: '$ pesos 2',
         color: `rgb(${Math.random() * 255},${Math.random() * 255},${
           Math.random() * 255
         })`,
@@ -50,7 +50,7 @@ function modificandoVariables() {
     variables_dinamicas.value = [
       {
         id: 'cantidad_1',
-        nombre_subcategoria: '$ pesos 1',
+        nombre: '$ pesos 1',
         color: `rgb(${Math.random() * 255},${Math.random() * 255},${
           Math.random() * 255
         })`,

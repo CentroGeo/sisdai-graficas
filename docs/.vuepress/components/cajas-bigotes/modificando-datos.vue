@@ -6,14 +6,14 @@ const base = ref(1)
 const datos_dinamicos = ref(cajasbigotesejemplos1)
 const variables_dinamicas = ref({
   id: 'acciones_vendidas',
-  nombre_subcategoria: 'Acciones vendidas',
+  nombre: 'Acciones vendidas',
   color: 'red',
 })
 function alternaDatos() {
   if (base.value == 1) {
     variables_dinamicas.value = {
       id: 'metrica',
-      nombre_subcategoria: 'Metrica',
+      nombre: 'Metrica',
       color: '#2c7fb8',
     }
     datos_dinamicos.value = cajasbigotesejemplos2
@@ -22,7 +22,7 @@ function alternaDatos() {
   } else {
     variables_dinamicas.value = {
       id: 'acciones_vendidas',
-      nombre_subcategoria: 'Acciones vendidas',
+      nombre: 'Acciones vendidas',
       color: 'red',
     }
     datos_dinamicos.value = cajasbigotesejemplos1

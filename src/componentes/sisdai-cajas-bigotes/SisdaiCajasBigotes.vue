@@ -23,10 +23,9 @@ const props = defineProps({
     type: Object,
     require: true,
     validator(value) {
-      // debe tener: id, nombre_subcategoria, color
+      // debe tener: id, nombre, color
 
-      const validado =
-        'id' in value && 'nombre_subcategoria' in value && 'color' in value
+      const validado = 'id' in value && 'nombre' in value && 'color' in value
       if (!validado) {
         console.error('El objeto no cumple con las especificaciones')
       }
