@@ -33,55 +33,29 @@ function alternaDatos() {
 </script>
 
 <template>
-  <div
-    class="contenedor-vis borde-redondeado-8 con-panel-encabezado-vis con-panel-pie-vis"
+  <SisdaiGraficas
+    :titulo_eje_y="'título del eje y'"
+    :titulo_eje_x="'título del eje x'"
+    class="con-panel-encabezado-vis"
   >
-    <div class="panel-encabezado-vis">
-      <p class="vis-titulo-visualizacion">Ejemplo con datos dinámicos</p>
-      <p class="vis-instruccional">
-        Da click en el botón para alternar la base de datos
-      </p>
-      <button
-        @click="alternaDatos"
-        class="boton-chico"
-      >
-        Alternar datos
-      </button>
-    </div>
-
-    <SisdaiGraficas
-      :titulo_eje_y="'título del eje y'"
-      :titulo_eje_x="'título del eje x'"
-    >
-      <SisdaiCajasBigotes
-        :datos="datos_dinamicos"
-        :variables="variables_dinamicas"
-        :clave_categorias="base == 1 ? 'nombre_empresa' : 'nombre_categoria'"
-      />
-    </SisdaiGraficas>
-    <div class="panel-pie-vis">
-      <hr />
-    </div>
-    <div class="contenedor-vis-atribuciones">
-      <a
-        class="logo-conacyt"
-        href="https://conahcyt.mx"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img
-          src="https://conahcyt.mx/wp-content/uploads/2021/10/logo_conacyt_con_sintagma_azul_completo.svg"
-          alt="Conahcyt"
-        />
-      </a>
-
-      <a
-        href="https://sisdai.conahcyt.mx/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Sisdai
-      </a>
-    </div>
-  </div>
+    <template #panel-encabezado-vis>
+      <div>
+        <p class="vis-titulo-visualizacion">Ejemplo con datos dinámicos</p>
+        <p class="vis-instruccional">
+          Da click en el botón para alternar la base de datos
+        </p>
+        <button
+          @click="alternaDatos"
+          class="boton-chico"
+        >
+          Alternar datos
+        </button>
+      </div>
+    </template>
+    <SisdaiCajasBigotes
+      :datos="datos_dinamicos"
+      :variables="variables_dinamicas"
+      :clave_categorias="base == 1 ? 'nombre_empresa' : 'nombre_categoria'"
+    />
+  </SisdaiGraficas>
 </template>

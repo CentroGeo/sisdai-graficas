@@ -175,7 +175,8 @@ function creaSeries() {
         grupo
           .selectAll('path.linea')
           .data(d => [{ ...d, datos: datos.value }])
-
+          .transition()
+          .duration(500)
           .attr('d', dd =>
             line()
               .x(d => escalaTemporal.value(d.la_fecha))

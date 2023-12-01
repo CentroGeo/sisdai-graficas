@@ -1,56 +1,62 @@
 <script setup>
-import { ref } from 'vue'
-import data_edos from './data_edos.json'
-import diccionario_estados from './diccionario_estados.json'
-diccionario_estados.forEach(
-  d =>
-    (d.color = `rgb(${220 * Math.random()},${220 * Math.random()},${
-      220 * Math.random()
-    })`)
-)
-const variables = ref(diccionario_estados)
-variables
-const datos = ref(data_edos)
+import { ref, watch } from 'vue'
+import resistencia_contra_tiempo from '../../assets/datos/resistencia_contra_tiempo.json'
+const datos = ref(resistencia_contra_tiempo)
+const variables = ref([
+  {
+    id: 'total',
+    nombre: 'Total',
+    color: '#B726FC',
+  },
+])
+
+const visualizando = ref('total')
+watch(visualizando, nv => {
+  if (nv == 'total') {
+    variables.value = [
+      {
+        id: 'total',
+        nombre: 'total',
+        color: '#B726FC',
+      },
+    ]
+  } else {
+    variables.value = [
+      {
+        id: 'porcentaje',
+        nombre: 'Porcentaje',
+        color: '#000',
+      },
+    ]
+  }
+})
 </script>
 <template>
-  <div
-    class="contenedor-vis borde-redondeado-8 con-panel-pie-vis con-panel-encabezado-vis"
+  <SisdaiGraficas
+    class="con-panel-encabezado-vis"
+    :titulo_eje_y="'título del eje y'"
+    :titulo_eje_x="'título del eje x'"
+    :margenes="{ arriba: 30, abajo: 70, derecha: 30, izquierda: 40 }"
   >
-    <div class="panel-encabezado-vis"></div>
-    <SisdaiGraficas
-      :titulo_eje_y="'título del eje y'"
-      :titulo_eje_x="'título del eje x'"
-      :margenes="{ arriba: 30, abajo: 70, derecha: 30, izquierda: 40 }"
-    >
-      <SisdaiSeriesTiempo
-        :datos="datos"
-        :variables="variables"
-        :angulo_etiquetas_eje_x="-45"
-      />
-    </SisdaiGraficas>
-    <div class="panel-pie-vis">
-      <hr />
-    </div>
-    <div class="contenedor-vis-atribuciones">
-      <a
-        class="logo-conacyt"
-        href="https://conahcyt.mx"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img
-          src="https://conahcyt.mx/wp-content/uploads/2021/10/logo_conacyt_con_sintagma_azul_completo.svg"
-          alt="Conahcyt"
-        />
-      </a>
-
-      <a
-        href="https://sisdai.conahcyt.mx/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Sisdai
-      </a>
-    </div>
-  </div>
+    <template #panel-encabezado-vis>
+      <div>
+        <button
+          @click="
+            visualizando == 'total'
+              ? (visualizando = 'porcentaje')
+              : (visualizando = 'total')
+          "
+        >
+          Cambiar variable
+        </button>
+      </div>
+    </template>
+    <SisdaiSeriesTiempo
+      :datos="datos"
+      :variables="variables"
+      :angulo_etiquetas_eje_x="-45"
+      :clave_fecha="'fecha_toma'"
+      :formato_temporal="'%Y-%m'"
+    />
+  </SisdaiGraficas>
 </template>

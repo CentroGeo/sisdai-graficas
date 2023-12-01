@@ -47,52 +47,25 @@ watch(
 </script>
 
 <template>
-  <div
-    class="contenedor-vis borde-redondeado-8 con-panel-pie-vis con-panel-encabezado-vis"
+  <SisdaiGraficas
+    ref="laGrafica"
+    class="con-panel-encabezado-vis"
+    :titulo_eje_y="'título del eje y'"
+    :titulo_eje_x="'título del eje x'"
+    :margenes="{ arriba: 30, abajo: 20, derecha: 30, izquierda: 40 }"
   >
-    <div class="panel-encabezado-vis">
+    <template #panel-encabezado-viz>
       <div>
         <p class="vis-titulo-visualizacion">
           Ejemplo con elementos de fondo y de frente
         </p>
       </div>
-    </div>
-    <SisdaiGraficas
-      ref="laGrafica"
-      :titulo_eje_y="'título del eje y'"
-      :titulo_eje_x="'título del eje x'"
-      :margenes="{ arriba: 30, abajo: 20, derecha: 30, izquierda: 40 }"
-    >
-      <SisdaiCajasBigotes
-        :datos="datos_dinamicos"
-        :variables="variables_dinamicas"
-        :clave_categorias="'nombre_empresa'"
-        ref="cajasBigotes"
-      />
-    </SisdaiGraficas>
-    <div class="panel-pie-vis">
-      <hr />
-    </div>
-    <div class="contenedor-vis-atribuciones">
-      <a
-        class="logo-conacyt"
-        href="https://conahcyt.mx"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img
-          src="https://conahcyt.mx/wp-content/uploads/2021/10/logo_conacyt_con_sintagma_azul_completo.svg"
-          alt="Conahcyt"
-        />
-      </a>
-
-      <a
-        href="https://sisdai.conahcyt.mx/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Sisdai
-      </a>
-    </div>
-  </div>
+    </template>
+    <SisdaiCajasBigotes
+      :datos="datos_dinamicos"
+      :variables="variables_dinamicas"
+      :clave_categorias="'nombre_empresa'"
+      ref="cajasBigotes"
+    />
+  </SisdaiGraficas>
 </template>

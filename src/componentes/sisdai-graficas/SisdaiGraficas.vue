@@ -1,4 +1,6 @@
 <script setup>
+import ContenedorVisAtribuciones from '../internos/ContenedorVisAtribuciones.vue'
+
 import { select } from 'd3-selection'
 import { onMounted, onUnmounted, ref, toRefs, watch } from 'vue'
 import { idAleatorio } from '../../utils'
@@ -91,75 +93,96 @@ onUnmounted(() => {
 
 <template>
   <div
-    ref="contenedorSisdaiGraficas"
     :sisdai-grafica="id"
-    class="contenido-vis"
+    class="contenedor-vis sisdai-grafica"
     :id="id"
   >
+    <div class="panel-encabezado-vis">
+      <slot name="panel-encabezado-vis" />
+    </div>
+
+    <div class="panel-izquierda-vis">
+      <slot name="panel-izquierda-vis" />
+    </div>
     <div
-      class="contenedor-svg-ejes-tooltip"
-      :style="{
-        height: !grafica().alto ? '100%' : grafica().alto + 'px',
-      }"
+      class="contenido-vis"
+      ref="contenedorSisdaiGraficas"
     >
       <div
-        class="contenedor-titulo-eje-y"
+        class="contenedor-svg-ejes-tooltip"
         :style="{
           height: !grafica().alto ? '100%' : grafica().alto + 'px',
         }"
       >
         <div
+          class="contenedor-titulo-eje-y"
           :style="{
-            width: !grafica().alto ? '100%' : grafica().alto + 'px',
-            transform: `rotate(-90deg)translateX(calc(-100% - ${
-              0.5 * (margenes.arriba - margenes.abajo)
-            }px))`,
+            height: !grafica().alto ? '100%' : grafica().alto + 'px',
           }"
-          class="titulo-eje-y vis-titulo-ejes"
-          style="padding: 0 0 5px 0"
-          v-html="titulo_eje_y"
-        ></div>
-      </div>
-      <figure :style="{ left: espacio_eje_y + 'px' }">
-        <svg
-          :width="grafica().ancho"
-          :height="grafica().alto"
         >
-          <g
-            class="grupo-fondo"
-            :transform="`translate(${margenes.izquierda}, ${margenes.arriba})`"
-          />
-          <g class="eje-x-arriba" />
-          <g
-            class="eje-x-abajo"
-            :transform="`translate(${margenes.izquierda}, ${
-              grafica().alto - margenes.abajo
-            })`"
-          />
-          <g
-            class="eje-y-izquierda"
-            :transform="`translate(${margenes.izquierda}, ${+margenes.arriba})`"
-          />
-          <g
-            class="eje-y-derecha"
-            :transform="`translate(${
-              grafica().ancho - margenes.derecha
-            }, ${+margenes.arriba})`"
-          />
-          <slot />
-          <g
-            class="grupo-frente"
-            :transform="`translate(${margenes.izquierda}, ${margenes.arriba})`"
-          />
-        </svg>
-      </figure>
-      <div class="contenedor-titulo-eje-x">
-        <div
-          class="titulo-eje-x vis-titulo-ejes"
-          v-html="titulo_eje_x"
-        ></div>
+          <div
+            :style="{
+              width: !grafica().alto ? '100%' : grafica().alto + 'px',
+              transform: `rotate(-90deg)translateX(calc(-100% - ${
+                0.5 * (margenes.arriba - margenes.abajo)
+              }px))`,
+            }"
+            class="titulo-eje-y vis-titulo-ejes"
+            style="padding: 0 0 5px 0"
+            v-html="titulo_eje_y"
+          ></div>
+        </div>
+        <figure :style="{ left: espacio_eje_y + 'px' }">
+          <svg
+            :width="grafica().ancho"
+            :height="grafica().alto"
+          >
+            <g
+              class="grupo-fondo"
+              :transform="`translate(${margenes.izquierda}, ${margenes.arriba})`"
+            />
+            <g class="eje-x-arriba" />
+            <g
+              class="eje-x-abajo"
+              :transform="`translate(${margenes.izquierda}, ${
+                grafica().alto - margenes.abajo
+              })`"
+            />
+            <g
+              class="eje-y-izquierda"
+              :transform="`translate(${
+                margenes.izquierda
+              }, ${+margenes.arriba})`"
+            />
+            <g
+              class="eje-y-derecha"
+              :transform="`translate(${
+                grafica().ancho - margenes.derecha
+              }, ${+margenes.arriba})`"
+            />
+            <slot />
+            <g
+              class="grupo-frente"
+              :transform="`translate(${margenes.izquierda}, ${margenes.arriba})`"
+            />
+          </svg>
+        </figure>
+        <div class="contenedor-titulo-eje-x">
+          <div
+            class="titulo-eje-x vis-titulo-ejes"
+            v-html="titulo_eje_x"
+          ></div>
+        </div>
       </div>
     </div>
+    <div class="panel-derecha-vis">
+      <slot name="panel-derecha-vis" />
+    </div>
+
+    <div class="panel-pie-vis">
+      <slot name="panel-pie-vis" />
+    </div>
+    <ContenedorVisAtribuciones />
   </div>
 </template>
 
