@@ -135,7 +135,9 @@ function calcularEscalas(grupoVis) {
   escalaLineal.value = scaleLinear()
     .domain([
       0,
-      max(datos.value?.map(d => sum(variables.value.map(dd => d[dd.id])))),
+      props.acomodo === 'apiladas'
+        ? max(datos.value?.map(d => sum(variables.value.map(dd => d[dd.id]))))
+        : max(datos.value?.map(d => max(variables.value.map(dd => d[dd.id])))),
     ])
     .range([grupoVis.alto, 0])
   escalaSubBanda.value = scaleBand()
@@ -179,7 +181,7 @@ function creaBarras() {
           .data(d => d)
           .enter()
           .append('rect')
-          .attr('class', 'barra')
+          .attr('class', d => `barra ${d.data.key}`)
           .attr('y', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto)
           .attr('x', d => {
             return props.acomodo === 'apiladas'
@@ -216,12 +218,6 @@ function creaBarras() {
               'fill',
               d => variables.value.filter(v => v.id === d.key)[0].color
             )
-            .attr(
-              'width',
-              props.acomodo === 'apiladas'
-                ? escalaBanda.value.bandwidth()
-                : escalaSubBanda.value.bandwidth()
-            )
         )
         grupo
           .selectAll('rect.barra')
@@ -230,7 +226,7 @@ function creaBarras() {
             barras_enter => {
               barras_enter
                 .append('rect')
-                .attr('class', 'barra')
+                .attr('class', d => `barra ${d.data.key}`)
                 .attr(
                   'y',
                   usarRegistroGraficas().grafica(idGrafica).grupoVis.alto
@@ -262,7 +258,13 @@ function creaBarras() {
                 )
             },
             barras_update => {
+              console.log(
+                barras_update.selectAll(d => {
+                  return `rect.barra.${d.data.key}`
+                })
+              )
               barras_update
+
                 .transition()
                 .duration(500)
                 .attr('y', d =>

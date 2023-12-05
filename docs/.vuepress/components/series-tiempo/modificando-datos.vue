@@ -1,31 +1,31 @@
 <script setup>
 import { ref, watch } from 'vue'
-import resistencia_contra_tiempo from '../../assets/datos/resistencia_contra_tiempo.json'
-const datos = ref(resistencia_contra_tiempo)
+import numero_de_conglomerados from '../../assets/datos/numero_de_conglomerados.json'
+const datos = ref(numero_de_conglomerados)
 const variables = ref([
   {
-    id: 'total',
-    nombre: 'Total',
+    id: 'num_conglomerados_no_acum',
+    nombre: 'No acumulado',
     color: '#B726FC',
   },
 ])
 
-const visualizando = ref('total')
+const visualizando = ref('num_conglomerados_no_acum')
 watch(visualizando, nv => {
-  if (nv == 'total') {
+  if (nv == 'num_conglomerados_no_acum') {
     variables.value = [
       {
-        id: 'total',
-        nombre: 'total',
+        id: 'num_conglomerados_no_acum',
+        nombre: 'No acumulado',
         color: '#B726FC',
       },
     ]
   } else {
     variables.value = [
       {
-        id: 'porcentaje',
-        nombre: 'Porcentaje',
-        color: '#000',
+        id: 'num_conglomerados_acum',
+        nombre: 'Acumulado',
+        color: '#7C38FB',
       },
     ]
   }
@@ -42,9 +42,9 @@ watch(visualizando, nv => {
       <div>
         <button
           @click="
-            visualizando == 'total'
-              ? (visualizando = 'porcentaje')
-              : (visualizando = 'total')
+            visualizando == 'num_conglomerados_no_acum'
+              ? (visualizando = 'num_conglomerados_acum')
+              : (visualizando = 'num_conglomerados_no_acum')
           "
         >
           Cambiar variable
@@ -55,7 +55,7 @@ watch(visualizando, nv => {
       :datos="datos"
       :variables="variables"
       :angulo_etiquetas_eje_x="-45"
-      :clave_fecha="'fecha_toma'"
+      :clave_fecha="'anio_mes'"
       :formato_temporal="'%Y-%m'"
     />
   </SisdaiGraficas>

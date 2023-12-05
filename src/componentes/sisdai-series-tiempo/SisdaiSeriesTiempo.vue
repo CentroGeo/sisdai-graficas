@@ -246,6 +246,7 @@ onMounted(() => {
 defineExpose({
   escalaTemporal,
   escalaLineal,
+  conversionTemporal,
 })
 </script>
 

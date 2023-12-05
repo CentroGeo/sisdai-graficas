@@ -31,10 +31,6 @@ defineExpose({ variables_activas })
       v-for="variable in variables"
       :key="variable.id"
     >
-      <span
-        class="figura-variable"
-        :style="{ background: variable.color }"
-      ></span>
       <input
         :id="variable.id"
         type="checkbox"
@@ -44,7 +40,13 @@ defineExpose({ variables_activas })
       <label
         class="nombre-variable"
         :for="variable.id"
-        >{{ variable.nombre }}</label
+        ><span
+          class="figura-variable"
+          :style="{ background: variable.color }"
+        ></span>
+        <span class="nombre-variable">
+          {{ variable.nombre }}
+        </span></label
       >
     </span>
   </div>

@@ -36,27 +36,27 @@ const variables = ref([
       :datos="[
         {
           categoria: 'aguascalientes',
-          cantidad_1: 100,
-          cantidad_2: 100,
+          cantidad_1: 10,
+          cantidad_2: 10,
           cantidad_3: 60,
         },
         {
           categoria: 'baja_cal',
-          cantidad_1: 80,
-          cantidad_2: 100,
-          cantidad_3: 60,
+          cantidad_1: 10,
+          cantidad_2: 20,
+          cantidad_3: 50,
         },
         {
           categoria: 'baja_cal_sur',
-          cantidad_1: 20,
-          cantidad_2: 50,
-          cantidad_3: 60,
+          cantidad_1: 10,
+          cantidad_2: 30,
+          cantidad_3: 40,
         },
         {
           categoria: 'zacatecas',
-          cantidad_1: 20,
-          cantidad_2: 100,
-          cantidad_3: 60,
+          cantidad_1: 10,
+          cantidad_2: 40,
+          cantidad_3: 30,
         },
       ]"
       :variables="

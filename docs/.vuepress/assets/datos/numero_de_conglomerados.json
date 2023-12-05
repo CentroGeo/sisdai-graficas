@@ -1,0 +1,197 @@
+[
+  {
+    "anio_mes": "2019-07",
+    "num_conglomerados_no_acum": 34,
+    "num_conglomerados_acum": 34
+  },
+  {
+    "anio_mes": "2019-08",
+    "num_conglomerados_no_acum": 38,
+    "num_conglomerados_acum": 72
+  },
+  {
+    "anio_mes": "2019-09",
+    "num_conglomerados_no_acum": 95,
+    "num_conglomerados_acum": 167
+  },
+  {
+    "anio_mes": "2019-10",
+    "num_conglomerados_no_acum": 95,
+    "num_conglomerados_acum": 262
+  },
+  {
+    "anio_mes": "2019-11",
+    "num_conglomerados_no_acum": 67,
+    "num_conglomerados_acum": 329
+  },
+  {
+    "anio_mes": "2019-12",
+    "num_conglomerados_no_acum": 26,
+    "num_conglomerados_acum": 355
+  },
+  {
+    "anio_mes": "2020-01",
+    "num_conglomerados_no_acum": 63,
+    "num_conglomerados_acum": 418
+  },
+  {
+    "anio_mes": "2020-02",
+    "num_conglomerados_no_acum": 60,
+    "num_conglomerados_acum": 478
+  },
+  {
+    "anio_mes": "2020-03",
+    "num_conglomerados_no_acum": 49,
+    "num_conglomerados_acum": 527
+  },
+  {
+    "anio_mes": "2020-07",
+    "num_conglomerados_no_acum": 38,
+    "num_conglomerados_acum": 565
+  },
+  {
+    "anio_mes": "2020-08",
+    "num_conglomerados_no_acum": 45,
+    "num_conglomerados_acum": 610
+  },
+  {
+    "anio_mes": "2020-09",
+    "num_conglomerados_no_acum": 58,
+    "num_conglomerados_acum": 668
+  },
+  {
+    "anio_mes": "2020-10",
+    "num_conglomerados_no_acum": 46,
+    "num_conglomerados_acum": 714
+  },
+  {
+    "anio_mes": "2020-11",
+    "num_conglomerados_no_acum": 35,
+    "num_conglomerados_acum": 749
+  },
+  {
+    "anio_mes": "2020-12",
+    "num_conglomerados_no_acum": 29,
+    "num_conglomerados_acum": 778
+  },
+  {
+    "anio_mes": "2021-01",
+    "num_conglomerados_no_acum": 29,
+    "num_conglomerados_acum": 807
+  },
+  {
+    "anio_mes": "2021-02",
+    "num_conglomerados_no_acum": 36,
+    "num_conglomerados_acum": 843
+  },
+  {
+    "anio_mes": "2021-03",
+    "num_conglomerados_no_acum": 43,
+    "num_conglomerados_acum": 886
+  },
+  {
+    "anio_mes": "2021-04",
+    "num_conglomerados_no_acum": 44,
+    "num_conglomerados_acum": 930
+  },
+  {
+    "anio_mes": "2021-05",
+    "num_conglomerados_no_acum": 35,
+    "num_conglomerados_acum": 965
+  },
+  {
+    "anio_mes": "2021-06",
+    "num_conglomerados_no_acum": 42,
+    "num_conglomerados_acum": 1007
+  },
+  {
+    "anio_mes": "2021-07",
+    "num_conglomerados_no_acum": 22,
+    "num_conglomerados_acum": 1029
+  },
+  {
+    "anio_mes": "2021-08",
+    "num_conglomerados_no_acum": 21,
+    "num_conglomerados_acum": 1050
+  },
+  {
+    "anio_mes": "2021-09",
+    "num_conglomerados_no_acum": 35,
+    "num_conglomerados_acum": 1085
+  },
+  {
+    "anio_mes": "2021-10",
+    "num_conglomerados_no_acum": 29,
+    "num_conglomerados_acum": 1114
+  },
+  {
+    "anio_mes": "2021-11",
+    "num_conglomerados_no_acum": 20,
+    "num_conglomerados_acum": 1134
+  },
+  {
+    "anio_mes": "2021-12",
+    "num_conglomerados_no_acum": 14,
+    "num_conglomerados_acum": 1148
+  },
+  {
+    "anio_mes": "2022-01",
+    "num_conglomerados_no_acum": 23,
+    "num_conglomerados_acum": 1171
+  },
+  {
+    "anio_mes": "2022-02",
+    "num_conglomerados_no_acum": 19,
+    "num_conglomerados_acum": 1190
+  },
+  {
+    "anio_mes": "2022-03",
+    "num_conglomerados_no_acum": 18,
+    "num_conglomerados_acum": 1208
+  },
+  {
+    "anio_mes": "2022-04",
+    "num_conglomerados_no_acum": 17,
+    "num_conglomerados_acum": 1225
+  },
+  {
+    "anio_mes": "2022-05",
+    "num_conglomerados_no_acum": 23,
+    "num_conglomerados_acum": 1248
+  },
+  {
+    "anio_mes": "2022-06",
+    "num_conglomerados_no_acum": 9,
+    "num_conglomerados_acum": 1257
+  },
+  {
+    "anio_mes": "2022-07",
+    "num_conglomerados_no_acum": 8,
+    "num_conglomerados_acum": 1265
+  },
+  {
+    "anio_mes": "2022-08",
+    "num_conglomerados_no_acum": 18,
+    "num_conglomerados_acum": 1283
+  },
+  {
+    "anio_mes": "2022-09",
+    "num_conglomerados_no_acum": 8,
+    "num_conglomerados_acum": 1291
+  },
+  {
+    "anio_mes": "2022-10",
+    "num_conglomerados_no_acum": 7,
+    "num_conglomerados_acum": 1298
+  },
+  {
+    "anio_mes": "2022-11",
+    "num_conglomerados_no_acum": 6,
+    "num_conglomerados_acum": 1304
+  },
+  {
+    "anio_mes": "2022-12",
+    "num_conglomerados_no_acum": 1,
+    "num_conglomerados_acum": 1305
+  }
+]

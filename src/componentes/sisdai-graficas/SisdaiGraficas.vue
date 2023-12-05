@@ -2,7 +2,7 @@
 import ContenedorVisAtribuciones from '../internos/ContenedorVisAtribuciones.vue'
 
 import { select } from 'd3-selection'
-import { onMounted, onUnmounted, ref, toRefs, watch } from 'vue'
+import { onMounted, onUnmounted, ref, toRefs, useSlots, watch } from 'vue'
 import { idAleatorio } from '../../utils'
 import usarRegistroGraficas from './../../composables/usarRegistroGraficas'
 import * as valoresPorDefecto from './../../valores/grafica'
@@ -43,6 +43,7 @@ const props = defineProps({
 })
 const ancho_grafica = ref()
 const alto_grafica = ref()
+const slots = useSlots()
 
 usarRegistroGraficas().registrarGrafica(props.id)
 const grafica = () => {
@@ -55,7 +56,8 @@ watch(margenes, nv => {
 })
 
 const contenedorSisdaiGraficas = ref(null)
-const espacio_eje_y = ref(0)
+const espacio_eje_y = ref(0),
+  espacio_eje_x = ref(0)
 const grupoFondo = ref()
 const grupoFrente = ref()
 onMounted(() => {
@@ -68,6 +70,10 @@ function obteniendoDimensiones() {
   espacio_eje_y.value = document.querySelector(
     `#${props.id}  .titulo-eje-y`
   ).clientHeight
+  espacio_eje_x.value = document.querySelector(
+    `#${props.id}  .titulo-eje-x`
+  ).clientHeight
+  console.log(espacio_eje_x.value)
   grafica().ancho = props.ancho
     ? props.ancho
     : contenedorSisdaiGraficas.value.clientWidth - espacio_eje_y.value
@@ -89,13 +95,22 @@ onUnmounted(() => {
   usarRegistroGraficas().borrarGrafica(props.id)
   window.removeEventListener('resize', obteniendoDimensiones)
 })
+const paneles = ['encabezado', 'izquierda', 'derecha', 'pie']
+
+function panelesEnUso() {
+  // return !!slots[name]
+  return paneles
+    .filter(panel => !!slots[`panel-${panel}-vis`])
+    .map(panel => `con-panel-${panel}-vis`)
+}
 </script>
 
 <template>
   <div
     :sisdai-grafica="id"
-    class="contenedor-vis sisdai-grafica"
+    class="contenedor-vis2 sisdai-grafica borde-redondeado-8"
     :id="id"
+    :class="panelesEnUso()"
   >
     <div class="panel-encabezado-vis">
       <slot name="panel-encabezado-vis" />
@@ -111,7 +126,9 @@ onUnmounted(() => {
       <div
         class="contenedor-svg-ejes-tooltip"
         :style="{
-          height: !grafica().alto ? '100%' : grafica().alto + 'px',
+          height: !grafica().alto
+            ? '100%'
+            : `${grafica().alto + espacio_eje_x}px`,
         }"
       >
         <div
@@ -185,10 +202,10 @@ onUnmounted(() => {
     <ContenedorVisAtribuciones />
   </div>
 </template>
-
 <style lang="scss">
+@import '../../estilos/ContenedorVis.scss';
+
 .contenido-vis {
-  width: 100%;
   div.contenedor-svg-ejes-tooltip {
     position: relative;
     width: 100%;

@@ -97,3 +97,4 @@ series de tiempo.
 
 <utils-ejemplo-doc ruta="series-tiempo/basico.vue"/>
 <utils-ejemplo-doc ruta="series-tiempo/modificando-datos.vue"/>
+<utils-ejemplo-doc ruta="series-tiempo/multiples-lineas.vue"/>
