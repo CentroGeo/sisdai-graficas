@@ -6,6 +6,7 @@ dist
 docs/.vuepress/dist
 docs/.vitepress/dist
 
+src/estilos
 # No ejecutar lint en la salida de nyc coverage
 coverage
 libs

@@ -4,17 +4,17 @@ const variablesCheckeadas = ref()
 const variables = ref([
   {
     id: 'cantidad_1',
-    nombre_subcategoria: 'Cantidad 1',
+    nombre: 'Cantidad 1',
     color: 'pink',
   },
   {
     id: 'cantidad_2',
-    nombre_subcategoria: 'Cantidad 2',
+    nombre: 'Cantidad 2',
     color: 'orange',
   },
   {
     id: 'cantidad_3',
-    nombre_subcategoria: 'Cantidad 3',
+    nombre: 'Cantidad 3',
     color: 'cyan',
   },
 ])
@@ -24,15 +24,16 @@ const variables = ref([
   <div
     class="contenedor-vis borde-redondeado-8 con-panel-encabezado-vis con-panel-pie-vis"
   >
-    <div class="panel-encabezado-vis">
-      <div>
-        <p class="vis-titulo-visualizacion">Ejemplo con inputs checks</p>
-      </div>
-    </div>
     <SisdaiGraficas
       :titulo_eje_y="'título del eje y'"
       :titulo_eje_x="'título del eje x'"
+      class="con-panel-encabezado-vis"
     >
+      <template #panel-encabezado-vis>
+        <div>
+          <p class="vis-titulo-visualizacion">Ejemplo con inputs checks</p>
+        </div>
+      </template>
       <SisdaiBarras
         :datos="[
           {

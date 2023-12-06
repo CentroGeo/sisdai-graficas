@@ -5,12 +5,10 @@ const props = defineProps({
     type: Array,
     require: true,
     validator(value) {
-      // debe tener: id, nombre_subcategoria, color
+      // debe tener: id, nombre, color
       const validado = value.some(
-        ({ id, nombre_subcategoria, color }) =>
-          id !== undefined ||
-          nombre_subcategoria !== undefined ||
-          color !== undefined
+        ({ id, nombre, color }) =>
+          id !== undefined || nombre !== undefined || color !== undefined
       )
       if (!validado) {
         console.error('El objeto no cumple con las especificaciones')
@@ -37,7 +35,7 @@ defineExpose({ variables_activas })
         class="figura-variable"
         :style="{ background: variable.color }"
       ></span>
-      <span :for="variable.id">{{ variable.nombre_subcategoria }}</span>
+      <span :for="variable.id">{{ variable.nombre }}</span>
     </span>
   </div>
 </template>

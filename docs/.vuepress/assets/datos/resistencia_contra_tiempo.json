@@ -1,0 +1,236 @@
+[
+  {
+    "fecha_toma": "2019-07",
+    "pacientes_con_resistencia": 16,
+    "total": 72,
+    "porcentaje": 22.2
+  },
+  {
+    "fecha_toma": "2019-08",
+    "pacientes_con_resistencia": 16,
+    "total": 93,
+    "porcentaje": 17.2
+  },
+  {
+    "fecha_toma": "2019-09",
+    "pacientes_con_resistencia": 43,
+    "total": 241,
+    "porcentaje": 17.8
+  },
+  {
+    "fecha_toma": "2019-10",
+    "pacientes_con_resistencia": 62,
+    "total": 301,
+    "porcentaje": 20.6
+  },
+  {
+    "fecha_toma": "2019-11",
+    "pacientes_con_resistencia": 46,
+    "total": 241,
+    "porcentaje": 19.1
+  },
+  {
+    "fecha_toma": "2019-12",
+    "pacientes_con_resistencia": 19,
+    "total": 94,
+    "porcentaje": 20.2
+  },
+  {
+    "fecha_toma": "2020-01",
+    "pacientes_con_resistencia": 60,
+    "total": 318,
+    "porcentaje": 18.9
+  },
+  {
+    "fecha_toma": "2020-02",
+    "pacientes_con_resistencia": 55,
+    "total": 272,
+    "porcentaje": 20.2
+  },
+  {
+    "fecha_toma": "2020-03",
+    "pacientes_con_resistencia": 33,
+    "total": 222,
+    "porcentaje": 14.9
+  },
+  {
+    "fecha_toma": "2020-07",
+    "pacientes_con_resistencia": 31,
+    "total": 177,
+    "porcentaje": 17.5
+  },
+  {
+    "fecha_toma": "2020-08",
+    "pacientes_con_resistencia": 48,
+    "total": 251,
+    "porcentaje": 19.1
+  },
+  {
+    "fecha_toma": "2020-09",
+    "pacientes_con_resistencia": 53,
+    "total": 255,
+    "porcentaje": 20.8
+  },
+  {
+    "fecha_toma": "2020-10",
+    "pacientes_con_resistencia": 62,
+    "total": 304,
+    "porcentaje": 20.4
+  },
+  {
+    "fecha_toma": "2020-11",
+    "pacientes_con_resistencia": 55,
+    "total": 224,
+    "porcentaje": 24.6
+  },
+  {
+    "fecha_toma": "2020-12",
+    "pacientes_con_resistencia": 34,
+    "total": 162,
+    "porcentaje": 21.0
+  },
+  {
+    "fecha_toma": "2021-01",
+    "pacientes_con_resistencia": 46,
+    "total": 208,
+    "porcentaje": 22.1
+  },
+  {
+    "fecha_toma": "2021-02",
+    "pacientes_con_resistencia": 62,
+    "total": 261,
+    "porcentaje": 23.8
+  },
+  {
+    "fecha_toma": "2021-03",
+    "pacientes_con_resistencia": 74,
+    "total": 348,
+    "porcentaje": 21.3
+  },
+  {
+    "fecha_toma": "2021-04",
+    "pacientes_con_resistencia": 90,
+    "total": 337,
+    "porcentaje": 26.7
+  },
+  {
+    "fecha_toma": "2021-05",
+    "pacientes_con_resistencia": 73,
+    "total": 312,
+    "porcentaje": 23.4
+  },
+  {
+    "fecha_toma": "2021-06",
+    "pacientes_con_resistencia": 67,
+    "total": 328,
+    "porcentaje": 20.4
+  },
+  {
+    "fecha_toma": "2021-07",
+    "pacientes_con_resistencia": 59,
+    "total": 245,
+    "porcentaje": 24.1
+  },
+  {
+    "fecha_toma": "2021-08",
+    "pacientes_con_resistencia": 60,
+    "total": 285,
+    "porcentaje": 21.1
+  },
+  {
+    "fecha_toma": "2021-09",
+    "pacientes_con_resistencia": 65,
+    "total": 298,
+    "porcentaje": 21.8
+  },
+  {
+    "fecha_toma": "2021-10",
+    "pacientes_con_resistencia": 63,
+    "total": 300,
+    "porcentaje": 21.0
+  },
+  {
+    "fecha_toma": "2021-11",
+    "pacientes_con_resistencia": 69,
+    "total": 287,
+    "porcentaje": 24.0
+  },
+  {
+    "fecha_toma": "2021-12",
+    "pacientes_con_resistencia": 35,
+    "total": 146,
+    "porcentaje": 24.0
+  },
+  {
+    "fecha_toma": "2022-01",
+    "pacientes_con_resistencia": 65,
+    "total": 317,
+    "porcentaje": 20.5
+  },
+  {
+    "fecha_toma": "2022-02",
+    "pacientes_con_resistencia": 71,
+    "total": 284,
+    "porcentaje": 25.0
+  },
+  {
+    "fecha_toma": "2022-03",
+    "pacientes_con_resistencia": 90,
+    "total": 352,
+    "porcentaje": 25.6
+  },
+  {
+    "fecha_toma": "2022-04",
+    "pacientes_con_resistencia": 66,
+    "total": 276,
+    "porcentaje": 23.9
+  },
+  {
+    "fecha_toma": "2022-05",
+    "pacientes_con_resistencia": 71,
+    "total": 344,
+    "porcentaje": 20.6
+  },
+  {
+    "fecha_toma": "2022-06",
+    "pacientes_con_resistencia": 66,
+    "total": 306,
+    "porcentaje": 21.6
+  },
+  {
+    "fecha_toma": "2022-07",
+    "pacientes_con_resistencia": 50,
+    "total": 219,
+    "porcentaje": 22.8
+  },
+  {
+    "fecha_toma": "2022-08",
+    "pacientes_con_resistencia": 70,
+    "total": 365,
+    "porcentaje": 19.2
+  },
+  {
+    "fecha_toma": "2022-09",
+    "pacientes_con_resistencia": 51,
+    "total": 303,
+    "porcentaje": 16.8
+  },
+  {
+    "fecha_toma": "2022-10",
+    "pacientes_con_resistencia": 44,
+    "total": 241,
+    "porcentaje": 18.3
+  },
+  {
+    "fecha_toma": "2022-11",
+    "pacientes_con_resistencia": 35,
+    "total": 206,
+    "porcentaje": 17.0
+  },
+  {
+    "fecha_toma": "2022-12",
+    "pacientes_con_resistencia": 26,
+    "total": 137,
+    "porcentaje": 19.0
+  }
+]

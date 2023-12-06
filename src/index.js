@@ -1,9 +1,12 @@
 import {
+  SisdaiAreasApiladas,
   SisdaiBarras,
   SisdaiCajasBigotes,
   SisdaiChecks,
   SisdaiGraficas,
   SisdaiNomenclatura,
+  SisdaiSeriesTiempo,
+  SisdaiViolines,
 } from './componentes'
 
 const plugin = {
@@ -14,15 +17,21 @@ const plugin = {
     Vue.use(SisdaiCajasBigotes)
     Vue.use(SisdaiChecks)
     Vue.use(SisdaiNomenclatura)
+    Vue.use(SisdaiSeriesTiempo)
+    Vue.use(SisdaiAreasApiladas)
+    Vue.use(SisdaiViolines)
   },
 }
 
 export {
+  SisdaiAreasApiladas,
   SisdaiBarras,
   SisdaiCajasBigotes,
   SisdaiChecks,
   SisdaiGraficas,
   SisdaiNomenclatura,
+  SisdaiSeriesTiempo,
+  SisdaiViolines,
 }
 
 export default plugin

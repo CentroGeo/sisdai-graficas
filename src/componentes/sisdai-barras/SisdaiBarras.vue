@@ -1,15 +1,17 @@
 <script setup>
 import { max, sum } from 'd3-array'
-import { axisBottom, axisLeft, axisRight } from 'd3-axis'
 import { scaleBand, scaleLinear } from 'd3-scale'
 import { select } from 'd3-selection'
 import { stack } from 'd3-shape'
 import { transition } from 'd3-transition'
 
 import { onMounted, ref, shallowRef, toRefs, watch } from 'vue'
+import {
+  buscarIdContenedorHtmlSisdai,
+  creaEjeHorizontal,
+  creaEjeVertical,
+} from '../../utils'
 import usarRegistroGraficas from './../../composables/usarRegistroGraficas'
-import { buscarIdContenedorHtmlSisdai } from './../../utils'
-
 var idGrafica
 
 const props = defineProps({
@@ -21,12 +23,10 @@ const props = defineProps({
     type: Array,
     require: true,
     validator(value) {
-      // debe tener: id, nombre_subcategoria, color
+      // debe tener: id, nombre, color
       const validado = value.some(
-        ({ id, nombre_subcategoria, color }) =>
-          id !== undefined ||
-          nombre_subcategoria !== undefined ||
-          color !== undefined
+        ({ id, nombre, color }) =>
+          id !== undefined || nombre !== undefined || color !== undefined
       )
       if (!validado) {
         console.error('El objeto no cumple con las especificaciones')
@@ -86,6 +86,30 @@ const props = defineProps({
       return validado
     },
   },
+  angulo_etiquetas_eje_x: {
+    type: Number,
+    default: 0,
+    validator(value) {
+      // debe estar entre -90 y 90
+      const validado = -90 <= value && value <= 90
+      if (!validado) {
+        console.error('El número debe estar entre -90 y 90')
+      }
+      return validado
+    },
+  },
+  angulo_etiquetas_eje_y: {
+    type: Number,
+    default: 0,
+    validator(value) {
+      // debe estar entre -90 y 90
+      const validado = -90 <= value && value <= 90
+      if (!validado) {
+        console.error('El número debe estar entre -90 y 90')
+      }
+      return validado
+    },
+  },
 })
 
 const sisdaiBarras = shallowRef()
@@ -111,25 +135,25 @@ function calcularEscalas(grupoVis) {
   escalaLineal.value = scaleLinear()
     .domain([
       0,
-      max(datos.value?.map(d => sum(variables.value.map(dd => d[dd.id])))),
+      props.acomodo === 'apiladas'
+        ? max(datos.value?.map(d => sum(variables.value.map(dd => d[dd.id]))))
+        : max(datos.value?.map(d => max(variables.value.map(dd => d[dd.id])))),
     ])
     .range([grupoVis.alto, 0])
-
-  select(`div#${idGrafica} svg g.eje-x-abajo`).call(
-    axisBottom(escalaBanda.value)
-  )
-  select(`div#${idGrafica} svg g.eje-y-${props.alineacion_eje_y}`)
-    .transition()
-    .duration(500)
-    .call(
-      props.alineacion_eje_y === 'izquierda'
-        ? axisLeft(escalaLineal.value)
-        : axisRight(escalaLineal.value)
-    )
   escalaSubBanda.value = scaleBand()
     .domain(variables.value.map(d => d.id))
     .range([0, escalaBanda.value.bandwidth()])
     .padding(props.separacion_agrupadas)
+
+  creaEjeHorizontal(idGrafica, escalaBanda.value, props.angulo_etiquetas_eje_x)
+
+  creaEjeVertical(
+    idGrafica,
+    escalaLineal.value,
+    props.angulo_etiquetas_eje_y,
+    props.alineacion_eje_y,
+    grupoVis.ancho
+  )
 }
 function creaBarras() {
   let apilada = stack().keys(variables.value.map(d => d.id))(datos.value)
@@ -157,7 +181,7 @@ function creaBarras() {
           .data(d => d)
           .enter()
           .append('rect')
-          .attr('class', 'barra')
+          .attr('class', d => `barra ${d.data.key}`)
           .attr('y', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto)
           .attr('x', d => {
             return props.acomodo === 'apiladas'
@@ -194,12 +218,6 @@ function creaBarras() {
               'fill',
               d => variables.value.filter(v => v.id === d.key)[0].color
             )
-            .attr(
-              'width',
-              props.acomodo === 'apiladas'
-                ? escalaBanda.value.bandwidth()
-                : escalaSubBanda.value.bandwidth()
-            )
         )
         grupo
           .selectAll('rect.barra')
@@ -208,7 +226,7 @@ function creaBarras() {
             barras_enter => {
               barras_enter
                 .append('rect')
-                .attr('class', 'barra')
+                .attr('class', d => `barra ${d.data.key}`)
                 .attr(
                   'y',
                   usarRegistroGraficas().grafica(idGrafica).grupoVis.alto
@@ -240,7 +258,13 @@ function creaBarras() {
                 )
             },
             barras_update => {
+              console.log(
+                barras_update.selectAll(d => {
+                  return `rect.barra.${d.data.key}`
+                })
+              )
               barras_update
+
                 .transition()
                 .duration(500)
                 .attr('y', d =>
@@ -304,6 +328,11 @@ onMounted(() => {
     calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
     creaBarras()
   })
+})
+defineExpose({
+  escalaBanda,
+  escalaLineal,
+  escalaSubBanda,
 })
 </script>
 

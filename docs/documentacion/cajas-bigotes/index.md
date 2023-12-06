@@ -9,6 +9,8 @@ En esta sección se describe el uso del componente de visualización `<SisdaiCaj
 
 ## Propiedades
 
+### Obligatorias
+
 - `datos`: (_Array_) Base de datos a visualizar, consiste en una arreglo de objetos en dónde cada objeto corresponde a un elemento de la distribución, el cual debe incluir una categoría y un valor numérico.
 
 > Ejemplo de `datos`:
@@ -77,7 +79,7 @@ En esta sección se describe el uso del componente de visualización `<SisdaiCaj
 > ```json
 >   {
 >     "id": "acciones_vendidas",
->     "nombre_subcategoria": "Acciones vendidas",
+>     "nombre": "Acciones vendidas",
 >     "color": "#2c7fb8"
 >   },
 > ```
@@ -85,11 +87,18 @@ En esta sección se describe el uso del componente de visualización `<SisdaiCaj
 > Esta propiedad tiene un validador para verificar que el objeto contenga las tres claves
 >
 > - `id`: su valor debe coincidir con alguna subcategoría de `datos`, equivalente a uno de los nombres de las columnas
-> - `nombre_subcategoria`: su valor es un string que da más información sobre el id y es un _String_ que puede ser empleado para globos de información
+> - `nombre`: su valor es un string que da más información sobre el id y es un _String_ que puede ser empleado para globos de información
 > - `color`: Es un _String_ que especifica en rgb, hexagesimal u otro formato reconoconocido por css que indicará el color que tomarán los diagramas
 
 - `clave_categorias`: (_String_) Indica la clave empleada para las categorías que se usarán para agrupar al conjunto de datos, por default es `"categoria"` y con el ejemplo anterior de `datos` tendría que especificarse como `"nombre_empresa"`
+
+### Opcionales
+
 - `alineacion_eje_y`: (_String_) Esta propiedad indica de qué lado se acomodará el eje vertical, las opciones validas son `'izquierda'` o `'derecha'`, y su valor por _default_ es `'izquierda'`.
+- `angulo_etiquetas_eje_y`: (_Number_) Es un valor numerico que indica el ángulo de rotación del eje vertical
+- `angulo_etiquetas_eje_x`: (_Number_) Es un valor numerico que indica el ángulo de rotación del eje horizontal
+
+## Ejemplos
 
 ### Ejemplo básico de componente
 

@@ -19,7 +19,7 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "d3": "^7.8.2",
-    "sisdai-css": "git+https://codigo.conahcyt.mx/sisdai/sisdai-css#v0.42.7",
+    "sisdai-css": "git+https://codigo.conahcyt.mx/sisdai/sisdai-css#v0.45.6",
     "vue": "^2.7.14"
   },
   "devDependencies": {
@@ -38,7 +38,7 @@
     "raw-loader": "^4.0.2",
     "sass": "^1.57.1",
     "sass-loader": "^10.4.1",
-    "sisdai-componentes": "git+https://codigo.conahcyt.mx/sisdai/sisdai-componentes#v2.3.9",
+    "sisdai-componentes": "git+https://codigo.conahcyt.mx/sisdai/sisdai-componentes#v2.4.2",
     "vue-template-compiler": "^2.7.14",
     "vuepress": "^1.9.8",
     "vuepress-html-webpack-plugin": "^3.2.0",

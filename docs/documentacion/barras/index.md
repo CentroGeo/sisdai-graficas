@@ -68,12 +68,12 @@ barras. Este componente puede ser utilizado para crear barras simples o apiladas
 > [
 >   {
 >     "id": "cantidad_1",
->     "nombre_subcategoria": "Cantidad 1",
+>     "nombre": "Cantidad 1",
 >     "color": "pink"
 >   },
 >   {
 >     "id": "cantidad_2",
->     "nombre_subcategoria": "Cantidad 2",
+>     "nombre": "Cantidad 2",
 >     "color": "orange"
 >   }
 > ]
@@ -82,21 +82,24 @@ barras. Este componente puede ser utilizado para crear barras simples o apiladas
 > Esta propiedad tiene un validador para verificar que todos los objetos contengan las tres claves:
 >
 > - `id`: su valor debe coincidir con alguna subcategoría de `datos`, equivalente a uno de los nombres de las columnas
-> - `nombre_subcategoria`: su valor es un string que da más información sobre el id y es un _String_ que puede ser empleado para globos de información
+> - `nombre`: su valor es un string que da más información sobre el id y es un _String_ que puede ser empleado para globos de información
 > - `color`: Es un _String_ que especifica en rgb, hexagesimal u otro formato reconoconocido por css que indicará el color que tomará cada subcategoría
 
 - `clave_categorias`: (_String_) Indica la clave empleada para las categorías principales, por default es `"categoria"` y con el ejemplo anterior de `datos` podría no especificarse esta propiedad, pero si `datos` emplea otra clave para la categoría principal, esta propiedad tendrá que especificarse
 
-- `clave_categorias`: (_String_) Indica la clave empleada para las categorías principales, por default es `"categoria"` y con el ejemplo anterior de `datos` podría no especificarse esta propiedad, pero si `datos` emplea otra clave para la categoría principal, esta propiedad tendrá que especificarse
-
-- `alineacion_eje_y`: (_String_) Esta propiedad indica de qué lado se acomodará el eje vertical, las opciones validas son `'izquierda'` o `'derecha'`, y su valor por _default_ es `'izquierda'`.
-
 ### Opcionales
 
--`separacion`: (_Number_) Valor numérico entre 0 y 1 que determina la separación de las barras. Por default es `0.2` y significa que el 20% de la gráfica será espacio en blanco
+- `separacion`: (_Number_) Valor numérico entre 0 y 1 que determina la separación de las barras. Por default es `0.2` y significa que el 20% de la gráfica será espacio en blanco
 
 - `acomodo`: (_String_) Admite los valores `"apiladas"` o `"agrupadas"` y determina la forma en la que se mostrarán las barras en caso de que existan varias subcategorías. -`padding_agrupadas`: (_Number_) Valor numérico entre 0 y 1 que determina la separación de las barras agrupadas. Para ver su efecto, se debe tener la propiedad `acomodo` en `"agrupadas"`. Por default es 0.1 y significa que para un subgrupo barras el 10% será espacio en blanco.
+- `alineacion_eje_y`: (_String_) Esta propiedad indica de qué lado se acomodará el eje vertical, las opciones validas son `'izquierda'` o `'derecha'`, y su valor por _default_ es `'izquierda'`.
+- `angulo_etiquetas_eje_y`: (_Number_) Es un valor numerico que indica el ángulo de rotación del eje vertical
+- `angulo_etiquetas_eje_x`: (_Number_) Es un valor numerico que indica el ángulo de rotación del eje horizontal
+
+## Ejemplos
 
 <utils-ejemplo-doc ruta="barras/basico.vue"/>
+<utils-ejemplo-doc ruta="barras/datos-reales.vue"/>
+
 <utils-ejemplo-doc ruta="barras/modificando-datos.vue"/>
 <utils-ejemplo-doc ruta="barras/checks.vue"/>

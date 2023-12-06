@@ -11,8 +11,8 @@ const datos_dinamicos = ref([
   { categoria: 'zacatecas', cantidad_1: 20, cantidad_2: 100 },
 ])
 const variables_dinamicas = ref([
-  { id: 'cantidad_1', nombre_subcategoria: '$ pesos 1', color: 'red' },
-  { id: 'cantidad_2', nombre_subcategoria: '$ pesos 2', color: 'blue' },
+  { id: 'cantidad_1', nombre: '$ pesos 1', color: 'red' },
+  { id: 'cantidad_2', nombre: '$ pesos 2', color: 'blue' },
 ])
 function modificandoDatos() {
   let cantidad_datos = 2 + parseInt(17 * Math.random())
@@ -32,14 +32,14 @@ function modificandoVariables() {
     variables_dinamicas.value = [
       {
         id: 'cantidad_1',
-        nombre_subcategoria: '$ pesos 1',
+        nombre: '$ pesos 1',
         color: `rgb(${Math.random() * 255},${Math.random() * 255},${
           Math.random() * 255
         })`,
       },
       {
         id: 'cantidad_2',
-        nombre_subcategoria: '$ pesos 2',
+        nombre: '$ pesos 2',
         color: `rgb(${Math.random() * 255},${Math.random() * 255},${
           Math.random() * 255
         })`,
@@ -50,7 +50,7 @@ function modificandoVariables() {
     variables_dinamicas.value = [
       {
         id: 'cantidad_1',
-        nombre_subcategoria: '$ pesos 1',
+        nombre: '$ pesos 1',
         color: `rgb(${Math.random() * 255},${Math.random() * 255},${
           Math.random() * 255
         })`,
@@ -61,87 +61,64 @@ function modificandoVariables() {
 </script>
 
 <template>
-  <div
-    class="contenedor-vis borde-redondeado-8 con-panel-encabezado-vis con-panel-pie-vis"
+  <SisdaiGraficas
+    class="con-panel-encabezado-vis"
+    :margenes="{
+      arriba: Number(margen),
+      abajo: Number(margen),
+      derecha: Number(margen),
+      izquierda: Number(margen),
+    }"
+    :titulo_eje_y="'título del eje y'"
+    :titulo_eje_x="'título del eje x'"
   >
-    <div class="panel-encabezado-vis">
-      <p class="vis-titulo-visualizacion">Ejemplo con propiedades dinámicas</p>
-      <p class="vis-instruccional">
-        Usa el <i>slider</i> para modificar los márgenes, y los botones para
-        modificar los datos aleatoriamente, para modificar las variables que se
-        visualizan o para cambiar la disposición de las barras
-      </p>
+    <template #panel-encabezado-vis>
+      <div>
+        <p class="vis-titulo-visualizacion">
+          Ejemplo con propiedades dinámicas
+        </p>
+        <p class="vis-instruccional">
+          Usa el <i>slider</i> para modificar los márgenes, y los botones para
+          modificar los datos aleatoriamente, para modificar las variables que
+          se visualizan o para cambiar la disposición de las barras
+        </p>
 
-      <div class="m-b-3 p-x-minimo">
-        <input
-          id="margenes"
-          type="range"
-          v-model="margen"
-        />
-        <label for="margenes">margen: {{ margen }}</label>
+        <div class="m-b-3 p-x-minimo">
+          <input
+            id="margenes"
+            type="range"
+            v-model="margen"
+          />
+          <label for="margenes">margen: {{ margen }}</label>
+        </div>
+        <button
+          class="boton-chico"
+          @click="modificandoDatos"
+        >
+          Modifica datos
+        </button>
+        <button
+          class="boton-chico"
+          @click="modificandoVariables"
+        >
+          Modifica variables
+        </button>
+        <button
+          class="boton-chico"
+          @click="
+            acomodo == 'apiladas'
+              ? (acomodo = 'agrupadas')
+              : (acomodo = 'apiladas')
+          "
+        >
+          {{ acomodo == 'apiladas' ? 'Agrupar' : 'Apilar' }}
+        </button>
       </div>
-      <button
-        class="boton-chico"
-        @click="modificandoDatos"
-      >
-        Modifica datos
-      </button>
-      <button
-        class="boton-chico"
-        @click="modificandoVariables"
-      >
-        Modifica variables
-      </button>
-      <button
-        class="boton-chico"
-        @click="
-          acomodo == 'apiladas'
-            ? (acomodo = 'agrupadas')
-            : (acomodo = 'apiladas')
-        "
-      >
-        {{ acomodo == 'apiladas' ? 'Agrupar' : 'Apilar' }}
-      </button>
-    </div>
-    <SisdaiGraficas
-      :margenes="{
-        arriba: Number(margen),
-        abajo: Number(margen),
-        derecha: Number(margen),
-        izquierda: Number(margen),
-      }"
-      :titulo_eje_y="'título del eje y'"
-      :titulo_eje_x="'título del eje x'"
-    >
-      <SisdaiBarras
-        :datos="datos_dinamicos"
-        :variables="variables_dinamicas"
-        :acomodo="acomodo"
-      />
-    </SisdaiGraficas>
-    <div class="panel-pie-vis">
-      <hr />
-    </div>
-    <div class="contenedor-vis-atribuciones">
-      <a
-        class="logo-conacyt"
-        href="https://conahcyt.mx"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img
-          src="https://conahcyt.mx/wp-content/uploads/2021/10/logo_conacyt_con_sintagma_azul_completo.svg"
-          alt="Conahcyt"
-        />
-      </a>
-
-      <a
-        href="https://sisdai.conahcyt.mx/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Sisdai
-      </a>
-    </div>
-  </div>
+    </template>
+    <SisdaiBarras
+      :datos="datos_dinamicos"
+      :variables="variables_dinamicas"
+      :acomodo="acomodo"
+    />
+  </SisdaiGraficas>
 </template>

@@ -1,13 +1,17 @@
 <script setup>
 import { ascending, descending, extent, mean, quantile, rollup } from 'd3-array'
-import { axisBottom, axisLeft, axisRight } from 'd3-axis'
 import { scaleBand, scaleLinear } from 'd3-scale'
 import { select } from 'd3-selection'
 import { transition } from 'd3-transition'
 
 import { onMounted, ref, shallowRef, toRefs, watch } from 'vue'
 import usarRegistroGraficas from '../../composables/usarRegistroGraficas'
-import { buscarIdContenedorHtmlSisdai } from '../../utils'
+import {
+  buscarIdContenedorHtmlSisdai,
+  creaEjeHorizontal,
+  creaEjeVertical,
+} from '../../utils'
+
 var idGrafica
 
 const props = defineProps({
@@ -19,10 +23,9 @@ const props = defineProps({
     type: Object,
     require: true,
     validator(value) {
-      // debe tener: id, nombre_subcategoria, color
+      // debe tener: id, nombre, color
 
-      const validado =
-        'id' in value && 'nombre_subcategoria' in value && 'color' in value
+      const validado = 'id' in value && 'nombre' in value && 'color' in value
       if (!validado) {
         console.error('El objeto no cumple con las especificaciones')
       }
@@ -42,6 +45,30 @@ const props = defineProps({
         console.error(
           "la propiedad 'alineacion_eje_y' sólo admite los valores 'izquierda' o 'derecha'"
         )
+      }
+      return validado
+    },
+  },
+  angulo_etiquetas_eje_x: {
+    type: Number,
+    default: 0,
+    validator(value) {
+      // debe estar entre -90 y 90
+      const validado = -90 <= value && value <= 90
+      if (!validado) {
+        console.error('El número debe estar entre -90 y 90')
+      }
+      return validado
+    },
+  },
+  angulo_etiquetas_eje_y: {
+    type: Number,
+    default: 0,
+    validator(value) {
+      // debe estar entre -90 y 90
+      const validado = -90 <= value && value <= 90
+      if (!validado) {
+        console.error('El número debe estar entre -90 y 90')
       }
       return validado
     },
@@ -70,18 +97,15 @@ function calcularEscalas(grupoVis) {
     .domain(extent(datos.value.map(d => d[variables.value.id])))
     .range([grupoVis.alto, 0])
 
-  select(`div#${idGrafica} svg g.eje-x-abajo`)
-    .transition()
-    .duration(500)
-    .call(axisBottom(escalaBanda.value))
-  select(`div#${idGrafica} svg g.eje-y-${props.alineacion_eje_y}`)
-    .transition()
-    .duration(500)
-    .call(
-      props.alineacion_eje_y === 'izquierda'
-        ? axisLeft(escalaLineal.value)
-        : axisRight(escalaLineal.value)
-    )
+  creaEjeHorizontal(idGrafica, escalaBanda.value, props.angulo_etiquetas_eje_x)
+
+  creaEjeVertical(
+    idGrafica,
+    escalaLineal.value,
+    props.angulo_etiquetas_eje_y,
+    props.alineacion_eje_y,
+    grupoVis.ancho
+  )
 }
 function creaCajasBigotes() {
   data_agrupada.value = rollup(
@@ -416,6 +440,10 @@ onMounted(() => {
     calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
     creaCajasBigotes()
   })
+})
+defineExpose({
+  escalaBanda,
+  escalaLineal,
 })
 </script>
 
