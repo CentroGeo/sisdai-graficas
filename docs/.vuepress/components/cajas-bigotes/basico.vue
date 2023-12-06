@@ -1,5 +1,5 @@
 <script setup>
-import cajasbigotesejemplos from './cajas_bigotes_ejemplo_1.json'
+import cajasbigotesejemplos from '../../assets/datos/cajas_bigotes_ejemplo_1.json'
 
 import { ref } from 'vue'
 const datos_dinamicos = ref(cajasbigotesejemplos)

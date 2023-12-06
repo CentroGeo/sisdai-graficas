@@ -1,16 +1,8 @@
 <script setup>
 import { ref } from 'vue'
-import data_edos from './data_edos.json'
-import diccionario_estados from './diccionario_estados.json'
-diccionario_estados.forEach(
-  d =>
-    (d.color = `rgb(${220 * Math.random()},${220 * Math.random()},${
-      220 * Math.random()
-    })`)
-)
-const variables = ref(diccionario_estados)
-variables
-const datos = ref(data_edos)
+import datos_consorcio from '../../assets/datos/consorcio_variantes_todas.json'
+
+const datos = ref(datos_consorcio)
 </script>
 <template>
   <SisdaiGraficas
@@ -20,8 +12,23 @@ const datos = ref(data_edos)
   >
     <SisdaiAreasApiladas
       :datos="datos"
-      :variables="variables"
+      :variables="[
+        { id: 'Omicron', color: '#FFCE00', nombre: 'Omicron' },
+        { id: 'Delta', color: '#FA5600', nombre: 'Delta' },
+        { id: 'Gamma', color: '#C7690D', nombre: 'Gamma' },
+        { id: 'Beta', color: '#FF9F4D', nombre: 'Beta' },
+        { id: 'Alpha', color: '#FFAC99', nombre: 'Alpha' },
+        { id: 'Mu', color: '#29037B', nombre: 'Mu' },
+        { id: 'Lambda', color: '#A359D9', nombre: 'Lambda' },
+        {
+          id: 'variantes_restantes',
+          color: '#bcbcbc',
+          nombre: 'Variantes restantes',
+        },
+      ]"
       :angulo_etiquetas_eje_x="-45"
+      :clave_fecha="'fecha_2'"
+      :formato_temporal="'%d/%m/%Y'"
     />
   </SisdaiGraficas>
 </template>

@@ -6,6 +6,7 @@ import {
   SisdaiGraficas,
   SisdaiNomenclatura,
   SisdaiSeriesTiempo,
+  SisdaiViolines,
 } from './componentes'
 
 const plugin = {
@@ -18,6 +19,7 @@ const plugin = {
     Vue.use(SisdaiNomenclatura)
     Vue.use(SisdaiSeriesTiempo)
     Vue.use(SisdaiAreasApiladas)
+    Vue.use(SisdaiViolines)
   },
 }
 
@@ -29,6 +31,7 @@ export {
   SisdaiGraficas,
   SisdaiNomenclatura,
   SisdaiSeriesTiempo,
+  SisdaiViolines,
 }
 
 export default plugin

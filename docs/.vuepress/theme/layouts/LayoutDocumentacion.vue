@@ -110,20 +110,16 @@ function actualizaContenidoIndice() {
                 >
               </li>
               <li>
+                <router-link to="/documentacion/violines">
+                  SisdaiViolines</router-link
+                >
+              </li>
+              <li>
                 <router-link to="/documentacion/opciones-avanzadas">
                   Opciones avanzadas</router-link
                 >
               </li>
             </ul>
-            <a
-              href="https://github.com/salsa-community/sisdai-graficas"
-              target="_blank"
-              rel="noopener"
-              style="display: grid"
-            >
-              <span class="icono-social-github titulo-eni"></span>
-              <span> ir a github</span>
-            </a>
           </template>
         </SisdaiMenuLateral>
       </div>
@@ -169,9 +165,15 @@ function actualizaContenidoIndice() {
   top: 50px;
   padding: 28px 0;
 }
+.menu-fondo {
+  background: var(--menu-lateral-fondo);
+}
 @media (max-width: 768px) {
   .contenedor-indice-y-content {
     flex-direction: column-reverse;
+  }
+  .menu-fondo {
+    background: transparent;
   }
 }
 </style>

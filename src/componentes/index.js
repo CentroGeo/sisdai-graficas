@@ -5,6 +5,7 @@ import SisdaiChecks from './sisdai-checks'
 import SisdaiGraficas from './sisdai-graficas'
 import SisdaiNomenclatura from './sisdai-nomenclatura'
 import SisdaiSeriesTiempo from './sisdai-series-tiempo'
+import SisdaiViolines from './sisdai-violines'
 
 export {
   SisdaiAreasApiladas,
@@ -14,4 +15,5 @@ export {
   SisdaiGraficas,
   SisdaiNomenclatura,
   SisdaiSeriesTiempo,
+  SisdaiViolines,
 }

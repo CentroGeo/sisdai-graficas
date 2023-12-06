@@ -1,31 +1,32 @@
 <script setup>
 import { ref } from 'vue'
-import cajasbigotesejemplos1 from '../../assets/datos/cajas_bigotes_ejemplo_1.json'
-import cajasbigotesejemplos2 from '../../assets/datos/cajas_bigotes_ejemplo_2.json'
+import violin_resistencia_edad from '../../assets/datos/violin_resistencia_edad.json'
+import violin_seguridad_social_edad from '../../assets/datos/violin_seguridad_social_edad.json'
+
 const base = ref(1)
-const datos_dinamicos = ref(cajasbigotesejemplos1)
+const datos_dinamicos = ref(violin_resistencia_edad)
 const variables_dinamicas = ref({
-  id: 'acciones_vendidas',
-  nombre: 'Acciones vendidas',
-  color: 'red',
+  id: 'edad',
+  nombre: 'Edad',
+  color: 'purple',
 })
 function alternaDatos() {
   if (base.value == 1) {
     variables_dinamicas.value = {
-      id: 'metrica',
-      nombre: 'Metrica',
+      id: 'edad',
+      nombre: 'Edad',
       color: '#2c7fb8',
     }
-    datos_dinamicos.value = cajasbigotesejemplos2
+    datos_dinamicos.value = violin_seguridad_social_edad
 
     base.value = 2
   } else {
     variables_dinamicas.value = {
-      id: 'acciones_vendidas',
-      nombre: 'Acciones vendidas',
-      color: 'red',
+      id: 'edad',
+      nombre: 'Edad',
+      color: 'purple',
     }
-    datos_dinamicos.value = cajasbigotesejemplos1
+    datos_dinamicos.value = violin_resistencia_edad
 
     base.value = 1
   }
@@ -34,9 +35,10 @@ function alternaDatos() {
 
 <template>
   <SisdaiGraficas
-    :titulo_eje_y="'título del eje y'"
-    :titulo_eje_x="'título del eje x'"
+    :titulo_eje_y="'Edad'"
+    :titulo_eje_x="base == 1 ? 'Resistencia' : 'Seguridad social'"
     class="con-panel-encabezado-vis"
+    :alto="200"
   >
     <template #panel-encabezado-vis>
       <div>
@@ -52,10 +54,10 @@ function alternaDatos() {
         </button>
       </div>
     </template>
-    <SisdaiCajasBigotes
+    <SisdaiViolines
       :datos="datos_dinamicos"
       :variables="variables_dinamicas"
-      :clave_categorias="base == 1 ? 'nombre_empresa' : 'nombre_categoria'"
+      :clave_categorias="base == 1 ? 'resistencia' : 'seguridad_social'"
     />
   </SisdaiGraficas>
 </template>
