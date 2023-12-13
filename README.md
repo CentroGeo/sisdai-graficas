@@ -49,7 +49,7 @@ Instala las dependencias de la biblioteca.
 npm install
 ```
 
-En cambio si se quiere instalar esta biblioteca para su uso en otro proyecto se puede hacer:
+En cambio si se quiere instalar esta biblioteca para su uso en otro proyecto (de Vue) se puede hacer:
 
 ``` bash
 npm install git+https://codigo.conahcyt.mx/sisdai/sisdai-graficas
@@ -63,8 +63,6 @@ donde N.N.N indica el número de versión, por ejemplo v1.0.0
 
 Así mismo también se puede agregar la biblioteca en el archio `package.json` de otro 
 proyecto.
-
-#######ME QUEDÉ AQUÍ###########33
 
 
 
