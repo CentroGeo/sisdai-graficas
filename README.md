@@ -3,44 +3,68 @@
 Esta es una biblioteca de visualización de datos que forma parte del Sistema de
 Diseño y Accesibilidad para la Investigación ([Sisdai](https://sisdai.conahcyt.mx)).
 
-> **_Limitación de responsabilidad_**
->
-> El presente es un proyecto en construcción, por tanto el equipo del Sisdai
-> no es responsable del uso y contenido del presente recurso,
-> toda vez que se trata de una versión en su modalidad prueba, y no de una
-> versión liberada al público, por lo que una vez que sea lanzada la versión
-> final,
-> se invita a la persona usuaria a consultarla y validar sus requisitos.
+Cualquier persona puede hacer uso de esta biblioteca al clonarla e instalarla
+en su equipo a través del **protocolo HTTPS**.
 
-## Dependencias e instalación
+## Requerimientos
+
+### Pasos previos recomendados
+
+Para desarrollar este proyecto se usó [node.js](https://nodejs.org/en) como
+entorno de ejecución de JavaScript. La opción recomendada para instalarlo es
+[vía nvm](https://github.com/nvm-sh/nvm) que es el manejador de versiones de
+node. Siguiendo este camino, también se instalará el manejador de paquetes
+[npm](https://www.npmjs.com/). Dado lo anterior las instrucciones de instalación
+y dependencias del proyecto se muestran aquí usando tanto npm, como nvm. 
 
 Las gráficas de esta biblioteca están desarrolladas como [componentes](https://es.vuejs.org/v2/guide/components.html) de
 [Vue.js](https://es.vuejs.org/) usando [D3.js](https://d3js.org/), por lo tanto se recomienda a la persona usuaria tener
 conocimientos básicos de lo anterior así como de desarrollo en [JavaScript](https://www.javascript.com/).
 
-Para instalar la biblioteca se puede hacer:
+### Dependencias
 
-**Opción A**
+- [node.js (^18)](https://nodejs.org/en/download/)
+- [npm (^9)](https://www.npmjs.com/get-npm)
+- [Vue.js (2.6.11)](https://v2.vuejs.org/)
 
-Por medio de [npm](https://www.npmjs.com/) ejecutar la siguiente línea de comando en la terminal de la computadora,
 
-```shell
-npm install https://codigo.conahcyt.mx/sisdai/sisdai-graficas.git
+### Instalación 
+
+Se puede clonar e instalar este proyecto en tu equipo
+utilizando **solo el protocolo HTTPS**, es decir:
+
+```bash
+git clone https://codigo.conahcyt.mx/sisdai/sisdai-graficas.git
 ```
 
-**Opción B**
+Establece la versión adecuada de npm y nvm (previamente instaladas).
 
-Clonar este repositorio en local. Si no se sabe como
-[aquí](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) hay una guía de
-como realizarlo.
-
-Una vez clonado el repositorio, se puede instalar en la terminal con `npm` ejecutando la siguiente línea de comando,
-
-```shell
-npm install ruta_al_repositorio/sisdai-graficas
+```bash
+nvm use 18
 ```
 
-(Sustituir `ruta_al_repositorio` por la ruta en local de la persona usuaria)
+Instala las dependencias de la biblioteca.
+
+```bash
+npm install
+```
+
+En cambio si se quiere instalar esta biblioteca para su uso en otro proyecto (de Vue) se puede hacer:
+
+``` bash
+npm install git+https://codigo.conahcyt.mx/sisdai/sisdai-graficas
+```
+
+Dependiendo de la versión de la biblioteca a instalar, la instrucción anterior puede cambiar a:
+``` bash
+npm install git+https://codigo.conahcyt.mx/sisdai/sisdai-graficas#vN.N.N
+```
+donde N.N.N indica el número de versión, por ejemplo v1.0.0
+
+Así mismo también se puede agregar la biblioteca en el archio `package.json` de otro 
+proyecto.
+
+
 
 ## Inicio rápido
 
@@ -99,7 +123,7 @@ la [documentación en línea](https://sisdai.conahcyt.mx/).
 
 **SOFTWARE LIBRE Y ESTÁNDARES ABIERTOS**
 
-Sisdai y sisdai-graficas están alineadas a las disposiciones establecidas por
+Sisdai y sisdai-componentes están alineadas a las disposiciones establecidas por
 la Coordinación de Estrategia Digital Nacional (
 DOF:06/09/2021) en donde se estipula que las "políticas y disposiciones tienen
 como objetivo fortalecer el uso del software
@@ -110,9 +134,15 @@ artículo 63 se explicita que "cuando se trate
 de desarrollos basados en software libre, se respetarán las condiciones de su
 licenciamiento original [...]".
 
+Considerando lo anterior sisdai-componentes se publica bajo la licencia
+[LGPLv3](https://www.gnu.org/licenses/lgpl-3.0.html). Dicha licencia se puede
+consultar en el archivo _LICENSE_ de este repositorio.
+Esta licencia se encuentra disponible en inglés porque aunque el Sisdai privilegia
+el idioma español se respeta la versión original de acuerdo al proyecto
+[GNU](https://www.gnu.org/licenses/licenses.html).
+
 ## Contribuir
 
-Para contribuir al proyecto, se pide que se haga tomando en cuenta la guía de
-contribución
-de [git](https://git-scm.com/book/es/v2/Git-en-entornos-distribuidos-Contribuyendo-a-un-Proyecto)
-.
+Por el momento sólo quienes sean
+parte de un equipo de investigación del capítulo de un [ENI](https://eni.conahcyt.mx)
+podrán levantar issues en este repositorio.
