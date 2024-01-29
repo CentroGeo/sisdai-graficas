@@ -80,42 +80,66 @@ function actualizaContenidoIndice() {
           <template slot="contenido-menu-lateral">
             <ul>
               <li>
-                <router-link to="/documentacion/introduccion">
+                <router-link
+                  class="p-x-5-esc p-x-3-mov p-y-1"
+                  to="/documentacion/introduccion"
+                >
                   Introducción</router-link
                 >
               </li>
               <li>
-                <router-link to="/documentacion/graficas">
+                <router-link
+                  class="p-x-5-esc p-x-3-mov p-y-1"
+                  to="/documentacion/graficas"
+                >
                   SisdaiGraficas</router-link
                 >
               </li>
               <li>
-                <router-link to="/documentacion/barras">
+                <router-link
+                  class="p-x-5-esc p-x-3-mov p-y-1"
+                  to="/documentacion/barras"
+                >
                   SisdaiBarras</router-link
                 >
               </li>
               <li>
-                <router-link to="/documentacion/cajas-bigotes">
+                <router-link
+                  class="p-x-5-esc p-x-3-mov p-y-1"
+                  to="/documentacion/cajas-bigotes"
+                >
                   SisdaiCajasBigotes</router-link
                 >
               </li>
               <li>
-                <router-link to="/documentacion/series-tiempo">
+                <router-link
+                  class="p-x-5-esc p-x-3-mov p-y-1"
+                  to="/documentacion/series-tiempo"
+                >
                   SisdaiSeriesTiempo</router-link
                 >
               </li>
               <li>
-                <router-link to="/documentacion/areas-apiladas">
+                <router-link
+                  class="p-x-5-esc p-x-3-mov p-y-1"
+                  to="/documentacion/areas-apiladas"
+                >
                   SisdaiAreasApiladas</router-link
                 >
               </li>
               <li>
-                <router-link to="/documentacion/violines">
+                <router-link
+                  class="p-x-5-esc p-x-3-mov p-y-1"
+                  to="/documentacion/violines"
+                >
                   SisdaiViolines</router-link
                 >
               </li>
               <li>
-                <router-link to="/documentacion/opciones-avanzadas">
+                <router-link
+                  class="p-x-5-esc p-x-3-mov p-y-1"
+                  to="/documentacion/opciones-avanzadas"
+                >
                   Opciones avanzadas</router-link
                 >
               </li>
