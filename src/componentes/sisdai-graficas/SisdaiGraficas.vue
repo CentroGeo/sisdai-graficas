@@ -108,132 +108,102 @@ function panelesEnUso() {
 <template>
   <div
     :sisdai-grafica="id"
-    class="contenedor-vis2 sisdai-grafica borde-redondeado-8"
+    class="contenedor-vis borde-redondeado-8"
     :id="id"
-    :class="panelesEnUso()"
   >
-    <div class="panel-encabezado-vis">
-      <slot name="panel-encabezado-vis" />
-    </div>
-
-    <div class="panel-izquierda-vis">
-      <slot name="panel-izquierda-vis" />
-    </div>
     <div
-      class="contenido-vis"
-      ref="contenedorSisdaiGraficas"
+      class="contenedor-vis-paneles"
+      :class="panelesEnUso()"
     >
+      <div class="panel-encabezado-vis">
+        <slot name="panel-encabezado-vis" />
+      </div>
+
+      <div class="panel-izquierda-vis">
+        <slot name="panel-izquierda-vis" />
+      </div>
       <div
-        class="contenedor-svg-ejes-tooltip"
-        :style="{
-          height: !grafica().alto
-            ? '100%'
-            : `${grafica().alto + espacio_eje_x}px`,
-        }"
+        class="contenido-vis"
+        ref="contenedorSisdaiGraficas"
       >
         <div
-          class="contenedor-titulo-eje-y"
+          class="contenedor-svg-ejes-tooltip"
           :style="{
-            height: !grafica().alto ? '100%' : grafica().alto + 'px',
+            height: !grafica().alto
+              ? '100%'
+              : `${grafica().alto + espacio_eje_x}px`,
           }"
         >
           <div
+            class="contenedor-titulo-eje-y"
             :style="{
-              width: !grafica().alto ? '100%' : grafica().alto + 'px',
-              transform: `rotate(-90deg)translateX(calc(-100% - ${
-                0.5 * (margenes.arriba - margenes.abajo)
-              }px))`,
+              height: !grafica().alto ? '100%' : grafica().alto + 'px',
             }"
-            class="titulo-eje-y vis-titulo-ejes"
-            style="padding: 0 0 5px 0"
-            v-html="titulo_eje_y"
-          ></div>
-        </div>
-        <figure :style="{ left: espacio_eje_y + 'px' }">
-          <svg
-            :width="grafica().ancho"
-            :height="grafica().alto"
           >
-            <g
-              class="grupo-fondo"
-              :transform="`translate(${margenes.izquierda}, ${margenes.arriba})`"
-            />
-            <g class="eje-x-arriba" />
-            <g
-              class="eje-x-abajo"
-              :transform="`translate(${margenes.izquierda}, ${
-                grafica().alto - margenes.abajo
-              })`"
-            />
-            <g
-              class="eje-y-izquierda"
-              :transform="`translate(${
-                margenes.izquierda
-              }, ${+margenes.arriba})`"
-            />
-            <g
-              class="eje-y-derecha"
-              :transform="`translate(${
-                grafica().ancho - margenes.derecha
-              }, ${+margenes.arriba})`"
-            />
-            <slot />
-            <g
-              class="grupo-frente"
-              :transform="`translate(${margenes.izquierda}, ${margenes.arriba})`"
-            />
-          </svg>
-        </figure>
-        <div class="contenedor-titulo-eje-x">
-          <div
-            class="titulo-eje-x vis-titulo-ejes"
-            v-html="titulo_eje_x"
-          ></div>
+            <div
+              :style="{
+                width: !grafica().alto ? '100%' : grafica().alto + 'px',
+                transform: `rotate(-90deg)translateX(calc(-100% - ${
+                  0.5 * (margenes.arriba - margenes.abajo)
+                }px))`,
+              }"
+              class="titulo-eje-y vis-titulo-ejes"
+              style="padding: 0 0 5px 0"
+              v-html="titulo_eje_y"
+            ></div>
+          </div>
+          <figure :style="{ left: espacio_eje_y + 'px' }">
+            <svg
+              :width="grafica().ancho"
+              :height="grafica().alto"
+            >
+              <g
+                class="grupo-fondo"
+                :transform="`translate(${margenes.izquierda}, ${margenes.arriba})`"
+              />
+              <g class="eje-x-arriba" />
+              <g
+                class="eje-x-abajo"
+                :transform="`translate(${margenes.izquierda}, ${
+                  grafica().alto - margenes.abajo
+                })`"
+              />
+              <g
+                class="eje-y-izquierda"
+                :transform="`translate(${
+                  margenes.izquierda
+                }, ${+margenes.arriba})`"
+              />
+              <g
+                class="eje-y-derecha"
+                :transform="`translate(${
+                  grafica().ancho - margenes.derecha
+                }, ${+margenes.arriba})`"
+              />
+              <slot />
+              <g
+                class="grupo-frente"
+                :transform="`translate(${margenes.izquierda}, ${margenes.arriba})`"
+              />
+            </svg>
+          </figure>
+          <div class="contenedor-titulo-eje-x">
+            <div
+              class="titulo-eje-x vis-titulo-ejes"
+              v-html="titulo_eje_x"
+            ></div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="panel-derecha-vis">
-      <slot name="panel-derecha-vis" />
+      <div class="panel-derecha-vis">
+        <slot name="panel-derecha-vis" />
+      </div>
+
+      <div class="panel-pie-vis">
+        <slot name="panel-pie-vis" />
+      </div>
     </div>
 
-    <div class="panel-pie-vis">
-      <slot name="panel-pie-vis" />
-    </div>
     <ContenedorVisAtribuciones />
   </div>
 </template>
-<style lang="scss">
-@import '../../estilos/ContenedorVis.scss';
-
-.contenido-vis {
-  div.contenedor-svg-ejes-tooltip {
-    position: relative;
-    width: 100%;
-    display: inline-block;
-
-    .contenedor-titulo-eje-y {
-      display: inline-block;
-      .titulo-eje-y {
-        position: absolute;
-        display: block;
-        transform-origin: top left;
-        //transform: rotate(-90deg) translate(-100%);
-        text-align: center;
-      }
-    }
-    div.contenedor-titulo-eje-x {
-      position: relative;
-      width: 100%;
-      .titulo-eje-x {
-        text-align: center;
-      }
-    }
-
-    figure {
-      position: absolute;
-      top: 0;
-      margin: 0;
-    }
-  }
-}
-</style>

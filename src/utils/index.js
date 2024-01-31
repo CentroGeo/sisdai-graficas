@@ -73,6 +73,7 @@ export function creaEjeVertical(id, escala, angulo, alineacion, ancho) {
     .attr('dy', `0em`)
     .interrupt()
     .attr('x', '0')
+    .attr('class', 'vis-valores-ejes')
     .style('dominant-baseline', 'middle')
     .text(d => d.toLocaleString('en'))
   eje_y
@@ -110,6 +111,7 @@ export function creaEjeHorizontal(id, escala, angulo) {
   eje_x.selectAll('line').remove()
   eje_x
     .selectAll('text')
+    .attr('class', 'vis-valores-ejes')
     .attr('transform', `translate(0,8)rotate(${angulo})`)
     .attr('dy', `${-Math.abs(angulo / 90)}em`)
     .style('dominant-baseline', angulo !== 0 ? 'middle' : 'inherit')

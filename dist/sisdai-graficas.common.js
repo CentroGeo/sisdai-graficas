@@ -34,7 +34,7 @@ __webpack_require__.d(__webpack_exports__, {
   "default": function() { return /* binding */ entry_lib; }
 });
 
-// UNUSED EXPORTS: SisdaiBarras, SisdaiCajasBigotes, SisdaiGraficas
+// UNUSED EXPORTS: SisdaiAreasApiladas, SisdaiBarras, SisdaiCajasBigotes, SisdaiChecks, SisdaiGraficas, SisdaiNomenclatura, SisdaiSeriesTiempo, SisdaiViolines
 
 ;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/setPublicPath.js
 /* eslint-disable no-var */
@@ -53,20 +53,51 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1076c6c5-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-barras/SisdaiBarras.vue?vue&type=template&id=51aacfd7&
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7fefe306-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-areas-apiladas/SisdaiAreasApiladas.vue?vue&type=template&id=28524fbc
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
   return _c('g', {
-    ref: "sisdaiBarras",
-    staticClass: "contenedor-barras",
+    ref: "sisdaiAreasApiladas",
+    staticClass: "contenedor-areas",
     attrs: {
       "transform": `translate(${_setup.margenesSvg?.izquierda || 0},${_setup.margenesSvg?.arriba || 0})`
     }
   });
 };
 var staticRenderFns = [];
+
+;// CONCATENATED MODULE: ./node_modules/d3-array/src/extent.js
+function extent(values, valueof) {
+  let min;
+  let max;
+  if (valueof === undefined) {
+    for (const value of values) {
+      if (value != null) {
+        if (min === undefined) {
+          if (value >= value) min = max = value;
+        } else {
+          if (min > value) min = value;
+          if (max < value) max = value;
+        }
+      }
+    }
+  } else {
+    let index = -1;
+    for (let value of values) {
+      if ((value = valueof(value, ++index, values)) != null) {
+        if (min === undefined) {
+          if (value >= value) min = max = value;
+        } else {
+          if (min > value) min = value;
+          if (max < value) max = value;
+        }
+      }
+    }
+  }
+  return [min, max];
+}
 
 ;// CONCATENATED MODULE: ./node_modules/d3-array/src/max.js
 function max(values, valueof) {
@@ -108,501 +139,6 @@ function sum(values, valueof) {
     }
   }
   return sum;
-}
-
-;// CONCATENATED MODULE: ./node_modules/d3-axis/src/identity.js
-/* harmony default export */ function src_identity(x) {
-  return x;
-}
-
-;// CONCATENATED MODULE: ./node_modules/d3-axis/src/axis.js
-
-
-var axis_top = 1,
-    right = 2,
-    bottom = 3,
-    left = 4,
-    epsilon = 1e-6;
-
-function translateX(x) {
-  return "translate(" + x + ",0)";
-}
-
-function translateY(y) {
-  return "translate(0," + y + ")";
-}
-
-function axis_number(scale) {
-  return d => +scale(d);
-}
-
-function center(scale, offset) {
-  offset = Math.max(0, scale.bandwidth() - offset * 2) / 2;
-  if (scale.round()) offset = Math.round(offset);
-  return d => +scale(d) + offset;
-}
-
-function entering() {
-  return !this.__axis;
-}
-
-function axis(orient, scale) {
-  var tickArguments = [],
-      tickValues = null,
-      tickFormat = null,
-      tickSizeInner = 6,
-      tickSizeOuter = 6,
-      tickPadding = 3,
-      offset = typeof window !== "undefined" && window.devicePixelRatio > 1 ? 0 : 0.5,
-      k = orient === axis_top || orient === left ? -1 : 1,
-      x = orient === left || orient === right ? "x" : "y",
-      transform = orient === axis_top || orient === bottom ? translateX : translateY;
-
-  function axis(context) {
-    var values = tickValues == null ? (scale.ticks ? scale.ticks.apply(scale, tickArguments) : scale.domain()) : tickValues,
-        format = tickFormat == null ? (scale.tickFormat ? scale.tickFormat.apply(scale, tickArguments) : src_identity) : tickFormat,
-        spacing = Math.max(tickSizeInner, 0) + tickPadding,
-        range = scale.range(),
-        range0 = +range[0] + offset,
-        range1 = +range[range.length - 1] + offset,
-        position = (scale.bandwidth ? center : axis_number)(scale.copy(), offset),
-        selection = context.selection ? context.selection() : context,
-        path = selection.selectAll(".domain").data([null]),
-        tick = selection.selectAll(".tick").data(values, scale).order(),
-        tickExit = tick.exit(),
-        tickEnter = tick.enter().append("g").attr("class", "tick"),
-        line = tick.select("line"),
-        text = tick.select("text");
-
-    path = path.merge(path.enter().insert("path", ".tick")
-        .attr("class", "domain")
-        .attr("stroke", "currentColor"));
-
-    tick = tick.merge(tickEnter);
-
-    line = line.merge(tickEnter.append("line")
-        .attr("stroke", "currentColor")
-        .attr(x + "2", k * tickSizeInner));
-
-    text = text.merge(tickEnter.append("text")
-        .attr("fill", "currentColor")
-        .attr(x, k * spacing)
-        .attr("dy", orient === axis_top ? "0em" : orient === bottom ? "0.71em" : "0.32em"));
-
-    if (context !== selection) {
-      path = path.transition(context);
-      tick = tick.transition(context);
-      line = line.transition(context);
-      text = text.transition(context);
-
-      tickExit = tickExit.transition(context)
-          .attr("opacity", epsilon)
-          .attr("transform", function(d) { return isFinite(d = position(d)) ? transform(d + offset) : this.getAttribute("transform"); });
-
-      tickEnter
-          .attr("opacity", epsilon)
-          .attr("transform", function(d) { var p = this.parentNode.__axis; return transform((p && isFinite(p = p(d)) ? p : position(d)) + offset); });
-    }
-
-    tickExit.remove();
-
-    path
-        .attr("d", orient === left || orient === right
-            ? (tickSizeOuter ? "M" + k * tickSizeOuter + "," + range0 + "H" + offset + "V" + range1 + "H" + k * tickSizeOuter : "M" + offset + "," + range0 + "V" + range1)
-            : (tickSizeOuter ? "M" + range0 + "," + k * tickSizeOuter + "V" + offset + "H" + range1 + "V" + k * tickSizeOuter : "M" + range0 + "," + offset + "H" + range1));
-
-    tick
-        .attr("opacity", 1)
-        .attr("transform", function(d) { return transform(position(d) + offset); });
-
-    line
-        .attr(x + "2", k * tickSizeInner);
-
-    text
-        .attr(x, k * spacing)
-        .text(format);
-
-    selection.filter(entering)
-        .attr("fill", "none")
-        .attr("font-size", 10)
-        .attr("font-family", "sans-serif")
-        .attr("text-anchor", orient === right ? "start" : orient === left ? "end" : "middle");
-
-    selection
-        .each(function() { this.__axis = position; });
-  }
-
-  axis.scale = function(_) {
-    return arguments.length ? (scale = _, axis) : scale;
-  };
-
-  axis.ticks = function() {
-    return tickArguments = Array.from(arguments), axis;
-  };
-
-  axis.tickArguments = function(_) {
-    return arguments.length ? (tickArguments = _ == null ? [] : Array.from(_), axis) : tickArguments.slice();
-  };
-
-  axis.tickValues = function(_) {
-    return arguments.length ? (tickValues = _ == null ? null : Array.from(_), axis) : tickValues && tickValues.slice();
-  };
-
-  axis.tickFormat = function(_) {
-    return arguments.length ? (tickFormat = _, axis) : tickFormat;
-  };
-
-  axis.tickSize = function(_) {
-    return arguments.length ? (tickSizeInner = tickSizeOuter = +_, axis) : tickSizeInner;
-  };
-
-  axis.tickSizeInner = function(_) {
-    return arguments.length ? (tickSizeInner = +_, axis) : tickSizeInner;
-  };
-
-  axis.tickSizeOuter = function(_) {
-    return arguments.length ? (tickSizeOuter = +_, axis) : tickSizeOuter;
-  };
-
-  axis.tickPadding = function(_) {
-    return arguments.length ? (tickPadding = +_, axis) : tickPadding;
-  };
-
-  axis.offset = function(_) {
-    return arguments.length ? (offset = +_, axis) : offset;
-  };
-
-  return axis;
-}
-
-function axisTop(scale) {
-  return axis(axis_top, scale);
-}
-
-function axisRight(scale) {
-  return axis(right, scale);
-}
-
-function axisBottom(scale) {
-  return axis(bottom, scale);
-}
-
-function axisLeft(scale) {
-  return axis(left, scale);
-}
-
-;// CONCATENATED MODULE: ./node_modules/d3-array/src/range.js
-function range(start, stop, step) {
-  start = +start, stop = +stop, step = (n = arguments.length) < 2 ? (stop = start, start = 0, 1) : n < 3 ? 1 : +step;
-
-  var i = -1,
-      n = Math.max(0, Math.ceil((stop - start) / step)) | 0,
-      range = new Array(n);
-
-  while (++i < n) {
-    range[i] = start + i * step;
-  }
-
-  return range;
-}
-
-;// CONCATENATED MODULE: ./node_modules/d3-scale/src/init.js
-function initRange(domain, range) {
-  switch (arguments.length) {
-    case 0: break;
-    case 1: this.range(domain); break;
-    default: this.range(range).domain(domain); break;
-  }
-  return this;
-}
-
-function initInterpolator(domain, interpolator) {
-  switch (arguments.length) {
-    case 0: break;
-    case 1: {
-      if (typeof domain === "function") this.interpolator(domain);
-      else this.range(domain);
-      break;
-    }
-    default: {
-      this.domain(domain);
-      if (typeof interpolator === "function") this.interpolator(interpolator);
-      else this.range(interpolator);
-      break;
-    }
-  }
-  return this;
-}
-
-;// CONCATENATED MODULE: ./node_modules/internmap/src/index.js
-class InternMap extends Map {
-  constructor(entries, key = keyof) {
-    super();
-    Object.defineProperties(this, {_intern: {value: new Map()}, _key: {value: key}});
-    if (entries != null) for (const [key, value] of entries) this.set(key, value);
-  }
-  get(key) {
-    return super.get(intern_get(this, key));
-  }
-  has(key) {
-    return super.has(intern_get(this, key));
-  }
-  set(key, value) {
-    return super.set(intern_set(this, key), value);
-  }
-  delete(key) {
-    return super.delete(intern_delete(this, key));
-  }
-}
-
-class InternSet extends (/* unused pure expression or super */ null && (Set)) {
-  constructor(values, key = keyof) {
-    super();
-    Object.defineProperties(this, {_intern: {value: new Map()}, _key: {value: key}});
-    if (values != null) for (const value of values) this.add(value);
-  }
-  has(value) {
-    return super.has(intern_get(this, value));
-  }
-  add(value) {
-    return super.add(intern_set(this, value));
-  }
-  delete(value) {
-    return super.delete(intern_delete(this, value));
-  }
-}
-
-function intern_get({_intern, _key}, value) {
-  const key = _key(value);
-  return _intern.has(key) ? _intern.get(key) : value;
-}
-
-function intern_set({_intern, _key}, value) {
-  const key = _key(value);
-  if (_intern.has(key)) return _intern.get(key);
-  _intern.set(key, value);
-  return value;
-}
-
-function intern_delete({_intern, _key}, value) {
-  const key = _key(value);
-  if (_intern.has(key)) {
-    value = _intern.get(key);
-    _intern.delete(key);
-  }
-  return value;
-}
-
-function keyof(value) {
-  return value !== null && typeof value === "object" ? value.valueOf() : value;
-}
-
-;// CONCATENATED MODULE: ./node_modules/d3-scale/src/ordinal.js
-
-
-
-const implicit = Symbol("implicit");
-
-function ordinal() {
-  var index = new InternMap(),
-      domain = [],
-      range = [],
-      unknown = implicit;
-
-  function scale(d) {
-    let i = index.get(d);
-    if (i === undefined) {
-      if (unknown !== implicit) return unknown;
-      index.set(d, i = domain.push(d) - 1);
-    }
-    return range[i % range.length];
-  }
-
-  scale.domain = function(_) {
-    if (!arguments.length) return domain.slice();
-    domain = [], index = new InternMap();
-    for (const value of _) {
-      if (index.has(value)) continue;
-      index.set(value, domain.push(value) - 1);
-    }
-    return scale;
-  };
-
-  scale.range = function(_) {
-    return arguments.length ? (range = Array.from(_), scale) : range.slice();
-  };
-
-  scale.unknown = function(_) {
-    return arguments.length ? (unknown = _, scale) : unknown;
-  };
-
-  scale.copy = function() {
-    return ordinal(domain, range).unknown(unknown);
-  };
-
-  initRange.apply(scale, arguments);
-
-  return scale;
-}
-
-;// CONCATENATED MODULE: ./node_modules/d3-scale/src/band.js
-
-
-
-
-function band() {
-  var scale = ordinal().unknown(undefined),
-      domain = scale.domain,
-      ordinalRange = scale.range,
-      r0 = 0,
-      r1 = 1,
-      step,
-      bandwidth,
-      round = false,
-      paddingInner = 0,
-      paddingOuter = 0,
-      align = 0.5;
-
-  delete scale.unknown;
-
-  function rescale() {
-    var n = domain().length,
-        reverse = r1 < r0,
-        start = reverse ? r1 : r0,
-        stop = reverse ? r0 : r1;
-    step = (stop - start) / Math.max(1, n - paddingInner + paddingOuter * 2);
-    if (round) step = Math.floor(step);
-    start += (stop - start - step * (n - paddingInner)) * align;
-    bandwidth = step * (1 - paddingInner);
-    if (round) start = Math.round(start), bandwidth = Math.round(bandwidth);
-    var values = range(n).map(function(i) { return start + step * i; });
-    return ordinalRange(reverse ? values.reverse() : values);
-  }
-
-  scale.domain = function(_) {
-    return arguments.length ? (domain(_), rescale()) : domain();
-  };
-
-  scale.range = function(_) {
-    return arguments.length ? ([r0, r1] = _, r0 = +r0, r1 = +r1, rescale()) : [r0, r1];
-  };
-
-  scale.rangeRound = function(_) {
-    return [r0, r1] = _, r0 = +r0, r1 = +r1, round = true, rescale();
-  };
-
-  scale.bandwidth = function() {
-    return bandwidth;
-  };
-
-  scale.step = function() {
-    return step;
-  };
-
-  scale.round = function(_) {
-    return arguments.length ? (round = !!_, rescale()) : round;
-  };
-
-  scale.padding = function(_) {
-    return arguments.length ? (paddingInner = Math.min(1, paddingOuter = +_), rescale()) : paddingInner;
-  };
-
-  scale.paddingInner = function(_) {
-    return arguments.length ? (paddingInner = Math.min(1, _), rescale()) : paddingInner;
-  };
-
-  scale.paddingOuter = function(_) {
-    return arguments.length ? (paddingOuter = +_, rescale()) : paddingOuter;
-  };
-
-  scale.align = function(_) {
-    return arguments.length ? (align = Math.max(0, Math.min(1, _)), rescale()) : align;
-  };
-
-  scale.copy = function() {
-    return band(domain(), [r0, r1])
-        .round(round)
-        .paddingInner(paddingInner)
-        .paddingOuter(paddingOuter)
-        .align(align);
-  };
-
-  return initRange.apply(rescale(), arguments);
-}
-
-function pointish(scale) {
-  var copy = scale.copy;
-
-  scale.padding = scale.paddingOuter;
-  delete scale.paddingInner;
-  delete scale.paddingOuter;
-
-  scale.copy = function() {
-    return pointish(copy());
-  };
-
-  return scale;
-}
-
-function point() {
-  return pointish(band.apply(null, arguments).paddingInner(1));
-}
-
-;// CONCATENATED MODULE: ./node_modules/d3-array/src/ticks.js
-const e10 = Math.sqrt(50),
-    e5 = Math.sqrt(10),
-    e2 = Math.sqrt(2);
-
-function tickSpec(start, stop, count) {
-  const step = (stop - start) / Math.max(0, count),
-      power = Math.floor(Math.log10(step)),
-      error = step / Math.pow(10, power),
-      factor = error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1;
-  let i1, i2, inc;
-  if (power < 0) {
-    inc = Math.pow(10, -power) / factor;
-    i1 = Math.round(start * inc);
-    i2 = Math.round(stop * inc);
-    if (i1 / inc < start) ++i1;
-    if (i2 / inc > stop) --i2;
-    inc = -inc;
-  } else {
-    inc = Math.pow(10, power) * factor;
-    i1 = Math.round(start / inc);
-    i2 = Math.round(stop / inc);
-    if (i1 * inc < start) ++i1;
-    if (i2 * inc > stop) --i2;
-  }
-  if (i2 < i1 && 0.5 <= count && count < 2) return tickSpec(start, stop, count * 2);
-  return [i1, i2, inc];
-}
-
-function ticks(start, stop, count) {
-  stop = +stop, start = +start, count = +count;
-  if (!(count > 0)) return [];
-  if (start === stop) return [start];
-  const reverse = stop < start, [i1, i2, inc] = reverse ? tickSpec(stop, start, count) : tickSpec(start, stop, count);
-  if (!(i2 >= i1)) return [];
-  const n = i2 - i1 + 1, ticks = new Array(n);
-  if (reverse) {
-    if (inc < 0) for (let i = 0; i < n; ++i) ticks[i] = (i2 - i) / -inc;
-    else for (let i = 0; i < n; ++i) ticks[i] = (i2 - i) * inc;
-  } else {
-    if (inc < 0) for (let i = 0; i < n; ++i) ticks[i] = (i1 + i) / -inc;
-    else for (let i = 0; i < n; ++i) ticks[i] = (i1 + i) * inc;
-  }
-  return ticks;
-}
-
-function tickIncrement(start, stop, count) {
-  stop = +stop, start = +start, count = +count;
-  return tickSpec(start, stop, count)[2];
-}
-
-function tickStep(start, stop, count) {
-  stop = +stop, start = +start, count = +count;
-  const reverse = stop < start, inc = reverse ? tickIncrement(stop, start, count) : tickIncrement(start, stop, count);
-  return (reverse ? -1 : 1) * (inc < 0 ? 1 / -inc : inc);
 }
 
 ;// CONCATENATED MODULE: ./node_modules/d3-array/src/ascending.js
@@ -675,6 +211,1194 @@ function bisector(f) {
 
 function zero() {
   return 0;
+}
+
+;// CONCATENATED MODULE: ./node_modules/d3-array/src/ticks.js
+const e10 = Math.sqrt(50),
+    e5 = Math.sqrt(10),
+    e2 = Math.sqrt(2);
+
+function tickSpec(start, stop, count) {
+  const step = (stop - start) / Math.max(0, count),
+      power = Math.floor(Math.log10(step)),
+      error = step / Math.pow(10, power),
+      factor = error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1;
+  let i1, i2, inc;
+  if (power < 0) {
+    inc = Math.pow(10, -power) / factor;
+    i1 = Math.round(start * inc);
+    i2 = Math.round(stop * inc);
+    if (i1 / inc < start) ++i1;
+    if (i2 / inc > stop) --i2;
+    inc = -inc;
+  } else {
+    inc = Math.pow(10, power) * factor;
+    i1 = Math.round(start / inc);
+    i2 = Math.round(stop / inc);
+    if (i1 * inc < start) ++i1;
+    if (i2 * inc > stop) --i2;
+  }
+  if (i2 < i1 && 0.5 <= count && count < 2) return tickSpec(start, stop, count * 2);
+  return [i1, i2, inc];
+}
+
+function ticks(start, stop, count) {
+  stop = +stop, start = +start, count = +count;
+  if (!(count > 0)) return [];
+  if (start === stop) return [start];
+  const reverse = stop < start, [i1, i2, inc] = reverse ? tickSpec(stop, start, count) : tickSpec(start, stop, count);
+  if (!(i2 >= i1)) return [];
+  const n = i2 - i1 + 1, ticks = new Array(n);
+  if (reverse) {
+    if (inc < 0) for (let i = 0; i < n; ++i) ticks[i] = (i2 - i) / -inc;
+    else for (let i = 0; i < n; ++i) ticks[i] = (i2 - i) * inc;
+  } else {
+    if (inc < 0) for (let i = 0; i < n; ++i) ticks[i] = (i1 + i) / -inc;
+    else for (let i = 0; i < n; ++i) ticks[i] = (i1 + i) * inc;
+  }
+  return ticks;
+}
+
+function tickIncrement(start, stop, count) {
+  stop = +stop, start = +start, count = +count;
+  return tickSpec(start, stop, count)[2];
+}
+
+function tickStep(start, stop, count) {
+  stop = +stop, start = +start, count = +count;
+  const reverse = stop < start, inc = reverse ? tickIncrement(stop, start, count) : tickIncrement(start, stop, count);
+  return (reverse ? -1 : 1) * (inc < 0 ? 1 / -inc : inc);
+}
+
+;// CONCATENATED MODULE: ./node_modules/d3-time/src/duration.js
+const durationSecond = 1000;
+const durationMinute = durationSecond * 60;
+const durationHour = durationMinute * 60;
+const durationDay = durationHour * 24;
+const durationWeek = durationDay * 7;
+const durationMonth = durationDay * 30;
+const durationYear = durationDay * 365;
+
+;// CONCATENATED MODULE: ./node_modules/d3-time/src/interval.js
+const t0 = new Date, t1 = new Date;
+
+function timeInterval(floori, offseti, count, field) {
+
+  function interval(date) {
+    return floori(date = arguments.length === 0 ? new Date : new Date(+date)), date;
+  }
+
+  interval.floor = (date) => {
+    return floori(date = new Date(+date)), date;
+  };
+
+  interval.ceil = (date) => {
+    return floori(date = new Date(date - 1)), offseti(date, 1), floori(date), date;
+  };
+
+  interval.round = (date) => {
+    const d0 = interval(date), d1 = interval.ceil(date);
+    return date - d0 < d1 - date ? d0 : d1;
+  };
+
+  interval.offset = (date, step) => {
+    return offseti(date = new Date(+date), step == null ? 1 : Math.floor(step)), date;
+  };
+
+  interval.range = (start, stop, step) => {
+    const range = [];
+    start = interval.ceil(start);
+    step = step == null ? 1 : Math.floor(step);
+    if (!(start < stop) || !(step > 0)) return range; // also handles Invalid Date
+    let previous;
+    do range.push(previous = new Date(+start)), offseti(start, step), floori(start);
+    while (previous < start && start < stop);
+    return range;
+  };
+
+  interval.filter = (test) => {
+    return timeInterval((date) => {
+      if (date >= date) while (floori(date), !test(date)) date.setTime(date - 1);
+    }, (date, step) => {
+      if (date >= date) {
+        if (step < 0) while (++step <= 0) {
+          while (offseti(date, -1), !test(date)) {} // eslint-disable-line no-empty
+        } else while (--step >= 0) {
+          while (offseti(date, +1), !test(date)) {} // eslint-disable-line no-empty
+        }
+      }
+    });
+  };
+
+  if (count) {
+    interval.count = (start, end) => {
+      t0.setTime(+start), t1.setTime(+end);
+      floori(t0), floori(t1);
+      return Math.floor(count(t0, t1));
+    };
+
+    interval.every = (step) => {
+      step = Math.floor(step);
+      return !isFinite(step) || !(step > 0) ? null
+          : !(step > 1) ? interval
+          : interval.filter(field
+              ? (d) => field(d) % step === 0
+              : (d) => interval.count(0, d) % step === 0);
+    };
+  }
+
+  return interval;
+}
+
+;// CONCATENATED MODULE: ./node_modules/d3-time/src/millisecond.js
+
+
+const millisecond = timeInterval(() => {
+  // noop
+}, (date, step) => {
+  date.setTime(+date + step);
+}, (start, end) => {
+  return end - start;
+});
+
+// An optimized implementation for this simple case.
+millisecond.every = (k) => {
+  k = Math.floor(k);
+  if (!isFinite(k) || !(k > 0)) return null;
+  if (!(k > 1)) return millisecond;
+  return timeInterval((date) => {
+    date.setTime(Math.floor(date / k) * k);
+  }, (date, step) => {
+    date.setTime(+date + step * k);
+  }, (start, end) => {
+    return (end - start) / k;
+  });
+};
+
+const milliseconds = millisecond.range;
+
+;// CONCATENATED MODULE: ./node_modules/d3-time/src/second.js
+
+
+
+const second = timeInterval((date) => {
+  date.setTime(date - date.getMilliseconds());
+}, (date, step) => {
+  date.setTime(+date + step * durationSecond);
+}, (start, end) => {
+  return (end - start) / durationSecond;
+}, (date) => {
+  return date.getUTCSeconds();
+});
+
+const seconds = second.range;
+
+;// CONCATENATED MODULE: ./node_modules/d3-time/src/minute.js
+
+
+
+const timeMinute = timeInterval((date) => {
+  date.setTime(date - date.getMilliseconds() - date.getSeconds() * durationSecond);
+}, (date, step) => {
+  date.setTime(+date + step * durationMinute);
+}, (start, end) => {
+  return (end - start) / durationMinute;
+}, (date) => {
+  return date.getMinutes();
+});
+
+const timeMinutes = timeMinute.range;
+
+const utcMinute = timeInterval((date) => {
+  date.setUTCSeconds(0, 0);
+}, (date, step) => {
+  date.setTime(+date + step * durationMinute);
+}, (start, end) => {
+  return (end - start) / durationMinute;
+}, (date) => {
+  return date.getUTCMinutes();
+});
+
+const utcMinutes = utcMinute.range;
+
+;// CONCATENATED MODULE: ./node_modules/d3-time/src/hour.js
+
+
+
+const timeHour = timeInterval((date) => {
+  date.setTime(date - date.getMilliseconds() - date.getSeconds() * durationSecond - date.getMinutes() * durationMinute);
+}, (date, step) => {
+  date.setTime(+date + step * durationHour);
+}, (start, end) => {
+  return (end - start) / durationHour;
+}, (date) => {
+  return date.getHours();
+});
+
+const timeHours = timeHour.range;
+
+const utcHour = timeInterval((date) => {
+  date.setUTCMinutes(0, 0, 0);
+}, (date, step) => {
+  date.setTime(+date + step * durationHour);
+}, (start, end) => {
+  return (end - start) / durationHour;
+}, (date) => {
+  return date.getUTCHours();
+});
+
+const utcHours = utcHour.range;
+
+;// CONCATENATED MODULE: ./node_modules/d3-time/src/day.js
+
+
+
+const timeDay = timeInterval(
+  date => date.setHours(0, 0, 0, 0),
+  (date, step) => date.setDate(date.getDate() + step),
+  (start, end) => (end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * durationMinute) / durationDay,
+  date => date.getDate() - 1
+);
+
+const timeDays = timeDay.range;
+
+const utcDay = timeInterval((date) => {
+  date.setUTCHours(0, 0, 0, 0);
+}, (date, step) => {
+  date.setUTCDate(date.getUTCDate() + step);
+}, (start, end) => {
+  return (end - start) / durationDay;
+}, (date) => {
+  return date.getUTCDate() - 1;
+});
+
+const utcDays = utcDay.range;
+
+const unixDay = timeInterval((date) => {
+  date.setUTCHours(0, 0, 0, 0);
+}, (date, step) => {
+  date.setUTCDate(date.getUTCDate() + step);
+}, (start, end) => {
+  return (end - start) / durationDay;
+}, (date) => {
+  return Math.floor(date / durationDay);
+});
+
+const unixDays = unixDay.range;
+
+;// CONCATENATED MODULE: ./node_modules/d3-time/src/week.js
+
+
+
+function timeWeekday(i) {
+  return timeInterval((date) => {
+    date.setDate(date.getDate() - (date.getDay() + 7 - i) % 7);
+    date.setHours(0, 0, 0, 0);
+  }, (date, step) => {
+    date.setDate(date.getDate() + step * 7);
+  }, (start, end) => {
+    return (end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * durationMinute) / durationWeek;
+  });
+}
+
+const timeSunday = timeWeekday(0);
+const timeMonday = timeWeekday(1);
+const timeTuesday = timeWeekday(2);
+const timeWednesday = timeWeekday(3);
+const timeThursday = timeWeekday(4);
+const timeFriday = timeWeekday(5);
+const timeSaturday = timeWeekday(6);
+
+const timeSundays = timeSunday.range;
+const timeMondays = timeMonday.range;
+const timeTuesdays = timeTuesday.range;
+const timeWednesdays = timeWednesday.range;
+const timeThursdays = timeThursday.range;
+const timeFridays = timeFriday.range;
+const timeSaturdays = timeSaturday.range;
+
+function utcWeekday(i) {
+  return timeInterval((date) => {
+    date.setUTCDate(date.getUTCDate() - (date.getUTCDay() + 7 - i) % 7);
+    date.setUTCHours(0, 0, 0, 0);
+  }, (date, step) => {
+    date.setUTCDate(date.getUTCDate() + step * 7);
+  }, (start, end) => {
+    return (end - start) / durationWeek;
+  });
+}
+
+const utcSunday = utcWeekday(0);
+const utcMonday = utcWeekday(1);
+const utcTuesday = utcWeekday(2);
+const utcWednesday = utcWeekday(3);
+const utcThursday = utcWeekday(4);
+const utcFriday = utcWeekday(5);
+const utcSaturday = utcWeekday(6);
+
+const utcSundays = utcSunday.range;
+const utcMondays = utcMonday.range;
+const utcTuesdays = utcTuesday.range;
+const utcWednesdays = utcWednesday.range;
+const utcThursdays = utcThursday.range;
+const utcFridays = utcFriday.range;
+const utcSaturdays = utcSaturday.range;
+
+;// CONCATENATED MODULE: ./node_modules/d3-time/src/month.js
+
+
+const timeMonth = timeInterval((date) => {
+  date.setDate(1);
+  date.setHours(0, 0, 0, 0);
+}, (date, step) => {
+  date.setMonth(date.getMonth() + step);
+}, (start, end) => {
+  return end.getMonth() - start.getMonth() + (end.getFullYear() - start.getFullYear()) * 12;
+}, (date) => {
+  return date.getMonth();
+});
+
+const timeMonths = timeMonth.range;
+
+const utcMonth = timeInterval((date) => {
+  date.setUTCDate(1);
+  date.setUTCHours(0, 0, 0, 0);
+}, (date, step) => {
+  date.setUTCMonth(date.getUTCMonth() + step);
+}, (start, end) => {
+  return end.getUTCMonth() - start.getUTCMonth() + (end.getUTCFullYear() - start.getUTCFullYear()) * 12;
+}, (date) => {
+  return date.getUTCMonth();
+});
+
+const utcMonths = utcMonth.range;
+
+;// CONCATENATED MODULE: ./node_modules/d3-time/src/year.js
+
+
+const timeYear = timeInterval((date) => {
+  date.setMonth(0, 1);
+  date.setHours(0, 0, 0, 0);
+}, (date, step) => {
+  date.setFullYear(date.getFullYear() + step);
+}, (start, end) => {
+  return end.getFullYear() - start.getFullYear();
+}, (date) => {
+  return date.getFullYear();
+});
+
+// An optimized implementation for this simple case.
+timeYear.every = (k) => {
+  return !isFinite(k = Math.floor(k)) || !(k > 0) ? null : timeInterval((date) => {
+    date.setFullYear(Math.floor(date.getFullYear() / k) * k);
+    date.setMonth(0, 1);
+    date.setHours(0, 0, 0, 0);
+  }, (date, step) => {
+    date.setFullYear(date.getFullYear() + step * k);
+  });
+};
+
+const timeYears = timeYear.range;
+
+const utcYear = timeInterval((date) => {
+  date.setUTCMonth(0, 1);
+  date.setUTCHours(0, 0, 0, 0);
+}, (date, step) => {
+  date.setUTCFullYear(date.getUTCFullYear() + step);
+}, (start, end) => {
+  return end.getUTCFullYear() - start.getUTCFullYear();
+}, (date) => {
+  return date.getUTCFullYear();
+});
+
+// An optimized implementation for this simple case.
+utcYear.every = (k) => {
+  return !isFinite(k = Math.floor(k)) || !(k > 0) ? null : timeInterval((date) => {
+    date.setUTCFullYear(Math.floor(date.getUTCFullYear() / k) * k);
+    date.setUTCMonth(0, 1);
+    date.setUTCHours(0, 0, 0, 0);
+  }, (date, step) => {
+    date.setUTCFullYear(date.getUTCFullYear() + step * k);
+  });
+};
+
+const utcYears = utcYear.range;
+
+;// CONCATENATED MODULE: ./node_modules/d3-time/src/ticks.js
+
+
+
+
+
+
+
+
+
+
+
+function ticker(year, month, week, day, hour, minute) {
+
+  const tickIntervals = [
+    [second,  1,      durationSecond],
+    [second,  5,  5 * durationSecond],
+    [second, 15, 15 * durationSecond],
+    [second, 30, 30 * durationSecond],
+    [minute,  1,      durationMinute],
+    [minute,  5,  5 * durationMinute],
+    [minute, 15, 15 * durationMinute],
+    [minute, 30, 30 * durationMinute],
+    [  hour,  1,      durationHour  ],
+    [  hour,  3,  3 * durationHour  ],
+    [  hour,  6,  6 * durationHour  ],
+    [  hour, 12, 12 * durationHour  ],
+    [   day,  1,      durationDay   ],
+    [   day,  2,  2 * durationDay   ],
+    [  week,  1,      durationWeek  ],
+    [ month,  1,      durationMonth ],
+    [ month,  3,  3 * durationMonth ],
+    [  year,  1,      durationYear  ]
+  ];
+
+  function ticks(start, stop, count) {
+    const reverse = stop < start;
+    if (reverse) [start, stop] = [stop, start];
+    const interval = count && typeof count.range === "function" ? count : tickInterval(start, stop, count);
+    const ticks = interval ? interval.range(start, +stop + 1) : []; // inclusive stop
+    return reverse ? ticks.reverse() : ticks;
+  }
+
+  function tickInterval(start, stop, count) {
+    const target = Math.abs(stop - start) / count;
+    const i = bisector(([,, step]) => step).right(tickIntervals, target);
+    if (i === tickIntervals.length) return year.every(tickStep(start / durationYear, stop / durationYear, count));
+    if (i === 0) return millisecond.every(Math.max(tickStep(start, stop, count), 1));
+    const [t, step] = tickIntervals[target / tickIntervals[i - 1][2] < tickIntervals[i][2] / target ? i - 1 : i];
+    return t.every(step);
+  }
+
+  return [ticks, tickInterval];
+}
+
+const [utcTicks, utcTickInterval] = ticker(utcYear, utcMonth, utcSunday, unixDay, utcHour, utcMinute);
+const [timeTicks, timeTickInterval] = ticker(timeYear, timeMonth, timeSunday, timeDay, timeHour, timeMinute);
+
+
+
+;// CONCATENATED MODULE: ./node_modules/d3-time-format/src/locale.js
+
+
+function localDate(d) {
+  if (0 <= d.y && d.y < 100) {
+    var date = new Date(-1, d.m, d.d, d.H, d.M, d.S, d.L);
+    date.setFullYear(d.y);
+    return date;
+  }
+  return new Date(d.y, d.m, d.d, d.H, d.M, d.S, d.L);
+}
+
+function utcDate(d) {
+  if (0 <= d.y && d.y < 100) {
+    var date = new Date(Date.UTC(-1, d.m, d.d, d.H, d.M, d.S, d.L));
+    date.setUTCFullYear(d.y);
+    return date;
+  }
+  return new Date(Date.UTC(d.y, d.m, d.d, d.H, d.M, d.S, d.L));
+}
+
+function newDate(y, m, d) {
+  return {y: y, m: m, d: d, H: 0, M: 0, S: 0, L: 0};
+}
+
+function formatLocale(locale) {
+  var locale_dateTime = locale.dateTime,
+      locale_date = locale.date,
+      locale_time = locale.time,
+      locale_periods = locale.periods,
+      locale_weekdays = locale.days,
+      locale_shortWeekdays = locale.shortDays,
+      locale_months = locale.months,
+      locale_shortMonths = locale.shortMonths;
+
+  var periodRe = formatRe(locale_periods),
+      periodLookup = formatLookup(locale_periods),
+      weekdayRe = formatRe(locale_weekdays),
+      weekdayLookup = formatLookup(locale_weekdays),
+      shortWeekdayRe = formatRe(locale_shortWeekdays),
+      shortWeekdayLookup = formatLookup(locale_shortWeekdays),
+      monthRe = formatRe(locale_months),
+      monthLookup = formatLookup(locale_months),
+      shortMonthRe = formatRe(locale_shortMonths),
+      shortMonthLookup = formatLookup(locale_shortMonths);
+
+  var formats = {
+    "a": formatShortWeekday,
+    "A": formatWeekday,
+    "b": formatShortMonth,
+    "B": formatMonth,
+    "c": null,
+    "d": formatDayOfMonth,
+    "e": formatDayOfMonth,
+    "f": formatMicroseconds,
+    "g": formatYearISO,
+    "G": formatFullYearISO,
+    "H": formatHour24,
+    "I": formatHour12,
+    "j": formatDayOfYear,
+    "L": formatMilliseconds,
+    "m": formatMonthNumber,
+    "M": formatMinutes,
+    "p": formatPeriod,
+    "q": formatQuarter,
+    "Q": formatUnixTimestamp,
+    "s": formatUnixTimestampSeconds,
+    "S": formatSeconds,
+    "u": formatWeekdayNumberMonday,
+    "U": formatWeekNumberSunday,
+    "V": formatWeekNumberISO,
+    "w": formatWeekdayNumberSunday,
+    "W": formatWeekNumberMonday,
+    "x": null,
+    "X": null,
+    "y": formatYear,
+    "Y": formatFullYear,
+    "Z": formatZone,
+    "%": formatLiteralPercent
+  };
+
+  var utcFormats = {
+    "a": formatUTCShortWeekday,
+    "A": formatUTCWeekday,
+    "b": formatUTCShortMonth,
+    "B": formatUTCMonth,
+    "c": null,
+    "d": formatUTCDayOfMonth,
+    "e": formatUTCDayOfMonth,
+    "f": formatUTCMicroseconds,
+    "g": formatUTCYearISO,
+    "G": formatUTCFullYearISO,
+    "H": formatUTCHour24,
+    "I": formatUTCHour12,
+    "j": formatUTCDayOfYear,
+    "L": formatUTCMilliseconds,
+    "m": formatUTCMonthNumber,
+    "M": formatUTCMinutes,
+    "p": formatUTCPeriod,
+    "q": formatUTCQuarter,
+    "Q": formatUnixTimestamp,
+    "s": formatUnixTimestampSeconds,
+    "S": formatUTCSeconds,
+    "u": formatUTCWeekdayNumberMonday,
+    "U": formatUTCWeekNumberSunday,
+    "V": formatUTCWeekNumberISO,
+    "w": formatUTCWeekdayNumberSunday,
+    "W": formatUTCWeekNumberMonday,
+    "x": null,
+    "X": null,
+    "y": formatUTCYear,
+    "Y": formatUTCFullYear,
+    "Z": formatUTCZone,
+    "%": formatLiteralPercent
+  };
+
+  var parses = {
+    "a": parseShortWeekday,
+    "A": parseWeekday,
+    "b": parseShortMonth,
+    "B": parseMonth,
+    "c": parseLocaleDateTime,
+    "d": parseDayOfMonth,
+    "e": parseDayOfMonth,
+    "f": parseMicroseconds,
+    "g": parseYear,
+    "G": parseFullYear,
+    "H": parseHour24,
+    "I": parseHour24,
+    "j": parseDayOfYear,
+    "L": parseMilliseconds,
+    "m": parseMonthNumber,
+    "M": parseMinutes,
+    "p": parsePeriod,
+    "q": parseQuarter,
+    "Q": parseUnixTimestamp,
+    "s": parseUnixTimestampSeconds,
+    "S": parseSeconds,
+    "u": parseWeekdayNumberMonday,
+    "U": parseWeekNumberSunday,
+    "V": parseWeekNumberISO,
+    "w": parseWeekdayNumberSunday,
+    "W": parseWeekNumberMonday,
+    "x": parseLocaleDate,
+    "X": parseLocaleTime,
+    "y": parseYear,
+    "Y": parseFullYear,
+    "Z": parseZone,
+    "%": parseLiteralPercent
+  };
+
+  // These recursive directive definitions must be deferred.
+  formats.x = newFormat(locale_date, formats);
+  formats.X = newFormat(locale_time, formats);
+  formats.c = newFormat(locale_dateTime, formats);
+  utcFormats.x = newFormat(locale_date, utcFormats);
+  utcFormats.X = newFormat(locale_time, utcFormats);
+  utcFormats.c = newFormat(locale_dateTime, utcFormats);
+
+  function newFormat(specifier, formats) {
+    return function(date) {
+      var string = [],
+          i = -1,
+          j = 0,
+          n = specifier.length,
+          c,
+          pad,
+          format;
+
+      if (!(date instanceof Date)) date = new Date(+date);
+
+      while (++i < n) {
+        if (specifier.charCodeAt(i) === 37) {
+          string.push(specifier.slice(j, i));
+          if ((pad = pads[c = specifier.charAt(++i)]) != null) c = specifier.charAt(++i);
+          else pad = c === "e" ? " " : "0";
+          if (format = formats[c]) c = format(date, pad);
+          string.push(c);
+          j = i + 1;
+        }
+      }
+
+      string.push(specifier.slice(j, i));
+      return string.join("");
+    };
+  }
+
+  function newParse(specifier, Z) {
+    return function(string) {
+      var d = newDate(1900, undefined, 1),
+          i = parseSpecifier(d, specifier, string += "", 0),
+          week, day;
+      if (i != string.length) return null;
+
+      // If a UNIX timestamp is specified, return it.
+      if ("Q" in d) return new Date(d.Q);
+      if ("s" in d) return new Date(d.s * 1000 + ("L" in d ? d.L : 0));
+
+      // If this is utcParse, never use the local timezone.
+      if (Z && !("Z" in d)) d.Z = 0;
+
+      // The am-pm flag is 0 for AM, and 1 for PM.
+      if ("p" in d) d.H = d.H % 12 + d.p * 12;
+
+      // If the month was not specified, inherit from the quarter.
+      if (d.m === undefined) d.m = "q" in d ? d.q : 0;
+
+      // Convert day-of-week and week-of-year to day-of-year.
+      if ("V" in d) {
+        if (d.V < 1 || d.V > 53) return null;
+        if (!("w" in d)) d.w = 1;
+        if ("Z" in d) {
+          week = utcDate(newDate(d.y, 0, 1)), day = week.getUTCDay();
+          week = day > 4 || day === 0 ? utcMonday.ceil(week) : utcMonday(week);
+          week = utcDay.offset(week, (d.V - 1) * 7);
+          d.y = week.getUTCFullYear();
+          d.m = week.getUTCMonth();
+          d.d = week.getUTCDate() + (d.w + 6) % 7;
+        } else {
+          week = localDate(newDate(d.y, 0, 1)), day = week.getDay();
+          week = day > 4 || day === 0 ? timeMonday.ceil(week) : timeMonday(week);
+          week = timeDay.offset(week, (d.V - 1) * 7);
+          d.y = week.getFullYear();
+          d.m = week.getMonth();
+          d.d = week.getDate() + (d.w + 6) % 7;
+        }
+      } else if ("W" in d || "U" in d) {
+        if (!("w" in d)) d.w = "u" in d ? d.u % 7 : "W" in d ? 1 : 0;
+        day = "Z" in d ? utcDate(newDate(d.y, 0, 1)).getUTCDay() : localDate(newDate(d.y, 0, 1)).getDay();
+        d.m = 0;
+        d.d = "W" in d ? (d.w + 6) % 7 + d.W * 7 - (day + 5) % 7 : d.w + d.U * 7 - (day + 6) % 7;
+      }
+
+      // If a time zone is specified, all fields are interpreted as UTC and then
+      // offset according to the specified time zone.
+      if ("Z" in d) {
+        d.H += d.Z / 100 | 0;
+        d.M += d.Z % 100;
+        return utcDate(d);
+      }
+
+      // Otherwise, all fields are in local time.
+      return localDate(d);
+    };
+  }
+
+  function parseSpecifier(d, specifier, string, j) {
+    var i = 0,
+        n = specifier.length,
+        m = string.length,
+        c,
+        parse;
+
+    while (i < n) {
+      if (j >= m) return -1;
+      c = specifier.charCodeAt(i++);
+      if (c === 37) {
+        c = specifier.charAt(i++);
+        parse = parses[c in pads ? specifier.charAt(i++) : c];
+        if (!parse || ((j = parse(d, string, j)) < 0)) return -1;
+      } else if (c != string.charCodeAt(j++)) {
+        return -1;
+      }
+    }
+
+    return j;
+  }
+
+  function parsePeriod(d, string, i) {
+    var n = periodRe.exec(string.slice(i));
+    return n ? (d.p = periodLookup.get(n[0].toLowerCase()), i + n[0].length) : -1;
+  }
+
+  function parseShortWeekday(d, string, i) {
+    var n = shortWeekdayRe.exec(string.slice(i));
+    return n ? (d.w = shortWeekdayLookup.get(n[0].toLowerCase()), i + n[0].length) : -1;
+  }
+
+  function parseWeekday(d, string, i) {
+    var n = weekdayRe.exec(string.slice(i));
+    return n ? (d.w = weekdayLookup.get(n[0].toLowerCase()), i + n[0].length) : -1;
+  }
+
+  function parseShortMonth(d, string, i) {
+    var n = shortMonthRe.exec(string.slice(i));
+    return n ? (d.m = shortMonthLookup.get(n[0].toLowerCase()), i + n[0].length) : -1;
+  }
+
+  function parseMonth(d, string, i) {
+    var n = monthRe.exec(string.slice(i));
+    return n ? (d.m = monthLookup.get(n[0].toLowerCase()), i + n[0].length) : -1;
+  }
+
+  function parseLocaleDateTime(d, string, i) {
+    return parseSpecifier(d, locale_dateTime, string, i);
+  }
+
+  function parseLocaleDate(d, string, i) {
+    return parseSpecifier(d, locale_date, string, i);
+  }
+
+  function parseLocaleTime(d, string, i) {
+    return parseSpecifier(d, locale_time, string, i);
+  }
+
+  function formatShortWeekday(d) {
+    return locale_shortWeekdays[d.getDay()];
+  }
+
+  function formatWeekday(d) {
+    return locale_weekdays[d.getDay()];
+  }
+
+  function formatShortMonth(d) {
+    return locale_shortMonths[d.getMonth()];
+  }
+
+  function formatMonth(d) {
+    return locale_months[d.getMonth()];
+  }
+
+  function formatPeriod(d) {
+    return locale_periods[+(d.getHours() >= 12)];
+  }
+
+  function formatQuarter(d) {
+    return 1 + ~~(d.getMonth() / 3);
+  }
+
+  function formatUTCShortWeekday(d) {
+    return locale_shortWeekdays[d.getUTCDay()];
+  }
+
+  function formatUTCWeekday(d) {
+    return locale_weekdays[d.getUTCDay()];
+  }
+
+  function formatUTCShortMonth(d) {
+    return locale_shortMonths[d.getUTCMonth()];
+  }
+
+  function formatUTCMonth(d) {
+    return locale_months[d.getUTCMonth()];
+  }
+
+  function formatUTCPeriod(d) {
+    return locale_periods[+(d.getUTCHours() >= 12)];
+  }
+
+  function formatUTCQuarter(d) {
+    return 1 + ~~(d.getUTCMonth() / 3);
+  }
+
+  return {
+    format: function(specifier) {
+      var f = newFormat(specifier += "", formats);
+      f.toString = function() { return specifier; };
+      return f;
+    },
+    parse: function(specifier) {
+      var p = newParse(specifier += "", false);
+      p.toString = function() { return specifier; };
+      return p;
+    },
+    utcFormat: function(specifier) {
+      var f = newFormat(specifier += "", utcFormats);
+      f.toString = function() { return specifier; };
+      return f;
+    },
+    utcParse: function(specifier) {
+      var p = newParse(specifier += "", true);
+      p.toString = function() { return specifier; };
+      return p;
+    }
+  };
+}
+
+var pads = {"-": "", "_": " ", "0": "0"},
+    numberRe = /^\s*\d+/, // note: ignores next directive
+    percentRe = /^%/,
+    requoteRe = /[\\^$*+?|[\]().{}]/g;
+
+function pad(value, fill, width) {
+  var sign = value < 0 ? "-" : "",
+      string = (sign ? -value : value) + "",
+      length = string.length;
+  return sign + (length < width ? new Array(width - length + 1).join(fill) + string : string);
+}
+
+function requote(s) {
+  return s.replace(requoteRe, "\\$&");
+}
+
+function formatRe(names) {
+  return new RegExp("^(?:" + names.map(requote).join("|") + ")", "i");
+}
+
+function formatLookup(names) {
+  return new Map(names.map((name, i) => [name.toLowerCase(), i]));
+}
+
+function parseWeekdayNumberSunday(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 1));
+  return n ? (d.w = +n[0], i + n[0].length) : -1;
+}
+
+function parseWeekdayNumberMonday(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 1));
+  return n ? (d.u = +n[0], i + n[0].length) : -1;
+}
+
+function parseWeekNumberSunday(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 2));
+  return n ? (d.U = +n[0], i + n[0].length) : -1;
+}
+
+function parseWeekNumberISO(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 2));
+  return n ? (d.V = +n[0], i + n[0].length) : -1;
+}
+
+function parseWeekNumberMonday(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 2));
+  return n ? (d.W = +n[0], i + n[0].length) : -1;
+}
+
+function parseFullYear(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 4));
+  return n ? (d.y = +n[0], i + n[0].length) : -1;
+}
+
+function parseYear(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 2));
+  return n ? (d.y = +n[0] + (+n[0] > 68 ? 1900 : 2000), i + n[0].length) : -1;
+}
+
+function parseZone(d, string, i) {
+  var n = /^(Z)|([+-]\d\d)(?::?(\d\d))?/.exec(string.slice(i, i + 6));
+  return n ? (d.Z = n[1] ? 0 : -(n[2] + (n[3] || "00")), i + n[0].length) : -1;
+}
+
+function parseQuarter(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 1));
+  return n ? (d.q = n[0] * 3 - 3, i + n[0].length) : -1;
+}
+
+function parseMonthNumber(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 2));
+  return n ? (d.m = n[0] - 1, i + n[0].length) : -1;
+}
+
+function parseDayOfMonth(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 2));
+  return n ? (d.d = +n[0], i + n[0].length) : -1;
+}
+
+function parseDayOfYear(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 3));
+  return n ? (d.m = 0, d.d = +n[0], i + n[0].length) : -1;
+}
+
+function parseHour24(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 2));
+  return n ? (d.H = +n[0], i + n[0].length) : -1;
+}
+
+function parseMinutes(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 2));
+  return n ? (d.M = +n[0], i + n[0].length) : -1;
+}
+
+function parseSeconds(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 2));
+  return n ? (d.S = +n[0], i + n[0].length) : -1;
+}
+
+function parseMilliseconds(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 3));
+  return n ? (d.L = +n[0], i + n[0].length) : -1;
+}
+
+function parseMicroseconds(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 6));
+  return n ? (d.L = Math.floor(n[0] / 1000), i + n[0].length) : -1;
+}
+
+function parseLiteralPercent(d, string, i) {
+  var n = percentRe.exec(string.slice(i, i + 1));
+  return n ? i + n[0].length : -1;
+}
+
+function parseUnixTimestamp(d, string, i) {
+  var n = numberRe.exec(string.slice(i));
+  return n ? (d.Q = +n[0], i + n[0].length) : -1;
+}
+
+function parseUnixTimestampSeconds(d, string, i) {
+  var n = numberRe.exec(string.slice(i));
+  return n ? (d.s = +n[0], i + n[0].length) : -1;
+}
+
+function formatDayOfMonth(d, p) {
+  return pad(d.getDate(), p, 2);
+}
+
+function formatHour24(d, p) {
+  return pad(d.getHours(), p, 2);
+}
+
+function formatHour12(d, p) {
+  return pad(d.getHours() % 12 || 12, p, 2);
+}
+
+function formatDayOfYear(d, p) {
+  return pad(1 + timeDay.count(timeYear(d), d), p, 3);
+}
+
+function formatMilliseconds(d, p) {
+  return pad(d.getMilliseconds(), p, 3);
+}
+
+function formatMicroseconds(d, p) {
+  return formatMilliseconds(d, p) + "000";
+}
+
+function formatMonthNumber(d, p) {
+  return pad(d.getMonth() + 1, p, 2);
+}
+
+function formatMinutes(d, p) {
+  return pad(d.getMinutes(), p, 2);
+}
+
+function formatSeconds(d, p) {
+  return pad(d.getSeconds(), p, 2);
+}
+
+function formatWeekdayNumberMonday(d) {
+  var day = d.getDay();
+  return day === 0 ? 7 : day;
+}
+
+function formatWeekNumberSunday(d, p) {
+  return pad(timeSunday.count(timeYear(d) - 1, d), p, 2);
+}
+
+function dISO(d) {
+  var day = d.getDay();
+  return (day >= 4 || day === 0) ? timeThursday(d) : timeThursday.ceil(d);
+}
+
+function formatWeekNumberISO(d, p) {
+  d = dISO(d);
+  return pad(timeThursday.count(timeYear(d), d) + (timeYear(d).getDay() === 4), p, 2);
+}
+
+function formatWeekdayNumberSunday(d) {
+  return d.getDay();
+}
+
+function formatWeekNumberMonday(d, p) {
+  return pad(timeMonday.count(timeYear(d) - 1, d), p, 2);
+}
+
+function formatYear(d, p) {
+  return pad(d.getFullYear() % 100, p, 2);
+}
+
+function formatYearISO(d, p) {
+  d = dISO(d);
+  return pad(d.getFullYear() % 100, p, 2);
+}
+
+function formatFullYear(d, p) {
+  return pad(d.getFullYear() % 10000, p, 4);
+}
+
+function formatFullYearISO(d, p) {
+  var day = d.getDay();
+  d = (day >= 4 || day === 0) ? timeThursday(d) : timeThursday.ceil(d);
+  return pad(d.getFullYear() % 10000, p, 4);
+}
+
+function formatZone(d) {
+  var z = d.getTimezoneOffset();
+  return (z > 0 ? "-" : (z *= -1, "+"))
+      + pad(z / 60 | 0, "0", 2)
+      + pad(z % 60, "0", 2);
+}
+
+function formatUTCDayOfMonth(d, p) {
+  return pad(d.getUTCDate(), p, 2);
+}
+
+function formatUTCHour24(d, p) {
+  return pad(d.getUTCHours(), p, 2);
+}
+
+function formatUTCHour12(d, p) {
+  return pad(d.getUTCHours() % 12 || 12, p, 2);
+}
+
+function formatUTCDayOfYear(d, p) {
+  return pad(1 + utcDay.count(utcYear(d), d), p, 3);
+}
+
+function formatUTCMilliseconds(d, p) {
+  return pad(d.getUTCMilliseconds(), p, 3);
+}
+
+function formatUTCMicroseconds(d, p) {
+  return formatUTCMilliseconds(d, p) + "000";
+}
+
+function formatUTCMonthNumber(d, p) {
+  return pad(d.getUTCMonth() + 1, p, 2);
+}
+
+function formatUTCMinutes(d, p) {
+  return pad(d.getUTCMinutes(), p, 2);
+}
+
+function formatUTCSeconds(d, p) {
+  return pad(d.getUTCSeconds(), p, 2);
+}
+
+function formatUTCWeekdayNumberMonday(d) {
+  var dow = d.getUTCDay();
+  return dow === 0 ? 7 : dow;
+}
+
+function formatUTCWeekNumberSunday(d, p) {
+  return pad(utcSunday.count(utcYear(d) - 1, d), p, 2);
+}
+
+function UTCdISO(d) {
+  var day = d.getUTCDay();
+  return (day >= 4 || day === 0) ? utcThursday(d) : utcThursday.ceil(d);
+}
+
+function formatUTCWeekNumberISO(d, p) {
+  d = UTCdISO(d);
+  return pad(utcThursday.count(utcYear(d), d) + (utcYear(d).getUTCDay() === 4), p, 2);
+}
+
+function formatUTCWeekdayNumberSunday(d) {
+  return d.getUTCDay();
+}
+
+function formatUTCWeekNumberMonday(d, p) {
+  return pad(utcMonday.count(utcYear(d) - 1, d), p, 2);
+}
+
+function formatUTCYear(d, p) {
+  return pad(d.getUTCFullYear() % 100, p, 2);
+}
+
+function formatUTCYearISO(d, p) {
+  d = UTCdISO(d);
+  return pad(d.getUTCFullYear() % 100, p, 2);
+}
+
+function formatUTCFullYear(d, p) {
+  return pad(d.getUTCFullYear() % 10000, p, 4);
+}
+
+function formatUTCFullYearISO(d, p) {
+  var day = d.getUTCDay();
+  d = (day >= 4 || day === 0) ? utcThursday(d) : utcThursday.ceil(d);
+  return pad(d.getUTCFullYear() % 10000, p, 4);
+}
+
+function formatUTCZone() {
+  return "+0000";
+}
+
+function formatLiteralPercent() {
+  return "%";
+}
+
+function formatUnixTimestamp(d) {
+  return +d;
+}
+
+function formatUnixTimestampSeconds(d) {
+  return Math.floor(+d / 1000);
+}
+
+;// CONCATENATED MODULE: ./node_modules/d3-time-format/src/defaultLocale.js
+
+
+var locale;
+var timeFormat;
+var timeParse;
+var utcFormat;
+var utcParse;
+
+defaultLocale({
+  dateTime: "%x, %X",
+  date: "%-m/%-d/%Y",
+  time: "%-I:%M:%S %p",
+  periods: ["AM", "PM"],
+  days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+  shortDays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+  months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+  shortMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+});
+
+function defaultLocale(definition) {
+  locale = formatLocale(definition);
+  timeFormat = locale.format;
+  timeParse = locale.parse;
+  utcFormat = locale.utcFormat;
+  utcParse = locale.utcParse;
+  return locale;
 }
 
 ;// CONCATENATED MODULE: ./node_modules/d3-array/src/number.js
@@ -1563,6 +2287,127 @@ function continuous() {
   return transformer()(continuous_identity, continuous_identity);
 }
 
+;// CONCATENATED MODULE: ./node_modules/d3-scale/src/init.js
+function initRange(domain, range) {
+  switch (arguments.length) {
+    case 0: break;
+    case 1: this.range(domain); break;
+    default: this.range(range).domain(domain); break;
+  }
+  return this;
+}
+
+function initInterpolator(domain, interpolator) {
+  switch (arguments.length) {
+    case 0: break;
+    case 1: {
+      if (typeof domain === "function") this.interpolator(domain);
+      else this.range(domain);
+      break;
+    }
+    default: {
+      this.domain(domain);
+      if (typeof interpolator === "function") this.interpolator(interpolator);
+      else this.range(interpolator);
+      break;
+    }
+  }
+  return this;
+}
+
+;// CONCATENATED MODULE: ./node_modules/d3-scale/src/nice.js
+function nice(domain, interval) {
+  domain = domain.slice();
+
+  var i0 = 0,
+      i1 = domain.length - 1,
+      x0 = domain[i0],
+      x1 = domain[i1],
+      t;
+
+  if (x1 < x0) {
+    t = i0, i0 = i1, i1 = t;
+    t = x0, x0 = x1, x1 = t;
+  }
+
+  domain[i0] = interval.floor(x0);
+  domain[i1] = interval.ceil(x1);
+  return domain;
+}
+
+;// CONCATENATED MODULE: ./node_modules/d3-scale/src/time.js
+
+
+
+
+
+
+function time_date(t) {
+  return new Date(t);
+}
+
+function time_number(t) {
+  return t instanceof Date ? +t : +new Date(+t);
+}
+
+function calendar(ticks, tickInterval, year, month, week, day, hour, minute, second, format) {
+  var scale = continuous(),
+      invert = scale.invert,
+      domain = scale.domain;
+
+  var formatMillisecond = format(".%L"),
+      formatSecond = format(":%S"),
+      formatMinute = format("%I:%M"),
+      formatHour = format("%I %p"),
+      formatDay = format("%a %d"),
+      formatWeek = format("%b %d"),
+      formatMonth = format("%B"),
+      formatYear = format("%Y");
+
+  function tickFormat(date) {
+    return (second(date) < date ? formatMillisecond
+        : minute(date) < date ? formatSecond
+        : hour(date) < date ? formatMinute
+        : day(date) < date ? formatHour
+        : month(date) < date ? (week(date) < date ? formatDay : formatWeek)
+        : year(date) < date ? formatMonth
+        : formatYear)(date);
+  }
+
+  scale.invert = function(y) {
+    return new Date(invert(y));
+  };
+
+  scale.domain = function(_) {
+    return arguments.length ? domain(Array.from(_, time_number)) : domain().map(time_date);
+  };
+
+  scale.ticks = function(interval) {
+    var d = domain();
+    return ticks(d[0], d[d.length - 1], interval == null ? 10 : interval);
+  };
+
+  scale.tickFormat = function(count, specifier) {
+    return specifier == null ? tickFormat : format(specifier);
+  };
+
+  scale.nice = function(interval) {
+    var d = domain();
+    if (!interval || typeof interval.range !== "function") interval = tickInterval(d[0], d[d.length - 1], interval == null ? 10 : interval);
+    return interval ? domain(nice(d, interval)) : scale;
+  };
+
+  scale.copy = function() {
+    return copy(scale, calendar(ticks, tickInterval, year, month, week, day, hour, minute, second, format));
+  };
+
+  return scale;
+}
+
+function time() {
+  return initRange.apply(calendar(timeTicks, timeTickInterval, timeYear, timeMonth, timeSunday, timeDay, timeHour, timeMinute, second, timeFormat).domain([new Date(2000, 0, 1), new Date(2000, 0, 2)]), arguments);
+}
+
 ;// CONCATENATED MODULE: ./node_modules/d3-format/src/formatSpecifier.js
 // [[fill]align][sign][symbol][0][width][,][.precision][~][type]
 var re = /^(?:(.)?([<>=^]))?([+\-( ])?([$#])?(0)?(\d+)?(,)?(\.\d+)?(~)?([a-z%])?$/i;
@@ -1743,7 +2588,7 @@ var prefixExponent;
 });
 
 ;// CONCATENATED MODULE: ./node_modules/d3-format/src/identity.js
-/* harmony default export */ function d3_format_src_identity(x) {
+/* harmony default export */ function src_identity(x) {
   return x;
 }
 
@@ -1760,12 +2605,12 @@ var prefixExponent;
 var map = Array.prototype.map,
     prefixes = ["y","z","a","f","p","n","µ","m","","k","M","G","T","P","E","Z","Y"];
 
-/* harmony default export */ function locale(locale) {
-  var group = locale.grouping === undefined || locale.thousands === undefined ? d3_format_src_identity : formatGroup(map.call(locale.grouping, Number), locale.thousands + ""),
+/* harmony default export */ function src_locale(locale) {
+  var group = locale.grouping === undefined || locale.thousands === undefined ? src_identity : formatGroup(map.call(locale.grouping, Number), locale.thousands + ""),
       currencyPrefix = locale.currency === undefined ? "" : locale.currency[0] + "",
       currencySuffix = locale.currency === undefined ? "" : locale.currency[1] + "",
       decimal = locale.decimal === undefined ? "." : locale.decimal + "",
-      numerals = locale.numerals === undefined ? d3_format_src_identity : formatNumerals(map.call(locale.numerals, String)),
+      numerals = locale.numerals === undefined ? src_identity : formatNumerals(map.call(locale.numerals, String)),
       percent = locale.percent === undefined ? "%" : locale.percent + "",
       minus = locale.minus === undefined ? "−" : locale.minus + "",
       nan = locale.nan === undefined ? "NaN" : locale.nan + "";
@@ -1904,14 +2749,14 @@ var defaultLocale_locale;
 var format;
 var formatPrefix;
 
-defaultLocale({
+defaultLocale_defaultLocale({
   thousands: ",",
   grouping: [3],
   currency: ["$", ""]
 });
 
-function defaultLocale(definition) {
-  defaultLocale_locale = locale(definition);
+function defaultLocale_defaultLocale(definition) {
+  defaultLocale_locale = src_locale(definition);
   format = defaultLocale_locale.format;
   formatPrefix = defaultLocale_locale.formatPrefix;
   return defaultLocale_locale;
@@ -3181,6 +4026,401 @@ function stackSeries(key) {
   };
 
   return stack;
+}
+
+;// CONCATENATED MODULE: ./node_modules/d3-shape/src/curve/linear.js
+function Linear(context) {
+  this._context = context;
+}
+
+Linear.prototype = {
+  areaStart: function() {
+    this._line = 0;
+  },
+  areaEnd: function() {
+    this._line = NaN;
+  },
+  lineStart: function() {
+    this._point = 0;
+  },
+  lineEnd: function() {
+    if (this._line || (this._line !== 0 && this._point === 1)) this._context.closePath();
+    this._line = 1 - this._line;
+  },
+  point: function(x, y) {
+    x = +x, y = +y;
+    switch (this._point) {
+      case 0: this._point = 1; this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y); break;
+      case 1: this._point = 2; // falls through
+      default: this._context.lineTo(x, y); break;
+    }
+  }
+};
+
+/* harmony default export */ function curve_linear(context) {
+  return new Linear(context);
+}
+
+;// CONCATENATED MODULE: ./node_modules/d3-path/src/path.js
+const pi = Math.PI,
+    tau = 2 * pi,
+    epsilon = 1e-6,
+    tauEpsilon = tau - epsilon;
+
+function path_append(strings) {
+  this._ += strings[0];
+  for (let i = 1, n = strings.length; i < n; ++i) {
+    this._ += arguments[i] + strings[i];
+  }
+}
+
+function appendRound(digits) {
+  let d = Math.floor(digits);
+  if (!(d >= 0)) throw new Error(`invalid digits: ${digits}`);
+  if (d > 15) return path_append;
+  const k = 10 ** d;
+  return function(strings) {
+    this._ += strings[0];
+    for (let i = 1, n = strings.length; i < n; ++i) {
+      this._ += Math.round(arguments[i] * k) / k + strings[i];
+    }
+  };
+}
+
+class Path {
+  constructor(digits) {
+    this._x0 = this._y0 = // start of current subpath
+    this._x1 = this._y1 = null; // end of current subpath
+    this._ = "";
+    this._append = digits == null ? path_append : appendRound(digits);
+  }
+  moveTo(x, y) {
+    this._append`M${this._x0 = this._x1 = +x},${this._y0 = this._y1 = +y}`;
+  }
+  closePath() {
+    if (this._x1 !== null) {
+      this._x1 = this._x0, this._y1 = this._y0;
+      this._append`Z`;
+    }
+  }
+  lineTo(x, y) {
+    this._append`L${this._x1 = +x},${this._y1 = +y}`;
+  }
+  quadraticCurveTo(x1, y1, x, y) {
+    this._append`Q${+x1},${+y1},${this._x1 = +x},${this._y1 = +y}`;
+  }
+  bezierCurveTo(x1, y1, x2, y2, x, y) {
+    this._append`C${+x1},${+y1},${+x2},${+y2},${this._x1 = +x},${this._y1 = +y}`;
+  }
+  arcTo(x1, y1, x2, y2, r) {
+    x1 = +x1, y1 = +y1, x2 = +x2, y2 = +y2, r = +r;
+
+    // Is the radius negative? Error.
+    if (r < 0) throw new Error(`negative radius: ${r}`);
+
+    let x0 = this._x1,
+        y0 = this._y1,
+        x21 = x2 - x1,
+        y21 = y2 - y1,
+        x01 = x0 - x1,
+        y01 = y0 - y1,
+        l01_2 = x01 * x01 + y01 * y01;
+
+    // Is this path empty? Move to (x1,y1).
+    if (this._x1 === null) {
+      this._append`M${this._x1 = x1},${this._y1 = y1}`;
+    }
+
+    // Or, is (x1,y1) coincident with (x0,y0)? Do nothing.
+    else if (!(l01_2 > epsilon));
+
+    // Or, are (x0,y0), (x1,y1) and (x2,y2) collinear?
+    // Equivalently, is (x1,y1) coincident with (x2,y2)?
+    // Or, is the radius zero? Line to (x1,y1).
+    else if (!(Math.abs(y01 * x21 - y21 * x01) > epsilon) || !r) {
+      this._append`L${this._x1 = x1},${this._y1 = y1}`;
+    }
+
+    // Otherwise, draw an arc!
+    else {
+      let x20 = x2 - x0,
+          y20 = y2 - y0,
+          l21_2 = x21 * x21 + y21 * y21,
+          l20_2 = x20 * x20 + y20 * y20,
+          l21 = Math.sqrt(l21_2),
+          l01 = Math.sqrt(l01_2),
+          l = r * Math.tan((pi - Math.acos((l21_2 + l01_2 - l20_2) / (2 * l21 * l01))) / 2),
+          t01 = l / l01,
+          t21 = l / l21;
+
+      // If the start tangent is not coincident with (x0,y0), line to.
+      if (Math.abs(t01 - 1) > epsilon) {
+        this._append`L${x1 + t01 * x01},${y1 + t01 * y01}`;
+      }
+
+      this._append`A${r},${r},0,0,${+(y01 * x20 > x01 * y20)},${this._x1 = x1 + t21 * x21},${this._y1 = y1 + t21 * y21}`;
+    }
+  }
+  arc(x, y, r, a0, a1, ccw) {
+    x = +x, y = +y, r = +r, ccw = !!ccw;
+
+    // Is the radius negative? Error.
+    if (r < 0) throw new Error(`negative radius: ${r}`);
+
+    let dx = r * Math.cos(a0),
+        dy = r * Math.sin(a0),
+        x0 = x + dx,
+        y0 = y + dy,
+        cw = 1 ^ ccw,
+        da = ccw ? a0 - a1 : a1 - a0;
+
+    // Is this path empty? Move to (x0,y0).
+    if (this._x1 === null) {
+      this._append`M${x0},${y0}`;
+    }
+
+    // Or, is (x0,y0) not coincident with the previous point? Line to (x0,y0).
+    else if (Math.abs(this._x1 - x0) > epsilon || Math.abs(this._y1 - y0) > epsilon) {
+      this._append`L${x0},${y0}`;
+    }
+
+    // Is this arc empty? We’re done.
+    if (!r) return;
+
+    // Does the angle go the wrong way? Flip the direction.
+    if (da < 0) da = da % tau + tau;
+
+    // Is this a complete circle? Draw two arcs to complete the circle.
+    if (da > tauEpsilon) {
+      this._append`A${r},${r},0,1,${cw},${x - dx},${y - dy}A${r},${r},0,1,${cw},${this._x1 = x0},${this._y1 = y0}`;
+    }
+
+    // Is this arc non-empty? Draw an arc!
+    else if (da > epsilon) {
+      this._append`A${r},${r},0,${+(da >= pi)},${cw},${this._x1 = x + r * Math.cos(a1)},${this._y1 = y + r * Math.sin(a1)}`;
+    }
+  }
+  rect(x, y, w, h) {
+    this._append`M${this._x0 = this._x1 = +x},${this._y0 = this._y1 = +y}h${w = +w}v${+h}h${-w}Z`;
+  }
+  toString() {
+    return this._;
+  }
+}
+
+function path() {
+  return new Path;
+}
+
+// Allow instanceof d3.path
+path.prototype = Path.prototype;
+
+function pathRound(digits = 3) {
+  return new Path(+digits);
+}
+
+;// CONCATENATED MODULE: ./node_modules/d3-shape/src/path.js
+
+
+function withPath(shape) {
+  let digits = 3;
+
+  shape.digits = function(_) {
+    if (!arguments.length) return digits;
+    if (_ == null) {
+      digits = null;
+    } else {
+      const d = Math.floor(_);
+      if (!(d >= 0)) throw new RangeError(`invalid digits: ${_}`);
+      digits = d;
+    }
+    return shape;
+  };
+
+  return () => new Path(digits);
+}
+
+;// CONCATENATED MODULE: ./node_modules/d3-shape/src/point.js
+function point_x(p) {
+  return p[0];
+}
+
+function point_y(p) {
+  return p[1];
+}
+
+;// CONCATENATED MODULE: ./node_modules/d3-shape/src/line.js
+
+
+
+
+
+
+/* harmony default export */ function line(x, y) {
+  var defined = d3_shape_src_constant(true),
+      context = null,
+      curve = curve_linear,
+      output = null,
+      path = withPath(line);
+
+  x = typeof x === "function" ? x : (x === undefined) ? point_x : d3_shape_src_constant(x);
+  y = typeof y === "function" ? y : (y === undefined) ? point_y : d3_shape_src_constant(y);
+
+  function line(data) {
+    var i,
+        n = (data = src_array(data)).length,
+        d,
+        defined0 = false,
+        buffer;
+
+    if (context == null) output = curve(buffer = path());
+
+    for (i = 0; i <= n; ++i) {
+      if (!(i < n && defined(d = data[i], i, data)) === defined0) {
+        if (defined0 = !defined0) output.lineStart();
+        else output.lineEnd();
+      }
+      if (defined0) output.point(+x(d, i, data), +y(d, i, data));
+    }
+
+    if (buffer) return output = null, buffer + "" || null;
+  }
+
+  line.x = function(_) {
+    return arguments.length ? (x = typeof _ === "function" ? _ : d3_shape_src_constant(+_), line) : x;
+  };
+
+  line.y = function(_) {
+    return arguments.length ? (y = typeof _ === "function" ? _ : d3_shape_src_constant(+_), line) : y;
+  };
+
+  line.defined = function(_) {
+    return arguments.length ? (defined = typeof _ === "function" ? _ : d3_shape_src_constant(!!_), line) : defined;
+  };
+
+  line.curve = function(_) {
+    return arguments.length ? (curve = _, context != null && (output = curve(context)), line) : curve;
+  };
+
+  line.context = function(_) {
+    return arguments.length ? (_ == null ? context = output = null : output = curve(context = _), line) : context;
+  };
+
+  return line;
+}
+
+;// CONCATENATED MODULE: ./node_modules/d3-shape/src/area.js
+
+
+
+
+
+
+
+/* harmony default export */ function src_area(x0, y0, y1) {
+  var x1 = null,
+      defined = d3_shape_src_constant(true),
+      context = null,
+      curve = curve_linear,
+      output = null,
+      path = withPath(area);
+
+  x0 = typeof x0 === "function" ? x0 : (x0 === undefined) ? point_x : d3_shape_src_constant(+x0);
+  y0 = typeof y0 === "function" ? y0 : (y0 === undefined) ? d3_shape_src_constant(0) : d3_shape_src_constant(+y0);
+  y1 = typeof y1 === "function" ? y1 : (y1 === undefined) ? point_y : d3_shape_src_constant(+y1);
+
+  function area(data) {
+    var i,
+        j,
+        k,
+        n = (data = src_array(data)).length,
+        d,
+        defined0 = false,
+        buffer,
+        x0z = new Array(n),
+        y0z = new Array(n);
+
+    if (context == null) output = curve(buffer = path());
+
+    for (i = 0; i <= n; ++i) {
+      if (!(i < n && defined(d = data[i], i, data)) === defined0) {
+        if (defined0 = !defined0) {
+          j = i;
+          output.areaStart();
+          output.lineStart();
+        } else {
+          output.lineEnd();
+          output.lineStart();
+          for (k = i - 1; k >= j; --k) {
+            output.point(x0z[k], y0z[k]);
+          }
+          output.lineEnd();
+          output.areaEnd();
+        }
+      }
+      if (defined0) {
+        x0z[i] = +x0(d, i, data), y0z[i] = +y0(d, i, data);
+        output.point(x1 ? +x1(d, i, data) : x0z[i], y1 ? +y1(d, i, data) : y0z[i]);
+      }
+    }
+
+    if (buffer) return output = null, buffer + "" || null;
+  }
+
+  function arealine() {
+    return line().defined(defined).curve(curve).context(context);
+  }
+
+  area.x = function(_) {
+    return arguments.length ? (x0 = typeof _ === "function" ? _ : d3_shape_src_constant(+_), x1 = null, area) : x0;
+  };
+
+  area.x0 = function(_) {
+    return arguments.length ? (x0 = typeof _ === "function" ? _ : d3_shape_src_constant(+_), area) : x0;
+  };
+
+  area.x1 = function(_) {
+    return arguments.length ? (x1 = _ == null ? null : typeof _ === "function" ? _ : d3_shape_src_constant(+_), area) : x1;
+  };
+
+  area.y = function(_) {
+    return arguments.length ? (y0 = typeof _ === "function" ? _ : d3_shape_src_constant(+_), y1 = null, area) : y0;
+  };
+
+  area.y0 = function(_) {
+    return arguments.length ? (y0 = typeof _ === "function" ? _ : d3_shape_src_constant(+_), area) : y0;
+  };
+
+  area.y1 = function(_) {
+    return arguments.length ? (y1 = _ == null ? null : typeof _ === "function" ? _ : d3_shape_src_constant(+_), area) : y1;
+  };
+
+  area.lineX0 =
+  area.lineY0 = function() {
+    return arealine().x(x0).y(y0);
+  };
+
+  area.lineY1 = function() {
+    return arealine().x(x0).y(y1);
+  };
+
+  area.lineX1 = function() {
+    return arealine().x(x1).y(y0);
+  };
+
+  area.defined = function(_) {
+    return arguments.length ? (defined = typeof _ === "function" ? _ : d3_shape_src_constant(!!_), area) : defined;
+  };
+
+  area.curve = function(_) {
+    return arguments.length ? (curve = _, context != null && (output = curve(context)), area) : curve;
+  };
+
+  area.context = function(_) {
+    return arguments.length ? (_ == null ? context = output = null : output = curve(context = _), area) : context;
+  };
+
+  return area;
 }
 
 ;// CONCATENATED MODULE: ./node_modules/d3-dispatch/src/dispatch.js
@@ -4522,27 +5762,27 @@ function _typeof(o) {
 }
 ;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/toPrimitive.js
 
-function _toPrimitive(input, hint) {
-  if (_typeof(input) !== "object" || input === null) return input;
-  var prim = input[Symbol.toPrimitive];
-  if (prim !== undefined) {
-    var res = prim.call(input, hint || "default");
-    if (_typeof(res) !== "object") return res;
+function toPrimitive(t, r) {
+  if ("object" != _typeof(t) || !t) return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r || "default");
+    if ("object" != _typeof(i)) return i;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
-  return (hint === "string" ? String : Number)(input);
+  return ("string" === r ? String : Number)(t);
 }
 ;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/toPropertyKey.js
 
 
-function _toPropertyKey(arg) {
-  var key = _toPrimitive(arg, "string");
-  return _typeof(key) === "symbol" ? key : String(key);
+function toPropertyKey(t) {
+  var i = toPrimitive(t, "string");
+  return "symbol" == _typeof(i) ? i : String(i);
 }
 ;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/defineProperty.js
 
 function _defineProperty(obj, key, value) {
-  key = _toPropertyKey(key);
+  key = toPropertyKey(key);
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -4595,7 +5835,7 @@ class RegistroObjetos {
   registrar(id, valor) {
     if (!this.existe(id)) {
       this.registros[id] = valor;
-      console.log(`registro ${this.tipoObjetos}: ${id}`);
+      //console.log(`registro ${this.tipoObjetos}: ${id}`)
     } else {
       // eslint-disable-next-line
       console.warn(`${this.tipoObjetos} ${id} ya existe`);
@@ -4657,7 +5897,7 @@ class RegistroObjetos {
   borrar(id) {
     if (this.existe(id)) {
       delete this.registros[id];
-      console.log(`borrado ${this.tipoObjetos}: ${id}`);
+      //console.log(`borrado ${this.tipoObjetos}: ${id}`)
     }
   }
 }
@@ -4775,7 +6015,194 @@ const registroGraficas = new RegistroObjetos('grafica');
 function idValido(id) {
   return id !== undefined && typeof id === typeof String();
 }
+;// CONCATENATED MODULE: ./node_modules/d3-axis/src/identity.js
+/* harmony default export */ function d3_axis_src_identity(x) {
+  return x;
+}
+
+;// CONCATENATED MODULE: ./node_modules/d3-axis/src/axis.js
+
+
+var axis_top = 1,
+    right = 2,
+    bottom = 3,
+    left = 4,
+    axis_epsilon = 1e-6;
+
+function translateX(x) {
+  return "translate(" + x + ",0)";
+}
+
+function translateY(y) {
+  return "translate(0," + y + ")";
+}
+
+function axis_number(scale) {
+  return d => +scale(d);
+}
+
+function center(scale, offset) {
+  offset = Math.max(0, scale.bandwidth() - offset * 2) / 2;
+  if (scale.round()) offset = Math.round(offset);
+  return d => +scale(d) + offset;
+}
+
+function entering() {
+  return !this.__axis;
+}
+
+function axis(orient, scale) {
+  var tickArguments = [],
+      tickValues = null,
+      tickFormat = null,
+      tickSizeInner = 6,
+      tickSizeOuter = 6,
+      tickPadding = 3,
+      offset = typeof window !== "undefined" && window.devicePixelRatio > 1 ? 0 : 0.5,
+      k = orient === axis_top || orient === left ? -1 : 1,
+      x = orient === left || orient === right ? "x" : "y",
+      transform = orient === axis_top || orient === bottom ? translateX : translateY;
+
+  function axis(context) {
+    var values = tickValues == null ? (scale.ticks ? scale.ticks.apply(scale, tickArguments) : scale.domain()) : tickValues,
+        format = tickFormat == null ? (scale.tickFormat ? scale.tickFormat.apply(scale, tickArguments) : d3_axis_src_identity) : tickFormat,
+        spacing = Math.max(tickSizeInner, 0) + tickPadding,
+        range = scale.range(),
+        range0 = +range[0] + offset,
+        range1 = +range[range.length - 1] + offset,
+        position = (scale.bandwidth ? center : axis_number)(scale.copy(), offset),
+        selection = context.selection ? context.selection() : context,
+        path = selection.selectAll(".domain").data([null]),
+        tick = selection.selectAll(".tick").data(values, scale).order(),
+        tickExit = tick.exit(),
+        tickEnter = tick.enter().append("g").attr("class", "tick"),
+        line = tick.select("line"),
+        text = tick.select("text");
+
+    path = path.merge(path.enter().insert("path", ".tick")
+        .attr("class", "domain")
+        .attr("stroke", "currentColor"));
+
+    tick = tick.merge(tickEnter);
+
+    line = line.merge(tickEnter.append("line")
+        .attr("stroke", "currentColor")
+        .attr(x + "2", k * tickSizeInner));
+
+    text = text.merge(tickEnter.append("text")
+        .attr("fill", "currentColor")
+        .attr(x, k * spacing)
+        .attr("dy", orient === axis_top ? "0em" : orient === bottom ? "0.71em" : "0.32em"));
+
+    if (context !== selection) {
+      path = path.transition(context);
+      tick = tick.transition(context);
+      line = line.transition(context);
+      text = text.transition(context);
+
+      tickExit = tickExit.transition(context)
+          .attr("opacity", axis_epsilon)
+          .attr("transform", function(d) { return isFinite(d = position(d)) ? transform(d + offset) : this.getAttribute("transform"); });
+
+      tickEnter
+          .attr("opacity", axis_epsilon)
+          .attr("transform", function(d) { var p = this.parentNode.__axis; return transform((p && isFinite(p = p(d)) ? p : position(d)) + offset); });
+    }
+
+    tickExit.remove();
+
+    path
+        .attr("d", orient === left || orient === right
+            ? (tickSizeOuter ? "M" + k * tickSizeOuter + "," + range0 + "H" + offset + "V" + range1 + "H" + k * tickSizeOuter : "M" + offset + "," + range0 + "V" + range1)
+            : (tickSizeOuter ? "M" + range0 + "," + k * tickSizeOuter + "V" + offset + "H" + range1 + "V" + k * tickSizeOuter : "M" + range0 + "," + offset + "H" + range1));
+
+    tick
+        .attr("opacity", 1)
+        .attr("transform", function(d) { return transform(position(d) + offset); });
+
+    line
+        .attr(x + "2", k * tickSizeInner);
+
+    text
+        .attr(x, k * spacing)
+        .text(format);
+
+    selection.filter(entering)
+        .attr("fill", "none")
+        .attr("font-size", 10)
+        .attr("font-family", "sans-serif")
+        .attr("text-anchor", orient === right ? "start" : orient === left ? "end" : "middle");
+
+    selection
+        .each(function() { this.__axis = position; });
+  }
+
+  axis.scale = function(_) {
+    return arguments.length ? (scale = _, axis) : scale;
+  };
+
+  axis.ticks = function() {
+    return tickArguments = Array.from(arguments), axis;
+  };
+
+  axis.tickArguments = function(_) {
+    return arguments.length ? (tickArguments = _ == null ? [] : Array.from(_), axis) : tickArguments.slice();
+  };
+
+  axis.tickValues = function(_) {
+    return arguments.length ? (tickValues = _ == null ? null : Array.from(_), axis) : tickValues && tickValues.slice();
+  };
+
+  axis.tickFormat = function(_) {
+    return arguments.length ? (tickFormat = _, axis) : tickFormat;
+  };
+
+  axis.tickSize = function(_) {
+    return arguments.length ? (tickSizeInner = tickSizeOuter = +_, axis) : tickSizeInner;
+  };
+
+  axis.tickSizeInner = function(_) {
+    return arguments.length ? (tickSizeInner = +_, axis) : tickSizeInner;
+  };
+
+  axis.tickSizeOuter = function(_) {
+    return arguments.length ? (tickSizeOuter = +_, axis) : tickSizeOuter;
+  };
+
+  axis.tickPadding = function(_) {
+    return arguments.length ? (tickPadding = +_, axis) : tickPadding;
+  };
+
+  axis.offset = function(_) {
+    return arguments.length ? (offset = +_, axis) : offset;
+  };
+
+  return axis;
+}
+
+function axisTop(scale) {
+  return axis(axis_top, scale);
+}
+
+function axisRight(scale) {
+  return axis(right, scale);
+}
+
+function axisBottom(scale) {
+  return axis(bottom, scale);
+}
+
+function axisLeft(scale) {
+  return axis(left, scale);
+}
+
 ;// CONCATENATED MODULE: ./src/utils/index.js
+
+
+
+
+
+transition_transition;
 /**
  * @module utiles/index
  */
@@ -4813,7 +6240,77 @@ function buscarIdContenedorHtmlSisdai(tipo, {
     console.warn(`No se encontro el contenedor`);
   }
 }
-;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-barras/SisdaiBarras.vue?vue&type=script&setup=true&lang=js&
+
+/**
+ * Crea el eje vertical
+ * @param {String} id el id asociado al componente SisdaiGraficas.
+ * @param {Function} escala funcion de d3 (scaleBand, scaleLinear, etc.) que se emplea para graficar y se asocia al eje vertical.
+ * @param {Number} angulo es el ángulo que se rotan las etiquetas del eje.
+ * @param {String} alineacion corresponde a la propiedad alineacion_eje_y con valor 'izquierda' o 'derecha'.
+ * @param {Number} ancho es el ancho de la gráfica. Se utiliza para dar longitud correcta a las lineas punteadas.
+ */
+function creaEjeVertical(id, escala, angulo, alineacion, ancho) {
+  const eje_y = src_select(`div#${id} svg g.eje-y-${alineacion}`);
+  eje_y.transition().duration(500).call(alineacion === 'izquierda' ? axisLeft(escala) : axisRight(escala));
+  eje_y.selectAll('path').remove();
+  eje_y.selectAll('text').attr('transform', `translate(${alineacion === 'izquierda' ? '-5' : '5'},0)rotate(${angulo})`).attr('dy', `0em`).interrupt().attr('x', '0').attr('class', 'vis-valores-ejes').style('dominant-baseline', 'middle').text(d => d.toLocaleString('en'));
+  eje_y.selectAll('g.tick line').interrupt().attr('x1', '0').attr('y1', '0').attr('x2', alineacion === 'izquierda' ? ancho : -ancho).attr('y2', '0').style('stroke-dasharray', alineacion === 'izquierda' ? '2 2' : '3 4').style('stroke', '#6F7271');
+}
+/**
+ * Crea el eje horizontal
+ * @param {String} id el id asociado al componente SisdaiGraficas.
+ * @param {Function} escala funcion de d3 (scaleBand, scaleLinear, etc.) que se emplea para graficar y se asocia al eje vertical.
+ * @param {Number} angulo es el ángulo que se rotan las etiquetas del eje.
+ */
+function creaEjeHorizontal(id, escala, angulo) {
+  const eje_x = src_select(`div#${id} svg g.eje-x-abajo`);
+  eje_x.transition().duration(500).call(axisBottom(escala).tickFormat(d => {
+    if (d instanceof Date) {
+      return multiFormat(d);
+    } else {
+      return d;
+    }
+  }));
+  eje_x.selectAll('path').remove();
+  eje_x.selectAll('line').remove();
+  eje_x.selectAll('text').attr('class', 'vis-valores-ejes').attr('transform', `translate(0,8)rotate(${angulo})`).attr('dy', `${-Math.abs(angulo / 90)}em`).style('dominant-baseline', angulo !== 0 ? 'middle' : 'inherit').style('text-anchor', angulo < 0 ? 'end' : angulo === 0 ? 'middle' : 'start');
+}
+/**
+ * formatea eje temporal al espaniol 
+ * @param {Date} date el id asociado al componente SisdaiGraficas.
+
+ */
+function multiFormat(date) {
+  /**
+   * Método para traducir el formato de fecha
+   */
+  let locale = formatLocale({
+    decimal: ',',
+    thousands: '.',
+    grouping: [3],
+    currency: ['€', ''],
+    dateTime: '%A, %e %B %Y г. %X',
+    date: '%d.%m.%Y',
+    time: '%H:%M:%S',
+    periods: ['AM', 'PM'],
+    days: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+    shortDays: ['Dom', 'Lun', 'Mar', 'Mi', 'Jue', 'Vie', 'Sab'],
+    months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+    shortMonths: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
+  });
+  let formatMillisecond = locale.format('.%L');
+  let formatSecond = locale.format(':%S');
+  let formatMinute = locale.format('%I:%M');
+  let formatHour = locale.format('%I %p');
+  let formatDay = locale.format('%a %d');
+  let formatWeek = locale.format('%b %d');
+  //let formatMonth = locale.format('%b')
+  let formatMonthYear = locale.format('%b/%Y');
+  //let formatYear = locale.format('%Y')
+  // console.log(date)
+  return (second(date) < date ? formatMillisecond : timeMinute(date) < date ? formatSecond : timeHour(date) < date ? formatMinute : timeDay(date) < date ? formatHour : timeMonth(date) < date ? timeSunday(date) < date ? formatDay : formatWeek : timeYear(date) < date ? formatMonthYear : formatMonthYear)(date);
+}
+;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-areas-apiladas/SisdaiAreasApiladas.vue?vue&type=script&setup=true&lang=js
 
 
 
@@ -4823,8 +6320,9 @@ function buscarIdContenedorHtmlSisdai(tipo, {
 
 
 
-/* harmony default export */ var SisdaiBarrasvue_type_script_setup_true_lang_js_ = ({
-  __name: 'SisdaiBarras',
+
+/* harmony default export */ var SisdaiAreasApiladasvue_type_script_setup_true_lang_js = ({
+  __name: 'SisdaiAreasApiladas',
   props: {
     datos: {
       type: Array,
@@ -4834,54 +6332,21 @@ function buscarIdContenedorHtmlSisdai(tipo, {
       type: Array,
       require: true,
       validator(value) {
-        // debe tener: id, nombre_subcategoria, color
+        // debe tener: id, nombre, color
         const validado = value.some(({
           id,
-          nombre_subcategoria,
+          nombre,
           color
-        }) => id !== undefined || nombre_subcategoria !== undefined || color !== undefined);
+        }) => id !== undefined || nombre !== undefined || color !== undefined);
         if (!validado) {
           console.error('El objeto no cumple con las especificaciones');
         }
         return validado;
       }
     },
-    acomodo: {
+    clave_fecha: {
       type: String,
-      default: 'apiladas',
-      validator(value) {
-        const validado = value === 'apiladas' || value === 'agrupadas';
-        if (!validado) {
-          console.error("la propiedad 'acomodo' sólo admite los valores 'apiladas' o 'agrupadas'");
-        }
-        return validado;
-      }
-    },
-    separacion: {
-      type: Number,
-      default: 0.2,
-      validator(value) {
-        const validado = 0 <= value && value <= 1;
-        if (!validado) {
-          console.error('El valor debe estar entre 0 y 1');
-        }
-        return validado;
-      }
-    },
-    separacion_agrupadas: {
-      type: Number,
-      default: 0.1,
-      validator(value) {
-        const validado = 0 <= value && value <= 1;
-        if (!validado) {
-          console.error('El valor debe estar entre 0 y 1');
-        }
-        return validado;
-      }
-    },
-    clave_categorias: {
-      type: String,
-      default: 'categoria'
+      default: 'fecha'
     },
     alineacion_eje_y: {
       type: String,
@@ -4893,108 +6358,125 @@ function buscarIdContenedorHtmlSisdai(tipo, {
         }
         return validado;
       }
+    },
+    angulo_etiquetas_eje_x: {
+      type: Number,
+      default: 0,
+      validator(value) {
+        // debe estar entre -90 y 90
+        const validado = -90 <= value && value <= 90;
+        if (!validado) {
+          console.error('El número debe estar entre -90 y 90');
+        }
+        return validado;
+      }
+    },
+    angulo_etiquetas_eje_y: {
+      type: Number,
+      default: 0,
+      validator(value) {
+        // debe estar entre -90 y 90
+        const validado = -90 <= value && value <= 90;
+        if (!validado) {
+          console.error('El número debe estar entre -90 y 90');
+        }
+        return validado;
+      }
+    },
+    formato_temporal: {
+      default: '%d-%m-%Y',
+      type: String
     }
   },
-  setup(__props) {
+  setup(__props, {
+    expose
+  }) {
     const props = __props;
     var idGrafica;
-    const sisdaiBarras = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.shallowRef)();
+    const sisdaiAreasApiladas = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.shallowRef)();
     const {
       datos,
-      clave_categorias,
+      clave_fecha,
       variables
     } = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.toRefs)(props);
     transition_transition;
     const margenesSvg = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)({});
-    const escalaBanda = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(),
-      escalaLineal = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(),
-      escalaSubBanda = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)();
+    const datos_apilados = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)([]);
+    const conversionTemporal = timeParse(props.formato_temporal);
+    const escalaTemporal = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(),
+      escalaLineal = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)();
     const grupoContenedor = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(),
-      data_apilada = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(),
-      grupoBarras = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)();
+      grupoAreas = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)();
     function calcularEscalas(grupoVis) {
       if (!grupoVis && grupoVis.ancho === 0) return;
-      escalaBanda.value = band().domain(datos.value?.map(d => d[clave_categorias.value])).range([0, grupoVis.ancho]).padding(props.separacion);
+      escalaTemporal.value = time().domain(extent(datos.value?.map(d => d.la_fecha))).range([0, grupoVis.ancho]);
       escalaLineal.value = linear_linear().domain([0, max(datos.value?.map(d => sum(variables.value.map(dd => d[dd.id]))))]).range([grupoVis.alto, 0]);
-      src_select(`div#${idGrafica} svg g.eje-x-abajo`).call(axisBottom(escalaBanda.value));
-      src_select(`div#${idGrafica} svg g.eje-y-${props.alineacion_eje_y}`).call(props.alineacion_eje_y === 'izquierda' ? axisLeft(escalaLineal.value) : axisRight(escalaLineal.value));
-      escalaSubBanda.value = band().domain(variables.value.map(d => d.id)).range([0, escalaBanda.value.bandwidth()]).padding(props.separacion_agrupadas);
+      creaEjeHorizontal(idGrafica, escalaTemporal.value, props.angulo_etiquetas_eje_x);
+      creaEjeVertical(idGrafica, escalaLineal.value, props.angulo_etiquetas_eje_y, props.alineacion_eje_y, grupoVis.ancho);
     }
-    function creaBarras() {
-      let apilada = stack().keys(variables.value.map(d => d.id))(datos.value);
-      for (let i = 0; i < variables.value.length; i++) {
-        apilada[i].forEach(d => {
-          d.data = {
-            ...d.data,
-            ...{
-              key: apilada[i].key
-            }
-          };
-        });
-      }
-      data_apilada.value = apilada;
-      grupoBarras.value = grupoContenedor.value.selectAll('g.subcategoria-barras').data(data_apilada.value).join(enter => {
-        let grupo = enter.append('g').attr('class', 'subcategoria-barras').attr('fill', d => variables.value.filter(v => v.id === d.key)[0].color);
-        grupo.selectAll('rect.barra').data(d => d).enter().append('rect').attr('class', 'barra').attr('y', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto).attr('x', d => {
-          return props.acomodo === 'apiladas' ? escalaBanda.value(d.data[clave_categorias.value]) : escalaBanda.value(d.data[clave_categorias.value]) + escalaSubBanda.value(d.data.key);
-        }).attr('height', 0).attr('width', props.acomodo === 'apiladas' ? escalaBanda.value.bandwidth() : escalaSubBanda.value.bandwidth()).transition().duration(500).attr('y', d => props.acomodo === 'apiladas' ? escalaLineal.value(d[1]) : escalaLineal.value(d[1] - d[0])).attr('height', d => escalaLineal.value(d[0]) - escalaLineal.value(d[1]) < 0 ? 0 : escalaLineal.value(d[0]) - escalaLineal.value(d[1]));
+    function creaAreas() {
+      datos.value.forEach(d => d.la_fecha = conversionTemporal(d[clave_fecha.value]));
+      datos_apilados.value = stack().keys(variables.value.map(d => d.id))(datos.value);
+      grupoAreas.value = grupoContenedor.value.selectAll('path.area').data(datos_apilados.value).join(enter => {
+        console.log('enter');
+        enter.append('path').attr('class', 'area').attr('d', dd => src_area().x(d => escalaTemporal.value(d.data.la_fecha)).y0(d => escalaLineal.value(d[0])).y1(d => escalaLineal.value(d[1]))(dd)).attr('fill', d => variables.value.filter(dd => dd.id === d.key)[0].color);
       }, update => {
-        let grupo = update.call(update1 => update1.transition().duration(500).attr('fill', d => variables.value.filter(v => v.id === d.key)[0].color).attr('width', props.acomodo === 'apiladas' ? escalaBanda.value.bandwidth() : escalaSubBanda.value.bandwidth()));
-        grupo.selectAll('rect.barra').data(d => d).join(barras_enter => {
-          barras_enter.append('rect').attr('class', 'barra').attr('y', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto).attr('x', d => props.acomodo === 'apiladas' ? escalaBanda.value(d.data[clave_categorias.value]) : escalaBanda.value(d.data[clave_categorias.value]) + escalaSubBanda.value(d.data.key)).attr('height', 0).attr('width', props.acomodo === 'apiladas' ? escalaBanda.value.bandwidth() : escalaSubBanda.value.bandwidth()).transition().duration(500).attr('y', d => props.acomodo === 'apiladas' ? escalaLineal.value(d[1]) : escalaLineal.value(d[1] - d[0])).attr('height', d => escalaLineal.value(d[0]) - escalaLineal.value(d[1]) < 0 ? 0 : escalaLineal.value(d[0]) - escalaLineal.value(d[1]));
-        }, barras_update => {
-          barras_update.transition().duration(500).attr('y', d => props.acomodo === 'apiladas' ? escalaLineal.value(d[1]) : escalaLineal.value(d[1] - d[0])).attr('height', d => escalaLineal.value(d[0]) - escalaLineal.value(d[1]) < 0 ? 0 : escalaLineal.value(d[0]) - escalaLineal.value(d[1])).attr('x', d => props.acomodo === 'apiladas' ? escalaBanda.value(d.data[clave_categorias.value]) : escalaBanda.value(d.data[clave_categorias.value]) + escalaSubBanda.value(d.data.key)).attr('width', props.acomodo === 'apiladas' ? escalaBanda.value.bandwidth() : escalaSubBanda.value.bandwidth());
-        }, barras_exit => barras_exit.remove());
-      },
-      // no update function
-      exit => {
+        console.log('update');
+        update.transition().duration(500).attr('d', dd => src_area().x(d => escalaTemporal.value(d.data.la_fecha)).y0(d => escalaLineal.value(d[0])).y1(d => escalaLineal.value(d[1]))(dd)).attr('fill', d => variables.value.filter(dd => dd.id === d.key)[0].color).selection();
+      }, exit => {
         exit.remove();
       });
     }
     (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.onMounted)(() => {
-      idGrafica = buscarIdContenedorHtmlSisdai('grafica', sisdaiBarras.value);
-      grupoContenedor.value = src_select('#' + idGrafica + ' svg g.contenedor-barras');
+      idGrafica = buscarIdContenedorHtmlSisdai('grafica', sisdaiAreasApiladas.value);
+      grupoContenedor.value = src_select('#' + idGrafica + ' svg g.contenedor-areas');
       margenesSvg.value = usarRegistroGraficas().grafica(idGrafica).margenes;
       (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(() => usarRegistroGraficas().grafica(idGrafica).margenes, nv => margenesSvg.value = nv);
+      datos.value.forEach(d => d.la_fecha = conversionTemporal(d[clave_fecha.value]));
       calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis);
-      creaBarras();
+      creaAreas();
       (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(() => usarRegistroGraficas().grafica(idGrafica).grupoVis, () => {
         calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis);
         if (usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho > 0) {
-          creaBarras();
+          creaAreas();
         }
       });
       (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(datos, () => {
+        datos.value.forEach(d => d.la_fecha = conversionTemporal(d[clave_fecha.value]));
         calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis);
-        creaBarras();
+        creaAreas();
       });
       (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(variables, () => {
         calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis);
-        creaBarras();
+        creaAreas();
       });
+    });
+    expose({
+      escalaTemporal,
+      escalaLineal
     });
     return {
       __sfc: true,
       idGrafica,
       props,
-      sisdaiBarras,
+      sisdaiAreasApiladas,
       datos,
-      clave_categorias,
+      clave_fecha,
       variables,
       margenesSvg,
-      escalaBanda,
+      datos_apilados,
+      conversionTemporal,
+      escalaTemporal,
       escalaLineal,
-      escalaSubBanda,
       grupoContenedor,
-      data_apilada,
-      grupoBarras,
+      grupoAreas,
       calcularEscalas,
-      creaBarras
+      creaAreas
     };
   }
 });
-;// CONCATENATED MODULE: ./src/componentes/sisdai-barras/SisdaiBarras.vue?vue&type=script&setup=true&lang=js&
- /* harmony default export */ var sisdai_barras_SisdaiBarrasvue_type_script_setup_true_lang_js_ = (SisdaiBarrasvue_type_script_setup_true_lang_js_); 
+;// CONCATENATED MODULE: ./src/componentes/sisdai-areas-apiladas/SisdaiAreasApiladas.vue?vue&type=script&setup=true&lang=js
+ /* harmony default export */ var sisdai_areas_apiladas_SisdaiAreasApiladasvue_type_script_setup_true_lang_js = (SisdaiAreasApiladasvue_type_script_setup_true_lang_js); 
 ;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
 
@@ -5093,7 +6575,7 @@ function normalizeComponent(
   }
 }
 
-;// CONCATENATED MODULE: ./src/componentes/sisdai-barras/SisdaiBarras.vue
+;// CONCATENATED MODULE: ./src/componentes/sisdai-areas-apiladas/SisdaiAreasApiladas.vue
 
 
 
@@ -5102,7 +6584,7 @@ function normalizeComponent(
 /* normalize component */
 ;
 var component = normalizeComponent(
-  sisdai_barras_SisdaiBarrasvue_type_script_setup_true_lang_js_,
+  sisdai_areas_apiladas_SisdaiAreasApiladasvue_type_script_setup_true_lang_js,
   render,
   staticRenderFns,
   false,
@@ -5112,7 +6594,494 @@ var component = normalizeComponent(
   
 )
 
-/* harmony default export */ var SisdaiBarras = (component.exports);
+/* harmony default export */ var SisdaiAreasApiladas = (component.exports);
+;// CONCATENATED MODULE: ./src/componentes/sisdai-areas-apiladas/index.js
+
+const sisdai_areas_apiladas_plugin = {
+  install: function (Vue) {
+    Vue.component('SisdaiAreasApiladas', SisdaiAreasApiladas);
+  }
+};
+/* harmony default export */ var sisdai_areas_apiladas = (sisdai_areas_apiladas_plugin);
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7fefe306-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-barras/SisdaiBarras.vue?vue&type=template&id=7ebc828d
+var SisdaiBarrasvue_type_template_id_7ebc828d_render = function render() {
+  var _vm = this,
+    _c = _vm._self._c,
+    _setup = _vm._self._setupProxy;
+  return _c('g', {
+    ref: "sisdaiBarras",
+    staticClass: "contenedor-barras",
+    attrs: {
+      "transform": `translate(${_setup.margenesSvg?.izquierda || 0},${_setup.margenesSvg?.arriba || 0})`
+    }
+  });
+};
+var SisdaiBarrasvue_type_template_id_7ebc828d_staticRenderFns = [];
+
+;// CONCATENATED MODULE: ./node_modules/d3-array/src/range.js
+function range(start, stop, step) {
+  start = +start, stop = +stop, step = (n = arguments.length) < 2 ? (stop = start, start = 0, 1) : n < 3 ? 1 : +step;
+
+  var i = -1,
+      n = Math.max(0, Math.ceil((stop - start) / step)) | 0,
+      range = new Array(n);
+
+  while (++i < n) {
+    range[i] = start + i * step;
+  }
+
+  return range;
+}
+
+;// CONCATENATED MODULE: ./node_modules/internmap/src/index.js
+class InternMap extends Map {
+  constructor(entries, key = keyof) {
+    super();
+    Object.defineProperties(this, {_intern: {value: new Map()}, _key: {value: key}});
+    if (entries != null) for (const [key, value] of entries) this.set(key, value);
+  }
+  get(key) {
+    return super.get(intern_get(this, key));
+  }
+  has(key) {
+    return super.has(intern_get(this, key));
+  }
+  set(key, value) {
+    return super.set(intern_set(this, key), value);
+  }
+  delete(key) {
+    return super.delete(intern_delete(this, key));
+  }
+}
+
+class InternSet extends Set {
+  constructor(values, key = keyof) {
+    super();
+    Object.defineProperties(this, {_intern: {value: new Map()}, _key: {value: key}});
+    if (values != null) for (const value of values) this.add(value);
+  }
+  has(value) {
+    return super.has(intern_get(this, value));
+  }
+  add(value) {
+    return super.add(intern_set(this, value));
+  }
+  delete(value) {
+    return super.delete(intern_delete(this, value));
+  }
+}
+
+function intern_get({_intern, _key}, value) {
+  const key = _key(value);
+  return _intern.has(key) ? _intern.get(key) : value;
+}
+
+function intern_set({_intern, _key}, value) {
+  const key = _key(value);
+  if (_intern.has(key)) return _intern.get(key);
+  _intern.set(key, value);
+  return value;
+}
+
+function intern_delete({_intern, _key}, value) {
+  const key = _key(value);
+  if (_intern.has(key)) {
+    value = _intern.get(key);
+    _intern.delete(key);
+  }
+  return value;
+}
+
+function keyof(value) {
+  return value !== null && typeof value === "object" ? value.valueOf() : value;
+}
+
+;// CONCATENATED MODULE: ./node_modules/d3-scale/src/ordinal.js
+
+
+
+const implicit = Symbol("implicit");
+
+function ordinal() {
+  var index = new InternMap(),
+      domain = [],
+      range = [],
+      unknown = implicit;
+
+  function scale(d) {
+    let i = index.get(d);
+    if (i === undefined) {
+      if (unknown !== implicit) return unknown;
+      index.set(d, i = domain.push(d) - 1);
+    }
+    return range[i % range.length];
+  }
+
+  scale.domain = function(_) {
+    if (!arguments.length) return domain.slice();
+    domain = [], index = new InternMap();
+    for (const value of _) {
+      if (index.has(value)) continue;
+      index.set(value, domain.push(value) - 1);
+    }
+    return scale;
+  };
+
+  scale.range = function(_) {
+    return arguments.length ? (range = Array.from(_), scale) : range.slice();
+  };
+
+  scale.unknown = function(_) {
+    return arguments.length ? (unknown = _, scale) : unknown;
+  };
+
+  scale.copy = function() {
+    return ordinal(domain, range).unknown(unknown);
+  };
+
+  initRange.apply(scale, arguments);
+
+  return scale;
+}
+
+;// CONCATENATED MODULE: ./node_modules/d3-scale/src/band.js
+
+
+
+
+function band() {
+  var scale = ordinal().unknown(undefined),
+      domain = scale.domain,
+      ordinalRange = scale.range,
+      r0 = 0,
+      r1 = 1,
+      step,
+      bandwidth,
+      round = false,
+      paddingInner = 0,
+      paddingOuter = 0,
+      align = 0.5;
+
+  delete scale.unknown;
+
+  function rescale() {
+    var n = domain().length,
+        reverse = r1 < r0,
+        start = reverse ? r1 : r0,
+        stop = reverse ? r0 : r1;
+    step = (stop - start) / Math.max(1, n - paddingInner + paddingOuter * 2);
+    if (round) step = Math.floor(step);
+    start += (stop - start - step * (n - paddingInner)) * align;
+    bandwidth = step * (1 - paddingInner);
+    if (round) start = Math.round(start), bandwidth = Math.round(bandwidth);
+    var values = range(n).map(function(i) { return start + step * i; });
+    return ordinalRange(reverse ? values.reverse() : values);
+  }
+
+  scale.domain = function(_) {
+    return arguments.length ? (domain(_), rescale()) : domain();
+  };
+
+  scale.range = function(_) {
+    return arguments.length ? ([r0, r1] = _, r0 = +r0, r1 = +r1, rescale()) : [r0, r1];
+  };
+
+  scale.rangeRound = function(_) {
+    return [r0, r1] = _, r0 = +r0, r1 = +r1, round = true, rescale();
+  };
+
+  scale.bandwidth = function() {
+    return bandwidth;
+  };
+
+  scale.step = function() {
+    return step;
+  };
+
+  scale.round = function(_) {
+    return arguments.length ? (round = !!_, rescale()) : round;
+  };
+
+  scale.padding = function(_) {
+    return arguments.length ? (paddingInner = Math.min(1, paddingOuter = +_), rescale()) : paddingInner;
+  };
+
+  scale.paddingInner = function(_) {
+    return arguments.length ? (paddingInner = Math.min(1, _), rescale()) : paddingInner;
+  };
+
+  scale.paddingOuter = function(_) {
+    return arguments.length ? (paddingOuter = +_, rescale()) : paddingOuter;
+  };
+
+  scale.align = function(_) {
+    return arguments.length ? (align = Math.max(0, Math.min(1, _)), rescale()) : align;
+  };
+
+  scale.copy = function() {
+    return band(domain(), [r0, r1])
+        .round(round)
+        .paddingInner(paddingInner)
+        .paddingOuter(paddingOuter)
+        .align(align);
+  };
+
+  return initRange.apply(rescale(), arguments);
+}
+
+function pointish(scale) {
+  var copy = scale.copy;
+
+  scale.padding = scale.paddingOuter;
+  delete scale.paddingInner;
+  delete scale.paddingOuter;
+
+  scale.copy = function() {
+    return pointish(copy());
+  };
+
+  return scale;
+}
+
+function point() {
+  return pointish(band.apply(null, arguments).paddingInner(1));
+}
+
+;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-barras/SisdaiBarras.vue?vue&type=script&setup=true&lang=js
+
+
+
+
+
+
+
+
+/* harmony default export */ var SisdaiBarrasvue_type_script_setup_true_lang_js = ({
+  __name: 'SisdaiBarras',
+  props: {
+    datos: {
+      type: Array,
+      require: true
+    },
+    variables: {
+      type: Array,
+      require: true,
+      validator(value) {
+        // debe tener: id, nombre, color
+        const validado = value.some(({
+          id,
+          nombre,
+          color
+        }) => id !== undefined || nombre !== undefined || color !== undefined);
+        if (!validado) {
+          console.error('El objeto no cumple con las especificaciones');
+        }
+        return validado;
+      }
+    },
+    acomodo: {
+      type: String,
+      default: 'apiladas',
+      validator(value) {
+        const validado = value === 'apiladas' || value === 'agrupadas';
+        if (!validado) {
+          console.error("la propiedad 'acomodo' sólo admite los valores 'apiladas' o 'agrupadas'");
+        }
+        return validado;
+      }
+    },
+    separacion: {
+      type: Number,
+      default: 0.2,
+      validator(value) {
+        const validado = 0 <= value && value <= 1;
+        if (!validado) {
+          console.error('El valor debe estar entre 0 y 1');
+        }
+        return validado;
+      }
+    },
+    separacion_agrupadas: {
+      type: Number,
+      default: 0.1,
+      validator(value) {
+        const validado = 0 <= value && value <= 1;
+        if (!validado) {
+          console.error('El valor debe estar entre 0 y 1');
+        }
+        return validado;
+      }
+    },
+    clave_categorias: {
+      type: String,
+      default: 'categoria'
+    },
+    alineacion_eje_y: {
+      type: String,
+      default: 'izquierda',
+      validator(value) {
+        const validado = value === 'izquierda' || value === 'derecha';
+        if (!validado) {
+          console.error("la propiedad 'alineacion_eje_y' sólo admite los valores 'izquierda' o 'derecha'");
+        }
+        return validado;
+      }
+    },
+    angulo_etiquetas_eje_x: {
+      type: Number,
+      default: 0,
+      validator(value) {
+        // debe estar entre -90 y 90
+        const validado = -90 <= value && value <= 90;
+        if (!validado) {
+          console.error('El número debe estar entre -90 y 90');
+        }
+        return validado;
+      }
+    },
+    angulo_etiquetas_eje_y: {
+      type: Number,
+      default: 0,
+      validator(value) {
+        // debe estar entre -90 y 90
+        const validado = -90 <= value && value <= 90;
+        if (!validado) {
+          console.error('El número debe estar entre -90 y 90');
+        }
+        return validado;
+      }
+    }
+  },
+  setup(__props, {
+    expose
+  }) {
+    const props = __props;
+    var idGrafica;
+    const sisdaiBarras = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.shallowRef)();
+    const {
+      datos,
+      clave_categorias,
+      variables
+    } = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.toRefs)(props);
+    transition_transition;
+    const margenesSvg = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)({});
+    const escalaBanda = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(),
+      escalaLineal = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(),
+      escalaSubBanda = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)();
+    const grupoContenedor = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(),
+      data_apilada = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(),
+      grupoBarras = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)();
+    function calcularEscalas(grupoVis) {
+      if (!grupoVis && grupoVis.ancho === 0) return;
+      escalaBanda.value = band().domain(datos.value?.map(d => d[clave_categorias.value])).range([0, grupoVis.ancho]).padding(props.separacion);
+      escalaLineal.value = linear_linear().domain([0, props.acomodo === 'apiladas' ? max(datos.value?.map(d => sum(variables.value.map(dd => d[dd.id])))) : max(datos.value?.map(d => max(variables.value.map(dd => d[dd.id]))))]).range([grupoVis.alto, 0]);
+      escalaSubBanda.value = band().domain(variables.value.map(d => d.id)).range([0, escalaBanda.value.bandwidth()]).padding(props.separacion_agrupadas);
+      creaEjeHorizontal(idGrafica, escalaBanda.value, props.angulo_etiquetas_eje_x);
+      creaEjeVertical(idGrafica, escalaLineal.value, props.angulo_etiquetas_eje_y, props.alineacion_eje_y, grupoVis.ancho);
+    }
+    function creaBarras() {
+      let apilada = stack().keys(variables.value.map(d => d.id))(datos.value);
+      for (let i = 0; i < variables.value.length; i++) {
+        apilada[i].forEach(d => {
+          d.data = {
+            ...d.data,
+            ...{
+              key: apilada[i].key
+            }
+          };
+        });
+      }
+      data_apilada.value = apilada;
+      grupoBarras.value = grupoContenedor.value.selectAll('g.subcategoria-barras').data(data_apilada.value).join(enter => {
+        let grupo = enter.append('g').attr('class', 'subcategoria-barras').attr('fill', d => variables.value.filter(v => v.id === d.key)[0].color);
+        grupo.selectAll('rect.barra').data(d => d).enter().append('rect').attr('class', d => `barra ${d.data.key}`).attr('y', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto).attr('x', d => {
+          return props.acomodo === 'apiladas' ? escalaBanda.value(d.data[clave_categorias.value]) : escalaBanda.value(d.data[clave_categorias.value]) + escalaSubBanda.value(d.data.key);
+        }).attr('height', 0).attr('width', props.acomodo === 'apiladas' ? escalaBanda.value.bandwidth() : escalaSubBanda.value.bandwidth()).transition().duration(500).attr('y', d => props.acomodo === 'apiladas' ? escalaLineal.value(d[1]) : escalaLineal.value(d[1] - d[0])).attr('height', d => escalaLineal.value(d[0]) - escalaLineal.value(d[1]) < 0 ? 0 : escalaLineal.value(d[0]) - escalaLineal.value(d[1]));
+      }, update => {
+        let grupo = update.call(update1 => update1.transition().duration(500).attr('fill', d => variables.value.filter(v => v.id === d.key)[0].color));
+        grupo.selectAll('rect.barra').data(d => d).join(barras_enter => {
+          barras_enter.append('rect').attr('class', d => `barra ${d.data.key}`).attr('y', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto).attr('x', d => props.acomodo === 'apiladas' ? escalaBanda.value(d.data[clave_categorias.value]) : escalaBanda.value(d.data[clave_categorias.value]) + escalaSubBanda.value(d.data.key)).attr('height', 0).attr('width', props.acomodo === 'apiladas' ? escalaBanda.value.bandwidth() : escalaSubBanda.value.bandwidth()).transition().duration(500).attr('y', d => props.acomodo === 'apiladas' ? escalaLineal.value(d[1]) : escalaLineal.value(d[1] - d[0])).attr('height', d => escalaLineal.value(d[0]) - escalaLineal.value(d[1]) < 0 ? 0 : escalaLineal.value(d[0]) - escalaLineal.value(d[1]));
+        }, barras_update => {
+          console.log(barras_update.selectAll(d => {
+            return `rect.barra.${d.data.key}`;
+          }));
+          barras_update.transition().duration(500).attr('y', d => props.acomodo === 'apiladas' ? escalaLineal.value(d[1]) : escalaLineal.value(d[1] - d[0])).attr('height', d => escalaLineal.value(d[0]) - escalaLineal.value(d[1]) < 0 ? 0 : escalaLineal.value(d[0]) - escalaLineal.value(d[1])).attr('x', d => props.acomodo === 'apiladas' ? escalaBanda.value(d.data[clave_categorias.value]) : escalaBanda.value(d.data[clave_categorias.value]) + escalaSubBanda.value(d.data.key)).attr('width', props.acomodo === 'apiladas' ? escalaBanda.value.bandwidth() : escalaSubBanda.value.bandwidth());
+        }, barras_exit => barras_exit.remove());
+      },
+      // no update function
+      exit => {
+        exit.remove();
+      });
+    }
+    (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.onMounted)(() => {
+      idGrafica = buscarIdContenedorHtmlSisdai('grafica', sisdaiBarras.value);
+      grupoContenedor.value = src_select('#' + idGrafica + ' svg g.contenedor-barras');
+      margenesSvg.value = usarRegistroGraficas().grafica(idGrafica).margenes;
+      (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(() => usarRegistroGraficas().grafica(idGrafica).margenes, nv => margenesSvg.value = nv);
+      calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis);
+      creaBarras();
+      (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(() => usarRegistroGraficas().grafica(idGrafica).grupoVis, () => {
+        calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis);
+        if (usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho > 0) {
+          creaBarras();
+        }
+      });
+      (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(datos, () => {
+        calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis);
+        creaBarras();
+      });
+      (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(variables, () => {
+        calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis);
+        creaBarras();
+      });
+    });
+    expose({
+      escalaBanda,
+      escalaLineal,
+      escalaSubBanda
+    });
+    return {
+      __sfc: true,
+      idGrafica,
+      props,
+      sisdaiBarras,
+      datos,
+      clave_categorias,
+      variables,
+      margenesSvg,
+      escalaBanda,
+      escalaLineal,
+      escalaSubBanda,
+      grupoContenedor,
+      data_apilada,
+      grupoBarras,
+      calcularEscalas,
+      creaBarras
+    };
+  }
+});
+;// CONCATENATED MODULE: ./src/componentes/sisdai-barras/SisdaiBarras.vue?vue&type=script&setup=true&lang=js
+ /* harmony default export */ var sisdai_barras_SisdaiBarrasvue_type_script_setup_true_lang_js = (SisdaiBarrasvue_type_script_setup_true_lang_js); 
+;// CONCATENATED MODULE: ./src/componentes/sisdai-barras/SisdaiBarras.vue
+
+
+
+
+
+/* normalize component */
+;
+var SisdaiBarras_component = normalizeComponent(
+  sisdai_barras_SisdaiBarrasvue_type_script_setup_true_lang_js,
+  SisdaiBarrasvue_type_template_id_7ebc828d_render,
+  SisdaiBarrasvue_type_template_id_7ebc828d_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var SisdaiBarras = (SisdaiBarras_component.exports);
 ;// CONCATENATED MODULE: ./src/componentes/sisdai-barras/index.js
 
 const sisdai_barras_plugin = {
@@ -5121,8 +7090,8 @@ const sisdai_barras_plugin = {
   }
 };
 /* harmony default export */ var sisdai_barras = (sisdai_barras_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1076c6c5-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-cajas-bigotes/SisdaiCajasBigotes.vue?vue&type=template&id=70fe32d4&
-var SisdaiCajasBigotesvue_type_template_id_70fe32d4_render = function render() {
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7fefe306-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-cajas-bigotes/SisdaiCajasBigotes.vue?vue&type=template&id=4f4ac904
+var SisdaiCajasBigotesvue_type_template_id_4f4ac904_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
@@ -5134,38 +7103,7 @@ var SisdaiCajasBigotesvue_type_template_id_70fe32d4_render = function render() {
     }
   });
 };
-var SisdaiCajasBigotesvue_type_template_id_70fe32d4_staticRenderFns = [];
-
-;// CONCATENATED MODULE: ./node_modules/d3-array/src/extent.js
-function extent(values, valueof) {
-  let min;
-  let max;
-  if (valueof === undefined) {
-    for (const value of values) {
-      if (value != null) {
-        if (min === undefined) {
-          if (value >= value) min = max = value;
-        } else {
-          if (min > value) min = value;
-          if (max < value) max = value;
-        }
-      }
-    }
-  } else {
-    let index = -1;
-    for (let value of values) {
-      if ((value = valueof(value, ++index, values)) != null) {
-        if (min === undefined) {
-          if (value >= value) min = max = value;
-        } else {
-          if (min > value) min = value;
-          if (max < value) max = value;
-        }
-      }
-    }
-  }
-  return [min, max];
-}
+var SisdaiCajasBigotesvue_type_template_id_4f4ac904_staticRenderFns = [];
 
 ;// CONCATENATED MODULE: ./node_modules/d3-array/src/identity.js
 function identity_identity(x) {
@@ -5427,7 +7365,7 @@ function mean(values, valueof) {
   if (count) return sum / count;
 }
 
-;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-cajas-bigotes/SisdaiCajasBigotes.vue?vue&type=script&setup=true&lang=js&
+;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-cajas-bigotes/SisdaiCajasBigotes.vue?vue&type=script&setup=true&lang=js
 
 
 
@@ -5435,8 +7373,7 @@ function mean(values, valueof) {
 
 
 
-
-/* harmony default export */ var SisdaiCajasBigotesvue_type_script_setup_true_lang_js_ = ({
+/* harmony default export */ var SisdaiCajasBigotesvue_type_script_setup_true_lang_js = ({
   __name: 'SisdaiCajasBigotes',
   props: {
     datos: {
@@ -5447,9 +7384,9 @@ function mean(values, valueof) {
       type: Object,
       require: true,
       validator(value) {
-        // debe tener: id, nombre_subcategoria, color
+        // debe tener: id, nombre, color
 
-        const validado = 'id' in value && 'nombre_subcategoria' in value && 'color' in value;
+        const validado = 'id' in value && 'nombre' in value && 'color' in value;
         if (!validado) {
           console.error('El objeto no cumple con las especificaciones');
         }
@@ -5459,9 +7396,46 @@ function mean(values, valueof) {
     clave_categorias: {
       type: String,
       default: 'categoria'
+    },
+    alineacion_eje_y: {
+      type: String,
+      default: 'izquierda',
+      validator(value) {
+        const validado = value === 'izquierda' || value === 'derecha';
+        if (!validado) {
+          console.error("la propiedad 'alineacion_eje_y' sólo admite los valores 'izquierda' o 'derecha'");
+        }
+        return validado;
+      }
+    },
+    angulo_etiquetas_eje_x: {
+      type: Number,
+      default: 0,
+      validator(value) {
+        // debe estar entre -90 y 90
+        const validado = -90 <= value && value <= 90;
+        if (!validado) {
+          console.error('El número debe estar entre -90 y 90');
+        }
+        return validado;
+      }
+    },
+    angulo_etiquetas_eje_y: {
+      type: Number,
+      default: 0,
+      validator(value) {
+        // debe estar entre -90 y 90
+        const validado = -90 <= value && value <= 90;
+        if (!validado) {
+          console.error('El número debe estar entre -90 y 90');
+        }
+        return validado;
+      }
     }
   },
-  setup(__props) {
+  setup(__props, {
+    expose
+  }) {
     const props = __props;
     var idGrafica;
     const sisdaiCajasBigotes = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.shallowRef)();
@@ -5481,8 +7455,8 @@ function mean(values, valueof) {
       if (!grupoVis && grupoVis.ancho === 0) return;
       escalaBanda.value = band().domain(datos.value?.map(d => d[clave_categorias.value])).range([0, grupoVis.ancho]).padding(0.5);
       escalaLineal.value = linear_linear().domain(extent(datos.value.map(d => d[variables.value.id]))).range([grupoVis.alto, 0]);
-      src_select(`div#${idGrafica} svg g.eje-x-abajo`).transition().duration(500).call(axisBottom(escalaBanda.value));
-      src_select(`div#${idGrafica} svg g.eje-y-izquierda`).transition().duration(500).call(axisLeft(escalaLineal.value));
+      creaEjeHorizontal(idGrafica, escalaBanda.value, props.angulo_etiquetas_eje_x);
+      creaEjeVertical(idGrafica, escalaLineal.value, props.angulo_etiquetas_eje_y, props.alineacion_eje_y, grupoVis.ancho);
     }
     function creaCajasBigotes() {
       data_agrupada.value = rollup(datos.value, d => {
@@ -5517,10 +7491,7 @@ function mean(values, valueof) {
         grupo.selectAll('rect.caja').data(d => [d[1]]).enter().append('rect').attr('class', 'caja').attr('width', escalaBanda.value.bandwidth()).attr('x', 0).attr('y', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto).attr('height', 0).style('fill-opacity', 0.25).style('stroke-width', '0').transition().duration(500).attr('y', d => escalaLineal.value(d.q3)).attr('height', d => escalaLineal.value(d.q1) - escalaLineal.value(d.q3) < 0 ? 0 : escalaLineal.value(d.q1) - escalaLineal.value(d.q3));
         grupo.selectAll('line.media').data(d => [d[1]]).enter().append('line').attr('class', 'media').attr('x1', 0).attr('x2', escalaBanda.value.bandwidth()).attr('y1', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto).attr('y2', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto).transition().duration(500).attr('y1', d => escalaLineal.value(d.median)).attr('y2', d => escalaLineal.value(d.median));
         grupo.selectAll('circle.promedio').data(d => [d[1]]).enter().append('circle').attr('class', 'promedio').attr('r', 0).attr('cx', escalaBanda.value.bandwidth() * 0.5).attr('cy', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto).style('stroke', '#fff').transition().duration(500).attr('cy', d => escalaLineal.value(d.promedio)).attr('r', 4);
-        grupo.selectAll('circle.atipicos').data(d => {
-          console.log(d[1].puntos.filter(dd => dd < d[1].min || d[1].max < dd));
-          return d[1].puntos.filter(dd => dd < d[1].min || d[1].max < dd);
-        }).enter().append('circle').attr('class', 'atipicos').attr('r', 0).attr('cx', escalaBanda.value.bandwidth() * 0.5).attr('cy', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto).style('stroke-opacity', '.4').style('stroke-width', '1px').style('fill-opacity', 0.25).transition().duration(500).attr('cy', d => escalaLineal.value(d)).attr('r', 2);
+        grupo.selectAll('circle.atipicos').data(d => d[1].puntos.filter(dd => dd < d[1].min || d[1].max < dd)).enter().append('circle').attr('class', 'atipicos').attr('r', 0).attr('cx', escalaBanda.value.bandwidth() * 0.5).attr('cy', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto).style('stroke-opacity', '.4').style('stroke-width', '1px').style('fill-opacity', 0.25).transition().duration(500).attr('cy', d => escalaLineal.value(d)).attr('r', 2);
       }, update => {
         let grupo = update.call(update1 => update1.transition().duration(500).style('fill', variables.value.color).style('stroke', variables.value.color).attr('transform', d => `translate(${escalaBanda.value(d[0])} ,0)`));
         grupo.selectAll('line.vertical').data(d => [d[1]]).transition().duration(500).attr('x1', 0.5 * escalaBanda.value.bandwidth()).attr('y1', d => escalaLineal.value(d.min)).attr('x2', 0.5 * escalaBanda.value.bandwidth()).attr('y2', d => escalaLineal.value(d.max));
@@ -5545,8 +7516,6 @@ function mean(values, valueof) {
     (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.onMounted)(() => {
       idGrafica = buscarIdContenedorHtmlSisdai('grafica', sisdaiCajasBigotes.value);
       grupoContenedor.value = src_select('#' + idGrafica + ' svg g.contenedor-cajas-bigotes');
-      // console.log(usarRegistroGraficas().grafica(idGrafica))
-
       margenesSvg.value = usarRegistroGraficas().grafica(idGrafica).margenes;
       (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(() => usarRegistroGraficas().grafica(idGrafica).margenes, nv => margenesSvg.value = nv);
       calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis);
@@ -5565,6 +7534,10 @@ function mean(values, valueof) {
         calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis);
         creaCajasBigotes();
       });
+    });
+    expose({
+      escalaBanda,
+      escalaLineal
     });
     return {
       __sfc: true,
@@ -5585,8 +7558,8 @@ function mean(values, valueof) {
     };
   }
 });
-;// CONCATENATED MODULE: ./src/componentes/sisdai-cajas-bigotes/SisdaiCajasBigotes.vue?vue&type=script&setup=true&lang=js&
- /* harmony default export */ var sisdai_cajas_bigotes_SisdaiCajasBigotesvue_type_script_setup_true_lang_js_ = (SisdaiCajasBigotesvue_type_script_setup_true_lang_js_); 
+;// CONCATENATED MODULE: ./src/componentes/sisdai-cajas-bigotes/SisdaiCajasBigotes.vue?vue&type=script&setup=true&lang=js
+ /* harmony default export */ var sisdai_cajas_bigotes_SisdaiCajasBigotesvue_type_script_setup_true_lang_js = (SisdaiCajasBigotesvue_type_script_setup_true_lang_js); 
 ;// CONCATENATED MODULE: ./src/componentes/sisdai-cajas-bigotes/SisdaiCajasBigotes.vue
 
 
@@ -5596,9 +7569,9 @@ function mean(values, valueof) {
 /* normalize component */
 ;
 var SisdaiCajasBigotes_component = normalizeComponent(
-  sisdai_cajas_bigotes_SisdaiCajasBigotesvue_type_script_setup_true_lang_js_,
-  SisdaiCajasBigotesvue_type_template_id_70fe32d4_render,
-  SisdaiCajasBigotesvue_type_template_id_70fe32d4_staticRenderFns,
+  sisdai_cajas_bigotes_SisdaiCajasBigotesvue_type_script_setup_true_lang_js,
+  SisdaiCajasBigotesvue_type_template_id_4f4ac904_render,
+  SisdaiCajasBigotesvue_type_template_id_4f4ac904_staticRenderFns,
   false,
   null,
   null,
@@ -5615,22 +7588,159 @@ const sisdai_cajas_bigotes_plugin = {
   }
 };
 /* harmony default export */ var sisdai_cajas_bigotes = (sisdai_cajas_bigotes_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1076c6c5-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas/SisdaiGraficas.vue?vue&type=template&id=ae73e43c&
-var SisdaiGraficasvue_type_template_id_ae73e43c_render = function render() {
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7fefe306-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-checks/SisdaiChecks.vue?vue&type=template&id=05215523
+var SisdaiChecksvue_type_template_id_05215523_render = function render() {
+  var _vm = this,
+    _c = _vm._self._c,
+    _setup = _vm._self._setupProxy;
+  return _c('div', _vm._l(_vm.variables, function (variable) {
+    return _c('span', {
+      key: variable.id,
+      staticClass: "controlador-vis"
+    }, [_c('input', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: _setup.variables_checkeadas,
+        expression: "variables_checkeadas"
+      }],
+      attrs: {
+        "id": variable.id,
+        "type": "checkbox"
+      },
+      domProps: {
+        "value": variable.id,
+        "checked": Array.isArray(_setup.variables_checkeadas) ? _vm._i(_setup.variables_checkeadas, variable.id) > -1 : _setup.variables_checkeadas
+      },
+      on: {
+        "change": function ($event) {
+          var $$a = _setup.variables_checkeadas,
+            $$el = $event.target,
+            $$c = $$el.checked ? true : false;
+          if (Array.isArray($$a)) {
+            var $$v = variable.id,
+              $$i = _vm._i($$a, $$v);
+            if ($$el.checked) {
+              $$i < 0 && (_setup.variables_checkeadas = $$a.concat([$$v]));
+            } else {
+              $$i > -1 && (_setup.variables_checkeadas = $$a.slice(0, $$i).concat($$a.slice($$i + 1)));
+            }
+          } else {
+            _setup.variables_checkeadas = $$c;
+          }
+        }
+      }
+    }), _c('label', {
+      staticClass: "nombre-variable",
+      attrs: {
+        "for": variable.id
+      }
+    }, [_c('span', {
+      staticClass: "figura-variable",
+      style: {
+        background: variable.color
+      }
+    }), _c('span', {
+      staticClass: "nombre-variable"
+    }, [_vm._v(" " + _vm._s(variable.nombre) + " ")])])]);
+  }), 0);
+};
+var SisdaiChecksvue_type_template_id_05215523_staticRenderFns = [];
+
+;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-checks/SisdaiChecks.vue?vue&type=script&setup=true&lang=js
+
+/* harmony default export */ var SisdaiChecksvue_type_script_setup_true_lang_js = ({
+  __name: 'SisdaiChecks',
+  props: {
+    variables: {
+      type: Array,
+      require: true,
+      validator(value) {
+        // debe tener: id, nombre, color
+        const validado = value.some(({
+          id,
+          nombre,
+          color
+        }) => id !== undefined || nombre !== undefined || color !== undefined);
+        if (!validado) {
+          console.error('El objeto no cumple con las especificaciones');
+        }
+        return validado;
+      }
+    }
+  },
+  setup(__props, {
+    expose
+  }) {
+    const props = __props;
+    const variables_checkeadas = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)([...props.variables].map(d => d.id));
+    const variables_activas = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.computed)(() => props.variables.filter(d => variables_checkeadas.value.includes(d.id)));
+    expose({
+      variables_activas
+    });
+    return {
+      __sfc: true,
+      props,
+      variables_checkeadas,
+      variables_activas
+    };
+  }
+});
+;// CONCATENATED MODULE: ./src/componentes/sisdai-checks/SisdaiChecks.vue?vue&type=script&setup=true&lang=js
+ /* harmony default export */ var sisdai_checks_SisdaiChecksvue_type_script_setup_true_lang_js = (SisdaiChecksvue_type_script_setup_true_lang_js); 
+;// CONCATENATED MODULE: ./src/componentes/sisdai-checks/SisdaiChecks.vue
+
+
+
+
+
+/* normalize component */
+;
+var SisdaiChecks_component = normalizeComponent(
+  sisdai_checks_SisdaiChecksvue_type_script_setup_true_lang_js,
+  SisdaiChecksvue_type_template_id_05215523_render,
+  SisdaiChecksvue_type_template_id_05215523_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var SisdaiChecks = (SisdaiChecks_component.exports);
+;// CONCATENATED MODULE: ./src/componentes/sisdai-checks/index.js
+
+const sisdai_checks_plugin = {
+  install: function (Vue) {
+    Vue.component('SisdaiChecks', SisdaiChecks);
+  }
+};
+/* harmony default export */ var sisdai_checks = (sisdai_checks_plugin);
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7fefe306-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas/SisdaiGraficas.vue?vue&type=template&id=2261370d
+var SisdaiGraficasvue_type_template_id_2261370d_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
   return _c('div', {
-    ref: "contenedorSisdaiGraficas",
-    staticClass: "contenedor-sisdai-graficas",
+    staticClass: "contenedor-vis borde-redondeado-8",
     attrs: {
       "sisdai-grafica": _vm.id,
       "id": _vm.id
     }
   }, [_c('div', {
+    staticClass: "contenedor-vis-paneles",
+    class: _setup.panelesEnUso()
+  }, [_c('div', {
+    staticClass: "panel-encabezado-vis"
+  }, [_vm._t("panel-encabezado-vis")], 2), _c('div', {
+    staticClass: "panel-izquierda-vis"
+  }, [_vm._t("panel-izquierda-vis")], 2), _c('div', {
+    ref: "contenedorSisdaiGraficas",
+    staticClass: "contenido-vis"
+  }, [_c('div', {
     staticClass: "contenedor-svg-ejes-tooltip",
     style: {
-      height: !_setup.grafica().alto ? '100%' : _setup.grafica().alto + 'px'
+      height: !_setup.grafica().alto ? '100%' : `${_setup.grafica().alto + _setup.espacio_eje_x}px`
     }
   }, [_c('div', {
     staticClass: "contenedor-titulo-eje-y",
@@ -5638,9 +7748,9 @@ var SisdaiGraficasvue_type_template_id_ae73e43c_render = function render() {
       height: !_setup.grafica().alto ? '100%' : _setup.grafica().alto + 'px'
     }
   }, [_c('div', {
-    staticClass: "titulo-eje-y",
+    staticClass: "titulo-eje-y vis-titulo-ejes",
     staticStyle: {
-      "padding": "10px 0 5px 0"
+      "padding": "0 0 5px 0"
     },
     style: {
       width: !_setup.grafica().alto ? '100%' : _setup.grafica().alto + 'px',
@@ -5659,6 +7769,11 @@ var SisdaiGraficasvue_type_template_id_ae73e43c_render = function render() {
       "height": _setup.grafica().alto
     }
   }, [_c('g', {
+    staticClass: "grupo-fondo",
+    attrs: {
+      "transform": `translate(${_setup.margenes.izquierda}, ${_setup.margenes.arriba})`
+    }
+  }), _c('g', {
     staticClass: "eje-x-arriba"
   }), _c('g', {
     staticClass: "eje-x-abajo",
@@ -5675,23 +7790,87 @@ var SisdaiGraficasvue_type_template_id_ae73e43c_render = function render() {
     attrs: {
       "transform": `translate(${_setup.grafica().ancho - _setup.margenes.derecha}, ${+_setup.margenes.arriba})`
     }
-  }), _vm._t("default")], 2)]), _c('div', {
+  }), _vm._t("default"), _c('g', {
+    staticClass: "grupo-frente",
+    attrs: {
+      "transform": `translate(${_setup.margenes.izquierda}, ${_setup.margenes.arriba})`
+    }
+  })], 2)]), _c('div', {
     staticClass: "contenedor-titulo-eje-x"
   }, [_c('div', {
-    staticClass: "titulo-eje-x",
+    staticClass: "titulo-eje-x vis-titulo-ejes",
     domProps: {
       "innerHTML": _vm._s(_vm.titulo_eje_x)
     }
-  })])])]);
+  })])])]), _c('div', {
+    staticClass: "panel-derecha-vis"
+  }, [_vm._t("panel-derecha-vis")], 2), _c('div', {
+    staticClass: "panel-pie-vis"
+  }, [_vm._t("panel-pie-vis")], 2)]), _c(_setup.ContenedorVisAtribuciones)], 1);
 };
-var SisdaiGraficasvue_type_template_id_ae73e43c_staticRenderFns = [];
+var SisdaiGraficasvue_type_template_id_2261370d_staticRenderFns = [];
 
-;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas/SisdaiGraficas.vue?vue&type=script&setup=true&lang=js&
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7fefe306-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/internos/ContenedorVisAtribuciones.vue?vue&type=template&id=72d7fd54
+var ContenedorVisAtribucionesvue_type_template_id_72d7fd54_render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _vm._m(0);
+};
+var ContenedorVisAtribucionesvue_type_template_id_72d7fd54_staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    staticClass: "contenedor-vis-atribuciones borde-t borde-color-3"
+  }, [_c('a', {
+    staticClass: "logo-conacyt atribucion-conahcyt",
+    attrs: {
+      "href": "https://conahcyt.mx/",
+      "target": "_blank"
+    }
+  }, [_c('img', {
+    attrs: {
+      "src": "https://conahcyt.mx/wp-content/uploads/2021/10/logo_conacyt_con_sintagma_azul_completo.svg",
+      "alt": "Conahcyt"
+    }
+  })]), _c('a', {
+    staticClass: "atribucion-sisdai",
+    attrs: {
+      "href": "https://sisdai.conahcyt.mx/",
+      "target": "_blank",
+      "rel": "noopener noreferrer"
+    }
+  }, [_vm._v(" Sisdai ")])]);
+}];
+
+;// CONCATENATED MODULE: ./src/componentes/internos/ContenedorVisAtribuciones.vue?vue&type=template&id=72d7fd54
+
+;// CONCATENATED MODULE: ./src/componentes/internos/ContenedorVisAtribuciones.vue
+
+var script = {}
+
+
+/* normalize component */
+;
+var ContenedorVisAtribuciones_component = normalizeComponent(
+  script,
+  ContenedorVisAtribucionesvue_type_template_id_72d7fd54_render,
+  ContenedorVisAtribucionesvue_type_template_id_72d7fd54_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var ContenedorVisAtribuciones = (ContenedorVisAtribuciones_component.exports);
+;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas/SisdaiGraficas.vue?vue&type=script&setup=true&lang=js
 
 
 
 
-/* harmony default export */ var SisdaiGraficasvue_type_script_setup_true_lang_js_ = ({
+
+
+/* harmony default export */ var SisdaiGraficasvue_type_script_setup_true_lang_js = ({
   __name: 'SisdaiGraficas',
   props: {
     id: {
@@ -5729,6 +7908,7 @@ var SisdaiGraficasvue_type_template_id_ae73e43c_staticRenderFns = [];
     const props = __props;
     const ancho_grafica = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)();
     const alto_grafica = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)();
+    const slots = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.useSlots)();
     usarRegistroGraficas().registrarGrafica(props.id);
     const grafica = () => {
       return usarRegistroGraficas().grafica(props.id);
@@ -5741,14 +7921,20 @@ var SisdaiGraficasvue_type_template_id_ae73e43c_staticRenderFns = [];
       grafica().margenes = nv;
     });
     const contenedorSisdaiGraficas = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(null);
-    const espacio_eje_y = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(0);
+    const espacio_eje_y = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(0),
+      espacio_eje_x = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(0);
+    const grupoFondo = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)();
+    const grupoFrente = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)();
     (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.onMounted)(() => {
-      console.log('SisdaiGraficas');
       obteniendoDimensiones();
+      grupoFondo.value = src_select(`#${props.id}  g.grupo-fondo`);
+      grupoFrente.value = src_select(`#${props.id}  g.grupo-frente`);
       window.addEventListener('resize', obteniendoDimensiones);
     });
     function obteniendoDimensiones() {
       espacio_eje_y.value = document.querySelector(`#${props.id}  .titulo-eje-y`).clientHeight;
+      espacio_eje_x.value = document.querySelector(`#${props.id}  .titulo-eje-x`).clientHeight;
+      console.log(espacio_eje_x.value);
       grafica().ancho = props.ancho ? props.ancho : contenedorSisdaiGraficas.value.clientWidth - espacio_eje_y.value;
       grafica().alto = props.alto ? props.alto : altoVis;
       ancho_grafica.value = props.ancho ? props.ancho : contenedorSisdaiGraficas.value.clientWidth - espacio_eje_y.value;
@@ -5757,45 +7943,53 @@ var SisdaiGraficasvue_type_template_id_ae73e43c_staticRenderFns = [];
     expose({
       ancho_grafica,
       alto_grafica,
-      grafica
+      grafica,
+      grupoFondo,
+      grupoFrente
     });
     (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.onUnmounted)(() => {
       usarRegistroGraficas().borrarGrafica(props.id);
       window.removeEventListener('resize', obteniendoDimensiones);
     });
+    const paneles = ['encabezado', 'izquierda', 'derecha', 'pie'];
+    function panelesEnUso() {
+      // return !!slots[name]
+      return paneles.filter(panel => !!slots[`panel-${panel}-vis`]).map(panel => `con-panel-${panel}-vis`);
+    }
     return {
       __sfc: true,
       props,
       ancho_grafica,
       alto_grafica,
+      slots,
       grafica,
       margenes,
       contenedorSisdaiGraficas,
       espacio_eje_y,
-      obteniendoDimensiones
+      espacio_eje_x,
+      grupoFondo,
+      grupoFrente,
+      obteniendoDimensiones,
+      paneles,
+      panelesEnUso,
+      ContenedorVisAtribuciones: ContenedorVisAtribuciones
     };
   }
 });
-;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas/SisdaiGraficas.vue?vue&type=script&setup=true&lang=js&
- /* harmony default export */ var sisdai_graficas_SisdaiGraficasvue_type_script_setup_true_lang_js_ = (SisdaiGraficasvue_type_script_setup_true_lang_js_); 
-;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-22.use[0]!./node_modules/@vue/cli-service/node_modules/css-loader/dist/cjs.js??clonedRuleSet-22.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-22.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22.use[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas/SisdaiGraficas.vue?vue&type=style&index=0&id=ae73e43c&prod&lang=scss&
-// extracted by mini-css-extract-plugin
-
-;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas/SisdaiGraficas.vue?vue&type=style&index=0&id=ae73e43c&prod&lang=scss&
-
+;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas/SisdaiGraficas.vue?vue&type=script&setup=true&lang=js
+ /* harmony default export */ var sisdai_graficas_SisdaiGraficasvue_type_script_setup_true_lang_js = (SisdaiGraficasvue_type_script_setup_true_lang_js); 
 ;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas/SisdaiGraficas.vue
 
 
 
-;
 
 
 /* normalize component */
-
+;
 var SisdaiGraficas_component = normalizeComponent(
-  sisdai_graficas_SisdaiGraficasvue_type_script_setup_true_lang_js_,
-  SisdaiGraficasvue_type_template_id_ae73e43c_render,
-  SisdaiGraficasvue_type_template_id_ae73e43c_staticRenderFns,
+  sisdai_graficas_SisdaiGraficasvue_type_script_setup_true_lang_js,
+  SisdaiGraficasvue_type_template_id_2261370d_render,
+  SisdaiGraficasvue_type_template_id_2261370d_staticRenderFns,
   false,
   null,
   null,
@@ -5812,7 +8006,914 @@ const sisdai_graficas_plugin = {
   }
 };
 /* harmony default export */ var sisdai_graficas = (sisdai_graficas_plugin);
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7fefe306-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-nomenclatura/SisdaiNomenclatura.vue?vue&type=template&id=6e8fbf5c
+var SisdaiNomenclaturavue_type_template_id_6e8fbf5c_render = function render() {
+  var _vm = this,
+    _c = _vm._self._c,
+    _setup = _vm._self._setupProxy;
+  return _c('div', {
+    staticClass: "contenedor-nomenclatura"
+  }, _vm._l(_vm.variables, function (variable) {
+    return _c('span', {
+      key: variable.id,
+      staticClass: "vis-nomenclatura"
+    }, [_c('span', {
+      staticClass: "figura-variable",
+      style: {
+        background: variable.color
+      }
+    }), _c('span', {
+      attrs: {
+        "for": variable.id
+      }
+    }, [_vm._v(_vm._s(variable.nombre))])]);
+  }), 0);
+};
+var SisdaiNomenclaturavue_type_template_id_6e8fbf5c_staticRenderFns = [];
+
+;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-nomenclatura/SisdaiNomenclatura.vue?vue&type=script&setup=true&lang=js
+
+/* harmony default export */ var SisdaiNomenclaturavue_type_script_setup_true_lang_js = ({
+  __name: 'SisdaiNomenclatura',
+  props: {
+    variables: {
+      type: Array,
+      require: true,
+      validator(value) {
+        // debe tener: id, nombre, color
+        const validado = value.some(({
+          id,
+          nombre,
+          color
+        }) => id !== undefined || nombre !== undefined || color !== undefined);
+        if (!validado) {
+          console.error('El objeto no cumple con las especificaciones');
+        }
+        return validado;
+      }
+    }
+  },
+  setup(__props, {
+    expose
+  }) {
+    const props = __props;
+    const variables_checkeadas = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)([...props.variables].map(d => d.id));
+    const variables_activas = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.computed)(() => props.variables.filter(d => variables_checkeadas.value.includes(d.id)));
+    expose({
+      variables_activas
+    });
+    return {
+      __sfc: true,
+      props,
+      variables_checkeadas,
+      variables_activas
+    };
+  }
+});
+;// CONCATENATED MODULE: ./src/componentes/sisdai-nomenclatura/SisdaiNomenclatura.vue?vue&type=script&setup=true&lang=js
+ /* harmony default export */ var sisdai_nomenclatura_SisdaiNomenclaturavue_type_script_setup_true_lang_js = (SisdaiNomenclaturavue_type_script_setup_true_lang_js); 
+;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-12.use[0]!./node_modules/@vue/cli-service/node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-nomenclatura/SisdaiNomenclatura.vue?vue&type=style&index=0&id=6e8fbf5c&prod&lang=css
+// extracted by mini-css-extract-plugin
+
+;// CONCATENATED MODULE: ./src/componentes/sisdai-nomenclatura/SisdaiNomenclatura.vue?vue&type=style&index=0&id=6e8fbf5c&prod&lang=css
+
+;// CONCATENATED MODULE: ./src/componentes/sisdai-nomenclatura/SisdaiNomenclatura.vue
+
+
+
+;
+
+
+/* normalize component */
+
+var SisdaiNomenclatura_component = normalizeComponent(
+  sisdai_nomenclatura_SisdaiNomenclaturavue_type_script_setup_true_lang_js,
+  SisdaiNomenclaturavue_type_template_id_6e8fbf5c_render,
+  SisdaiNomenclaturavue_type_template_id_6e8fbf5c_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var SisdaiNomenclatura = (SisdaiNomenclatura_component.exports);
+;// CONCATENATED MODULE: ./src/componentes/sisdai-nomenclatura/index.js
+
+const sisdai_nomenclatura_plugin = {
+  install: function (Vue) {
+    Vue.component('SisdaiNomenclatura', SisdaiNomenclatura);
+  }
+};
+/* harmony default export */ var sisdai_nomenclatura = (sisdai_nomenclatura_plugin);
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7fefe306-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-series-tiempo/SisdaiSeriesTiempo.vue?vue&type=template&id=29581438
+var SisdaiSeriesTiempovue_type_template_id_29581438_render = function render() {
+  var _vm = this,
+    _c = _vm._self._c,
+    _setup = _vm._self._setupProxy;
+  return _c('g', {
+    ref: "sisdaiSeriesTiempo",
+    staticClass: "contenedor-series",
+    attrs: {
+      "transform": `translate(${_setup.margenesSvg?.izquierda || 0},${_setup.margenesSvg?.arriba || 0})`
+    }
+  });
+};
+var SisdaiSeriesTiempovue_type_template_id_29581438_staticRenderFns = [];
+
+;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-series-tiempo/SisdaiSeriesTiempo.vue?vue&type=script&setup=true&lang=js
+
+
+
+
+
+
+
+
+
+/* harmony default export */ var SisdaiSeriesTiempovue_type_script_setup_true_lang_js = ({
+  __name: 'SisdaiSeriesTiempo',
+  props: {
+    datos: {
+      type: Array,
+      require: true
+    },
+    variables: {
+      type: Array,
+      require: true,
+      validator(value) {
+        // debe tener: id, nombre, color
+        const validado = value.some(({
+          id,
+          nombre,
+          color
+        }) => id !== undefined || nombre !== undefined || color !== undefined);
+        if (!validado) {
+          console.error('El objeto no cumple con las especificaciones');
+        }
+        return validado;
+      }
+    },
+    clave_fecha: {
+      type: String,
+      default: 'fecha'
+    },
+    alineacion_eje_y: {
+      type: String,
+      default: 'izquierda',
+      validator(value) {
+        const validado = value === 'izquierda' || value === 'derecha';
+        if (!validado) {
+          console.error("la propiedad 'alineacion_eje_y' sólo admite los valores 'izquierda' o 'derecha'");
+        }
+        return validado;
+      }
+    },
+    angulo_etiquetas_eje_x: {
+      type: Number,
+      default: 0,
+      validator(value) {
+        // debe estar entre -90 y 90
+        const validado = -90 <= value && value <= 90;
+        if (!validado) {
+          console.error('El número debe estar entre -90 y 90');
+        }
+        return validado;
+      }
+    },
+    angulo_etiquetas_eje_y: {
+      type: Number,
+      default: 0,
+      validator(value) {
+        // debe estar entre -90 y 90
+        const validado = -90 <= value && value <= 90;
+        if (!validado) {
+          console.error('El número debe estar entre -90 y 90');
+        }
+        return validado;
+      }
+    },
+    formato_temporal: {
+      default: '%d-%m-%Y',
+      type: String
+    }
+  },
+  setup(__props, {
+    expose
+  }) {
+    const props = __props;
+    var idGrafica;
+    const sisdaiSeriesTiempo = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.shallowRef)();
+    const {
+      datos,
+      clave_fecha,
+      variables
+    } = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.toRefs)(props);
+    transition_transition;
+    const margenesSvg = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)({});
+    const conversionTemporal = timeParse(props.formato_temporal);
+    const escalaTemporal = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(),
+      escalaLineal = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)();
+    const grupoContenedor = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(),
+      grupoSeries = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)();
+    function calcularEscalas(grupoVis) {
+      if (!grupoVis && grupoVis.ancho === 0) return;
+      escalaTemporal.value = time().domain(extent(datos.value?.map(d => d.la_fecha))).range([0, grupoVis.ancho]);
+      escalaLineal.value = linear_linear().domain([min(datos.value?.map(d => min(variables.value.map(dd => d[dd.id])))), max(datos.value?.map(d => max(variables.value.map(dd => d[dd.id]))))]).range([grupoVis.alto, 0]);
+      creaEjeHorizontal(idGrafica, escalaTemporal.value, props.angulo_etiquetas_eje_x);
+      creaEjeVertical(idGrafica, escalaLineal.value, props.angulo_etiquetas_eje_y, props.alineacion_eje_y, grupoVis.ancho);
+    }
+    function creaSeries() {
+      datos.value.forEach(d => d.la_fecha = conversionTemporal(d[clave_fecha.value]));
+      grupoSeries.value = grupoContenedor.value.selectAll('g.serie-temporal').data(variables.value).join(enter => {
+        let grupo = enter.append('g').attr('class', 'serie-temporal').style('fill', 'none').style('stroke', d => d.color).style('stroke-width', '1px');
+        grupo.selectAll('path.linea').data(d => [{
+          ...d,
+          datos: datos.value
+        }]).enter().append('path').attr('class', 'linea').attr('d', dd => line().x(d => escalaTemporal.value(d.la_fecha)).y(d => escalaLineal.value(d[dd.id]))(dd.datos));
+        grupo.selectAll('circle.puntos').data(d => datos.value.map(datum => ({
+          la_fecha: datum.la_fecha,
+          valor: datum[d.id],
+          ...d
+        }))).enter().append('circle').attr('class', 'puntos').attr('r', 0).attr('cx', d => escalaTemporal.value(d.la_fecha)).attr('cy', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto).style('stroke', '#fff').style('fill', d => d.color);
+      }, update => {
+        let grupo = update.call(update1 => update1.transition().duration(500).style('fill', 'none').style('stroke', d => d.color).style('stroke-width', '1px'));
+        grupo.selectAll('path.linea').data(d => [{
+          ...d,
+          datos: datos.value
+        }]).transition().duration(500).attr('d', dd => line().x(d => escalaTemporal.value(d.la_fecha)).y(d => escalaLineal.value(d[dd.id]))(dd.datos)).style('stroke', d => d.color);
+        grupo.selectAll('circle.puntos').data(d => datos.value.map(datum => ({
+          la_fecha: datum.la_fecha,
+          valor: datum[d.id],
+          ...d
+        }))).transition().duration(500).attr('r', variables.value.length > 1 ? 0 : 4).attr('cx', d => escalaTemporal.value(d.la_fecha)).attr('cy', d => escalaLineal.value(d.valor)).style('stroke', '#fff').style('fill', d => d.color);
+      },
+      // no update function
+      exit => {
+        exit.remove();
+      });
+    }
+    (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.onMounted)(() => {
+      idGrafica = buscarIdContenedorHtmlSisdai('grafica', sisdaiSeriesTiempo.value);
+      grupoContenedor.value = src_select('#' + idGrafica + ' svg g.contenedor-series');
+      margenesSvg.value = usarRegistroGraficas().grafica(idGrafica).margenes;
+      (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(() => usarRegistroGraficas().grafica(idGrafica).margenes, nv => margenesSvg.value = nv);
+      datos.value.forEach(d => d.la_fecha = conversionTemporal(d[clave_fecha.value]));
+      calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis);
+      creaSeries();
+      (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(() => usarRegistroGraficas().grafica(idGrafica).grupoVis, () => {
+        calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis);
+        if (usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho > 0) {
+          creaSeries();
+        }
+      });
+      (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(datos, () => {
+        datos.value.forEach(d => d.la_fecha = conversionTemporal(d[clave_fecha.value]));
+        calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis);
+        creaSeries();
+      });
+      (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(variables, () => {
+        calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis);
+        creaSeries();
+      });
+    });
+    expose({
+      escalaTemporal,
+      escalaLineal,
+      conversionTemporal
+    });
+    return {
+      __sfc: true,
+      idGrafica,
+      props,
+      sisdaiSeriesTiempo,
+      datos,
+      clave_fecha,
+      variables,
+      margenesSvg,
+      conversionTemporal,
+      escalaTemporal,
+      escalaLineal,
+      grupoContenedor,
+      grupoSeries,
+      calcularEscalas,
+      creaSeries
+    };
+  }
+});
+;// CONCATENATED MODULE: ./src/componentes/sisdai-series-tiempo/SisdaiSeriesTiempo.vue?vue&type=script&setup=true&lang=js
+ /* harmony default export */ var sisdai_series_tiempo_SisdaiSeriesTiempovue_type_script_setup_true_lang_js = (SisdaiSeriesTiempovue_type_script_setup_true_lang_js); 
+;// CONCATENATED MODULE: ./src/componentes/sisdai-series-tiempo/SisdaiSeriesTiempo.vue
+
+
+
+
+
+/* normalize component */
+;
+var SisdaiSeriesTiempo_component = normalizeComponent(
+  sisdai_series_tiempo_SisdaiSeriesTiempovue_type_script_setup_true_lang_js,
+  SisdaiSeriesTiempovue_type_template_id_29581438_render,
+  SisdaiSeriesTiempovue_type_template_id_29581438_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var SisdaiSeriesTiempo = (SisdaiSeriesTiempo_component.exports);
+;// CONCATENATED MODULE: ./src/componentes/sisdai-series-tiempo/index.js
+
+const sisdai_series_tiempo_plugin = {
+  install: function (Vue) {
+    Vue.component('SisdaiSeriesTiempo', SisdaiSeriesTiempo);
+  }
+};
+/* harmony default export */ var sisdai_series_tiempo = (sisdai_series_tiempo_plugin);
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7fefe306-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-violines/SisdaiViolines.vue?vue&type=template&id=596afb80
+var SisdaiViolinesvue_type_template_id_596afb80_render = function render() {
+  var _vm = this,
+    _c = _vm._self._c,
+    _setup = _vm._self._setupProxy;
+  return _c('g', {
+    ref: "sisdaiViolines",
+    staticClass: "contenedor-violines",
+    attrs: {
+      "transform": `translate(${_setup.margenesSvg?.izquierda || 0},${_setup.margenesSvg?.arriba || 0})`
+    }
+  });
+};
+var SisdaiViolinesvue_type_template_id_596afb80_staticRenderFns = [];
+
+;// CONCATENATED MODULE: ./node_modules/d3-array/src/array.js
+var src_array_array = Array.prototype;
+
+var array_slice = src_array_array.slice;
+var array_map = src_array_array.map;
+
+;// CONCATENATED MODULE: ./node_modules/d3-array/src/constant.js
+function constant_constant(x) {
+  return () => x;
+}
+
+;// CONCATENATED MODULE: ./node_modules/d3-array/src/nice.js
+
+
+function nice_nice(start, stop, count) {
+  let prestep;
+  while (true) {
+    const step = tickIncrement(start, stop, count);
+    if (step === prestep || step === 0 || !isFinite(step)) {
+      return [start, stop];
+    } else if (step > 0) {
+      start = Math.floor(start / step) * step;
+      stop = Math.ceil(stop / step) * step;
+    } else if (step < 0) {
+      start = Math.ceil(start * step) / step;
+      stop = Math.floor(stop * step) / step;
+    }
+    prestep = step;
+  }
+}
+
+;// CONCATENATED MODULE: ./node_modules/d3-array/src/count.js
+function count(values, valueof) {
+  let count = 0;
+  if (valueof === undefined) {
+    for (let value of values) {
+      if (value != null && (value = +value) >= value) {
+        ++count;
+      }
+    }
+  } else {
+    let index = -1;
+    for (let value of values) {
+      if ((value = valueof(value, ++index, values)) != null && (value = +value) >= value) {
+        ++count;
+      }
+    }
+  }
+  return count;
+}
+
+;// CONCATENATED MODULE: ./node_modules/d3-array/src/threshold/sturges.js
+
+
+function thresholdSturges(values) {
+  return Math.max(1, Math.ceil(Math.log(count(values)) / Math.LN2) + 1);
+}
+
+;// CONCATENATED MODULE: ./node_modules/d3-array/src/bin.js
+
+
+
+
+
+
+
+
+
+function bin() {
+  var value = identity_identity,
+      domain = extent,
+      threshold = thresholdSturges;
+
+  function histogram(data) {
+    if (!Array.isArray(data)) data = Array.from(data);
+
+    var i,
+        n = data.length,
+        x,
+        step,
+        values = new Array(n);
+
+    for (i = 0; i < n; ++i) {
+      values[i] = value(data[i], i, data);
+    }
+
+    var xz = domain(values),
+        x0 = xz[0],
+        x1 = xz[1],
+        tz = threshold(values, x0, x1);
+
+    // Convert number of thresholds into uniform thresholds, and nice the
+    // default domain accordingly.
+    if (!Array.isArray(tz)) {
+      const max = x1, tn = +tz;
+      if (domain === extent) [x0, x1] = nice_nice(x0, x1, tn);
+      tz = ticks(x0, x1, tn);
+
+      // If the domain is aligned with the first tick (which it will by
+      // default), then we can use quantization rather than bisection to bin
+      // values, which is substantially faster.
+      if (tz[0] <= x0) step = tickIncrement(x0, x1, tn);
+
+      // If the last threshold is coincident with the domain’s upper bound, the
+      // last bin will be zero-width. If the default domain is used, and this
+      // last threshold is coincident with the maximum input value, we can
+      // extend the niced upper bound by one tick to ensure uniform bin widths;
+      // otherwise, we simply remove the last threshold. Note that we don’t
+      // coerce values or the domain to numbers, and thus must be careful to
+      // compare order (>=) rather than strict equality (===)!
+      if (tz[tz.length - 1] >= x1) {
+        if (max >= x1 && domain === extent) {
+          const step = tickIncrement(x0, x1, tn);
+          if (isFinite(step)) {
+            if (step > 0) {
+              x1 = (Math.floor(x1 / step) + 1) * step;
+            } else if (step < 0) {
+              x1 = (Math.ceil(x1 * -step) + 1) / -step;
+            }
+          }
+        } else {
+          tz.pop();
+        }
+      }
+    }
+
+    // Remove any thresholds outside the domain.
+    // Be careful not to mutate an array owned by the user!
+    var m = tz.length, a = 0, b = m;
+    while (tz[a] <= x0) ++a;
+    while (tz[b - 1] > x1) --b;
+    if (a || b < m) tz = tz.slice(a, b), m = b - a;
+
+    var bins = new Array(m + 1),
+        bin;
+
+    // Initialize bins.
+    for (i = 0; i <= m; ++i) {
+      bin = bins[i] = [];
+      bin.x0 = i > 0 ? tz[i - 1] : x0;
+      bin.x1 = i < m ? tz[i] : x1;
+    }
+
+    // Assign data to bins by value, ignoring any outside the domain.
+    if (isFinite(step)) {
+      if (step > 0) {
+        for (i = 0; i < n; ++i) {
+          if ((x = values[i]) != null && x0 <= x && x <= x1) {
+            bins[Math.min(m, Math.floor((x - x0) / step))].push(data[i]);
+          }
+        }
+      } else if (step < 0) {
+        for (i = 0; i < n; ++i) {
+          if ((x = values[i]) != null && x0 <= x && x <= x1) {
+            const j = Math.floor((x0 - x) * step);
+            bins[Math.min(m, j + (tz[j] <= x))].push(data[i]); // handle off-by-one due to rounding
+          }
+        }
+      }
+    } else {
+      for (i = 0; i < n; ++i) {
+        if ((x = values[i]) != null && x0 <= x && x <= x1) {
+          bins[bisect(tz, x, 0, m)].push(data[i]);
+        }
+      }
+    }
+
+    return bins;
+  }
+
+  histogram.value = function(_) {
+    return arguments.length ? (value = typeof _ === "function" ? _ : constant_constant(_), histogram) : value;
+  };
+
+  histogram.domain = function(_) {
+    return arguments.length ? (domain = typeof _ === "function" ? _ : constant_constant([_[0], _[1]]), histogram) : domain;
+  };
+
+  histogram.thresholds = function(_) {
+    return arguments.length ? (threshold = typeof _ === "function" ? _ : constant_constant(Array.isArray(_) ? array_slice.call(_) : _), histogram) : threshold;
+  };
+
+  return histogram;
+}
+
+;// CONCATENATED MODULE: ./node_modules/d3-shape/src/math.js
+const abs = Math.abs;
+const atan2 = Math.atan2;
+const cos = Math.cos;
+const math_max = Math.max;
+const math_min = Math.min;
+const sin = Math.sin;
+const sqrt = Math.sqrt;
+
+const math_epsilon = 1e-12;
+const math_pi = Math.PI;
+const halfPi = math_pi / 2;
+const math_tau = 2 * math_pi;
+
+function acos(x) {
+  return x > 1 ? 0 : x < -1 ? math_pi : Math.acos(x);
+}
+
+function asin(x) {
+  return x >= 1 ? halfPi : x <= -1 ? -halfPi : Math.asin(x);
+}
+
+;// CONCATENATED MODULE: ./node_modules/d3-shape/src/curve/cardinal.js
+function cardinal_point(that, x, y) {
+  that._context.bezierCurveTo(
+    that._x1 + that._k * (that._x2 - that._x0),
+    that._y1 + that._k * (that._y2 - that._y0),
+    that._x2 + that._k * (that._x1 - x),
+    that._y2 + that._k * (that._y1 - y),
+    that._x2,
+    that._y2
+  );
+}
+
+function Cardinal(context, tension) {
+  this._context = context;
+  this._k = (1 - tension) / 6;
+}
+
+Cardinal.prototype = {
+  areaStart: function() {
+    this._line = 0;
+  },
+  areaEnd: function() {
+    this._line = NaN;
+  },
+  lineStart: function() {
+    this._x0 = this._x1 = this._x2 =
+    this._y0 = this._y1 = this._y2 = NaN;
+    this._point = 0;
+  },
+  lineEnd: function() {
+    switch (this._point) {
+      case 2: this._context.lineTo(this._x2, this._y2); break;
+      case 3: cardinal_point(this, this._x1, this._y1); break;
+    }
+    if (this._line || (this._line !== 0 && this._point === 1)) this._context.closePath();
+    this._line = 1 - this._line;
+  },
+  point: function(x, y) {
+    x = +x, y = +y;
+    switch (this._point) {
+      case 0: this._point = 1; this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y); break;
+      case 1: this._point = 2; this._x1 = x, this._y1 = y; break;
+      case 2: this._point = 3; // falls through
+      default: cardinal_point(this, x, y); break;
+    }
+    this._x0 = this._x1, this._x1 = this._x2, this._x2 = x;
+    this._y0 = this._y1, this._y1 = this._y2, this._y2 = y;
+  }
+};
+
+/* harmony default export */ var cardinal = ((function custom(tension) {
+
+  function cardinal(context) {
+    return new Cardinal(context, tension);
+  }
+
+  cardinal.tension = function(tension) {
+    return custom(+tension);
+  };
+
+  return cardinal;
+})(0));
+
+;// CONCATENATED MODULE: ./node_modules/d3-shape/src/curve/catmullRom.js
+
+
+
+function catmullRom_point(that, x, y) {
+  var x1 = that._x1,
+      y1 = that._y1,
+      x2 = that._x2,
+      y2 = that._y2;
+
+  if (that._l01_a > math_epsilon) {
+    var a = 2 * that._l01_2a + 3 * that._l01_a * that._l12_a + that._l12_2a,
+        n = 3 * that._l01_a * (that._l01_a + that._l12_a);
+    x1 = (x1 * a - that._x0 * that._l12_2a + that._x2 * that._l01_2a) / n;
+    y1 = (y1 * a - that._y0 * that._l12_2a + that._y2 * that._l01_2a) / n;
+  }
+
+  if (that._l23_a > math_epsilon) {
+    var b = 2 * that._l23_2a + 3 * that._l23_a * that._l12_a + that._l12_2a,
+        m = 3 * that._l23_a * (that._l23_a + that._l12_a);
+    x2 = (x2 * b + that._x1 * that._l23_2a - x * that._l12_2a) / m;
+    y2 = (y2 * b + that._y1 * that._l23_2a - y * that._l12_2a) / m;
+  }
+
+  that._context.bezierCurveTo(x1, y1, x2, y2, that._x2, that._y2);
+}
+
+function CatmullRom(context, alpha) {
+  this._context = context;
+  this._alpha = alpha;
+}
+
+CatmullRom.prototype = {
+  areaStart: function() {
+    this._line = 0;
+  },
+  areaEnd: function() {
+    this._line = NaN;
+  },
+  lineStart: function() {
+    this._x0 = this._x1 = this._x2 =
+    this._y0 = this._y1 = this._y2 = NaN;
+    this._l01_a = this._l12_a = this._l23_a =
+    this._l01_2a = this._l12_2a = this._l23_2a =
+    this._point = 0;
+  },
+  lineEnd: function() {
+    switch (this._point) {
+      case 2: this._context.lineTo(this._x2, this._y2); break;
+      case 3: this.point(this._x2, this._y2); break;
+    }
+    if (this._line || (this._line !== 0 && this._point === 1)) this._context.closePath();
+    this._line = 1 - this._line;
+  },
+  point: function(x, y) {
+    x = +x, y = +y;
+
+    if (this._point) {
+      var x23 = this._x2 - x,
+          y23 = this._y2 - y;
+      this._l23_a = Math.sqrt(this._l23_2a = Math.pow(x23 * x23 + y23 * y23, this._alpha));
+    }
+
+    switch (this._point) {
+      case 0: this._point = 1; this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y); break;
+      case 1: this._point = 2; break;
+      case 2: this._point = 3; // falls through
+      default: catmullRom_point(this, x, y); break;
+    }
+
+    this._l01_a = this._l12_a, this._l12_a = this._l23_a;
+    this._l01_2a = this._l12_2a, this._l12_2a = this._l23_2a;
+    this._x0 = this._x1, this._x1 = this._x2, this._x2 = x;
+    this._y0 = this._y1, this._y1 = this._y2, this._y2 = y;
+  }
+};
+
+/* harmony default export */ var catmullRom = ((function custom(alpha) {
+
+  function catmullRom(context) {
+    return alpha ? new CatmullRom(context, alpha) : new Cardinal(context, 0);
+  }
+
+  catmullRom.alpha = function(alpha) {
+    return custom(+alpha);
+  };
+
+  return catmullRom;
+})(0.5));
+
+;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-violines/SisdaiViolines.vue?vue&type=script&setup=true&lang=js
+
+
+
+
+
+
+
+
+/* harmony default export */ var SisdaiViolinesvue_type_script_setup_true_lang_js = ({
+  __name: 'SisdaiViolines',
+  props: {
+    datos: {
+      type: Array,
+      require: true
+    },
+    variables: {
+      type: Object,
+      require: true,
+      validator(value) {
+        // debe tener: id, nombre, color
+
+        const validado = 'id' in value && 'nombre' in value && 'color' in value;
+        if (!validado) {
+          console.error('El objeto no cumple con las especificaciones');
+        }
+        return validado;
+      }
+    },
+    clave_categorias: {
+      type: String,
+      default: 'categoria'
+    },
+    alineacion_eje_y: {
+      type: String,
+      default: 'izquierda',
+      validator(value) {
+        const validado = value === 'izquierda' || value === 'derecha';
+        if (!validado) {
+          console.error("la propiedad 'alineacion_eje_y' sólo admite los valores 'izquierda' o 'derecha'");
+        }
+        return validado;
+      }
+    },
+    angulo_etiquetas_eje_x: {
+      type: Number,
+      default: 0,
+      validator(value) {
+        // debe estar entre -90 y 90
+        const validado = -90 <= value && value <= 90;
+        if (!validado) {
+          console.error('El número debe estar entre -90 y 90');
+        }
+        return validado;
+      }
+    },
+    angulo_etiquetas_eje_y: {
+      type: Number,
+      default: 0,
+      validator(value) {
+        // debe estar entre -90 y 90
+        const validado = -90 <= value && value <= 90;
+        if (!validado) {
+          console.error('El número debe estar entre -90 y 90');
+        }
+        return validado;
+      }
+    },
+    numero_divisiones: {
+      type: Number,
+      default: 10
+    }
+  },
+  setup(__props, {
+    expose
+  }) {
+    const props = __props;
+    var idGrafica;
+    const sisdaiViolines = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.shallowRef)();
+    const {
+      datos,
+      clave_categorias,
+      variables
+    } = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.toRefs)(props);
+    transition_transition;
+    const margenesSvg = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)({});
+    const escalaBanda = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(),
+      escalaLineal = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(),
+      escalaPathX = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)();
+    const grupoContenedor = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(),
+      data_agrupada = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(),
+      histograma = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(),
+      grupoViolines = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)();
+    function calcularEscalas(grupoVis) {
+      if (!grupoVis && grupoVis.ancho === 0) return;
+      escalaBanda.value = band().domain(datos.value?.map(d => d[clave_categorias.value])).range([0, grupoVis.ancho]).padding(0.05);
+      escalaLineal.value = linear_linear().domain(extent(datos.value.map(d => d[variables.value.id]))).range([grupoVis.alto, 0]);
+      creaEjeHorizontal(idGrafica, escalaBanda.value, props.angulo_etiquetas_eje_x);
+      creaEjeVertical(idGrafica, escalaLineal.value, props.angulo_etiquetas_eje_y, props.alineacion_eje_y, grupoVis.ancho);
+      histograma.value = bin().domain(escalaLineal.value.domain()).thresholds(props.numero_divisiones).value(d => d);
+      data_agrupada.value = rollup(datos.value, d => {
+        let input = d.map(g => g[variables.value.id]);
+        let bins = histograma.value(input);
+        return bins;
+      }, d => d[props.clave_categorias]);
+      let numero_maximo = 0;
+      for (var i of data_agrupada.value) {
+        let longuest = max(i[1].map(a => a.length));
+        if (longuest > numero_maximo) {
+          numero_maximo = longuest;
+        }
+      }
+      escalaPathX.value = linear_linear().range([0, escalaBanda.value.bandwidth()]).domain([-numero_maximo, numero_maximo]);
+    }
+    function creaViolines() {
+      grupoViolines.value = grupoContenedor.value.selectAll('g.grupo-violin').data(data_agrupada.value).join(enter => {
+        let grupo = enter.append('g').attr('class', 'grupo-violin').style('fill', variables.value.color).attr('transform', d => `translate(${escalaBanda.value(d[0])} ,0)`);
+        grupo.selectAll('path.violin').data(d => [d[1]]).enter().append('path').attr('class', 'violin').attr('width', escalaBanda.value.bandwidth()).transition().duration(500).attr('d', src_area().x0(d => escalaPathX.value(-d.length)).x1(d => escalaPathX.value(d.length)).y(d => escalaLineal.value(d.x0)).curve(catmullRom));
+      }, update => {
+        let grupo = update.call(update1 => update1.transition().duration(500).style('fill', variables.value.color).attr('transform', d => `translate(${escalaBanda.value(d[0])} ,0)`));
+        grupo.selectAll('path.violin').data(d => [d[1]]).transition().duration(500).attr('d', src_area().x0(d => escalaPathX.value(-d.length)).x1(d => escalaPathX.value(d.length)).y(d => escalaLineal.value(d.x0)).curve(catmullRom));
+      }, exit => {
+        exit.remove();
+      });
+    }
+    (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.onMounted)(() => {
+      idGrafica = buscarIdContenedorHtmlSisdai('grafica', sisdaiViolines.value);
+      grupoContenedor.value = src_select('#' + idGrafica + ' svg g.contenedor-violines');
+      margenesSvg.value = usarRegistroGraficas().grafica(idGrafica).margenes;
+      (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(() => usarRegistroGraficas().grafica(idGrafica).margenes, nv => margenesSvg.value = nv);
+      calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis);
+      creaViolines();
+      (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(() => usarRegistroGraficas().grafica(idGrafica).grupoVis, () => {
+        calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis);
+        if (usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho > 0) {
+          creaViolines();
+        }
+      });
+      (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(datos, () => {
+        calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis);
+        creaViolines();
+      });
+      (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(variables, () => {
+        calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis);
+        creaViolines();
+      });
+    });
+    expose({
+      escalaBanda,
+      escalaLineal
+    });
+    return {
+      __sfc: true,
+      idGrafica,
+      props,
+      sisdaiViolines,
+      datos,
+      clave_categorias,
+      variables,
+      margenesSvg,
+      escalaBanda,
+      escalaLineal,
+      escalaPathX,
+      grupoContenedor,
+      data_agrupada,
+      histograma,
+      grupoViolines,
+      calcularEscalas,
+      creaViolines
+    };
+  }
+});
+;// CONCATENATED MODULE: ./src/componentes/sisdai-violines/SisdaiViolines.vue?vue&type=script&setup=true&lang=js
+ /* harmony default export */ var sisdai_violines_SisdaiViolinesvue_type_script_setup_true_lang_js = (SisdaiViolinesvue_type_script_setup_true_lang_js); 
+;// CONCATENATED MODULE: ./src/componentes/sisdai-violines/SisdaiViolines.vue
+
+
+
+
+
+/* normalize component */
+;
+var SisdaiViolines_component = normalizeComponent(
+  sisdai_violines_SisdaiViolinesvue_type_script_setup_true_lang_js,
+  SisdaiViolinesvue_type_template_id_596afb80_render,
+  SisdaiViolinesvue_type_template_id_596afb80_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var SisdaiViolines = (SisdaiViolines_component.exports);
+;// CONCATENATED MODULE: ./src/componentes/sisdai-violines/index.js
+
+const sisdai_violines_plugin = {
+  install: function (Vue) {
+    Vue.component('SisdaiViolines', SisdaiViolines);
+  }
+};
+/* harmony default export */ var sisdai_violines = (sisdai_violines_plugin);
 ;// CONCATENATED MODULE: ./src/componentes/index.js
+
+
+
+
+
 
 
 
@@ -5825,6 +8926,11 @@ const src_plugin = {
     Vue.use(sisdai_graficas);
     Vue.use(sisdai_barras);
     Vue.use(sisdai_cajas_bigotes);
+    Vue.use(sisdai_checks);
+    Vue.use(sisdai_nomenclatura);
+    Vue.use(sisdai_series_tiempo);
+    Vue.use(sisdai_areas_apiladas);
+    Vue.use(sisdai_violines);
   }
 };
 
