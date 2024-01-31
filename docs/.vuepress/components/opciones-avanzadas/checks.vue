@@ -67,35 +67,15 @@ const variables = ref([
             : variables
         "
       />
+      <template #panel-pie-vis>
+        <div>
+          <div class="vis-titulo-leyenda">Leyenda</div>
+          <SisdaiChecks
+            ref="variablesCheckeadas"
+            :variables="variables"
+          ></SisdaiChecks>
+        </div>
+      </template>
     </SisdaiGraficas>
-    <div class="panel-pie-vis">
-      <div class="vis-titulo-leyenda">Leyenda</div>
-      <SisdaiChecks
-        ref="variablesCheckeadas"
-        :variables="variables"
-      ></SisdaiChecks>
-      <hr />
-    </div>
-    <div class="contenedor-vis-atribuciones">
-      <a
-        class="logo-conacyt"
-        href="https://conahcyt.mx"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img
-          src="https://conahcyt.mx/wp-content/uploads/2021/10/logo_conacyt_con_sintagma_azul_completo.svg"
-          alt="Conahcyt"
-        />
-      </a>
-
-      <a
-        href="https://sisdai.conahcyt.mx/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Sisdai
-      </a>
-    </div>
   </div>
 </template>
