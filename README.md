@@ -65,6 +65,8 @@ sin necesidad de volver a importarlo en el script. Por ejemplo:
 </template>
 ```
 
+_Para un uso avanzado revisa la documentación._
+
 ## Actualizarion de la biblioteca
 
 Si actualmente utilizas la biblioteca y necesitas utilizar otra version de las gráficas, 
