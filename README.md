@@ -71,7 +71,7 @@ Si actualmente utilizas la biblioteca y necesitas utilizar otra version de las g
 en la carpeta del proyecto en donde necesitas la actualización instala la version que requieres nuevamente
 
 ```bash
-npm install git+https://codigo.conahcyt.mx/sisdai/sisdai-componentes#vN.N.N
+npm install git+https://codigo.conahcyt.mx/sisdai/sisdai-graficas#vN.N.N
 ```
 
 donde N.N.N indica el número de versión, por ejemplo v1.0.0
