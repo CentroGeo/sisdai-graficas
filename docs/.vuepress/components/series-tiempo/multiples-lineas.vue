@@ -14,13 +14,11 @@ const miGrafica = ref(),
   serieDeTiempo = ref()
 onMounted(() => {
   rectangulo.value = miGrafica.value.grupoFrente.append('rect')
-  console.log(rectangulo.value)
 })
 watch(
   () => serieDeTiempo.value?.escalaLineal,
   nv => {
     if (nv.range()[0] > 0) {
-      console.log(miGrafica.value.grafica()._grupoVis.alto)
       rectangulo.value
         .attr(
           'width',

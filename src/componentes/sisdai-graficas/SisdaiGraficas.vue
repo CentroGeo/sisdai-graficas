@@ -73,7 +73,6 @@ function obteniendoDimensiones() {
   espacio_eje_x.value = document.querySelector(
     `#${props.id}  .titulo-eje-x`
   ).clientHeight
-  console.log(espacio_eje_x.value)
   grafica().ancho = props.ancho
     ? props.ancho
     : contenedorSisdaiGraficas.value.clientWidth - espacio_eje_y.value

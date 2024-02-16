@@ -258,11 +258,6 @@ function creaBarras() {
                 )
             },
             barras_update => {
-              console.log(
-                barras_update.selectAll(d => {
-                  return `rect.barra.${d.data.key}`
-                })
-              )
               barras_update
 
                 .transition()
