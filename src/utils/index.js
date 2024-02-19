@@ -86,6 +86,7 @@ export function creaEjeVertical(id, escala, angulo, alineacion, ancho) {
     .attr('y2', '0')
     .style('stroke-dasharray', alineacion === 'izquierda' ? '2 2' : '3 4')
     .style('stroke', '#6F7271')
+  return eje_y
 }
 /**
  * Crea el eje horizontal
@@ -120,6 +121,7 @@ export function creaEjeHorizontal(id, escala, angulo) {
       'text-anchor',
       angulo < 0 ? 'end' : angulo === 0 ? 'middle' : 'start'
     )
+  return eje_x
 }
 /**
  * formatea eje temporal al espaniol

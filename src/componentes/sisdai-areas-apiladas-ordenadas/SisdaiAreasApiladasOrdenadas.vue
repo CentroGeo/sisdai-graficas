@@ -80,12 +80,17 @@ const props = defineProps({
     default: '%d-%m-%Y',
     type: String,
   },
-  reordenamientoTemporal: {
-    // Propiedad de prueba
-    default: true,
-  },
-  anchoBarra: {
-    default: 0.5,
+
+  ancho_barra: {
+    default: 0.3,
+    validator(value) {
+      // debe estar entre 0 y 1
+      const validado = 0 <= value && value <= 1
+      if (!validado) {
+        console.error('El número debe estar entre 0 y 1')
+      }
+      return validado
+    },
   },
 })
 
@@ -99,7 +104,8 @@ const escalaTemporal = ref(),
   escalaLineal = ref()
 const grupoContenedor = ref(),
   grupoAreas = ref(),
-  grupoRectangulos = ref()
+  grupoRectangulos = ref(),
+  eje_y = ref()
 const minDeltaTiempo = ref()
 const anchoBanda = ref()
 function calcularEscalas(grupoVis) {
@@ -127,7 +133,7 @@ function calcularEscalas(grupoVis) {
     props.angulo_etiquetas_eje_x
   )
 
-  creaEjeVertical(
+  eje_y.value = creaEjeVertical(
     idGrafica,
     escalaLineal.value,
     props.angulo_etiquetas_eje_y,
@@ -142,25 +148,24 @@ function creaAreas() {
   datos_apilados.value = stack().keys(variables.value.map(d => d.id))(
     datos.value
   )
-  if (props.reordenamientoTemporal) {
-    datos_apilados.value = reordenamientoApilado(datos_apilados.value)
-  }
+  datos_apilados.value = reordenamientoApilado(datos_apilados.value)
+
   console.log(datos_apilados)
   let ancho_barra =
     escalaTemporal.value(
       new Date(
         datos_apilados.value[0][0].data.la_fecha.getTime() +
-          0.5 * props.anchoBarra * minDeltaTiempo.value
+          0.5 * props.ancho_barra * minDeltaTiempo.value
       )
     ) -
     escalaTemporal.value(
       new Date(
         datos_apilados.value[0][0].data.la_fecha.getTime() -
-          0.5 * props.anchoBarra * minDeltaTiempo.value
+          0.5 * props.ancho_barra * minDeltaTiempo.value
       )
     )
   anchoBanda.value = ancho_barra > 20 ? 20 : ancho_barra
-
+  eje_y.value.selectAll('text').attr('x', -0.5 * anchoBanda.value)
   grupoAreas.value = grupoContenedor.value
     .selectAll('path.area')
     .data(datos_apilados.value)

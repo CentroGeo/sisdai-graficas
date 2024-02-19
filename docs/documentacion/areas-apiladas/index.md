@@ -6,7 +6,7 @@ sectionName: Documentación
 # SisdaiAreasApiladas
 
 A continuación se describe la utilización del componente de visualización `<SisdaiAreasApiladas/>` para construir un gráfico de
-series de tiempo.
+áreas apiladas en el tiempo.
 
 ## Propiedades
 

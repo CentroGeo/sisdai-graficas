@@ -3,10 +3,9 @@ layout: LayoutDocumentacion
 sectionName: Documentación
 ---
 
-# SisdaiAreasApiladas
+# SisdaiAreasApiladasOrdenadas
 
-A continuación se describe la utilización del componente de visualización `<SisdaiAreasApiladas/>` para construir un gráfico de
-series de tiempo.
+A continuación se describe la utilización del componente de visualización `<SisdaiAreasApiladasOrdenadas/>` para construir un gráfico de áreas apiladas en el tiempo cuyas categorías se reordenan en cada fecha de forma ascendente.
 
 ## Propiedades
 
@@ -92,6 +91,7 @@ series de tiempo.
 - `alineacion_eje_y`: (_String_) Esta propiedad indica de qué lado se acomodará el eje vertical, las opciones validas son `'izquierda'` o `'derecha'`, y su valor por _default_ es `'izquierda'`.
 - `angulo_etiquetas_eje_y`: (_Number_) Es un valor numerico que indica el ángulo de rotación del eje vertical
 - `angulo_etiquetas_eje_x`: (_Number_) Es un valor numerico que indica el ángulo de rotación del eje horizontal
+- `ancho_barra`: (_Number_) Valor entre 0 y 1 que especifica la fracción que ocupan las barras con respecto al espacio total. Por default es 0.3, no obstante, si la fracción es tal que dibuja unas barras de más de 20px, entonces el componente pintará barras de 20px y no más ancha. Dicha condición previene que se obtengan unas barras muy anchas que se "salgan" del svg o que generen una visualización desproporcionada.
 
 ## Ejemplos
 
