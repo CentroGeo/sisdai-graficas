@@ -1,4 +1,5 @@
 import SisdaiAreasApiladas from './sisdai-areas-apiladas'
+import SisdaiAreasApiladasOrdenadas from './sisdai-areas-apiladas-ordenadas'
 import SisdaiBarras from './sisdai-barras'
 import SisdaiCajasBigotes from './sisdai-cajas-bigotes'
 import SisdaiChecks from './sisdai-checks'
@@ -9,6 +10,7 @@ import SisdaiViolines from './sisdai-violines'
 
 export {
   SisdaiAreasApiladas,
+  SisdaiAreasApiladasOrdenadas,
   SisdaiBarras,
   SisdaiCajasBigotes,
   SisdaiChecks,
