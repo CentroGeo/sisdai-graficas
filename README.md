@@ -9,7 +9,7 @@ en su equipo a través del **protocolo HTTPS**.
 ## Utilidades
 
 - Homologa los estilos utilizando el sistema de diseño [Sisdai](https://sisdai.conahcyt.mx).
-- Mejora la accesibilidad mediante el uso de html semántico y aplicando las reglas establecidad en [Sisdai](https://sisdai.conahcyt.mx).
+- Mejora la accesibilidad mediante el uso de html semántico y aplicando las reglas establecidas en [Sisdai](https://sisdai.conahcyt.mx).
 - Facilita la actualización de elementos institucionales requeridos.
 - Facilita y reduce el código de elementos para la visualización de datos.
 
@@ -17,7 +17,7 @@ en su equipo a través del **protocolo HTTPS**.
 
 ### Instala la biblioteca
 
-En la carpeta principal de tu proyecto Vue, instala la biblioteca a las dependencias de tu proyecto con:
+En la carpeta principal de tu proyecto Vue, instala la biblioteca en las dependencias de tu proyecto con:
 
 ``` bash
 npm install git+https://codigo.conahcyt.mx/sisdai/sisdai-graficas
@@ -33,7 +33,7 @@ donde N.N.N indica el número de versión, por ejemplo v1.0.0
 
 ### Importa la biblioteca
 
-En el archivo `main.js` de tu proyecto Vue, importa cada grafica que necesites de la biblioteca con:
+En el archivo `main.js` de tu proyecto Vue, importa cada gráfica que necesites de la biblioteca con:
 
 ```javascript
 // src/main.js
@@ -46,7 +46,7 @@ Vue.use(SisdaiBarras)
 
 ### Uso
 
-En cualquier vista en la sección `<template>` de tu proyecto puedes utilizar los componentes de la biblioteca que importaste, 
+En cualquier vista en la sección `<template>` de tu proyecto puedes utilizar los componentes de la biblioteca 
 sin necesidad de volver a importarlo en el script. Por ejemplo:
 
 ```js
@@ -67,10 +67,10 @@ sin necesidad de volver a importarlo en el script. Por ejemplo:
 
 _Para un uso avanzado revisa la documentación._
 
-## Actualizarion de la biblioteca
+## Actualización de la biblioteca
 
-Si actualmente utilizas la biblioteca y necesitas utilizar otra version de las gráficas, 
-en la carpeta del proyecto en donde necesitas la actualización instala la version que requieres nuevamente
+Si actualmente utilizas la biblioteca y necesitas utilizar otra versión de las gráficas, 
+en la carpeta del proyecto instala la versión que requieres nuevamente
 
 ```bash
 npm install git+https://codigo.conahcyt.mx/sisdai/sisdai-graficas#vN.N.N
