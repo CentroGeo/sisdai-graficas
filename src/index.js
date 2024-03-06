@@ -4,6 +4,7 @@ import {
   SisdaiBarras,
   SisdaiCajasBigotes,
   SisdaiChecks,
+  SisdaiDona,
   SisdaiGraficas,
   SisdaiNomenclatura,
   SisdaiSeriesTiempo,
@@ -17,6 +18,7 @@ const plugin = {
     Vue.use(SisdaiBarras)
     Vue.use(SisdaiCajasBigotes)
     Vue.use(SisdaiChecks)
+    Vue.use(SisdaiDona)
     Vue.use(SisdaiNomenclatura)
     Vue.use(SisdaiSeriesTiempo)
     Vue.use(SisdaiAreasApiladas)
@@ -31,6 +33,7 @@ export {
   SisdaiBarras,
   SisdaiCajasBigotes,
   SisdaiChecks,
+  SisdaiDona,
   SisdaiGraficas,
   SisdaiNomenclatura,
   SisdaiSeriesTiempo,

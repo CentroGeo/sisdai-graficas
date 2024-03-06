@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 const props = defineProps({
   variables: {
     type: Array,
@@ -19,9 +19,22 @@ const props = defineProps({
 })
 
 const variables_checkeadas = ref([...props.variables].map(d => d.id))
-const variables_activas = computed(() =>
-  props.variables.filter(d => variables_checkeadas.value.includes(d.id))
+
+watch(
+  () => props.variables,
+  nv => {
+    variables_checkeadas.value = [...nv].map(d => d.id)
+  }
 )
+const variables_activas = computed(() => {
+  let vars_activas = props.variables.filter(d =>
+    variables_checkeadas.value.includes(d.id)
+  )
+  if (vars_activas.length === 0) {
+    vars_activas = [...props.variables]
+  }
+  return vars_activas
+})
 defineExpose({ variables_activas })
 </script>
 <template>
@@ -36,6 +49,10 @@ defineExpose({ variables_activas })
         type="checkbox"
         :value="variable.id"
         v-model="variables_checkeadas"
+        :disabled="
+          variables_checkeadas.length === 1 &&
+          variable.id == variables_checkeadas[0]
+        "
       />
       <label
         class="nombre-variable"
