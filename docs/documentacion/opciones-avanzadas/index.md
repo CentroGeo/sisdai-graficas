@@ -34,3 +34,5 @@ En este ejemplo se muestra cómo añadir elementos al fondo de la gráfica como 
 En este ejemplo se implementa el uso de una función para rotar ejes
 
 <utils-ejemplo-doc ruta="opciones-avanzadas/rotacion-ejes.vue"/>
+
+<utils-ejemplo-doc ruta="opciones-avanzadas/modificando-datos-checks.vue"/>
