@@ -122,6 +122,14 @@ function actualizaContenidoIndice() {
               <li>
                 <router-link
                   class="p-x-5-esc p-x-3-mov p-y-1"
+                  to="/documentacion/alluvial"
+                >
+                  SisdaiAlluvial</router-link
+                >
+              </li>
+              <li>
+                <router-link
+                  class="p-x-5-esc p-x-3-mov p-y-1"
                   to="/documentacion/areas-apiladas"
                 >
                   SisdaiAreasApiladas</router-link

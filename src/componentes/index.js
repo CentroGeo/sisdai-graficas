@@ -1,3 +1,4 @@
+import SisdaiAlluvial from './sisdai-alluvial'
 import SisdaiAreasApiladas from './sisdai-areas-apiladas'
 import SisdaiBarras from './sisdai-barras'
 import SisdaiCajasBigotes from './sisdai-cajas-bigotes'
@@ -8,6 +9,7 @@ import SisdaiSeriesTiempo from './sisdai-series-tiempo'
 import SisdaiViolines from './sisdai-violines'
 
 export {
+  SisdaiAlluvial,
   SisdaiAreasApiladas,
   SisdaiBarras,
   SisdaiCajasBigotes,
