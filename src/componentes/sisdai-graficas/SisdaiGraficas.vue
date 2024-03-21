@@ -107,7 +107,7 @@ function panelesEnUso() {
 <template>
   <div
     :sisdai-grafica="id"
-    class="contenedor-vis borde-redondeado-8"
+    class="contenedor-vis borde-redondeado-8 contenedor-sisdai-graficas"
     :id="id"
   >
     <div
@@ -206,3 +206,8 @@ function panelesEnUso() {
     <ContenedorVisAtribuciones />
   </div>
 </template>
+<style scoped lang="scss">
+.contenedor-vis.contenedor-sisdai-graficas {
+  --contenedor-vis-alto-menus: auto;
+}
+</style>
