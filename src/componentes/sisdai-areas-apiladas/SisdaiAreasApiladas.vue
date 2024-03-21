@@ -13,6 +13,7 @@ import {
   buscarIdContenedorHtmlSisdai,
   creaEjeHorizontal,
   creaEjeVertical,
+  reordenamientoApilado,
 } from '../../utils'
 var idGrafica
 
@@ -81,6 +82,10 @@ const props = defineProps({
     default: '%d-%m-%Y',
     type: String,
   },
+  reordenamientoTemporal: {
+    // Propiedad de prueba
+    default: false,
+  },
 })
 
 const sisdaiAreasApiladas = shallowRef()
@@ -127,14 +132,15 @@ function creaAreas() {
   datos_apilados.value = stack().keys(variables.value.map(d => d.id))(
     datos.value
   )
+  if (props.reordenamientoTemporal) {
+    datos_apilados.value = reordenamientoApilado(datos_apilados.value)
+  }
 
   grupoAreas.value = grupoContenedor.value
     .selectAll('path.area')
     .data(datos_apilados.value)
     .join(
       enter => {
-        console.log('enter')
-
         enter
           .append('path')
           .attr('class', 'area')
@@ -150,7 +156,6 @@ function creaAreas() {
           )
       },
       update => {
-        console.log('update')
         update
           .transition()
           .duration(500)

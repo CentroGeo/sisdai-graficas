@@ -1,9 +1,11 @@
 import {
   SisdaiAlluvial,
   SisdaiAreasApiladas,
+  SisdaiAreasApiladasOrdenadas,
   SisdaiBarras,
   SisdaiCajasBigotes,
   SisdaiChecks,
+  SisdaiDona,
   SisdaiGraficas,
   SisdaiNomenclatura,
   SisdaiSeriesTiempo,
@@ -17,9 +19,11 @@ const plugin = {
     Vue.use(SisdaiBarras)
     Vue.use(SisdaiCajasBigotes)
     Vue.use(SisdaiChecks)
+    Vue.use(SisdaiDona)
     Vue.use(SisdaiNomenclatura)
     Vue.use(SisdaiSeriesTiempo)
     Vue.use(SisdaiAreasApiladas)
+    Vue.use(SisdaiAreasApiladasOrdenadas)
     Vue.use(SisdaiViolines)
     Vue.use(SisdaiAlluvial)
   },
@@ -28,9 +32,11 @@ const plugin = {
 export {
   SisdaiAlluvial,
   SisdaiAreasApiladas,
+  SisdaiAreasApiladasOrdenadas,
   SisdaiBarras,
   SisdaiCajasBigotes,
   SisdaiChecks,
+  SisdaiDona,
   SisdaiGraficas,
   SisdaiNomenclatura,
   SisdaiSeriesTiempo,
