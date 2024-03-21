@@ -1,0 +1,30 @@
+[
+  {
+    "Con_seguridad": 539,
+    "Desconoce": 54,
+    "Sin_informacion": 43,
+    "Sin_seguridad": 0,
+    "nombre": "Mujer cis"
+  },
+  {
+    "Con_seguridad": 7404,
+    "Desconoce": 1001,
+    "Sin_informacion": 675,
+    "Sin_seguridad": 0,
+    "nombre": "Hombre cis"
+  },
+  {
+    "Con_seguridad": 186,
+    "Desconoce": 13,
+    "Sin_informacion": 14,
+    "Sin_seguridad": 0,
+    "nombre": "Mujer trans"
+  },
+  {
+    "Con_seguridad": 2,
+    "Desconoce": 1,
+    "Sin_informacion": 0,
+    "Sin_seguridad": 0,
+    "nombre": "Hombre trans"
+  }
+]

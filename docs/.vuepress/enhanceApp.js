@@ -1,39 +1,28 @@
-/**
- * Client app enhancement file.
- *
- * https://v1.vuepress.vuejs.org/guide/basic-config.html#app-level-enhancements
- */
-
-
-import {
-    SisdaiBarras,
-    SisdaiDonas,
-    SisdaiLineas,
-    SisdaiCajasBigotes,
-    SisdaiDiagramaProcesos,
-    SisdaiAreasApiladas,
-    SisdaiLineaTiempo
-} from "../../src/index.js"
-import "./styles/index.scss"
-import Vuex from 'vuex';
+import SisdaiComponentes from 'sisdai-componentes'
+import SisdaiGraficas from './../../src'
+import pageComponents from '@internal/page-components'
+import Vuex from 'vuex'
+import store from './store'
 
 export default ({
-                    Vue, // the version of Vue being used in the VuePress app
-                    options, // the options for the root Vue instance
-                    router, // the router instance for the app
-                    siteData // site metadata
-                }) => {
-    Vue.use(SisdaiBarras)
-    Vue.use(SisdaiCajasBigotes)
-    Vue.use(SisdaiDonas)
-    Vue.use(SisdaiLineas)
-    Vue.use(SisdaiDiagramaProcesos)
-    Vue.use(SisdaiAreasApiladas)
-    Vue.use(SisdaiLineaTiempo)
+  Vue,
+  // options, // the options for the root Vue instance
+  // router, // the router instance for the app
+  // siteData // site metadata
+}) => {
+  // ...apply enhancements to the app
+  // import styles
+  require('./theme/styles/index.scss')
+  require('../../node_modules/sisdai-css/src/eni.scss')
 
-    // ...apply enhancements for the site.
+  Vue.use(Vuex)
+  Vue.mixin({ store: store })
 
+  Vue.use(SisdaiComponentes)
 
-    Vue.use(Vuex);
+  Vue.use(SisdaiGraficas)
 
+  for (const [name, component] of Object.entries(pageComponents)) {
+    Vue.component(name, component)
+  }
 }
