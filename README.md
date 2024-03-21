@@ -21,13 +21,13 @@ conocimientos básicos de lo anterior así como de desarrollo en [JavaScript](ht
 
 En la carpeta principal de tu proyecto Vue, instala la biblioteca en las dependencias de tu proyecto con:
 
-``` bash
+```bash
 npm install git+https://codigo.conahcyt.mx/sisdai/sisdai-graficas
 ```
 
 Dependiendo de la versión de la biblioteca a instalar, la instrucción anterior puede cambiar a:
 
-``` bash
+```bash
 npm install git+https://codigo.conahcyt.mx/sisdai/sisdai-graficas#vN.N.N
 ```
 
@@ -52,7 +52,7 @@ Vue.use(SisdaiBarras)
 
 ### Uso
 
-En cualquier vista en la sección `<template>` de tu proyecto puedes utilizar los componentes de la biblioteca 
+En cualquier vista en la sección `<template>` de tu proyecto puedes utilizar los componentes de la biblioteca
 sin necesidad de volver a importarlo en el script. Por ejemplo:
 
 ```js
@@ -75,7 +75,7 @@ _Para un uso avanzado revisa la documentación._
 
 ## Actualización de la biblioteca
 
-Si actualmente utilizas la biblioteca y necesitas utilizar otra versión de las gráficas, 
+Si actualmente utilizas la biblioteca y necesitas utilizar otra versión de las gráficas,
 en la carpeta del proyecto instala la versión que requieres nuevamente
 
 ```bash
@@ -87,9 +87,10 @@ donde N.N.N indica el número de versión, por ejemplo v1.0.0
 ## Listado de gráficas
 
 new Vue({
-  render: h => h(App),
+render: h => h(App),
 }).$mount('#app')
-```
+
+````
 
 ### Uso básico
 
@@ -133,7 +134,7 @@ de Vue como se muestra a continuación.
   :nombre_barra="'nombre_rectangulos'"
   :nombre_color="'nombre_colores'"
 />
-```
+````
 
 En el script anterior se especifican los parámetros del componente `SisdaiBarras` como pueden ser el `id`, los
 datos que se usarán para construir las barras, las variables para construir la gráfica, etc. Una lista completa de los
