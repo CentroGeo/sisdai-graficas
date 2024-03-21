@@ -1,4 +1,5 @@
 import {
+  SisdaiAlluvial,
   SisdaiAreasApiladas,
   SisdaiAreasApiladasOrdenadas,
   SisdaiBarras,
@@ -24,10 +25,12 @@ const plugin = {
     Vue.use(SisdaiAreasApiladas)
     Vue.use(SisdaiAreasApiladasOrdenadas)
     Vue.use(SisdaiViolines)
+    Vue.use(SisdaiAlluvial)
   },
 }
 
 export {
+  SisdaiAlluvial,
   SisdaiAreasApiladas,
   SisdaiAreasApiladasOrdenadas,
   SisdaiBarras,

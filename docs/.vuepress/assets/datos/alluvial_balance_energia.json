@@ -1,0 +1,808 @@
+{
+  "nodos": [
+    { "name": "Producción", "id": "node0", "color": "#999" },
+    { "name": "Importación", "id": "node1", "color": "#999" },
+    { "name": "Exportación", "id": "node2", "color": "#999" },
+    { "name": "Petróleo", "id": "node3", "color": "#000000" },
+    { "name": "Carbón", "id": "node4", "color": "#85200c" },
+    { "name": "Condensados", "id": "node5", "color": "#f00" },
+    { "name": "Gas natural", "id": "node6", "color": "#4a86e8" },
+    { "name": "Nucleoenergía", "id": "node7", "color": "#9900ff" },
+    { "name": "Geoenergía", "id": "node8", "color": "#783f04" },
+    { "name": "Energía eólica", "id": "node9", "color": "#0000ff" },
+    { "name": "Hidroenergía", "id": "node10", "color": "#0ff" },
+    { "name": "Bagazo de caña", "id": "node11", "color": "#0ff" },
+    { "name": "Biogas", "id": "node12", "color": "#6d9eeb" },
+    { "name": "Energía solar", "id": "node13", "color": "#ff0" },
+    { "name": "Leña", "id": "node14", "color": "#b45f06" },
+    { "name": "Otros", "id": "node15", "color": "#999" },
+    { "name": "Consumo propio", "id": "node16", "color": "#999" },
+    { "name": "Otros *", "id": "node17", "color": "#999" },
+    { "name": "Sector industrial", "id": "node18", "color": "#999" },
+    { "name": "Sector transporte", "id": "node19", "color": "#999" },
+    { "name": "Sector agropecuario", "id": "node20", "color": "#999" },
+    { "name": "Sector comercial y servicios", "id": "node21", "color": "#999" },
+    { "name": "Sector público", "id": "node22", "color": "#999" },
+    { "name": "Sector residencial", "id": "node23", "color": "#999" },
+    { "name": "PEMEX Petroquímica", "id": "node24", "color": "#999" },
+    { "name": "Otras ramas económicas", "id": "node25", "color": "#999" },
+    { "name": "Hornos y coquizadoras", "id": "node26", "color": "#999" },
+    { "name": "Refinerías y despuntadoras", "id": "node27", "color": "#999" },
+    {
+      "name": "Plantas de gas y fraccionadoras",
+      "id": "node28",
+      "color": "#999"
+    },
+    { "name": "Transferencia interproductos", "id": "node29", "color": "#999" },
+    { "name": "Coque de carbón", "id": "node30", "color": "#cc4125" },
+    { "name": "Coque de petróleo", "id": "node31", "color": "#000000" },
+    { "name": "Combustóleo", "id": "node32", "color": "#666666" },
+    { "name": "Queroseno", "id": "node33", "color": "#999" },
+    { "name": "Diésel", "id": "node34", "color": "#b7b7b7" },
+    { "name": "Gasolina", "id": "node35", "color": "#cccccc" },
+    { "name": "GLP", "id": "node36", "color": "#c9daf8" },
+    { "name": "Gas seco", "id": "node37", "color": "#6d9eeb" },
+    { "name": "No energéticos", "id": "node38", "color": "#ff00ff" },
+    { "name": "Pérdidas en transformación", "id": "node39", "color": "#999" },
+    { "name": "Centrales eléctricas", "id": "node40", "color": "#00ff00" },
+    { "name": "Electricidad", "id": "node41", "color": "#00ff00" }
+  ],
+  "enlaces": [
+    {
+      "source": "Producción",
+      "target": "Carbón",
+      "value": 192.29,
+      "color": "#85200c"
+    },
+    {
+      "source": "Producción",
+      "target": "Petróleo",
+      "value": 3821.1,
+      "color": "#000000"
+    },
+    {
+      "source": "Producción",
+      "target": "Gas natural",
+      "value": 2553,
+      "color": "#4a86e8"
+    },
+    {
+      "source": "Producción",
+      "target": "Condensados",
+      "value": 140.98,
+      "color": "#f00"
+    },
+    {
+      "source": "Producción",
+      "target": "Nucleoenergía",
+      "value": 125.62,
+      "color": "#9900ff"
+    },
+    {
+      "source": "Producción",
+      "target": "Geoenergía",
+      "value": 18.54,
+      "color": "#783f04"
+    },
+    {
+      "source": "Producción",
+      "target": "Hidroenergía",
+      "value": 96.52,
+      "color": "#0ff"
+    },
+    {
+      "source": "Producción",
+      "target": "Energía eólica",
+      "value": 70.9,
+      "color": "#0000ff"
+    },
+    {
+      "source": "Producción",
+      "target": "Bagazo de caña",
+      "value": 99.66,
+      "color": "#0ff"
+    },
+    {
+      "source": "Producción",
+      "target": "Biogas",
+      "value": 2.53,
+      "color": "#6d9eeb"
+    },
+    {
+      "source": "Producción",
+      "target": "Leña",
+      "value": 246.62,
+      "color": "#b45f06"
+    },
+    {
+      "source": "Producción",
+      "target": "Energía solar",
+      "value": 72.75,
+      "color": "#ff0"
+    },
+
+    {
+      "source": "Carbón",
+      "target": "Exportación",
+      "value": 0.09,
+      "color": "#85200c"
+    },
+    {
+      "source": "Carbón",
+      "target": "Hornos y coquizadoras",
+      "value": 27.13,
+      "color": "#85200c"
+    },
+    {
+      "source": "Carbón",
+      "target": "Sector industrial",
+      "value": 20.95,
+      "color": "#85200c"
+    },
+    {
+      "source": "Carbón",
+      "target": "Centrales eléctricas",
+      "value": 164.1,
+      "color": "#85200c"
+    },
+    {
+      "source": "Carbón",
+      "target": "Otros",
+      "value": 1.81,
+      "color": "#85200c"
+    },
+
+    {
+      "source": "Petróleo",
+      "target": "Exportación",
+      "value": 2509.2,
+      "color": "#000000"
+    },
+    {
+      "source": "Petróleo",
+      "target": "Refinerías y despuntadoras",
+      "value": 1303.1,
+      "color": "#000000"
+    },
+    {
+      "source": "Petróleo",
+      "target": "Consumo propio",
+      "value": 16.82,
+      "color": "#000000"
+    },
+
+    {
+      "source": "Condensados",
+      "target": "Plantas de gas y fraccionadoras",
+      "value": 7.26,
+      "color": "#F00"
+    },
+    {
+      "source": "Condensados",
+      "target": "Otros",
+      "value": 133.72,
+      "color": "#F00"
+    },
+
+    {
+      "source": "Gas natural",
+      "target": "Plantas de gas y fraccionadoras",
+      "value": 1072.7,
+      "color": "#4a86e8"
+    },
+    {
+      "source": "Gas natural",
+      "target": "Consumo propio",
+      "value": 641.15,
+      "color": "#4a86e8"
+    },
+    {
+      "source": "Gas natural",
+      "target": "Transferencia interproductos",
+      "value": 134.9,
+      "color": "#4a86e8"
+    },
+    {
+      "source": "Gas natural",
+      "target": "Otros",
+      "value": 704.34,
+      "color": "#4a86e8"
+    },
+
+    {
+      "source": "Nucleoenergía",
+      "target": "Centrales eléctricas",
+      "value": 125.62,
+      "color": "#9900ff"
+    },
+
+    {
+      "source": "Geoenergía",
+      "target": "Centrales eléctricas",
+      "value": 18.539,
+      "color": "#783f04"
+    },
+
+    {
+      "source": "Energía eólica",
+      "target": "Centrales eléctricas",
+      "value": 70.9,
+      "color": "#0000ff"
+    },
+
+    {
+      "source": "Hidroenergía",
+      "target": "Centrales eléctricas",
+      "value": 95.52,
+      "color": "#0ff"
+    },
+
+    {
+      "source": "Bagazo de caña",
+      "target": "Otros",
+      "value": 1.1,
+      "color": "#f6b26b"
+    },
+    {
+      "source": "Bagazo de caña",
+      "target": "Centrales eléctricas",
+      "value": 57.82,
+      "color": "#f6b26b"
+    },
+    {
+      "source": "Bagazo de caña",
+      "target": "Sector industrial",
+      "value": 40.6,
+      "color": "#f6b26b"
+    },
+
+    {
+      "source": "Biogas",
+      "target": "Centrales eléctricas",
+      "value": 2.53,
+      "color": "#6d9eeb"
+    },
+
+    {
+      "source": "Energía solar",
+      "target": "Centrales eléctricas",
+      "value": 56.48,
+      "color": "#ffff00"
+    },
+    {
+      "source": "Energía solar",
+      "target": "Sector industrial",
+      "value": 1.3,
+      "color": "#ffff00"
+    },
+    {
+      "source": "Energía solar",
+      "target": "Sector comercial y servicios",
+      "value": 5.96,
+      "color": "#ffff00"
+    },
+    {
+      "source": "Energía solar",
+      "target": "Sector residencial",
+      "value": 9.01,
+      "color": "#ffff00"
+    },
+
+    {
+      "source": "Leña",
+      "target": "Sector residencial",
+      "value": 246.62,
+      "color": "#b45f06"
+    },
+
+    {
+      "source": "Hornos y coquizadoras",
+      "target": "Coque de carbón",
+      "value": 18.47,
+      "color": "#cc4125"
+    },
+    {
+      "source": "Hornos y coquizadoras",
+      "target": "Pérdidas en transformación",
+      "value": 8.66,
+      "color": "#f9a145"
+    },
+
+    {
+      "source": "Refinerías y despuntadoras",
+      "target": "Coque de petróleo",
+      "value": 99.27,
+      "color": "#434343"
+    },
+    {
+      "source": "Refinerías y despuntadoras",
+      "target": "Combustóleo",
+      "value": 417.32,
+      "color": "#666666"
+    },
+    {
+      "source": "Refinerías y despuntadoras",
+      "target": "Diésel",
+      "value": 220.49,
+      "color": "#b7b7b7"
+    },
+    {
+      "source": "Refinerías y despuntadoras",
+      "target": "Gasolina",
+      "value": 357.7,
+      "color": "#cccccc"
+    },
+    {
+      "source": "Refinerías y despuntadoras",
+      "target": "GLP",
+      "value": 8.43,
+      "color": "#c9daf8"
+    },
+    {
+      "source": "Refinerías y despuntadoras",
+      "target": "No energéticos",
+      "value": 29.4,
+      "color": "#ff00ff"
+    },
+    {
+      "source": "Refinerías y despuntadoras",
+      "target": "Gas seco",
+      "value": 76.64,
+      "color": "#6d9eeb"
+    },
+    {
+      "source": "Refinerías y despuntadoras",
+      "target": "Pérdidas en transformación",
+      "value": 57.06,
+      "color": "#FBFBFB"
+    },
+    {
+      "source": "Refinerías y despuntadoras",
+      "target": "Queroseno",
+      "value": 36.83,
+      "color": "#999"
+    },
+
+    {
+      "source": "Plantas de gas y fraccionadoras",
+      "target": "Pérdidas en transformación",
+      "value": 2.24,
+      "color": "#FBFBFB"
+    },
+    {
+      "source": "Plantas de gas y fraccionadoras",
+      "target": "No energéticos",
+      "value": 70.8,
+      "color": "#ff00ff"
+    },
+    {
+      "source": "Plantas de gas y fraccionadoras",
+      "target": "Gas seco",
+      "value": 783.46,
+      "color": "#6d9eeb"
+    },
+    {
+      "source": "Plantas de gas y fraccionadoras",
+      "target": "GLP",
+      "value": 144.27,
+      "color": "#c9daf8"
+    },
+    {
+      "source": "Plantas de gas y fraccionadoras",
+      "target": "Gasolina",
+      "value": 79.51,
+      "color": "#cccccc"
+    },
+
+    {
+      "source": "Transferencia interproductos",
+      "target": "Gas seco",
+      "value": 134.9,
+      "color": "#6d9eeb"
+    },
+
+    {
+      "source": "Importación",
+      "target": "Carbón",
+      "value": 21.79,
+      "color": "#85200c"
+    },
+    {
+      "source": "Importación",
+      "target": "Gas seco",
+      "value": 1890.4,
+      "color": "#6d9eeb"
+    },
+    {
+      "source": "Importación",
+      "target": "Gasolina",
+      "value": 649.31,
+      "color": "#cccccc"
+    },
+    {
+      "source": "Importación",
+      "target": "GLP",
+      "value": 283,
+      "color": "#c9daf8"
+    },
+    {
+      "source": "Importación",
+      "target": "Diésel",
+      "value": 436.23,
+      "color": "#b7b7b7"
+    },
+    {
+      "source": "Importación",
+      "target": "Combustóleo",
+      "value": 20.2,
+      "color": "#666666"
+    },
+    {
+      "source": "Importación",
+      "target": "Electricidad",
+      "value": 35.87,
+      "color": "#00ff00"
+    },
+    {
+      "source": "Importación",
+      "target": "Coque de carbón",
+      "value": 27.2,
+      "color": "#cc4125"
+    },
+    {
+      "source": "Importación",
+      "target": "Coque de petróleo",
+      "value": 113.55,
+      "color": "#434343"
+    },
+    {
+      "source": "Importación",
+      "target": "Queroseno",
+      "value": 45.81,
+      "color": "#999"
+    },
+
+    {
+      "source": "Coque de carbón",
+      "target": "Sector industrial",
+      "value": 44.56,
+      "color": "#cc4125"
+    },
+    {
+      "source": "Coque de carbón",
+      "target": "Consumo propio",
+      "value": 1.11,
+      "color": "#cc4125"
+    },
+
+    {
+      "source": "Coque de petróleo",
+      "target": "Otros",
+      "value": 48.27,
+      "color": "#434343"
+    },
+    {
+      "source": "Coque de petróleo",
+      "target": "Centrales eléctricas",
+      "value": 37.84,
+      "color": "#434343"
+    },
+    {
+      "source": "Coque de petróleo",
+      "target": "Exportación",
+      "value": 0.07,
+      "color": "#434343"
+    },
+    {
+      "source": "Coque de petróleo",
+      "target": "Sector industrial",
+      "value": 126.63,
+      "color": "#434343"
+    },
+
+    {
+      "source": "Combustóleo",
+      "target": "Exportación",
+      "value": 262.87,
+      "color": "#666666"
+    },
+    {
+      "source": "Combustóleo",
+      "target": "Sector industrial",
+      "value": 11.72,
+      "color": "#666666"
+    },
+    {
+      "source": "Combustóleo",
+      "target": "Consumo propio",
+      "value": 37.35,
+      "color": "#666666"
+    },
+    {
+      "source": "Combustóleo",
+      "target": "Centrales eléctricas",
+      "value": 137.69,
+      "color": "#666666"
+    },
+    {
+      "source": "Combustóleo",
+      "target": "Sector transporte",
+      "value": 2.09,
+      "color": "#666666"
+    },
+
+    {
+      "source": "Queroseno",
+      "target": "Sector transporte",
+      "value": 106.68,
+      "color": "#999"
+    },
+    {
+      "source": "Queroseno",
+      "target": "Otros",
+      "value": 1.51,
+      "color": "#999"
+    },
+
+    {
+      "source": "Diésel",
+      "target": "Sector transporte",
+      "value": 438.34,
+      "color": "#b7b7b7"
+    },
+    {
+      "source": "Diésel",
+      "target": "Sector agropecuario",
+      "value": 127.34,
+      "color": "#b7b7b7"
+    },
+    {
+      "source": "Diésel",
+      "target": "Exportación",
+      "value": 36.6,
+      "color": "#b7b7b7"
+    },
+    {
+      "source": "Diésel",
+      "target": "Centrales eléctricas",
+      "value": 24.32,
+      "color": "#b7b7b7"
+    },
+    {
+      "source": "Diésel",
+      "target": "Consumo propio",
+      "value": 41.48,
+      "color": "#b7b7b7"
+    },
+    {
+      "source": "Diésel",
+      "target": "Sector industrial",
+      "value": 62.2,
+      "color": "#b7b7b7"
+    },
+
+    {
+      "source": "Gasolina",
+      "target": "Sector transporte",
+      "value": 1404.2,
+      "color": "#cccccc"
+    },
+    {
+      "source": "Gasolina",
+      "target": "Sector industrial",
+      "value": 1.47,
+      "color": "#cccccc"
+    },
+    {
+      "source": "Gasolina",
+      "target": "Exportación",
+      "value": 23.49,
+      "color": "#cccccc"
+    },
+
+    {
+      "source": "GLP",
+      "target": "Sector transporte",
+      "value": 61.04,
+      "color": "#c9daf8"
+    },
+    {
+      "source": "GLP",
+      "target": "Sector comercial y servicios",
+      "value": 61.04,
+      "color": "#c9daf8"
+    },
+    {
+      "source": "GLP",
+      "target": "Sector industrial",
+      "value": 46.34,
+      "color": "#c9daf8"
+    },
+    {
+      "source": "GLP",
+      "target": "Sector residencial",
+      "value": 240.14,
+      "color": "#c9daf8"
+    },
+    {
+      "source": "GLP",
+      "target": "Sector agropecuario",
+      "value": 4.9,
+      "color": "#c9daf8"
+    },
+    {
+      "source": "GLP",
+      "target": "Exportación",
+      "value": 1.21,
+      "color": "#c9daf8"
+    },
+    {
+      "source": "GLP",
+      "target": "Otras ramas económicas",
+      "value": 6.62,
+      "color": "#c9daf8"
+    },
+    { "source": "GLP", "target": "Otros", "value": 14.4, "color": "#c9daf8" },
+
+    {
+      "source": "Gas seco",
+      "target": "Sector industrial",
+      "value": 438.81,
+      "color": "#6d9eeb"
+    },
+    {
+      "source": "Gas seco",
+      "target": "PEMEX Petroquímica",
+      "value": 12.05,
+      "color": "#6d9eeb"
+    },
+    {
+      "source": "Gas seco",
+      "target": "Sector comercial y servicios",
+      "value": 9.5,
+      "color": "#6d9eeb"
+    },
+    {
+      "source": "Gas seco",
+      "target": "Sector transporte",
+      "value": 1.81,
+      "color": "#6d9eeb"
+    },
+    {
+      "source": "Gas seco",
+      "target": "Exportación",
+      "value": 2.66,
+      "color": "#6d9eeb"
+    },
+    {
+      "source": "Gas seco",
+      "target": "Sector residencial",
+      "value": 25.95,
+      "color": "#6d9eeb"
+    },
+    {
+      "source": "Gas seco",
+      "target": "Consumo propio",
+      "value": 14.4,
+      "color": "#6d9eeb"
+    },
+    {
+      "source": "Gas seco",
+      "target": "Centrales eléctricas",
+      "value": 1439,
+      "color": "#6d9eeb"
+    },
+
+    {
+      "source": "No energéticos",
+      "target": "Consumo propio",
+      "value": 68.06,
+      "color": "#ff00ff"
+    },
+    {
+      "source": "No energéticos",
+      "target": "Otras ramas económicas",
+      "value": 30.4,
+      "color": "#ff00ff"
+    },
+    {
+      "source": "No energéticos",
+      "target": "Otros",
+      "value": 1.66,
+      "color": "#ff00ff"
+    },
+
+    {
+      "source": "Centrales eléctricas",
+      "target": "Electricidad",
+      "value": 1186.9,
+      "color": "#00ff00"
+    },
+    {
+      "source": "Centrales eléctricas",
+      "target": "Pérdidas en transformación",
+      "value": 1044.5,
+      "color": "#f9a145"
+    },
+
+    {
+      "source": "Electricidad",
+      "target": "Sector industrial",
+      "value": 635.85,
+      "color": "#00ff00"
+    },
+    {
+      "source": "Electricidad",
+      "target": "Consumo propio",
+      "value": 199.6,
+      "color": "#00ff00"
+    },
+    {
+      "source": "Electricidad",
+      "target": "Sector residencial",
+      "value": 248.32,
+      "color": "#00ff00"
+    },
+    {
+      "source": "Electricidad",
+      "target": "Sector público",
+      "value": 14.26,
+      "color": "#00ff00"
+    },
+    {
+      "source": "Electricidad",
+      "target": "Sector transporte",
+      "value": 3.41,
+      "color": "#00ff00"
+    },
+    {
+      "source": "Electricidad",
+      "target": "Sector comercial y servicios",
+      "value": 49.48,
+      "color": "#00ff00"
+    },
+    {
+      "source": "Electricidad",
+      "target": "Sector agropecuario",
+      "value": 50.4,
+      "color": "#00ff00"
+    },
+    {
+      "source": "Electricidad",
+      "target": "Exportación",
+      "value": 21.44,
+      "color": "#00ff00"
+    },
+
+    {
+      "source": "Otros *",
+      "target": "Diésel",
+      "value": 7.56,
+      "color": "#b7b7b7"
+    },
+    {
+      "source": "Otros *",
+      "target": "Gasolina",
+      "value": 344.06,
+      "color": "#cccccc"
+    },
+    {
+      "source": "Otros *",
+      "target": "Gas seco",
+      "value": 99.8,
+      "color": "#6d9eeb"
+    },
+    {
+      "source": "Otros *",
+      "target": "Combustóleo",
+      "value": 14.2,
+      "color": "#666666"
+    },
+    {
+      "source": "Otros *",
+      "target": "Queroseno",
+      "value": 25.54,
+      "color": "#999"
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import SisdaiAlluvial from './sisdai-alluvial'
 import SisdaiAreasApiladas from './sisdai-areas-apiladas'
 import SisdaiAreasApiladasOrdenadas from './sisdai-areas-apiladas-ordenadas'
 import SisdaiBarras from './sisdai-barras'
@@ -10,6 +11,7 @@ import SisdaiSeriesTiempo from './sisdai-series-tiempo'
 import SisdaiViolines from './sisdai-violines'
 
 export {
+  SisdaiAlluvial,
   SisdaiAreasApiladas,
   SisdaiAreasApiladasOrdenadas,
   SisdaiBarras,
