@@ -64,12 +64,12 @@ function actualizaContenidoIndice() {
             >Documentación</RouterLink
           >
         </li>
-
         <li>
           <a
             class="nav-hipervinculo"
-            href="https://github.com/salsa-community/sisdai-graficas"
-            >GitHub</a
+            href="https://codigo.conahcyt.mx/sisdai/sisdai-graficas"
+            target="_blank"
+            >Gitlab</a
           >
         </li>
       </ul>
