@@ -3,17 +3,15 @@
 El proyecto sisdai-graficas es una biblioteca de visualización de datos que forma parte del Sistema de
 Diseño y Accesibilidad para la Investigación ([Sisdai](https://sisdai.conahcyt.mx)).
 
-> **_Limitación de responsabilidad_**
->
-> El presente es un proyecto en construcción, por tanto Conacyt no es responsable del uso y contenido del presente
-> recurso, toda vez que se trata de una versión en su modalidad prueba, y no de una versión pública, por lo que una vez
-> que sea lanzada la versión final, se invita a la persona usuaria a consultarla y validar sus requisitos.
+Cualquier persona puede hacer uso de esta biblioteca al clonarla e instalarla
+en su equipo a través del **protocolo HTTPS**.
 
 ## Utilidades
 
-Las gráficas de esta biblioteca están desarrolladas como [componentes](https://es.vuejs.org/v2/guide/components.html) de
-[Vue.js](https://es.vuejs.org/) usando [D3.js](https://d3js.org/), por lo tanto se recomienda a la persona usuaria tener
-conocimientos básicos de lo anterior así como de desarrollo en [JavaScript](https://www.javascript.com/).
+- Homologa los estilos utilizando el sistema de diseño [Sisdai](https://sisdai.conahcyt.mx).
+- Mejora la accesibilidad mediante el uso de html semántico y aplicando las reglas establecidas en [Sisdai](https://sisdai.conahcyt.mx).
+- Facilita la actualización de elementos institucionales requeridos.
+- Facilita y reduce el código de elementos para la visualización de datos.
 
 ## Instalación y uso
 
@@ -30,8 +28,6 @@ Dependiendo de la versión de la biblioteca a instalar, la instrucción anterior
 ```bash
 npm install git+https://codigo.conahcyt.mx/sisdai/sisdai-graficas#vN.N.N
 ```
-
-(Sustituir `ruta_al_repositorio` por la ruta en local de la persona usuaria)
 
 donde N.N.N indica el número de versión, por ejemplo v1.0.0
 
@@ -86,59 +82,68 @@ donde N.N.N indica el número de versión, por ejemplo v1.0.0
 
 ## Listado de gráficas
 
-new Vue({
-render: h => h(App),
-}).$mount('#app')
+| Gráfica                      | Descripcion                                                                                                                          | Propiedades requeridas                                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| SisdaiAlluvial               | Componente para construir un gráfico de tipo alluvial                                                                                | :datos="`{objeto}`" :variales="`[{arreglo de objetos}]`"                                                                |
+| SisdaiAreasApiladas          | Componente para construir una gráfica de áreas apiladas en el tiempo                                                                 | :datos="`[{arreglo de objetos}]`" :variales="`[{arreglo de objetos}]`" clave_fecha="`texto`" formato_temporal="`texto`" |
+| SisdaiAreasApiladasOrdenadas | Componente para construir una gráfica de áreas apiladas en el tiempo cuyas categorías se reordenan en cada fecha de forma ascendente | :datos="`[{arreglo de objetos}]`" :variales="`[{arreglo de objetos}]`" clave_fecha="`texto`" formato_temporal="`texto`" |
+| SisdaiBarras                 | Componente para crear gráficas de barras simples o apiladas                                                                          | :datos="`[{arreglo de objetos}]`" :variables="`[{arreglo de objetos}]`" clave_categorias="`texto`"                      |
+| SisdaiCajasBigotes           | Componente para construir un gráfico de cajas y bigotes, útil para visualizar distribuciones                                         | :datos="`[{arreglo de objetos}]`" :variables="`{objeto}`" clave_categorias="`texto`"                                    |
+| SisdaiDona                   | Componente para construir un gráfico de donas                                                                                        | :datos="`[{arreglo de objetos}]`" :variables="`{objeto}`" clave_categorias="`texto`" clave_cantidad="`texto`"           |
+| SisdaiSeriesTiempo           | Componente para construir un gráfico de series de tiempo                                                                             | :datos="`[{arreglo de objetos}]`" :variables="`{objeto}`" clave_fecha="`texto`" formato_temporal="`texto`"              |
+| SisdaiViolines               | Componente para construir un diagrama de violines, útil para visualizar distribuciones                                               | :datos="`[{arreglo de objetos}]`" :variables="`{objeto}`" clave_categorias="`texto`"                                    |
 
-````
+## Uso local del proyecto
 
-### Uso básico
+### Pasos previos recomendados
 
-Una vez instalado y registrado el componente, ya se puede usar dentro de un `<template>` de otros componentes o vistas
-de Vue como se muestra a continuación.
+Para desarrollar este proyecto se usó [node.js](https://nodejs.org/en) como
+entorno de ejecución de JavaScript. La opción recomendada para instalarlo es
+[vía nvm](https://github.com/nvm-sh/nvm) que es el manejador de versiones de
+node. Siguiendo este camino, también se instalará el manejador de paquetes
+[npm](https://www.npmjs.com/). Dado lo anterior las instrucciones de instalación
+y dependencias del proyecto se muestran aquí usando tanto npm, como nvm.
 
-```vue
-<SisdaiBarras
-  :barras_id="'mi_proyecto_de_barras'"
-  :datos="[
-    {
-      nombre_rectangulos: 'Nombre de variable 1',
-      cantidad_1: 120,
-      cantidad_2: 40,
-      cantidad_3: 40,
-    },
-    {
-      nombre_rectangulos: 'Nombre de variable 2',
-      cantidad_1: 100,
-      cantidad_2: 30,
-      cantidad_3: 40,
-    },
-    {
-      nombre_rectangulos: 'Nombre de variable 3',
-      cantidad_1: 20,
-      cantidad_2: 130,
-      cantidad_3: 540,
-    },
-    {
-      nombre_rectangulos: 'Nombre de variable 4',
-      cantidad_1: 20,
-      cantidad_2: 130,
-      cantidad_3: 540,
-    },
-  ]"
-  :variables="[
-    { id: 'cantidad_1', nombre_colores: 'cantidad 1', color: 'yellow' },
-    { id: 'cantidad_2', nombre_colores: 'cantidad 2', color: 'magenta' },
-    { id: 'cantidad_3', nombre_colores: 'cantidad 3', color: 'blue' },
-  ]"
-  :nombre_barra="'nombre_rectangulos'"
-  :nombre_color="'nombre_colores'"
-/>
-````
+Las gráficas de esta biblioteca están desarrolladas como [componentes](https://es.vuejs.org/v2/guide/components.html) de
+[Vue.js](https://es.vuejs.org/) usando [D3.js](https://d3js.org/), por lo tanto se recomienda a la persona usuaria tener
+conocimientos básicos de lo anterior así como de desarrollo en [JavaScript](https://www.javascript.com/).
 
-En el script anterior se especifican los parámetros del componente `SisdaiBarras` como pueden ser el `id`, los
-datos que se usarán para construir las barras, las variables para construir la gráfica, etc. Una lista completa de los
-parámetros usados en cada uno de los componentes de visualización se puede hallar en la [documentación en línea](https://sisdai.conacyt.mx/).
+### Dependencias
+
+- [node.js (^18)](https://nodejs.org/en/download/)
+- [npm (^9)](https://www.npmjs.com/get-npm)
+- [Vue.js (2.6.11)](https://v2.vuejs.org/)
+
+### Instalación
+
+Se puede clonar e instalar este proyecto en tu equipo
+utilizando **solo el protocolo HTTPS**, es decir:
+
+```bash
+git clone https://codigo.conahcyt.mx/sisdai/sisdai-graficas.git
+```
+
+Establece la versión adecuada de npm y nvm (previamente instaladas).
+
+```bash
+nvm use 18
+```
+
+Instala las dependencias de la biblioteca.
+
+```bash
+npm install
+```
+
+### Documentación
+
+Este proyecto cuenta con una documentación más extensa que aún está
+en proceso de desarrollo. Es posible levantarla en un ambiente local con la
+instrucción:
+
+```bash
+npm run docs:serve
+```
 
 ## Licencia
 
@@ -164,8 +169,6 @@ el idioma español se respeta la versión original de acuerdo al proyecto
 
 ## Contribuir
 
-Para contribuir al proyecto, se pide que se haga por medio de los lineamientos de contribución de SALSA que se
-pueden consultar [aquí](https://salsa.crip.conacyt.mx/guidelines/contribute/).
-
-\*En los lineamientos de contribución se lista la rama _master_ como principal, sin embargo en este proyecto, dicha
-rama es _main_.
+Por el momento sólo quienes sean
+parte de un equipo de investigación del capítulo de un [ENI](https://eni.conahcyt.mx)
+podrán levantar issues en este repositorio. Mientras que el equipo del sistema de diseño [Sisdai](https://sisdai.conahcyt.mx/acerca-de) se encargará de mantenerlo.
