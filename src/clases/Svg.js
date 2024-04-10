@@ -8,6 +8,8 @@ export default class Svg {
     alto: 0,
     ancho: 0,
   })
+  _posicion_cursor = { x: 0, y: 0 }
+  _globo_visible = false
 
   constructor() {}
 
@@ -27,6 +29,24 @@ export default class Svg {
 
   get ancho() {
     return this._ancho
+  }
+
+  set posicion_cursor(v) {
+    this._posicion_cursor = v
+    //this.calcularGrupoVis()
+  }
+
+  get posicion_cursor() {
+    return this._posicion_cursor
+  }
+
+  set globo_visible(v) {
+    this._globo_visible = v
+    //this.calcularGrupoVis()
+  }
+
+  get globo_visible() {
+    return this._globo_visible
   }
 
   set margenes(opciones) {

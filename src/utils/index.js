@@ -1,4 +1,4 @@
-import { ascending, min, range } from 'd3-array'
+import { ascending, max, min, range } from 'd3-array'
 import { axisBottom, axisLeft, axisRight } from 'd3-axis'
 import { select } from 'd3-selection'
 import {
@@ -84,8 +84,15 @@ export function creaEjeVertical(id, escala, angulo, alineacion, ancho) {
     .attr('y1', '0')
     .attr('x2', alineacion === 'izquierda' ? ancho : -ancho)
     .attr('y2', '0')
-    .style('stroke-dasharray', alineacion === 'izquierda' ? '2 2' : '3 4')
-    .style('stroke', '#6F7271')
+    .attr('class', 'vis-linea-ejes')
+  eje_y.selectAll('line.vis-linea-base').remove()
+  eje_y
+    .append('line')
+    .attr('class', 'vis-linea-base')
+    .attr('x1', '0')
+    .attr('y1', max(escala.range()))
+    .attr('x2', alineacion === 'izquierda' ? ancho : -ancho)
+    .attr('y2', max(escala.range()))
   return eje_y
 }
 /**
@@ -123,6 +130,7 @@ export function creaEjeHorizontal(id, escala, angulo) {
     )
   return eje_x
 }
+
 /**
  * formatea eje temporal al espaniol
  * @param {Date} date el id asociado al componente SisdaiGraficas.

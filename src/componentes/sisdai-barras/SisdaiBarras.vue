@@ -111,6 +111,7 @@ const props = defineProps({
     },
   },
 })
+const datos_hover = ref()
 
 const sisdaiBarras = shallowRef()
 const { datos, clave_categorias, variables } = toRefs(props)
@@ -293,11 +294,9 @@ function creaBarras() {
       }
     )
 }
-
 onMounted(() => {
   idGrafica = buscarIdContenedorHtmlSisdai('grafica', sisdaiBarras.value)
   grupoContenedor.value = select('#' + idGrafica + ' svg g.contenedor-barras')
-
   margenesSvg.value = usarRegistroGraficas().grafica(idGrafica).margenes
   watch(
     () => usarRegistroGraficas().grafica(idGrafica).margenes,
@@ -305,7 +304,6 @@ onMounted(() => {
   )
   calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
   creaBarras()
-
   watch(
     () => usarRegistroGraficas().grafica(idGrafica).grupoVis,
     () => {
@@ -323,11 +321,104 @@ onMounted(() => {
     calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
     creaBarras()
   })
+  watch(
+    () => usarRegistroGraficas().grafica(idGrafica).posicion_cursor,
+    nv => {
+      let bandas = escalaBanda.value.step()
+      let indice =
+        nv.x < margenesSvg.value.derecha
+          ? 0
+          : nv.x >=
+            usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho +
+              margenesSvg.value.izquierda
+          ? escalaBanda.value.domain().length - 1
+          : parseInt(
+              (nv.x - margenesSvg.value.derecha - margenesSvg.value.izquierda) /
+                bandas
+            )
+      let categoria = escalaBanda.value.domain()[indice]
+      datos_hover.value = data_apilada.value[0].filter(
+        dd => dd.data[clave_categorias.value] === categoria
+      )[0].data
+
+      grupoContenedor.value
+        .selectAll('g.subcategoria-barras')
+        .selectAll('rect.barra')
+
+        .style('fill-opacity', '.2')
+
+      grupoContenedor.value
+        .selectAll('g.subcategoria-barras')
+        .selectAll('rect.barra')
+        .filter(
+          d =>
+            d.data[clave_categorias.value] ===
+            datos_hover.value[clave_categorias.value]
+        )
+        .style('fill-opacity', '1')
+    },
+    { deep: true }
+  )
+  watch(
+    () => usarRegistroGraficas().grafica(idGrafica).posicion_cursor,
+    nv => {
+      let bandas = escalaBanda.value.step()
+
+      let indice =
+        nv.x < margenesSvg.value.derecha
+          ? 0
+          : nv.x >=
+            usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho +
+              margenesSvg.value.izquierda
+          ? escalaBanda.value.domain().length - 1
+          : parseInt(
+              (nv.x - margenesSvg.value.derecha - margenesSvg.value.izquierda) /
+                bandas
+            )
+      indice =
+        indice === escalaBanda.value.domain().length ? indice - 1 : indice
+      let categoria = escalaBanda.value.domain()[indice]
+      datos_hover.value = data_apilada.value[0].filter(
+        dd => dd.data[clave_categorias.value] === categoria
+      )[0].data
+
+      grupoContenedor.value
+        .selectAll('g.subcategoria-barras')
+        .selectAll('rect.barra')
+
+        .style('fill-opacity', '.2')
+
+      grupoContenedor.value
+        .selectAll('g.subcategoria-barras')
+        .selectAll('rect.barra')
+        .filter(
+          d =>
+            d.data[clave_categorias.value] ===
+            datos_hover.value[clave_categorias.value]
+        )
+        .style('fill-opacity', '1')
+    },
+    { deep: true }
+  )
+  watch(
+    () => usarRegistroGraficas().grafica(idGrafica).globo_visible,
+    nv => {
+      if (!nv) {
+        grupoContenedor.value
+          .selectAll('g.subcategoria-barras')
+          .selectAll('rect.barra')
+
+          .style('fill-opacity', '1')
+      }
+    },
+    { deep: true }
+  )
 })
 defineExpose({
   escalaBanda,
   escalaLineal,
   escalaSubBanda,
+  datos_hover,
 })
 </script>
 

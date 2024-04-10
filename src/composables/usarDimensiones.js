@@ -13,6 +13,14 @@ export default function (idGrafica) {
   const margenes = computed(() => grafica?.margenes)
   const guardarMargenes = _margenes => (grafica.margenes = _margenes)
 
+  const posicion_cursor = computed(() => grafica?.posicion_cursor)
+  const guardaPosicionCursor = _posicion_cursor =>
+    (grafica.posicion_cursor = _posicion_cursor)
+
+  const globo_visible = computed(() => grafica?.globo_visible)
+  const guardarGloboVisible = _globo_visible =>
+    (grafica.globo_visible = _globo_visible)
+
   return {
     alto,
     guardarAlto,
@@ -20,5 +28,9 @@ export default function (idGrafica) {
     guardarAncho,
     margenes,
     guardarMargenes,
+    posicion_cursor,
+    guardaPosicionCursor,
+    globo_visible,
+    guardarGloboVisible,
   }
 }

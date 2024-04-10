@@ -22,6 +22,7 @@ import {
   SisdaiChecks,
   SisdaiDona,
   SisdaiGraficas,
+  SisdaiGraficasGloboInfo,
   SisdaiNomenclatura,
   SisdaiSeriesTiempo,
   SisdaiViolines,
@@ -41,6 +42,7 @@ const plugin = {
     Vue.use(SisdaiAreasApiladasOrdenadas)
     Vue.use(SisdaiViolines)
     Vue.use(SisdaiAlluvial)
+    Vue.use(SisdaiGraficasGloboInfo)
   },
 }
 
@@ -53,6 +55,7 @@ export {
   SisdaiChecks,
   SisdaiDona,
   SisdaiGraficas,
+  SisdaiGraficasGloboInfo,
   SisdaiNomenclatura,
   SisdaiSeriesTiempo,
   SisdaiViolines,

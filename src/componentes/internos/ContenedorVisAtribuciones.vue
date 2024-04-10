@@ -8,6 +8,7 @@
       <img
         src="https://conahcyt.mx/wp-content/uploads/2021/10/logo_conacyt_con_sintagma_azul_completo.svg"
         alt="Conahcyt"
+        class="invertir"
       />
     </a>
 

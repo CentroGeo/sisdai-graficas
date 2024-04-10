@@ -21,7 +21,6 @@ const props = defineProps({
         'abajo' in objeto &&
         'derecha' in objeto &&
         'izquierda' in objeto
-
       if (!validado) {
         console.error('El objeto no cumple con las especificaciones', objeto)
       }
@@ -44,7 +43,8 @@ const props = defineProps({
 const ancho_grafica = ref()
 const alto_grafica = ref()
 const slots = useSlots()
-
+const posicion_cursor = ref({ x: 0, y: 0 })
+const posicion_globo_info = ref({ x: 0, y: 0 })
 usarRegistroGraficas().registrarGrafica(props.id)
 const grafica = () => {
   return usarRegistroGraficas().grafica(props.id)
@@ -54,7 +54,6 @@ grafica().margenes = margenes.value
 watch(margenes, nv => {
   grafica().margenes = nv
 })
-
 const contenedorSisdaiGraficas = ref(null)
 const espacio_eje_y = ref(0),
   espacio_eje_x = ref(0)
@@ -65,6 +64,9 @@ onMounted(() => {
   grupoFondo.value = select(`#${props.id}  g.grupo-fondo`)
   grupoFrente.value = select(`#${props.id}  g.grupo-frente`)
   window.addEventListener('resize', obteniendoDimensiones)
+  if ('globo-informacion' in slots) {
+    siHayGlobo()
+  }
 })
 function obteniendoDimensiones() {
   espacio_eje_y.value = document.querySelector(
@@ -96,6 +98,40 @@ onUnmounted(() => {
 })
 const paneles = ['encabezado', 'izquierda', 'derecha', 'pie']
 
+function siHayGlobo() {
+  let ancho_globo = select(
+    `#${props.id} .contenedor-svg-ejes-tooltip .contenedor-globo-info`
+  ).node().clientWidth
+
+  select(`#${props.id} svg.svg-vis`)
+    .on('mousemove', e => {
+      posicion_cursor.value.x = e.layerX
+
+      posicion_cursor.value.y = e.layerY
+      posicion_globo_info.value.top = e.layerY
+      grafica().posicion_cursor = posicion_cursor.value
+      select(`#${props.id} .contenedor-svg-ejes-tooltip .contenedor-globo-info`)
+        .style(
+          'left',
+          (e.layerX >
+          0.5 *
+            (grafica().ancho +
+              margenes.value.izquierda +
+              margenes.value.derecha)
+            ? e.layerX - ancho_globo + espacio_eje_y.value - 5
+            : e.layerX + espacio_eje_y.value + 5) + 'px'
+        )
+        .style('top', e.layerY + 15 + 'px')
+        .style('visibility', 'visible')
+      grafica().globo_visible = true
+    })
+    .on('mouseout', () => {
+      grafica().globo_visible = false
+      select(
+        `#${props.id} .contenedor-svg-ejes-tooltip .contenedor-globo-info`
+      ).style('visibility', 'hidden')
+    })
+}
 function panelesEnUso() {
   // return !!slots[name]
   return paneles
@@ -133,6 +169,8 @@ function panelesEnUso() {
               : `${grafica().alto + espacio_eje_x}px`,
           }"
         >
+          <slot name="globo-informacion" />
+
           <div
             class="contenedor-titulo-eje-y"
             :style="{
@@ -151,8 +189,10 @@ function panelesEnUso() {
               v-html="titulo_eje_y"
             ></div>
           </div>
+
           <figure :style="{ left: espacio_eje_y + 'px' }">
             <svg
+              class="svg-vis"
               :width="grafica().ancho"
               :height="grafica().alto"
             >

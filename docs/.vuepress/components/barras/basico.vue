@@ -3,6 +3,28 @@
     :titulo_eje_y="'título del eje y'"
     :titulo_eje_x="'título del eje x'"
   >
+    <template #globo-informacion>
+      <SisdaiGraficasGloboInfo :ancho="150">
+        <template>
+          <div>
+            <p>
+              <span
+                class="punto-color m-r-minimo"
+                style="background: pink"
+              ></span
+              >Cantidad 1: {{ lasBarras?.datos_hover?.cantidad_1 }}
+            </p>
+            <p>
+              <span
+                class="punto-color m-r-minimo"
+                style="background: orange"
+              ></span
+              >Cantidad 2: {{ lasBarras?.datos_hover?.cantidad_2 }}
+            </p>
+          </div>
+        </template>
+      </SisdaiGraficasGloboInfo>
+    </template>
     <SisdaiBarras
       :datos="[
         { categoria: 'categoría 1', cantidad_1: 100, cantidad_2: 100 },
@@ -22,6 +44,11 @@
           color: 'orange',
         },
       ]"
+      ref="lasBarras"
     />
   </SisdaiGraficas>
 </template>
+<script setup>
+import { ref } from 'vue'
+const lasBarras = ref()
+</script>
