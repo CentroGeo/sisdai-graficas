@@ -47,6 +47,7 @@ const alto = ref(0)
 const ancho = ref(0)
 var idGrafica
 const sisdaiDona = shallowRef()
+const datos_hover = ref()
 const { datos, clave_cantidad, variables, clave_categoria } = toRefs(props)
 transition
 const margenesSvg = ref({})
@@ -80,103 +81,101 @@ function creaDona() {
   grupoDona.value = grupoContenedor.value
     .selectAll('g.segmento')
     .data(data_pay.value)
-    .join(
-      enter => {
-        var grupo = enter
-          .append('g')
-          .attr('class', 'segmento')
+  grupoDona.value.join(
+    enter => {
+      var grupo = enter
+        .append('g')
+        .attr('class', 'segmento')
+        .attr('fill', d => {
+          return variables.value.filter(
+            dd => dd.id === d.data[clave_categoria.value]
+          )[0].color
+        })
+      grupo
+        .selectAll('path.path-segmento')
+        .data(d => [d])
+        .enter()
+        .append('path')
+        .attr('class', 'path-segmento')
+        .attr('d', arco.value)
+      grupo
+        .selectAll('text.vis-valores-ejes')
+        .data(d => [d])
+        .enter()
+        .append('text')
+        .attr('class', 'vis-valores-ejes')
+        .text(
+          d =>
+            Math.round(
+              (1000 * d.data[clave_cantidad.value]) /
+                sum(data_pay.value.map(d => d.data[clave_cantidad.value]))
+            ) /
+              10 +
+            '%'
+        )
+        .style('text-anchor', d => {
+          var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
+          return midangle < Math.PI ? 'start' : 'end'
+        })
+        .style('dominant-baseline', d => {
+          var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
+          return midangle < 0.5 * Math.PI || midangle > 1.5 * Math.PI
+            ? 'auto'
+            : 'hanging'
+        })
+        .style('font-size', '16px')
+        .style('font-weight', '500')
+        .attr('transform', d => 'translate(' + arco_txt.value.centroid(d) + ')')
+        .style('font-weight', '500')
+    },
+    update => {
+      let grupo = update.call(update1 => {
+        update1
+          .transition()
+          .duration(500)
           .attr('fill', d => {
             return variables.value.filter(
               dd => dd.id === d.data[clave_categoria.value]
             )[0].color
           })
-        grupo
-          .selectAll('path.segmento')
-          .data(d => [d])
-          .enter()
-          .append('path')
-          .attr('class', 'segmento')
-          .attr('d', arco.value)
-        grupo
-          .selectAll('text.segmento')
-          .data(d => [d])
-          .enter()
-          .append('text')
-          .attr('class', 'segmento')
-          .text(
-            d =>
-              Math.round(
-                (1000 * d.data[clave_cantidad.value]) /
-                  sum(data_pay.value.map(d => d.data[clave_cantidad.value]))
-              ) /
-                10 +
-              '%'
-          )
-          .style('text-anchor', d => {
-            var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
-            return midangle < Math.PI ? 'start' : 'end'
-          })
-          .style('dominant-baseline', d => {
-            var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
-            return midangle < 0.5 * Math.PI || midangle > 1.5 * Math.PI
-              ? 'auto'
-              : 'hanging'
-          })
-          .style('fill', '#141414')
+      })
+      grupo
+        .selectAll('path.path-segmento')
+        .data(d => [d])
+        .attr('d', arco.value)
 
-          .style('font-weight', '500')
-      },
-      update => {
-        let grupo = update.call(update1 => {
-          update1
-            .transition()
-            .duration(500)
-            .attr('fill', d => {
-              return variables.value.filter(
-                dd => dd.id === d.data[clave_categoria.value]
-              )[0].color
-            })
+      grupo
+        .selectAll('text.vis-valores-ejes')
+        .data(d => [d])
+        .text(
+          d =>
+            Math.round(
+              (1000 * d.data[clave_cantidad.value]) /
+                sum(data_pay.value.map(d => d.data[clave_cantidad.value]))
+            ) /
+              10 +
+            '%'
+        )
+        .style('font-size', '16px')
+        .style('font-weight', '500')
+        .style('text-anchor', d => {
+          var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
+          return midangle < Math.PI ? 'start' : 'end'
         })
-        grupo
-          .selectAll('path.segmento')
-          .data(d => [d])
-          .attr('d', arco.value)
-
-        grupo
-          .selectAll('text.segmento')
-          .data(d => [d])
-          .text(
-            d =>
-              Math.round(
-                (1000 * d.data[clave_cantidad.value]) /
-                  sum(data_pay.value.map(d => d.data[clave_cantidad.value]))
-              ) /
-                10 +
-              '%'
-          )
-          .style('font-size', '20px')
-          .style('font-weight', '500')
-          .style('text-anchor', d => {
-            var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
-            return midangle < Math.PI ? 'start' : 'end'
-          })
-          .style('dominant-baseline', d => {
-            var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
-            return midangle < 0.5 * Math.PI || midangle > 1.5 * Math.PI
-              ? 'auto'
-              : 'hanging'
-          })
-          .attr(
-            'transform',
-            d => 'translate(' + arco_txt.value.centroid(d) + ')'
-          )
-          .style('fill-opacity', 1)
-          .style('fill', '#141414')
-      },
-      exit => {
-        exit.remove()
-      }
-    )
+        .style('dominant-baseline', d => {
+          var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
+          return midangle < 0.5 * Math.PI || midangle > 1.5 * Math.PI
+            ? 'auto'
+            : 'hanging'
+        })
+        .attr('transform', d => 'translate(' + arco_txt.value.centroid(d) + ')')
+        .attr('class', 'vis-valores-ejes')
+    },
+    exit => {
+      exit.remove()
+    }
+  )
+  console.log(grupoDona.value)
 }
 
 onMounted(() => {
@@ -209,7 +208,38 @@ onMounted(() => {
     calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
     creaDona()
   })
+  watch(
+    () => usarRegistroGraficas().grafica(idGrafica).posicion_cursor,
+    nv => {
+      let x =
+        nv.x - 0.5 * usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho
+      let y =
+        nv.y - 0.5 * usarRegistroGraficas().grafica(idGrafica).grupoVis.alto
+      let ang = Math.atan(y / x) + 0.5 * Math.PI
+      let angulo
+      if (x >= 0) {
+        angulo = ang
+      } else {
+        angulo = ang + Math.PI
+      }
+      grupoDona.value.style('fill-opacity', '.2')
+      var segmento_over = grupoDona.value
+        .filter(d => d.startAngle <= angulo && angulo < d.endAngle)
+        .style('fill-opacity', 1)
+      datos_hover.value = segmento_over.data()[0].data
+    },
+    { deep: true }
+  )
+  watch(
+    () => usarRegistroGraficas().grafica(idGrafica).globo_visible,
+    nv => {
+      if (!nv) {
+        grupoDona.value.style('fill-opacity', '1')
+      }
+    }
+  )
 })
+defineExpose({ datos_hover })
 </script>
 
 <template>

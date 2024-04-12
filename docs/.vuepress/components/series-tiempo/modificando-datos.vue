@@ -41,6 +41,7 @@ watch(visualizando, nv => {
     <template #panel-encabezado-vis>
       <div>
         <button
+          class="boton-chico"
           @click="
             visualizando == 'num_conglomerados_no_acum'
               ? (visualizando = 'num_conglomerados_acum')

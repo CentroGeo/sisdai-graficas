@@ -84,27 +84,28 @@ function modificandoVariables() {
         </p>
 
         <div class="m-b-3 p-x-minimo">
+          <label for="margenes">margen: {{ margen }}</label>
+
           <input
             id="margenes"
             type="range"
             v-model="margen"
           />
-          <label for="margenes">margen: {{ margen }}</label>
         </div>
         <button
-          class="boton-chico"
+          class="boton-chico m-b-1"
           @click="modificandoDatos"
         >
           Modifica datos
         </button>
         <button
-          class="boton-chico"
+          class="boton-chico m-b-1"
           @click="modificandoVariables"
         >
           Modifica variables
         </button>
         <button
-          class="boton-chico"
+          class="boton-chico m-b-1"
           @click="
             acomodo == 'apiladas'
               ? (acomodo = 'agrupadas')

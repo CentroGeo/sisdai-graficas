@@ -46,6 +46,14 @@
       ]"
       ref="lasBarras"
     />
+    <template #panel-pie-vis>
+      <div>
+        <div class="vis-titulo-leyenda">Datos asociados al cursor:</div>
+        <p>
+          {{ lasBarras?.datos_hover }}
+        </p>
+      </div>
+    </template>
   </SisdaiGraficas>
 </template>
 <script setup>

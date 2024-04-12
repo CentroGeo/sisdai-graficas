@@ -29,6 +29,8 @@ const angulo_y = ref(0)
             Ejemplo rotacion de eje horizontal
           </p>
         </div>
+        <label for="angulo-x">ángulo x: {{ angulo_x }}</label>
+
         <input
           id="angulo-x"
           type="range"
@@ -37,7 +39,8 @@ const angulo_y = ref(0)
           max="90"
           step="1"
         />
-        <label for="angulo-x">ángulo x: {{ angulo_x }}</label>
+        <label for="angulo-y">ángulo y: {{ angulo_y }}</label>
+
         <input
           id="angulo-y"
           type="range"
@@ -46,7 +49,6 @@ const angulo_y = ref(0)
           max="90"
           step="1"
         />
-        <label for="angulo-y">ángulo y: {{ angulo_y }}</label>
       </div>
     </template>
     <SisdaiCajasBigotes

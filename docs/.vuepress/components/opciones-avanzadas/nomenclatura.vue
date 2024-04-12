@@ -60,5 +60,11 @@ const variables = ref([
       ]"
       :variables="variables"
     />
+    <template #panel-pie-vis>
+      <div>
+        <div class="vis-titulo-leyenda">Leyenda</div>
+        <SisdaiNomenclatura :variables="variables"></SisdaiNomenclatura>
+      </div>
+    </template>
   </SisdaiGraficas>
 </template>

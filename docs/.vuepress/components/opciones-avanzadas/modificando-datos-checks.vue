@@ -50,7 +50,10 @@ watch(contador, nv => {
     <template #panel-encabezado-vis>
       <div>
         <p class="vis-titulo-visualizacion">Ejemplo de donas</p>
-        <button @click="contador = (contador + 1) % 3">
+        <button
+          class="boton-chico"
+          @click="contador = (contador + 1) % 3"
+        >
           Cambia datos y variables
         </button>
       </div>

@@ -41,12 +41,13 @@ onMounted(() => {
         <p class="vis-instruccional">
           Modifica el margen para ver su efecto en el componente
         </p>
+        <label for="margenes">margen: {{ margen }}</label>
+
         <input
           id="margenes"
           type="range"
           v-model="margen"
         />
-        <label for="margenes">margen: {{ margen }}</label>
       </div>
     </template>
     <rect
