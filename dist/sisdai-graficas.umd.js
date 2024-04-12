@@ -10726,8 +10726,8 @@ const sisdai_checks_plugin = {
   }
 };
 /* harmony default export */ var sisdai_checks = (sisdai_checks_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"778cbd13-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-dona/SisdaiDona.vue?vue&type=template&id=65a9ec1b
-var SisdaiDonavue_type_template_id_65a9ec1b_render = function render() {
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"778cbd13-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-dona/SisdaiDona.vue?vue&type=template&id=673d18dd
+var SisdaiDonavue_type_template_id_673d18dd_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
@@ -10739,7 +10739,7 @@ var SisdaiDonavue_type_template_id_65a9ec1b_render = function render() {
     }
   });
 };
-var SisdaiDonavue_type_template_id_65a9ec1b_staticRenderFns = [];
+var SisdaiDonavue_type_template_id_673d18dd_staticRenderFns = [];
 
 ;// CONCATENATED MODULE: ./node_modules/d3-shape/src/descending.js
 /* harmony default export */ function src_descending(a, b) {
@@ -11236,7 +11236,6 @@ function cornerTangents(x0, y0, x1, y1, r1, rc, cw) {
       }, exit => {
         exit.remove();
       });
-      console.log(grupoDona.value);
     }
     (0,external_commonjs_vue_commonjs2_vue_root_Vue_.onMounted)(() => {
       idGrafica = buscarIdContenedorHtmlSisdai('grafica', sisdaiDona.value);
@@ -11320,8 +11319,8 @@ function cornerTangents(x0, y0, x1, y1, r1, rc, cw) {
 ;
 var SisdaiDona_component = normalizeComponent(
   sisdai_dona_SisdaiDonavue_type_script_setup_true_lang_js,
-  SisdaiDonavue_type_template_id_65a9ec1b_render,
-  SisdaiDonavue_type_template_id_65a9ec1b_staticRenderFns,
+  SisdaiDonavue_type_template_id_673d18dd_render,
+  SisdaiDonavue_type_template_id_673d18dd_staticRenderFns,
   false,
   null,
   null,

@@ -175,7 +175,6 @@ function creaDona() {
       exit.remove()
     }
   )
-  console.log(grupoDona.value)
 }
 
 onMounted(() => {
