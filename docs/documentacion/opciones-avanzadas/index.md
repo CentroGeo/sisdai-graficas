@@ -42,3 +42,9 @@ En este ejemplo se implementa el uso de una función para rotar ejes
 <utils-ejemplo-doc ruta="opciones-avanzadas/rotacion-ejes.vue"/>
 
 <utils-ejemplo-doc ruta="opciones-avanzadas/modificando-datos-checks.vue"/>
+
+## Narrativa
+
+El siguiente ejemplo muestra como se puede combinar el uso de `sisdai-graficas` con `sisdai-componentes` para construir una narrativa. Se recomienda consultar [sisdai-componentes](https://codigo.conahcyt.mx/sisdai/sisdai-componentes) para conocer más sobre el funcionamiento del componente `<SisdaiNarrativa>`
+
+<utils-ejemplo-doc ruta="opciones-avanzadas/narrativa.vue"/>

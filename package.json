@@ -39,7 +39,7 @@
     "raw-loader": "^4.0.2",
     "sass": "^1.57.1",
     "sass-loader": "^10.4.1",
-    "sisdai-componentes": "git+https://codigo.conahcyt.mx/sisdai/sisdai-componentes#v2.10.1",
+    "sisdai-componentes": "git+https://codigo.conahcyt.mx/sisdai/sisdai-componentes#v2.13.0",
     "vue-template-compiler": "^2.7.14",
     "vuepress": "^1.9.8",
     "vuepress-html-webpack-plugin": "^3.2.0",
