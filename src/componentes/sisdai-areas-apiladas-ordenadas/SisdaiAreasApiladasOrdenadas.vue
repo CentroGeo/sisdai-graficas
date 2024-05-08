@@ -1,5 +1,5 @@
 <script setup>
-import { extent, max, min, sum } from 'd3-array'
+import { bisector, extent, max, min, sum } from 'd3-array'
 import { scaleLinear, scaleTime } from 'd3-scale'
 import { select } from 'd3-selection'
 import { stack } from 'd3-shape'
@@ -108,6 +108,9 @@ const grupoContenedor = ref(),
   eje_y = ref()
 const minDeltaTiempo = ref()
 const anchoBanda = ref()
+
+const datos_hover = ref()
+
 function calcularEscalas(grupoVis) {
   if (!grupoVis && grupoVis.ancho === 0) return
   escalaTemporal.value = scaleTime()
@@ -152,13 +155,13 @@ function creaAreas() {
   let ancho_barra =
     escalaTemporal.value(
       new Date(
-        datos_apilados.value[0][0].data.la_fecha.getTime() +
+        datos_apilados.value[0][0]?.data.la_fecha.getTime() +
           0.5 * props.ancho_barra * minDeltaTiempo.value
       )
     ) -
     escalaTemporal.value(
       new Date(
-        datos_apilados.value[0][0].data.la_fecha.getTime() -
+        datos_apilados.value[0][0]?.data.la_fecha.getTime() -
           0.5 * props.ancho_barra * minDeltaTiempo.value
       )
     )
@@ -260,7 +263,7 @@ function creaBarras() {
                 .attr(
                   'x',
                   d =>
-                    escalaTemporal.value(d.data.la_fecha) -
+                    escalaTemporal.value(d?.data.la_fecha) -
                     0.5 * anchoBanda.value
                 )
                 .attr('height', 0)
@@ -288,7 +291,7 @@ function creaBarras() {
                 .attr(
                   'x',
                   d =>
-                    escalaTemporal.value(d.data.la_fecha) -
+                    escalaTemporal.value(d?.data.la_fecha) -
                     0.5 * anchoBanda.value
                 )
                 .attr('width', anchoBanda.value)
@@ -337,10 +340,31 @@ onMounted(() => {
     calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
     creaVis()
   })
+
+  watch(
+    () => usarRegistroGraficas().grafica(idGrafica).posicion_cursor,
+    nv => {
+      let bisecetDate = bisector(d => d.la_fecha).left
+
+      let x0 = escalaTemporal.value.invert(nv.x - margenesSvg.value.izquierda)
+      let indice = bisecetDate(datos.value, x0, 1)
+      let d0 = datos.value[indice - 1]
+      let d1 = datos.value[indice]
+
+      if (!d1) {
+        d1 = d0
+      }
+
+      datos_hover.value = x0 - d0.la_fecha > d1.la_fecha - x0 ? d1 : d0
+      console.log(datos_hover.value)
+    },
+    { deep: true }
+  )
 })
 defineExpose({
   escalaTemporal,
   escalaLineal,
+  datos_hover,
 })
 function generadorAreaBezier(datum) {
   if (datum.length > 2) {
@@ -350,8 +374,7 @@ function generadorAreaBezier(datum) {
     let x_i_mas_1
     for (let i = 0; i < datum.length - 1; i++) {
       //let x00 = escalaTemporal.value(+datum[i-1].data.Year) - escalaTemporal.value.bandwidth() * .5
-      let x_i =
-        escalaTemporal.value(datum[i].data.la_fecha) + 0.0 * anchoBanda.value
+      let x_i = escalaTemporal.value(datum[i].data.la_fecha)
       x_i_mas_1 =
         escalaTemporal.value(datum[i + 1].data.la_fecha) -
         0.5 * anchoBanda.value
@@ -368,24 +391,26 @@ function generadorAreaBezier(datum) {
         ${x_mid} ${y_i_mas_1},
         ${x_i_mas_1} ${y_i_mas_1}H ${x_i_mas_1}`
     }
-    txt += `H ${x_i_mas_1 + anchoBanda.value}`
+    txt += `H ${x_i_mas_1 + 0.5 * anchoBanda.value}`
 
     txt += `V ${escalaLineal.value(datum[datum.length - 1][0])}`
-    txt += `H ${x_i_mas_1 - anchoBanda.value}`
+    txt += `H ${x_i_mas_1 - 0.5 * anchoBanda.value}`
 
     for (let i = datum.length - 1; i > 0; i--) {
       //let x00 = escalaTemporal.value(+datum[i-1].data.Year) - escalaTemporal.value.bandwidth() * .5
       let x_i =
-        escalaTemporal.value(+datum[i].data.la_fecha) + 0.5 * anchoBanda.value
+        escalaTemporal.value(+datum[i].data.la_fecha) - 1 * anchoBanda.value
       let x_i_menos_1 = escalaTemporal.value(+datum[i - 1].data.la_fecha)
-      let x_i_bandwidth_menos_1 = anchoBanda.value + x_i_menos_1
+      let x_i_bandwidth = x_i + 0.5 * anchoBanda.value
+
+      let x_i_bandwidth_menos_1 = +0.5 * anchoBanda.value + x_i_menos_1
 
       let x_mid = 0.5 * (x_i - x_i_bandwidth_menos_1) + x_i_bandwidth_menos_1
 
       let y_i = escalaLineal.value(datum[i][0])
       let y_i_menos_1 = escalaLineal.value(datum[i - 1][0])
 
-      txt += ` C ${x_mid} ${y_i}, ${x_mid} ${y_i_menos_1}, ${x_i_bandwidth_menos_1} ${y_i_menos_1}H ${x_i_menos_1}`
+      txt += `H ${x_i_bandwidth} C ${x_mid} ${y_i}, ${x_mid} ${y_i_menos_1}, ${x_i_bandwidth_menos_1} ${y_i_menos_1}H ${x_i_menos_1}`
     }
 
     return txt

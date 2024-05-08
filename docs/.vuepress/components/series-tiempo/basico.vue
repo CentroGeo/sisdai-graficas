@@ -1,10 +1,24 @@
+<script setup>
+import { ref } from 'vue'
+const laSerie = ref()
+</script>
 <template>
   <SisdaiGraficas
     :titulo_eje_y="'título del eje y'"
     :titulo_eje_x="'título del eje x'"
     :margenes="{ arriba: 30, abajo: 70, derecha: 30, izquierda: 40 }"
   >
+    <template #globo-informacion>
+      <SisdaiGraficasGloboInfo :ancho="200">
+        <template>
+          <div>
+            <p>Cantidad 1: {{ laSerie?.datos_hover?.cantidad_1 }}</p>
+          </div>
+        </template>
+      </SisdaiGraficasGloboInfo>
+    </template>
     <SisdaiSeriesTiempo
+      ref="laSerie"
       :datos="[
         { fecha: '01-01-2015', cantidad_1: 100, cantidad_2: 10 },
         { fecha: '01-01-2016', cantidad_1: 80, cantidad_2: 20 },

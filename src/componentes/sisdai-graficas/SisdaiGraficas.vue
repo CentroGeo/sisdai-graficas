@@ -123,6 +123,28 @@ function siHayGlobo() {
         )
         .style('top', e.layerY + 15 + 'px')
         .style('visibility', 'visible')
+
+      grafica().globo_visible = true
+    })
+    .on('click', e => {
+      posicion_cursor.value.x = e.layerX
+
+      posicion_cursor.value.y = e.layerY
+      posicion_globo_info.value.top = e.layerY
+      grafica().posicion_cursor = posicion_cursor.value
+      select(`#${props.id} .contenedor-svg-ejes-tooltip .contenedor-globo-info`)
+        .style(
+          'left',
+          (e.layerX >
+          0.5 *
+            (grafica().ancho +
+              margenes.value.izquierda +
+              margenes.value.derecha)
+            ? e.layerX - ancho_globo + espacio_eje_y.value - 5
+            : e.layerX + espacio_eje_y.value + 5) + 'px'
+        )
+        .style('top', e.layerY + 15 + 'px')
+        .style('visibility', 'visible')
       grafica().globo_visible = true
     })
     .on('mouseout', () => {

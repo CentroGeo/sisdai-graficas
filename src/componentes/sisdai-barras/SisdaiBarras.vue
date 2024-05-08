@@ -146,7 +146,18 @@ function calcularEscalas(grupoVis) {
     .range([0, escalaBanda.value.bandwidth()])
     .padding(props.separacion_agrupadas)
 
-  creaEjeHorizontal(idGrafica, escalaBanda.value, props.angulo_etiquetas_eje_x)
+  let eje_horizontal = creaEjeHorizontal(
+    idGrafica,
+    escalaBanda.value,
+    props.angulo_etiquetas_eje_x
+  )
+  eje_horizontal
+    .selectAll('text')
+    .interrupt()
+    .html(d => {
+      console.log(d)
+      return d
+    })
 
   creaEjeVertical(
     idGrafica,
