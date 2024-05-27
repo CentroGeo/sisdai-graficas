@@ -26,7 +26,7 @@ defineExpose({ variables_activas })
 </script>
 <template>
   <div class="contenedor-nomenclatura">
-    <span
+    <p
       class="vis-nomenclatura"
       v-for="variable in variables"
       :key="variable.id"
@@ -36,7 +36,7 @@ defineExpose({ variables_activas })
         :style="{ background: variable.color }"
       ></span>
       <span :for="variable.id">{{ variable.nombre }}</span>
-    </span>
+    </p>
   </div>
 </template>
 <style>

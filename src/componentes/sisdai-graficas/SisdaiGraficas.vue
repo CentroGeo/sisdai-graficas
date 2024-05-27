@@ -165,7 +165,7 @@ function panelesEnUso() {
 <template>
   <div
     :sisdai-grafica="id"
-    class="contenedor-vis borde-redondeado-8 contenedor-sisdai-graficas"
+    class="contenedor-vis contenedor-sisdai-graficas"
     :id="id"
   >
     <div
