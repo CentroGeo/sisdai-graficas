@@ -8,17 +8,18 @@ const contenedorGlobo = ref()
 <template>
   <div
     ref="contenedorGlobo"
-    class="contenedor-globo-info"
+    class="globo-informacion globo-informacion-extra"
+    role="tooltip"
     :style="{
       width: props.ancho + 'px',
     }"
   >
-    <div class="cuerpo-globo-info">
-      <slot></slot>
-    </div>
-    <button class="boton-icono boton-chico boton-cerrar no-visible-esc">
+    <slot></slot>
+    <button
+      class="boton-pictograma boton-sin-contenedor-secundario globo-informacion-cerrar no-visible-esc"
+    >
       <span
-        class="icono-cerrar"
+        class="pictograma-cerrar"
         aria-hidden="true"
       ></span>
       <span class="a11y-solo-lectura">Cerrar.</span>
@@ -26,7 +27,7 @@ const contenedorGlobo = ref()
   </div>
 </template>
 <style land="scss" scoped>
-.contenedor-globo-info {
+.globo-informacion {
   position: absolute;
   visibility: hidden;
 }

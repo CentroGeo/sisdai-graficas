@@ -100,7 +100,7 @@ const paneles = ['encabezado', 'izquierda', 'derecha', 'pie']
 
 function siHayGlobo() {
   let ancho_globo = select(
-    `#${props.id} .contenedor-svg-ejes-tooltip .contenedor-globo-info`
+    `#${props.id} .contenedor-svg-ejes-tooltip .globo-informacion`
   ).node().clientWidth
 
   select(`#${props.id} svg.svg-vis`)
@@ -110,7 +110,7 @@ function siHayGlobo() {
       posicion_cursor.value.y = e.layerY
       posicion_globo_info.value.top = e.layerY
       grafica().posicion_cursor = posicion_cursor.value
-      select(`#${props.id} .contenedor-svg-ejes-tooltip .contenedor-globo-info`)
+      select(`#${props.id} .contenedor-svg-ejes-tooltip .globo-informacion`)
         .style(
           'left',
           (e.layerX >
@@ -132,7 +132,7 @@ function siHayGlobo() {
       posicion_cursor.value.y = e.layerY
       posicion_globo_info.value.top = e.layerY
       grafica().posicion_cursor = posicion_cursor.value
-      select(`#${props.id} .contenedor-svg-ejes-tooltip .contenedor-globo-info`)
+      select(`#${props.id} .contenedor-svg-ejes-tooltip .globo-informacion`)
         .style(
           'left',
           (e.layerX >
@@ -150,7 +150,7 @@ function siHayGlobo() {
     .on('mouseout', () => {
       grafica().globo_visible = false
       select(
-        `#${props.id} .contenedor-svg-ejes-tooltip .contenedor-globo-info`
+        `#${props.id} .contenedor-svg-ejes-tooltip .globo-informacion`
       ).style('visibility', 'hidden')
     })
 }
@@ -165,6 +165,7 @@ function panelesEnUso() {
 <template>
   <div
     :sisdai-grafica="id"
+    style="--contenedor-vis-alto-menus: auto"
     class="contenedor-vis contenedor-sisdai-graficas"
     :id="id"
   >

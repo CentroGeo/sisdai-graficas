@@ -88,7 +88,7 @@ watch(
               <div>
                 <p>
                   <span
-                    class="punto-color m-r-minimo"
+                    class="globo-informacion-punto-color"
                     :style="{
                       background: variables.filter(
                         d => d.id === laDona?.datos_hover?.categoria

@@ -9,14 +9,14 @@
           <div>
             <p>
               <span
-                class="punto-color m-r-minimo"
+                class="globo-informacion-punto-color"
                 style="background: pink"
               ></span
               >Cantidad 1: {{ lasBarras?.datos_hover?.cantidad_1 }}
             </p>
             <p>
               <span
-                class="punto-color m-r-minimo"
+                class="globo-informacion-punto-color"
                 style="background: orange"
               ></span
               >Cantidad 2: {{ lasBarras?.datos_hover?.cantidad_2 }}
