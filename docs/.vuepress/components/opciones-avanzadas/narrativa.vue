@@ -85,20 +85,18 @@ watch(
         <template #globo-informacion>
           <SisdaiGraficasGloboInfo :ancho="200">
             <template>
-              <div>
-                <p>
-                  <span
-                    class="globo-informacion-punto-color"
-                    :style="{
-                      background: variables.filter(
-                        d => d.id === laDona?.datos_hover?.categoria
-                      )[0]?.color,
-                    }"
-                  ></span
-                  >{{ laDona?.datos_hover?.categoria }}:
-                  {{ laDona?.datos_hover?.cantidad }}
-                </p>
-              </div>
+              <p>
+                <span
+                  class="globo-informacion-punto-color"
+                  :style="{
+                    background: variables.filter(
+                      d => d.id === laDona?.datos_hover?.categoria
+                    )[0]?.color,
+                  }"
+                ></span>
+                {{ laDona?.datos_hover?.categoria }}:
+                {{ laDona?.datos_hover?.cantidad }}
+              </p>
             </template>
           </SisdaiGraficasGloboInfo>
         </template>
