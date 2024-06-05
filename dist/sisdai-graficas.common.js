@@ -1209,10 +1209,10 @@ var SHARED = '__core-js_shared__';
 var store = module.exports = globalThis[SHARED] || defineGlobalProperty(SHARED, {});
 
 (store.versions || (store.versions = [])).push({
-  version: '3.36.1',
+  version: '3.37.1',
   mode: IS_PURE ? 'pure' : 'global',
   copyright: '© 2014-2024 Denis Pushkarev (zloirock.ru)',
-  license: 'https://github.com/zloirock/core-js/blob/v3.36.1/LICENSE',
+  license: 'https://github.com/zloirock/core-js/blob/v3.37.1/LICENSE',
   source: 'https://github.com/zloirock/core-js'
 });
 
@@ -1642,7 +1642,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"778cbd13-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-alluvial/SisdaiAlluvial.vue?vue&type=template&id=7c1a303d
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8a733e28-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-alluvial/SisdaiAlluvial.vue?vue&type=template&id=7c1a303d
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c,
@@ -5728,6 +5728,7 @@ function _typeof(o) {
     return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
   }, _typeof(o);
 }
+
 ;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/toPrimitive.js
 
 function toPrimitive(t, r) {
@@ -5740,6 +5741,7 @@ function toPrimitive(t, r) {
   }
   return ("string" === r ? String : Number)(t);
 }
+
 ;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/toPropertyKey.js
 
 
@@ -5747,22 +5749,18 @@ function toPropertyKey(t) {
   var i = toPrimitive(t, "string");
   return "symbol" == _typeof(i) ? i : i + "";
 }
+
 ;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/defineProperty.js
 
-function _defineProperty(obj, key, value) {
-  key = toPropertyKey(key);
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
+function _defineProperty(e, r, t) {
+  return (r = toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+    value: t,
+    enumerable: !0,
+    configurable: !0,
+    writable: !0
+  }) : e[r] = t, e;
 }
+
 ;// CONCATENATED MODULE: ./src/clases/ResgistroObjetos.js
 
 /**
@@ -7375,7 +7373,7 @@ function multiFormat(date) {
   let formatDay = locale.format('%a %d');
   let formatWeek = locale.format('%b %d');
   //let formatMonth = locale.format('%b')
-  let formatMonthYear = locale.format('%b/%Y');
+  let formatMonthYear = locale.format('%Y');
   //let formatYear = locale.format('%Y')
   return (second(date) < date ? formatMillisecond : timeMinute(date) < date ? formatSecond : timeHour(date) < date ? formatMinute : timeDay(date) < date ? formatHour : timeMonth(date) < date ? timeSunday(date) < date ? formatDay : formatWeek : timeYear(date) < date ? formatMonthYear : formatMonthYear)(date);
 }
@@ -7801,7 +7799,7 @@ const sisdai_alluvial_plugin = {
   }
 };
 /* harmony default export */ var sisdai_alluvial = (sisdai_alluvial_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"778cbd13-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-areas-apiladas/SisdaiAreasApiladas.vue?vue&type=template&id=2f22ad52
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8a733e28-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-areas-apiladas/SisdaiAreasApiladas.vue?vue&type=template&id=2f22ad52
 var SisdaiAreasApiladasvue_type_template_id_2f22ad52_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
@@ -9318,8 +9316,8 @@ const sisdai_areas_apiladas_plugin = {
   }
 };
 /* harmony default export */ var sisdai_areas_apiladas = (sisdai_areas_apiladas_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"778cbd13-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-areas-apiladas-ordenadas/SisdaiAreasApiladasOrdenadas.vue?vue&type=template&id=4d4bef50
-var SisdaiAreasApiladasOrdenadasvue_type_template_id_4d4bef50_render = function render() {
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8a733e28-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-areas-apiladas-ordenadas/SisdaiAreasApiladasOrdenadas.vue?vue&type=template&id=9ecb3fc4
+var SisdaiAreasApiladasOrdenadasvue_type_template_id_9ecb3fc4_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
@@ -9331,7 +9329,7 @@ var SisdaiAreasApiladasOrdenadasvue_type_template_id_4d4bef50_render = function 
     }
   });
 };
-var SisdaiAreasApiladasOrdenadasvue_type_template_id_4d4bef50_staticRenderFns = [];
+var SisdaiAreasApiladasOrdenadasvue_type_template_id_9ecb3fc4_staticRenderFns = [];
 
 ;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-areas-apiladas-ordenadas/SisdaiAreasApiladasOrdenadas.vue?vue&type=script&setup=true&lang=js
 
@@ -9444,6 +9442,7 @@ var SisdaiAreasApiladasOrdenadasvue_type_template_id_4d4bef50_staticRenderFns = 
       eje_y = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)();
     const minDeltaTiempo = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)();
     const anchoBanda = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)();
+    const datos_hover = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)();
     function calcularEscalas(grupoVis) {
       if (!grupoVis && grupoVis.ancho === 0) return;
       escalaTemporal.value = time().domain(extent(datos.value?.map(d => d.la_fecha))).range([0, grupoVis.ancho]);
@@ -9457,7 +9456,7 @@ var SisdaiAreasApiladasOrdenadasvue_type_template_id_4d4bef50_staticRenderFns = 
       datos.value.forEach(d => d.la_fecha = conversionTemporal(d[clave_fecha.value]));
       datos_apilados.value = stack().keys(variables.value.map(d => d.id))(datos.value);
       datos_apilados.value = reordenamientoApilado(datos_apilados.value);
-      let ancho_barra = escalaTemporal.value(new Date(datos_apilados.value[0][0].data.la_fecha.getTime() + 0.5 * props.ancho_barra * minDeltaTiempo.value)) - escalaTemporal.value(new Date(datos_apilados.value[0][0].data.la_fecha.getTime() - 0.5 * props.ancho_barra * minDeltaTiempo.value));
+      let ancho_barra = escalaTemporal.value(new Date(datos_apilados.value[0][0]?.data.la_fecha.getTime() + 0.5 * props.ancho_barra * minDeltaTiempo.value)) - escalaTemporal.value(new Date(datos_apilados.value[0][0]?.data.la_fecha.getTime() - 0.5 * props.ancho_barra * minDeltaTiempo.value));
       anchoBanda.value = ancho_barra > 20 ? 20 : ancho_barra;
       eje_y.value.selectAll('text').attr('x', -0.5 * anchoBanda.value);
       grupoAreas.value = grupoContenedor.value.selectAll('path.area').data(datos_apilados.value).join(enter => {
@@ -9479,9 +9478,9 @@ var SisdaiAreasApiladasOrdenadasvue_type_template_id_4d4bef50_staticRenderFns = 
       }, update => {
         let grupo = update.call(update1 => update1.transition().duration(500).attr('fill', d => variables.value.filter(v => v.id === d.key)[0].color));
         grupo.selectAll('rect.barra').data(d => d).join(barras_enter => {
-          barras_enter.append('rect').attr('class', `barra`).attr('y', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto).attr('x', d => escalaTemporal.value(d.data.la_fecha) - 0.5 * anchoBanda.value).attr('height', 0).attr('width', anchoBanda.value).transition().duration(500).attr('y', d => escalaLineal.value(d[1])).attr('height', d => escalaLineal.value(d[0]) - escalaLineal.value(d[1]) < 0 ? 0 : escalaLineal.value(d[0]) - escalaLineal.value(d[1]));
+          barras_enter.append('rect').attr('class', `barra`).attr('y', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto).attr('x', d => escalaTemporal.value(d?.data.la_fecha) - 0.5 * anchoBanda.value).attr('height', 0).attr('width', anchoBanda.value).transition().duration(500).attr('y', d => escalaLineal.value(d[1])).attr('height', d => escalaLineal.value(d[0]) - escalaLineal.value(d[1]) < 0 ? 0 : escalaLineal.value(d[0]) - escalaLineal.value(d[1]));
         }, barras_update => {
-          barras_update.transition().duration(500).attr('y', d => escalaLineal.value(d[1])).attr('height', d => escalaLineal.value(d[0]) - escalaLineal.value(d[1]) < 0 ? 0 : escalaLineal.value(d[0]) - escalaLineal.value(d[1])).attr('x', d => escalaTemporal.value(d.data.la_fecha) - 0.5 * anchoBanda.value).attr('width', anchoBanda.value);
+          barras_update.transition().duration(500).attr('y', d => escalaLineal.value(d[1])).attr('height', d => escalaLineal.value(d[0]) - escalaLineal.value(d[1]) < 0 ? 0 : escalaLineal.value(d[0]) - escalaLineal.value(d[1])).attr('x', d => escalaTemporal.value(d?.data.la_fecha) - 0.5 * anchoBanda.value).attr('width', anchoBanda.value);
         }, barras_exit => barras_exit.remove());
       }, exit => {
         exit.remove();
@@ -9510,10 +9509,25 @@ var SisdaiAreasApiladasOrdenadasvue_type_template_id_4d4bef50_staticRenderFns = 
         calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis);
         creaVis();
       });
+      (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(() => usarRegistroGraficas().grafica(idGrafica).posicion_cursor, nv => {
+        let bisecetDate = bisector(d => d.la_fecha).left;
+        let x0 = escalaTemporal.value.invert(nv.x - margenesSvg.value.izquierda);
+        let indice = bisecetDate(datos.value, x0, 1);
+        let d0 = datos.value[indice - 1];
+        let d1 = datos.value[indice];
+        if (!d1) {
+          d1 = d0;
+        }
+        datos_hover.value = x0 - d0.la_fecha > d1.la_fecha - x0 ? d1 : d0;
+        console.log(datos_hover.value);
+      }, {
+        deep: true
+      });
     });
     expose({
       escalaTemporal,
-      escalaLineal
+      escalaLineal,
+      datos_hover
     });
     function generadorAreaBezier(datum) {
       if (datum.length > 2) {
@@ -9521,7 +9535,7 @@ var SisdaiAreasApiladasOrdenadasvue_type_template_id_4d4bef50_staticRenderFns = 
         let x_i_mas_1;
         for (let i = 0; i < datum.length - 1; i++) {
           //let x00 = escalaTemporal.value(+datum[i-1].data.Year) - escalaTemporal.value.bandwidth() * .5
-          let x_i = escalaTemporal.value(datum[i].data.la_fecha) + 0.0 * anchoBanda.value;
+          let x_i = escalaTemporal.value(datum[i].data.la_fecha);
           x_i_mas_1 = escalaTemporal.value(datum[i + 1].data.la_fecha) - 0.5 * anchoBanda.value;
 
           //escalaTemporal.value(+datum[i + 1].datala_fecha)
@@ -9534,18 +9548,19 @@ var SisdaiAreasApiladasOrdenadasvue_type_template_id_4d4bef50_staticRenderFns = 
         ${x_mid} ${y_i_mas_1},
         ${x_i_mas_1} ${y_i_mas_1}H ${x_i_mas_1}`;
         }
-        txt += `H ${x_i_mas_1 + anchoBanda.value}`;
+        txt += `H ${x_i_mas_1 + 0.5 * anchoBanda.value}`;
         txt += `V ${escalaLineal.value(datum[datum.length - 1][0])}`;
-        txt += `H ${x_i_mas_1 - anchoBanda.value}`;
+        txt += `H ${x_i_mas_1 - 0.5 * anchoBanda.value}`;
         for (let i = datum.length - 1; i > 0; i--) {
           //let x00 = escalaTemporal.value(+datum[i-1].data.Year) - escalaTemporal.value.bandwidth() * .5
-          let x_i = escalaTemporal.value(+datum[i].data.la_fecha) + 0.5 * anchoBanda.value;
+          let x_i = escalaTemporal.value(+datum[i].data.la_fecha) - 1 * anchoBanda.value;
           let x_i_menos_1 = escalaTemporal.value(+datum[i - 1].data.la_fecha);
-          let x_i_bandwidth_menos_1 = anchoBanda.value + x_i_menos_1;
+          let x_i_bandwidth = x_i + 0.5 * anchoBanda.value;
+          let x_i_bandwidth_menos_1 = +0.5 * anchoBanda.value + x_i_menos_1;
           let x_mid = 0.5 * (x_i - x_i_bandwidth_menos_1) + x_i_bandwidth_menos_1;
           let y_i = escalaLineal.value(datum[i][0]);
           let y_i_menos_1 = escalaLineal.value(datum[i - 1][0]);
-          txt += ` C ${x_mid} ${y_i}, ${x_mid} ${y_i_menos_1}, ${x_i_bandwidth_menos_1} ${y_i_menos_1}H ${x_i_menos_1}`;
+          txt += `H ${x_i_bandwidth} C ${x_mid} ${y_i}, ${x_mid} ${y_i_menos_1}, ${x_i_bandwidth_menos_1} ${y_i_menos_1}H ${x_i_menos_1}`;
         }
         return txt;
       }
@@ -9569,6 +9584,7 @@ var SisdaiAreasApiladasOrdenadasvue_type_template_id_4d4bef50_staticRenderFns = 
       eje_y,
       minDeltaTiempo,
       anchoBanda,
+      datos_hover,
       calcularEscalas,
       creaAreas,
       creaVis,
@@ -9589,8 +9605,8 @@ var SisdaiAreasApiladasOrdenadasvue_type_template_id_4d4bef50_staticRenderFns = 
 ;
 var SisdaiAreasApiladasOrdenadas_component = normalizeComponent(
   sisdai_areas_apiladas_ordenadas_SisdaiAreasApiladasOrdenadasvue_type_script_setup_true_lang_js,
-  SisdaiAreasApiladasOrdenadasvue_type_template_id_4d4bef50_render,
-  SisdaiAreasApiladasOrdenadasvue_type_template_id_4d4bef50_staticRenderFns,
+  SisdaiAreasApiladasOrdenadasvue_type_template_id_9ecb3fc4_render,
+  SisdaiAreasApiladasOrdenadasvue_type_template_id_9ecb3fc4_staticRenderFns,
   false,
   null,
   null,
@@ -9607,8 +9623,8 @@ const sisdai_areas_apiladas_ordenadas_plugin = {
   }
 };
 /* harmony default export */ var sisdai_areas_apiladas_ordenadas = (sisdai_areas_apiladas_ordenadas_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"778cbd13-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-barras/SisdaiBarras.vue?vue&type=template&id=02c76c8e
-var SisdaiBarrasvue_type_template_id_02c76c8e_render = function render() {
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8a733e28-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-barras/SisdaiBarras.vue?vue&type=template&id=f09b6d22
+var SisdaiBarrasvue_type_template_id_f09b6d22_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
@@ -9620,7 +9636,7 @@ var SisdaiBarrasvue_type_template_id_02c76c8e_render = function render() {
     }
   });
 };
-var SisdaiBarrasvue_type_template_id_02c76c8e_staticRenderFns = [];
+var SisdaiBarrasvue_type_template_id_f09b6d22_staticRenderFns = [];
 
 ;// CONCATENATED MODULE: ./node_modules/internmap/src/index.js
 class InternMap extends Map {
@@ -9966,7 +9982,11 @@ function point() {
       escalaBanda.value = band().domain(datos.value?.map(d => d[clave_categorias.value])).range([0, grupoVis.ancho]).padding(props.separacion);
       escalaLineal.value = linear_linear().domain([0, props.acomodo === 'apiladas' ? max_max(datos.value?.map(d => sum_sum(variables.value.map(dd => d[dd.id])))) : max_max(datos.value?.map(d => max_max(variables.value.map(dd => d[dd.id]))))]).range([grupoVis.alto, 0]);
       escalaSubBanda.value = band().domain(variables.value.map(d => d.id)).range([0, escalaBanda.value.bandwidth()]).padding(props.separacion_agrupadas);
-      creaEjeHorizontal(idGrafica, escalaBanda.value, props.angulo_etiquetas_eje_x);
+      let eje_horizontal = creaEjeHorizontal(idGrafica, escalaBanda.value, props.angulo_etiquetas_eje_x);
+      eje_horizontal.selectAll('text').interrupt().html(d => {
+        console.log(d);
+        return d;
+      });
       creaEjeVertical(idGrafica, escalaLineal.value, props.angulo_etiquetas_eje_y, props.alineacion_eje_y, grupoVis.ancho);
     }
     function creaBarras() {
@@ -10077,8 +10097,8 @@ function point() {
 ;
 var SisdaiBarras_component = normalizeComponent(
   sisdai_barras_SisdaiBarrasvue_type_script_setup_true_lang_js,
-  SisdaiBarrasvue_type_template_id_02c76c8e_render,
-  SisdaiBarrasvue_type_template_id_02c76c8e_staticRenderFns,
+  SisdaiBarrasvue_type_template_id_f09b6d22_render,
+  SisdaiBarrasvue_type_template_id_f09b6d22_staticRenderFns,
   false,
   null,
   null,
@@ -10095,7 +10115,7 @@ const sisdai_barras_plugin = {
   }
 };
 /* harmony default export */ var sisdai_barras = (sisdai_barras_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"778cbd13-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-cajas-bigotes/SisdaiCajasBigotes.vue?vue&type=template&id=4f4ac904
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8a733e28-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-cajas-bigotes/SisdaiCajasBigotes.vue?vue&type=template&id=4f4ac904
 var SisdaiCajasBigotesvue_type_template_id_4f4ac904_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
@@ -10571,7 +10591,7 @@ const sisdai_cajas_bigotes_plugin = {
   }
 };
 /* harmony default export */ var sisdai_cajas_bigotes = (sisdai_cajas_bigotes_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"778cbd13-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-checks/SisdaiChecks.vue?vue&type=template&id=28f6bfae
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8a733e28-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-checks/SisdaiChecks.vue?vue&type=template&id=28f6bfae
 var SisdaiChecksvue_type_template_id_28f6bfae_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
@@ -10709,7 +10729,7 @@ const sisdai_checks_plugin = {
   }
 };
 /* harmony default export */ var sisdai_checks = (sisdai_checks_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"778cbd13-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-dona/SisdaiDona.vue?vue&type=template&id=673d18dd
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8a733e28-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-dona/SisdaiDona.vue?vue&type=template&id=673d18dd
 var SisdaiDonavue_type_template_id_673d18dd_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
@@ -11320,13 +11340,16 @@ const sisdai_dona_plugin = {
   }
 };
 /* harmony default export */ var sisdai_dona = (sisdai_dona_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"778cbd13-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas/SisdaiGraficas.vue?vue&type=template&id=caeb955e&scoped=true
-var SisdaiGraficasvue_type_template_id_caeb955e_scoped_true_render = function render() {
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8a733e28-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas/SisdaiGraficas.vue?vue&type=template&id=509e6edd
+var SisdaiGraficasvue_type_template_id_509e6edd_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
   return _c('div', {
     staticClass: "contenedor-vis borde-redondeado-8 contenedor-sisdai-graficas",
+    staticStyle: {
+      "--contenedor-vis-alto-maximo": "auto"
+    },
     attrs: {
       "sisdai-grafica": _vm.id,
       "id": _vm.id
@@ -11413,42 +11436,17 @@ var SisdaiGraficasvue_type_template_id_caeb955e_scoped_true_render = function re
     staticClass: "panel-pie-vis"
   }, [_vm._t("panel-pie-vis")], 2)]), _c(_setup.ContenedorVisAtribuciones)], 1);
 };
-var SisdaiGraficasvue_type_template_id_caeb955e_scoped_true_staticRenderFns = [];
+var SisdaiGraficasvue_type_template_id_509e6edd_staticRenderFns = [];
 
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"778cbd13-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/internos/ContenedorVisAtribuciones.vue?vue&type=template&id=067256ac
-var ContenedorVisAtribucionesvue_type_template_id_067256ac_render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _vm._m(0);
-};
-var ContenedorVisAtribucionesvue_type_template_id_067256ac_staticRenderFns = [function () {
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8a733e28-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/internos/ContenedorVisAtribuciones.vue?vue&type=template&id=3f61fd8c
+var ContenedorVisAtribucionesvue_type_template_id_3f61fd8c_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
     staticClass: "contenedor-vis-atribuciones borde-t borde-color-3"
-  }, [_c('a', {
-    staticClass: "logo-conacyt atribucion-conahcyt",
-    attrs: {
-      "href": "https://conahcyt.mx/",
-      "target": "_blank"
-    }
-  }, [_c('img', {
-    staticClass: "invertir",
-    attrs: {
-      "src": "https://conahcyt.mx/wp-content/uploads/2021/10/logo_conacyt_con_sintagma_azul_completo.svg",
-      "alt": "Conahcyt"
-    }
-  })]), _c('a', {
-    staticClass: "atribucion-sisdai",
-    attrs: {
-      "href": "https://sisdai.conahcyt.mx/",
-      "target": "_blank",
-      "rel": "noopener noreferrer"
-    }
-  }, [_vm._v(" Sisdai ")])]);
-}];
-
-;// CONCATENATED MODULE: ./src/componentes/internos/ContenedorVisAtribuciones.vue?vue&type=template&id=067256ac
+  });
+};
+var ContenedorVisAtribucionesvue_type_template_id_3f61fd8c_staticRenderFns = [];
 
 ;// CONCATENATED MODULE: ./src/componentes/internos/ContenedorVisAtribuciones.vue
 
@@ -11459,8 +11457,8 @@ var script = {}
 ;
 var ContenedorVisAtribuciones_component = normalizeComponent(
   script,
-  ContenedorVisAtribucionesvue_type_template_id_067256ac_render,
-  ContenedorVisAtribucionesvue_type_template_id_067256ac_staticRenderFns,
+  ContenedorVisAtribucionesvue_type_template_id_3f61fd8c_render,
+  ContenedorVisAtribucionesvue_type_template_id_3f61fd8c_staticRenderFns,
   false,
   null,
   null,
@@ -11577,6 +11575,13 @@ var ContenedorVisAtribuciones_component = normalizeComponent(
         grafica().posicion_cursor = posicion_cursor.value;
         src_select(`#${props.id} .contenedor-svg-ejes-tooltip .contenedor-globo-info`).style('left', (e.layerX > 0.5 * (grafica().ancho + margenes.value.izquierda + margenes.value.derecha) ? e.layerX - ancho_globo + espacio_eje_y.value - 5 : e.layerX + espacio_eje_y.value + 5) + 'px').style('top', e.layerY + 15 + 'px').style('visibility', 'visible');
         grafica().globo_visible = true;
+      }).on('click', e => {
+        posicion_cursor.value.x = e.layerX;
+        posicion_cursor.value.y = e.layerY;
+        posicion_globo_info.value.top = e.layerY;
+        grafica().posicion_cursor = posicion_cursor.value;
+        src_select(`#${props.id} .contenedor-svg-ejes-tooltip .contenedor-globo-info`).style('left', (e.layerX > 0.5 * (grafica().ancho + margenes.value.izquierda + margenes.value.derecha) ? e.layerX - ancho_globo + espacio_eje_y.value - 5 : e.layerX + espacio_eje_y.value + 5) + 'px').style('top', e.layerY + 15 + 'px').style('visibility', 'visible');
+        grafica().globo_visible = true;
       }).on('mouseout', () => {
         grafica().globo_visible = false;
         src_select(`#${props.id} .contenedor-svg-ejes-tooltip .contenedor-globo-info`).style('visibility', 'hidden');
@@ -11611,27 +11616,21 @@ var ContenedorVisAtribuciones_component = normalizeComponent(
 });
 ;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas/SisdaiGraficas.vue?vue&type=script&setup=true&lang=js
  /* harmony default export */ var sisdai_graficas_SisdaiGraficasvue_type_script_setup_true_lang_js = (SisdaiGraficasvue_type_script_setup_true_lang_js); 
-;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-22.use[0]!./node_modules/@vue/cli-service/node_modules/css-loader/dist/cjs.js??clonedRuleSet-22.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-22.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22.use[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas/SisdaiGraficas.vue?vue&type=style&index=0&id=caeb955e&prod&scoped=true&lang=scss
-// extracted by mini-css-extract-plugin
-
-;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas/SisdaiGraficas.vue?vue&type=style&index=0&id=caeb955e&prod&scoped=true&lang=scss
-
 ;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas/SisdaiGraficas.vue
 
 
 
-;
 
 
 /* normalize component */
-
+;
 var SisdaiGraficas_component = normalizeComponent(
   sisdai_graficas_SisdaiGraficasvue_type_script_setup_true_lang_js,
-  SisdaiGraficasvue_type_template_id_caeb955e_scoped_true_render,
-  SisdaiGraficasvue_type_template_id_caeb955e_scoped_true_staticRenderFns,
+  SisdaiGraficasvue_type_template_id_509e6edd_render,
+  SisdaiGraficasvue_type_template_id_509e6edd_staticRenderFns,
   false,
   null,
-  "caeb955e",
+  null,
   null
   
 )
@@ -11645,26 +11644,30 @@ const sisdai_graficas_plugin = {
   }
 };
 /* harmony default export */ var sisdai_graficas = (sisdai_graficas_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"778cbd13-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=template&id=04fd5132&scoped=true
-var SisdaiGraficasGloboInfovue_type_template_id_04fd5132_scoped_true_render = function render() {
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8a733e28-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=template&id=2b08ae68&scoped=true
+var SisdaiGraficasGloboInfovue_type_template_id_2b08ae68_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
   return _c('div', {
+    ref: "contenedorGlobo",
     staticClass: "contenedor-globo-info",
+    staticStyle: {
+      "position": "absolute"
+    },
     style: {
-      width: _setup.props.ancho + 'px',
-      visibility: _setup.visible ? 'visible' : 'hidden'
+      width: _setup.props.ancho + 'px'
     }
   }, [_c('div', {
     staticClass: "cuerpo-globo-info"
-  }, [_vm._t("default")], 2), _c('button', {
-    staticClass: "boton-icono boton-chico boton-cerrar no-visible-esc",
-    on: {
-      "click": function ($event) {
-        _setup.visible = false;
-      }
-    }
+  }, [_vm._t("default")], 2), _vm._m(0)]);
+};
+var SisdaiGraficasGloboInfovue_type_template_id_2b08ae68_scoped_true_staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c,
+    _setup = _vm._self._setupProxy;
+  return _c('button', {
+    staticClass: "boton-icono boton-chico boton-cerrar no-visible-esc"
   }, [_c('span', {
     staticClass: "icono-cerrar",
     attrs: {
@@ -11672,9 +11675,10 @@ var SisdaiGraficasGloboInfovue_type_template_id_04fd5132_scoped_true_render = fu
     }
   }), _c('span', {
     staticClass: "a11y-solo-lectura"
-  }, [_vm._v("Cerrar.")])])]);
-};
-var SisdaiGraficasGloboInfovue_type_template_id_04fd5132_scoped_true_staticRenderFns = [];
+  }, [_vm._v("Cerrar.")])]);
+}];
+
+;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=template&id=2b08ae68&scoped=true
 
 ;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=script&setup=true&lang=js
 
@@ -11688,20 +11692,20 @@ var SisdaiGraficasGloboInfovue_type_template_id_04fd5132_scoped_true_staticRende
   },
   setup(__props) {
     const props = __props;
-    const visible = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(false);
+    const contenedorGlobo = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)();
     return {
       __sfc: true,
       props,
-      visible
+      contenedorGlobo
     };
   }
 });
 ;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=script&setup=true&lang=js
  /* harmony default export */ var sisdai_graficas_globo_info_SisdaiGraficasGloboInfovue_type_script_setup_true_lang_js = (SisdaiGraficasGloboInfovue_type_script_setup_true_lang_js); 
-;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-12.use[0]!./node_modules/@vue/cli-service/node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=style&index=0&id=04fd5132&prod&land=scss&scoped=true&lang=css
+;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-12.use[0]!./node_modules/@vue/cli-service/node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=style&index=0&id=2b08ae68&prod&land=scss&scoped=true&lang=css
 // extracted by mini-css-extract-plugin
 
-;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=style&index=0&id=04fd5132&prod&land=scss&scoped=true&lang=css
+;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=style&index=0&id=2b08ae68&prod&land=scss&scoped=true&lang=css
 
 ;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue
 
@@ -11714,11 +11718,11 @@ var SisdaiGraficasGloboInfovue_type_template_id_04fd5132_scoped_true_staticRende
 
 var SisdaiGraficasGloboInfo_component = normalizeComponent(
   sisdai_graficas_globo_info_SisdaiGraficasGloboInfovue_type_script_setup_true_lang_js,
-  SisdaiGraficasGloboInfovue_type_template_id_04fd5132_scoped_true_render,
-  SisdaiGraficasGloboInfovue_type_template_id_04fd5132_scoped_true_staticRenderFns,
+  SisdaiGraficasGloboInfovue_type_template_id_2b08ae68_scoped_true_render,
+  SisdaiGraficasGloboInfovue_type_template_id_2b08ae68_scoped_true_staticRenderFns,
   false,
   null,
-  "04fd5132",
+  "2b08ae68",
   null
   
 )
@@ -11732,7 +11736,7 @@ const sisdai_graficas_globo_info_plugin = {
   }
 };
 /* harmony default export */ var sisdai_graficas_globo_info = (sisdai_graficas_globo_info_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"778cbd13-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-nomenclatura/SisdaiNomenclatura.vue?vue&type=template&id=6e8fbf5c
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8a733e28-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-nomenclatura/SisdaiNomenclatura.vue?vue&type=template&id=6e8fbf5c
 var SisdaiNomenclaturavue_type_template_id_6e8fbf5c_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
@@ -11832,8 +11836,8 @@ const sisdai_nomenclatura_plugin = {
   }
 };
 /* harmony default export */ var sisdai_nomenclatura = (sisdai_nomenclatura_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"778cbd13-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-series-tiempo/SisdaiSeriesTiempo.vue?vue&type=template&id=29581438
-var SisdaiSeriesTiempovue_type_template_id_29581438_render = function render() {
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8a733e28-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-series-tiempo/SisdaiSeriesTiempo.vue?vue&type=template&id=5e0f3c56
+var SisdaiSeriesTiempovue_type_template_id_5e0f3c56_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
@@ -11845,7 +11849,7 @@ var SisdaiSeriesTiempovue_type_template_id_29581438_render = function render() {
     }
   });
 };
-var SisdaiSeriesTiempovue_type_template_id_29581438_staticRenderFns = [];
+var SisdaiSeriesTiempovue_type_template_id_5e0f3c56_staticRenderFns = [];
 
 ;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-series-tiempo/SisdaiSeriesTiempo.vue?vue&type=script&setup=true&lang=js
 
@@ -11929,6 +11933,7 @@ var SisdaiSeriesTiempovue_type_template_id_29581438_staticRenderFns = [];
   }) {
     const props = __props;
     var idGrafica;
+    const datos_hover = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)({});
     const sisdaiSeriesTiempo = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.shallowRef)();
     const {
       datos,
@@ -11942,16 +11947,20 @@ var SisdaiSeriesTiempovue_type_template_id_29581438_staticRenderFns = [];
       escalaLineal = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)();
     const grupoContenedor = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(),
       grupoSeries = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)();
+    const circulo_marcador = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)();
     function calcularEscalas(grupoVis) {
       if (!grupoVis && grupoVis.ancho === 0) return;
       escalaTemporal.value = time().domain(extent(datos.value?.map(d => d.la_fecha))).range([0, grupoVis.ancho]);
-      escalaLineal.value = linear_linear().domain([src_min_min(datos.value?.map(d => src_min_min(variables.value.map(dd => d[dd.id])))), max_max(datos.value?.map(d => max_max(variables.value.map(dd => d[dd.id]))))]).range([grupoVis.alto, 0]);
+      escalaLineal.value = linear_linear().domain([
+      //min(datos.value?.map((d) => min(variables.value.map((dd) => d[dd.id])))),
+      0, max_max(datos.value?.map(d => max_max(variables.value.map(dd => d[dd.id]))))]).range([grupoVis.alto, 0]);
       creaEjeHorizontal(idGrafica, escalaTemporal.value, props.angulo_etiquetas_eje_x);
       creaEjeVertical(idGrafica, escalaLineal.value, props.angulo_etiquetas_eje_y, props.alineacion_eje_y, grupoVis.ancho);
     }
     function creaSeries() {
       datos.value.forEach(d => d.la_fecha = conversionTemporal(d[clave_fecha.value]));
-      grupoSeries.value = grupoContenedor.value.selectAll('g.serie-temporal').data(variables.value).join(enter => {
+      grupoSeries.value = grupoContenedor.value.selectAll('g.serie-temporal');
+      grupoSeries.value.data(variables.value).join(enter => {
         let grupo = enter.append('g').attr('class', 'serie-temporal').style('fill', 'none').style('stroke', d => d.color).style('stroke-width', '1px');
         grupo.selectAll('path.linea').data(d => [{
           ...d,
@@ -11982,6 +11991,7 @@ var SisdaiSeriesTiempovue_type_template_id_29581438_staticRenderFns = [];
     (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.onMounted)(() => {
       idGrafica = buscarIdContenedorHtmlSisdai('grafica', sisdaiSeriesTiempo.value);
       grupoContenedor.value = src_select('#' + idGrafica + ' svg g.contenedor-series');
+      circulo_marcador.value = grupoContenedor.value.append('circle').style('fill-opacity', 0).attr('r', 5);
       margenesSvg.value = usarRegistroGraficas().grafica(idGrafica).margenes;
       (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(() => usarRegistroGraficas().grafica(idGrafica).margenes, nv => margenesSvg.value = nv);
       datos.value.forEach(d => d.la_fecha = conversionTemporal(d[clave_fecha.value]));
@@ -12002,16 +12012,46 @@ var SisdaiSeriesTiempovue_type_template_id_29581438_staticRenderFns = [];
         calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis);
         creaSeries();
       });
+      (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(() => usarRegistroGraficas().grafica(idGrafica).posicion_cursor, nv => {
+        let bisecetDate = bisector(d => d.la_fecha).left;
+        let x0 = escalaTemporal.value.invert(nv.x - margenesSvg.value.izquierda);
+        let indice = bisecetDate(datos.value, x0, 1);
+        let d0 = datos.value[indice - 1];
+        let d1 = datos.value[indice];
+        if (!d1) d1 = d0;
+        let tooltip_data_seleccionada_x = x0 - d0.la_fecha > d1.la_fecha - x0 ? d1 : d0;
+        let datos_y = variables.value.map(d => [d, tooltip_data_seleccionada_x[d.id]]).sort((a, b) => ascending_ascending(a[1], b[1]));
+        let bisectCantidad = bisector(d => d).center;
+        let y0 = escalaLineal.value.invert(nv.y - margenesSvg.value.arriba);
+        let indiceY = bisectCantidad(datos_y.map(d => d[1]), y0);
+        datos_hover.value = {
+          ...datos_y[indiceY][0],
+          ...tooltip_data_seleccionada_x
+        };
+        circulo_marcador.value.style('fill-opacity', 1).attr('cx', escalaTemporal.value(datos_hover.value.la_fecha)).attr('cy', escalaLineal.value(+datos_hover.value[datos_hover.value['id']])).style('fill', datos_hover.value.color);
+        grupoSeries.value.selectAll('path').style('stroke-width', '2px').style('stroke-opacity', '.3');
+        grupoSeries.value.filter(d => d.id === datos_hover.value.id).selectAll('path').style('stroke-width', '3px').style('stroke-opacity', '1');
+      }, {
+        deep: true
+      });
+      (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(() => usarRegistroGraficas().grafica(idGrafica).globo_visible, nv => {
+        if (!nv) {
+          circulo_marcador.value.style('fill-opacity', 0);
+          grupoSeries.value.selectAll('path').style('stroke-width', '2px').style('stroke-opacity', '.8');
+        }
+      });
     });
     expose({
       escalaTemporal,
       escalaLineal,
-      conversionTemporal
+      conversionTemporal,
+      datos_hover
     });
     return {
       __sfc: true,
       idGrafica,
       props,
+      datos_hover,
       sisdaiSeriesTiempo,
       datos,
       clave_fecha,
@@ -12022,6 +12062,7 @@ var SisdaiSeriesTiempovue_type_template_id_29581438_staticRenderFns = [];
       escalaLineal,
       grupoContenedor,
       grupoSeries,
+      circulo_marcador,
       calcularEscalas,
       creaSeries
     };
@@ -12039,8 +12080,8 @@ var SisdaiSeriesTiempovue_type_template_id_29581438_staticRenderFns = [];
 ;
 var SisdaiSeriesTiempo_component = normalizeComponent(
   sisdai_series_tiempo_SisdaiSeriesTiempovue_type_script_setup_true_lang_js,
-  SisdaiSeriesTiempovue_type_template_id_29581438_render,
-  SisdaiSeriesTiempovue_type_template_id_29581438_staticRenderFns,
+  SisdaiSeriesTiempovue_type_template_id_5e0f3c56_render,
+  SisdaiSeriesTiempovue_type_template_id_5e0f3c56_staticRenderFns,
   false,
   null,
   null,
@@ -12057,7 +12098,7 @@ const sisdai_series_tiempo_plugin = {
   }
 };
 /* harmony default export */ var sisdai_series_tiempo = (sisdai_series_tiempo_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"778cbd13-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-violines/SisdaiViolines.vue?vue&type=template&id=596afb80
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8a733e28-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-violines/SisdaiViolines.vue?vue&type=template&id=596afb80
 var SisdaiViolinesvue_type_template_id_596afb80_render = function render() {
   var _vm = this,
     _c = _vm._self._c,

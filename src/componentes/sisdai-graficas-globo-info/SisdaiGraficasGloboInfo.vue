@@ -12,6 +12,7 @@ const contenedorGlobo = ref()
     :style="{
       width: props.ancho + 'px',
     }"
+    style="position: absolute"
   >
     <div class="cuerpo-globo-info">
       <slot></slot>
@@ -27,7 +28,6 @@ const contenedorGlobo = ref()
 </template>
 <style land="scss" scoped>
 .contenedor-globo-info {
-  position: absolute;
   visibility: hidden;
 }
 </style>
