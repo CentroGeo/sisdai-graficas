@@ -167,7 +167,7 @@ function panelesEnUso() {
     :sisdai-grafica="id"
     class="contenedor-vis borde-redondeado-8 contenedor-sisdai-graficas"
     :id="id"
-    style="--contenedor-vis-alto-maximo: auto"
+    :style="{ '--contenedor-vis-alto-maximo': 'auto' }"
   >
     <div
       class="contenedor-vis-paneles"
