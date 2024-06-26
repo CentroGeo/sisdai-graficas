@@ -11,8 +11,9 @@ const contenedorGlobo = ref()
     class="contenedor-globo-info"
     :style="{
       width: props.ancho + 'px',
+      position: 'absolute',
     }"
-    style="position: absolute; visibility: hidden"
+    style="visibility: hidden"
   >
     <div class="cuerpo-globo-info">
       <slot></slot>

@@ -225,7 +225,14 @@ onMounted(() => {
       var segmento_over = grupoDona.value
         .filter(d => d.startAngle <= angulo && angulo < d.endAngle)
         .style('fill-opacity', 1)
-      datos_hover.value = segmento_over.data()[0].data
+      datos_hover.value = {
+        porcentaje:
+          Math.round(
+            (1000 * segmento_over.data()[0].value) /
+              sum(data_pay.value.map(d => d.value))
+          ) / 10,
+        ...segmento_over.data()[0].data,
+      }
     },
     { deep: true }
   )
