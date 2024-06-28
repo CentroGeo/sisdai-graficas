@@ -11672,14 +11672,17 @@ const sisdai_graficas_plugin = {
   }
 };
 /* harmony default export */ var sisdai_graficas = (sisdai_graficas_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"09f12175-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=template&id=03268f1b&scoped=true
-var SisdaiGraficasGloboInfovue_type_template_id_03268f1b_scoped_true_render = function render() {
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"09f12175-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=template&id=e73a3ad6&scoped=true
+var SisdaiGraficasGloboInfovue_type_template_id_e73a3ad6_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
   return _c('div', {
     ref: "contenedorGlobo",
     staticClass: "globo-informacion globo-informacion-extra",
+    staticStyle: {
+      "visibility": "hidden"
+    },
     style: {
       width: _setup.props.ancho + 'px'
     },
@@ -11688,7 +11691,7 @@ var SisdaiGraficasGloboInfovue_type_template_id_03268f1b_scoped_true_render = fu
     }
   }, [_vm._t("default"), _vm._m(0)], 2);
 };
-var SisdaiGraficasGloboInfovue_type_template_id_03268f1b_scoped_true_staticRenderFns = [function () {
+var SisdaiGraficasGloboInfovue_type_template_id_e73a3ad6_scoped_true_staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
@@ -11704,7 +11707,7 @@ var SisdaiGraficasGloboInfovue_type_template_id_03268f1b_scoped_true_staticRende
   }, [_vm._v("Cerrar.")])]);
 }];
 
-;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=template&id=03268f1b&scoped=true
+;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=template&id=e73a3ad6&scoped=true
 
 ;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=script&setup=true&lang=js
 
@@ -11728,10 +11731,10 @@ var SisdaiGraficasGloboInfovue_type_template_id_03268f1b_scoped_true_staticRende
 });
 ;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=script&setup=true&lang=js
  /* harmony default export */ var sisdai_graficas_globo_info_SisdaiGraficasGloboInfovue_type_script_setup_true_lang_js = (SisdaiGraficasGloboInfovue_type_script_setup_true_lang_js); 
-;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-12.use[0]!./node_modules/@vue/cli-service/node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=style&index=0&id=03268f1b&prod&land=scss&scoped=true&lang=css
+;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-12.use[0]!./node_modules/@vue/cli-service/node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=style&index=0&id=e73a3ad6&prod&land=scss&scoped=true&lang=css
 // extracted by mini-css-extract-plugin
 
-;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=style&index=0&id=03268f1b&prod&land=scss&scoped=true&lang=css
+;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=style&index=0&id=e73a3ad6&prod&land=scss&scoped=true&lang=css
 
 ;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue
 
@@ -11744,11 +11747,11 @@ var SisdaiGraficasGloboInfovue_type_template_id_03268f1b_scoped_true_staticRende
 
 var SisdaiGraficasGloboInfo_component = normalizeComponent(
   sisdai_graficas_globo_info_SisdaiGraficasGloboInfovue_type_script_setup_true_lang_js,
-  SisdaiGraficasGloboInfovue_type_template_id_03268f1b_scoped_true_render,
-  SisdaiGraficasGloboInfovue_type_template_id_03268f1b_scoped_true_staticRenderFns,
+  SisdaiGraficasGloboInfovue_type_template_id_e73a3ad6_scoped_true_render,
+  SisdaiGraficasGloboInfovue_type_template_id_e73a3ad6_scoped_true_staticRenderFns,
   false,
   null,
-  "03268f1b",
+  "e73a3ad6",
   null
   
 )

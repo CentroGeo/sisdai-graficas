@@ -13,6 +13,7 @@ const contenedorGlobo = ref()
     :style="{
       width: props.ancho + 'px',
     }"
+    style="visibility: hidden"
   >
     <slot></slot>
     <button
