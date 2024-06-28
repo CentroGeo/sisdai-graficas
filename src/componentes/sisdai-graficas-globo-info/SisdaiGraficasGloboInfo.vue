@@ -12,6 +12,7 @@ const contenedorGlobo = ref()
     role="tooltip"
     :style="{
       width: props.ancho + 'px',
+      position: 'absolute',
     }"
     style="visibility: hidden"
   >
@@ -27,9 +28,3 @@ const contenedorGlobo = ref()
     </button>
   </div>
 </template>
-<style land="scss" scoped>
-.globo-informacion {
-  position: absolute;
-  visibility: hidden;
-}
-</style>

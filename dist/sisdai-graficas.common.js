@@ -10726,8 +10726,8 @@ const sisdai_checks_plugin = {
   }
 };
 /* harmony default export */ var sisdai_checks = (sisdai_checks_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"09f12175-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-dona/SisdaiDona.vue?vue&type=template&id=673d18dd
-var SisdaiDonavue_type_template_id_673d18dd_render = function render() {
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"09f12175-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-dona/SisdaiDona.vue?vue&type=template&id=6d3db64e
+var SisdaiDonavue_type_template_id_6d3db64e_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
@@ -10739,7 +10739,7 @@ var SisdaiDonavue_type_template_id_673d18dd_render = function render() {
     }
   });
 };
-var SisdaiDonavue_type_template_id_673d18dd_staticRenderFns = [];
+var SisdaiDonavue_type_template_id_6d3db64e_staticRenderFns = [];
 
 ;// CONCATENATED MODULE: ./node_modules/d3-shape/src/descending.js
 /* harmony default export */ function src_descending(a, b) {
@@ -11270,7 +11270,10 @@ function cornerTangents(x0, y0, x1, y1, r1, rc, cw) {
         }
         grupoDona.value.style('fill-opacity', '.2');
         var segmento_over = grupoDona.value.filter(d => d.startAngle <= angulo && angulo < d.endAngle).style('fill-opacity', 1);
-        datos_hover.value = segmento_over.data()[0].data;
+        datos_hover.value = {
+          porcentaje: Math.round(1000 * segmento_over.data()[0].value / sum_sum(data_pay.value.map(d => d.value))) / 10,
+          ...segmento_over.data()[0].data
+        };
       }, {
         deep: true
       });
@@ -11319,8 +11322,8 @@ function cornerTangents(x0, y0, x1, y1, r1, rc, cw) {
 ;
 var SisdaiDona_component = normalizeComponent(
   sisdai_dona_SisdaiDonavue_type_script_setup_true_lang_js,
-  SisdaiDonavue_type_template_id_673d18dd_render,
-  SisdaiDonavue_type_template_id_673d18dd_staticRenderFns,
+  SisdaiDonavue_type_template_id_6d3db64e_render,
+  SisdaiDonavue_type_template_id_6d3db64e_staticRenderFns,
   false,
   null,
   null,
@@ -11337,8 +11340,8 @@ const sisdai_dona_plugin = {
   }
 };
 /* harmony default export */ var sisdai_dona = (sisdai_dona_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"09f12175-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas/SisdaiGraficas.vue?vue&type=template&id=bb24223a&scoped=true
-var SisdaiGraficasvue_type_template_id_bb24223a_scoped_true_render = function render() {
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"09f12175-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas/SisdaiGraficas.vue?vue&type=template&id=ae43fe5e
+var SisdaiGraficasvue_type_template_id_ae43fe5e_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
@@ -11346,6 +11349,9 @@ var SisdaiGraficasvue_type_template_id_bb24223a_scoped_true_render = function re
     staticClass: "contenedor-vis contenedor-sisdai-graficas",
     staticStyle: {
       "--contenedor-vis-alto-menus": "auto"
+    },
+    style: {
+      '--contenedor-vis-alto-maximo': 'auto'
     },
     attrs: {
       "sisdai-grafica": _vm.id,
@@ -11433,7 +11439,7 @@ var SisdaiGraficasvue_type_template_id_bb24223a_scoped_true_render = function re
     staticClass: "panel-pie-vis"
   }, [_vm._t("panel-pie-vis")], 2)]), _c(_setup.ContenedorVisAtribuciones)], 1);
 };
-var SisdaiGraficasvue_type_template_id_bb24223a_scoped_true_staticRenderFns = [];
+var SisdaiGraficasvue_type_template_id_ae43fe5e_staticRenderFns = [];
 
 ;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"09f12175-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/internos/ContenedorVisAtribuciones.vue?vue&type=template&id=067256ac
 var ContenedorVisAtribucionesvue_type_template_id_067256ac_render = function render() {
@@ -11638,27 +11644,21 @@ var ContenedorVisAtribuciones_component = normalizeComponent(
 });
 ;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas/SisdaiGraficas.vue?vue&type=script&setup=true&lang=js
  /* harmony default export */ var sisdai_graficas_SisdaiGraficasvue_type_script_setup_true_lang_js = (SisdaiGraficasvue_type_script_setup_true_lang_js); 
-;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-22.use[0]!./node_modules/@vue/cli-service/node_modules/css-loader/dist/cjs.js??clonedRuleSet-22.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-22.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-22.use[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas/SisdaiGraficas.vue?vue&type=style&index=0&id=bb24223a&prod&scoped=true&lang=scss
-// extracted by mini-css-extract-plugin
-
-;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas/SisdaiGraficas.vue?vue&type=style&index=0&id=bb24223a&prod&scoped=true&lang=scss
-
 ;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas/SisdaiGraficas.vue
 
 
 
-;
 
 
 /* normalize component */
-
+;
 var SisdaiGraficas_component = normalizeComponent(
   sisdai_graficas_SisdaiGraficasvue_type_script_setup_true_lang_js,
-  SisdaiGraficasvue_type_template_id_bb24223a_scoped_true_render,
-  SisdaiGraficasvue_type_template_id_bb24223a_scoped_true_staticRenderFns,
+  SisdaiGraficasvue_type_template_id_ae43fe5e_render,
+  SisdaiGraficasvue_type_template_id_ae43fe5e_staticRenderFns,
   false,
   null,
-  "bb24223a",
+  null,
   null
   
 )
@@ -11672,8 +11672,8 @@ const sisdai_graficas_plugin = {
   }
 };
 /* harmony default export */ var sisdai_graficas = (sisdai_graficas_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"09f12175-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=template&id=e73a3ad6&scoped=true
-var SisdaiGraficasGloboInfovue_type_template_id_e73a3ad6_scoped_true_render = function render() {
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"09f12175-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=template&id=44d1155b
+var SisdaiGraficasGloboInfovue_type_template_id_44d1155b_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
@@ -11684,14 +11684,15 @@ var SisdaiGraficasGloboInfovue_type_template_id_e73a3ad6_scoped_true_render = fu
       "visibility": "hidden"
     },
     style: {
-      width: _setup.props.ancho + 'px'
+      width: _setup.props.ancho + 'px',
+      position: 'absolute'
     },
     attrs: {
       "role": "tooltip"
     }
   }, [_vm._t("default"), _vm._m(0)], 2);
 };
-var SisdaiGraficasGloboInfovue_type_template_id_e73a3ad6_scoped_true_staticRenderFns = [function () {
+var SisdaiGraficasGloboInfovue_type_template_id_44d1155b_staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
@@ -11707,7 +11708,7 @@ var SisdaiGraficasGloboInfovue_type_template_id_e73a3ad6_scoped_true_staticRende
   }, [_vm._v("Cerrar.")])]);
 }];
 
-;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=template&id=e73a3ad6&scoped=true
+;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=template&id=44d1155b
 
 ;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=script&setup=true&lang=js
 
@@ -11731,27 +11732,21 @@ var SisdaiGraficasGloboInfovue_type_template_id_e73a3ad6_scoped_true_staticRende
 });
 ;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=script&setup=true&lang=js
  /* harmony default export */ var sisdai_graficas_globo_info_SisdaiGraficasGloboInfovue_type_script_setup_true_lang_js = (SisdaiGraficasGloboInfovue_type_script_setup_true_lang_js); 
-;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/node_modules/mini-css-extract-plugin/dist/loader.js??clonedRuleSet-12.use[0]!./node_modules/@vue/cli-service/node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/stylePostLoader.js!./node_modules/@vue/cli-service/node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=style&index=0&id=e73a3ad6&prod&land=scss&scoped=true&lang=css
-// extracted by mini-css-extract-plugin
-
-;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=style&index=0&id=e73a3ad6&prod&land=scss&scoped=true&lang=css
-
 ;// CONCATENATED MODULE: ./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue
 
 
 
-;
 
 
 /* normalize component */
-
+;
 var SisdaiGraficasGloboInfo_component = normalizeComponent(
   sisdai_graficas_globo_info_SisdaiGraficasGloboInfovue_type_script_setup_true_lang_js,
-  SisdaiGraficasGloboInfovue_type_template_id_e73a3ad6_scoped_true_render,
-  SisdaiGraficasGloboInfovue_type_template_id_e73a3ad6_scoped_true_staticRenderFns,
+  SisdaiGraficasGloboInfovue_type_template_id_44d1155b_render,
+  SisdaiGraficasGloboInfovue_type_template_id_44d1155b_staticRenderFns,
   false,
   null,
-  "e73a3ad6",
+  null,
   null
   
 )

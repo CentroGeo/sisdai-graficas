@@ -168,6 +168,7 @@ function panelesEnUso() {
     style="--contenedor-vis-alto-menus: auto"
     class="contenedor-vis contenedor-sisdai-graficas"
     :id="id"
+    :style="{ '--contenedor-vis-alto-maximo': 'auto' }"
   >
     <div
       class="contenedor-vis-paneles"
@@ -269,8 +270,3 @@ function panelesEnUso() {
     <ContenedorVisAtribuciones />
   </div>
 </template>
-<style scoped lang="scss">
-.contenedor-vis.contenedor-sisdai-graficas {
-  --contenedor-vis-alto-menus: auto;
-}
-</style>
