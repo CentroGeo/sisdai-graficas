@@ -122,7 +122,7 @@ function siHayGlobo() {
             : e.layerX + espacio_eje_y.value + 5) + 'px'
         )
         .style('top', e.layerY + 15 + 'px')
-        .style('visibility', 'visible')
+        .classed('no-visible', false)
 
       grafica().globo_visible = true
     })
@@ -144,14 +144,14 @@ function siHayGlobo() {
             : e.layerX + espacio_eje_y.value + 5) + 'px'
         )
         .style('top', e.layerY + 15 + 'px')
-        .style('visibility', 'visible')
+        .classed('no-visible', false)
       grafica().globo_visible = true
     })
     .on('mouseout', () => {
       grafica().globo_visible = false
       select(
         `#${props.id} .contenedor-svg-ejes-tooltip .globo-informacion`
-      ).style('visibility', 'hidden')
+      ).classed('no-visible', true)
     })
 }
 function panelesEnUso() {
@@ -270,10 +270,3 @@ function panelesEnUso() {
     <ContenedorVisAtribuciones />
   </div>
 </template>
-<style lang="scss" scoped>
-.contenedor-vis {
-  :deep(.globo-informacion.globo-informacion-extra) {
-    visibility: hidden;
-  }
-}
-</style>

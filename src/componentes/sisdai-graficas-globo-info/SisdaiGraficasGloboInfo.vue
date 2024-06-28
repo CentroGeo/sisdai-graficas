@@ -8,7 +8,7 @@ const contenedorGlobo = ref()
 <template>
   <div
     ref="contenedorGlobo"
-    class="globo-informacion globo-informacion-extra"
+    class="globo-informacion globo-informacion-extra no-visible"
     role="tooltip"
     :style="{
       width: props.ancho + 'px',
