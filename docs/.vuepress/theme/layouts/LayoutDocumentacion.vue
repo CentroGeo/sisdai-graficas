@@ -194,7 +194,7 @@ function actualizaContenidoIndice() {
               ref="componenteIndice"
               class="m-l-3-mov"
             >
-              <template slot="contenido-indice-de-contenido">
+              <template slot="contenido-indice-contenido">
                 <ul>
                   <li
                     v-for="(elemento, i) in lista_elementos"
