@@ -27,8 +27,3 @@ const contenedorGlobo = ref()
     </button>
   </div>
 </template>
-<style scoped>
-.globo-informacion.globo-informacion-extra {
-  visibility: hidden;
-}
-</style>

@@ -270,3 +270,10 @@ function panelesEnUso() {
     <ContenedorVisAtribuciones />
   </div>
 </template>
+<style lang="scss" scoped>
+.contenedor-vis {
+  :deep(.globo-informacion.globo-informacion-extra) {
+    visibility: hidden;
+  }
+}
+</style>
