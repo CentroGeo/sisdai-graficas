@@ -14,7 +14,6 @@ const contenedorGlobo = ref()
       width: props.ancho + 'px',
       position: 'absolute',
     }"
-    style="visibility: hidden"
   >
     <slot></slot>
     <button
@@ -28,3 +27,8 @@ const contenedorGlobo = ref()
     </button>
   </div>
 </template>
+<style scoped>
+.globo-informacion.globo-informacion-extra {
+  visibility: hidden;
+}
+</style>
