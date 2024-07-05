@@ -20,8 +20,8 @@
     "core-js": "^3.6.5",
     "d3": "^7.8.2",
     "d3-sankey": "^0.12.3",
-    "sisdai-css": "git+https://codigo.conahcyt.mx/sisdai/sisdai-css#v1.0.0-beta.22",
-    "vue": "^2.7.14"
+    "sisdai-css": "git+https://codigo.conahcyt.mx/sisdai/sisdai-css#v1.0.0",
+    "vue": "^2.7.16"
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",
@@ -39,8 +39,8 @@
     "raw-loader": "^4.0.2",
     "sass": "^1.57.1",
     "sass-loader": "^10.4.1",
-    "sisdai-componentes": "git+https://codigo.conahcyt.mx/sisdai/sisdai-componentes#v3.0.0-beta.9",
-    "vue-template-compiler": "^2.7.14",
+    "sisdai-componentes": "git+https://codigo.conahcyt.mx/sisdai/sisdai-componentes#v3.0.0-beta.11",
+    "vue-template-compiler": "^2.7.16",
     "vuepress": "^1.9.8",
     "vuepress-html-webpack-plugin": "^3.2.0",
     "vuex": "^3.6.2"
