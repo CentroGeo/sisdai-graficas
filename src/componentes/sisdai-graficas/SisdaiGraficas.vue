@@ -100,7 +100,7 @@ const paneles = ['encabezado', 'izquierda', 'derecha', 'pie']
 
 function siHayGlobo() {
   let ancho_globo = select(
-    `#${props.id} .contenedor-svg-ejes-tooltip .contenedor-globo-info`
+    `#${props.id} .contenedor-svg-ejes-tooltip .globo-informacion`
   ).node().clientWidth
 
   select(`#${props.id} svg.svg-vis`)
@@ -110,7 +110,7 @@ function siHayGlobo() {
       posicion_cursor.value.y = e.layerY
       posicion_globo_info.value.top = e.layerY
       grafica().posicion_cursor = posicion_cursor.value
-      select(`#${props.id} .contenedor-svg-ejes-tooltip .contenedor-globo-info`)
+      select(`#${props.id} .contenedor-svg-ejes-tooltip .globo-informacion`)
         .style(
           'left',
           (e.layerX >
@@ -122,7 +122,7 @@ function siHayGlobo() {
             : e.layerX + espacio_eje_y.value + 5) + 'px'
         )
         .style('top', e.layerY + 15 + 'px')
-        .style('visibility', 'visible')
+        .classed('no-visible', false)
 
       grafica().globo_visible = true
     })
@@ -132,7 +132,7 @@ function siHayGlobo() {
       posicion_cursor.value.y = e.layerY
       posicion_globo_info.value.top = e.layerY
       grafica().posicion_cursor = posicion_cursor.value
-      select(`#${props.id} .contenedor-svg-ejes-tooltip .contenedor-globo-info`)
+      select(`#${props.id} .contenedor-svg-ejes-tooltip .globo-informacion`)
         .style(
           'left',
           (e.layerX >
@@ -144,14 +144,14 @@ function siHayGlobo() {
             : e.layerX + espacio_eje_y.value + 5) + 'px'
         )
         .style('top', e.layerY + 15 + 'px')
-        .style('visibility', 'visible')
+        .classed('no-visible', false)
       grafica().globo_visible = true
     })
     .on('mouseout', () => {
       grafica().globo_visible = false
       select(
-        `#${props.id} .contenedor-svg-ejes-tooltip .contenedor-globo-info`
-      ).style('visibility', 'hidden')
+        `#${props.id} .contenedor-svg-ejes-tooltip .globo-informacion`
+      ).classed('no-visible', true)
     })
 }
 function panelesEnUso() {
@@ -165,7 +165,8 @@ function panelesEnUso() {
 <template>
   <div
     :sisdai-grafica="id"
-    class="contenedor-vis borde-redondeado-8 contenedor-sisdai-graficas"
+    style="--contenedor-vis-alto-menus: auto"
+    class="contenedor-vis contenedor-sisdai-graficas"
     :id="id"
     :style="{ '--contenedor-vis-alto-maximo': 'auto' }"
   >

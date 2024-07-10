@@ -11,12 +11,10 @@ const misAreasApiladasOrdenadas = ref()
     <template #globo-informacion>
       <SisdaiGraficasGloboInfo :ancho="200">
         <template>
-          <div>
-            <p>{{ misAreasApiladasOrdenadas?.datos_hover?.fecha }}</p>
-            <p>
-              Cantidad: {{ misAreasApiladasOrdenadas?.datos_hover?.cantidad_1 }}
-            </p>
-          </div>
+          <p>{{ misAreasApiladasOrdenadas?.datos_hover?.fecha }}</p>
+          <p>
+            Cantidad: {{ misAreasApiladasOrdenadas?.datos_hover?.cantidad_1 }}
+          </p>
         </template>
       </SisdaiGraficasGloboInfo>
     </template>

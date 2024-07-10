@@ -7,7 +7,14 @@ const lista_elementos = ref([])
 
 const route = useRoute()
 const componenteIndice = ref()
+const menuLateralAbierto = ref()
+if (typeof window !== 'undefined') {
+  menuLateralAbierto.value = window.innerWidth < 768 ? false : true
+}
 
+function alAlternarMenuLateral(navSecundariaAbierta) {
+  menuLateralAbierto.value = navSecundariaAbierta
+}
 onMounted(() => {
   setTimeout(() => actualizaContenidoIndice(), 200)
 })
@@ -74,9 +81,14 @@ function actualizaContenidoIndice() {
         </li>
       </ul>
     </SisdaiNavegacionPrincipal>
-    <div class="flex">
-      <div class="columna-4 columna-1-mov menu-fondo">
-        <SisdaiMenuLateral>
+    <SisdaiMenuAccesibilidad :objetoStore="store" />
+
+    <div
+      id="contenido-todo"
+      class="flex"
+    >
+      <div class="columna-4 columna-1-mov menu-lateral-fondo">
+        <SisdaiMenuLateral @alAlternarMenu="alAlternarMenuLateral">
           <template slot="contenido-menu-lateral">
             <ul>
               <li>
@@ -171,28 +183,40 @@ function actualizaContenidoIndice() {
           </template>
         </SisdaiMenuLateral>
       </div>
-      <div class="columna-12 columna-7-mov">
-        <div class="flex contenedor-indice-y-content">
-          <div class="columna-12 contenedor ancho-fijo">
-            <Content />
-          </div>
-          <div class="columna-4 columna-8-mov">
+      <div class="columna-12-esc columna-7-mov">
+        <div
+          class="flex"
+          id="contenido-documento"
+        >
+          <div class="columna-4-esc columna-8-mov columna-orden-3-esc">
             <SisdaiIndiceDeContenido
-              class="indice-contenido-documentacion"
               :id_indice="'indice-template'"
               ref="componenteIndice"
+              class="m-l-3-mov"
             >
-              <template slot="contenido-indice-de-contenido">
+              <template slot="contenido-indice-contenido">
                 <ul>
                   <li
                     v-for="(elemento, i) in lista_elementos"
                     :key="i"
                   >
-                    <a :href="'#' + elemento.id"> {{ elemento.texto }}</a>
+                    <router-link :to="'#' + elemento.id">
+                      {{ elemento.texto }}</router-link
+                    >
                   </li>
                 </ul>
               </template>
             </SisdaiIndiceDeContenido>
+          </div>
+          <div
+            class="columna-12-esc columna-8-mov"
+            tabindex="-1"
+          >
+            <div class="contenedor m-y-maximo-esc">
+              <div class="ancho-lectura">
+                <Content />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -201,27 +225,7 @@ function actualizaContenidoIndice() {
     <SisdaiPiePaginaConahcyt />
 
     <SisdaiPiePaginaGobMx />
-
-    <SisdaiMenuAccesibilidad :objetoStore="store" />
   </div>
 </template>
 
 <style src="prismjs/themes/prism-tomorrow.css" />
-<style>
-.indice-contenido-documentacion {
-  position: sticky;
-  top: 50px;
-  padding: 28px 0;
-}
-.menu-fondo {
-  background: var(--menu-lateral-fondo);
-}
-@media (max-width: 768px) {
-  .contenedor-indice-y-content {
-    flex-direction: column-reverse;
-  }
-  .menu-fondo {
-    background: transparent;
-  }
-}
-</style>

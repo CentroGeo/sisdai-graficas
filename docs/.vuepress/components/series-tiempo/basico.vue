@@ -11,9 +11,7 @@ const laSerie = ref()
     <template #globo-informacion>
       <SisdaiGraficasGloboInfo :ancho="200">
         <template>
-          <div>
-            <p>Cantidad 1: {{ laSerie?.datos_hover?.cantidad_1 }}</p>
-          </div>
+          <p>Cantidad 1: {{ laSerie?.datos_hover?.cantidad_1 }}</p>
         </template>
       </SisdaiGraficasGloboInfo>
     </template>

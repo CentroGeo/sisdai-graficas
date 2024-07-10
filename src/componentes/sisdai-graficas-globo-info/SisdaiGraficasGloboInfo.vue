@@ -8,19 +8,19 @@ const contenedorGlobo = ref()
 <template>
   <div
     ref="contenedorGlobo"
-    class="contenedor-globo-info"
+    class="globo-informacion no-visible"
+    role="tooltip"
     :style="{
       width: props.ancho + 'px',
       position: 'absolute',
     }"
-    style="visibility: hidden"
   >
-    <div class="cuerpo-globo-info">
+    <div class="globo-informacion-cuerpo">
       <slot></slot>
     </div>
-    <button class="boton-icono boton-chico boton-cerrar no-visible-esc">
+    <button class="globo-informacion-cerrar">
       <span
-        class="icono-cerrar"
+        class="pictograma-cerrar"
         aria-hidden="true"
       ></span>
       <span class="a11y-solo-lectura">Cerrar.</span>
