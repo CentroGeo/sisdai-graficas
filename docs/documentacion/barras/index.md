@@ -29,34 +29,34 @@ barras. Este componente puede ser utilizado para crear barras simples o apiladas
 >
 > <table>
 > <thead>
->  <tr>
->    <th>categoria</th>
->    <th>cantidad_1</th>
->    <th>cantidad_2</th>
->  </tr>
->  </thead>
->  <tbody>
->  <tr>
->    <td>aguascalientes</td>
->    <td>100</td>
->    <td>100</td>
->  </tr>
->  <tr>
->    <td>baja_california</td>
->    <td>80</td>
->    <td>50</td>
->  </tr>
->  <tr>
->    <td>baja_california_sur</td>
->    <td>20</td>
->    <td>90</td>
->  </tr>
->  <tr>
->    <td>zacatecas</td>
->    <td>20</td>
->    <td>15</td>
->  </tr>
->  </tbody>
+> <tr>
+> <th>categoria</th>
+> <th>cantidad_1</th>
+> <th>cantidad_2</th>
+> </tr>
+> </thead>
+> <tbody>
+> <tr>
+> <td>aguascalientes</td>
+> <td>100</td>
+> <td>100</td>
+> </tr>
+> <tr>
+> <td>baja_california</td>
+> <td>80</td>
+> <td>50</td>
+> </tr>
+> <tr>
+> <td>baja_california_sur</td>
+> <td>20</td>
+> <td>90</td>
+> </tr>
+> <tr>
+> <td>zacatecas</td>
+> <td>20</td>
+> <td>15</td>
+> </tr>
+> </tbody>
 > </table>
 >
 > En este ejemplo, **categoria** indica las categorías principales, y **cantidad_1** y **cantidad_2** son un valores numérico que representa la magnitud de dichas subcategorías.
@@ -90,8 +90,8 @@ barras. Este componente puede ser utilizado para crear barras simples o apiladas
 ### Opcionales
 
 - `separacion`: (_Number_) Valor numérico entre 0 y 1 que determina la separación de las barras. Por default es `0.2` y significa que el 20% de la gráfica será espacio en blanco
-
-- `acomodo`: (_String_) Admite los valores `"apiladas"` o `"agrupadas"` y determina la forma en la que se mostrarán las barras en caso de que existan varias subcategorías. -`padding_agrupadas`: (_Number_) Valor numérico entre 0 y 1 que determina la separación de las barras agrupadas. Para ver su efecto, se debe tener la propiedad `acomodo` en `"agrupadas"`. Por default es 0.1 y significa que para un subgrupo barras el 10% será espacio en blanco.
+- `acomodo`: (_String_) Admite los valores `"apiladas"` o `"agrupadas"` y determina la forma en la que se mostrarán las barras en caso de que existan varias subcategorías.
+- `padding_agrupadas`: (_Number_) Valor numérico entre 0 y 1 que determina la separación de las barras agrupadas. Para ver su efecto, se debe tener la propiedad `acomodo` en `"agrupadas"`. Por default es 0.1 y significa que para un subgrupo barras el 10% será espacio en blanco.
 - `alineacion_eje_y`: (_String_) Esta propiedad indica de qué lado se acomodará el eje vertical, las opciones validas son `'izquierda'` o `'derecha'`, y su valor por _default_ es `'izquierda'`.
 - `angulo_etiquetas_eje_y`: (_Number_) Es un valor numerico que indica el ángulo de rotación del eje vertical
 - `angulo_etiquetas_eje_x`: (_Number_) Es un valor numerico que indica el ángulo de rotación del eje horizontal
