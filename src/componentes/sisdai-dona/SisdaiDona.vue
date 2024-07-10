@@ -69,8 +69,8 @@ function calcularEscalas(grupoVis) {
     .innerRadius(props.radio_interno * limites)
     .outerRadius(props.radio_externo * limites)
   arco_txt.value
-    .innerRadius(props.radio_externo * limites)
-    .outerRadius(props.radio_externo * limites)
+    .innerRadius(props.radio_externo * limites + 4)
+    .outerRadius(props.radio_externo * limites + 4)
   data_pay.value = pay.value(
     datos.value.filter(d =>
       variables.value.map(dd => dd.id).includes(d[clave_categoria.value])
