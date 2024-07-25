@@ -342,13 +342,15 @@ onMounted(() => {
         nv.x < margenesSvg.value.derecha
           ? 0
           : nv.x >=
-            usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho +
-              margenesSvg.value.izquierda
-          ? escalaBanda.value.domain().length - 1
-          : parseInt(
-              (nv.x - margenesSvg.value.derecha - margenesSvg.value.izquierda) /
-                bandas
-            )
+              usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho +
+                margenesSvg.value.izquierda
+            ? escalaBanda.value.domain().length - 1
+            : parseInt(
+                (nv.x -
+                  margenesSvg.value.derecha -
+                  margenesSvg.value.izquierda) /
+                  bandas
+              )
       indice =
         indice === escalaBanda.value.domain().length ? indice - 1 : indice
       let categoria = escalaBanda.value.domain()[indice]

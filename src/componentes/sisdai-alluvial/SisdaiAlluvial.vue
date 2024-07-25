@@ -2,7 +2,6 @@
 import { format } from 'd3-format'
 import { sankey, sankeyLinkHorizontal } from 'd3-sankey'
 import { select } from 'd3-selection'
-import { transition } from 'd3-transition'
 
 import { onMounted, ref, shallowRef, toRefs, watch } from 'vue'
 import usarRegistroGraficas from '../../composables/usarRegistroGraficas'
@@ -30,10 +29,11 @@ const props = defineProps({
     },
   },
 })
+const datos_hover = ref()
 
 const sisdaiAlluvial = shallowRef()
 const { datos, variables } = toRefs(props)
-transition
+
 const margenesSvg = ref({})
 
 const grupoContenedor = ref(),
@@ -53,10 +53,7 @@ function creaAlluvial() {
     .nodePadding(8) // separación vertical entre nodos
     .extent([
       [-margenesSvg.value.izquierda, -margenesSvg.value.arriba],
-      [
-        grupoVis.ancho + margenesSvg.value.derecha,
-        grupoVis.alto + margenesSvg.value.abajo,
-      ],
+      [grupoVis.ancho, grupoVis.alto],
     ])
 
   // obtén el formato de datos para nodos y enlaces
@@ -87,20 +84,15 @@ function creaAlluvial() {
           .attr('opacity', 0.25)
           .style('mix-blend-mode', 'multiply')
           // interacción con el mouse
-          .on('mouseover', function () {
-            select(this).transition().duration(500).attr('opacity', 0.5)
+          .on('mouseover', function (e, d) {
+            datos_hover.value = { tipo: 'enlace', ...d }
+            select(this).attr('opacity', 0.5)
           })
           .on('mouseout', function () {
-            select(this).transition().duration(500).attr('opacity', 0.25)
+            datos_hover.value = {}
+
+            select(this).attr('opacity', 0.25)
           })
-          .append('title')
-          .text(
-            d =>
-              // revisar cuando son más de dos nodos
-              `${d.source.name} → ${
-                d.target.name
-              }\nvalor: ${d.value.toLocaleString()}`
-          )
       },
       update => {
         let grupo = update
@@ -109,16 +101,6 @@ function creaAlluvial() {
           .data(d => [d])
           .attr('d', sankeyLinkHorizontal())
           .attr('stroke-width', d => Math.max(1, d.width))
-
-        trazo
-          .selectAll('title')
-          .data(d => [d])
-          .text(
-            d =>
-              `${d.source.name} → ${
-                d.target.name
-              }\nvalor: ${d.value.toLocaleString()}`
-          )
       },
       exit => {
         exit.remove()
@@ -150,33 +132,32 @@ function creaAlluvial() {
             return 'rect-' + i
           })
           // interacción con el mouse
-          .on('mouseover', (d, i) => {
+          .on('mouseover', (e, d) => {
+            datos_hover.value = { tipo: 'nodo', ...d }
+
             let nodoResaltado = []
 
             // resalta los enlaces según el nodo seleccionado
             grupoEnlaces.value
-              .transition()
-              .duration(500)
+
               .selectAll('path.enlace')
               .attr('opacity', function (l) {
-                if (l.source.index === i.index || l.target.index === i.index) {
+                if (l.source.index === d.index || l.target.index === d.index) {
                   nodoResaltado.push(l.target.id)
                   nodoResaltado.push(l.source.id)
                 }
-                return l.source.index === i.index || l.target.index === i.index
+                return l.source.index === d.index || l.target.index === d.index
                   ? 0.5
                   : 0.2 // baja la opacidad a los enlaces que no estén relacionados
               })
 
             // baja la opacidad a los nodos y textos que no estén relacionados
             grupoNodos.value
-              .transition()
-              .duration(500)
+
               .selectAll('rect.nodo-rectangulo')
               .attr('opacity', 0.2)
             grupoNodos.value
-              .transition()
-              .duration(500)
+
               .selectAll('text.nodo-nombre')
               // .selectAll('foreignObject.nodo-nombre')
               .attr('opacity', 0.2)
@@ -184,86 +165,31 @@ function creaAlluvial() {
             // resalta los nodos y textos que estén relacionados
             for (let i = 0; i < nodoResaltado.length; i++) {
               grupoNodos.value
-                .transition()
-                .duration(500)
+
                 .selectAll('rect#rect-' + nodoResaltado[i])
                 .attr('opacity', 1)
               grupoNodos.value
-                .transition()
-                .duration(500)
+
                 .selectAll('text#rect-texto-' + nodoResaltado[i])
                 // .selectAll('foreignObject#rect-texto-' + nodoResaltado[i])
                 .attr('opacity', 1)
             }
           })
-          .on('mouseleave', () => {
+          .on('mouseout', () => {
+            datos_hover.value = {}
+
             // resetea la opacidad de los enlaces y nodos a como estaban
-            grupoEnlaces.value
-              .transition()
-              .duration(500)
-              .selectAll('path.enlace')
-              .attr('opacity', 0.25)
+            grupoEnlaces.value.selectAll('path.enlace').attr('opacity', 0.25)
             grupoNodos.value
-              .transition()
-              .duration(500)
+
               .selectAll('rect.nodo-rectangulo')
               .attr('opacity', 1)
             grupoNodos.value
-              .transition()
-              .duration(500)
+
               .selectAll('text.nodo-nombre')
               // .selectAll('foreignObject.nodo-nombre')
               .attr('opacity', 1)
           })
-          .append('title')
-          .text(d => `${d.name}\nvalor: ${d.value.toLocaleString()}`)
-
-        // Utilizando foreignObject
-        // let texto = grupo
-        //   .append('foreignObject')
-        //   .attr('class', 'nodo-nombre')
-        //   .attr('id', (d, i) => {
-        //     d.id = i
-        //     return 'rect-texto-' + i
-        //   })
-        //   // si la x0 del vector es menor a la mitad del ancho anchoVis
-        //   .attr('x', d =>
-        //     d.x0 < grupoVis.ancho / 2 ? d.x1 + 8 : d.x0 - 8 - 110
-        //   ) // padding horizontal de 8px
-        //   .attr('y', d => (d.y1 + d.y0) / 2 - 80)
-        //   .attr('width', 110)
-        //   .attr('height', 160)
-        //   .attr('opacity', 1)
-        //   // agrega div
-        //   .append('xhtml:div')
-        //   .style('display', 'inline-grid')
-        //   .style('align-content', 'center')
-        //   .style('justify-content', d =>
-        //     d.x0 < grupoVis.ancho / 2 ? 'start' : 'end'
-        //   )
-        //   .style('height', '160px')
-        //   .style('width', '110px')
-        // // agrega p
-        // texto
-        //   .append('p')
-        //   .style('margin', '0px')
-        //   .style('font-size', '.75rem')
-        //   .style('font-weight', '600')
-        //   .style('line-height', '1.3em')
-        //   .style('text-align', d =>
-        //     d.x0 < grupoVis.ancho / 2 ? 'left' : 'right'
-        //   )
-        //   .text(d => d.name)
-        // texto
-        //   .append('p')
-        //   .attr('class', 'nodo-valor')
-        //   .style('margin', '0px')
-        //   .style('font-size', '.75rem')
-        //   .attr('font-weight', '400')
-        //   .style('text-align', d =>
-        //     d.x0 < grupoVis.ancho / 2 ? 'left' : 'right'
-        //   )
-        //   .text(d => `valor: ${formatea(d.value).toLocaleString()}`) // solo la cantidad
 
         grupo
           .append('text')
@@ -308,38 +234,6 @@ function creaAlluvial() {
             d.id = i
             return 'rect-' + i
           })
-        rectangulo
-          .selectAll('title')
-          .data(d => [d])
-          .text(d => `${d.name}\nvalor: ${d.value.toLocaleString()}`)
-
-        // Utilizando foreignObject
-        // let texto = grupo.selectAll('foreignObject.nodo-nombre').data(d => [d])
-        // texto
-        //   .attr('id', (d, i) => {
-        //     d.id = i
-        //     return 'rect-texto-' + i
-        //   })
-        //   .attr('x', d =>
-        //     d.x0 < grupoVis.ancho / 2 ? d.x1 + 8 : d.x0 - 8 - 110
-        //   )
-        //   .attr('y', d => (d.y1 + d.y0) / 2 - 80)
-        //   .append('xhtml:div')
-        //   .style('justify-content', d =>
-        //     d.x0 < grupoVis.ancho / 2 ? 'start' : 'end'
-        //   )
-        // texto
-        //   .append('p')
-        //   .style('text-align', d =>
-        //     d.x0 < grupoVis.ancho / 2 ? 'left' : 'right'
-        //   )
-        //   .text(d => d.name)
-        // texto
-        //   .append('p')
-        //   .style('text-align', d =>
-        //     d.x0 < grupoVis.ancho / 2 ? 'left' : 'right'
-        //   )
-        //   .text(d => `valor: ${formatea(d.value).toLocaleString()}`)
 
         let texto = grupo.selectAll('text.nodo-nombre').data(d => [d])
         texto
@@ -402,6 +296,7 @@ onMounted(() => {
     creaAlluvial()
   })
 })
+defineExpose({ datos_hover })
 </script>
 
 <template>

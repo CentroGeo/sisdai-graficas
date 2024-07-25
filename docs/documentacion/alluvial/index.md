@@ -1,18 +1,21 @@
----
-layout: LayoutDocumentacion
-sectionName: Documentación
----
+<script setup>
+    import Basico from "../../.vitepress/components/alluvial/basico.vue";
+      import Complejo from "../../.vitepress/components/alluvial/complejo.vue";
+
+</script>
 
 # SisdaiAlluvial
 
-A continuación se describe la utilización del componente de visualización `<SisdaiAlluvial/>` para construir un gráfico de
-tipo alluvial.
+En este apartado se describe el uso del componente `<SisdaiAlluvial/>`, el cual consiste en un diagrama de Alluvial, cuyo uso más común se da para representar diagramas de flujo y/o de conexiones.
 
-## Propiedades
+## API
 
-### Obligatorias
+### Propiedades
 
-- `datos`: (_Object_) Base de datos a visualizar, consiste en un objeto con dos propiedades que corresponden a un arreglo de nodos que contiene el nombre y el id de dicho nodo y otro arreglo de enlaces con la fuente, el objetivo y los valores de dicho enlace.
+- `datos`: Base de datos a visualizar, consiste en un objeto con la clave `"nodos"` y cuyo valor es un arreglo de ojetos que contienen el nombre y el id de cada nodo y otra clave `"enlaces"` cuyo valor es un arreglo de enlaces con la fuente, el objetivo y los valores de dicho enlace.
+  - Tipo: `Object`
+  - Valor predeterminado: `undefined`
+  - Requerido: Sí
 
 > Ejemplo de `datos`:
 >
@@ -34,7 +37,12 @@ tipo alluvial.
 >
 > Para este tipo de visualización un archivo .csv no sería el formato más adecuado, por lo que se sugiere importar el objeto desde un archivo en formato .json
 
-- `variables`: (_Array_) Arreglo de objetos, en donde cada uno contiene información de las variables, nodos o enlaces incluidas en la base de datos. Por ejemplo:
+- `variables`: Arreglo de objetos, en donde cada uno contiene información de cada elemento gráfico, nodo o enlace, incluidos en la base de datos.
+  - Tipo: `Array`
+  - Valor predeterminado: `undefined`
+  - Requerido: Sí
+
+> Por ejemplo:
 
 > ```json
 > [
@@ -53,12 +61,27 @@ tipo alluvial.
 > ]
 > ```
 >
-> Esta propiedad tiene un validador para verificar que todos los objetos contengan las dos claves:
->
-> - `id`: su valor debe coincidir con alguna subcategoría de `datos`, equivalente a uno de los nombres de las columnas que contiene información numérica
-> - `color`: Es un _String_ que especifica en rgb, hexagesimal u otro formato reconoconocido por css que indicará el color que tomará cada subcategoría
+> Esta propiedad tiene un validador para verificar que todos los objetos contengan las siguientes dos claves:
+
+> - `id`: `String` cuyo valor debe coincidir con alguna subcategoría de `datos`, equivalente a uno de los nombres de las columnas que contiene información numérica
+> - `color`: `String` que especifica en rgb, hexagesimal u otro formato reconoconocido por `CSS` el color que tomará cada elemento.
+
+### Métodos
+
+- `creaAlluvial`: Este método crea ya actualiza el diagrama cuando se detectan cambios en `datos` y `variables`, así como en otros elementos del componente contenedor `<SisdaiGraficas>` como lo son `margenes` y los tamaños del `SVG`.
+
+### Propiedades expuestas
+
+- `datos_hover`: Esta propiedad expuesta se modifica cuando el cursor se posiciona en uno de los rectángulos (nodos) o en los algún enlace y devuelve un `Object` con los datos asociados al elemento generado por D3. Generalmente se usa esta propiedad para llenar el componente de `SisdaiGraficasGloboInfo` con información.
+  - Si el cursor está encima de un enlace, devuelve un objecto con la clave `tipo: "enlace"`, además de los datos `target`, `source` y `value` entre otros que asigna automáticamente D3.
+  - Si el cursor está sobre un nodo, devuelve un objeto con la clave `tipo:"nodo"`, además de los datos `name`, `id` y `value` entre otros que asigna automáticamente D3.
 
 ## Ejemplos
 
-<utils-ejemplo-doc ruta="alluvial/basico.vue"/>
-<utils-ejemplo-doc ruta="alluvial/complejo.vue"/>
+El siguiente ejemplo muestra el funcionamiento del componente con una base de datos muy sencilla y un globo de información condicional.
+<Basico/>
+<<< @/.vitepress/components/alluvial/basico.vue
+
+Cómo se puede notar en el ejemplo anterior, cuando el cursor se posiciona dentro del gráfico en un espacio en blanco, el globo de información se queda sin contenido. Se se quiere condicionar a que sólo se muestre si el cursor se posiciona sobre un elemento visual, se puede usar la directiva `v-show` como se muestra en el siguiente ejemplo.
+<Complejo/>
+<<< @/.vitepress/components/alluvial/complejo.vue
