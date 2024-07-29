@@ -28,29 +28,29 @@ A continuación se describe la utilización del componente de visualización `<S
 >
 > <table>
 > <thead>
->  <tr>
->    <th>categoria</th>
->    <th>cantidad</th>
->  </tr>
->  </thead>
->  <tbody>
->  <tr>
->    <td>cat_A</td>
->    <td>210</td>
->  </tr>
->  <tr>
->    <td>cat_B</td>
->    <td>120</td>
->  </tr>
->  <tr>
->    <td>cat_C</td>
->    <td>85</td>
->  </tr>
->  <tr>
->    <td>cat_D</td>
->    <td>52</td>
->  </tr>
->  </tbody>
+> <tr>
+> <th>categoria</th>
+> <th>cantidad</th>
+> </tr>
+> </thead>
+> <tbody>
+> <tr>
+> <td>cat_A</td>
+> <td>210</td>
+> </tr>
+> <tr>
+> <td>cat_B</td>
+> <td>120</td>
+> </tr>
+> <tr>
+> <td>cat_C</td>
+> <td>85</td>
+> </tr>
+> <tr>
+> <td>cat_D</td>
+> <td>52</td>
+> </tr>
+> </tbody>
 > </table>
 
 Cabe mencionar que el nombre de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no se tienen que llamar forzosamente como en el ejemplo. Las propiedades `variables`, `clave_categoria` y `clave_cantidad` descritas a continuación nos permiten especificar el nombre de las claves (o columnas).
@@ -95,6 +95,8 @@ Cabe mencionar que el nombre de las claves en los diccionarios (o de las columna
 
 - `radio_interno`: (_Number_) Es un número entre 0 y 0.5 que indica la el espacio en blanco dentro de la dona. Si es 0, se obtendrá una gráfica de pastel.
 - `radio_externo`: (_Number_) Es un número entre 0 y 0.5 que debe ser mayor al radio interno. Ambas propiedades en conjunto sirven para calibrar el grosor y tamaño de la dona.
+- `variables_visibles`: (_Array_) Es una propiedad opcional que consiste en un arreglo de _id_ que especifican las rebanadas que serán mostradas. Los que no estén incluidos en el arreglo, no se mostrarán en el gráfico.
+- `color_dona_fondo`: (_String_) Es pecifica el color de la dona de fondo. Por default es la variable de sisdai-css `"var(--fondo)"`
 
 ## Ejemplos
 

@@ -99,25 +99,22 @@ onUnmounted(() => {
 const paneles = ['encabezado', 'izquierda', 'derecha', 'pie']
 
 function siHayGlobo() {
-  let ancho_globo = select(
+  let globo_nodo = select(
     `#${props.id} .contenedor-svg-ejes-tooltip .globo-informacion`
-  ).node().clientWidth
+  ).node()
 
+  let ancho_globo = globo_nodo.getBoundingClientRect().width
   select(`#${props.id} svg.svg-vis`)
     .on('mousemove', e => {
       posicion_cursor.value.x = e.layerX
-
+      ancho_globo = globo_nodo.getBoundingClientRect().width
       posicion_cursor.value.y = e.layerY
       posicion_globo_info.value.top = e.layerY
       grafica().posicion_cursor = posicion_cursor.value
       select(`#${props.id} .contenedor-svg-ejes-tooltip .globo-informacion`)
         .style(
           'left',
-          (e.layerX >
-          0.5 *
-            (grafica().ancho +
-              margenes.value.izquierda +
-              margenes.value.derecha)
+          (e.layerX > 0.5 * grafica().ancho
             ? e.layerX - ancho_globo + espacio_eje_y.value - 5
             : e.layerX + espacio_eje_y.value + 5) + 'px'
         )
@@ -128,18 +125,14 @@ function siHayGlobo() {
     })
     .on('click', e => {
       posicion_cursor.value.x = e.layerX
-
+      ancho_globo = globo_nodo.getBoundingClientRect().width
       posicion_cursor.value.y = e.layerY
       posicion_globo_info.value.top = e.layerY
       grafica().posicion_cursor = posicion_cursor.value
       select(`#${props.id} .contenedor-svg-ejes-tooltip .globo-informacion`)
         .style(
           'left',
-          (e.layerX >
-          0.5 *
-            (grafica().ancho +
-              margenes.value.izquierda +
-              margenes.value.derecha)
+          (e.layerX > 0.5 * grafica().ancho
             ? e.layerX - ancho_globo + espacio_eje_y.value - 5
             : e.layerX + espacio_eje_y.value + 5) + 'px'
         )
