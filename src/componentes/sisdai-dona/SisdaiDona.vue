@@ -2,7 +2,6 @@
 import { min, sum } from 'd3-array'
 import { select } from 'd3-selection'
 import { arc, pie } from 'd3-shape'
-import { transition } from 'd3-transition'
 import { onMounted, ref, shallowRef, toRefs, watch } from 'vue'
 import usarRegistroGraficas from '../../composables/usarRegistroGraficas'
 import { buscarIdContenedorHtmlSisdai } from '../../utils'
@@ -62,7 +61,7 @@ const {
   clave_categoria,
   variables_visibles,
 } = toRefs(props)
-transition
+
 const margenesSvg = ref({})
 const pay = ref(pie()),
   arco = ref(arc()),
@@ -174,24 +173,21 @@ function creaDona() {
     },
     update => {
       let grupo = update.call(update1 => {
-        update1
-          .transition()
-          .duration(500)
-          .attr('fill', d => {
-            if (variables_visibles.value) {
-              return variables_visibles.value.includes(
-                d.data[clave_categoria.value]
-              )
-                ? variables.value.filter(
-                    dd => dd.id === d.data[clave_categoria.value]
-                  )[0].color
-                : 'none'
-            } else {
-              return variables.value.filter(
-                dd => dd.id === d.data[clave_categoria.value]
-              )[0].color
-            }
-          })
+        update1.attr('fill', d => {
+          if (variables_visibles.value) {
+            return variables_visibles.value.includes(
+              d.data[clave_categoria.value]
+            )
+              ? variables.value.filter(
+                  dd => dd.id === d.data[clave_categoria.value]
+                )[0].color
+              : 'none'
+          } else {
+            return variables.value.filter(
+              dd => dd.id === d.data[clave_categoria.value]
+            )[0].color
+          }
+        })
       })
       grupo
         .selectAll('path.path-segmento')
