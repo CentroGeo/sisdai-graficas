@@ -10,7 +10,7 @@
   "scripts": {
     "clean": "rm -rf node_modules && rm -f package-lock.json && npm cache clean -f && npm cache verify && npm i",
     "docs": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
+    "docs:build": "npm run clean && vuepress build docs",
     "docs:build-nossr": "vuepress buildnossr docs",
     "build": "vue-cli-service build --target lib src/index.js",
     "lint": "vue-cli-service lint",
