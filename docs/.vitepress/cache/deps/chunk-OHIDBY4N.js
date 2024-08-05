@@ -18,7 +18,7 @@ import {
   toRefs,
   unref,
   watch,
-} from './chunk-KV7T6ZSY.js'
+} from './chunk-574YRH25.js'
 
 // node_modules/@vue/devtools-api/lib/esm/env.js
 function getDevtoolsGlobalHook() {
@@ -196,7 +196,10 @@ var activePinia
 var setActivePinia = pinia => (activePinia = pinia)
 var getActivePinia = () =>
   (hasInjectionContext() && inject(piniaSymbol)) || activePinia
-var piniaSymbol = true ? Symbol('pinia') : /* istanbul ignore next */ Symbol()
+var piniaSymbol = true
+  ? Symbol('pinia')
+  : /* istanbul ignore next */
+    Symbol()
 function isPlainObject(o) {
   return (
     o &&
@@ -212,7 +215,6 @@ var MutationType
   MutationType2['patchFunction'] = 'patch function'
 })(MutationType || (MutationType = {}))
 var IS_CLIENT = typeof window !== 'undefined'
-var USE_DEVTOOLS = IS_CLIENT
 var _global = (() =>
   typeof window === 'object' && window.window === window
     ? window
@@ -772,6 +774,7 @@ function registerPiniaDevtools(app, pinia) {
           ).map(formatStoreForInspectorTree)
         }
       })
+      globalThis.$pinia = pinia
       api.on.getInspectorState(payload => {
         if (payload.app === app && payload.inspectorId === INSPECTOR_ID) {
           const inspectedStore =
@@ -782,6 +785,8 @@ function registerPiniaDevtools(app, pinia) {
             return
           }
           if (inspectedStore) {
+            if (payload.nodeId !== PINIA_ROOT_ID)
+              globalThis.$store = toRaw(inspectedStore)
             payload.state = formatStoreForInspectorState(inspectedStore)
           }
         }
@@ -1049,19 +1054,21 @@ function devtoolsPlugin({ app, store, options }) {
     return
   }
   store._isOptionsAPI = !!options.state
-  patchActionForGrouping(
-    store,
-    Object.keys(options.actions),
-    store._isOptionsAPI
-  )
-  const originalHotUpdate = store._hotUpdate
-  toRaw(store)._hotUpdate = function (newStore) {
-    originalHotUpdate.apply(this, arguments)
+  if (!store._p._testing) {
     patchActionForGrouping(
       store,
-      Object.keys(newStore._hmrPayload.actions),
-      !!store._isOptionsAPI
+      Object.keys(options.actions),
+      store._isOptionsAPI
     )
+    const originalHotUpdate = store._hotUpdate
+    toRaw(store)._hotUpdate = function (newStore) {
+      originalHotUpdate.apply(this, arguments)
+      patchActionForGrouping(
+        store,
+        Object.keys(newStore._hmrPayload.actions),
+        !!store._isOptionsAPI
+      )
+    }
   }
   addStoreToDevtools(
     app,
@@ -1081,7 +1088,7 @@ function createPinia() {
         pinia._a = app
         app.provide(piniaSymbol, pinia)
         app.config.globalProperties.$pinia = pinia
-        if (USE_DEVTOOLS) {
+        if (IS_CLIENT) {
           registerPiniaDevtools(app, pinia)
         }
         toBeInstalled.forEach(plugin => _p.push(plugin))
@@ -1104,10 +1111,17 @@ function createPinia() {
     _s: /* @__PURE__ */ new Map(),
     state,
   })
-  if (USE_DEVTOOLS && typeof Proxy !== 'undefined') {
+  if (typeof Proxy !== 'undefined') {
     pinia.use(devtoolsPlugin)
   }
   return pinia
+}
+function disposePinia(pinia) {
+  pinia._e.stop()
+  pinia._s.clear()
+  pinia._p.splice(0)
+  pinia.state.value = {}
+  pinia._a = null
 }
 var isUseStore = fn => {
   return typeof fn === 'function' && typeof fn.$id === 'string'
@@ -1187,11 +1201,12 @@ function triggerSubscriptions(subscriptions, ...args) {
   })
 }
 var fallbackRunWithContext = fn => fn()
+var ACTION_MARKER = Symbol()
+var ACTION_NAME = Symbol()
 function mergeReactiveObjects(target, patchToApply) {
   if (target instanceof Map && patchToApply instanceof Map) {
     patchToApply.forEach((value, key) => target.set(key, value))
-  }
-  if (target instanceof Set && patchToApply instanceof Set) {
+  } else if (target instanceof Set && patchToApply instanceof Set) {
     patchToApply.forEach(target.add, target)
   }
   for (const key in patchToApply) {
@@ -1287,10 +1302,7 @@ function createSetupStore(
   if (!pinia._e.active) {
     throw new Error('Pinia destroyed')
   }
-  const $subscribeOptions = {
-    deep: true,
-    // flush: 'post',
-  }
+  const $subscribeOptions = { deep: true }
   if (!isVue2) {
     $subscribeOptions.onTrigger = event => {
       if (isListening) {
@@ -1378,8 +1390,12 @@ function createSetupStore(
     actionSubscriptions = []
     pinia._s.delete($id)
   }
-  function wrapAction(name, action) {
-    return function () {
+  const action = (fn, name = '') => {
+    if (ACTION_MARKER in fn) {
+      fn[ACTION_NAME] = name
+      return fn
+    }
+    const wrappedAction = function () {
       setActivePinia(pinia)
       const args = Array.from(arguments)
       const afterCallbackList = []
@@ -1392,14 +1408,14 @@ function createSetupStore(
       }
       triggerSubscriptions(actionSubscriptions, {
         args,
-        name,
+        name: wrappedAction[ACTION_NAME],
         store,
         after,
         onError,
       })
       let ret
       try {
-        ret = action.apply(this && this.$id === $id ? this : store, args)
+        ret = fn.apply(this && this.$id === $id ? this : store, args)
       } catch (error) {
         triggerSubscriptions(onErrorCallbackList, error)
         throw error
@@ -1418,6 +1434,9 @@ function createSetupStore(
       triggerSubscriptions(afterCallbackList, ret)
       return ret
     }
+    wrappedAction[ACTION_MARKER] = true
+    wrappedAction[ACTION_NAME] = name
+    return wrappedAction
   }
   const _hmrPayload = markRaw({
     actions: {},
@@ -1482,7 +1501,7 @@ function createSetupStore(
   const runWithContext =
     (pinia._a && pinia._a.runWithContext) || fallbackRunWithContext
   const setupStore = runWithContext(() =>
-    pinia._e.run(() => (scope = effectScope()).run(setup))
+    pinia._e.run(() => (scope = effectScope()).run(() => setup({ action })))
   )
   for (const key in setupStore) {
     const prop = setupStore[key]
@@ -1507,7 +1526,7 @@ function createSetupStore(
         _hmrPayload.state.push(key)
       }
     } else if (typeof prop === 'function') {
-      const actionValue = hot ? prop : wrapAction(key, prop)
+      const actionValue = hot ? prop : action(prop, key)
       if (isVue2) {
         set(setupStore, key, actionValue)
       } else {
@@ -1583,8 +1602,8 @@ function createSetupStore(
         isListening = true
       })
       for (const actionName in newStore._hmrPayload.actions) {
-        const action = newStore[actionName]
-        set(store, actionName, wrapAction(actionName, action))
+        const actionFn = newStore[actionName]
+        set(store, actionName, action(actionFn, actionName))
       }
       for (const getterName in newStore._hmrPayload.getters) {
         const getter = newStore._hmrPayload.getters[getterName]
@@ -1612,7 +1631,7 @@ function createSetupStore(
       store._hotUpdating = false
     })
   }
-  if (USE_DEVTOOLS) {
+  if (IS_CLIENT) {
     const nonEnumerable = {
       writable: true,
       configurable: true,
@@ -1631,7 +1650,7 @@ function createSetupStore(
     store._r = true
   }
   pinia._p.forEach(extender => {
-    if (USE_DEVTOOLS) {
+    if (IS_CLIENT) {
       const extensions = scope.run(() =>
         extender({
           store,
@@ -1858,7 +1877,7 @@ var PiniaVuePlugin = function (_Vue) {
         if (IS_CLIENT) {
           setActivePinia(pinia)
         }
-        if (USE_DEVTOOLS) {
+        if (IS_CLIENT) {
           registerPiniaDevtools(pinia._a, pinia)
         }
       } else if (!this.$pinia && options.parent && options.parent.$pinia) {
@@ -1876,6 +1895,7 @@ export {
   getActivePinia,
   MutationType,
   createPinia,
+  disposePinia,
   acceptHMRUpdate,
   skipHydrate,
   defineStore,
@@ -1892,9 +1912,9 @@ export {
 
 pinia/dist/pinia.mjs:
   (*!
-   * pinia v2.1.7
-   * (c) 2023 Eduardo San Martin Morote
+   * pinia v2.2.0
+   * (c) 2024 Eduardo San Martin Morote
    * @license MIT
    *)
 */
-//# sourceMappingURL=chunk-XK7F5NBO.js.map
+//# sourceMappingURL=chunk-OHIDBY4N.js.map

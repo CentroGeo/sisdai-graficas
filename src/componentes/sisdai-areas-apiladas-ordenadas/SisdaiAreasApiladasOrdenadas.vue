@@ -356,7 +356,6 @@ onMounted(() => {
       }
 
       datos_hover.value = x0 - d0.la_fecha > d1.la_fecha - x0 ? d1 : d0
-      console.log(datos_hover.value)
     },
     { deep: true }
   )

@@ -1,6 +1,6 @@
 <script setup>
-    import Basico from "../../.vitepress/components/areas-apiladas/basico.vue";
-      import ModificandoDatos from "../../.vitepress/components/areas-apiladas/modificando-datos.vue";
+  import Basico from "../../.vitepress/components/areas-apiladas/basico.vue";
+  import ModificandoDatos from "../../.vitepress/components/areas-apiladas/modificando-datos.vue";
 </script>
 
 # SisdaiAreasApiladas
@@ -60,11 +60,9 @@ El componente `<SisdaiAreasApiladas/>` sirve para graficar datos temporales de d
 > </tr>
 > </tbody>
 > </table>
-
 > Cabe mencionar que el nombre de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no se tienen que llamar forzosamente como en el ejemplo. Las propiedades `variables` y `clave_fecha` más adelante nos permiten especificar el nombre de las claves (o columnas).
 
 - `variables`: Arreglo de objetos, en donde cada uno contiene información de las variables o series de tiempo incluidas en la base de datos.
-
   - Tipo: `Array`
   - Valor predeterminado: `undefined`
   - Requerido: Sí
@@ -88,7 +86,7 @@ El componente `<SisdaiAreasApiladas/>` sirve para graficar datos temporales de d
 >
 > Esta propiedad tiene un validador para verificar que todos los objetos contengan las tres claves:
 >
-> - `id`: su valor es un `String` que debe coincidir con alguna subcategoría de `datos`, equivalente a uno de los nombres de las columnas que contiene información numérica
+> - `id`: su valor es un `String` que debe coincidir con alguna subcategoría de `datos`, equivalente a uno de los nombres de las columnas que contienen información numérica
 > - `nombre`: su valor es un `String` que da más información sobre el id y que puede ser empleado para globos de información
 > - `color`: Es un `String` que especifica en rgb, hexagesimal u otro formato reconoconocido por css el color que tomará cada subcategoría.
 
@@ -119,6 +117,8 @@ El componente `<SisdaiAreasApiladas/>` sirve para graficar datos temporales de d
 - `creaAreas`: Este método se ejecuta al montar el componente y cuando se detectan cambios en `datos`, `variables` o en las dimensiones del componente contenedor `<SisdaiGraficas>` y crea y actualiza el gráfico.
 
 ### Propiedades expuestas
+
+- `datos_hover`: Esta propiedad expuesta se modifica según la posición del cursor cuando se usa el slot `globo-informacion`, y devuelve un `Object` con los datos asociados a la fecha más cercana indicada por el cursor. Generalmente se usa esta propiedad para llenar el componente de `SisdaiGraficasGloboInfo` con información.
 
 - `escalaTemporal`: Es la función de D3 `d3.scaleTime` que se emplea en el eje horizontal. Es útil cuando se desean agregar elementos al gráfico a través de dicha escala.
 - `escalaLineal`: Es la función de D3 `d3.scaleLinear` que se emplea en el eje vertical. Es útil cuando se desean agregar elementos al gráfico a través de dicha escala.

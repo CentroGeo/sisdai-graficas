@@ -1,7 +1,7 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import datos_consorcio from '../../assets/datos/consorcio_variantes_todas.json'
-
+const lasAreasApiladas = ref()
 const datos = ref(datos_consorcio)
 const variables = ref([
   { id: 'Omicron', color: '#FFCE00', nombre: 'Omicron' },
@@ -18,6 +18,15 @@ const variables = ref([
   },
 ])
 const variablesCheckeadas = ref()
+const variablesDinamicas = computed(() =>
+  variablesCheckeadas.value
+    ? variablesCheckeadas.value?.variables_activas
+    : variables.value
+)
+watch(
+  () => lasAreasApiladas.value?.datos_hover,
+  nv => console.log(nv.fecha_1)
+)
 </script>
 <template>
   <SisdaiGraficas
@@ -25,6 +34,25 @@ const variablesCheckeadas = ref()
     :titulo_eje_x="'título del eje x'"
     :margenes="{ arriba: 10, abajo: 40, derecha: 30, izquierda: 40 }"
   >
+    <template #globo-informacion>
+      <SisdaiGraficasGloboInfo :ancho="200">
+        <p>{{ lasAreasApiladas?.datos_hover?.fecha_1 }}</p>
+        <p>
+          <span
+            v-for="(variable, i) in variablesDinamicas"
+            :key="i"
+          >
+            <span
+              class="globo-informacion-punto-color"
+              :style="{ background: variable.color }"
+            ></span>
+            {{ variable.nombre }}:
+            {{ lasAreasApiladas?.datos_hover?.[variable.id] }}
+            <br />
+          </span>
+        </p>
+      </SisdaiGraficasGloboInfo>
+    </template>
     <template #panel-encabezado-vis>
       <div>
         <p class="vis-titulo-visualizacion">
@@ -34,10 +62,9 @@ const variablesCheckeadas = ref()
       </div>
     </template>
     <SisdaiAreasApiladas
+      ref="lasAreasApiladas"
       :datos="datos"
-      :variables="
-        variablesCheckeadas ? variablesCheckeadas.variables_activas : variables
-      "
+      :variables="variablesDinamicas"
       :angulo_etiquetas_eje_x="-45"
       :clave_fecha="'fecha_2'"
       :formato_temporal="'%d/%m/%Y'"

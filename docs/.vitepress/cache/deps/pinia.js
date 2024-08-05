@@ -4,6 +4,7 @@ import {
   acceptHMRUpdate,
   createPinia,
   defineStore,
+  disposePinia,
   getActivePinia,
   mapActions,
   mapGetters,
@@ -14,15 +15,16 @@ import {
   setMapStoreSuffix,
   skipHydrate,
   storeToRefs,
-} from './chunk-XK7F5NBO.js'
+} from './chunk-OHIDBY4N.js'
 import './chunk-O3YQPVDG.js'
-import './chunk-KV7T6ZSY.js'
+import './chunk-574YRH25.js'
 export {
   MutationType,
   PiniaVuePlugin,
   acceptHMRUpdate,
   createPinia,
   defineStore,
+  disposePinia,
   getActivePinia,
   mapActions,
   mapGetters,

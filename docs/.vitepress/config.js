@@ -96,7 +96,7 @@ function sidebarDocumentacion(path) {
     },
     {
       text: 'Dona',
-      link: `/${path}/Dona/`,
+      link: `/${path}/dona/`,
     },
     {
       text: 'Series de tiempo',

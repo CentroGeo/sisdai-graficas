@@ -56,7 +56,7 @@ defineExpose({ variables_activas })
       />
       <label :for="variable.id"
         ><span
-          class="figura-variable"
+          class="figura-variable muestra"
           :style="{ background: variable.color }"
         ></span>
         <span class="nombre-variable">

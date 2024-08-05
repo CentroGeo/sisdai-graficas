@@ -4728,16 +4728,31 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
         const opt = raw[key]
         const prop = (normalized[normalizedKey] =
           isArray(opt) || isFunction(opt) ? { type: opt } : extend({}, opt))
-        if (prop) {
-          const booleanIndex = getTypeIndex(Boolean, prop.type)
-          const stringIndex = getTypeIndex(String, prop.type)
-          prop[0] = booleanIndex > -1
-          /* shouldCast */
-          prop[1] = stringIndex < 0 || booleanIndex < stringIndex
-          /* shouldCastTrue */
-          if (booleanIndex > -1 || hasOwn(prop, 'default')) {
-            needCastKeys.push(normalizedKey)
+        const propType = prop.type
+        let shouldCast = false
+        let shouldCastTrue = true
+        if (isArray(propType)) {
+          for (let index = 0; index < propType.length; ++index) {
+            const type = propType[index]
+            const typeName = isFunction(type) && type.name
+            if (typeName === 'Boolean') {
+              shouldCast = true
+              break
+            } else if (typeName === 'String') {
+              shouldCastTrue = false
+            }
           }
+        } else {
+          shouldCast = isFunction(propType) && propType.name === 'Boolean'
+        }
+        prop[0] =
+        /* shouldCast */
+          shouldCast
+        prop[1] =
+        /* shouldCastTrue */
+          shouldCastTrue
+        if (shouldCast || hasOwn(prop, 'default')) {
+          needCastKeys.push(normalizedKey)
         }
       }
     }
@@ -4767,17 +4782,6 @@ function getType(ctor) {
     return name || ''
   }
   return ''
-}
-function isSameType(a, b) {
-  return getType(a) === getType(b)
-}
-function getTypeIndex(type, expectedTypes) {
-  if (isArray(expectedTypes)) {
-    return expectedTypes.findIndex(t => isSameType(t, type))
-  } else if (isFunction(expectedTypes)) {
-    return isSameType(expectedTypes, type) ? 0 : -1
-  }
-  return -1
 }
 function validateProps(rawProps, props, instance) {
   const resolvedValues = toRaw(props)
@@ -5143,15 +5147,11 @@ var TeleportImpl = {
       const mainAnchor = (n2.anchor = true
         ? createComment('teleport end')
         : createText(''))
-      const target = (n2.target = resolveTarget(n2.props, querySelector))
-      const targetStart = (n2.targetStart = createText(''))
-      const targetAnchor = (n2.targetAnchor = createText(''))
       insert(placeholder, container, anchor)
       insert(mainAnchor, container, anchor)
-      targetStart[TeleportEndKey] = targetAnchor
+      const target = (n2.target = resolveTarget(n2.props, querySelector))
+      const targetAnchor = prepareAnchor(target, n2, createText, insert)
       if (target) {
-        insert(targetStart, target)
-        insert(targetAnchor, target)
         if (namespace === 'svg' || isTargetSVG(target)) {
           namespace = 'svg'
         } else if (namespace === 'mathml' || isTargetMathML(target)) {
@@ -5322,7 +5322,7 @@ function hydrateTeleport(
   parentSuspense,
   slotScopeIds,
   optimized,
-  { o: { nextSibling, parentNode, querySelector } },
+  { o: { nextSibling, parentNode, querySelector, insert, createText } },
   hydrateChildren
 ) {
   const target = (vnode.target = resolveTarget(vnode.props, querySelector))
@@ -5339,24 +5339,29 @@ function hydrateTeleport(
           slotScopeIds,
           optimized
         )
-        vnode.targetAnchor = targetNode
+        vnode.targetStart = targetNode
+        vnode.targetAnchor = targetNode && nextSibling(targetNode)
       } else {
         vnode.anchor = nextSibling(node)
         let targetAnchor = targetNode
         while (targetAnchor) {
-          targetAnchor = nextSibling(targetAnchor)
-          if (
-            targetAnchor &&
-            targetAnchor.nodeType === 8 &&
-            targetAnchor.data === 'teleport anchor'
-          ) {
-            vnode.targetAnchor = targetAnchor
-            target._lpa = vnode.targetAnchor && nextSibling(vnode.targetAnchor)
-            break
+          if (targetAnchor && targetAnchor.nodeType === 8) {
+            if (targetAnchor.data === 'teleport start anchor') {
+              vnode.targetStart = targetAnchor
+            } else if (targetAnchor.data === 'teleport anchor') {
+              vnode.targetAnchor = targetAnchor
+              target._lpa =
+                vnode.targetAnchor && nextSibling(vnode.targetAnchor)
+              break
+            }
           }
+          targetAnchor = nextSibling(targetAnchor)
+        }
+        if (!vnode.targetAnchor) {
+          prepareAnchor(target, vnode, createText, insert)
         }
         hydrateChildren(
-          targetNode,
+          targetNode && nextSibling(targetNode),
           vnode,
           target,
           parentComponent,
@@ -5381,6 +5386,16 @@ function updateCssVars(vnode) {
     }
     ctx.ut()
   }
+}
+function prepareAnchor(target, vnode, createText, insert) {
+  const targetStart = (vnode.targetStart = createText(''))
+  const targetAnchor = (vnode.targetAnchor = createText(''))
+  targetStart[TeleportEndKey] = targetAnchor
+  if (target) {
+    insert(targetStart, target)
+    insert(targetAnchor, target)
+  }
+  return targetAnchor
 }
 var hasLoggedMismatchError = false
 var logMismatchError = () => {
@@ -8126,7 +8141,7 @@ function useModel(props, name, options = EMPTY_OBJ) {
   const modifiers = getModelModifiers(props, name)
   const res = customRef((track2, trigger2) => {
     let localValue
-    let prevSetValue
+    let prevSetValue = EMPTY_OBJ
     let prevEmittedValue
     watchSyncEffect(() => {
       const propValue = props[name]
@@ -8141,7 +8156,10 @@ function useModel(props, name, options = EMPTY_OBJ) {
         return options.get ? options.get(localValue) : localValue
       },
       set(value) {
-        if (!hasChanged(value, localValue)) {
+        if (
+          !hasChanged(value, localValue) &&
+          !(prevSetValue !== EMPTY_OBJ && hasChanged(value, prevSetValue))
+        ) {
           return
         }
         const rawProps = i.vnode.props
@@ -8162,9 +8180,9 @@ function useModel(props, name, options = EMPTY_OBJ) {
         const emittedValue = options.set ? options.set(value) : value
         i.emit(`update:${name}`, emittedValue)
         if (
-          value !== emittedValue &&
-          value !== prevSetValue &&
-          emittedValue === prevEmittedValue
+          hasChanged(value, emittedValue) &&
+          hasChanged(value, prevSetValue) &&
+          !hasChanged(emittedValue, prevEmittedValue)
         ) {
           trigger2()
         }
@@ -10406,7 +10424,7 @@ function isMemoSame(cached, memo) {
   }
   return true
 }
-var version = '3.4.33'
+var version = '3.4.35'
 var warn2 = true ? warn$1 : NOOP
 var ErrorTypeStrings = ErrorTypeStrings$1
 var devtools = true ? devtools$1 : void 0
@@ -12268,7 +12286,7 @@ export {
 
 @vue/shared/dist/shared.esm-bundler.js:
   (**
-  * @vue/shared v3.4.33
+  * @vue/shared v3.4.35
   * (c) 2018-present Yuxi (Evan) You and Vue contributors
   * @license MIT
   **)
@@ -12276,14 +12294,14 @@ export {
 
 @vue/reactivity/dist/reactivity.esm-bundler.js:
   (**
-  * @vue/reactivity v3.4.33
+  * @vue/reactivity v3.4.35
   * (c) 2018-present Yuxi (Evan) You and Vue contributors
   * @license MIT
   **)
 
 @vue/runtime-core/dist/runtime-core.esm-bundler.js:
   (**
-  * @vue/runtime-core v3.4.33
+  * @vue/runtime-core v3.4.35
   * (c) 2018-present Yuxi (Evan) You and Vue contributors
   * @license MIT
   **)
@@ -12291,7 +12309,7 @@ export {
 
 @vue/runtime-dom/dist/runtime-dom.esm-bundler.js:
   (**
-  * @vue/runtime-dom v3.4.33
+  * @vue/runtime-dom v3.4.35
   * (c) 2018-present Yuxi (Evan) You and Vue contributors
   * @license MIT
   **)
@@ -12299,9 +12317,9 @@ export {
 
 vue/dist/vue.runtime.esm-bundler.js:
   (**
-  * vue v3.4.33
+  * vue v3.4.35
   * (c) 2018-present Yuxi (Evan) You and Vue contributors
   * @license MIT
   **)
 */
-//# sourceMappingURL=chunk-KV7T6ZSY.js.map
+//# sourceMappingURL=chunk-574YRH25.js.map

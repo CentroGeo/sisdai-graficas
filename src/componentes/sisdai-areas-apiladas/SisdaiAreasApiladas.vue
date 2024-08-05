@@ -1,5 +1,5 @@
 <script setup>
-import { extent, max, sum } from 'd3-array'
+import { bisector, extent, max, sum } from 'd3-array'
 import { scaleLinear, scaleTime } from 'd3-scale'
 import { select } from 'd3-selection'
 import { stack } from 'd3-shape'
@@ -98,6 +98,8 @@ const escalaTemporal = ref(),
   escalaLineal = ref()
 const grupoContenedor = ref(),
   grupoAreas = ref()
+
+const datos_hover = ref()
 
 function calcularEscalas(grupoVis) {
   if (!grupoVis && grupoVis.ancho === 0) return
@@ -212,10 +214,28 @@ onMounted(() => {
     calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
     creaAreas()
   })
+  watch(
+    () => usarRegistroGraficas().grafica(idGrafica).posicion_cursor,
+    nv => {
+      let bisecetDate = bisector(d => d.la_fecha).left
+
+      let x0 = escalaTemporal.value.invert(nv.x - margenesSvg.value.izquierda)
+      let indice = bisecetDate(datos.value, x0, 1)
+      let d0 = datos.value[indice - 1]
+      let d1 = datos.value[indice]
+
+      if (!d1) {
+        d1 = d0
+      }
+      datos_hover.value = x0 - d0.la_fecha > d1.la_fecha - x0 ? d1 : d0
+    },
+    { deep: true }
+  )
 })
 defineExpose({
   escalaTemporal,
   escalaLineal,
+  datos_hover,
 })
 </script>
 

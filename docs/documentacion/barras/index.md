@@ -1,18 +1,22 @@
----
-layout: LayoutDocumentacion
-sectionName: Documentación
----
+<script setup>
+    import Basico from "../../.vitepress/components/barras/basico.vue";
+    import DatosReales from "../../.vitepress/components/barras/datos-reales.vue";
+    import ModificandoDatos from "../../.vitepress/components/barras/modificando-datos.vue";
+    import Checks from "../../.vitepress/components/barras/checks.vue";
+</script>
 
 # SisdaiBarras
 
-A continuación se describe la utilización del componente de visualización `<SisdaiBarras/>` para construir un gráfico de
-barras. Este componente puede ser utilizado para crear barras simples o apiladas.
+A continuación se describe el uso del componente `<SisdaiBarras/>` para construir un gráfico de barras.
 
-## Propiedades
+## API
 
-### Obligatorias
+### Propiedades
 
-- `datos`: (_Array_) Base de datos a visualizar, consiste en una arreglo de objetos en dónde cada objeto corresponde a una categoría principal y contiene la información necesaria para construir una barra, una barra conformada por otros rectángulos apilados, o bien, un conjunto de barras agupadas
+- `datos`: Base de datos a visualizar, consiste en una arreglo de objetos en dónde cada uno corresponde a una categoría principal y contiene la información necesaria para construir una barra, la cual puede estar conformada por otros rectángulos apilados, o bien, un conjunto de barras agupadas.
+  - Tipo: `Array`
+  - Valor predeterminado: `undefined`
+  - Requerido: Sí
 
 > Ejemplo de `datos`:
 >
@@ -25,7 +29,7 @@ barras. Este componente puede ser utilizado para crear barras simples o apiladas
 > ]
 > ```
 >
-> El arreglo mostrado arriba puede ser el objeto resultante al importar con la biblioteca d3.js un archivo .csv con la estructura mostrada a continuación. En ese sentido, mantienen cierta equivalencia:
+> El arreglo mostrado arriba puede ser el objeto resultante al importar con la biblioteca d3.js o algún plugin como [plugin-dsv](https://www.npmjs.com/package/@rollup/plugin-dsv) un archivo .csv con la estructura mostrada a continuación. En ese sentido, mantienen cierta equivalencia:
 >
 > <table>
 > <thead>
@@ -59,47 +63,86 @@ barras. Este componente puede ser utilizado para crear barras simples o apiladas
 > </tbody>
 > </table>
 >
-> En este ejemplo, **categoria** indica las categorías principales, y **cantidad_1** y **cantidad_2** son un valores numérico que representa la magnitud de dichas subcategorías.
+> En este ejemplo, `categoria` indica las categorías principales, y `cantidad_1` y `cantidad_2` son un valores numérico que representa la magnitud de dichas subcategorías.
 > Cabe mencionar que el nombre de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no se tienen que llamar forzosamente como en el ejemplo. Las propiedades `variables` y `clave_categorias` descritas a continuación nos permiten especificar el nombre de las claves (o columnas).
 
-- `variables`: (_Array_) Arreglo de objetos, en donde cada uno contiene información de las subcategorías/colores incluidos en la base de datos. Por ejemplo:
+- `variables`: Arreglo de objetos, en donde cada uno contiene información de las subcategorías incluidas en la base de datos, así como sus colores.
 
-> ```json
-> [
->   {
->     "id": "cantidad_1",
->     "nombre": "Cantidad 1",
->     "color": "pink"
->   },
->   {
->     "id": "cantidad_2",
->     "nombre": "Cantidad 2",
->     "color": "orange"
->   }
-> ]
-> ```
->
-> Esta propiedad tiene un validador para verificar que todos los objetos contengan las tres claves:
->
-> - `id`: su valor debe coincidir con alguna subcategoría de `datos`, equivalente a uno de los nombres de las columnas
-> - `nombre`: su valor es un string que da más información sobre el id y es un _String_ que puede ser empleado para globos de información
-> - `color`: Es un _String_ que especifica en rgb, hexagesimal u otro formato reconoconocido por css que indicará el color que tomará cada subcategoría
+  - Tipo: `Array`
+  - Valor predeterminado: `undefined`
+  - Requerido: Sí
+    > Por ejemplo:
+    >
+    > ```json
+    > [
+    >   {
+    >     "id": "cantidad_1",
+    >     "nombre": "Cantidad 1",
+    >     "color": "pink"
+    >   },
+    >   {
+    >     "id": "cantidad_2",
+    >     "nombre": "Cantidad 2",
+    >     "color": "orange"
+    >   }
+    > ]
+    > ```
+    >
+    > Esta propiedad tiene un validador para verificar que todos los objetos contengan las tres claves:
+    >
+    > - `id`: su valor es un `String` quedebe coincidir con alguna subcategoría de `datos`, equivalente a uno de los nombres de las columnas que contienen informacion numérica
+    > - `nombre`: su valor es un `String` que da más información sobre el id y que puede ser empleado para globos de información
+    > - `color`: Es un `String` que especifica en rgb, hexagesimal u otro formato reconoconocido por css el color que tomará cada subcategoría.
 
-- `clave_categorias`: (_String_) Indica la clave empleada para las categorías principales, por default es `"categoria"` y con el ejemplo anterior de `datos` podría no especificarse esta propiedad, pero si `datos` emplea otra clave para la categoría principal, esta propiedad tendrá que especificarse
+- `clave_categorias`: Indica la clave empleada para las categorías principales, por default es `"categoria"` y con el ejemplo anterior de `datos` podría no especificarse esta propiedad, pero si `datos` emplea otra clave para la categoría principal, esta propiedad tendrá que especificarse.
+  - Tipo: `String`
+  - Valor predeterminado: `"fecha"`
+  - Requerido: Sí
+- `separacion`: Valor numérico entre 0 y 1 que determina la separación de las barras. Por default es `0.2` y significa que el 20% de la gráfica será espacio en blanco.
+  - Tipo: `Number`
+  - Valor predeterminado: `0.2`
+  - Requerido: No
+- `acomodo`: Admite los valores `"apiladas"` o `"agrupadas"` y determina la forma en la que se mostrarán las barras en caso de que existan varias subcategorías.
+  - Tipo: `String`
+  - Valor predeterminado: `"apiladas"`
+  - Requerido: No
+- `padding_agrupadas`: Valor numérico entre 0 y 1 que determina la separación de las barras agrupadas. Para ver su efecto, se debe tener la propiedad `acomodo` en `"agrupadas"`. Por default es 0.1 y significa que para un subgrupo barras el 10% será espacio en blanco.
+  - Tipo: `Number`
+  - Valor predeterminado: `0.1`
+  - Requerido: No
+- `alineacion_eje_y`: Esta propiedad indica de qué lado se acomodará el eje vertical, las opciones validas son `'izquierda'` o `'derecha'`.
+  - Tipo: `String`
+  - Valor predeterminado: `"izquierda"`
+  - Requerido: No
+- `angulo_etiquetas_eje_y`: Es un valor numerico entre `-90` y `90` que indica el ángulo de rotación del eje vertical
+  - Tipo: `Number`
+  - Valor predeterminado: `0`
+  - Requerido: No
+- `angulo_etiquetas_eje_x`: Es un valor numerico entre `-90` y `90` que indica el ángulo de rotación del eje horizontal
+  - Tipo: `Number`
+  - Valor predeterminado: `0`
+  - Requerido: No
 
-### Opcionales
+### Métodos
 
-- `separacion`: (_Number_) Valor numérico entre 0 y 1 que determina la separación de las barras. Por default es `0.2` y significa que el 20% de la gráfica será espacio en blanco
-- `acomodo`: (_String_) Admite los valores `"apiladas"` o `"agrupadas"` y determina la forma en la que se mostrarán las barras en caso de que existan varias subcategorías.
-- `padding_agrupadas`: (_Number_) Valor numérico entre 0 y 1 que determina la separación de las barras agrupadas. Para ver su efecto, se debe tener la propiedad `acomodo` en `"agrupadas"`. Por default es 0.1 y significa que para un subgrupo barras el 10% será espacio en blanco.
-- `alineacion_eje_y`: (_String_) Esta propiedad indica de qué lado se acomodará el eje vertical, las opciones validas son `'izquierda'` o `'derecha'`, y su valor por _default_ es `'izquierda'`.
-- `angulo_etiquetas_eje_y`: (_Number_) Es un valor numerico que indica el ángulo de rotación del eje vertical
-- `angulo_etiquetas_eje_x`: (_Number_) Es un valor numerico que indica el ángulo de rotación del eje horizontal
+- `calcularEscalas`: Este método se ejecuta al montar el componente y cuando se detectan cambios en `datos`, `variables` o en las dimensiones del componente contenedor `<SisdaiGraficas>` y calcula escalas para graficar.
+- `creaBarras`: Este método se ejecuta al montar el componente y cuando se detectan cambios en `datos`, `variables` o en las dimensiones del componente contenedor `<SisdaiGraficas>` y crea y actualiza el gráfico.
+
+### Propiedades expuestas
+
+- `datos_hover`: Esta propiedad expuesta se modifica según la posición del cursor cuando se usa el slot `globo-informacion`, y devuelve un `Object` con los datos asociados a la categoría más cercana indicada por el cursor. Generalmente se usa esta propiedad para llenar el componente de `SisdaiGraficasGloboInfo` con información.
+
+- `escalaBanda`: Es la función de D3 `d3.scaleBand` que se emplea en el eje horizontal. Es útil cuando se desean agregar elementos al gráfico a través de dicha escala.
+- `escalaSubBanda`: Es la función de D3 `d3.scaleBand` que se emplea en el eje horizontal cuando las la propiedad `acomodo` toma el valor de `"agrupadas"` . Esta escala corresponde a la separación entre cada grupo de barras.
+- `escalaLineal`: Es la función de D3 `d3.scaleLinear` que se emplea en el eje vertical. Es útil cuando se desean agregar elementos al gráfico a través de dicha escala.
 
 ## Ejemplos
 
-<utils-ejemplo-doc ruta="barras/basico.vue"/>
-<utils-ejemplo-doc ruta="barras/datos-reales.vue"/>
-
-<utils-ejemplo-doc ruta="barras/modificando-datos.vue"/>
-<utils-ejemplo-doc ruta="barras/checks.vue"/>
+<Basico/>
+<<< @/.vitepress/components/barras/basico.vue
+<DatosReales/>
+<<< @/.vitepress/components/barras/datos-reales.vue
+<ModificandoDatos/>
+<<< @/.vitepress/components/barras/modificando-datos.vue
+<Checks/>
+<<< @/.vitepress/components/barras/checks.vue

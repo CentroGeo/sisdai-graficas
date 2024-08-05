@@ -3,7 +3,6 @@ node_modules
 package.json
 package-lock.json
 
-
 # No ejecutar prettier en carpetas de compilación (asegúrese de que esté configurada con el nombre correcto de la carpeta de compilación)
 dist
 docs/.vuepress/dist
@@ -11,4 +10,3 @@ docs/.vitepress/dist
 
 # No ejecutar prettier en la salida de nyc coverage
 coverage
-
