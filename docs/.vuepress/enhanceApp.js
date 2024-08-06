@@ -12,8 +12,8 @@ export default ({
 }) => {
   // ...apply enhancements to the app
   // import styles
-  require('./theme/styles/index.scss')
-  require('../../node_modules/sisdai-css/src/sisdai.scss')
+  require('./theme/styles/index.css')
+  require('../../node_modules/sisdai-css/dist/sisdai.min.css')
 
   Vue.use(Vuex)
   Vue.mixin({ store: store })
