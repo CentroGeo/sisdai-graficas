@@ -1,5 +1,5 @@
 ---
-layout: LayoutDocumentacion
+layout: Layout
 sectionName: Documentación
 ---
 
@@ -41,34 +41,34 @@ En esta sección se describe el uso del componente de visualización `<SisdaiVio
 >
 > <table>
 > <thead>
->  <tr>
->    <th>seguridad_social</th>
->    <th>edad</th>
->  </tr>
->  </thead>
->  <tbody>
->  <tr>
->    <td>INSABI</td>
->    <td>35</td>
->  </tr>
->  <tr>
->    <td>INSABI</td>
->    <td>40</td>
->  </tr>
->  <tr>
->    <td>IMSS</td>
->    <td>22</td>
->  </tr>
->  <tr>
->    <td>Otro</td>
->    <td>19</td>
->  </tr>
 > <tr>
->    <td>...</td>
->    <td>...</td>
->  </tr>
+> <th>seguridad_social</th>
+> <th>edad</th>
+> </tr>
+> </thead>
+> <tbody>
+> <tr>
+> <td>INSABI</td>
+> <td>35</td>
+> </tr>
+> <tr>
+> <td>INSABI</td>
+> <td>40</td>
+> </tr>
+> <tr>
+> <td>IMSS</td>
+> <td>22</td>
+> </tr>
+> <tr>
+> <td>Otro</td>
+> <td>19</td>
+> </tr>
+> <tr>
+> <td>...</td>
+> <td>...</td>
+> </tr>
 >
->  </tbody>
+> </tbody>
 > </table>
 >
 > En este ejemplo, **seguridad_social** indica las categorías con las que se agruparán los datos, y **edad** la variable númerica que se usará para calcular las los cuartiles y otros elementos de cada subconjunto de los datos.

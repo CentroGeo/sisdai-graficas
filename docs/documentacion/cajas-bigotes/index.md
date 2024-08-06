@@ -1,5 +1,5 @@
 ---
-layout: LayoutDocumentacion
+layout: Layout
 sectionName: Documentación
 ---
 
@@ -41,34 +41,34 @@ En esta sección se describe el uso del componente de visualización `<SisdaiCaj
 >
 > <table>
 > <thead>
->  <tr>
->    <th>nombre_empresa</th>
->    <th>acciones_vendidas</th>
->  </tr>
->  </thead>
->  <tbody>
->  <tr>
->    <td>Empresa A</td>
->    <td>180</td>
->  </tr>
->  <tr>
->    <td>Empresa B</td>
->    <td>178</td>
->  </tr>
->  <tr>
->    <td>Empresa C</td>
->    <td>467</td>
->  </tr>
->  <tr>
->    <td>Empresa A</td>
->    <td>264</td>
->  </tr>
 > <tr>
->    <td>...</td>
->    <td>...</td>
->  </tr>
+> <th>nombre_empresa</th>
+> <th>acciones_vendidas</th>
+> </tr>
+> </thead>
+> <tbody>
+> <tr>
+> <td>Empresa A</td>
+> <td>180</td>
+> </tr>
+> <tr>
+> <td>Empresa B</td>
+> <td>178</td>
+> </tr>
+> <tr>
+> <td>Empresa C</td>
+> <td>467</td>
+> </tr>
+> <tr>
+> <td>Empresa A</td>
+> <td>264</td>
+> </tr>
+> <tr>
+> <td>...</td>
+> <td>...</td>
+> </tr>
 >
->  </tbody>
+> </tbody>
 > </table>
 >
 > En este ejemplo, **nombre_empresa** indica las categorías con las que se agruparán los datos, y **acciones_vendidas** la variable númerica que se usará para calcular las los cuartiles y otros elementos de cada subconjunto de los datos.

@@ -1,5 +1,5 @@
 ---
-layout: LayoutDocumentacion
+layout: Layout
 sectionName: Documentación
 ---
 
@@ -29,34 +29,34 @@ A continuación se describe la utilización del componente de visualización `<S
 >
 > <table>
 > <thead>
->  <tr>
->    <th>fecha</th>
->    <th>ags</th>
->    <th>bc</th>
->  </tr>
->  </thead>
->  <tbody>
->  <tr>
->    <td>01-01-2021</td>
->    <td>100</td>
->    <td>100</td>
->  </tr>
->  <tr>
->    <td>01-02-2021</td>
->    <td>80</td>
->    <td>50</td>
->  </tr>
->  <tr>
->    <td>01-03-2021</td>
->    <td>20</td>
->    <td>90</td>
->  </tr>
->  <tr>
->    <td>01-04-2021</td>
->    <td>20</td>
->    <td>15</td>
->  </tr>
->  </tbody>
+> <tr>
+> <th>fecha</th>
+> <th>ags</th>
+> <th>bc</th>
+> </tr>
+> </thead>
+> <tbody>
+> <tr>
+> <td>01-01-2021</td>
+> <td>100</td>
+> <td>100</td>
+> </tr>
+> <tr>
+> <td>01-02-2021</td>
+> <td>80</td>
+> <td>50</td>
+> </tr>
+> <tr>
+> <td>01-03-2021</td>
+> <td>20</td>
+> <td>90</td>
+> </tr>
+> <tr>
+> <td>01-04-2021</td>
+> <td>20</td>
+> <td>15</td>
+> </tr>
+> </tbody>
 > </table>
 
 > Cabe mencionar que el nombre de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no se tienen que llamar forzosamente como en el ejemplo. Las propiedades `variables` y `clave_fecha` descritas a continuación nos permiten especificar el nombre de las claves (o columnas).

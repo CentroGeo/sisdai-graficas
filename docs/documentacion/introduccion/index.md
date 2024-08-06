@@ -1,5 +1,5 @@
 ---
-layout: LayoutDocumentacion
+layout: Layout
 ---
 
 # Introducción
