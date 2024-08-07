@@ -1,109 +1,109 @@
 {
-  "hash": "b60012b1",
+  "hash": "02992f92",
   "configHash": "7c03052b",
-  "lockfileHash": "a41a9360",
-  "browserHash": "b8c2f3ec",
+  "lockfileHash": "50744a02",
+  "browserHash": "4117a1e5",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "62c44e1f",
+      "fileHash": "081a0700",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/vitepress/node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "598942ac",
+      "fileHash": "a2862023",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "24121e53",
+      "fileHash": "4d6afbb1",
       "needsInterop": false
     },
     "pinia": {
       "src": "../../../../node_modules/pinia/dist/pinia.mjs",
       "file": "pinia.js",
-      "fileHash": "2b134b62",
+      "fileHash": "06bba8f3",
       "needsInterop": false
     },
     "sisdai-componentes/src/stores": {
       "src": "../../../../node_modules/sisdai-componentes/src/stores/index.js",
       "file": "sisdai-componentes_src_stores.js",
-      "fileHash": "717c415e",
+      "fileHash": "b3cb0d9e",
       "needsInterop": false
     },
     "d3-format": {
       "src": "../../../../node_modules/d3-format/src/index.js",
       "file": "d3-format.js",
-      "fileHash": "19d57eab",
+      "fileHash": "61e5b0c7",
       "needsInterop": false
     },
     "d3-sankey": {
       "src": "../../../../node_modules/d3-sankey/src/index.js",
       "file": "d3-sankey.js",
-      "fileHash": "ee661d17",
+      "fileHash": "e3251ee3",
       "needsInterop": false
     },
     "d3-selection": {
       "src": "../../../../node_modules/d3-selection/src/index.js",
       "file": "d3-selection.js",
-      "fileHash": "22b3ba1c",
+      "fileHash": "25b7a3e3",
       "needsInterop": false
     },
     "d3-array": {
       "src": "../../../../node_modules/d3-array/src/index.js",
       "file": "d3-array.js",
-      "fileHash": "45db176f",
+      "fileHash": "68aa86c9",
       "needsInterop": false
     },
     "d3-scale": {
       "src": "../../../../node_modules/d3-scale/src/index.js",
       "file": "d3-scale.js",
-      "fileHash": "7c24c3ca",
+      "fileHash": "bf2b2ad5",
       "needsInterop": false
     },
     "d3-shape": {
       "src": "../../../../node_modules/d3-shape/src/index.js",
       "file": "d3-shape.js",
-      "fileHash": "0a52c666",
+      "fileHash": "18c3849d",
       "needsInterop": false
     },
     "d3-transition": {
       "src": "../../../../node_modules/d3-transition/src/index.js",
       "file": "d3-transition.js",
-      "fileHash": "1b34e48b",
+      "fileHash": "add80574",
       "needsInterop": false
     },
     "d3-time-format": {
       "src": "../../../../node_modules/d3-time-format/src/index.js",
       "file": "d3-time-format.js",
-      "fileHash": "4b481341",
+      "fileHash": "2d5449e3",
       "needsInterop": false
     },
     "d3-axis": {
       "src": "../../../../node_modules/d3-axis/src/index.js",
       "file": "d3-axis.js",
-      "fileHash": "62ac2997",
+      "fileHash": "b830c6c2",
       "needsInterop": false
     },
     "d3-time": {
       "src": "../../../../node_modules/d3-time/src/index.js",
       "file": "d3-time.js",
-      "fileHash": "b99cee0b",
+      "fileHash": "2012a46c",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-OHIDBY4N": {
-      "file": "chunk-OHIDBY4N.js"
+    "chunk-5HDYNCFZ": {
+      "file": "chunk-5HDYNCFZ.js"
     },
     "chunk-O3YQPVDG": {
       "file": "chunk-O3YQPVDG.js"
     },
-    "chunk-574YRH25": {
-      "file": "chunk-574YRH25.js"
+    "chunk-CNGU7YNB": {
+      "file": "chunk-CNGU7YNB.js"
     },
     "chunk-VVYX45C2": {
       "file": "chunk-VVYX45C2.js"

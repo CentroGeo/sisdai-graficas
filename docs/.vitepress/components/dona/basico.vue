@@ -13,20 +13,18 @@ const variables = ref([
   <SisdaiGraficas :margenes="{ arriba: 0, abajo: 0, derecha: 0, izquierda: 0 }">
     <template #globo-informacion>
       <SisdaiGraficasGloboInfo :ancho="200">
-        <template>
-          <p>
-            <span
-              class="globo-informacion-punto-color"
-              :style="{
-                background: variables.filter(
-                  d => d.id === laDona?.datos_hover?.categoria
-                )[0]?.color,
-              }"
-            ></span>
-            {{ laDona?.datos_hover?.categoria }}:
-            {{ laDona?.datos_hover?.cantidad }}
-          </p>
-        </template>
+        <p>
+          <span
+            class="globo-informacion-punto-color"
+            :style="{
+              background: variables.filter(
+                d => d.id === laDona?.datos_hover?.categoria
+              )[0]?.color,
+            }"
+          ></span>
+          {{ laDona?.datos_hover?.categoria }}:
+          {{ laDona?.datos_hover?.cantidad }}
+        </p>
       </SisdaiGraficasGloboInfo>
     </template>
     <SisdaiDona

@@ -13,8 +13,8 @@ import {
   selectorAll_default,
   selector_default,
   styleValue,
-  window_default,
-} from './chunk-HSCBWQAO.js'
+  window_default
+} from "./chunk-HSCBWQAO.js";
 export {
   create_default as create,
   creator_default as creator,
@@ -30,6 +30,6 @@ export {
   selector_default as selector,
   selectorAll_default as selectorAll,
   styleValue as style,
-  window_default as window,
-}
+  window_default as window
+};
 //# sourceMappingURL=d3-selection.js.map

@@ -111,8 +111,8 @@ watch(route, () => {
                 v-for="item in listaSidebar(theme, page)"
                 :key="item.text"
               >
-                <a
-                  :href="item.link"
+                <router-link
+                  :to="item.link"
                   :tabindex="menuLateralAbierto ? undefined : -1"
                 >
                   {{ item.text }}
@@ -121,7 +121,7 @@ watch(route, () => {
                     class="etiqueta"
                     >pre</span
                   >
-                </a>
+                </router-link>
               </li>
             </ul>
           </template>

@@ -383,7 +383,6 @@ onMounted(() => {
         grupoContenedor.value
           .selectAll('g.subcategoria-barras')
           .selectAll('rect.barra')
-
           .style('fill-opacity', '1')
       }
     }

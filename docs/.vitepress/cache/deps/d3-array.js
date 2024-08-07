@@ -76,8 +76,8 @@ import {
   transpose,
   union,
   variance,
-  zip,
-} from './chunk-I7AXEEPR.js'
+  zip
+} from "./chunk-I7AXEEPR.js";
 export {
   Adder,
   InternMap,
@@ -157,6 +157,6 @@ export {
   transpose,
   union,
   variance,
-  zip,
-}
+  zip
+};
 //# sourceMappingURL=d3-array.js.map

@@ -57,9 +57,9 @@ import {
   utcWednesday,
   utcWednesdays,
   utcYear,
-  utcYears,
-} from './chunk-CCDGN2S7.js'
-import './chunk-I7AXEEPR.js'
+  utcYears
+} from "./chunk-CCDGN2S7.js";
+import "./chunk-I7AXEEPR.js";
 export {
   timeDay,
   timeDays,
@@ -127,6 +127,6 @@ export {
   utcSunday as utcWeek,
   utcSundays as utcWeeks,
   utcYear,
-  utcYears,
-}
+  utcYears
+};
 //# sourceMappingURL=d3-time.js.map

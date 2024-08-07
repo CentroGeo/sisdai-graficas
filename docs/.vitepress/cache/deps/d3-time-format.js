@@ -6,10 +6,10 @@ import {
   timeFormat,
   timeParse,
   utcFormat,
-  utcParse,
-} from './chunk-2DJ4GDBT.js'
-import './chunk-CCDGN2S7.js'
-import './chunk-I7AXEEPR.js'
+  utcParse
+} from "./chunk-2DJ4GDBT.js";
+import "./chunk-CCDGN2S7.js";
+import "./chunk-I7AXEEPR.js";
 export {
   isoFormat_default as isoFormat,
   isoParse_default as isoParse,
@@ -18,6 +18,6 @@ export {
   formatLocale as timeFormatLocale,
   timeParse,
   utcFormat,
-  utcParse,
-}
+  utcParse
+};
 //# sourceMappingURL=d3-time-format.js.map

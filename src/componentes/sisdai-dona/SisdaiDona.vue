@@ -2,7 +2,6 @@
 import { min, sum } from 'd3-array'
 import { select } from 'd3-selection'
 import { arc, pie } from 'd3-shape'
-import { transition } from 'd3-transition'
 import { onMounted, ref, shallowRef, toRefs, watch } from 'vue'
 import usarRegistroGraficas from '../../composables/usarRegistroGraficas'
 import { buscarIdContenedorHtmlSisdai } from '../../utils'
@@ -42,22 +41,36 @@ const props = defineProps({
     type: Number,
     default: 0.32,
   },
+  variables_visibles: {
+    type: Array,
+  },
+  color_dona_fondo: {
+    type: String,
+    default: 'var(--fondo)',
+  },
 })
 const alto = ref(0)
 const ancho = ref(0)
 var idGrafica
 const sisdaiDona = shallowRef()
 const datos_hover = ref()
-const { datos, clave_cantidad, variables, clave_categoria } = toRefs(props)
-transition
+const {
+  datos,
+  clave_cantidad,
+  variables,
+  clave_categoria,
+  variables_visibles,
+} = toRefs(props)
+
 const margenesSvg = ref({})
 const pay = ref(pie()),
   arco = ref(arc()),
+  arco_completo = ref(arc()),
   arco_txt = ref(arc()),
   data_pay = ref()
-
 const grupoContenedor = ref(),
-  grupoDona = ref()
+  grupoDona = ref(),
+  donaCompleta = ref()
 
 function calcularEscalas(grupoVis) {
   alto.value = grupoVis.alto
@@ -66,6 +79,9 @@ function calcularEscalas(grupoVis) {
 
   pay.value.sort(null).value(d => d[clave_cantidad.value])
   arco.value
+    .innerRadius(props.radio_interno * limites)
+    .outerRadius(props.radio_externo * limites)
+  arco_completo.value
     .innerRadius(props.radio_interno * limites)
     .outerRadius(props.radio_externo * limites)
   arco_txt.value
@@ -77,19 +93,35 @@ function calcularEscalas(grupoVis) {
     )
   )
 }
+
 function creaDona() {
+  donaCompleta.value = grupoContenedor.value
+    .select('path.dona-completa-fondo')
+    .attr('d', arco_completo.value.startAngle(0).endAngle(2 * Math.PI))
+    .style('fill', props.color_dona_fondo)
   grupoDona.value = grupoContenedor.value
     .selectAll('g.segmento')
     .data(data_pay.value)
+
   grupoDona.value.join(
     enter => {
       var grupo = enter
         .append('g')
         .attr('class', 'segmento')
         .attr('fill', d => {
-          return variables.value.filter(
-            dd => dd.id === d.data[clave_categoria.value]
-          )[0].color
+          if (variables_visibles.value) {
+            return variables_visibles.value.includes(
+              d.data[clave_categoria.value]
+            )
+              ? variables.value.filter(
+                  dd => dd.id === d.data[clave_categoria.value]
+                )[0].color
+              : 'none'
+          } else {
+            return variables.value.filter(
+              dd => dd.id === d.data[clave_categoria.value]
+            )[0].color
+          }
         })
       grupo
         .selectAll('path.path-segmento')
@@ -127,17 +159,35 @@ function creaDona() {
         .style('font-weight', '500')
         .attr('transform', d => 'translate(' + arco_txt.value.centroid(d) + ')')
         .style('font-weight', '500')
+        .style('fill', d => {
+          if (variables_visibles.value) {
+            return variables_visibles.value?.includes(
+              d.data[clave_categoria.value]
+            )
+              ? 'var(--texto-primario)'
+              : 'none'
+          } else {
+            return 'var(--texto-primario)'
+          }
+        })
     },
     update => {
       let grupo = update.call(update1 => {
-        update1
-          .transition()
-          .duration(500)
-          .attr('fill', d => {
+        update1.attr('fill', d => {
+          if (variables_visibles.value) {
+            return variables_visibles.value.includes(
+              d.data[clave_categoria.value]
+            )
+              ? variables.value.filter(
+                  dd => dd.id === d.data[clave_categoria.value]
+                )[0].color
+              : 'none'
+          } else {
             return variables.value.filter(
               dd => dd.id === d.data[clave_categoria.value]
             )[0].color
-          })
+          }
+        })
       })
       grupo
         .selectAll('path.path-segmento')
@@ -156,6 +206,7 @@ function creaDona() {
               10 +
             '%'
         )
+
         .style('font-size', '16px')
         .style('font-weight', '500')
         .style('text-anchor', d => {
@@ -170,6 +221,17 @@ function creaDona() {
         })
         .attr('transform', d => 'translate(' + arco_txt.value.centroid(d) + ')')
         .attr('class', 'vis-valores-ejes')
+        .style('fill', d => {
+          if (variables_visibles.value) {
+            return variables_visibles.value.includes(
+              d.data[clave_categoria.value]
+            )
+              ? 'var(--texto-primario)'
+              : 'none'
+          } else {
+            return 'var(--texto-primario)'
+          }
+        })
     },
     exit => {
       exit.remove()
@@ -256,5 +318,6 @@ defineExpose({ datos_hover })
     },${margenesSvg.arriba ? margenesSvg.arriba + alto * 0.5 : alto * 0.5})`"
     class="contenedor-dona"
   >
+    <path class="dona-completa-fondo"></path>
   </g>
 </template>

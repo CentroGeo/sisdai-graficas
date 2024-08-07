@@ -7,8 +7,8 @@ import {
   locale_default,
   precisionFixed_default,
   precisionPrefix_default,
-  precisionRound_default,
-} from './chunk-VVYX45C2.js'
+  precisionRound_default
+} from "./chunk-VVYX45C2.js";
 export {
   FormatSpecifier,
   format,
@@ -18,6 +18,6 @@ export {
   formatSpecifier,
   precisionFixed_default as precisionFixed,
   precisionPrefix_default as precisionPrefix,
-  precisionRound_default as precisionRound,
-}
+  precisionRound_default as precisionRound
+};
 //# sourceMappingURL=d3-format.js.map
