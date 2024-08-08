@@ -1,12 +1,4 @@
 import {
-  matcher_default,
-  namespace_default,
-  selection_default,
-  selectorAll_default,
-  selector_default,
-  styleValue
-} from "./chunk-HSCBWQAO.js";
-import {
   color,
   interpolateTransformCss,
   interpolateTransformSvg,
@@ -14,6 +6,14 @@ import {
   rgb_default,
   string_default
 } from "./chunk-2YAAEMK7.js";
+import {
+  matcher_default,
+  namespace_default,
+  selection_default,
+  selectorAll_default,
+  selector_default,
+  styleValue
+} from "./chunk-HSCBWQAO.js";
 
 // node_modules/d3-dispatch/src/dispatch.js
 var noop = { value: () => {

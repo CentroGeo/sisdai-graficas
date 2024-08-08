@@ -20,7 +20,6 @@ export default {
     // Pinia
     const pinia = createPinia()
     app.use(pinia)
-
     if (!import.meta.env.SSR) {
       // Store
       const store = await import('../store')

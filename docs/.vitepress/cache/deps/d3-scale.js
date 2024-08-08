@@ -1,4 +1,10 @@
 import {
+  number_default,
+  piecewise,
+  round_default,
+  value_default
+} from "./chunk-2YAAEMK7.js";
+import {
   format,
   formatPrefix,
   formatSpecifier,
@@ -6,12 +12,6 @@ import {
   precisionPrefix_default,
   precisionRound_default
 } from "./chunk-VVYX45C2.js";
-import {
-  number_default,
-  piecewise,
-  round_default,
-  value_default
-} from "./chunk-2YAAEMK7.js";
 import {
   timeFormat,
   utcFormat

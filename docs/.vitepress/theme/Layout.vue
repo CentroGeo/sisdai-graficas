@@ -6,15 +6,11 @@ import SisdaiMenuLateral from 'sisdai-componentes/src/componentes/menu-lateral/S
 import SisdaiNavegacionGobMx from 'sisdai-componentes/src/componentes/navegacion-gob-mx/SisdaiNavegacionGobMx.vue'
 import SisdaiPiePaginaConahcyt from 'sisdai-componentes/src/componentes/pie-pagina-conahcyt/SisdaiPiePaginaConahcyt.vue'
 import SisdaiPiePaginaGobMx from 'sisdai-componentes/src/componentes/pie-pagina-gob-mx/SisdaiPiePaginaGobMx.vue'
-
+import { useAccesibilidadStore } from 'sisdai-componentes/src/stores'
 import { useData, useRoute } from 'vitepress'
 import { isActive } from 'vitepress/dist/client/shared'
 import { onMounted, ref, watch } from 'vue'
-
 import NavegacionPrincipal from './NavegacionPrincipal.vue'
-
-import { useAccesibilidadStore } from 'sisdai-componentes/src/stores'
-
 const store = useAccesibilidadStore()
 
 // https://vitepress.dev/reference/runtime-api#usedata
@@ -111,8 +107,14 @@ watch(route, () => {
                 v-for="item in listaSidebar(theme, page)"
                 :key="item.text"
               >
-                <router-link
-                  :to="item.link"
+                <a
+                  :href="item.link"
+                  :class="{
+                    'router-link-exact-active router-link-active': isActive(
+                      page.relativePath,
+                      item.link
+                    ),
+                  }"
                   :tabindex="menuLateralAbierto ? undefined : -1"
                 >
                   {{ item.text }}
@@ -121,7 +123,7 @@ watch(route, () => {
                     class="etiqueta"
                     >pre</span
                   >
-                </router-link>
+                </a>
               </li>
             </ul>
           </template>

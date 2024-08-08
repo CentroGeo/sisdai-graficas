@@ -1,118 +1,118 @@
 {
-  "hash": "02992f92",
+  "hash": "52351772",
   "configHash": "7c03052b",
-  "lockfileHash": "50744a02",
-  "browserHash": "4117a1e5",
+  "lockfileHash": "9ef5041d",
+  "browserHash": "2c904514",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "081a0700",
+      "fileHash": "998c5ade",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/vitepress/node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "a2862023",
+      "fileHash": "29a053c4",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "4d6afbb1",
+      "fileHash": "370d78f4",
       "needsInterop": false
     },
     "pinia": {
       "src": "../../../../node_modules/pinia/dist/pinia.mjs",
       "file": "pinia.js",
-      "fileHash": "06bba8f3",
+      "fileHash": "d27aca51",
       "needsInterop": false
     },
     "sisdai-componentes/src/stores": {
       "src": "../../../../node_modules/sisdai-componentes/src/stores/index.js",
       "file": "sisdai-componentes_src_stores.js",
-      "fileHash": "b3cb0d9e",
-      "needsInterop": false
-    },
-    "d3-format": {
-      "src": "../../../../node_modules/d3-format/src/index.js",
-      "file": "d3-format.js",
-      "fileHash": "61e5b0c7",
-      "needsInterop": false
-    },
-    "d3-sankey": {
-      "src": "../../../../node_modules/d3-sankey/src/index.js",
-      "file": "d3-sankey.js",
-      "fileHash": "e3251ee3",
-      "needsInterop": false
-    },
-    "d3-selection": {
-      "src": "../../../../node_modules/d3-selection/src/index.js",
-      "file": "d3-selection.js",
-      "fileHash": "25b7a3e3",
+      "fileHash": "81157e68",
       "needsInterop": false
     },
     "d3-array": {
       "src": "../../../../node_modules/d3-array/src/index.js",
       "file": "d3-array.js",
-      "fileHash": "68aa86c9",
+      "fileHash": "d9a8a1e9",
       "needsInterop": false
     },
     "d3-scale": {
       "src": "../../../../node_modules/d3-scale/src/index.js",
       "file": "d3-scale.js",
-      "fileHash": "bf2b2ad5",
+      "fileHash": "a01d872c",
       "needsInterop": false
     },
-    "d3-shape": {
-      "src": "../../../../node_modules/d3-shape/src/index.js",
-      "file": "d3-shape.js",
-      "fileHash": "18c3849d",
+    "d3-selection": {
+      "src": "../../../../node_modules/d3-selection/src/index.js",
+      "file": "d3-selection.js",
+      "fileHash": "a297b992",
       "needsInterop": false
     },
     "d3-transition": {
       "src": "../../../../node_modules/d3-transition/src/index.js",
       "file": "d3-transition.js",
-      "fileHash": "add80574",
+      "fileHash": "91516b02",
+      "needsInterop": false
+    },
+    "d3-format": {
+      "src": "../../../../node_modules/d3-format/src/index.js",
+      "file": "d3-format.js",
+      "fileHash": "ca1f02a4",
+      "needsInterop": false
+    },
+    "d3-sankey": {
+      "src": "../../../../node_modules/d3-sankey/src/index.js",
+      "file": "d3-sankey.js",
+      "fileHash": "80658185",
+      "needsInterop": false
+    },
+    "d3-shape": {
+      "src": "../../../../node_modules/d3-shape/src/index.js",
+      "file": "d3-shape.js",
+      "fileHash": "35bb408f",
       "needsInterop": false
     },
     "d3-time-format": {
       "src": "../../../../node_modules/d3-time-format/src/index.js",
       "file": "d3-time-format.js",
-      "fileHash": "2d5449e3",
+      "fileHash": "fe15303b",
       "needsInterop": false
     },
     "d3-axis": {
       "src": "../../../../node_modules/d3-axis/src/index.js",
       "file": "d3-axis.js",
-      "fileHash": "b830c6c2",
+      "fileHash": "8b27bab5",
       "needsInterop": false
     },
     "d3-time": {
       "src": "../../../../node_modules/d3-time/src/index.js",
       "file": "d3-time.js",
-      "fileHash": "2012a46c",
+      "fileHash": "bf83b9c3",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-5HDYNCFZ": {
-      "file": "chunk-5HDYNCFZ.js"
+    "chunk-T3YPJTGW": {
+      "file": "chunk-T3YPJTGW.js"
     },
     "chunk-O3YQPVDG": {
       "file": "chunk-O3YQPVDG.js"
     },
-    "chunk-CNGU7YNB": {
-      "file": "chunk-CNGU7YNB.js"
+    "chunk-5K23BRP6": {
+      "file": "chunk-5K23BRP6.js"
     },
-    "chunk-VVYX45C2": {
-      "file": "chunk-VVYX45C2.js"
+    "chunk-2YAAEMK7": {
+      "file": "chunk-2YAAEMK7.js"
     },
     "chunk-HSCBWQAO": {
       "file": "chunk-HSCBWQAO.js"
     },
-    "chunk-2YAAEMK7": {
-      "file": "chunk-2YAAEMK7.js"
+    "chunk-VVYX45C2": {
+      "file": "chunk-VVYX45C2.js"
     },
     "chunk-2DJ4GDBT": {
       "file": "chunk-2DJ4GDBT.js"
