@@ -1,6 +1,6 @@
 <script setup>
 
-    import DatosReales from "../../.vitepress/components/barras/datos-reales.vue";
+    import BarrasAgrupadas from "../../.vitepress/components/barras/barras-agrupadas.vue";
 
     import Basico from "../../.vitepress/components/barras/basico.vue";
 </script>
@@ -103,9 +103,9 @@ Uso:
     >
     > Esta propiedad tiene un validador para verificar que todos los objetos contengan las tres claves:
     >
-    > - `id`: su valor es un `String` quedebe coincidir con alguna subcategoría de `datos`, equivalente a uno de los nombres de las columnas que contienen informacion numérica
+    > - `id`: su valor es un `String` que debe coincidir con alguna subcategoría de `datos`, equivalente a uno de los nombres de las columnas que contienen información numérica
     > - `nombre`: su valor es un `String` que da más información sobre el id y que puede ser empleado para globos de información
-    > - `color`: Es un `String` que especifica en rgb, hexagesimal u otro formato reconoconocido por css el color que tomará cada subcategoría.
+    > - `color`: Es un `String` que especifica en rgb, hexadecimal u otro formato reconocido por css el color que tomará cada subcategoría.
 
 - `clave_categorias`: Indica la clave empleada para las categorías principales, por default es `"categoria"` y con el ejemplo anterior de `datos` podría no especificarse esta propiedad, pero si `datos` emplea otra clave para la categoría principal, esta propiedad tendrá que especificarse.
   - Tipo: `String`
@@ -123,7 +123,7 @@ Uso:
   - Tipo: `Number`
   - Valor predeterminado: `0.1`
   - Requerido: No
-- `alineacion_eje_y`: Esta propiedad indica de qué lado se acomodará el eje vertical, las opciones validas son `'izquierda'` o `'derecha'`.
+- `alineacion_eje_y`: Esta propiedad indica de qué lado se acomodará el eje vertical, las opciones válidas son `'izquierda'` o `'derecha'`.
   - Tipo: `String`
   - Valor predeterminado: `"izquierda"`
   - Requerido: No
@@ -154,5 +154,5 @@ Uso:
 <Basico/>
 <<< @/.vitepress/components/barras/basico.vue
 
-<Checks/>
-<<< @/.vitepress/components/barras/checks-barras.vue
+<BarrasAgrupadas/>
+<<< @/.vitepress/components/barras/barras-agrupadas.vue

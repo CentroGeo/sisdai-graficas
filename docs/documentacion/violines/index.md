@@ -87,7 +87,7 @@ Uso:
 > </tbody>
 > </table>
 >
-> En este ejemplo, **seguridad_social** indica las categorías con las que se agruparán los datos, y **edad** la variable númerica que se usará para calcular las los cuartiles y otros elementos de cada subconjunto de los datos.
+> En este ejemplo, **seguridad_social** indica las categorías con las que se agruparán los datos, y **edad** la variable numérica que se usará para calcular las los cuartiles y otros elementos de cada subconjunto de los datos.
 > Cabe mencionar que el nombre de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no se tienen que llamar forzosamente como en el ejemplo. Las propiedades `variables` y `clave_categorias` descritas a continuación nos permiten especificar el nombre de las claves (o columnas).
 
 - `variables`: Objeto que contiene información sobre el color y el nombre de la clave asociada a la variable numérica en `datos`. Si consideramos el caso anterior de `datos`, un ejemplo de `variables` es:
@@ -107,17 +107,17 @@ Uso:
 >
 > - `id`: su valor debe coincidir con alguna subcategoría de `datos`, equivalente a uno de los nombres de las columnas
 > - `nombre`: su valor es un string que da más información sobre el id y es un `String` que puede ser empleado para globos de información
-> - `color`: Es un `String` que especifica en rgb, hexagesimal u otro formato reconoconocido por css que indicará el color que tomarán los diagramas
+> - `color`: Es un `String` que especifica en rgb, hexadecimal u otro formato reconocido por css que indicará el color que tomarán los diagramas
 
 - `clave_categorias`: Indica la clave empleada para las categorías que se usarán para agrupar al conjunto de datos, por default es `"categoria"` y con el ejemplo anterior de `datos` tendría que especificarse como `"seguridad_social"`
   - Tipo: `String`
   - Valor predeterminado: `"categoria"`
   - Requerido: Sí
-- `numero_divisiones`: Este número sirve para indicar en cuantas partes se dividirá la distribución obtenida en el histograma.
+- `numero_divisiones`: Este número sirve para indicar en cuántas partes se dividirá la distribución obtenida en el histograma.
   - Tipo: `Number`
   - Valor predeterminado: `10`
   - Requerido: No
-- `alineacion_eje_y`: Esta propiedad indica de qué lado se acomodará el eje vertical, las opciones validas son `'izquierda'` o `'derecha'`.
+- `alineacion_eje_y`: Esta propiedad indica de qué lado se acomodará el eje vertical, las opciones válidas son `'izquierda'` o `'derecha'`.
   - Tipo: `String`
   - Valor predeterminado: `"izquierda"`
   - Requerido: No

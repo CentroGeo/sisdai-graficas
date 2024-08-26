@@ -1,8 +1,3 @@
----
-home: true
-title: Documentación
----
-
 # Documentación
 
 El proyecto sisdai-graficas es una biblioteca de componentes de visualización de datos reutilizables de Vue, creados con [D3.js](https://d3js.org) y alineada al Sistema de Diseño y Accesibilidad para la Investigación [Sisdai](https://sisdai.conahcyt.mx/).
@@ -48,7 +43,7 @@ Esta es la manera más recomendada de importar cuando no se usan todos los compo
 Para dar de alta de manera global en toda la aplicación:
 
 ```js
-//generalmente es el arhivo src/main.js
+//generalmente es el archivo src/main.js
 
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -83,7 +78,7 @@ import SisdaiDona from 'sisdai-graficas/src/componentes/sisdai-dona/SisdaiDona.v
 Para dar de alta de manera global todos los componentes biblioteca, se puede hacer desde el archivo `src/main.js` como se muestra a continuación.
 
 ```js
-//generalmente es el arhivo src/main.js
+//generalmente es el archivo src/main.js
 
 import SisdaiGraficas from 'sisdai-graficas'
 

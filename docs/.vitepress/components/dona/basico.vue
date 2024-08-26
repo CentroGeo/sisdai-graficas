@@ -2,17 +2,17 @@
 import { ref } from 'vue'
 const laDona = ref()
 const variables = ref([
-  { id: 'Variable A', nombre: 'Variable A', color: '#253494' },
-  { id: 'Variable B', nombre: 'Variable B', color: '#2c7fb8' },
-  { id: 'Variable C', nombre: 'Variable C', color: '#41b6c4' },
-  { id: 'Variable D', nombre: 'Variable D', color: '#7fcdbb' },
-  { id: 'Variable E', nombre: 'Variable E', color: '#c7e9b4' },
+  { id: 'fut', nombre: 'Futbol', color: '#fb4c56' },
+  { id: 'natacion', nombre: 'Natación', color: '#023b88' },
+  { id: 'basquet', nombre: 'Básquetbol', color: '#19a7ac' },
+  { id: 'ciclismo', nombre: 'Ciclismo', color: '#046b4f' },
+  { id: 'box', nombre: 'Boxeo', color: '#f9af05' },
 ])
 </script>
 <template>
   <SisdaiGraficas :margenes="{ arriba: 0, abajo: 0, derecha: 0, izquierda: 0 }">
     <template #globo-informacion>
-      <SisdaiGraficasGloboInfo :ancho="200">
+      <SisdaiGraficasGloboInfo :ancho="216">
         <p>
           <span
             class="globo-informacion-punto-color"
@@ -21,22 +21,48 @@ const variables = ref([
                 d => d.id === laDona?.datos_hover?.categoria
               )[0]?.color,
             }"
-          ></span>
-          {{ laDona?.datos_hover?.categoria }}:
-          {{ laDona?.datos_hover?.cantidad }}
+          ></span
+          >{{
+            variables.filter(d => d.id === laDona?.datos_hover?.categoria)[0]
+              ?.nombre
+          }}: {{ laDona?.datos_hover?.cantidad }} |
+          {{ laDona?.datos_hover?.porcentaje }} %
         </p>
       </SisdaiGraficasGloboInfo>
+    </template>
+    <template #panel-encabezado-vis>
+      <div>
+        <p class="vis-titulo-visualizacion">
+          Actividades deportivas realizadas por estudiantes de secundaria
+        </p>
+        <p class="vis-fecha-actualizacion">Última actualización: 14/05/2023</p>
+        <p class="vis-instruccional">
+          Se presentan las cinco actividades deportivas más practicadas por
+          estudiantes de secundaria en su tiempo libre. Pasa el cursor por
+          encima de cada segmento para conocer el detalle.
+        </p>
+      </div>
     </template>
     <SisdaiDona
       ref="laDona"
       :datos="[
-        { categoria: 'Variable A', cantidad: 100 },
-        { categoria: 'Variable B', cantidad: 120 },
-        { categoria: 'Variable C', cantidad: 60 },
-        { categoria: 'Variable D', cantidad: 50 },
-        { categoria: 'Variable E', cantidad: 40 },
+        { categoria: 'fut', cantidad: 93 },
+        { categoria: 'natacion', cantidad: 52 },
+        { categoria: 'basquet', cantidad: 31 },
+        { categoria: 'ciclismo', cantidad: 24 },
+        { categoria: 'box', cantidad: 12 },
       ]"
       :variables="variables"
     />
+    <template #panel-pie-vis>
+      <div>
+        <p class="vis-titulo-leyenda">Actividades deportivas</p>
+        <SisdaiNomenclatura :variables="variables"></SisdaiNomenclatura>
+
+        <p class="vis-fuente">
+          Fuente: Los datos que se visualizan en este gráfico son hipotéticos
+        </p>
+      </div>
+    </template>
   </SisdaiGraficas>
 </template>

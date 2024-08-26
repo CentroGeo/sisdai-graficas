@@ -1,16 +1,25 @@
 <script setup>
-import violin_seguridad_social_edad from '../../assets/datos/violin_seguridad_social_edad.json'
+import violin_resistencia_edad from '../../assets/datos/violin_resistencia_edad.json'
 
 import { ref } from 'vue'
-const datos = ref(violin_seguridad_social_edad)
+const datos = ref(violin_resistencia_edad)
 const losViolines = ref()
 </script>
 
 <template>
   <SisdaiGraficas
     :titulo_eje_y="'Edad'"
-    :titulo_eje_x="'Seguridad social'"
+    :titulo_eje_x="'Tipo de resistencia'"
   >
+    <template #panel-encabezado-vis>
+      <div>
+        <p class="vis-titulo-visualizacion">
+          Resistencia a antirretrovirales con respecto a la edad
+        </p>
+        <p class="vis-fecha-actualizacion">Última actualización: 14/05/2023</p>
+        <p class="vis-instruccional">Descripción o texto instruccional.</p>
+      </div>
+    </template>
     <template #globo-informacion>
       <SisdaiGraficasGloboInfo :ancho="200">
         <p>
@@ -29,7 +38,7 @@ const losViolines = ref()
         nombre: 'Edad',
         color: '#2c7fb8',
       }"
-      :clave_categorias="'seguridad_social'"
+      :clave_categorias="'resistencia'"
     />
   </SisdaiGraficas>
 </template>

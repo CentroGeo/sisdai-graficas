@@ -24,7 +24,7 @@ Uso:
 
 ### Propiedades
 
-- `datos`: Base de datos a visualizar, consiste en un objeto con la clave `"nodos"` y cuyo valor es un arreglo de ojetos que contienen el nombre y el id de cada nodo y otra clave `"enlaces"` cuyo valor es un arreglo de enlaces con la fuente, el objetivo y los valores de dicho enlace.
+- `datos`: Base de datos a visualizar, consiste en un objeto con la clave `"nodos"` y cuyo valor es un arreglo de objetos que contienen el nombre y el id de cada nodo y otra clave `"enlaces"` cuyo valor es un arreglo de enlaces con la fuente, el objetivo y los valores de dicho enlace.
   - Tipo: `Object`
   - Valor predeterminado: `undefined`
   - Requerido: Sí
@@ -76,16 +76,16 @@ Uso:
 > Esta propiedad tiene un validador para verificar que todos los objetos contengan las siguientes dos claves:
 
 > - `id`: `String` cuyo valor debe coincidir con alguna subcategoría de `datos`, equivalente a uno de los nombres de las columnas que contiene información numérica
-> - `color`: `String` que especifica en rgb, hexagesimal u otro formato reconoconocido por `CSS` el color que tomará cada elemento.
+> - `color`: `String` que especifica en rgb, hexadecimal u otro formato reconocido por `CSS` el color que tomará cada elemento.
 
 ### Métodos
 
-- `creaAlluvial`: Este método crea ya actualiza el diagrama cuando se detectan cambios en `datos` y `variables`, así como en otros elementos del componente contenedor `<SisdaiGraficas>` como lo son `margenes` y los tamaños del `SVG`.
+- `creaAlluvial`: Este método crea y actualiza el diagrama cuando se detectan cambios en `datos` y `variables`, así como en otros elementos del componente contenedor `<SisdaiGraficas>` como lo son `margenes` y los tamaños del `SVG`.
 
 ### Propiedades expuestas
 
 - `datos_hover`: Esta propiedad expuesta se modifica cuando el cursor se posiciona en uno de los rectángulos (nodos) o en los algún enlace y devuelve un `Object` con los datos asociados al elemento generado por D3. Generalmente se usa esta propiedad para llenar el componente de `SisdaiGraficasGloboInfo` con información.
-  - Si el cursor está encima de un enlace, devuelve un objecto con la clave `tipo: "enlace"`, además de los datos `target`, `source` y `value` entre otros que asigna automáticamente D3.
+  - Si el cursor está encima de un enlace, devuelve un objeto con la clave `tipo: "enlace"`, además de los datos `target`, `source` y `value` entre otros que asigna automáticamente D3.
   - Si el cursor está sobre un nodo, devuelve un objeto con la clave `tipo:"nodo"`, además de los datos `name`, `id` y `value` entre otros que asigna automáticamente D3.
 
 ## Ejemplos
@@ -94,6 +94,6 @@ El siguiente ejemplo muestra el funcionamiento del componente con una base de da
 <Basico/>
 <<< @/.vitepress/components/alluvial/basico.vue
 
-Cómo se puede notar en el ejemplo anterior, cuando el cursor se posiciona dentro del gráfico en un espacio en blanco, el globo de información se queda sin contenido. Se se quiere condicionar a que sólo se muestre si el cursor se posiciona sobre un elemento visual, se puede usar la directiva `v-show` como se muestra en el siguiente ejemplo.
+Cómo se puede notar en el ejemplo anterior, cuando el cursor se posiciona dentro del gráfico en un espacio en blanco, el globo de información se queda sin contenido. Si se quiere condicionar a que sólo se muestre si el cursor se posiciona sobre un elemento visual, se puede usar la directiva `v-show` como se muestra en el siguiente ejemplo.
 <AlluvialComplejo/>
 <<< @/.vitepress/components/alluvial/alluvial-complejo.vue

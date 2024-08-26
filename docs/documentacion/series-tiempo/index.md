@@ -26,7 +26,7 @@ Uso:
 
 ### Propiedades
 
-- `datos`: Base de datos a visualizar, consiste en un arreglo de objetos en dónde cada objeto esta asociado a una fecha y a los valores muestreados vinculados a dicha fecha.
+- `datos`: Base de datos a visualizar, consiste en un arreglo de objetos en dónde cada objeto está asociado a una fecha y a los valores muestreados vinculados a dicha fecha.
 - Tipo: `Array`
 - Valor predeterminado: `undefined`
 - Requerido: Sí
@@ -82,7 +82,7 @@ Uso:
   - Valor predeterminado: `undefined`
   - Requerido: Sí
 
-> En relación con el ejemplo empleado en `datos`, `varibales` podría tener la siguiente estructura:
+> En relación con el ejemplo empleado en `datos`, `variables` podría tener la siguiente estructura:
 >
 > ```json
 > [
@@ -103,17 +103,17 @@ Uso:
 >
 > - `id`: su valor es un `String` que debe coincidir con alguna subcategoría de `datos`, equivalente a uno de los nombres de las columnas que contienen información numérica
 > - `nombre`: su valor es un `String` que da más información sobre el id y que puede ser empleado para globos de información
-> - `color`: Es un `String` que especifica en rgb, hexagesimal u otro formato reconoconocido por css el color que tomará cada subcategoría.
+> - `color`: Es un `String` que especifica en rgb, hexadecimal u otro formato reconocido por css el color que tomará cada subcategoría.
 
 - `clave_fecha`: Indica la clave empleada para la columna temporal, por default es `"fecha"` y con el ejemplo anterior de `datos` podría no especificarse esta propiedad, pero si `datos` emplea otra clave para la temporalidad, esta propiedad tendrá que especificarse.
   - Tipo: `String`
   - Valor predeterminado: `"fecha"`
   - Requerido: Sí
-- `formato_temporal`: Especifica el formato temporal que tiene la variable de tiempo. Es un parámetro que se introduce a la función de d3 `d3.timeParse` y que sirve para transformar un formato de texto a un formato temporal dentro del contexto de javascript. En esta [documentación](https://d3-wiki.readthedocs.io/zh-cn/master/Time-Formatting/) se explica como espeficiar formatos para d3.
+- `formato_temporal`: Especifica el formato temporal que tiene la variable de tiempo. Es un parámetro que se introduce a la función de d3 `d3.timeParse` y que sirve para transformar un formato de texto a un formato temporal dentro del contexto de javascript. En esta [documentación](https://d3-wiki.readthedocs.io/zh-cn/master/Time-Formatting/) se explica cómo especificar formatos para d3.
   - Tipo: `String`
   - Valor predeterminado: `"%d-%m-%Y"`
   - Requerido: Sí
-- `alineacion_eje_y`: Esta propiedad indica de qué lado se acomodará el eje vertical, las opciones validas son `'izquierda'` o `'derecha'`.
+- `alineacion_eje_y`: Esta propiedad indica de qué lado se acomodará el eje vertical, las opciones válidas son `'izquierda'` o `'derecha'`.
   - Tipo: `String`
   - Valor predeterminado: `"izquierda"`
   - Requerido: No

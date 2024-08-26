@@ -5,7 +5,7 @@
 
 # SisdaiDona
 
-Las gráficas de dona o pay se usan para representar como se reparte una totalidad. Esta biblioteca ofrece el componente `<SisdaiDona/>` para construir este tipo de gráficas. En esta sección se explica su uso.
+Las gráficas de dona o pay se usan para representar cómo se reparte una totalidad. Esta biblioteca ofrece el componente `<SisdaiDona/>` para construir este tipo de gráficas. En esta sección se explica su uso.
 
 Uso:
 
@@ -23,7 +23,7 @@ Uso:
 
 ### Propiedades
 
-- `datos`: Base de datos a visualizar, consiste en una arreglo de objetos en dónde objeto corresponde a un segmento de la dona y debe contener una clave asociada al nombre de la categoría y otra clave asociada al número que representa el segmento.
+- `datos`: Base de datos a visualizar, consiste en una arreglo de objetos en dónde cada objeto corresponde a un segmento de la dona y debe contener una clave asociada al nombre de la categoría y otra clave asociada al número que representa el segmento.
   - Tipo: `Array`
   - Valor predeterminado: `undefined`
   - Requerido: Sí
@@ -102,19 +102,19 @@ Uso:
     >
     > Esta propiedad tiene un validador para verificar que todos los objetos contengan las tres claves:
     >
-    > - `id`: su valor debe coincidir con alguna categoria de `datos`.
+    > - `id`: su valor debe coincidir con alguna categoría de `datos`.
     > - `nombre`: su valor es un string que da más información sobre el id y es un `String` que puede ser empleado para globos de información
-    > - `color`: Es un `String` que especifica en rgb, hexagesimal u otro formato reconoconocido por css que indicará el color que tomará cada subcategoría
+    > - `color`: Es un `String` que especifica en rgb, hexadecimal u otro formato reconocido por css que indicará el color que tomará cada subcategoría
 
 - `clave_categoria`: Indica la clave empleada para la columna categórica en `datos`, por default es `"categoria"` y con el ejemplo anterior de `datos` podría no especificarse esta propiedad, pero si `datos` emplea otra clave para las categorías, esta propiedad tendrá que especificarse y ser igual a la clave que usa `datos`.
   - Tipo: `String`
   - Valor predeterminado: `"categoria"`
   - Requerido: Sí
-- `clave_cantidad`: Especifica el nombre de la clave empleada para referir la cantidad o valor asociada a cada segmento de la dona u categoría. Por defaul es `"cantidad"` y en el ejemplo anterior no tendría que especificarse, pero si en `datos` se usara una clave distinta para referir la cantidad, dicha clave tendrá que especificarse aquí.
+- `clave_cantidad`: Especifica el nombre de la clave empleada para referir la cantidad o valor asociada a cada segmento de la dona u categoría. Por default es `"cantidad"` y en el ejemplo anterior no tendría que especificarse, pero si en `datos` se usará una clave distinta para referir la cantidad, dicha clave tendrá que especificarse aquí.
   - Tipo: `String`
   - Valor predeterminado: `"cantidad"`
   - Requerido: Sí
-- `radio_interno`: Es un número entre 0 y 0.5 que indica la el espacio en blanco dentro de la dona. Si es 0, se obtendrá una gráfica de pastel.
+- `radio_interno`: Es un número entre 0 y 0.5 que indica el espacio en blanco dentro de la dona. Si es 0, se obtendrá una gráfica de pastel.
   - Tipo: `Number`
   - Valor predeterminado: `0.18`
   - Requerido: No
