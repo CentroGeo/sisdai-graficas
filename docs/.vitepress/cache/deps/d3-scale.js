@@ -5,14 +5,6 @@ import {
   value_default
 } from "./chunk-2YAAEMK7.js";
 import {
-  format,
-  formatPrefix,
-  formatSpecifier,
-  precisionFixed_default,
-  precisionPrefix_default,
-  precisionRound_default
-} from "./chunk-VVYX45C2.js";
-import {
   timeFormat,
   utcFormat
 } from "./chunk-2DJ4GDBT.js";
@@ -46,6 +38,14 @@ import {
   tickStep,
   ticks
 } from "./chunk-I7AXEEPR.js";
+import {
+  format,
+  formatPrefix,
+  formatSpecifier,
+  precisionFixed_default,
+  precisionPrefix_default,
+  precisionRound_default
+} from "./chunk-VVYX45C2.js";
 
 // node_modules/d3-scale/src/init.js
 function initRange(domain, range2) {

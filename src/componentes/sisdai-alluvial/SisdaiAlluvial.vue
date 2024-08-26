@@ -96,7 +96,7 @@ function creaAlluvial() {
       },
       update => {
         let grupo = update
-        let trazo = grupo
+        grupo
           .selectAll('path.enlace')
           .data(d => [d])
           .attr('d', sankeyLinkHorizontal())
@@ -219,7 +219,7 @@ function creaAlluvial() {
       update => {
         let grupo = update
 
-        let rectangulo = grupo
+        grupo
           .selectAll('rect.nodo-rectangulo')
           .data(d => [d])
           .attr('x', d => d.x0 + 1)

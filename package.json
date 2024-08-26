@@ -8,14 +8,15 @@
     "src",
     "README.md"
   ],
+  "type": "module",
   "scripts": {
     "clean": "rm -rf node_modules && rm -f package-lock.json && npm cache clean -f && npm cache verify && npm i",
     "docs": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs --port 8080",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "format": "prettier . --write",
     "format-lint": "npm run format && npm run lint",
+    "lint": "eslint --fix --ignore-pattern .gitignore .",
     "preview": "vite preview",
     "test": "vitest"
   },
@@ -24,16 +25,19 @@
     "d3-sankey": "^0.12.3"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.9.0",
+    "@html-eslint/eslint-plugin": "^0.25.0",
+    "@html-eslint/parser": "^0.25.0",
     "@rushstack/eslint-patch": "^1.10.4",
     "@testing-library/vue": "^8.1.0",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/eslint-config-prettier": "^9.0.0",
     "@vue/test-utils": "^2.4.6",
-    "eslint": "^9.6.0",
-    "eslint-plugin-html": "^8.1.1",
+    "eslint": "^9.9.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-vue": "^9.27.0",
-    "happy-dom": "^14.12.3",
-    "husky": "^9.1.2",
     "lint-staged": "^15.2.2",
     "pinia": "^2.1.7",
     "prettier": "^3.3.2",
@@ -46,7 +50,9 @@
     "vue": "^3.4.31",
     "yorkie": "^2.0.0"
   },
-  "gitHooks": {},
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
   "repository": {
     "type": "git",
     "url": "https://codigo.conahcyt.mx/sisdai/sisdai-graficas"

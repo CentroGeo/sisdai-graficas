@@ -12,7 +12,7 @@ const variables = ref([
 
 const visualizando = ref('num_conglomerados_no_acum')
 watch(visualizando, nv => {
-  if (nv == 'num_conglomerados_no_acum') {
+  if (nv === 'num_conglomerados_no_acum') {
     variables.value = [
       {
         id: 'num_conglomerados_no_acum',
@@ -43,7 +43,7 @@ watch(visualizando, nv => {
         <button
           class="boton-chico"
           @click="
-            visualizando == 'num_conglomerados_no_acum'
+            visualizando === 'num_conglomerados_no_acum'
               ? (visualizando = 'num_conglomerados_acum')
               : (visualizando = 'num_conglomerados_no_acum')
           "

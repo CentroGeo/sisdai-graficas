@@ -146,18 +146,7 @@ function calcularEscalas(grupoVis) {
     .range([0, escalaBanda.value.bandwidth()])
     .padding(props.separacion_agrupadas)
 
-  let eje_horizontal = creaEjeHorizontal(
-    idGrafica,
-    escalaBanda.value,
-    props.angulo_etiquetas_eje_x
-  )
-  eje_horizontal
-    .selectAll('text')
-    .interrupt()
-    .html(d => {
-      console.log(d)
-      return d
-    })
+  creaEjeHorizontal(idGrafica, escalaBanda.value, props.angulo_etiquetas_eje_x)
 
   creaEjeVertical(
     idGrafica,
@@ -345,12 +334,7 @@ onMounted(() => {
               usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho +
                 margenesSvg.value.izquierda
             ? escalaBanda.value.domain().length - 1
-            : parseInt(
-                (nv.x -
-                  margenesSvg.value.derecha -
-                  margenesSvg.value.izquierda) /
-                  bandas
-              )
+            : parseInt((nv.x - margenesSvg.value.izquierda) / bandas)
       indice =
         indice === escalaBanda.value.domain().length ? indice - 1 : indice
       let categoria = escalaBanda.value.domain()[indice]
@@ -386,6 +370,14 @@ onMounted(() => {
           .style('fill-opacity', '1')
       }
     }
+  )
+  watch(
+    () => props.angulo_etiquetas_eje_y,
+    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+  )
+  watch(
+    () => props.angulo_etiquetas_eje_x,
+    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
   )
 })
 defineExpose({

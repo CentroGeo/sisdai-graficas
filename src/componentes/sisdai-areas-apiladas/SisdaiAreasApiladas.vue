@@ -231,10 +231,19 @@ onMounted(() => {
     },
     { deep: true }
   )
+  watch(
+    () => props.angulo_etiquetas_eje_y,
+    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+  )
+  watch(
+    () => props.angulo_etiquetas_eje_x,
+    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+  )
 })
 defineExpose({
   escalaTemporal,
   escalaLineal,
+  conversionTemporal,
   datos_hover,
 })
 </script>

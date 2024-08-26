@@ -27,7 +27,7 @@ function modificandoDatos() {
   datos_dinamicos.value = datum
 }
 function modificandoVariables() {
-  if (cantidad_variables.value == 1) {
+  if (cantidad_variables.value === 1) {
     cantidad_variables.value = 2
     variables_dinamicas.value = [
       {
@@ -107,12 +107,12 @@ function modificandoVariables() {
         <button
           class="boton-chico m-b-1"
           @click="
-            acomodo == 'apiladas'
+            acomodo === 'apiladas'
               ? (acomodo = 'agrupadas')
               : (acomodo = 'apiladas')
           "
         >
-          {{ acomodo == 'apiladas' ? 'Agrupar' : 'Apilar' }}
+          {{ acomodo === 'apiladas' ? 'Agrupar' : 'Apilar' }}
         </button>
       </div>
     </template>

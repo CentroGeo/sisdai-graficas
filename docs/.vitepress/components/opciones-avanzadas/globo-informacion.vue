@@ -5,22 +5,19 @@
   >
     <template #globo-informacion>
       <SisdaiGraficasGloboInfo :ancho="200">
-        <template>
-          <p>
-            <span
-              class="globo-informacion-punto-color"
-              style="background: pink"
-            ></span>
-            Cantidad 1: {{ lasBarras?.datos_hover?.cantidad_1 }}
-          </p>
-          <p>
-            <span
-              class="globo-informacion-punto-color"
-              style="background: orange"
-            ></span>
-            Cantidad 2: {{ lasBarras?.datos_hover?.cantidad_2 }}
-          </p>
-        </template>
+        <p>
+          <span
+            class="globo-informacion-punto-color"
+            style="background: pink"
+          ></span>
+          Cantidad 1: {{ lasBarras?.datos_hover?.cantidad_1 }}
+          <br />
+          <span
+            class="globo-informacion-punto-color"
+            style="background: orange"
+          ></span>
+          Cantidad 2: {{ lasBarras?.datos_hover?.cantidad_2 }}
+        </p>
       </SisdaiGraficasGloboInfo>
     </template>
     <SisdaiBarras

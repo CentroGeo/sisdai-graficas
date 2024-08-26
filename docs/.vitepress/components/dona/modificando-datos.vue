@@ -27,10 +27,10 @@ const variables_3 = [
 const datos = ref(datos_donas_1)
 const variables = ref(variables_1)
 watch(contador, nv => {
-  if (nv == 0) {
+  if (nv === 0) {
     datos.value = datos_donas_1
     variables.value = variables_1
-  } else if (nv == 1) {
+  } else if (nv === 1) {
     datos.value = datos_donas_2
     variables.value = variables_2
   } else {

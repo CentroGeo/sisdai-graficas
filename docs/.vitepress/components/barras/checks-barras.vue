@@ -4,15 +4,16 @@ const lasBarras = ref()
 const variablesCheckeadas = ref()
 
 const variables = ref([
-  { id: 'predeterminado_1', nombre: 'Predeterminado 1', color: '#000565' },
-  { id: 'predeterminado_2', nombre: 'Predeterminado 2', color: '#4974F3' },
+  { id: 'hasta_45', nombre: 'Hata 45 años', color: '#1BB584' },
+  { id: 'de_46_60', nombre: 'De 46 a 60 años', color: '#409FFF' },
+  { id: 'mas_de_60', nombre: 'Más de 60 años', color: '#6D6DFC' },
 ])
 </script>
 <template>
   <SisdaiGraficas
     :titulo_eje_y="'Título de eje Y'"
     :titulo_eje_x="'Título de eje X'"
-    :margenes="{ arriba: 10, abajo: 20, derecha: 30, izquierda: 40 }"
+    :margenes="{ arriba: 10, abajo: 50, derecha: 30, izquierda: 45 }"
   >
     <template #panel-encabezado-vis>
       <div>
@@ -25,27 +26,34 @@ const variables = ref([
       </div>
     </template>
     <template #globo-informacion>
-      <SisdaiGraficasGloboInfo :ancho="240">
+      <SisdaiGraficasGloboInfo :ancho="230">
         <p>
-          {{ lasBarras?.datos_hover?.categoria }} <br />
+          <b> {{ lasBarras?.datos_hover?.categoria }} </b><br />
           <span
             class="globo-informacion-punto-color"
             :style="{
-              background: '#000565',
+              background: '#1BB584',
             }"
           ></span>
-          <b> Predeterminado 1</b>:
-          {{ lasBarras?.datos_hover?.predeterminado_1.toLocaleString('en') }}
+          <b> Hasta 45 años</b>:
+          {{ lasBarras?.datos_hover?.hasta_45.toLocaleString('en') }}
           <br />
           <span
             class="globo-informacion-punto-color"
             :style="{
-              background: '#4974F3',
+              background: '#409FFF',
             }"
           ></span>
-          <b> Predeterminado 2</b>:
-          {{ lasBarras?.datos_hover?.predeterminado_2.toLocaleString('en') }}
-          <br />
+          <b> De 46 a 60 años</b>:
+          {{ lasBarras?.datos_hover?.de_46_60.toLocaleString('en') }} <br />
+          <span
+            class="globo-informacion-punto-color"
+            :style="{
+              background: '#6D6DFC',
+            }"
+          ></span>
+          <b> Más de 60 años</b>:
+          {{ lasBarras?.datos_hover?.mas_de_60.toLocaleString('en') }}
         </p>
       </SisdaiGraficasGloboInfo>
     </template>
@@ -53,34 +61,41 @@ const variables = ref([
       ref="lasBarras"
       :datos="[
         {
-          predeterminado_1: 4500,
-          predeterminado_2: 3700,
-          categoria: '2018',
+          hasta_45: 10000,
+          de_46_60: 4500,
+          mas_de_60: 2700,
+          categoria: 'Candidatas',
         },
         {
-          predeterminado_1: 1000,
-          predeterminado_2: 4400,
-          categoria: '2019',
+          hasta_45: 9200,
+          de_46_60: 4400,
+          mas_de_60: 2600,
+          categoria: 'Nivel 1',
         },
         {
-          predeterminado_1: 2100,
-          predeterminado_2: 4300,
-          categoria: '2020',
+          hasta_45: 9100,
+          de_46_60: 4300,
+          mas_de_60: 2500,
+          categoria: 'Nivel 2',
         },
         {
-          predeterminado_1: 6000,
-          predeterminado_2: 1200,
-          categoria: '2021',
+          hasta_45: 9000,
+          de_46_60: 4200,
+          mas_de_60: 2400,
+          categoria: 'Nivel 3',
         },
         {
-          predeterminado_1: 3000,
-          predeterminado_2: 3000,
-          categoria: '2022',
+          hasta_45: 8900,
+          de_46_60: 4100,
+          mas_de_60: 2300,
+          categoria: 'Eméritas',
         },
       ]"
       :variables="
         variablesCheckeadas ? variablesCheckeadas.variables_activas : variables
       "
+      :acomodo="'agrupadas'"
+      :angulo_etiquetas_eje_x="-30"
     />
     <template #panel-pie-vis>
       <div>

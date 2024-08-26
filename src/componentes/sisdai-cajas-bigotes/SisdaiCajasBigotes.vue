@@ -506,7 +506,7 @@ onMounted(() => {
 
       grupoContenedor.value
         .selectAll('g.grupo-caja')
-        .filter(d => d[0] == categoria)
+        .filter(d => d[0] === categoria)
         .style('opacity', '1')
     },
     { deep: true }
@@ -518,6 +518,14 @@ onMounted(() => {
         grupoContenedor.value.selectAll('g.grupo-caja').style('opacity', '1')
       }
     }
+  )
+  watch(
+    () => props.angulo_etiquetas_eje_y,
+    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+  )
+  watch(
+    () => props.angulo_etiquetas_eje_x,
+    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
   )
 })
 defineExpose({

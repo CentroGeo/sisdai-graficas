@@ -1,6 +1,4 @@
-# EditorConfig is awesome: https://EditorConfig.org
 
-# top-most EditorConfig file
 root = true
 
 [*.{js,jsx,ts,tsx,vue,md}]
@@ -10,4 +8,5 @@ trim_trailing_whitespace = true
 insert_final_newline = true
 end_of_line = lf
 charset = utf-8
+
 max_line_length = 80

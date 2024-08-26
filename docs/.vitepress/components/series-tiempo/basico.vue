@@ -10,9 +10,15 @@ const laSerie = ref()
   >
     <template #globo-informacion>
       <SisdaiGraficasGloboInfo :ancho="200">
-        <template>
-          <p>Cantidad 1: {{ laSerie?.datos_hover?.cantidad_1 }}</p>
-        </template>
+        <p>
+          <span
+            class="globo-informacion-punto-color"
+            :style="{ background: laSerie?.datos_hover?.color }"
+          ></span>
+
+          {{ laSerie?.datos_hover?.nombre }}:
+          {{ laSerie?.datos_hover?.[laSerie?.datos_hover?.id] }}
+        </p>
       </SisdaiGraficasGloboInfo>
     </template>
     <SisdaiSeriesTiempo
@@ -31,6 +37,11 @@ const laSerie = ref()
           id: 'cantidad_1',
           nombre: 'Cantidad 1',
           color: 'blue',
+        },
+        {
+          id: 'cantidad_2',
+          nombre: 'Cantidad 1',
+          color: 'red',
         },
       ]"
       :angulo_etiquetas_eje_x="-45"

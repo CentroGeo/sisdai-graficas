@@ -1,6 +1,6 @@
 <script setup>
   import Basico from "../../.vitepress/components/graficas/basico.vue";
-  import Editable from "../../.vitepress/components/graficas/editable.vue";
+  import Editable from "../../.vitepress/components/graficas/editable-graficas.vue";
 
 </script>
 
@@ -89,4 +89,4 @@ En este ejemplo se muestra como se escribe el componente `<SisdaiGraficas>` y se
 
 En este ejemplo se agrega un rectángulo en el interior del svg que para ilustrar como se puedeagregar reactividad a este para ajustar sus dimensiones según el ancho del contenedor del svg y según la manipulación de los márgenes. El área del rectángulo ilustra el espacio en el cual se dibujarán los gráficos y los márgenes pueden servir como espacio para pintar los ejes.
 <Editable/>
-<<< @/.vitepress/components/graficas/editable.vue
+<<< @/.vitepress/components/graficas/editable-graficas.vue

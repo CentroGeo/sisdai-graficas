@@ -2,13 +2,7 @@
 import { onMounted, ref, watch } from 'vue'
 import numero_de_conglomerados from '../../assets/datos/resistencia_por_ARV_contra_tiempo_pivot.json'
 const datos = ref(numero_de_conglomerados)
-const variables = ref([
-  {
-    id: 'num_conglomerados_no_acum',
-    nombre: 'No acumulado',
-    color: '#B726FC',
-  },
-])
+
 const miGrafica = ref(),
   rectangulo = ref(),
   serieDeTiempo = ref()

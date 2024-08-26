@@ -10,7 +10,7 @@ const variables_dinamicas = ref({
   color: 'red',
 })
 function alternaDatos() {
-  if (base.value == 1) {
+  if (base.value === 1) {
     variables_dinamicas.value = {
       id: 'metrica',
       nombre: 'Metrica',
@@ -55,7 +55,7 @@ function alternaDatos() {
     <SisdaiCajasBigotes
       :datos="datos_dinamicos"
       :variables="variables_dinamicas"
-      :clave_categorias="base == 1 ? 'nombre_empresa' : 'nombre_categoria'"
+      :clave_categorias="base === 1 ? 'nombre_empresa' : 'nombre_categoria'"
     />
   </SisdaiGraficas>
 </template>

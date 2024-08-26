@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import datos_consorcio from '../../assets/datos/consorcio_variantes_todas.json'
 const lasAreasApiladas = ref()
 const datos = ref(datos_consorcio)
@@ -22,10 +22,6 @@ const variablesDinamicas = computed(() =>
   variablesCheckeadas.value
     ? variablesCheckeadas.value?.variables_activas
     : variables.value
-)
-watch(
-  () => lasAreasApiladas.value?.datos_hover,
-  nv => console.log(nv.fecha_1)
 )
 </script>
 <template>

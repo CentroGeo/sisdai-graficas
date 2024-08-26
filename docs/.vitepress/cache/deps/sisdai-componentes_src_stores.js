@@ -1,8 +1,8 @@
 import {
   defineStore
-} from "./chunk-T3YPJTGW.js";
+} from "./chunk-UAAR5INI.js";
 import "./chunk-O3YQPVDG.js";
-import "./chunk-5K23BRP6.js";
+import "./chunk-PAUCAATC.js";
 
 // node_modules/sisdai-componentes/src/stores/accesibilidad.js
 var useAccesibilidadStore = defineStore("accesibilidad", {

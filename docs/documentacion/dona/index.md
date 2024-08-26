@@ -7,6 +7,18 @@
 
 Las gráficas de dona o pay se usan para representar como se reparte una totalidad. Esta biblioteca ofrece el componente `<SisdaiDona/>` para construir este tipo de gráficas. En esta sección se explica su uso.
 
+Uso:
+
+```html
+<SisdaiGraficas>
+  <SisdaiDona
+    :datos="datos"
+    :variables="variables"
+  >
+  </SisdaiDona>
+</SisdaiGraficas>
+```
+
 ## API
 
 ### Propiedades
@@ -56,43 +68,43 @@ Las gráficas de dona o pay se usan para representar como se reparte una totalid
 > </tbody>
 > </table>
 
->Cabe mencionar que el nombre de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no se tienen que llamar forzosamente como en el ejemplo. Las propiedades `variables`, `clave_categoria` y `clave_cantidad` descritas a continuación nos permiten especificar el nombre de las claves (o columnas).
+> Cabe mencionar que el nombre de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no se tienen que llamar forzosamente como en el ejemplo. Las propiedades `variables`, `clave_categoria` y `clave_cantidad` descritas a continuación nos permiten especificar el nombre de las claves (o columnas).
 
 - `variables`: Arreglo de objetos, en donde cada uno contiene información de las categorías como un `id` que debe coincidir con los identificadores o nombres que se usan en `datos` para cada rebanada. También tienen información sobre el color y un nombre que puede ser alternativo al que se usa en `datos`:
+
   - Tipo: `Array`
   - Valor predeterminado: `undefined`
   - Requerido: Sí
->
-> ```json
-> [
->   {
->     "id": "cat_A",
->     "nombre": "Categoría A",
->     "color": "#FFCE00"
->   },
->   {
->     "id": "cat_B",
->     "nombre": "Categoría B",
->     "color": "#FA5600"
->   },
->   {
->     "id": "cat_C",
->     "nombre": "Categoría C",
->     "color": "#C7690D"
->   },
->   {
->     "id": "cat_D",
->     "nombre": "Categoría D",
->     "color": "#FF9F4D"
->   }
-> ]
-> ```
->
-> Esta propiedad tiene un validador para verificar que todos los objetos contengan las tres claves:
->
-> - `id`: su valor debe coincidir con alguna categoria de `datos`.
-> - `nombre`: su valor es un string que da más información sobre el id y es un `String` que puede ser empleado para globos de información
-> - `color`: Es un `String` que especifica en rgb, hexagesimal u otro formato reconoconocido por css que indicará el color que tomará cada subcategoría
+    > ```json
+    > [
+    >   {
+    >     "id": "cat_A",
+    >     "nombre": "Categoría A",
+    >     "color": "#FFCE00"
+    >   },
+    >   {
+    >     "id": "cat_B",
+    >     "nombre": "Categoría B",
+    >     "color": "#FA5600"
+    >   },
+    >   {
+    >     "id": "cat_C",
+    >     "nombre": "Categoría C",
+    >     "color": "#C7690D"
+    >   },
+    >   {
+    >     "id": "cat_D",
+    >     "nombre": "Categoría D",
+    >     "color": "#FF9F4D"
+    >   }
+    > ]
+    > ```
+    >
+    > Esta propiedad tiene un validador para verificar que todos los objetos contengan las tres claves:
+    >
+    > - `id`: su valor debe coincidir con alguna categoria de `datos`.
+    > - `nombre`: su valor es un string que da más información sobre el id y es un `String` que puede ser empleado para globos de información
+    > - `color`: Es un `String` que especifica en rgb, hexagesimal u otro formato reconoconocido por css que indicará el color que tomará cada subcategoría
 
 - `clave_categoria`: Indica la clave empleada para la columna categórica en `datos`, por default es `"categoria"` y con el ejemplo anterior de `datos` podría no especificarse esta propiedad, pero si `datos` emplea otra clave para las categorías, esta propiedad tendrá que especificarse y ser igual a la clave que usa `datos`.
   - Tipo: `String`

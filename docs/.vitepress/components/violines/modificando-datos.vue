@@ -11,7 +11,7 @@ const variables_dinamicas = ref({
   color: 'purple',
 })
 function alternaDatos() {
-  if (base.value == 1) {
+  if (base.value === 1) {
     variables_dinamicas.value = {
       id: 'edad',
       nombre: 'Edad',
@@ -36,7 +36,7 @@ function alternaDatos() {
 <template>
   <SisdaiGraficas
     :titulo_eje_y="'Edad'"
-    :titulo_eje_x="base == 1 ? 'Resistencia' : 'Seguridad social'"
+    :titulo_eje_x="base === 1 ? 'Resistencia' : 'Seguridad social'"
     class="con-panel-encabezado-vis"
     :alto="200"
   >
@@ -57,7 +57,7 @@ function alternaDatos() {
     <SisdaiViolines
       :datos="datos_dinamicos"
       :variables="variables_dinamicas"
-      :clave_categorias="base == 1 ? 'resistencia' : 'seguridad_social'"
+      :clave_categorias="base === 1 ? 'resistencia' : 'seguridad_social'"
     />
   </SisdaiGraficas>
 </template>

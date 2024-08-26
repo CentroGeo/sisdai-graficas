@@ -7,6 +7,20 @@
 
 El componente `<SisdaiAreasApiladasOrdenadas/>` sirve para graficar datos temporales de distintas categorías y que conforman una totalidad, y además se ordenan de mayor a menor a través del tiempo.
 
+Uso:
+
+```html
+<SisdaiGraficas>
+  <SisdaiAreasApiladasOrdenadas
+    :datos="datos"
+    :variables="variables"
+    :formato_temporal="'%d/%m/%Y'"
+    :clave_fecha="'nombre_fecha'"
+  >
+  </SisdaiAreasApiladasOrdenadas>
+</SisdaiGraficas>
+```
+
 ## API
 
 ### Propiedades
@@ -126,6 +140,7 @@ El componente `<SisdaiAreasApiladasOrdenadas/>` sirve para graficar datos tempor
 
 - `escalaTemporal`: Es la función de D3 `d3.scaleTime` que se emplea en el eje horizontal. Es útil cuando se desean agregar elementos al gráfico a través de dicha escala.
 - `escalaLineal`: Es la función de D3 `d3.scaleLinear` que se emplea en el eje vertical. Es útil cuando se desean agregar elementos al gráfico a través de dicha escala.
+- `conversionTemporal`: Es la función de D3 `d3.timeParse` que tiene como argumento el `formato_temporal` que se haya especificado en las propiedades. Puede ser útil cuando se desea agregar elementos usando la `escalaTemporal` y antes de ello los argumentos de dicha escala deben convertirse de `String` a un tipo de objeto `Date`.
 
 ## Ejemplos
 

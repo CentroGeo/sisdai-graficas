@@ -1,12 +1,24 @@
 <script setup>
     import Basico from "../../.vitepress/components/alluvial/basico.vue";
-      import Complejo from "../../.vitepress/components/alluvial/complejo.vue";
+      import AlluvialComplejo from "../../.vitepress/components/alluvial/alluvial-complejo.vue";
 
 </script>
 
 # SisdaiAlluvial
 
 En este apartado se describe el uso del componente `<SisdaiAlluvial/>`, el cual consiste en un diagrama de Alluvial, cuyo uso más común se da para representar diagramas de flujo y/o de conexiones.
+
+Uso:
+
+```html
+<SisdaiGraficas>
+  <SisdaiAlluvial
+    :datos="datos"
+    :variables="variables"
+  >
+  </SisdaiAlluvial>
+</SisdaiGraficas>
+```
 
 ## API
 
@@ -83,5 +95,5 @@ El siguiente ejemplo muestra el funcionamiento del componente con una base de da
 <<< @/.vitepress/components/alluvial/basico.vue
 
 Cómo se puede notar en el ejemplo anterior, cuando el cursor se posiciona dentro del gráfico en un espacio en blanco, el globo de información se queda sin contenido. Se se quiere condicionar a que sólo se muestre si el cursor se posiciona sobre un elemento visual, se puede usar la directiva `v-show` como se muestra en el siguiente ejemplo.
-<Complejo/>
-<<< @/.vitepress/components/alluvial/complejo.vue
+<AlluvialComplejo/>
+<<< @/.vitepress/components/alluvial/alluvial-complejo.vue

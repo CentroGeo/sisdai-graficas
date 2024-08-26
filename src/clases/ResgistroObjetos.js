@@ -39,7 +39,6 @@ export default class RegistroObjetos {
       this.registros[id] = valor
       //console.log(`registro ${this.tipoObjetos}: ${id}`)
     } else {
-      // eslint-disable-next-line
       console.warn(`${this.tipoObjetos} ${id} ya existe`)
     }
   }
@@ -53,7 +52,6 @@ export default class RegistroObjetos {
     if (this.existe(id)) {
       this.registros[id] = valor
     } else {
-      // eslint-disable-next-line
       console.warn(`${this.tipoObjetos} ${id} no encontrado`)
     }
   }
@@ -67,7 +65,6 @@ export default class RegistroObjetos {
     if (this.existe(id)) {
       return this.registros[id]
     } else {
-      // eslint-disable-next-line
       console.warn(`${this.tipoObjetos} ${id} no encontrado`)
     }
   }

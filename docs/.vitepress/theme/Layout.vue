@@ -14,7 +14,7 @@ import NavegacionPrincipal from './NavegacionPrincipal.vue'
 const store = useAccesibilidadStore()
 
 // https://vitepress.dev/reference/runtime-api#usedata
-const { theme, page, frontmatter } = useData()
+const { theme, page } = useData()
 // https://router.vuejs.org/
 const route = useRoute()
 

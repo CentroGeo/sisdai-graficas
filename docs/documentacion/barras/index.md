@@ -1,13 +1,26 @@
 <script setup>
-    import Basico from "../../.vitepress/components/barras/basico.vue";
+
     import DatosReales from "../../.vitepress/components/barras/datos-reales.vue";
-    import ModificandoDatos from "../../.vitepress/components/barras/modificando-datos.vue";
-    import Checks from "../../.vitepress/components/barras/checks.vue";
+
+    import Basico from "../../.vitepress/components/barras/basico.vue";
 </script>
 
 # SisdaiBarras
 
 A continuación se describe el uso del componente `<SisdaiBarras/>` para construir un gráfico de barras.
+
+Uso:
+
+```html
+<SisdaiGraficas>
+  <SisdaiBarras
+    :datos="datos"
+    :variables="variables"
+    :clave_categorias="'nombre'"
+  >
+  </SisdaiBarras>
+</SisdaiGraficas>
+```
 
 ## API
 
@@ -140,9 +153,6 @@ A continuación se describe el uso del componente `<SisdaiBarras/>` para constru
 
 <Basico/>
 <<< @/.vitepress/components/barras/basico.vue
-<DatosReales/>
-<<< @/.vitepress/components/barras/datos-reales.vue
-<ModificandoDatos/>
-<<< @/.vitepress/components/barras/modificando-datos.vue
+
 <Checks/>
-<<< @/.vitepress/components/barras/checks.vue
+<<< @/.vitepress/components/barras/checks-barras.vue

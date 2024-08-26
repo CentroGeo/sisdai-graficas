@@ -11,11 +11,11 @@ const elAlluvial = ref()
     </template>
     <template #globo-informacion>
       <SisdaiGraficasGloboInfo :ancho="180">
-        <p v-if="elAlluvial?.datos_hover?.tipo == 'nodo'">
+        <p v-if="elAlluvial?.datos_hover?.tipo === 'nodo'">
           {{ elAlluvial?.datos_hover?.name }} <br />
           Valor: {{ elAlluvial?.datos_hover?.value }}
         </p>
-        <p v-else-if="elAlluvial?.datos_hover?.tipo == 'enlace'">
+        <p v-else-if="elAlluvial?.datos_hover?.tipo === 'enlace'">
           {{ elAlluvial?.datos_hover?.source?.name }} →
           {{ elAlluvial?.datos_hover?.target?.name }}<br />
           Valor: {{ elAlluvial?.datos_hover?.value }}
