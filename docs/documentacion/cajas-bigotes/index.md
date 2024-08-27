@@ -5,7 +5,7 @@
 
 # SisdaiCajasBigotes
 
-Los diagragmas de cajas y bigotes se utilizan para visualizar distribuciones. Esta biblioteca cuenta con el componente `<SisdaiCajasBigotes/>` para generar dicho diagrama. A continuación se explica su uso.
+Los diagramas de cajas y bigotes se utilizan para visualizar distribuciones. Esta biblioteca cuenta con el componente `<SisdaiCajasBigotes/>` para generar dicho diagrama. A continuación se explica su uso.
 
 Uso:
 

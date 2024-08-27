@@ -26,7 +26,7 @@ Uso:
 
 ### Propiedades
 
-- `datos`: Base de datos a visualizar, consiste en una arreglo de objetos en dónde cada uno corresponde a una categoría principal y contiene la información necesaria para construir una barra, la cual puede estar conformada por otros rectángulos apilados, o bien, un conjunto de barras agupadas.
+- `datos`: Base de datos a visualizar, consiste en una arreglo de objetos en dónde cada uno corresponde a una categoría principal y contiene la información necesaria para construir una barra, la cual puede estar conformada por otros rectángulos apilados, o bien, un conjunto de barras agrupadas.
   - Tipo: `Array`
   - Valor predeterminado: `undefined`
   - Requerido: Sí
