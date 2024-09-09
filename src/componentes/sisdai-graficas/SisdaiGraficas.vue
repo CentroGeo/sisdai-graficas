@@ -2,7 +2,15 @@
 import ContenedorVisAtribuciones from '../internos/ContenedorVisAtribuciones.vue'
 
 import { select } from 'd3-selection'
-import { onMounted, onUnmounted, ref, toRefs, useSlots, watch } from 'vue'
+import {
+  onBeforeMount,
+  onMounted,
+  onUnmounted,
+  ref,
+  toRefs,
+  useSlots,
+  watch,
+} from 'vue'
 import { idAleatorio } from '../../utils'
 import usarRegistroGraficas from './../../composables/usarRegistroGraficas'
 import * as valoresPorDefecto from './../../valores/grafica'
@@ -45,20 +53,25 @@ const alto_grafica = ref()
 const slots = useSlots()
 const posicion_cursor = ref({ x: 0, y: 0 })
 const posicion_globo_info = ref({ x: 0, y: 0 })
-usarRegistroGraficas().registrarGrafica(props.id)
-const grafica = () => {
-  return usarRegistroGraficas().grafica(props.id)
-}
-const { margenes } = toRefs(props)
-grafica().margenes = margenes.value
-watch(margenes, nv => {
-  grafica().margenes = nv
-})
+
 const contenedorSisdaiGraficas = ref(null)
 const espacio_eje_y = ref(0),
   espacio_eje_x = ref(0)
 const grupoFondo = ref()
 const grupoFrente = ref()
+
+const grafica = () => {
+  return usarRegistroGraficas().grafica(props.id)
+}
+
+const { margenes } = toRefs(props)
+watch(margenes, nv => {
+  grafica().margenes = nv
+})
+onBeforeMount(() => {
+  usarRegistroGraficas().registrarGrafica(props.id)
+  grafica().margenes = margenes.value
+})
 onMounted(() => {
   obteniendoDimensiones()
   grupoFondo.value = select(`#${props.id}  g.grupo-fondo`)
@@ -71,10 +84,10 @@ onMounted(() => {
 function obteniendoDimensiones() {
   espacio_eje_y.value = document.querySelector(
     `#${props.id}  .titulo-eje-y`
-  ).clientHeight
+  )?.clientHeight
   espacio_eje_x.value = document.querySelector(
     `#${props.id}  .titulo-eje-x`
-  ).clientHeight
+  )?.clientHeight
   grafica().ancho = props.ancho
     ? props.ancho
     : contenedorSisdaiGraficas.value.clientWidth - espacio_eje_y.value
@@ -103,12 +116,11 @@ function siHayGlobo() {
     `#${props.id} .contenedor-svg-ejes-tooltip .globo-informacion`
   ).node()
 
-  let ancho_globo = globo_nodo.getBoundingClientRect().width
+  let ancho_globo = globo_nodo?.getBoundingClientRect()?.width
   select(`#${props.id} svg.svg-vis`)
     .on('mousemove', e => {
-      posicion_cursor.value.x = e.layerX
-      ancho_globo = globo_nodo.getBoundingClientRect().width
-      posicion_cursor.value.y = e.layerY
+      posicion_cursor.value = { x: e.layerX, y: e.layerY }
+      ancho_globo = globo_nodo?.getBoundingClientRect()?.width
       posicion_globo_info.value.top = e.layerY
       grafica().posicion_cursor = posicion_cursor.value
       select(`#${props.id} .contenedor-svg-ejes-tooltip .globo-informacion`)
@@ -181,7 +193,7 @@ function panelesEnUso() {
         <div
           class="contenedor-svg-ejes-tooltip"
           :style="{
-            height: !grafica().alto
+            height: !grafica()?.alto
               ? '100%'
               : `${grafica().alto + espacio_eje_x}px`,
           }"
@@ -191,12 +203,12 @@ function panelesEnUso() {
           <div
             class="contenedor-titulo-eje-y"
             :style="{
-              height: !grafica().alto ? '100%' : grafica().alto + 'px',
+              height: !grafica()?.alto ? '100%' : grafica()?.alto + 'px',
             }"
           >
             <div
               :style="{
-                width: !grafica().alto ? '100%' : grafica().alto + 'px',
+                width: !grafica()?.alto ? '100%' : grafica()?.alto + 'px',
                 transform: `rotate(-90deg)translateX(calc(-100% - ${
                   0.5 * (margenes.arriba - margenes.abajo)
                 }px))`,
@@ -210,8 +222,9 @@ function panelesEnUso() {
           <figure :style="{ left: espacio_eje_y + 'px' }">
             <svg
               class="svg-vis"
-              :width="grafica().ancho"
-              :height="grafica().alto"
+              :width="grafica()?.ancho"
+              :height="grafica()?.alto"
+              :viewBox="`0 0 ${grafica()?.ancho} ${grafica()?.alto}`"
             >
               <g
                 class="grupo-fondo"
@@ -221,7 +234,7 @@ function panelesEnUso() {
               <g
                 class="eje-x-abajo"
                 :transform="`translate(${margenes.izquierda}, ${
-                  grafica().alto - margenes.abajo
+                  grafica()?.alto - margenes.abajo
                 })`"
               />
               <g
@@ -233,7 +246,7 @@ function panelesEnUso() {
               <g
                 class="eje-y-derecha"
                 :transform="`translate(${
-                  grafica().ancho - margenes.derecha
+                  grafica()?.ancho - margenes.derecha
                 }, ${+margenes.arriba})`"
               />
               <slot />

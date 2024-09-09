@@ -2,7 +2,7 @@
 
 El proyecto sisdai-graficas es una biblioteca de componentes de visualización de datos reutilizables de Vue, creados con [D3.js](https://d3js.org) y alineada al Sistema de Diseño y Accesibilidad para la Investigación [Sisdai](https://sisdai.conahcyt.mx/).
 
-Para el uso se recomienda utilizar Vue **3.4.31** y el soporte para [Composition Api](https://vuejs.org/api/composition-api-setup.html).
+Para el uso se recomienda utilizar Vue **3.4.36** y el soporte para [Composition Api](https://vuejs.org/api/composition-api-setup.html).
 
 <section id="instalacion">
 

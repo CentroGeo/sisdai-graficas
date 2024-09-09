@@ -1,10 +1,4 @@
 import {
-  number_default,
-  piecewise,
-  round_default,
-  value_default
-} from "./chunk-2YAAEMK7.js";
-import {
   timeFormat,
   utcFormat
 } from "./chunk-2DJ4GDBT.js";
@@ -38,6 +32,12 @@ import {
   tickStep,
   ticks
 } from "./chunk-I7AXEEPR.js";
+import {
+  number_default,
+  piecewise,
+  round_default,
+  value_default
+} from "./chunk-2YAAEMK7.js";
 import {
   format,
   formatPrefix,
