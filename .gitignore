@@ -4,7 +4,9 @@ package-lock.json
 #docs
 docs/.vuepress/dist/
 docs/.vitepress/dist/
+docs/.vitepress/cache/
 
+coverage
 # local env files
 .env.local
 .env.*.local
