@@ -259,7 +259,8 @@ onMounted(() => {
       if (usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho > 0) {
         creaDona()
       }
-    }
+    },
+    { deep: true }
   )
   watch(datos, () => {
     calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)

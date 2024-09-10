@@ -54,6 +54,18 @@ grafica().margenes = margenes.value
 watch(margenes, nv => {
   grafica().margenes = nv
 })
+watch(
+  () => props.alto,
+  nv => {
+    grafica().alto = nv
+  }
+)
+watch(
+  () => props.ancho,
+  nv => {
+    grafica().ancho = nv
+  }
+)
 const contenedorSisdaiGraficas = ref(null)
 const espacio_eje_y = ref(0),
   espacio_eje_x = ref(0)
@@ -161,7 +173,10 @@ function panelesEnUso() {
     style="--contenedor-vis-alto-menus: auto"
     class="contenedor-vis contenedor-sisdai-graficas"
     :id="id"
-    :style="{ '--contenedor-vis-alto-maximo': 'auto' }"
+    :style="{
+      '--contenedor-vis-alto-maximo': 'auto',
+      '--contenedor-vis-alto-minimo-vis': 'auto',
+    }"
   >
     <div
       class="contenedor-vis-paneles"

@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 const laDona = ref()
 const variables = ref([
   { id: 'Variable A', nombre: 'Variable A', color: '#253494' },
@@ -8,9 +8,21 @@ const variables = ref([
   { id: 'Variable D', nombre: 'Variable D', color: '#7fcdbb' },
   { id: 'Variable E', nombre: 'Variable E', color: '#c7e9b4' },
 ])
+const altoSisdaiGrafica = ref()
+const sisdaiGrafica = ref()
+watch(
+  () => sisdaiGrafica.value?.ancho_grafica,
+  (nv, ov) => {
+    altoSisdaiGrafica.value = nv
+  }
+)
 </script>
 <template>
-  <SisdaiGraficas :margenes="{ arriba: 0, abajo: 0, derecha: 0, izquierda: 0 }">
+  <SisdaiGraficas
+    ref="sisdaiGrafica"
+    :margenes="{ arriba: 0, abajo: 0, derecha: 0, izquierda: 0 }"
+    :alto="altoSisdaiGrafica ? altoSisdaiGrafica : 100"
+  >
     <template #globo-informacion>
       <SisdaiGraficasGloboInfo :ancho="200">
         <template>
