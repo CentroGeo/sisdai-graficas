@@ -113,7 +113,7 @@ module.exports = SILENT_ON_NON_WRITABLE_LENGTH_SET ? function (O, length) {
 
 /***/ }),
 
-/***/ 4576:
+/***/ 2195:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 
@@ -226,16 +226,16 @@ module.exports = function (O, key, value, options) {
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 
-var global = __webpack_require__(4475);
+var globalThis = __webpack_require__(4576);
 
 // eslint-disable-next-line es/no-object-defineproperty -- safe
 var defineProperty = Object.defineProperty;
 
 module.exports = function (key, value) {
   try {
-    defineProperty(global, key, { value: value, configurable: true, writable: true });
+    defineProperty(globalThis, key, { value: value, configurable: true, writable: true });
   } catch (error) {
-    global[key] = value;
+    globalThis[key] = value;
   } return value;
 };
 
@@ -261,10 +261,10 @@ module.exports = !fails(function () {
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 
-var global = __webpack_require__(4475);
+var globalThis = __webpack_require__(4576);
 var isObject = __webpack_require__(34);
 
-var document = global.document;
+var document = globalThis.document;
 // typeof document.createElement is 'object' in old IE
 var EXISTS = isObject(document) && isObject(document.createElement);
 
@@ -290,24 +290,47 @@ module.exports = function (it) {
 
 /***/ }),
 
-/***/ 9392:
+/***/ 8727:
 /***/ (function(module) {
 
 
-module.exports = typeof navigator != 'undefined' && String(navigator.userAgent) || '';
+// IE8- don't enum bug keys
+module.exports = [
+  'constructor',
+  'hasOwnProperty',
+  'isPrototypeOf',
+  'propertyIsEnumerable',
+  'toLocaleString',
+  'toString',
+  'valueOf'
+];
 
 
 /***/ }),
 
-/***/ 7388:
+/***/ 2839:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 
-var global = __webpack_require__(4475);
-var userAgent = __webpack_require__(9392);
+var globalThis = __webpack_require__(4576);
 
-var process = global.process;
-var Deno = global.Deno;
+var navigator = globalThis.navigator;
+var userAgent = navigator && navigator.userAgent;
+
+module.exports = userAgent ? String(userAgent) : '';
+
+
+/***/ }),
+
+/***/ 9519:
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+
+var globalThis = __webpack_require__(4576);
+var userAgent = __webpack_require__(2839);
+
+var process = globalThis.process;
+var Deno = globalThis.Deno;
 var versions = process && process.versions || Deno && Deno.version;
 var v8 = versions && versions.v8;
 var match, version;
@@ -334,29 +357,11 @@ module.exports = version;
 
 /***/ }),
 
-/***/ 8727:
-/***/ (function(module) {
-
-
-// IE8- don't enum bug keys
-module.exports = [
-  'constructor',
-  'hasOwnProperty',
-  'isPrototypeOf',
-  'propertyIsEnumerable',
-  'toLocaleString',
-  'toString',
-  'valueOf'
-];
-
-
-/***/ }),
-
 /***/ 6518:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 
-var global = __webpack_require__(4475);
+var globalThis = __webpack_require__(4576);
 var getOwnPropertyDescriptor = (__webpack_require__(7347).f);
 var createNonEnumerableProperty = __webpack_require__(6699);
 var defineBuiltIn = __webpack_require__(6840);
@@ -385,11 +390,11 @@ module.exports = function (options, source) {
   var STATIC = options.stat;
   var FORCED, target, key, targetProperty, sourceProperty, descriptor;
   if (GLOBAL) {
-    target = global;
+    target = globalThis;
   } else if (STATIC) {
-    target = global[TARGET] || defineGlobalProperty(TARGET, {});
+    target = globalThis[TARGET] || defineGlobalProperty(TARGET, {});
   } else {
-    target = global[TARGET] && global[TARGET].prototype;
+    target = globalThis[TARGET] && globalThis[TARGET].prototype;
   }
   if (target) for (key in source) {
     sourceProperty = source[key];
@@ -508,7 +513,7 @@ module.exports = NATIVE_BIND ? uncurryThisWithBind : function (fn) {
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 
-var global = __webpack_require__(4475);
+var globalThis = __webpack_require__(4576);
 var isCallable = __webpack_require__(4901);
 
 var aFunction = function (argument) {
@@ -516,7 +521,7 @@ var aFunction = function (argument) {
 };
 
 module.exports = function (namespace, method) {
-  return arguments.length < 2 ? aFunction(global[namespace]) : global[namespace] && global[namespace][method];
+  return arguments.length < 2 ? aFunction(globalThis[namespace]) : globalThis[namespace] && globalThis[namespace][method];
 };
 
 
@@ -539,7 +544,7 @@ module.exports = function (V, P) {
 
 /***/ }),
 
-/***/ 4475:
+/***/ 4576:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 
@@ -615,7 +620,7 @@ module.exports = !DESCRIPTORS && !fails(function () {
 
 var uncurryThis = __webpack_require__(9504);
 var fails = __webpack_require__(9039);
-var classof = __webpack_require__(4576);
+var classof = __webpack_require__(2195);
 
 var $Object = Object;
 var split = uncurryThis(''.split);
@@ -659,7 +664,7 @@ module.exports = store.inspectSource;
 
 
 var NATIVE_WEAK_MAP = __webpack_require__(8622);
-var global = __webpack_require__(4475);
+var globalThis = __webpack_require__(4576);
 var isObject = __webpack_require__(34);
 var createNonEnumerableProperty = __webpack_require__(6699);
 var hasOwn = __webpack_require__(9297);
@@ -668,8 +673,8 @@ var sharedKey = __webpack_require__(6119);
 var hiddenKeys = __webpack_require__(421);
 
 var OBJECT_ALREADY_INITIALIZED = 'Object already initialized';
-var TypeError = global.TypeError;
-var WeakMap = global.WeakMap;
+var TypeError = globalThis.TypeError;
+var WeakMap = globalThis.WeakMap;
 var set, get, has;
 
 var enforce = function (it) {
@@ -736,7 +741,7 @@ module.exports = {
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 
-var classof = __webpack_require__(4576);
+var classof = __webpack_require__(2195);
 
 // `IsArray` abstract operation
 // https://tc39.es/ecma262/#sec-isarray
@@ -1202,17 +1207,17 @@ module.exports = function (key) {
 
 
 var IS_PURE = __webpack_require__(6395);
-var globalThis = __webpack_require__(4475);
+var globalThis = __webpack_require__(4576);
 var defineGlobalProperty = __webpack_require__(9433);
 
 var SHARED = '__core-js_shared__';
 var store = module.exports = globalThis[SHARED] || defineGlobalProperty(SHARED, {});
 
 (store.versions || (store.versions = [])).push({
-  version: '3.37.1',
+  version: '3.38.1',
   mode: IS_PURE ? 'pure' : 'global',
   copyright: '© 2014-2024 Denis Pushkarev (zloirock.ru)',
-  license: 'https://github.com/zloirock/core-js/blob/v3.37.1/LICENSE',
+  license: 'https://github.com/zloirock/core-js/blob/v3.38.1/LICENSE',
   source: 'https://github.com/zloirock/core-js'
 });
 
@@ -1237,11 +1242,11 @@ module.exports = function (key, value) {
 
 
 /* eslint-disable es/no-symbol -- required for testing */
-var V8_VERSION = __webpack_require__(7388);
+var V8_VERSION = __webpack_require__(9519);
 var fails = __webpack_require__(9039);
-var global = __webpack_require__(4475);
+var globalThis = __webpack_require__(4576);
 
-var $String = global.String;
+var $String = globalThis.String;
 
 // eslint-disable-next-line es/no-object-getownpropertysymbols -- required for testing
 module.exports = !!Object.getOwnPropertySymbols && !fails(function () {
@@ -1467,10 +1472,10 @@ module.exports = DESCRIPTORS && fails(function () {
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 
-var global = __webpack_require__(4475);
+var globalThis = __webpack_require__(4576);
 var isCallable = __webpack_require__(4901);
 
-var WeakMap = global.WeakMap;
+var WeakMap = globalThis.WeakMap;
 
 module.exports = isCallable(WeakMap) && /native code/.test(String(WeakMap));
 
@@ -1481,14 +1486,14 @@ module.exports = isCallable(WeakMap) && /native code/.test(String(WeakMap));
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 
-var global = __webpack_require__(4475);
+var globalThis = __webpack_require__(4576);
 var shared = __webpack_require__(5745);
 var hasOwn = __webpack_require__(9297);
 var uid = __webpack_require__(3392);
 var NATIVE_SYMBOL = __webpack_require__(4495);
 var USE_SYMBOL_AS_UID = __webpack_require__(7040);
 
-var Symbol = global.Symbol;
+var Symbol = globalThis.Symbol;
 var WellKnownSymbolsStore = shared('wks');
 var createWellKnownSymbol = USE_SYMBOL_AS_UID ? Symbol['for'] || Symbol : Symbol && Symbol.withoutSetter || uid;
 
@@ -1640,7 +1645,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"44732a59-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-alluvial/SisdaiAlluvial.vue?vue&type=template&id=064f6a4c
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5cc34656-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-alluvial/SisdaiAlluvial.vue?vue&type=template&id=064f6a4c
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c,
@@ -7732,7 +7737,7 @@ const sisdai_alluvial_plugin = {
   }
 };
 /* harmony default export */ var sisdai_alluvial = (sisdai_alluvial_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"44732a59-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-areas-apiladas/SisdaiAreasApiladas.vue?vue&type=template&id=2f22ad52
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5cc34656-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-areas-apiladas/SisdaiAreasApiladas.vue?vue&type=template&id=2f22ad52
 var SisdaiAreasApiladasvue_type_template_id_2f22ad52_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
@@ -9249,7 +9254,7 @@ const sisdai_areas_apiladas_plugin = {
   }
 };
 /* harmony default export */ var sisdai_areas_apiladas = (sisdai_areas_apiladas_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"44732a59-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-areas-apiladas-ordenadas/SisdaiAreasApiladasOrdenadas.vue?vue&type=template&id=9ecb3fc4
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5cc34656-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-areas-apiladas-ordenadas/SisdaiAreasApiladasOrdenadas.vue?vue&type=template&id=9ecb3fc4
 var SisdaiAreasApiladasOrdenadasvue_type_template_id_9ecb3fc4_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
@@ -9556,8 +9561,8 @@ const sisdai_areas_apiladas_ordenadas_plugin = {
   }
 };
 /* harmony default export */ var sisdai_areas_apiladas_ordenadas = (sisdai_areas_apiladas_ordenadas_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"44732a59-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-barras/SisdaiBarras.vue?vue&type=template&id=f09b6d22
-var SisdaiBarrasvue_type_template_id_f09b6d22_render = function render() {
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5cc34656-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-barras/SisdaiBarras.vue?vue&type=template&id=e24c13fa
+var SisdaiBarrasvue_type_template_id_e24c13fa_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
@@ -9569,7 +9574,7 @@ var SisdaiBarrasvue_type_template_id_f09b6d22_render = function render() {
     }
   });
 };
-var SisdaiBarrasvue_type_template_id_f09b6d22_staticRenderFns = [];
+var SisdaiBarrasvue_type_template_id_e24c13fa_staticRenderFns = [];
 
 ;// CONCATENATED MODULE: ./node_modules/internmap/src/index.js
 class InternMap extends Map {
@@ -10030,8 +10035,8 @@ function point() {
 ;
 var SisdaiBarras_component = normalizeComponent(
   sisdai_barras_SisdaiBarrasvue_type_script_setup_true_lang_js,
-  SisdaiBarrasvue_type_template_id_f09b6d22_render,
-  SisdaiBarrasvue_type_template_id_f09b6d22_staticRenderFns,
+  SisdaiBarrasvue_type_template_id_e24c13fa_render,
+  SisdaiBarrasvue_type_template_id_e24c13fa_staticRenderFns,
   false,
   null,
   null,
@@ -10048,7 +10053,7 @@ const sisdai_barras_plugin = {
   }
 };
 /* harmony default export */ var sisdai_barras = (sisdai_barras_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"44732a59-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-cajas-bigotes/SisdaiCajasBigotes.vue?vue&type=template&id=4f4ac904
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5cc34656-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-cajas-bigotes/SisdaiCajasBigotes.vue?vue&type=template&id=4f4ac904
 var SisdaiCajasBigotesvue_type_template_id_4f4ac904_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
@@ -10524,7 +10529,7 @@ const sisdai_cajas_bigotes_plugin = {
   }
 };
 /* harmony default export */ var sisdai_cajas_bigotes = (sisdai_cajas_bigotes_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"44732a59-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-checks/SisdaiChecks.vue?vue&type=template&id=7ff4d7a6
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5cc34656-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-checks/SisdaiChecks.vue?vue&type=template&id=7ff4d7a6
 var SisdaiChecksvue_type_template_id_7ff4d7a6_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
@@ -10661,8 +10666,8 @@ const sisdai_checks_plugin = {
   }
 };
 /* harmony default export */ var sisdai_checks = (sisdai_checks_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"44732a59-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-dona/SisdaiDona.vue?vue&type=template&id=8cac5cae
-var SisdaiDonavue_type_template_id_8cac5cae_render = function render() {
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5cc34656-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-dona/SisdaiDona.vue?vue&type=template&id=6e142b6e
+var SisdaiDonavue_type_template_id_6e142b6e_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
@@ -10676,7 +10681,7 @@ var SisdaiDonavue_type_template_id_8cac5cae_render = function render() {
     staticClass: "dona-completa-fondo"
   })]);
 };
-var SisdaiDonavue_type_template_id_8cac5cae_staticRenderFns = [];
+var SisdaiDonavue_type_template_id_6e142b6e_staticRenderFns = [];
 
 ;// CONCATENATED MODULE: ./node_modules/d3-shape/src/descending.js
 /* harmony default export */ function src_descending(a, b) {
@@ -11216,6 +11221,8 @@ function cornerTangents(x0, y0, x1, y1, r1, rc, cw) {
         if (usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho > 0) {
           creaDona();
         }
+      }, {
+        deep: true
       });
       (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(datos, () => {
         calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis);
@@ -11292,8 +11299,8 @@ function cornerTangents(x0, y0, x1, y1, r1, rc, cw) {
 ;
 var SisdaiDona_component = normalizeComponent(
   sisdai_dona_SisdaiDonavue_type_script_setup_true_lang_js,
-  SisdaiDonavue_type_template_id_8cac5cae_render,
-  SisdaiDonavue_type_template_id_8cac5cae_staticRenderFns,
+  SisdaiDonavue_type_template_id_6e142b6e_render,
+  SisdaiDonavue_type_template_id_6e142b6e_staticRenderFns,
   false,
   null,
   null,
@@ -11310,8 +11317,8 @@ const sisdai_dona_plugin = {
   }
 };
 /* harmony default export */ var sisdai_dona = (sisdai_dona_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"44732a59-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas/SisdaiGraficas.vue?vue&type=template&id=7a165678
-var SisdaiGraficasvue_type_template_id_7a165678_render = function render() {
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5cc34656-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas/SisdaiGraficas.vue?vue&type=template&id=ba3fb112
+var SisdaiGraficasvue_type_template_id_ba3fb112_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
@@ -11321,7 +11328,8 @@ var SisdaiGraficasvue_type_template_id_7a165678_render = function render() {
       "--contenedor-vis-alto-menus": "auto"
     },
     style: {
-      '--contenedor-vis-alto-maximo': 'auto'
+      '--contenedor-vis-alto-maximo': 'auto',
+      '--contenedor-vis-alto-minimo-vis': 'auto'
     },
     attrs: {
       "sisdai-grafica": _vm.id,
@@ -11409,9 +11417,9 @@ var SisdaiGraficasvue_type_template_id_7a165678_render = function render() {
     staticClass: "panel-pie-vis"
   }, [_vm._t("panel-pie-vis")], 2)]), _c(_setup.ContenedorVisAtribuciones)], 1);
 };
-var SisdaiGraficasvue_type_template_id_7a165678_staticRenderFns = [];
+var SisdaiGraficasvue_type_template_id_ba3fb112_staticRenderFns = [];
 
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"44732a59-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/internos/ContenedorVisAtribuciones.vue?vue&type=template&id=067256ac
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5cc34656-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/internos/ContenedorVisAtribuciones.vue?vue&type=template&id=067256ac
 var ContenedorVisAtribucionesvue_type_template_id_067256ac_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -11530,6 +11538,12 @@ var ContenedorVisAtribuciones_component = normalizeComponent(
     (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(margenes, nv => {
       grafica().margenes = nv;
     });
+    (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(() => props.alto, nv => {
+      grafica().alto = nv;
+    });
+    (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.watch)(() => props.ancho, nv => {
+      grafica().ancho = nv;
+    });
     const contenedorSisdaiGraficas = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(null);
     const espacio_eje_y = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(0),
       espacio_eje_x = (0,external_commonjs_vue_commonjs2_vue_root_Vue_namespaceObject.ref)(0);
@@ -11627,8 +11641,8 @@ var ContenedorVisAtribuciones_component = normalizeComponent(
 ;
 var SisdaiGraficas_component = normalizeComponent(
   sisdai_graficas_SisdaiGraficasvue_type_script_setup_true_lang_js,
-  SisdaiGraficasvue_type_template_id_7a165678_render,
-  SisdaiGraficasvue_type_template_id_7a165678_staticRenderFns,
+  SisdaiGraficasvue_type_template_id_ba3fb112_render,
+  SisdaiGraficasvue_type_template_id_ba3fb112_staticRenderFns,
   false,
   null,
   null,
@@ -11645,7 +11659,7 @@ const sisdai_graficas_plugin = {
   }
 };
 /* harmony default export */ var sisdai_graficas = (sisdai_graficas_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"44732a59-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=template&id=23ffba04
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5cc34656-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-graficas-globo-info/SisdaiGraficasGloboInfo.vue?vue&type=template&id=23ffba04
 var SisdaiGraficasGloboInfovue_type_template_id_23ffba04_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
@@ -11732,7 +11746,7 @@ const sisdai_graficas_globo_info_plugin = {
   }
 };
 /* harmony default export */ var sisdai_graficas_globo_info = (sisdai_graficas_globo_info_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"44732a59-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-nomenclatura/SisdaiNomenclatura.vue?vue&type=template&id=25c10340
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5cc34656-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-nomenclatura/SisdaiNomenclatura.vue?vue&type=template&id=25c10340
 var SisdaiNomenclaturavue_type_template_id_25c10340_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
@@ -11832,7 +11846,7 @@ const sisdai_nomenclatura_plugin = {
   }
 };
 /* harmony default export */ var sisdai_nomenclatura = (sisdai_nomenclatura_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"44732a59-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-series-tiempo/SisdaiSeriesTiempo.vue?vue&type=template&id=5e0f3c56
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5cc34656-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-series-tiempo/SisdaiSeriesTiempo.vue?vue&type=template&id=5e0f3c56
 var SisdaiSeriesTiempovue_type_template_id_5e0f3c56_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
@@ -12094,7 +12108,7 @@ const sisdai_series_tiempo_plugin = {
   }
 };
 /* harmony default export */ var sisdai_series_tiempo = (sisdai_series_tiempo_plugin);
-;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"44732a59-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-violines/SisdaiViolines.vue?vue&type=template&id=596afb80
+;// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5cc34656-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/cli-service/node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/componentes/sisdai-violines/SisdaiViolines.vue?vue&type=template&id=596afb80
 var SisdaiViolinesvue_type_template_id_596afb80_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
