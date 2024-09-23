@@ -6,8 +6,8 @@ coverage
 *.local
 package-lock.json
 #docs
-docs/.vitepress/dist
 docs/.vitepress/cache
+docs/.vitepress/dist
 docs/.vitepress/.temp
 
 # local env files

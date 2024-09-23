@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../node_modules/sisdai-componentes/src/stores/accesibilidad.js"],
-  "sourcesContent": ["// This file is part of sisdai-componentes.\n//\n//   sisdai-componentes is free software: you can redistribute it and/or modify\n//   it under the terms of the GNU Lesser General Public License as published by the\n//   Free Software Foundation, either version 3 of the License, or\n//   (at your option) any later version.\n//\n//   sisdai-componentes is distributed in the hope that it will be useful,\n//   but WITHOUT ANY WARRANTY; without even the implied warranty of\n//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General\n//   Public License for more details.\n//\n//   You should have received a copy of the GNU Lesser General Public License along\n//   with sisdai-componentes. If not, see <https://www.gnu.org/licenses/>.\n\nimport { defineStore } from 'pinia'\n\nexport const useAccesibilidadStore = defineStore('accesibilidad', {\n  state: () => ({ clasesAccesibles: [] }),\n  // state: () => {\n  //   return { clasesAccesibles: [] }\n  // },\n  actions: {\n    modificarClasesAccesibles(valor) {\n      this.clasesAccesibles = valor\n    },\n    restablecer() {\n      this.clasesAccesibles = []\n    },\n  },\n})\n"],
-  "mappings": ";;;;;;;AAiBO,IAAM,wBAAwB,YAAY,iBAAiB;AAAA,EAChE,OAAO,OAAO,EAAE,kBAAkB,CAAC,EAAE;AAAA;AAAA;AAAA;AAAA,EAIrC,SAAS;AAAA,IACP,0BAA0B,OAAO;AAC/B,WAAK,mBAAmB;AAAA,IAC1B;AAAA,IACA,cAAc;AACZ,WAAK,mBAAmB,CAAC;AAAA,IAC3B;AAAA,EACF;AACF,CAAC;",
-  "names": []
-}
