@@ -1,31 +1,24 @@
-<template>
-  <div id="app">
-    <SisdaiCajasBigotes
-        ref="cajas_bigotes_basica"
-        :caja_id="'cajas_bigotes_basica'"
-        :datos="datos"
-        :titulo_eje_x="'Empresa'"
-        :titulo_eje_y="''"
-        :tooltip_activo="false"
-        :alto_vis="500"
-        :variables="{'grupos':'nombre_empresa','variable_dist':'acciones_vendidas','color':'#2c7fb8'}"
-    />
-  </div>
-</template>
+<script setup>
+import cajasbigotesejemplos from '../../assets/datos/cajas_bigotes_ejemplo_1.json'
 
-<script>
-import cajasbigotesejemplos from "./cajas_bigotes_ejemplo_1.json"
-
-export default {
-  name: 'cajas-bigotes-basico',
-
-  data: function () {
-    return {
-      datos: cajasbigotesejemplos,
-    }
-  },
-}
+import { ref } from 'vue'
+const datos_dinamicos = ref(cajasbigotesejemplos)
+const variables_dinamicas = ref({
+  id: 'acciones_vendidas',
+  nombre: 'Acciones vendidas',
+  color: '#2c7fb8',
+})
 </script>
 
-<style lang="scss">
-</style>
+<template>
+  <SisdaiGraficas
+    :titulo_eje_y="'título del eje y'"
+    :titulo_eje_x="'título del eje x'"
+  >
+    <SisdaiCajasBigotes
+      :datos="datos_dinamicos"
+      :variables="variables_dinamicas"
+      :clave_categorias="'nombre_empresa'"
+    />
+  </SisdaiGraficas>
+</template>

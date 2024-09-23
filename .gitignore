@@ -1,7 +1,12 @@
 .DS_Store
 node_modules
 package-lock.json
+#docs
+docs/.vuepress/dist/
+docs/.vitepress/dist/
+docs/.vitepress/cache/
 
+coverage
 # local env files
 .env.local
 .env.*.local
@@ -14,9 +19,12 @@ pnpm-debug.log*
 
 # Editor directories and files
 .idea
-.vscode
+# .vscode
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+dist/demo.html
+
+deprecated/

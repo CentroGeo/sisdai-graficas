@@ -14,38 +14,51 @@
 //   with sisdai-graficas. If not, see <https://www.gnu.org/licenses/>.
 
 import {
-    SisdaiBarras,
-    SisdaiDonas,
-    SisdaiLineas,
-    SisdaiCajasBigotes,
-    SisdaiDiagramaProcesos,
-    SisdaiAreasApiladas,
-    SisdaiLineaTiempo
-} from "./components"
+  SisdaiAlluvial,
+  SisdaiAreasApiladas,
+  SisdaiAreasApiladasOrdenadas,
+  SisdaiBarras,
+  SisdaiCajasBigotes,
+  SisdaiChecks,
+  SisdaiDona,
+  SisdaiGraficas,
+  SisdaiGraficasGloboInfo,
+  SisdaiNomenclatura,
+  SisdaiSeriesTiempo,
+  SisdaiViolines,
+} from './componentes'
 
-import "./scss/estilogeneral.scss"
-
-export default function plugin(Vue) {
-    if (plugin.installed) {
-        return
-    }
-    plugin.installed = true
+const plugin = {
+  install: function (Vue) {
+    //UI base
+    Vue.use(SisdaiGraficas)
     Vue.use(SisdaiBarras)
-    Vue.use(SisdaiDonas)
-    Vue.use(SisdaiLineas)
     Vue.use(SisdaiCajasBigotes)
-    Vue.use(SisdaiDiagramaProcesos)
+    Vue.use(SisdaiChecks)
+    Vue.use(SisdaiDona)
+    Vue.use(SisdaiNomenclatura)
+    Vue.use(SisdaiSeriesTiempo)
     Vue.use(SisdaiAreasApiladas)
-    Vue.use(SisdaiLineaTiempo)
+    Vue.use(SisdaiAreasApiladasOrdenadas)
+    Vue.use(SisdaiViolines)
+    Vue.use(SisdaiAlluvial)
+    Vue.use(SisdaiGraficasGloboInfo)
+  },
 }
 
 export {
-    plugin as install,
-    SisdaiBarras,
-    SisdaiDonas,
-    SisdaiLineas,
-    SisdaiCajasBigotes,
-    SisdaiDiagramaProcesos,
-    SisdaiAreasApiladas,
-    SisdaiLineaTiempo
+  SisdaiAlluvial,
+  SisdaiAreasApiladas,
+  SisdaiAreasApiladasOrdenadas,
+  SisdaiBarras,
+  SisdaiCajasBigotes,
+  SisdaiChecks,
+  SisdaiDona,
+  SisdaiGraficas,
+  SisdaiGraficasGloboInfo,
+  SisdaiNomenclatura,
+  SisdaiSeriesTiempo,
+  SisdaiViolines,
 }
+
+export default plugin
