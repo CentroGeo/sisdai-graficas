@@ -8,9 +8,10 @@ export default mergeConfig(
     test: {
       coverage: {
         provider: 'v8', // istanbul, v8
+        reporter: ['text', 'html'],
+        reportsDirectory: './test/unit/coverage',
       },
       ui: true,
-      reportsDirectory: './test/unit/coverage',
       // enable jest-like global test APIs
       globals: true,
       // simulate DOM with happy-dom

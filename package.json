@@ -18,8 +18,8 @@
     "format-lint": "npm run format && npm run lint",
     "lint": "eslint --fix --ignore-pattern .gitignore .",
     "preview": "vite preview",
-    "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "test": "vitest --no-ui",
+    "coverage": "vitest run --coverage && open ./coverage/index.html"
   },
   "dependencies": {
     "d3": "^7.8.2",
@@ -44,6 +44,7 @@
     "happy-dom": "^14.12.3",
     "jsdom": "^25.0.0",
     "lint-staged": "^15.2.7",
+    "open": "^10.1.0",
     "pinia": "^2.2.1",
     "prettier": "^3.3.3",
     "sisdai-componentes": "git+https://codigo.conahcyt.mx/sisdai/sisdai-componentes#v4.0.0-beta.10",
