@@ -142,7 +142,21 @@ en proceso de desarrollo. Es posible levantarla en un ambiente local con la
 instrucción:
 
 ```bash
-npm run docs:serve
+npm run docs
+```
+
+### Testing
+
+Si deseas correr el testing puedes ejecutar el siguiente comando, el cual implementará la pruebas unitarias
+
+```bash
+npm run docs
+```
+
+Adicionalmente puedes ejecutar el siguiente comando para evaluar el porcentaje de código que se ha testeado y visualizar el avance en un servidor local
+
+```bash
+npm run coverage
 ```
 
 ## Licencia
