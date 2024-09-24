@@ -150,7 +150,7 @@ npm run docs
 Si deseas correr el testing puedes ejecutar el siguiente comando, el cual implementará la pruebas unitarias
 
 ```bash
-npm run docs
+npm run test
 ```
 
 Adicionalmente puedes ejecutar el siguiente comando para evaluar el porcentaje de código que se ha testeado y visualizar el avance en un servidor local
