@@ -5,9 +5,9 @@
 
 # SisdaiAreasApiladasOrdenadas
 
-El componente `<SisdaiAreasApiladasOrdenadas/>` sirve para graficar datos temporales de distintas categorías y que conforman una totalidad, y además se ordenan de mayor a menor a través del tiempo.
+El componente `<SisdaiAreasApiladasOrdenadas/>` se utiliza para graficar datos temporales de distintas categorías que conforman una totalidad y que, además, se ordenan de mayor a menor a lo largo del tiempo.
 
-Uso:
+Ejemplo de implementación:
 
 ```html
 <SisdaiGraficas>
@@ -25,7 +25,7 @@ Uso:
 
 ### Propiedades
 
-- `datos`: Base de datos a visualizar, consiste en un arreglo de objetos en dónde cada objeto está asociado a una fecha y a los valores muestreados vinculados a dicha fecha.
+- `datos`: Conjunto de datos a visualizar. Es un arreglo de objetos en dónde cada objeto está asociado a una fecha y a los valores muestreados vinculados a dicha fecha.
   - Tipo: `Array`
   - Valor predeterminado: `undefined`
   - Requerido: Sí
@@ -41,7 +41,7 @@ Uso:
 > ]
 > ```
 >
-> El arreglo mostrado arriba puede ser el objeto resultante al importar con la biblioteca d3.js o algún plugin como [plugin-dsv](https://www.npmjs.com/package/@rollup/plugin-dsv) un archivo .csv con la estructura mostrada a continuación. En ese sentido, mantienen cierta equivalencia:
+> El arreglo anterior podría ser el resultado de importar un archivo .csv usando la biblioteca D3.js o algún plugin como [plugin-dsv](https://www.npmjs.com/package/@rollup/plugin-dsv) con la siguiente estructura:
 >
 > <table>
 > <thead>
@@ -74,9 +74,10 @@ Uso:
 > </tr>
 > </tbody>
 > </table>
-> Cabe mencionar que el nombre de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no se tienen que llamar forzosamente como en el ejemplo. Las propiedades `variables` y `clave_fecha` más adelante nos permiten especificar el nombre de las claves (o columnas).
+> Cabe mencionar que el nombre de las claves en los objetos  (o de las columnas desde el punto de vista de la tabla) no necesariamente deben coincidir con los del ejemplo. Las propiedades `variables` y `clave_fecha` permiten especificar el nombre de las claves (o columnas).
 
-- `variables`: Arreglo de objetos, en donde cada uno contiene información de las variables o series de tiempo incluidas en la base de datos.
+- `variables`: Arreglo de objetos en donde cada uno contiene información de las variables o series de tiempo incluidas en el conjunto de datos.
+
   - Tipo: `Array`
   - Valor predeterminado: `undefined`
   - Requerido: Sí
@@ -98,48 +99,49 @@ Uso:
 > ]
 > ```
 >
-> Esta propiedad tiene un validador para verificar que todos los objetos contengan las tres claves:
+> Esta propiedad incluye un validador para verificar que todos los objetos contengan las siguientes tres claves:
 >
-> - `id`: su valor es un `String` que debe coincidir con alguna subcategoría de `datos`, equivalente a uno de los nombres de las columnas que contiene información numérica
-> - `nombre`: su valor es un `String` que da más información sobre el id y que puede ser empleado para globos de información
-> - `color`: Es un `String` que especifica en rgb, hexadecimal u otro formato reconocido por css el color que tomará cada subcategoría.
+> - `id`: su valor es un `String` que debe coincidir con alguna subcategoría de `datos`, equivalente a un nombre de las columnas con valores numéricos.
+> - `nombre`: es un `String` que proporciona una descripción más detallada sobre el id y que puede ser útil para mostrar globos de información.
+> - `color`: es un `String` que define el color de cada categoría, en formato RGB, hexadecimal u otro formato reconocido por CSS.
 
-- `clave_fecha`: Indica la clave empleada para la columna temporal, por default es `"fecha"` y con el ejemplo anterior de `datos` podría no especificarse esta propiedad, pero si `datos` emplea otra clave para la temporalidad, esta propiedad tendrá que especificarse.
+- `clave_fecha`: define la clave que se utiliza para la columna temporal.Por defecto es `"fecha"`, pero si los datos usan otro nombre, esta propiedad debe especificarse.
   - Tipo: `String`
   - Valor predeterminado: `"fecha"`
   - Requerido: Sí
-- `formato_temporal`: Especifica el formato temporal que tiene la variable de tiempo. Es un parámetro que se introduce a la función de d3 `d3.timeParse` y que sirve para transformar un formato de texto a un formato temporal dentro del contexto de javascript. En esta [documentación](https://d3-wiki.readthedocs.io/zh-cn/master/Time-Formatting/) se explica cómo especificar formatos para d3.
+- `formato_temporal`: Especifica el formato temporal de la variable de tiempo. Es un parámetro que se introduce a la función de D3 `d3.timeParse` y que sirve para transformar un formato de texto a un formato temporal dentro del contexto de javascript. En esta [documentación](https://d3-wiki.readthedocs.io/zh-cn/master/Time-Formatting/) se explica cómo especificar formatos para D3.
   - Tipo: `String`
   - Valor predeterminado: `"%d-%m-%Y"`
   - Requerido: Sí
-- `alineacion_eje_y`: Esta propiedad indica de qué lado se acomodará el eje vertical, las opciones válidas son `'izquierda'` o `'derecha'`.
+- `alineacion_eje_y`: determina la posición del eje vertical. Las opciones válidas son `'izquierda'` o `'derecha'`.
   - Tipo: `String`
   - Valor predeterminado: `"izquierda"`
   - Requerido: No
-- `angulo_etiquetas_eje_y`: Es un valor numerico entre `-90` y `90` que indica el ángulo de rotación del eje vertical
+- `angulo_etiquetas_eje_y`: es un valor numérico entre `-90` y `90` que indica el ángulo de rotación de las etiquetas del eje vertical.
   - Tipo: `Number`
   - Valor predeterminado: `0`
   - Requerido: No
-- `angulo_etiquetas_eje_x`: Es un valor numerico entre `-90` y `90` que indica el ángulo de rotación del eje horizontal
+- `angulo_etiquetas_eje_x`: es un valor numérico entre `-90` que indica el ángulo de rotación de las etiquetas eje horizontal.
   - Tipo: `Number`
   - Valor predeterminado: `0`
   - Requerido: No
-- `ancho_barra`: Valor entre 0 y 1 que especifica la fracción que ocupan las barras con respecto al espacio total. Por default es 0.3, no obstante, si la fracción es tal que dibuja unas barras de más de 20px, entonces el componente pintará barras de 20px y no más ancha. Dicha condición previene que se obtengan unas barras muy anchas que se "salgan" del svg o que generen una visualización desproporcionada.
+- `ancho_barra`: Valor entre 0 y 1 que especifica la fracción del espacio total que ocupan las barras. El valor predeterminado es 0.3. Sin embargo, si la fracción resulta en barras de más de 20px de ancho, el componente limitará el ancho a 20px para evitar visualizaciones desproporcionadas.
   - Tipo: `Number`
   - Valor predeterminado: `0.3`
   - Requerido: No
 
 ### Métodos
 
-- `calcularEscalas`: Este método se ejecuta al montar el componente y cuando se detectan cambios en `datos`, `variables` o en las dimensiones del componente contenedor `<SisdaiGraficas>` y calcula escalas para graficar.
-- `creaAreas`: Este método se ejecuta al montar el componente y cuando se detectan cambios en `datos`, `variables` o en las dimensiones del componente contenedor `<SisdaiGraficas>` y crea y actualiza el gráfico.
+- `calcularEscalas`: Este método se ejecuta al montar el componente o cuando se detectan cambios en las propiedades `datos`, `variables` o en las dimensiones del componente contenedor `<SisdaiGraficas>`. Calcula escalas necesarias para graficar.
+
+- `creaAreas`: Este método se ejecuta al montar el componente o cuando se detectan cambios en las propiedades `datos`, `variables` o en las dimensiones del componente contenedor `<SisdaiGraficas>`. Crea y actualiza el gráfico de áreas apiladas ordenadas.
 
 ### Propiedades expuestas
 
-- `datos_hover`: Esta propiedad expuesta se modifica según la posición del cursor cuando se usa el slot `globo-informacion`, y devuelve un `Object` con los datos asociados a la fecha más cercana indicada por el cursor. Generalmente se usa esta propiedad para llenar el componente de `SisdaiGraficasGloboInfo` con información.
+- `datos_hover`: propiedad reactiva que se actualiza según la posición del cursor cuando se usa el slot `globo-informacion`.Devuelve un `Object` con los datos asociados a la fecha más cercana indicada por el cursor. Generalmente se usa esta propiedad para llenar el componente de `SisdaiGraficasGloboInfo` con información.
 
-- `escalaTemporal`: Es la función de D3 `d3.scaleTime` que se emplea en el eje horizontal. Es útil cuando se desean agregar elementos al gráfico a través de dicha escala.
-- `escalaLineal`: Es la función de D3 `d3.scaleLinear` que se emplea en el eje vertical. Es útil cuando se desean agregar elementos al gráfico a través de dicha escala.
+- `escalaTemporal`: Es la función de D3 `d3.scaleTime` que se emplea en el eje horizontal. Es útil cuando se desean agregar elementos al gráfico que se basen en la escala temporal.
+- `escalaLineal`: Es la función de D3 `d3.scaleLinear` que se emplea en el eje vertical. Es útil cuando se desean agregar elementos al gráfico que dependan de esta escala.
 - `conversionTemporal`: Es la función de D3 `d3.timeParse` que tiene como argumento el `formato_temporal` que se haya especificado en las propiedades. Puede ser útil cuando se desea agregar elementos usando la `escalaTemporal` y antes de ello los argumentos de dicha escala deben convertirse de `String` a un tipo de objeto `Date`.
 
 ## Ejemplos

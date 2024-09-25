@@ -5,9 +5,9 @@
 
 # SisdaiDona
 
-Las gráficas de dona o pay se usan para representar cómo se reparte una totalidad. Esta biblioteca ofrece el componente `<SisdaiDona/>` para construir este tipo de gráficas. En esta sección se explica su uso.
+El componente `<SisdaiDona/>` se utiliza para representar la distribución de una totalidad entre diferentes categorías mediante gráficos de dona o pastel. A continuación se detalla su uso y configuración.
 
-Uso:
+Ejemplo de implementación:
 
 ```html
 <SisdaiGraficas>
@@ -23,7 +23,7 @@ Uso:
 
 ### Propiedades
 
-- `datos`: Base de datos a visualizar, consiste en una arreglo de objetos en dónde cada objeto corresponde a un segmento de la dona y debe contener una clave asociada al nombre de la categoría y otra clave asociada al número que representa el segmento.
+- `datos`: Conjunto de datos a visualizar.Consiste en un arreglo de objetos en dónde cada objeto corresponde a un segmento de la dona y debe incluir una clave asociada al nombre de la categoría y otra clave asociada al número que representa el segmento.
   - Tipo: `Array`
   - Valor predeterminado: `undefined`
   - Requerido: Sí
@@ -39,7 +39,7 @@ Uso:
 > ]
 > ```
 >
-> El arreglo mostrado arriba puede ser el objeto resultante al importar con la biblioteca d3.js un archivo .csv con la estructura mostrada a continuación. En ese sentido, mantienen cierta equivalencia:
+> El arreglo mostrado anteriormente puede ser el objeto resultante de la importación de datos mediante la biblioteca D3.js o utilizando algún complemento (plugin) como [plugin-dsv](https://www.npmjs.com/package/@rollup/plugin-dsv) para procesar un archivo .csv con la siguiente estructura equivalente:
 >
 > <table>
 > <thead>
@@ -68,9 +68,9 @@ Uso:
 > </tbody>
 > </table>
 
-> Cabe mencionar que el nombre de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no se tienen que llamar forzosamente como en el ejemplo. Las propiedades `variables`, `clave_categoria` y `clave_cantidad` descritas a continuación nos permiten especificar el nombre de las claves (o columnas).
+> Cabe mencionar que los nombres de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no necesariamente deben coincidir con los del ejemplo mostrado. Las propiedades `variables`, `clave_categoria` y `clave_cantidad` descritas a continuación nos permiten especificar el nombre de las claves (o columnas).
 
-- `variables`: Arreglo de objetos, en donde cada uno contiene información de las categorías como un `id` que debe coincidir con los identificadores o nombres que se usan en `datos` para cada rebanada. También tienen información sobre el color y un nombre que puede ser alternativo al que se usa en `datos`:
+- `variables`: Arreglo de objetos que contienen información sobre las categorías, como un `id` que debe coincidir con los identificadores o nombres que se usan en `datos`para cada segmento . También tienen información sobre el color y un nombre que puede ser alternativo al que se usa en `datos`:
 
   - Tipo: `Array`
   - Valor predeterminado: `undefined`
@@ -100,33 +100,39 @@ Uso:
     > ]
     > ```
     >
-    > Esta propiedad tiene un validador para verificar que todos los objetos contengan las tres claves:
+    > Esta propiedad incluye un validador para verificar que todos los objetos contengan las siguientes tres claves:
     >
-    > - `id`: su valor debe coincidir con alguna categoría de `datos`.
-    > - `nombre`: su valor es un string que da más información sobre el id y es un `String` que puede ser empleado para globos de información
-    > - `color`: Es un `String` que especifica en rgb, hexadecimal u otro formato reconocido por css que indicará el color que tomará cada subcategoría
+    > - `id`: su valor es un `String` y debe coincidir con alguna categoría de `datos`.
+    > - `nombre`: su valor es un `String` que proporciona una descripción más detallada sobre el id y que puede ser empleado para globos de información
+    > - `color`: es un `String` que define el color de cada categoría, en formato RGB, hexadecimal u otro formato reconocido por CSS.
 
-- `clave_categoria`: Indica la clave empleada para la columna categórica en `datos`, por default es `"categoria"` y con el ejemplo anterior de `datos` podría no especificarse esta propiedad, pero si `datos` emplea otra clave para las categorías, esta propiedad tendrá que especificarse y ser igual a la clave que usa `datos`.
+- `clave_categorias`: especifica la clave que se utiliza para las categorías principales. Por defecto es `"categoria"` pero si los datos usan otro nombre, esta propiedad debe especificarse.
   - Tipo: `String`
   - Valor predeterminado: `"categoria"`
   - Requerido: Sí
-- `clave_cantidad`: Especifica el nombre de la clave empleada para referir la cantidad o valor asociada a cada segmento de la dona u categoría. Por default es `"cantidad"` y en el ejemplo anterior no tendría que especificarse, pero si en `datos` se usará una clave distinta para referir la cantidad, dicha clave tendrá que especificarse aquí.
+- `clave_cantidad`: Especifica el nombre de la clave empleada para referir la cantidad o valor asociada a cada segmento de la dona u categoría. Por defecto es `"cantidad"` y en el ejemplo anterior no tendría que especificarse, pero si en `datos` se usará una clave distinta para referir la cantidad, dicha clave tendrá que especificarse aquí.
   - Tipo: `String`
   - Valor predeterminado: `"cantidad"`
   - Requerido: Sí
-- `radio_interno`: Es un número entre 0 y 0.5 que indica el espacio en blanco dentro de la dona. Si es 0, se obtendrá una gráfica de pastel.
+- `radio_interno`:Define el radio interno de la dona, que controla el tamaño del hueco central. Es un valor numérico entre 0 y 0.5. Si se establece en 0, se obtendrá una gráfica de pastel.
+
   - Tipo: `Number`
   - Valor predeterminado: `0.18`
   - Requerido: No
-- `radio_externo`: Es un número entre 0 y 0.5 que debe ser mayor al radio interno. Ambas propiedades en conjunto sirven para calibrar el grosor y tamaño de la dona.
+
+- `radio_externo`: Define el radio externo de la dona y debe ser mayor que el radio interno. Es un valor numérico entre 0 y 0.5. Ambas propiedades en conjunto sirven para calibrar el grosor y tamaño de la dona.
+
   - Tipo: `Number`
   - Valor predeterminado: `0.32`
   - Requerido: No
-- `variables_visibles`: Es una propiedad opcional que consiste en un arreglo los `id` que especifican las rebanadas que serán mostradas. Los que no estén incluidos en el arreglo, no se mostrarán en el gráfico
+
+- `variables_visibles`: Arreglo opcional que especifica qué segmentos (identificador por `id`) serán mostrados en el gráfico. Los segmentos que no estén incluidos en el arreglo, no se visualizarán.
+
   - Tipo: `Array`
   - Valor predeterminado: `undefined`
   - Requerido: No
-- `color_dona_fondo`: Especifica el color de la dona de fondo que se muestra cuando hay rebanadas sin pintar. Por deault es la variable de [sisdai-css](https://codigo.conahcyt.mx/sisdai/sisdai-css) `"var(--fondo)"`, pero se puede usar cualquier formato de color admitido por CSS.
+
+- `color_dona_fondo`: Especifica el color de fondo de la dona para las áreas no asignadas a ningún segmento. Por defecto utiliza la variable de [sisdai-css](https://codigo.conahcyt.mx/sisdai/sisdai-css) `"var(--fondo)"`, pero se puede definir cualquier formato de color admitido por CSS.
   - Tipo: `String`
   - Valor predeterminado: `"var(--fondo)"`
   - Requerido: No
