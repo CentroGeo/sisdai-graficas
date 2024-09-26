@@ -29,9 +29,10 @@ function actualizaContenidoIndice() {
   let elementos = []
   document.querySelectorAll('div h2').forEach(el => {
     if (el.id) {
+      console.log(el.id)
       elementos.push({
         id: el.id,
-        texto: el.innerText.replace('#', ''),
+        texto: el.innerText,
       })
     }
   })
@@ -145,7 +146,7 @@ watch(route, () => {
                 <ul>
                   <li
                     v-for="elemento in lista_elementos"
-                    :key="elemento.texto"
+                    :key="elemento.id"
                   >
                     <a :href="'#' + elemento.id"> {{ elemento.texto }}</a>
                   </li>

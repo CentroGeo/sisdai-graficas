@@ -6,9 +6,9 @@
 
 # SisdaiViolines
 
-En esta sección se describe el uso del componente de visualización `<SisdaiViolines/>` para construir un diagrama de violines. Este gráfico es útil para visualizar distribuciones.
+El componente `<SisdaiViolines/>` se utiliza para construir diagramas de violines, los cuales son útiles para visualizar distribuciones de datos. A continuación se detalla su uso y configuración.
 
-Uso:
+Ejemplo de implementación:
 
 ```html
 <SisdaiGraficas>
@@ -24,7 +24,7 @@ Uso:
 
 ### Propiedades
 
-- `datos`: Base de datos a visualizar, consiste en una arreglo de objetos en dónde cada objeto corresponde a un elemento de la distribución, el cual debe incluir una categoría y un valor numérico.
+- `datos`: Conjunto de datos a visualizar.Consiste en un arreglo de objetos en dónde cada objeto corresponde a un elemento de la distribución, el cual debe incluir una categoría y un valor numérico.
   - Tipo: `Array`
   - Valor predeterminado: `undefined`
   - Requerido: Sí
@@ -53,8 +53,8 @@ Uso:
 > ]
 > ```
 >
-> El arreglo mostrado arriba puede ser el objeto resultante al importar con la biblioteca d3.js un archivo .csv con la estructura mostrada a continuación. En ese sentido, mantienen cierta equivalencia:
->
+> El arreglo mostrado anteriormente puede ser el objeto resultante de la importación de datos mediante la biblioteca D3.js o utilizando algún complemento (plugin) como [plugin-dsv](https://www.npmjs.com/package/@rollup/plugin-dsv) para procesar un archivo .csv con la siguiente estructura equivalente:
+
 > <table>
 > <thead>
 > <tr>
@@ -87,10 +87,9 @@ Uso:
 > </tbody>
 > </table>
 >
-> En este ejemplo, **seguridad_social** indica las categorías con las que se agruparán los datos, y **edad** la variable numérica que se usará para calcular las los cuartiles y otros elementos de cada subconjunto de los datos.
-> Cabe mencionar que el nombre de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no se tienen que llamar forzosamente como en el ejemplo. Las propiedades `variables` y `clave_categorias` descritas a continuación nos permiten especificar el nombre de las claves (o columnas).
+> En este ejemplo, **seguridad_social** indica las categorías con las que se agruparán los datos, mientras que **edad** es la variable numérica que se usará para calcular las los cuartiles y otros elementos de cada subconjunto de los datos. Cabe mencionar que los nombres de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no necesariamente deben coincidir con los del ejemplo mostrado. Las propiedades `variables` y `clave_categorias` descritas a continuación nos permiten especificar el nombre de las claves (o columnas).
 
-- `variables`: Objeto que contiene información sobre el color y el nombre de la clave asociada a la variable numérica en `datos`. Si consideramos el caso anterior de `datos`, un ejemplo de `variables` es:
+- `variables`: Arreglo de objetos que contienen información sobre el color y el nombre de la clave asociada a la variable numérica en `datos` Si consideramos el caso anterior de `datos`, un ejemplo de `variables` es:
   - Tipo: `Array`
   - Valor predeterminado: `undefined`
   - Requerido: Sí
@@ -103,52 +102,54 @@ Uso:
 >   },
 > ```
 >
-> Esta propiedad tiene un validador para verificar que el objeto contenga las tres claves
+> Esta propiedad incluye un validador para verificar que el objeto contenga las siguiente tres claves:
 >
-> - `id`: su valor debe coincidir con alguna subcategoría de `datos`, equivalente a uno de los nombres de las columnas
-> - `nombre`: su valor es un string que da más información sobre el id y es un `String` que puede ser empleado para globos de información
-> - `color`: Es un `String` que especifica en rgb, hexadecimal u otro formato reconocido por css que indicará el color que tomarán los diagramas
+> - `id`:su valor es un `String` que debe coincidir con alguna subcategoría de `datos`, equivalente a uno de los nombres de las columnas.
+> - `nombre`: su valor es un string que da más información sobre el `id` y es un `String` que puede ser empleado para globos de información.
+> - `color`: Es un `String` que define el color de los diagramas, especificado en RGB, hexadecimal u otro formato reconocido por CSS.
 
-- `clave_categorias`: Indica la clave empleada para las categorías que se usarán para agrupar al conjunto de datos, por default es `"categoria"` y con el ejemplo anterior de `datos` tendría que especificarse como `"seguridad_social"`
+- `clave_categorias`: Especifica la clave empleada para las categorías que se usarán para agrupar al conjunto de datos.Por defecto es `"categoria"` y con el ejemplo anterior de `datos` tendría que especificarse como `"seguridad_social"`
   - Tipo: `String`
   - Valor predeterminado: `"categoria"`
   - Requerido: Sí
-- `numero_divisiones`: Este número sirve para indicar en cuántas partes se dividirá la distribución obtenida en el histograma.
+- `numero_divisiones`: Define en cuántas partes se dividirá la distribución obtenida en el histograma.
+
   - Tipo: `Number`
   - Valor predeterminado: `10`
   - Requerido: No
-- `alineacion_eje_y`: Esta propiedad indica de qué lado se acomodará el eje vertical, las opciones válidas son `'izquierda'` o `'derecha'`.
+
+- `alineacion_eje_y`: determina la posición del eje vertical. Las opciones válidas son `'izquierda'` o `'derecha'`.
   - Tipo: `String`
   - Valor predeterminado: `"izquierda"`
   - Requerido: No
-- `angulo_etiquetas_eje_y`: Es un valor numerico entre `-90` y `90` que indica el ángulo de rotación del eje vertical
+- `angulo_etiquetas_eje_y`: es un valor numérico entre `-90` y `90` que indica el ángulo de rotación de las etiquetas del eje vertical.
   - Tipo: `Number`
   - Valor predeterminado: `0`
   - Requerido: No
-- `angulo_etiquetas_eje_x`: Es un valor numerico entre `-90` y `90` que indica el ángulo de rotación del eje horizontal
+- `angulo_etiquetas_eje_x`: es un valor numérico entre `-90` que indica el ángulo de rotación de las etiquetas eje horizontal.
   - Tipo: `Number`
   - Valor predeterminado: `0`
   - Requerido: No
 
 ### Métodos
 
-- `calcularEscalas`: Este método se ejecuta al montar el componente y cuando se detectan cambios en `datos`, `variables` o en las dimensiones del componente contenedor `<SisdaiGraficas>` y calcula escalas para graficar.
-- `creaViolines`: Este método se ejecuta al montar el componente y cuando se detectan cambios en `datos`, `variables` o en las dimensiones del componente contenedor `<SisdaiGraficas>` y crea y actualiza el gráfico.
+- `calcularEscalas`: Este método se ejecuta al montar el componente o cuando se detectan cambios en las propiedades`datos`, `variables` o en las dimensiones del componente contenedor `<SisdaiGraficas>`. Calcula escalas necesarias para graficar los datos.
+- `creaViolines`: Este método se ejecuta al montar el componente o cuando se detectan cambios en las propiedades `datos`, `variables` o en las dimensiones del componente contenedor `<SisdaiGraficas>` .Crea y actualiza la gráfica de violines.
 
 ### Propiedades expuestas
 
-- `datos_hover`: Esta propiedad expuesta se modifica según la posición del cursor cuando se usa el slot `globo-informacion`, y devuelve un `Object` con los datos del diagrama asociado la categoría y corte más cercano indicada por el cursor. Los valores que devuelve el objeto corresponden a:
+- `datos_hover`: Esta propiedad expuesta se actualiza según la posición del cursor cuando se usa el slot `globo-informacion`. Devuelve un `Object` con los datos del diagrama asociado la categoría y corte más cercano indicada por el cursor. Los valores que devuelve el objeto corresponden a:
 
   - `"categoria"`: Categoría del violín
   - `"datos_segmento"`: Es un `Array` que tiene la lista de datos asociados a la categoría y corte.
-  - `"x0"`: El valor mínimo del corte
-  - `"x1"`: Es el valor máximo del corte
+  - `"x0"`: El valor mínimo del corte.
+  - `"x1"`: Es el valor máximo del corte.
   - `"cantidad_muestras_segmento"`: Es el número de muestras de dicha categoría y corte. En otras palabras, es la longitud de `"datos_segmento"`.
   - `"cantidad_muestras_violin"`: Es el número de muestras de dicha categoría tomando en cuenta el violín completo.
 
-- `escalaBanda`: Es la función de D3 `d3.scaleBand` que se emplea en el eje horizontal. Es útil cuando se desean agregar elementos al gráfico a través de dicha escala.
+- `escalaBanda`: Es la función de D3 `d3.scaleBand` que se emplea en el eje horizontal. Es útil cuando se desean agregar elementos al gráfico que se basen en la escala categórica.
 
-- `escalaLineal`: Es la función de D3 `d3.scaleLinear` que se emplea en el eje vertical. Es útil cuando se desean agregar elementos al gráfico a través de dicha escala.
+- `escalaLineal`: Es la función de D3 `d3.scaleLinear` que se emplea en el eje vertical. Es útil cuando se desean agregar elementos al gráfico que dependan de esta escala.
 
 ## Ejemplos
 
