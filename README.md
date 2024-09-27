@@ -97,22 +97,22 @@ donde N.N.N indica el número de versión, por ejemplo v1.0.0
 
 ### Pasos previos recomendados
 
-Para desarrollar este proyecto se usó [node.js](https://nodejs.org/en) como
+Para desarrollar este proyecto se usa [node.js](https://nodejs.org/en) como
 entorno de ejecución de JavaScript. La opción recomendada para instalarlo es
 [vía nvm](https://github.com/nvm-sh/nvm) que es el manejador de versiones de
 node. Siguiendo este camino, también se instalará el manejador de paquetes
-[npm](https://www.npmjs.com/). Dado lo anterior las instrucciones de instalación
+[npm](https://www.npmjs.com/). Las instrucciones de instalación
 y dependencias del proyecto se muestran aquí usando tanto npm, como nvm.
 
 Las gráficas de esta biblioteca están desarrolladas como [componentes](https://es.vuejs.org/v2/guide/components.html) de
-[Vue.js](https://es.vuejs.org/) usando [D3.js](https://d3js.org/), por lo tanto se recomienda a la persona usuaria tener
+[Vue.js](https://es.vuejs.org/) usando [D3.js](https://d3js.org/), por lo tanto se le recomienda a la persona usuaria tener
 conocimientos básicos de lo anterior así como de desarrollo en [JavaScript](https://www.javascript.com/).
 
 ### Dependencias
 
 - [node.js (^18)](https://nodejs.org/en/download/)
 - [npm (^9)](https://www.npmjs.com/get-npm)
-- [Vue.js (2.6.11)](https://v2.vuejs.org/)
+- [Vue.js (3.4.36)](https://vuejs.org/)
 
 ### Instalación
 
@@ -174,7 +174,7 @@ artículo 63 se explicita que "cuando se trate
 de desarrollos basados en software libre, se respetarán las condiciones de su
 licenciamiento original [...]".
 
-Considerando lo anterior sisdai-graficas se publica bajo la licencia
+Considerando lo anterior, sisdai-graficas se publica bajo la licencia
 [LGPLv3](https://www.gnu.org/licenses/lgpl-3.0.html). Dicha licencia se puede
 consultar en el archivo _LICENSE_ de este repositorio.
 Esta licencia se encuentra disponible en inglés porque aunque el Sisdai privilegia
@@ -183,6 +183,5 @@ el idioma español se respeta la versión original de acuerdo al proyecto
 
 ## Contribuir
 
-Por el momento sólo quienes sean
-parte de un equipo de investigación del capítulo de un [ENI](https://eni.conahcyt.mx)
-podrán levantar issues en este repositorio. Mientras que el equipo del sistema de diseño [Sisdai](https://sisdai.conahcyt.mx/acerca-de) se encargará de mantenerlo.
+Por el momento sólo quienes sean parte de un equipo de investigación del capítulo de un ENI podrán levantar issues en
+este repositorio. El equipo del Sisdai se encargará de mantenerlo.
