@@ -45,7 +45,6 @@ export function buscarIdContenedorHtmlSisdai(tipo, { parentElement }) {
     // console.log('buscar un nivel abajo', parentElement.parentElement)
     return buscarIdContenedorHtmlSisdai(tipo, parentElement)
   } else {
-    // eslint-disable-next-line
     console.warn(`No se encontro el contenedor`)
   }
 }

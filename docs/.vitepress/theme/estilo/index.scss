@@ -1,0 +1,33 @@
+pre,
+code {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace !important;
+  span {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace !important;
+  }
+}
+
+.contenerdor-ejemplo-menu-flotante {
+  position: relative;
+  min-height: 88px;
+  width: 100%;
+
+  .contenedor-menu-flotante {
+    position: absolute;
+  }
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.etiqueta {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  line-height: 1.3em;
+  margin: 0;
+  display: inline-flex;
+  border-radius: 20px;
+  background-color: rgba(255, 0, 0, 0.3333333333);
+  color: var(--texto-primario);
+}

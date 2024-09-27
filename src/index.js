@@ -29,7 +29,7 @@ import {
 } from './componentes'
 
 const plugin = {
-  install: function (Vue) {
+  install: Vue => {
     //UI base
     Vue.use(SisdaiGraficas)
     Vue.use(SisdaiBarras)

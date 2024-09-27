@@ -1,18 +1,34 @@
----
-layout: Layout
-sectionName: Documentación
----
+<script setup>
+  import Basico from "../../.vitepress/components/areas-apiladas/basico.vue";
+  import ModificandoDatos from "../../.vitepress/components/areas-apiladas/modificando-datos.vue";
+</script>
 
 # SisdaiAreasApiladas
 
-A continuación se describe la utilización del componente de visualización `<SisdaiAreasApiladas/>` para construir un gráfico de
-áreas apiladas en el tiempo.
+El componente `<SisdaiAreasApiladas/>` permite graficar datos temporales que pertenecen a distintas categorías que, en conjunto, forman una totalidad. Este tipo de gráficas es conocido como “áreas apiladas” o _stream graphs_ en inglés.
 
-## Propiedades
+Ejemplo de implementación:
 
-### Obligatorias
+```html
+<SisdaiGraficas>
+  <SisdaiAreasApiladas
+    :datos="datos"
+    :variables="variables"
+    :formato_temporal="'%d/%m/%Y'"
+    :clave_fecha="'nombre_fecha'"
+  >
+  </SisdaiAreasApiladas>
+</SisdaiGraficas>
+```
 
-- `datos`: (_Array_) Base de datos a visualizar, consiste en una arreglo de objetos en dónde cada objeto corresponde a una fecha y contiene una clave con dicho dato y otras claves con los valores de las variables en dicha temporalidad
+## API
+
+### Propiedades
+
+- `datos`: Conjunto de datos a visualizar. Consiste en un arreglo de objetos en dónde cada objeto está asociado a una fecha y a los valores muestreados en esa fecha.
+  - Tipo: `Array`
+  - Valor predeterminado: `undefined`
+  - Requerido: Sí
 
 > Ejemplo de `datos`:
 >
@@ -25,8 +41,8 @@ A continuación se describe la utilización del componente de visualización `<S
 > ]
 > ```
 >
-> El arreglo mostrado arriba puede ser el objeto resultante al importar con la biblioteca d3.js un archivo .csv con la estructura mostrada a continuación. En ese sentido, mantienen cierta equivalencia:
->
+> El arreglo mostrado anteriormente puede ser el objeto resultante de la importación de datos mediante la biblioteca D3.js o utilizando complemento (plugin) como [plugin-dsv](https://www.npmjs.com/package/@rollup/plugin-dsv) para procesar un archivo .csv con la siguiente estructura equivalente:
+
 > <table>
 > <thead>
 > <tr>
@@ -58,10 +74,15 @@ A continuación se describe la utilización del componente de visualización `<S
 > </tr>
 > </tbody>
 > </table>
+> Los nombres de las claves en los diccionarios (o  las columnas desde el punto de vista de la tabla) no necesariamente deben de coincidir con  el ejemplo mostrado. Las propiedades `variables` y `clave_fecha` permiten especificar los nombres de las claves (o columnas) correspondientes.
 
-> Cabe mencionar que el nombre de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no se tienen que llamar forzosamente como en el ejemplo. Las propiedades `variables` y `clave_fecha` descritas a continuación nos permiten especificar el nombre de las claves (o columnas).
+- `variables`: Arreglo de objetos que describen las variables o series de tiempo incluidas en el conjunto de datos.
 
-- `variables`: (_Array_) Arreglo de objetos, en donde cada uno contiene información de las variables o series de tiempo incluidas en la base de datos. Por ejemplo:
+  - Tipo: `Array`
+  - Valor predeterminado: `undefined`
+  - Requerido: Sí
+
+> En relación con el ejemplo empleado en `datos`, `variables` podría tener la siguiente estructura:
 
 > ```json
 > [
@@ -78,22 +99,52 @@ A continuación se describe la utilización del componente de visualización `<S
 > ]
 > ```
 >
-> Esta propiedad tiene un validador para verificar que todos los objetos contengan las tres claves:
->
-> - `id`: su valor debe coincidir con alguna subcategoría de `datos`, equivalente a uno de los nombres de las columnas que contiene información numérica
-> - `nombre`: su valor es un string que da más información sobre el id y es un _String_ que puede ser empleado para globos de información
-> - `color`: Es un _String_ que especifica en rgb, hexagesimal u otro formato reconoconocido por css que indicará el color que tomará cada subcategoría
+> Esta propiedad incluye un validador que asegura que cada objeto en el arreglo contenga las siguientes tres claves:
 
-- `clave_fecha`: (_String_) Indica la clave empleada para la columna temporal, por default es `"fecha"` y con el ejemplo anterior de `datos` podría no especificarse esta propiedad, pero si `datos` emplea otra clave para la temporalidad, esta propiedad tendrá que especificarse.
-- `formato_temporal`: (_String_) Especifica el formato temporal que tiene la variable de tiempo. Es un parámetro que se introduce a la función de d3 `d3.timeParse` y que sirve para transformar un formato de texto a un formato temporal dentro del contexto de javascript. En esta [documentación](https://d3-wiki.readthedocs.io/zh-cn/master/Time-Formatting/) se explica como espeficiar formatos para d3.
+> - `id`: su valor es un `String` que debe coincidir con alguna subcategoría de `datos` (equivalente a uno de los nombres de las columnas que contienen información numérica).
 
-### Opcionales
+> - `nombre`: su valor es un `String` que proporciona información adicional sobre el id y que puede ser útil para globos de información.
 
-- `alineacion_eje_y`: (_String_) Esta propiedad indica de qué lado se acomodará el eje vertical, las opciones validas son `'izquierda'` o `'derecha'`, y su valor por _default_ es `'izquierda'`.
-- `angulo_etiquetas_eje_y`: (_Number_) Es un valor numerico que indica el ángulo de rotación del eje vertical
-- `angulo_etiquetas_eje_x`: (_Number_) Es un valor numerico que indica el ángulo de rotación del eje horizontal
+> - `color`: es un `String` que define el color de cada categoría, en formato RGB, hexadecimal u otro formato reconocido por CSS.
+
+- `clave_fecha`: define la clave empleada para identificar la columna temporal. Por defecto es `"fecha"` , pero si los datos usan otro nombre, esta propiedad debe especificarse.
+  - Tipo: `String`
+  - Valor predeterminado: `"fecha"`
+  - Requerido: Sí
+- `formato_temporal`: Especifica el formato temporal de la variable de tiempo. Es un parámetro que se introduce a la función de D3 `d3.timeParse` y que sirve para transformar un formato de texto a un formato temporal dentro del contexto de JavaScript. En esta [documentación](https://d3-wiki.readthedocs.io/zh-cn/master/Time-Formatting/) se explica cómo especificar formatos para D3.
+  - Tipo: `String`
+  - Valor predeterminado: `"%d-%m-%Y"`
+  - Requerido: Sí
+- `alineacion_eje_y`: determina la posición del eje vertical. Las opciones válidas son `'izquierda'` o `'derecha'`.
+  - Tipo: `String`
+  - Valor predeterminado: `"izquierda"`
+  - Requerido: No
+- `angulo_etiquetas_eje_y`: es un valor numérico entre `-90` y `90` que indica el ángulo de rotación de las etiquetas del eje vertical.
+  - Tipo: `Number`
+  - Valor predeterminado: `0`
+  - Requerido: No
+- `angulo_etiquetas_eje_x`: es un valor numérico entre `-90` que indica el ángulo de rotación de las etiquetas eje horizontal.
+  - Tipo: `Number`
+  - Valor predeterminado: `0`
+  - Requerido: No
+
+### Métodos
+
+- `calcularEscalas`: Este método se ejecuta al montar el componente o cuando se detectan cambios en las propiedades`datos`, `variables` o en las dimensiones del componente contenedor `<SisdaiGraficas>`. Calcula escalas necesarias para graficar los datos.
+
+- `creaAreas`: Este método se ejecuta al montar el componente o cuando se detectan cambios en las propiedades `datos`, `variables` o en las dimensiones del componente contenedor `<SisdaiGraficas>` .Crea y actualiza el gráfico de áreas apiladas.
+
+### Propiedades expuestas
+
+- `datos_hover`: propiedad reactiva que se actualiza según la posición del cursor cuando se usa el slot `globo-informacion`.Devuelve un `Object` con los datos asociados a la fecha más cercana indicada por el cursor. Generalmente se usa esta propiedad para llenar el componente de `SisdaiGraficasGloboInfo` con información.
+
+- `escalaTemporal`: Es la función de D3 `d3.scaleTime` que se emplea en el eje horizontal. Es útil cuando se desean agregar elementos al gráfico que se basen en la escala temporal.
+- `escalaLineal`: Es la función de D3 `d3.scaleLinear` que se emplea en el eje vertical. Es útil cuando se desean agregar elementos al gráfico que dependan de esta escala.
+- `conversionTemporal`: Es la función de D3 `d3.timeParse` que tiene como argumento el `formato_temporal` que se haya especificado en las propiedades. Puede ser útil cuando se desea agregar elementos usando la `escalaTemporal` y antes de ello los argumentos de dicha escala deben convertirse de `String` a un tipo de objeto `Date`.
 
 ## Ejemplos
 
-<utils-ejemplo-doc ruta="areas-apiladas/basico.vue"/>
-<utils-ejemplo-doc ruta="areas-apiladas/modificando-datos.vue"/>
+<Basico/>
+<<< @/.vitepress/components/areas-apiladas/basico.vue
+<ModificandoDatos/>
+<<< @/.vitepress/components/areas-apiladas/modificando-datos.vue

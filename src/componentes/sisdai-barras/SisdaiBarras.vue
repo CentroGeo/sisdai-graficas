@@ -18,6 +18,7 @@ const props = defineProps({
   datos: {
     type: Array,
     require: true,
+    default: () => [],
   },
   variables: {
     type: Array,
@@ -33,6 +34,7 @@ const props = defineProps({
       }
       return validado
     },
+    default: () => [{ id: '', nombre: '', color: '' }],
   },
   acomodo: {
     type: String,
@@ -126,11 +128,11 @@ const grupoContenedor = ref(),
   grupoBarras = ref()
 
 function calcularEscalas(grupoVis) {
-  if (!grupoVis && grupoVis.ancho === 0) return
+  if (!grupoVis && grupoVis?.ancho === 0) return
 
   escalaBanda.value = scaleBand()
     .domain(datos.value?.map(d => d[clave_categorias.value]))
-    .range([0, grupoVis.ancho])
+    .range([0, grupoVis?.ancho])
     .padding(props.separacion)
 
   escalaLineal.value = scaleLinear()
@@ -140,31 +142,20 @@ function calcularEscalas(grupoVis) {
         ? max(datos.value?.map(d => sum(variables.value.map(dd => d[dd.id]))))
         : max(datos.value?.map(d => max(variables.value.map(dd => d[dd.id])))),
     ])
-    .range([grupoVis.alto, 0])
+    .range([grupoVis?.alto, 0])
   escalaSubBanda.value = scaleBand()
     .domain(variables.value.map(d => d.id))
     .range([0, escalaBanda.value.bandwidth()])
     .padding(props.separacion_agrupadas)
 
-  let eje_horizontal = creaEjeHorizontal(
-    idGrafica,
-    escalaBanda.value,
-    props.angulo_etiquetas_eje_x
-  )
-  eje_horizontal
-    .selectAll('text')
-    .interrupt()
-    .html(d => {
-      console.log(d)
-      return d
-    })
+  creaEjeHorizontal(idGrafica, escalaBanda.value, props.angulo_etiquetas_eje_x)
 
   creaEjeVertical(
     idGrafica,
     escalaLineal.value,
     props.angulo_etiquetas_eje_y,
     props.alineacion_eje_y,
-    grupoVis.ancho
+    grupoVis?.ancho
   )
 }
 function creaBarras() {
@@ -194,7 +185,7 @@ function creaBarras() {
           .enter()
           .append('rect')
           .attr('class', d => `barra ${d.data.key}`)
-          .attr('y', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto)
+          .attr('y', usarRegistroGraficas().grafica(idGrafica)?.grupoVis?.alto)
           .attr('x', d => {
             return props.acomodo === 'apiladas'
               ? escalaBanda.value(d.data[clave_categorias.value])
@@ -241,7 +232,7 @@ function creaBarras() {
                 .attr('class', d => `barra ${d.data.key}`)
                 .attr(
                   'y',
-                  usarRegistroGraficas().grafica(idGrafica).grupoVis.alto
+                  usarRegistroGraficas().grafica(idGrafica)?.grupoVis.alto
                 )
                 .attr('x', d =>
                   props.acomodo === 'apiladas'
@@ -308,15 +299,15 @@ function creaBarras() {
 onMounted(() => {
   idGrafica = buscarIdContenedorHtmlSisdai('grafica', sisdaiBarras.value)
   grupoContenedor.value = select('#' + idGrafica + ' svg g.contenedor-barras')
-  margenesSvg.value = usarRegistroGraficas().grafica(idGrafica).margenes
+  margenesSvg.value = usarRegistroGraficas().grafica(idGrafica)?.margenes
   watch(
-    () => usarRegistroGraficas().grafica(idGrafica).margenes,
+    () => usarRegistroGraficas().grafica(idGrafica)?.margenes,
     nv => (margenesSvg.value = nv)
   )
-  calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+  calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.grupoVis)
   creaBarras()
   watch(
-    () => usarRegistroGraficas().grafica(idGrafica).grupoVis,
+    () => usarRegistroGraficas().grafica(idGrafica)?.grupoVis,
     () => {
       calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
       if (usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho > 0) {
@@ -334,7 +325,7 @@ onMounted(() => {
   })
 
   watch(
-    () => usarRegistroGraficas().grafica(idGrafica).posicion_cursor,
+    () => usarRegistroGraficas().grafica(idGrafica)?.posicion_cursor,
     nv => {
       let bandas = escalaBanda.value.step()
 
@@ -345,12 +336,7 @@ onMounted(() => {
               usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho +
                 margenesSvg.value.izquierda
             ? escalaBanda.value.domain().length - 1
-            : parseInt(
-                (nv.x -
-                  margenesSvg.value.derecha -
-                  margenesSvg.value.izquierda) /
-                  bandas
-              )
+            : parseInt((nv.x - margenesSvg.value.izquierda) / bandas)
       indice =
         indice === escalaBanda.value.domain().length ? indice - 1 : indice
       let categoria = escalaBanda.value.domain()[indice]
@@ -377,16 +363,23 @@ onMounted(() => {
     { deep: true }
   )
   watch(
-    () => usarRegistroGraficas().grafica(idGrafica).globo_visible,
+    () => usarRegistroGraficas().grafica(idGrafica)?.globo_visible,
     nv => {
       if (!nv) {
         grupoContenedor.value
           .selectAll('g.subcategoria-barras')
           .selectAll('rect.barra')
-
           .style('fill-opacity', '1')
       }
     }
+  )
+  watch(
+    () => props.angulo_etiquetas_eje_y,
+    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+  )
+  watch(
+    () => props.angulo_etiquetas_eje_x,
+    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
   )
 })
 defineExpose({

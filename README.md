@@ -112,7 +112,7 @@ conocimientos básicos de lo anterior así como de desarrollo en [JavaScript](ht
 
 - [node.js (^18)](https://nodejs.org/en/download/)
 - [npm (^9)](https://www.npmjs.com/get-npm)
-- [Vue.js (2.7.16)](https://v2.vuejs.org/)
+- [Vue.js (3.4.36)](https://vuejs.org/)
 
 ### Instalación
 
@@ -142,7 +142,21 @@ en proceso de desarrollo. Es posible levantarla en un ambiente local con la
 instrucción:
 
 ```bash
-npm run docs:serve
+npm run docs
+```
+
+### Testing
+
+Si deseas correr el testing puedes ejecutar el siguiente comando, el cual implementará la pruebas unitarias
+
+```bash
+npm run test
+```
+
+Adicionalmente puedes ejecutar el siguiente comando para evaluar el porcentaje de código que se ha testeado y visualizar el avance en un servidor local
+
+```bash
+npm run coverage
 ```
 
 ## Licencia

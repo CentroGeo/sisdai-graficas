@@ -1,18 +1,33 @@
----
-layout: Layout
-sectionName: Documentación
----
+<script setup>
+  import Basico from "../../.vitepress/components/alluvial/basico.vue";
+  import AlluvialComplejo from "../../.vitepress/components/alluvial/alluvial-complejo.vue";
+</script>
 
 # SisdaiAlluvial
 
-A continuación se describe la utilización del componente de visualización `<SisdaiAlluvial/>` para construir un gráfico de
-tipo alluvial.
+El componente `<SisdaiAlluvial/>`, permite generar diagramas de flujo de tipo Alluvial. Es ideal para representar flujo y/o conexiones entre diferentes datos.
 
-## Propiedades
+Ejemplo de implementación:
 
-### Obligatorias
+```html
+<SisdaiGraficas>
+  <SisdaiAlluvial
+    :datos="datos"
+    :variables="variables"
+  >
+  </SisdaiAlluvial>
+</SisdaiGraficas>
+```
 
-- `datos`: (_Object_) Base de datos a visualizar, consiste en un objeto con dos propiedades que corresponden a un arreglo de nodos que contiene el nombre y el id de dicho nodo y otro arreglo de enlaces con la fuente, el objetivo y los valores de dicho enlace.
+## API
+
+### Propiedades
+
+- `datos`: Conjunto de datos a visualizar. Consiste en un objeto que contiene dos claves principales: `"nodos"` cuyo valor es un arreglo de objetos que representan cada nodo con su respectivo nombre e id, y `"enlaces"`, que es un arreglo de objetos que define las conexiones entre los nodos, especificando la fuente, el objetivo y los valores asociados a cada enlace.
+
+  - Tipo: `Object`
+  - Valor predeterminado: `undefined`
+  - Requerido: Sí
 
 > Ejemplo de `datos`:
 >
@@ -32,9 +47,14 @@ tipo alluvial.
 > }
 > ```
 >
-> Para este tipo de visualización un archivo .csv no sería el formato más adecuado, por lo que se sugiere importar el objeto desde un archivo en formato .json
+> Para este tipo de visualización no se recomienda usar archivos .csv, por lo que se sugiere importar los datos desde un archivo en formato `.json`.
 
-- `variables`: (_Array_) Arreglo de objetos, en donde cada uno contiene información de las variables, nodos o enlaces incluidas en la base de datos. Por ejemplo:
+- `variables`: Un arreglo de objetos que contiene la configuración gráfica para cada nodo o enlace dentro de los datos.
+  - Tipo: `Array`
+  - Valor predeterminado: `undefined`
+  - Requerido: Sí
+
+> Ejemplo de variables:
 
 > ```json
 > [
@@ -53,12 +73,28 @@ tipo alluvial.
 > ]
 > ```
 >
-> Esta propiedad tiene un validador para verificar que todos los objetos contengan las dos claves:
->
-> - `id`: su valor debe coincidir con alguna subcategoría de `datos`, equivalente a uno de los nombres de las columnas que contiene información numérica
-> - `color`: Es un _String_ que especifica en rgb, hexagesimal u otro formato reconoconocido por css que indicará el color que tomará cada subcategoría
+> Esta propiedad incluye un validador que asegura que cada objeto en el arreglo contenga las siguientes dos claves:
+
+> - `id`: su valor es un `String` que debe coincidir con alguna subcategoría de `datos`, equivalente a uno de los nombres de las columnas que contiene información numérica.
+
+> - `color`: es un `String` que define el color de cada categoría, en formato RGB, hexadecimal u otro formato reconocido por `CSS`.
+
+### Métodos
+
+- `creaAlluvial`: Este método crea y actualiza el diagrama cuando detecta cambios en `datos`, `variables` o en otros elementos del componente contenedor`<SisdaiGraficas>`, como `margenes` o las dimensiones del `SVG`.
+
+### Propiedades expuestas
+
+- `datos_hover`: Esta propiedad expuesta se actualiza cuando el cursor se posiciona sobre uno de los rectángulos (nodos) o en algún enlace y devuelve un `Object` con los datos asociados al elemento generado por D3. Generalmente se usa esta propiedad para llenar el componente de `SisdaiGraficasGloboInfo` con información.
+  - Si el cursor está sobre un enlace, devuelve un objeto con la clave `tipo: "enlace"`, junto con las claves `target`, `source` y `value` entre otros que asigna automáticamente D3.
+  - Si el cursor está sobre un nodo, devuelve un objeto con la clave `tipo:"nodo"`, además de los datos `name`, `id` y `value` entre otros que asigna automáticamente D3.
 
 ## Ejemplos
 
-<utils-ejemplo-doc ruta="alluvial/basico.vue"/>
-<utils-ejemplo-doc ruta="alluvial/complejo.vue"/>
+El siguiente ejemplo muestra el funcionamiento del componente con un conjunto de datos simples y un globo de información condicional:
+<Basico/>
+<<< @/.vitepress/components/alluvial/basico.vue
+
+Como se observa en el ejemplo anterior, cuando el cursor está dentro del gráfico en un área en blanco, el globo de información se queda sin contenido. Para evitar esto y mostrar el globo solo cuando el cursor está sobre un elemento visual, se puede usar la directiva `v-show` como se muestra en el siguiente ejemplo:
+<AlluvialComplejo/>
+<<< @/.vitepress/components/alluvial/alluvial-complejo.vue

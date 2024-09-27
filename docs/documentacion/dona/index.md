@@ -1,17 +1,32 @@
----
-layout: Layout
-sectionName: Documentación
----
+<script setup>
+    import Basico from "../../.vitepress/components/dona/basico.vue";
+    import ModificandoDatos from "../../.vitepress/components/dona/modificando-datos.vue";
+</script>
 
 # SisdaiDona
 
-A continuación se describe la utilización del componente de visualización `<SisdaiDona/>` para construir un gráfico de donas.
+El componente `<SisdaiDona/>` se utiliza para representar la distribución de una totalidad entre diferentes categorías mediante gráficos de dona o pastel. A continuación se detalla su uso y configuración.
 
-## Propiedades
+Ejemplo de implementación:
 
-### Obligatorias
+```html
+<SisdaiGraficas>
+  <SisdaiDona
+    :datos="datos"
+    :variables="variables"
+  >
+  </SisdaiDona>
+</SisdaiGraficas>
+```
 
-- `datos`: (_Array_) Base de datos a visualizar, consiste en una arreglo de objetos en dónde objeto corresponde a un segmento de la dona y debe contener una clave asociada al nombre de la categoría y otra clave asociada al número que representa el segmento.
+## API
+
+### Propiedades
+
+- `datos`: Conjunto de datos a visualizar.Consiste en un arreglo de objetos en dónde cada objeto corresponde a un segmento de la dona y debe incluir una clave asociada al nombre de la categoría y otra clave asociada al número que representa el segmento.
+  - Tipo: `Array`
+  - Valor predeterminado: `undefined`
+  - Requerido: Sí
 
 > Ejemplo de `datos`:
 >
@@ -24,7 +39,7 @@ A continuación se describe la utilización del componente de visualización `<S
 > ]
 > ```
 >
-> El arreglo mostrado arriba puede ser el objeto resultante al importar con la biblioteca d3.js un archivo .csv con la estructura mostrada a continuación. En ese sentido, mantienen cierta equivalencia:
+> El arreglo mostrado anteriormente puede ser el objeto resultante de la importación de datos mediante la biblioteca D3.js o utilizando algún complemento (plugin) como [plugin-dsv](https://www.npmjs.com/package/@rollup/plugin-dsv) para procesar un archivo .csv con la siguiente estructura equivalente:
 >
 > <table>
 > <thead>
@@ -53,52 +68,79 @@ A continuación se describe la utilización del componente de visualización `<S
 > </tbody>
 > </table>
 
-Cabe mencionar que el nombre de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no se tienen que llamar forzosamente como en el ejemplo. Las propiedades `variables`, `clave_categoria` y `clave_cantidad` descritas a continuación nos permiten especificar el nombre de las claves (o columnas).
+> Cabe mencionar que los nombres de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no necesariamente deben coincidir con los del ejemplo mostrado. Las propiedades `variables`, `clave_categoria` y `clave_cantidad` descritas a continuación nos permiten especificar el nombre de las claves (o columnas).
 
-- `variables`: (_Array_) Arreglo de objetos, en donde cada uno contiene información de las categorías como un `id` que debe coincidir con los identificadores o nombres que se usan en `datos` para cada rebanada. También tienen información sobre el color y un nombre que puede ser alternativo al que se usa en `datos`:
+- `variables`: Arreglo de objetos que contienen información sobre las categorías, como un `id` que debe coincidir con los identificadores o nombres que se usan en `datos`para cada segmento . También tienen información sobre el color y un nombre que puede ser alternativo al que se usa en `datos`:
 
-> ```json
-> [
->   {
->     "id": "cat_A",
->     "nombre": "Categoría A",
->     "color": "#FFCE00"
->   },
->   {
->     "id": "cat_B",
->     "nombre": "Categoría B",
->     "color": "#FA5600"
->   },
->   {
->     "id": "cat_C",
->     "nombre": "Categoría C",
->     "color": "#C7690D"
->   },
->   {
->     "id": "cat_D",
->     "nombre": "Categoría D",
->     "color": "#FF9F4D"
->   }
-> ]
-> ```
->
-> Esta propiedad tiene un validador para verificar que todos los objetos contengan las tres claves:
->
-> - `id`: su valor debe coincidir con alguna categoria de `datos`.
-> - `nombre`: su valor es un string que da más información sobre el id y es un _String_ que puede ser empleado para globos de información
-> - `color`: Es un _String_ que especifica en rgb, hexagesimal u otro formato reconoconocido por css que indicará el color que tomará cada subcategoría
+  - Tipo: `Array`
+  - Valor predeterminado: `undefined`
+  - Requerido: Sí
+    > ```json
+    > [
+    >   {
+    >     "id": "cat_A",
+    >     "nombre": "Categoría A",
+    >     "color": "#FFCE00"
+    >   },
+    >   {
+    >     "id": "cat_B",
+    >     "nombre": "Categoría B",
+    >     "color": "#FA5600"
+    >   },
+    >   {
+    >     "id": "cat_C",
+    >     "nombre": "Categoría C",
+    >     "color": "#C7690D"
+    >   },
+    >   {
+    >     "id": "cat_D",
+    >     "nombre": "Categoría D",
+    >     "color": "#FF9F4D"
+    >   }
+    > ]
+    > ```
+    >
+    > Esta propiedad incluye un validador para verificar que todos los objetos contengan las siguientes tres claves:
+    >
+    > - `id`: su valor es un `String` y debe coincidir con alguna categoría de `datos`.
+    > - `nombre`: su valor es un `String` que proporciona una descripción más detallada sobre el id y que puede ser empleado para globos de información
+    > - `color`: es un `String` que define el color de cada categoría, en formato RGB, hexadecimal u otro formato reconocido por CSS.
 
-- `clave_categoria`: (_String_) Indica la clave empleada para la columna categórica en `datos`, por default es `"categoria"` y con el ejemplo anterior de `datos` podría no especificarse esta propiedad, pero si `datos` emplea otra clave para las categorías, esta propiedad tendrá que especificarse y ser igual a la clave que usa `datos`.
-- `clave_cantidad`: (_String_) Especifica el nombre de la clave empleada para referir la cantidad o valor asociada a cada segmento de la dona u categoría. Por defaul es `cantidad` y en el ejemplo anterior no tendría que especificarse, pero si en `datos` se usara una clave distinta para referir la cantidad, dicha clave tendrá que especificarse aquí.
+- `clave_categorias`: especifica la clave que se utiliza para las categorías principales. Por defecto es `"categoria"` pero si los datos usan otro nombre, esta propiedad debe especificarse.
+  - Tipo: `String`
+  - Valor predeterminado: `"categoria"`
+  - Requerido: Sí
+- `clave_cantidad`: Especifica el nombre de la clave empleada para referir la cantidad o valor asociada a cada segmento de la dona u categoría. Por defecto es `"cantidad"` y en el ejemplo anterior no tendría que especificarse, pero si en `datos` se usará una clave distinta para referir la cantidad, dicha clave tendrá que especificarse aquí.
+  - Tipo: `String`
+  - Valor predeterminado: `"cantidad"`
+  - Requerido: Sí
+- `radio_interno`:Define el radio interno de la dona, que controla el tamaño del hueco central. Es un valor numérico entre 0 y 0.5. Si se establece en 0, se obtendrá una gráfica de pastel.
 
-### Opcionales
+  - Tipo: `Number`
+  - Valor predeterminado: `0.18`
+  - Requerido: No
 
-- `radio_interno`: (_Number_) Es un número entre 0 y 0.5 que indica la el espacio en blanco dentro de la dona. Si es 0, se obtendrá una gráfica de pastel.
-- `radio_externo`: (_Number_) Es un número entre 0 y 0.5 que debe ser mayor al radio interno. Ambas propiedades en conjunto sirven para calibrar el grosor y tamaño de la dona.
-- `variables_visibles`: (_Array_) Es una propiedad opcional que consiste en un arreglo de _id_ que especifican las rebanadas que serán mostradas. Los que no estén incluidos en el arreglo, no se mostrarán en el gráfico.
-- `color_dona_fondo`: (_String_) Es pecifica el color de la dona de fondo. Por default es la variable de sisdai-css `"var(--fondo)"`
+- `radio_externo`: Define el radio externo de la dona y debe ser mayor que el radio interno. Es un valor numérico entre 0 y 0.5. Ambas propiedades en conjunto sirven para calibrar el grosor y tamaño de la dona.
+
+  - Tipo: `Number`
+  - Valor predeterminado: `0.32`
+  - Requerido: No
+
+- `variables_visibles`: Arreglo opcional que especifica qué segmentos (identificador por `id`) serán mostrados en el gráfico. Los segmentos que no estén incluidos en el arreglo, no se visualizarán.
+
+  - Tipo: `Array`
+  - Valor predeterminado: `undefined`
+  - Requerido: No
+
+- `color_dona_fondo`: Especifica el color de fondo de la dona para las áreas no asignadas a ningún segmento. Por defecto utiliza la variable de [sisdai-css](https://codigo.conahcyt.mx/sisdai/sisdai-css) `"var(--fondo)"`, pero se puede definir cualquier formato de color admitido por CSS.
+  - Tipo: `String`
+  - Valor predeterminado: `"var(--fondo)"`
+  - Requerido: No
 
 ## Ejemplos
 
-<utils-ejemplo-doc ruta="dona/basico.vue"/>
-<utils-ejemplo-doc ruta="dona/modificando-datos.vue"/>
+<Basico/>
+<<< @/.vitepress/components/dona/basico.vue
+
+<ModificandoDatos/>
+<<< @/.vitepress/components/dona/modificando-datos.vue

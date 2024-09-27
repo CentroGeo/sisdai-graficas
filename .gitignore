@@ -1,10 +1,14 @@
 .DS_Store
 node_modules
+dist
+dist-ssr
+coverage
+*.local
 package-lock.json
 #docs
-docs/.vuepress/dist/
-docs/.vitepress/dist/
-docs/.vitepress/cache/
+docs/.vitepress/cache
+docs/.vitepress/dist
+docs/.vitepress/.temp
 
 coverage
 # local env files

@@ -51,7 +51,7 @@ defineExpose({ variables_activas })
         v-model="variables_checkeadas"
         :disabled="
           variables_checkeadas.length === 1 &&
-          variable.id == variables_checkeadas[0]
+          variable.id === variables_checkeadas[0]
         "
       />
       <label :for="variable.id"
