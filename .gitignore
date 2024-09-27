@@ -10,7 +10,6 @@ docs/.vitepress/cache
 docs/.vitepress/dist
 docs/.vitepress/.temp
 
-coverage
 # local env files
 .env.local
 .env.*.local
