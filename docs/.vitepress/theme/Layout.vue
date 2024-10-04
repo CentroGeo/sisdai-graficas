@@ -6,12 +6,10 @@ import SisdaiMenuLateral from 'sisdai-componentes/src/componentes/menu-lateral/S
 import SisdaiNavegacionGobMx from 'sisdai-componentes/src/componentes/navegacion-gob-mx/SisdaiNavegacionGobMx.vue'
 import SisdaiPiePaginaConahcyt from 'sisdai-componentes/src/componentes/pie-pagina-conahcyt/SisdaiPiePaginaConahcyt.vue'
 import SisdaiPiePaginaGobMx from 'sisdai-componentes/src/componentes/pie-pagina-gob-mx/SisdaiPiePaginaGobMx.vue'
-import { useAccesibilidadStore } from 'sisdai-componentes/src/stores'
 import { useData, useRoute } from 'vitepress'
 import { isActive } from 'vitepress/dist/client/shared'
 import { onMounted, ref, watch } from 'vue'
 import NavegacionPrincipal from './NavegacionPrincipal.vue'
-const store = useAccesibilidadStore()
 
 // https://vitepress.dev/reference/runtime-api#usedata
 const { theme, page } = useData()
@@ -22,8 +20,6 @@ const lista_elementos = ref([])
 
 const componenteIndice = ref(null)
 const menuLateralAbierto = ref()
-
-const menuAccesibilidad = ref(null)
 
 function actualizaContenidoIndice() {
   let elementos = []
@@ -81,10 +77,7 @@ watch(route, () => {
     <SisdaiNavegacionGobMx />
     <NavegacionPrincipal />
 
-    <SisdaiMenuAccesibilidad
-      ref="menuAccesibilidad"
-      :objetoStore="store"
-    />
+    <SisdaiMenuAccesibilidad />
 
     <div
       id="contenido-todo"
