@@ -1,5 +1,5 @@
 <script setup>
-import { bin, extent, max, rollup } from 'd3-array'
+import { bin, extent, max, rollup, sum } from 'd3-array'
 import { scaleBand, scaleLinear } from 'd3-scale'
 import { select } from 'd3-selection'
 import { area, curveCatmullRom } from 'd3-shape'
@@ -78,6 +78,7 @@ const props = defineProps({
     default: 10,
   },
 })
+const datos_hover = ref()
 
 const sisdaiViolines = shallowRef()
 const { datos, clave_categorias, variables } = toRefs(props)
@@ -90,7 +91,8 @@ const escalaBanda = ref(),
 const grupoContenedor = ref(),
   data_agrupada = ref(),
   histograma = ref(),
-  grupoViolines = ref()
+  grupoViolines = ref(),
+  grupoMarcador = ref()
 function calcularEscalas(grupoVis) {
   if (!grupoVis && grupoVis.ancho === 0) return
 
@@ -145,7 +147,7 @@ function creaViolines() {
     .join(
       enter => {
         let grupo = enter
-          .append('g')
+          .insert('g', 'g.grupo-marcador')
           .attr('class', 'grupo-violin')
           .style('fill', variables.value.color)
           .attr('transform', d => `translate(${escalaBanda.value(d[0])} ,0)`)
@@ -201,7 +203,7 @@ function creaViolines() {
 onMounted(() => {
   idGrafica = buscarIdContenedorHtmlSisdai('grafica', sisdaiViolines.value)
   grupoContenedor.value = select('#' + idGrafica + ' svg g.contenedor-violines')
-
+  grupoMarcador.value = grupoContenedor.value.select('g.grupo-marcador')
   margenesSvg.value = usarRegistroGraficas().grafica(idGrafica).margenes
   watch(
     () => usarRegistroGraficas().grafica(idGrafica).margenes,
@@ -227,10 +229,85 @@ onMounted(() => {
     calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
     creaViolines()
   })
+  watch(
+    () => usarRegistroGraficas().grafica(idGrafica).posicion_cursor,
+    nv => {
+      let bandas = escalaBanda.value.step()
+
+      let indice =
+        nv.x < margenesSvg.value.derecha
+          ? 0
+          : nv.x >=
+              usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho +
+                margenesSvg.value.izquierda
+            ? escalaBanda.value.domain().length - 1
+            : parseInt((nv.x - margenesSvg.value.izquierda) / bandas)
+      indice =
+        indice === escalaBanda.value.domain().length ? indice - 1 : indice
+      let categoria = escalaBanda.value.domain()[indice]
+      let dato_violin = data_agrupada.value.get(categoria)
+      let y0 = escalaLineal.value.invert(nv.y - margenesSvg.value.arriba)
+      let dato_violin_segmento = dato_violin.filter(
+        arr => arr.x0 <= y0 && y0 <= arr.x1
+      )[0]
+      datos_hover.value = {
+        categoria,
+        datos_segmento: dato_violin_segmento,
+        x0: dato_violin_segmento?.x0,
+        x1: dato_violin_segmento?.x1,
+        cantidad_muestras_segmento: dato_violin_segmento?.length,
+        cantidad_muestras_violin: sum(dato_violin.map(d => d.length)),
+      }
+      grupoMarcador.value
+        .style('fill-opacity', 1)
+        .attr(
+          'transform',
+          `translate(${escalaBanda.value(datos_hover.value.categoria)},0)`
+        )
+      if (!datos_hover.value.categoria) {
+        grupoMarcador.value
+          .select('path.triangulo-0')
+          .attr(
+            'd',
+            `M ${escalaPathX.value(-datos_hover.value.cantidad_muestras_segmento)},${escalaLineal.value(datos_hover.value.x0)} ${escalaPathX.value(-datos_hover.value.cantidad_muestras_segmento) - 5},${escalaLineal.value(datos_hover.value.x0) + 5} ${escalaPathX.value(-datos_hover.value.cantidad_muestras_segmento) - 5},${escalaLineal.value(datos_hover.value.x0) - 5}z`
+          )
+
+        grupoMarcador.value
+          .select('line')
+          .attr(
+            'x1',
+            escalaPathX.value(datos_hover.value.cantidad_muestras_segmento)
+          )
+          .attr('y1', escalaLineal.value(datos_hover.value.x0))
+          .attr(
+            'x2',
+            escalaPathX.value(-datos_hover.value.cantidad_muestras_segmento)
+          )
+          .attr('y2', escalaLineal.value(datos_hover.value.x0))
+          .style('stroke', 'black')
+        grupoMarcador.value
+          .select('path.triangulo-1')
+          .attr(
+            'd',
+            `M ${escalaPathX.value(datos_hover.value.cantidad_muestras_segmento)},${escalaLineal.value(datos_hover.value.x0)} ${escalaPathX.value(datos_hover.value.cantidad_muestras_segmento) + 5},${escalaLineal.value(datos_hover.value.x0) + 5} ${escalaPathX.value(datos_hover.value.cantidad_muestras_segmento) + 5},${escalaLineal.value(datos_hover.value.x0) - 5}z`
+          )
+      }
+    },
+    { deep: true }
+  )
+  watch(
+    () => usarRegistroGraficas().grafica(idGrafica).globo_visible,
+    nv => {
+      if (!nv) {
+        grupoMarcador.value.style('fill-opacity', 0)
+      }
+    }
+  )
 })
 defineExpose({
   escalaBanda,
   escalaLineal,
+  datos_hover,
 })
 </script>
 
@@ -242,5 +319,10 @@ defineExpose({
     })`"
     class="contenedor-violines"
   >
+    <g class="grupo-marcador">
+      <path class="triangulo-0"></path>
+      <line></line>
+      <path class="triangulo-1"></path>
+    </g>
   </g>
 </template>

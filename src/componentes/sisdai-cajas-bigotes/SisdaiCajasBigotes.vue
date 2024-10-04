@@ -74,6 +74,7 @@ const props = defineProps({
     },
   },
 })
+const datos_hover = ref()
 
 const sisdaiCajasBigotes = shallowRef()
 const { datos, clave_categorias, variables } = toRefs(props)
@@ -112,14 +113,14 @@ function creaCajasBigotes() {
     datos.value,
     d => {
       let q1 = quantile(d.map(g => g[variables.value.id]).sort(ascending), 0.25)
-      let median = quantile(
+      let mediana = quantile(
         d.map(g => g[variables.value.id]).sort(ascending),
         0.5
       )
       let q3 = quantile(d.map(g => g[variables.value.id]).sort(ascending), 0.75)
-      let interQuantileRange = q3 - q1
-      let min = q1 - 1.5 * interQuantileRange
-      let max = q3 + 1.5 * interQuantileRange
+      let rango_intercuantil = q3 - q1
+      let min = q1 - 1.5 * rango_intercuantil
+      let max = q3 + 1.5 * rango_intercuantil
       let puntos = d.map(g => g[variables.value.id])
       let promedio = mean(d.map(g => g[variables.value.id]))
       max = puntos.filter(g => g <= max).sort(descending)[0]
@@ -127,9 +128,9 @@ function creaCajasBigotes() {
 
       return {
         q1: q1,
-        median: median,
+        mediana: mediana,
         q3: q3,
-        interQuantileRange: interQuantileRange,
+        rango_intercuantil: rango_intercuantil,
         min: min,
         max: max,
         puntos: puntos,
@@ -163,8 +164,27 @@ function creaCajasBigotes() {
           .duration(500)
           .attr('y1', d => escalaLineal.value(d.min))
           .attr('y2', d => escalaLineal.value(d.max))
-          .style('stroke-width', '1px')
-          .style('stroke-dasharray', '5 2')
+          .style('stroke-width', '2px')
+        grupo
+          .selectAll('rect.caja-fondo')
+          .data(d => [d[1]])
+          .enter()
+          .append('rect')
+          .attr('class', 'caja-fondo')
+          .attr('width', escalaBanda.value.bandwidth())
+          .attr('x', 0)
+          .attr('y', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto)
+          .attr('height', 0)
+          .style('fill', 'var(--fondo)')
+          .style('stroke-width', '0')
+          .transition()
+          .duration(500)
+          .attr('y', d => escalaLineal.value(d.q3))
+          .attr('height', d =>
+            escalaLineal.value(d.q1) - escalaLineal.value(d.q3) < 0
+              ? 0
+              : escalaLineal.value(d.q1) - escalaLineal.value(d.q3)
+          )
         grupo
           .selectAll('line.max')
           .data(d => [d[1]])
@@ -179,6 +199,7 @@ function creaCajasBigotes() {
           .duration(500)
           .attr('y1', d => escalaLineal.value(d.max))
           .attr('y2', d => escalaLineal.value(d.max))
+          .style('stroke-width', '2px')
         grupo
           .selectAll('line.min')
           .data(d => [d[1]])
@@ -189,6 +210,7 @@ function creaCajasBigotes() {
           .attr('x2', escalaBanda.value.bandwidth())
           .attr('y1', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto)
           .attr('y2', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto)
+          .style('stroke-width', '2px')
           .transition()
           .duration(500)
           .attr('y1', d => escalaLineal.value(d.min))
@@ -203,6 +225,7 @@ function creaCajasBigotes() {
           .attr('x2', escalaBanda.value.bandwidth())
           .attr('y1', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto)
           .attr('y2', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto)
+          .style('stroke-width', '2px')
           .transition()
           .duration(500)
           .attr('y1', d => escalaLineal.value(d.q1))
@@ -217,10 +240,12 @@ function creaCajasBigotes() {
           .attr('x2', escalaBanda.value.bandwidth())
           .attr('y1', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto)
           .attr('y2', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto)
+          .style('stroke-width', '2px')
           .transition()
           .duration(500)
           .attr('y1', d => escalaLineal.value(d.q3))
           .attr('y2', d => escalaLineal.value(d.q3))
+
         grupo
           .selectAll('rect.caja')
           .data(d => [d[1]])
@@ -251,10 +276,11 @@ function creaCajasBigotes() {
           .attr('x2', escalaBanda.value.bandwidth())
           .attr('y1', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto)
           .attr('y2', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto)
+          .style('stroke-width', '10px')
           .transition()
           .duration(500)
-          .attr('y1', d => escalaLineal.value(d.median))
-          .attr('y2', d => escalaLineal.value(d.median))
+          .attr('y1', d => escalaLineal.value(d.mediana))
+          .attr('y2', d => escalaLineal.value(d.mediana))
         grupo
           .selectAll('circle.promedio')
           .data(d => [d[1]])
@@ -264,11 +290,12 @@ function creaCajasBigotes() {
           .attr('r', 0)
           .attr('cx', escalaBanda.value.bandwidth() * 0.5)
           .attr('cy', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto)
-          .style('stroke', '#fff')
+          .style('stroke', 'var(--fondo)')
+          .style('stroke-width', '2px')
           .transition()
           .duration(500)
           .attr('cy', d => escalaLineal.value(d.promedio))
-          .attr('r', 4)
+          .attr('r', 5)
         grupo
           .selectAll('circle.atipicos')
           .data(d => d[1].puntos.filter(dd => dd < d[1].min || d[1].max < dd))
@@ -279,12 +306,12 @@ function creaCajasBigotes() {
           .attr('cx', escalaBanda.value.bandwidth() * 0.5)
           .attr('cy', usarRegistroGraficas().grafica(idGrafica).grupoVis.alto)
           .style('stroke-opacity', '.4')
-          .style('stroke-width', '1px')
+          .style('stroke-width', '2px')
           .style('fill-opacity', 0.25)
           .transition()
           .duration(500)
           .attr('cy', d => escalaLineal.value(d))
-          .attr('r', 2)
+          .attr('r', 4)
       },
       update => {
         let grupo = update.call(update1 =>
@@ -341,6 +368,17 @@ function creaCajasBigotes() {
           .attr('y1', d => escalaLineal.value(d.q3))
           .attr('y2', d => escalaLineal.value(d.q3))
         grupo
+          .selectAll('rect.caja-fondo')
+          .data(d => [d[1]])
+          .transition()
+          .duration(500)
+          .attr('y', d => escalaLineal.value(d.q3))
+          .attr(
+            'height',
+            d => escalaLineal.value(d.q1) - escalaLineal.value(d.q3)
+          )
+          .attr('width', escalaBanda.value.bandwidth())
+        grupo
           .selectAll('rect.caja')
           .data(d => [d[1]])
           .transition()
@@ -358,8 +396,8 @@ function creaCajasBigotes() {
           .duration(500)
           .attr('x1', 0)
           .attr('x2', escalaBanda.value.bandwidth())
-          .attr('y1', d => escalaLineal.value(d.median))
-          .attr('y2', d => escalaLineal.value(d.median))
+          .attr('y1', d => escalaLineal.value(d.mediana))
+          .attr('y2', d => escalaLineal.value(d.mediana))
         grupo
           .selectAll('circle.promedio')
           .data(d => [d[1]])
@@ -367,7 +405,7 @@ function creaCajasBigotes() {
           .duration(500)
           .attr('cx', escalaBanda.value.bandwidth() * 0.5)
           .attr('cy', d => escalaLineal.value(d.promedio))
-          .attr('r', 4)
+          .attr('r', 5)
         grupo
           .selectAll('circle.atipicos')
           .data(d => d[1].puntos.filter(dd => dd < d[1].min || d[1].max < dd))
@@ -383,19 +421,19 @@ function creaCajasBigotes() {
                   usarRegistroGraficas().grafica(idGrafica).grupoVis.alto
                 )
                 .style('stroke-opacity', '.4')
-                .style('stroke-width', '1px')
+                .style('stroke-width', '2px')
                 .style('fill-opacity', 0.25)
                 .transition()
                 .duration(500)
                 .attr('cy', d => escalaLineal.value(d))
-                .attr('r', 2)
+                .attr('r', 4)
             },
             atipicos_update => {
               atipicos_update
                 .transition()
                 .duration(500)
                 .attr('cy', d => escalaLineal.value(d))
-                .attr('r', 2)
+                .attr('r', 4)
                 .attr('cx', escalaBanda.value.bandwidth() * 0.5)
             },
             atipicos_exit => {
@@ -440,10 +478,60 @@ onMounted(() => {
     calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
     creaCajasBigotes()
   })
+  watch(
+    () => usarRegistroGraficas().grafica(idGrafica).posicion_cursor,
+    nv => {
+      let bandas = escalaBanda.value.step()
+
+      let indice =
+        nv.x < margenesSvg.value.derecha
+          ? 0
+          : nv.x >=
+              usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho +
+                margenesSvg.value.izquierda
+            ? escalaBanda.value.domain().length - 1
+            : parseInt(
+                (nv.x -
+                  margenesSvg.value.derecha -
+                  margenesSvg.value.izquierda) /
+                  bandas
+              )
+      indice =
+        indice === escalaBanda.value.domain().length ? indice - 1 : indice
+      let categoria = escalaBanda.value.domain()[indice]
+
+      datos_hover.value = { categoria, ...data_agrupada.value.get(categoria) }
+
+      grupoContenedor.value.selectAll('g.grupo-caja').style('opacity', '.2')
+
+      grupoContenedor.value
+        .selectAll('g.grupo-caja')
+        .filter(d => d[0] === categoria)
+        .style('opacity', '1')
+    },
+    { deep: true }
+  )
+  watch(
+    () => usarRegistroGraficas().grafica(idGrafica).globo_visible,
+    nv => {
+      if (!nv) {
+        grupoContenedor.value.selectAll('g.grupo-caja').style('opacity', '1')
+      }
+    }
+  )
+  watch(
+    () => props.angulo_etiquetas_eje_y,
+    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+  )
+  watch(
+    () => props.angulo_etiquetas_eje_x,
+    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+  )
 })
 defineExpose({
   escalaBanda,
   escalaLineal,
+  datos_hover,
 })
 </script>
 
