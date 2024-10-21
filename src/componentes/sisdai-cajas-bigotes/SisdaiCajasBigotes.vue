@@ -13,7 +13,6 @@ import {
 } from '../../utils'
 
 var idGrafica
-
 const props = defineProps({
   datos: {
     type: Array,
@@ -32,9 +31,9 @@ const props = defineProps({
       return validado
     },
   },
-  clave_categorias: {
+  nombre_indice: {
     type: String,
-    default: 'categoria',
+    require: true,
   },
   alineacion_eje_y: {
     type: String,
@@ -77,7 +76,7 @@ const props = defineProps({
 const datos_hover = ref()
 
 const sisdaiCajasBigotes = shallowRef()
-const { datos, clave_categorias, variables } = toRefs(props)
+const { datos, nombre_indice, variables } = toRefs(props)
 transition
 const margenesSvg = ref({})
 const escalaBanda = ref(),
@@ -90,7 +89,7 @@ function calcularEscalas(grupoVis) {
   if (!grupoVis && grupoVis.ancho === 0) return
 
   escalaBanda.value = scaleBand()
-    .domain(datos.value?.map(d => d[clave_categorias.value]))
+    .domain(datos.value?.map(d => d[nombre_indice.value]))
     .range([0, grupoVis.ancho])
     .padding(0.5)
 
@@ -137,8 +136,9 @@ function creaCajasBigotes() {
         promedio: promedio,
       }
     },
-    d => d[props.clave_categorias]
+    d => d[props.nombre_indice]
   )
+
   grupoCajasBigotes.value = grupoContenedor.value
     .selectAll('g.grupo-caja')
     .data(data_agrupada.value)
@@ -532,6 +532,7 @@ defineExpose({
   escalaBanda,
   escalaLineal,
   datos_hover,
+  data_agrupada,
 })
 </script>
 

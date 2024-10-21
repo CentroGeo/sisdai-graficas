@@ -34,9 +34,9 @@ const props = defineProps({
       return validado
     },
   },
-  clave_fecha: {
+  nombre_indice: {
     type: String,
-    default: 'fecha',
+    require: true,
   },
   alineacion_eje_y: {
     type: String,
@@ -83,7 +83,7 @@ const props = defineProps({
 const datos_hover = ref({})
 
 const sisdaiSeriesTiempo = shallowRef()
-const { datos, clave_fecha, variables } = toRefs(props)
+const { datos, nombre_indice, variables } = toRefs(props)
 transition
 const margenesSvg = ref({})
 
@@ -122,7 +122,7 @@ function calcularEscalas(grupoVis) {
 }
 function creaSeries() {
   datos.value.forEach(
-    d => (d.la_fecha = conversionTemporal(d[clave_fecha.value]))
+    d => (d.la_fecha = conversionTemporal(d[nombre_indice.value]))
   )
   grupoSeries.value = grupoContenedor.value.selectAll('g.serie-temporal')
 
@@ -220,7 +220,7 @@ onMounted(() => {
     nv => (margenesSvg.value = nv)
   )
   datos.value.forEach(
-    d => (d.la_fecha = conversionTemporal(d[clave_fecha.value]))
+    d => (d.la_fecha = conversionTemporal(d[nombre_indice.value]))
   )
   calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
   creaSeries()
@@ -236,7 +236,7 @@ onMounted(() => {
   )
   watch(datos, () => {
     datos.value.forEach(
-      d => (d.la_fecha = conversionTemporal(d[clave_fecha.value]))
+      d => (d.la_fecha = conversionTemporal(d[nombre_indice.value]))
     )
     calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
     creaSeries()

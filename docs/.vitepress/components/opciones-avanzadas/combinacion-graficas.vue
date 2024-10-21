@@ -36,11 +36,12 @@ const variables_dinamicas = ref({
       ]"
       :separacion="0.6"
       :alineacion_eje_y="'derecha'"
+      :nombre_indice="'categoria'"
     />
     <SisdaiCajasBigotes
       :datos="datos_dinamicos"
       :variables="variables_dinamicas"
-      :clave_categorias="'nombre_empresa'"
+      :nombre_indice="'nombre_empresa'"
     />
   </SisdaiGraficas>
 </template>

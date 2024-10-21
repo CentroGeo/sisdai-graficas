@@ -71,9 +71,9 @@ const props = defineProps({
       return validado
     },
   },
-  clave_categorias: {
+  nombre_indice: {
     type: String,
-    default: 'categoria',
+    require: true,
   },
   alineacion_eje_y: {
     type: String,
@@ -116,7 +116,7 @@ const props = defineProps({
 const datos_hover = ref()
 
 const sisdaiBarras = shallowRef()
-const { datos, clave_categorias, variables } = toRefs(props)
+const { datos, nombre_indice, variables } = toRefs(props)
 transition
 const margenesSvg = ref({})
 
@@ -131,7 +131,7 @@ function calcularEscalas(grupoVis) {
   if (!grupoVis && grupoVis?.ancho === 0) return
 
   escalaBanda.value = scaleBand()
-    .domain(datos.value?.map(d => d[clave_categorias.value]))
+    .domain(datos.value?.map(d => d[nombre_indice.value]))
     .range([0, grupoVis?.ancho])
     .padding(props.separacion)
 
@@ -166,6 +166,11 @@ function creaBarras() {
     })
   }
   data_apilada.value = apilada
+  usarRegistroGraficas().grafica(idGrafica).tablas.agregaTabla(idGrafica, {
+    datos,
+    variables,
+  })
+  console.log(usarRegistroGraficas().grafica(idGrafica).tablas.tablas)
 
   grupoBarras.value = grupoContenedor.value
     .selectAll('g.subcategoria-barras')
@@ -185,11 +190,14 @@ function creaBarras() {
           .enter()
           .append('rect')
           .attr('class', d => `barra ${d.data.key}`)
-          .attr('y', usarRegistroGraficas().grafica(idGrafica)?.grupoVis?.alto)
+          .attr(
+            'y',
+            usarRegistroGraficas().grafica(idGrafica).svg?.grupoVis?.alto
+          )
           .attr('x', d => {
             return props.acomodo === 'apiladas'
-              ? escalaBanda.value(d.data[clave_categorias.value])
-              : escalaBanda.value(d.data[clave_categorias.value]) +
+              ? escalaBanda.value(d.data[nombre_indice.value])
+              : escalaBanda.value(d.data[nombre_indice.value]) +
                   escalaSubBanda.value(d.data.key)
           })
           .attr('height', 0)
@@ -232,12 +240,12 @@ function creaBarras() {
                 .attr('class', d => `barra ${d.data.key}`)
                 .attr(
                   'y',
-                  usarRegistroGraficas().grafica(idGrafica)?.grupoVis.alto
+                  usarRegistroGraficas().grafica(idGrafica).svg?.grupoVis.alto
                 )
                 .attr('x', d =>
                   props.acomodo === 'apiladas'
-                    ? escalaBanda.value(d.data[clave_categorias.value])
-                    : escalaBanda.value(d.data[clave_categorias.value]) +
+                    ? escalaBanda.value(d.data[nombre_indice.value])
+                    : escalaBanda.value(d.data[nombre_indice.value]) +
                       escalaSubBanda.value(d.data.key)
                 )
                 .attr('height', 0)
@@ -277,8 +285,8 @@ function creaBarras() {
                 )
                 .attr('x', d =>
                   props.acomodo === 'apiladas'
-                    ? escalaBanda.value(d.data[clave_categorias.value])
-                    : escalaBanda.value(d.data[clave_categorias.value]) +
+                    ? escalaBanda.value(d.data[nombre_indice.value])
+                    : escalaBanda.value(d.data[nombre_indice.value]) +
                       escalaSubBanda.value(d.data.key)
                 )
                 .attr(
@@ -304,28 +312,28 @@ onMounted(() => {
     () => usarRegistroGraficas().grafica(idGrafica)?.margenes,
     nv => (margenesSvg.value = nv)
   )
-  calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.grupoVis)
+  calcularEscalas(usarRegistroGraficas().grafica(idGrafica).svg?.grupoVis)
   creaBarras()
   watch(
-    () => usarRegistroGraficas().grafica(idGrafica)?.grupoVis,
+    () => usarRegistroGraficas().grafica(idGrafica).svg?.grupoVis,
     () => {
-      calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
-      if (usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho > 0) {
+      calcularEscalas(usarRegistroGraficas().grafica(idGrafica).svg.grupoVis)
+      if (usarRegistroGraficas().grafica(idGrafica).svg.grupoVis.ancho > 0) {
         creaBarras()
       }
     }
   )
   watch(datos, () => {
-    calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+    calcularEscalas(usarRegistroGraficas().grafica(idGrafica).svg.grupoVis)
     creaBarras()
   })
   watch(variables, () => {
-    calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+    calcularEscalas(usarRegistroGraficas().grafica(idGrafica).svg.grupoVis)
     creaBarras()
   })
 
   watch(
-    () => usarRegistroGraficas().grafica(idGrafica)?.posicion_cursor,
+    () => usarRegistroGraficas().grafica(idGrafica).svg?.posicion_cursor,
     nv => {
       let bandas = escalaBanda.value.step()
 
@@ -333,7 +341,7 @@ onMounted(() => {
         nv.x < margenesSvg.value.derecha
           ? 0
           : nv.x >=
-              usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho +
+              usarRegistroGraficas().grafica(idGrafica).svg.grupoVis.ancho +
                 margenesSvg.value.izquierda
             ? escalaBanda.value.domain().length - 1
             : parseInt((nv.x - margenesSvg.value.izquierda) / bandas)
@@ -341,7 +349,7 @@ onMounted(() => {
         indice === escalaBanda.value.domain().length ? indice - 1 : indice
       let categoria = escalaBanda.value.domain()[indice]
       datos_hover.value = data_apilada.value[0].filter(
-        dd => dd.data[clave_categorias.value] === categoria
+        dd => dd.data[nombre_indice.value] === categoria
       )[0].data
 
       grupoContenedor.value
@@ -355,15 +363,15 @@ onMounted(() => {
         .selectAll('rect.barra')
         .filter(
           d =>
-            d.data[clave_categorias.value] ===
-            datos_hover.value[clave_categorias.value]
+            d.data[nombre_indice.value] ===
+            datos_hover.value[nombre_indice.value]
         )
         .style('fill-opacity', '1')
     },
     { deep: true }
   )
   watch(
-    () => usarRegistroGraficas().grafica(idGrafica)?.globo_visible,
+    () => usarRegistroGraficas().grafica(idGrafica).svg?.globo_visible,
     nv => {
       if (!nv) {
         grupoContenedor.value
@@ -375,11 +383,13 @@ onMounted(() => {
   )
   watch(
     () => props.angulo_etiquetas_eje_y,
-    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+    () =>
+      calcularEscalas(usarRegistroGraficas().grafica(idGrafica).svg.grupoVis)
   )
   watch(
     () => props.angulo_etiquetas_eje_x,
-    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+    () =>
+      calcularEscalas(usarRegistroGraficas().grafica(idGrafica).svg.grupoVis)
   )
 })
 defineExpose({

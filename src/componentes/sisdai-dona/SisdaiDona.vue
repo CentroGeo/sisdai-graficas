@@ -10,9 +10,9 @@ const props = defineProps({
     type: Array,
     require: true,
   },
-  clave_categoria: {
+  nombre_indice: {
     type: String,
-    default: 'categoria',
+    require: true,
   },
   clave_cantidad: {
     type: String,
@@ -54,13 +54,8 @@ const ancho = ref(0)
 var idGrafica
 const sisdaiDona = shallowRef()
 const datos_hover = ref()
-const {
-  datos,
-  clave_cantidad,
-  variables,
-  clave_categoria,
-  variables_visibles,
-} = toRefs(props)
+const { datos, clave_cantidad, variables, nombre_indice, variables_visibles } =
+  toRefs(props)
 
 const margenesSvg = ref({})
 const pay = ref(pie()),
@@ -89,7 +84,7 @@ function calcularEscalas(grupoVis) {
     .outerRadius(props.radio_externo * limites + 4)
   data_pay.value = pay.value(
     datos.value.filter(d =>
-      variables.value.map(dd => dd.id).includes(d[clave_categoria.value])
+      variables.value.map(dd => dd.id).includes(d[nombre_indice.value])
     )
   )
 }
@@ -111,15 +106,15 @@ function creaDona() {
         .attr('fill', d => {
           if (variables_visibles.value) {
             return variables_visibles.value.includes(
-              d.data[clave_categoria.value]
+              d.data[nombre_indice.value]
             )
               ? variables.value.filter(
-                  dd => dd.id === d.data[clave_categoria.value]
+                  dd => dd.id === d.data[nombre_indice.value]
                 )[0].color
               : 'none'
           } else {
             return variables.value.filter(
-              dd => dd.id === d.data[clave_categoria.value]
+              dd => dd.id === d.data[nombre_indice.value]
             )[0].color
           }
         })
@@ -162,7 +157,7 @@ function creaDona() {
         .style('fill', d => {
           if (variables_visibles.value) {
             return variables_visibles.value?.includes(
-              d.data[clave_categoria.value]
+              d.data[nombre_indice.value]
             )
               ? 'var(--texto-primario)'
               : 'none'
@@ -176,15 +171,15 @@ function creaDona() {
         update1.attr('fill', d => {
           if (variables_visibles.value) {
             return variables_visibles.value.includes(
-              d.data[clave_categoria.value]
+              d.data[nombre_indice.value]
             )
               ? variables.value.filter(
-                  dd => dd.id === d.data[clave_categoria.value]
+                  dd => dd.id === d.data[nombre_indice.value]
                 )[0].color
               : 'none'
           } else {
             return variables.value.filter(
-              dd => dd.id === d.data[clave_categoria.value]
+              dd => dd.id === d.data[nombre_indice.value]
             )[0].color
           }
         })
@@ -224,7 +219,7 @@ function creaDona() {
         .style('fill', d => {
           if (variables_visibles.value) {
             return variables_visibles.value.includes(
-              d.data[clave_categoria.value]
+              d.data[nombre_indice.value]
             )
               ? 'var(--texto-primario)'
               : 'none'

@@ -37,9 +37,9 @@ const props = defineProps({
       return validado
     },
   },
-  clave_fecha: {
+  nombre_indice: {
     type: String,
-    default: 'fecha',
+    require: true,
   },
   alineacion_eje_y: {
     type: String,
@@ -89,7 +89,7 @@ const props = defineProps({
 })
 
 const sisdaiAreasApiladas = shallowRef()
-const { datos, clave_fecha, variables } = toRefs(props)
+const { datos, nombre_indice, variables } = toRefs(props)
 transition
 const margenesSvg = ref({})
 const datos_apilados = ref([])
@@ -129,7 +129,7 @@ function calcularEscalas(grupoVis) {
 }
 function creaAreas() {
   datos.value.forEach(
-    d => (d.la_fecha = conversionTemporal(d[clave_fecha.value]))
+    d => (d.la_fecha = conversionTemporal(d[nombre_indice.value]))
   )
   datos_apilados.value = stack().keys(variables.value.map(d => d.id))(
     datos.value
@@ -183,39 +183,39 @@ onMounted(() => {
   idGrafica = buscarIdContenedorHtmlSisdai('grafica', sisdaiAreasApiladas.value)
   grupoContenedor.value = select('#' + idGrafica + ' svg g.contenedor-areas')
 
-  margenesSvg.value = usarRegistroGraficas().grafica(idGrafica).margenes
+  margenesSvg.value = usarRegistroGraficas().grafica(idGrafica)?.margenes
   watch(
-    () => usarRegistroGraficas().grafica(idGrafica).margenes,
+    () => usarRegistroGraficas().grafica(idGrafica)?.margenes,
     nv => (margenesSvg.value = nv)
   )
   datos.value.forEach(
-    d => (d.la_fecha = conversionTemporal(d[clave_fecha.value]))
+    d => (d.la_fecha = conversionTemporal(d[nombre_indice.value]))
   )
-  calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+  calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.svg.grupoVis)
   creaAreas()
 
   watch(
-    () => usarRegistroGraficas().grafica(idGrafica).grupoVis,
+    () => usarRegistroGraficas().grafica(idGrafica)?.svg.grupoVis,
     () => {
-      calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
-      if (usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho > 0) {
+      calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.svg.grupoVis)
+      if (usarRegistroGraficas().grafica(idGrafica)?.svg.grupoVis.ancho > 0) {
         creaAreas()
       }
     }
   )
   watch(datos, () => {
     datos.value.forEach(
-      d => (d.la_fecha = conversionTemporal(d[clave_fecha.value]))
+      d => (d.la_fecha = conversionTemporal(d[nombre_indice.value]))
     )
-    calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+    calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.svg.grupoVis)
     creaAreas()
   })
   watch(variables, () => {
-    calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+    calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.svg.grupoVis)
     creaAreas()
   })
   watch(
-    () => usarRegistroGraficas().grafica(idGrafica).posicion_cursor,
+    () => usarRegistroGraficas().grafica(idGrafica)?.svg.posicion_cursor,
     nv => {
       let bisecetDate = bisector(d => d.la_fecha).left
 
@@ -233,11 +233,13 @@ onMounted(() => {
   )
   watch(
     () => props.angulo_etiquetas_eje_y,
-    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+    () =>
+      calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.svg.grupoVis)
   )
   watch(
     () => props.angulo_etiquetas_eje_x,
-    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+    () =>
+      calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.svg.grupoVis)
   )
 })
 defineExpose({

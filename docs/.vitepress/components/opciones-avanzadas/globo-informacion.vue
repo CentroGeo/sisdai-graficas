@@ -40,6 +40,7 @@
         },
       ]"
       ref="lasBarras"
+      :nombre_indice="'categoria'"
     />
     <template #panel-pie-vis>
       <div>

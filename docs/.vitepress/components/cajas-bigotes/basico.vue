@@ -36,7 +36,7 @@ const lasCajasBigotes = ref()
       ref="lasCajasBigotes"
       :datos="datos_dinamicos"
       :variables="variables_dinamicas"
-      :clave_categorias="'nombre_empresa'"
+      :nombre_indice="'nombre_empresa'"
     />
   </SisdaiGraficas>
 </template>

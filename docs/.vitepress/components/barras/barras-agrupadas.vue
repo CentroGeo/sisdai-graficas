@@ -96,6 +96,7 @@ const variables = ref([
       "
       :acomodo="'agrupadas'"
       :angulo_etiquetas_eje_x="-30"
+      :nombre_indice="'categoria'"
     />
     <template #panel-pie-vis>
       <div>

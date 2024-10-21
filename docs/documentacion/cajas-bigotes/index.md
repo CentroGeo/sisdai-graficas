@@ -14,7 +14,7 @@ Ejemplo de implementación:
   <SisdaiCajasBigotes
     :datos="datos"
     :variables="variables"
-    :clave_categorias="'nombre_empresa'"
+    :nombre_indice="'nombre_empresa'"
   >
   </SisdaiCajasBigotes>
 </SisdaiGraficas>
@@ -87,7 +87,7 @@ Ejemplo de implementación:
 > </tbody>
 > </table>
 >
-> En este ejemplo, **nombre_empresa** indica las categorías con las que se agruparán los datos, mientras que **acciones_vendidas** es el valor numérico utilizado para calcular los cuartiles y otros otros elementos estadísticos de cada subconjunto de los datos. Cabe mencionar que los nombres de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no necesariamente deben coincidir con los del ejemplo mostrado. Las propiedades `variables` y `clave_categorias` descritas a continuación nos permiten especificar el nombre de las claves (o columnas).
+> En este ejemplo, **nombre_empresa** indica las categorías con las que se agruparán los datos, mientras que **acciones_vendidas** es el valor numérico utilizado para calcular los cuartiles y otros otros elementos estadísticos de cada subconjunto de los datos. Cabe mencionar que los nombres de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no necesariamente deben coincidir con los del ejemplo mostrado. Las propiedades `variables` y `nombre_indice` descritas a continuación nos permiten especificar el nombre de las claves (o columnas).
 
 - `variables`: Arreglo de objetos que contienen información sobre el color y el nombre de la clave asociada a la variable numérica en `datos`. Si consideramos el caso anterior de `datos`, un ejemplo de `variables` es:
 
@@ -109,7 +109,7 @@ Ejemplo de implementación:
     > - `nombre`: su valor es un `String` que proporciona una descripción más detallada sobre el id y que puede ser útil para mostrar globos de información.
     > - `color`: Es un `String` que define el color del diagrama especificando en formatos RGB, hexadecimal u otro formato reconocido por CSS.
 
-- `clave_categorias`:especifica la clave que se utiliza para las categorías que se usarán para agrupar al conjunto de datos. Por defecto es `"categoria"`, pero si los datos usan otro nombre, esta propiedad debe especificarse. Con el ejemplo anterior de datos tendría que especificarse como `"nombre_empresa"`
+- `nombre_indice`:especifica la clave que se utiliza para las categorías que se usarán para agrupar al conjunto de datos. Por defecto es `"categoria"`, pero si los datos usan otro nombre, esta propiedad debe especificarse. Con el ejemplo anterior de datos tendría que especificarse como `"nombre_empresa"`
   - Tipo: `String`
   - Valor predeterminado: `"categoria"`
   - Requerido: Sí

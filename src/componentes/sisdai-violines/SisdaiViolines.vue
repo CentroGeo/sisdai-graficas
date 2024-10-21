@@ -32,9 +32,9 @@ const props = defineProps({
       return validado
     },
   },
-  clave_categorias: {
+  nombre_indice: {
     type: String,
-    default: 'categoria',
+    require: true,
   },
   alineacion_eje_y: {
     type: String,
@@ -81,7 +81,7 @@ const props = defineProps({
 const datos_hover = ref()
 
 const sisdaiViolines = shallowRef()
-const { datos, clave_categorias, variables } = toRefs(props)
+const { datos, nombre_indice, variables } = toRefs(props)
 transition
 const margenesSvg = ref({})
 const escalaBanda = ref(),
@@ -97,7 +97,7 @@ function calcularEscalas(grupoVis) {
   if (!grupoVis && grupoVis.ancho === 0) return
 
   escalaBanda.value = scaleBand()
-    .domain(datos.value?.map(d => d[clave_categorias.value]))
+    .domain(datos.value?.map(d => d[nombre_indice.value]))
     .range([0, grupoVis.ancho])
     .padding(0.05)
 
@@ -126,7 +126,7 @@ function calcularEscalas(grupoVis) {
 
       return bins
     },
-    d => d[props.clave_categorias]
+    d => d[props.nombre_indice]
   )
 
   let numero_maximo = 0

@@ -56,7 +56,7 @@ watch(
         { id: 'PI', nombre: 'PI', color: '#A52424' },
       ]"
       :angulo_etiquetas_eje_x="-45"
-      :clave_fecha="'fecha_toma'"
+      :nombre_indice="'fecha_toma'"
       :formato_temporal="'%Y-%m'"
     />
   </SisdaiGraficas>

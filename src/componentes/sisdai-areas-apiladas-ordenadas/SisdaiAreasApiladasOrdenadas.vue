@@ -35,9 +35,9 @@ const props = defineProps({
       return validado
     },
   },
-  clave_fecha: {
+  nombre_indice: {
     type: String,
-    default: 'fecha',
+    require: true,
   },
   alineacion_eje_y: {
     type: String,
@@ -95,7 +95,7 @@ const props = defineProps({
 })
 
 const sisdaiAreasApiladas = shallowRef()
-const { datos, clave_fecha, variables } = toRefs(props)
+const { datos, nombre_indice, variables } = toRefs(props)
 transition
 const margenesSvg = ref({})
 const datos_apilados = ref([])
@@ -145,7 +145,7 @@ function calcularEscalas(grupoVis) {
 }
 function creaAreas() {
   datos.value.forEach(
-    d => (d.la_fecha = conversionTemporal(d[clave_fecha.value]))
+    d => (d.la_fecha = conversionTemporal(d[nombre_indice.value]))
   )
   datos_apilados.value = stack().keys(variables.value.map(d => d.id))(
     datos.value
@@ -315,7 +315,7 @@ onMounted(() => {
     nv => (margenesSvg.value = nv)
   )
   datos.value.forEach(
-    d => (d.la_fecha = conversionTemporal(d[clave_fecha.value]))
+    d => (d.la_fecha = conversionTemporal(d[nombre_indice.value]))
   )
   calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
   creaVis()
@@ -331,7 +331,7 @@ onMounted(() => {
   )
   watch(datos, () => {
     datos.value.forEach(
-      d => (d.la_fecha = conversionTemporal(d[clave_fecha.value]))
+      d => (d.la_fecha = conversionTemporal(d[nombre_indice.value]))
     )
     calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
     creaVis()

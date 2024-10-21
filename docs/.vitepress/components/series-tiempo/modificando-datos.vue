@@ -56,7 +56,7 @@ watch(visualizando, nv => {
       :datos="datos"
       :variables="variables"
       :angulo_etiquetas_eje_x="-45"
-      :clave_fecha="'anio_mes'"
+      :nombre_indice="'anio_mes'"
       :formato_temporal="'%Y-%m'"
     />
   </SisdaiGraficas>

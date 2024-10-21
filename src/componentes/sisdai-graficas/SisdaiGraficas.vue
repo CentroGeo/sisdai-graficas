@@ -62,8 +62,11 @@ const grupoFrente = ref()
 const grafica = () => {
   return usarRegistroGraficas().grafica(props.id)
 }
-
 const { margenes } = toRefs(props)
+const slots_default = ref([])
+
+// Función para acceder a la ref expuesta por el hijo
+
 watch(margenes, nv => {
   grafica().margenes = nv
 })
@@ -76,6 +79,7 @@ onMounted(() => {
   grupoFondo.value = select(`#${props.id}  g.grupo-fondo`)
   grupoFrente.value = select(`#${props.id}  g.grupo-frente`)
   window.addEventListener('resize', obteniendoDimensiones)
+  slots_default.value = slots.default ? slots.default() : []
   if ('globo-informacion' in slots) {
     siHayGlobo()
   }
@@ -87,10 +91,10 @@ function obteniendoDimensiones() {
   espacio_eje_x.value = document.querySelector(
     `#${props.id}  .titulo-eje-x`
   )?.clientHeight
-  grafica().ancho = props.ancho
+  grafica().svg.ancho = props.ancho
     ? props.ancho
     : contenedorSisdaiGraficas.value.clientWidth - espacio_eje_y.value
-  grafica().alto = props.alto ? props.alto : valoresPorDefecto.altoVis
+  grafica().svg.alto = props.alto ? props.alto : valoresPorDefecto.altoVis
 
   ancho_grafica.value = props.ancho
     ? props.ancho
@@ -121,38 +125,38 @@ function siHayGlobo() {
       posicion_cursor.value = { x: e.layerX, y: e.layerY }
       ancho_globo = globo_nodo?.getBoundingClientRect()?.width
       posicion_globo_info.value.top = e.layerY
-      grafica().posicion_cursor = posicion_cursor.value
+      grafica().svg.posicion_cursor = posicion_cursor.value
       select(`#${props.id} .contenedor-svg-ejes-tooltip .globo-informacion`)
         .style(
           'left',
-          (e.layerX > 0.5 * grafica().ancho
+          (e.layerX > 0.5 * grafica().svg.ancho
             ? e.layerX - ancho_globo + espacio_eje_y.value - 5
             : e.layerX + espacio_eje_y.value + 5) + 'px'
         )
         .style('top', e.layerY + 15 + 'px')
         .classed('no-visible', false)
 
-      grafica().globo_visible = true
+      grafica().svg.globo_visible = true
     })
     .on('click', e => {
       posicion_cursor.value.x = e.layerX
       ancho_globo = globo_nodo.getBoundingClientRect().width
       posicion_cursor.value.y = e.layerY
       posicion_globo_info.value.top = e.layerY
-      grafica().posicion_cursor = posicion_cursor.value
+      grafica().svg.posicion_cursor = posicion_cursor.value
       select(`#${props.id} .contenedor-svg-ejes-tooltip .globo-informacion`)
         .style(
           'left',
-          (e.layerX > 0.5 * grafica().ancho
+          (e.layerX > 0.5 * grafica().svg.ancho
             ? e.layerX - ancho_globo + espacio_eje_y.value - 5
             : e.layerX + espacio_eje_y.value + 5) + 'px'
         )
         .style('top', e.layerY + 15 + 'px')
         .classed('no-visible', false)
-      grafica().globo_visible = true
+      grafica().svg.globo_visible = true
     })
     .on('mouseout', () => {
-      grafica().globo_visible = false
+      grafica().svg.globo_visible = false
       select(
         `#${props.id} .contenedor-svg-ejes-tooltip .globo-informacion`
       ).classed('no-visible', true)
@@ -195,9 +199,9 @@ function panelesEnUso() {
         <div
           class="contenedor-svg-ejes-tooltip"
           :style="{
-            height: !grafica()?.alto
+            height: !grafica().svg?.alto
               ? '100%'
-              : `${grafica().alto + espacio_eje_x}px`,
+              : `${grafica().svg.alto + espacio_eje_x}px`,
           }"
         >
           <slot name="globo-informacion" />
@@ -205,12 +209,16 @@ function panelesEnUso() {
           <div
             class="contenedor-titulo-eje-y"
             :style="{
-              height: !grafica()?.alto ? '100%' : grafica()?.alto + 'px',
+              height: !grafica().svg?.alto
+                ? '100%'
+                : grafica().svg?.alto + 'px',
             }"
           >
             <div
               :style="{
-                width: !grafica()?.alto ? '100%' : grafica()?.alto + 'px',
+                width: !grafica().svg?.alto
+                  ? '100%'
+                  : grafica().svg?.alto + 'px',
                 transform: `rotate(-90deg)translateX(calc(-100% - ${
                   0.5 * (margenes.arriba - margenes.abajo)
                 }px))`,
@@ -224,9 +232,9 @@ function panelesEnUso() {
           <figure :style="{ left: espacio_eje_y + 'px' }">
             <svg
               class="svg-vis"
-              :width="grafica()?.ancho"
-              :height="grafica()?.alto"
-              :viewBox="`0 0 ${grafica()?.ancho} ${grafica()?.alto}`"
+              :width="grafica().svg?.ancho"
+              :height="grafica().svg?.alto"
+              :viewBox="`0 0 ${grafica().svg?.ancho} ${grafica().svg?.alto}`"
             >
               <g
                 class="grupo-fondo"
@@ -236,7 +244,7 @@ function panelesEnUso() {
               <g
                 class="eje-x-abajo"
                 :transform="`translate(${margenes.izquierda}, ${
-                  grafica()?.alto - margenes.abajo
+                  grafica().svg?.alto - margenes.abajo
                 })`"
               />
               <g
@@ -248,10 +256,10 @@ function panelesEnUso() {
               <g
                 class="eje-y-derecha"
                 :transform="`translate(${
-                  grafica()?.ancho - margenes.derecha
+                  grafica().svg?.ancho - margenes.derecha
                 }, ${+margenes.arriba})`"
               />
-              <slot />
+              <slot ref="slotsDefaults" />
               <g
                 class="grupo-frente"
                 :transform="`translate(${margenes.izquierda}, ${margenes.arriba})`"
@@ -264,6 +272,77 @@ function panelesEnUso() {
               v-html="titulo_eje_x"
             ></div>
           </div>
+        </div>
+        <div
+          class="contenedor-tabla"
+          v-for="(grafico, g) in slots_default"
+          :key="g"
+        >
+          <table
+            v-if="
+              [
+                'SisdaiBarras',
+                'SisdaiAreasApiladas',
+                'SisdaiAreasApiladasOrdenadas',
+                'SisdaiSeriesTiempo',
+              ].includes(grafico.type.__name)
+            "
+          >
+            <thead>
+              <tr>
+                <th>{{ grafico.props.nombre_indice }}</th>
+                <th
+                  v-for="(variable, v) in grafico.props.variables"
+                  :key="v"
+                >
+                  {{ variable.nombre }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="(datum, d) in grafico.props.datos"
+                :key="d"
+              >
+                <td>{{ datum[grafico.props.nombre_indice] }}</td>
+                <td
+                  v-for="(variable, v) in grafico.props.variables"
+                  :key="v"
+                >
+                  {{ datum[variable.id]?.toLocaleString('en') }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table
+            v-else-if="['SisdaiCajasBigotes'].includes(grafico.type.__name)"
+          >
+            <thead>
+              <tr>
+                <th>{{ grafico.props.nombre_indice }}</th>
+                <th
+                  v-for="(variable, v) in grafico.props.variables"
+                  :key="v"
+                >
+                  {{ variable.nombre }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="(datum, d) in grafico.props.datos"
+                :key="d"
+              >
+                <td>{{ datum[grafico.props.nombre_indice] }}</td>
+                <td
+                  v-for="(variable, v) in grafico.props.variables"
+                  :key="v"
+                >
+                  {{ datum[variable.id]?.toLocaleString('en') }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
       <div class="panel-derecha-vis">
@@ -278,3 +357,9 @@ function panelesEnUso() {
     <ContenedorVisAtribuciones />
   </div>
 </template>
+<style scoped lang="scss">
+.contenedor-tabla {
+  table {
+  }
+}
+</style>
