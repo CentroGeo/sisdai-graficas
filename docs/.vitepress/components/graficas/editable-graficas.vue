@@ -38,7 +38,9 @@ onMounted(() => {
       <div>
         <p class="vis-titulo-visualizacion">Titulo de visualizacion</p>
         <p class="vis-instruccional">
-          Modifica el margen para ver su efecto en el componente
+          Modifica el margen para ver su efecto en el componente{{
+            sisdaiGraficaEditable?.grafica()._grupoVis
+          }}
         </p>
         <label for="margenes">margen: {{ margen }}</label>
         <input

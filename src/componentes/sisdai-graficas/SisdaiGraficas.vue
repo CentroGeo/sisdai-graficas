@@ -64,9 +64,8 @@ const grafica = () => {
 }
 const { margenes } = toRefs(props)
 const slots_default = ref([])
-
+const vistaActiva = ref('grafica')
 // Función para acceder a la ref expuesta por el hijo
-
 watch(margenes, nv => {
   grafica().margenes = nv
 })
@@ -74,7 +73,35 @@ onBeforeMount(() => {
   usarRegistroGraficas().registrarGrafica(props.id)
   grafica().margenes = margenes.value
 })
+const iniciaMutationObserver = () => {
+  const body = document.querySelector('body')
+
+  const observer = new MutationObserver(mutacion => {
+    mutacion.forEach(mutation => {
+      if (mutation.attributeName === 'class') {
+        // Cada vez que cambien las clases, actualiza `classList`
+        const clases = Array.from(body.classList)
+        vistaActiva.value = clases.includes('a11y-simplificada')
+          ? 'tabla'
+          : 'grafica'
+      }
+    })
+  })
+  // Iniciar la observación de los cambios de atributos (clases)
+  observer.observe(body, { attributes: true })
+
+  // Retorna el observador para poder desconectarlo más tarde
+  return observer
+}
+let observer
 onMounted(() => {
+  observer = iniciaMutationObserver()
+
+  vistaActiva.value = Array.from(
+    document.querySelector('body').classList
+  ).includes('a11y-simplificada')
+    ? 'tabla'
+    : 'grafica'
   obteniendoDimensiones()
   grupoFondo.value = select(`#${props.id}  g.grupo-fondo`)
   grupoFrente.value = select(`#${props.id}  g.grupo-frente`)
@@ -91,10 +118,10 @@ function obteniendoDimensiones() {
   espacio_eje_x.value = document.querySelector(
     `#${props.id}  .titulo-eje-x`
   )?.clientHeight
-  grafica().svg.ancho = props.ancho
+  grafica().ancho = props.ancho
     ? props.ancho
     : contenedorSisdaiGraficas.value.clientWidth - espacio_eje_y.value
-  grafica().svg.alto = props.alto ? props.alto : valoresPorDefecto.altoVis
+  grafica().alto = props.alto ? props.alto : valoresPorDefecto.altoVis
 
   ancho_grafica.value = props.ancho
     ? props.ancho
@@ -107,8 +134,12 @@ defineExpose({
   grafica,
   grupoFondo,
   grupoFrente,
+  vistaActiva,
 })
 onUnmounted(() => {
+  if (observer) {
+    observer.disconnect()
+  }
   usarRegistroGraficas().borrarGrafica(props.id)
   window.removeEventListener('resize', obteniendoDimensiones)
 })
@@ -120,43 +151,43 @@ function siHayGlobo() {
   ).node()
 
   let ancho_globo = globo_nodo?.getBoundingClientRect()?.width
-  select(`#${props.id} svg.svg-vis`)
+  select(`#${props.id} .svg-vis`)
     .on('mousemove', e => {
       posicion_cursor.value = { x: e.layerX, y: e.layerY }
       ancho_globo = globo_nodo?.getBoundingClientRect()?.width
       posicion_globo_info.value.top = e.layerY
-      grafica().svg.posicion_cursor = posicion_cursor.value
+      grafica().posicion_cursor = posicion_cursor.value
       select(`#${props.id} .contenedor-svg-ejes-tooltip .globo-informacion`)
         .style(
           'left',
-          (e.layerX > 0.5 * grafica().svg.ancho
+          (e.layerX > 0.5 * grafica().ancho
             ? e.layerX - ancho_globo + espacio_eje_y.value - 5
             : e.layerX + espacio_eje_y.value + 5) + 'px'
         )
         .style('top', e.layerY + 15 + 'px')
         .classed('no-visible', false)
 
-      grafica().svg.globo_visible = true
+      grafica().globo_visible = true
     })
     .on('click', e => {
       posicion_cursor.value.x = e.layerX
       ancho_globo = globo_nodo.getBoundingClientRect().width
       posicion_cursor.value.y = e.layerY
       posicion_globo_info.value.top = e.layerY
-      grafica().svg.posicion_cursor = posicion_cursor.value
+      grafica().posicion_cursor = posicion_cursor.value
       select(`#${props.id} .contenedor-svg-ejes-tooltip .globo-informacion`)
         .style(
           'left',
-          (e.layerX > 0.5 * grafica().svg.ancho
+          (e.layerX > 0.5 * grafica().ancho
             ? e.layerX - ancho_globo + espacio_eje_y.value - 5
             : e.layerX + espacio_eje_y.value + 5) + 'px'
         )
         .style('top', e.layerY + 15 + 'px')
         .classed('no-visible', false)
-      grafica().svg.globo_visible = true
+      grafica().globo_visible = true
     })
     .on('mouseout', () => {
-      grafica().svg.globo_visible = false
+      grafica().globo_visible = false
       select(
         `#${props.id} .contenedor-svg-ejes-tooltip .globo-informacion`
       ).classed('no-visible', true)
@@ -194,14 +225,16 @@ function panelesEnUso() {
       </div>
       <div
         class="contenido-vis"
+        :style="{ overflow: vistaActiva === 'grafica' ? 'initial' : 'hidden' }"
         ref="contenedorSisdaiGraficas"
       >
         <div
+          v-show="vistaActiva === 'grafica'"
           class="contenedor-svg-ejes-tooltip"
           :style="{
-            height: !grafica().svg?.alto
+            height: !grafica()?.alto
               ? '100%'
-              : `${grafica().svg.alto + espacio_eje_x}px`,
+              : `${grafica().alto + espacio_eje_x}px`,
           }"
         >
           <slot name="globo-informacion" />
@@ -209,16 +242,12 @@ function panelesEnUso() {
           <div
             class="contenedor-titulo-eje-y"
             :style="{
-              height: !grafica().svg?.alto
-                ? '100%'
-                : grafica().svg?.alto + 'px',
+              height: !grafica()?.alto ? '100%' : grafica()?.alto + 'px',
             }"
           >
             <div
               :style="{
-                width: !grafica().svg?.alto
-                  ? '100%'
-                  : grafica().svg?.alto + 'px',
+                width: !grafica()?.alto ? '100%' : grafica()?.alto + 'px',
                 transform: `rotate(-90deg)translateX(calc(-100% - ${
                   0.5 * (margenes.arriba - margenes.abajo)
                 }px))`,
@@ -232,9 +261,9 @@ function panelesEnUso() {
           <figure :style="{ left: espacio_eje_y + 'px' }">
             <svg
               class="svg-vis"
-              :width="grafica().svg?.ancho"
-              :height="grafica().svg?.alto"
-              :viewBox="`0 0 ${grafica().svg?.ancho} ${grafica().svg?.alto}`"
+              :width="grafica()?.ancho"
+              :height="grafica()?.alto"
+              :viewBox="`0 0 ${grafica()?.ancho} ${grafica()?.alto}`"
             >
               <g
                 class="grupo-fondo"
@@ -244,7 +273,7 @@ function panelesEnUso() {
               <g
                 class="eje-x-abajo"
                 :transform="`translate(${margenes.izquierda}, ${
-                  grafica().svg?.alto - margenes.abajo
+                  grafica()?.alto - margenes.abajo
                 })`"
               />
               <g
@@ -256,7 +285,7 @@ function panelesEnUso() {
               <g
                 class="eje-y-derecha"
                 :transform="`translate(${
-                  grafica().svg?.ancho - margenes.derecha
+                  grafica()?.ancho - margenes.derecha
                 }, ${+margenes.arriba})`"
               />
               <slot ref="slotsDefaults" />
@@ -273,76 +302,40 @@ function panelesEnUso() {
             ></div>
           </div>
         </div>
-        <div
-          class="contenedor-tabla"
-          v-for="(grafico, g) in slots_default"
-          :key="g"
-        >
-          <table
-            v-if="
-              [
-                'SisdaiBarras',
-                'SisdaiAreasApiladas',
-                'SisdaiAreasApiladasOrdenadas',
-                'SisdaiSeriesTiempo',
-              ].includes(grafico.type.__name)
-            "
+        <div v-show="vistaActiva === 'tabla'">
+          <div
+            class="contenedor-tabla"
+            v-for="(tabla, g) in Object.values(grafica().tablas)"
+            :key="g"
           >
-            <thead>
-              <tr>
-                <th>{{ grafico.props.nombre_indice }}</th>
-                <th
-                  v-for="(variable, v) in grafico.props.variables"
-                  :key="v"
+            <table v-if="tabla.tipo != 'alluvial'">
+              <thead>
+                <tr>
+                  <th>{{ tabla.nombre_indice }}</th>
+                  <th
+                    v-for="(variable, v) in tabla.variables"
+                    :key="v"
+                  >
+                    {{ variable.nombre }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="(datum, d) in tabla.datos"
+                  :key="d"
                 >
-                  {{ variable.nombre }}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                v-for="(datum, d) in grafico.props.datos"
-                :key="d"
-              >
-                <td>{{ datum[grafico.props.nombre_indice] }}</td>
-                <td
-                  v-for="(variable, v) in grafico.props.variables"
-                  :key="v"
-                >
-                  {{ datum[variable.id]?.toLocaleString('en') }}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <table
-            v-else-if="['SisdaiCajasBigotes'].includes(grafico.type.__name)"
-          >
-            <thead>
-              <tr>
-                <th>{{ grafico.props.nombre_indice }}</th>
-                <th
-                  v-for="(variable, v) in grafico.props.variables"
-                  :key="v"
-                >
-                  {{ variable.nombre }}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                v-for="(datum, d) in grafico.props.datos"
-                :key="d"
-              >
-                <td>{{ datum[grafico.props.nombre_indice] }}</td>
-                <td
-                  v-for="(variable, v) in grafico.props.variables"
-                  :key="v"
-                >
-                  {{ datum[variable.id]?.toLocaleString('en') }}
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                  <td>{{ datum[tabla.nombre_indice] }}</td>
+                  <td
+                    v-for="(variable, v) in tabla.variables"
+                    :key="v"
+                  >
+                    {{ datum[variable.id]?.toLocaleString('en') }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
       <div class="panel-derecha-vis">
@@ -358,8 +351,11 @@ function panelesEnUso() {
   </div>
 </template>
 <style scoped lang="scss">
-.contenedor-tabla {
-  table {
+.contenido-vis {
+  max-width: 100%;
+  .contenedor-tabla {
+    overflow: auto;
+    max-height: 500px;
   }
 }
 </style>

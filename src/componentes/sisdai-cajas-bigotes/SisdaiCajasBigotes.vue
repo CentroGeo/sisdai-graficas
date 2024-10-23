@@ -1,10 +1,12 @@
 <script setup>
+import { idAleatorio } from '../../utils'
+
 import { ascending, descending, extent, mean, quantile, rollup } from 'd3-array'
 import { scaleBand, scaleLinear } from 'd3-scale'
 import { select } from 'd3-selection'
 import { transition } from 'd3-transition'
 
-import { onMounted, ref, shallowRef, toRefs, watch } from 'vue'
+import { onMounted, ref, shallowRef, toRefs, watch, onUnmounted } from 'vue'
 import usarRegistroGraficas from '../../composables/usarRegistroGraficas'
 import {
   buscarIdContenedorHtmlSisdai,
@@ -85,6 +87,9 @@ const escalaBanda = ref(),
 const grupoContenedor = ref(),
   data_agrupada = ref(),
   grupoCajasBigotes = ref()
+
+const idTabla = idAleatorio()
+
 function calcularEscalas(grupoVis) {
   if (!grupoVis && grupoVis.ancho === 0) return
 
@@ -138,7 +143,24 @@ function creaCajasBigotes() {
     },
     d => d[props.nombre_indice]
   )
-
+  usarRegistroGraficas()
+    .grafica(idGrafica)
+    .agregarTabla(idTabla, {
+      datos: Array.from(data_agrupada.value).map(d => ({
+        categoria: d[0],
+        ...d[1],
+      })),
+      variables: [
+        { id: 'max', nombre: 'Límite superior' },
+        { id: 'q3', nombre: 'Tercer cuantil' },
+        { id: 'mediana', nombre: 'Mediana' },
+        { id: 'promedio', nombre: 'Promedio' },
+        { id: 'q1', nombre: 'Primer cuantil' },
+        { id: 'min', nombre: 'Límite inferior' },
+      ],
+      nombre_indice: 'categoria',
+      tipo: 'cajas-bigotes',
+    })
   grupoCajasBigotes.value = grupoContenedor.value
     .selectAll('g.grupo-caja')
     .data(data_agrupada.value)
@@ -527,6 +549,9 @@ onMounted(() => {
     () => props.angulo_etiquetas_eje_x,
     () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
   )
+})
+onUnmounted(() => {
+  usarRegistroGraficas().grafica(idGrafica).quitarTabla(idTabla)
 })
 defineExpose({
   escalaBanda,

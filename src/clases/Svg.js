@@ -1,17 +1,18 @@
 import * as valoresPorDefecto from './../valores/grafica'
 
 export default class Svg {
-  _alto = 0
-  _ancho = 0
-  _margenes = new Margenes(valoresPorDefecto.margenes)
-  _grupoVis = new GrupoVis({
-    alto: 0,
-    ancho: 0,
-  })
-  _posicion_cursor = { x: 0, y: 0 }
-  _globo_visible = false
-
-  constructor() {}
+  constructor() {
+    this._alto = 0
+    this._ancho = 0
+    this._margenes = new Margenes(valoresPorDefecto.margenes)
+    this._grupoVis = new GrupoVis({
+      alto: 0,
+      ancho: 0,
+    })
+    this._posicion_cursor = { x: 0, y: 0 }
+    this._globo_visible = false
+    this._tablas = {}
+  }
 
   set alto(v) {
     this._alto = v
@@ -56,6 +57,19 @@ export default class Svg {
 
   get margenes() {
     return this._margenes
+  }
+  set tablas(t) {
+    this._tablas = t
+  }
+
+  get tablas() {
+    return this._tablas
+  }
+  agregarTabla(id, t) {
+    this._tablas[id] = t
+  }
+  quitarTabla(id) {
+    delete this._tablas[id]
   }
 
   set grupoVis(opciones) {

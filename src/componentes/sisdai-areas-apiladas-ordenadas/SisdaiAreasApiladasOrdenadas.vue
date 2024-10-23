@@ -1,11 +1,13 @@
 <script setup>
+import { idAleatorio } from '../../utils'
+
 import { bisector, extent, max, min, sum } from 'd3-array'
 import { scaleLinear, scaleTime } from 'd3-scale'
 import { select } from 'd3-selection'
 import { stack } from 'd3-shape'
 import { timeParse } from 'd3-time-format'
 import { transition } from 'd3-transition'
-import { onMounted, ref, shallowRef, toRefs, watch } from 'vue'
+import { onMounted, ref, shallowRef, toRefs, watch, onUnmounted } from 'vue'
 import usarRegistroGraficas from '../../composables/usarRegistroGraficas'
 import {
   buscarIdContenedorHtmlSisdai,
@@ -108,6 +110,7 @@ const grupoContenedor = ref(),
   eje_y = ref()
 const minDeltaTiempo = ref()
 const anchoBanda = ref()
+const idTabla = idAleatorio()
 
 const datos_hover = ref()
 
@@ -151,7 +154,12 @@ function creaAreas() {
     datos.value
   )
   datos_apilados.value = reordenamientoApilado(datos_apilados.value)
-
+  usarRegistroGraficas().grafica(idGrafica).agregarTabla(idTabla, {
+    datos: datos.value,
+    variables: variables.value,
+    nombre_indice: nombre_indice.value,
+    tipo: 'areas-apiladas-ordenadas',
+  })
   let ancho_barra =
     escalaTemporal.value(
       new Date(
@@ -367,6 +375,9 @@ onMounted(() => {
     () => props.angulo_etiquetas_eje_x,
     () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
   )
+})
+onUnmounted(() => {
+  usarRegistroGraficas().grafica(idGrafica).quitarTabla(idTabla)
 })
 defineExpose({
   escalaTemporal,

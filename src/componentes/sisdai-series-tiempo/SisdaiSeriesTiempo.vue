@@ -1,11 +1,13 @@
 <script setup>
+import { idAleatorio } from '../../utils'
+
 import { ascending, bisector, extent, max } from 'd3-array'
 import { scaleLinear, scaleTime } from 'd3-scale'
 import { select } from 'd3-selection'
 import { line } from 'd3-shape'
 import { timeParse } from 'd3-time-format'
 import { transition } from 'd3-transition'
-import { onMounted, ref, shallowRef, toRefs, watch } from 'vue'
+import { onMounted, ref, shallowRef, toRefs, watch, onUnmounted } from 'vue'
 import usarRegistroGraficas from '../../composables/usarRegistroGraficas'
 import {
   buscarIdContenedorHtmlSisdai,
@@ -93,6 +95,8 @@ const escalaTemporal = ref(),
 const grupoContenedor = ref(),
   grupoSeries = ref()
 const circulo_marcador = ref()
+const idTabla = idAleatorio()
+
 function calcularEscalas(grupoVis) {
   if (!grupoVis && grupoVis.ancho === 0) return
   escalaTemporal.value = scaleTime()
@@ -124,6 +128,12 @@ function creaSeries() {
   datos.value.forEach(
     d => (d.la_fecha = conversionTemporal(d[nombre_indice.value]))
   )
+  usarRegistroGraficas().grafica(idGrafica).agregarTabla(idTabla, {
+    datos: datos.value,
+    variables: variables.value,
+    nombre_indice: nombre_indice.value,
+    tipo: 'series-tiempo',
+  })
   grupoSeries.value = grupoContenedor.value.selectAll('g.serie-temporal')
 
   grupoSeries.value.data(variables.value).join(
@@ -316,6 +326,9 @@ onMounted(() => {
     () => props.angulo_etiquetas_eje_x,
     () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
   )
+})
+onUnmounted(() => {
+  usarRegistroGraficas().grafica(idGrafica).quitarTabla(idTabla)
 })
 defineExpose({
   escalaTemporal,
