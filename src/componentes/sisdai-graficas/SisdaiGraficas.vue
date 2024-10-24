@@ -305,16 +305,19 @@ function panelesEnUso() {
         <div v-show="vistaActiva === 'tabla'">
           <div
             class="contenedor-tabla"
-            v-for="(tabla, g) in Object.values(grafica().tablas)"
+            v-for="(tabla, g) in grafica().tablas"
             :key="g"
           >
             <table v-if="tabla.tipo != 'alluvial'">
+              <caption></caption>
               <thead>
                 <tr>
-                  <th>{{ tabla.nombre_indice }}</th>
+                  <th scope="col">{{ tabla.nombre_indice }}</th>
                   <th
+                    scope="col"
                     v-for="(variable, v) in tabla.variables"
                     :key="v"
+                    :id="`${g}-col-${v}`"
                   >
                     {{ variable.nombre }}
                   </th>
@@ -324,11 +327,13 @@ function panelesEnUso() {
                 <tr
                   v-for="(datum, d) in tabla.datos"
                   :key="d"
+                  :id="`${g}-ren-${d}`"
                 >
-                  <td>{{ datum[tabla.nombre_indice] }}</td>
+                  <th scope="row">{{ datum[tabla.nombre_indice] }}</th>
                   <td
                     v-for="(variable, v) in tabla.variables"
                     :key="v"
+                    :headers="`${g}-ren-${d} ${g}-col-${v}`"
                   >
                     {{ datum[variable.id]?.toLocaleString('en') }}
                   </td>
