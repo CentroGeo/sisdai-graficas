@@ -66,6 +66,7 @@ const variables = ref([
             ? variablesCheckeadas.variables_activas
             : variables
         "
+        :nombre_indice="'categoria'"
       />
       <template #panel-pie-vis>
         <div>

@@ -59,6 +59,7 @@ const variables = ref([
         },
       ]"
       :variables="variables"
+      :nombre_indice="'categoria'"
     />
     <template #panel-pie-vis>
       <div>

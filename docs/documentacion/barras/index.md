@@ -16,7 +16,7 @@ Ejemplo de implementación:
   <SisdaiBarras
     :datos="datos"
     :variables="variables"
-    :clave_categorias="'nombre'"
+    :nombre_indice="'nombre'"
   >
   </SisdaiBarras>
 </SisdaiGraficas>
@@ -76,7 +76,7 @@ Ejemplo de implementación:
 > </tbody>
 > </table>
 >
-> En este ejemplo, `categoria` representa la categoría principal y `cantidad_1` y `cantidad_2` corresponden a los valores numéricos que representa la magnitud de dichas subcategorías. Cabe mencionar que el nombre de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no necesariamente deben coincidir con los del ejemplo mostrado. Las propiedades `variables` y `clave_categorias` permiten especificar el nombre de las claves (o columnas).
+> En este ejemplo, `categoria` representa la categoría principal y `cantidad_1` y `cantidad_2` corresponden a los valores numéricos que representa la magnitud de dichas subcategorías. Cabe mencionar que el nombre de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no necesariamente deben coincidir con los del ejemplo mostrado. Las propiedades `variables` y `nombre_indice` permiten especificar el nombre de las claves (o columnas).
 
 - `variables`: Arreglo de objetos en donde cada uno contiene información de las subcategorías incluidas en el conjunto de datos, así como sus respectivos colores.
 
@@ -107,7 +107,7 @@ Ejemplo de implementación:
     > - `nombre`: es un `String` que proporciona una descripción más detallada sobre el id y que puede ser útil para mostrar globos de información.
     > - `color`: es un `String` que define el color de cada categoría, en formato RGB, hexadecimal u otro formato reconocido por CSS.
 
-- `clave_categorias`: especifica la clave que se utiliza para las categorías principales. Por defecto es `"categoria"` pero si los datos usan otro nombre, esta propiedad debe especificarse.
+- `nombre_indice`: especifica la clave que se utiliza para las categorías principales. Por defecto es `"categoria"` pero si los datos usan otro nombre, esta propiedad debe especificarse.
   - Tipo: `String`
   - Valor predeterminado: `"fecha"`
   - Requerido: Sí

@@ -16,7 +16,7 @@ Ejemplo de implementación:
     :datos="datos"
     :variables="variables"
     :formato_temporal="'%d/%m/%Y'"
-    :clave_fecha="'nombre_fecha'"
+    :nombre_indice="'nombre_fecha'"
   >
   </SisdaiSeriesTiempo>
 </SisdaiGraficas>
@@ -76,7 +76,7 @@ Ejemplo de implementación:
 > </tr>
 > </tbody>
 > </table>
-> Cabe mencionar que los nombres de las claves en los objetos (o de las columnas desde el punto de vista de la tabla) no necesariamente deben coincidir con los del ejemplo mostrado. Las propiedades  `variables` y `clave_fecha` descritas a continuación nos permiten especificar el nombre de las claves (o columnas).
+> Cabe mencionar que los nombres de las claves en los objetos (o de las columnas desde el punto de vista de la tabla) no necesariamente deben coincidir con los del ejemplo mostrado. Las propiedades  `variables` y `nombre_indice` descritas a continuación nos permiten especificar el nombre de las claves (o columnas).
 
 - `variables`: Arreglo de objetos que contienen la información de las series de tiempo representadas en los datos.
 
@@ -107,7 +107,7 @@ Ejemplo de implementación:
 > - `nombre`: su valor es un `String` que proporciona una descriçión más detallada sobre el id y que puede ser empleado para globos de información.
 > - `color`: Es un `String` que define el color de la serie especificado en formatos RGB, hexadecimal u otro formato reconocido por CSS.
 
-- `clave_fecha`: Especifica la clave empleada para la columna temporal. Por defecto es `"fecha"` y con el ejemplo anterior de datos podría no especificarse esta propiedad, pero si `datos` emplea otra clave para la temporalidad, esta propiedad tendrá que especificarse.
+- `nombre_indice`: Especifica la clave empleada para la columna temporal. Por defecto es `"fecha"` y con el ejemplo anterior de datos podría no especificarse esta propiedad, pero si `datos` emplea otra clave para la temporalidad, esta propiedad tendrá que especificarse.
 
   - Tipo: `String`
   - Valor predeterminado: `"fecha"`

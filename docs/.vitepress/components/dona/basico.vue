@@ -8,9 +8,13 @@ const variables = ref([
   { id: 'ciclismo', nombre: 'Ciclismo', color: '#046b4f' },
   { id: 'box', nombre: 'Boxeo', color: '#f9af05' },
 ])
+const laGrafica = ref()
 </script>
 <template>
-  <SisdaiGraficas :margenes="{ arriba: 0, abajo: 0, derecha: 0, izquierda: 0 }">
+  <SisdaiGraficas
+    :margenes="{ arriba: 0, abajo: 0, derecha: 0, izquierda: 0 }"
+    ref="laGrafica"
+  >
     <template #globo-informacion>
       <SisdaiGraficasGloboInfo :ancho="216">
         <p>
@@ -53,11 +57,14 @@ const variables = ref([
         { categoria: 'box', cantidad: 12 },
       ]"
       :variables="variables"
+      :nombre_indice="'categoria'"
     />
     <template #panel-pie-vis>
       <div>
-        <p class="vis-titulo-leyenda">Actividades deportivas</p>
-        <SisdaiNomenclatura :variables="variables"></SisdaiNomenclatura>
+        <div v-if="laGrafica?.vistaActiva === 'grafica'">
+          <p class="vis-titulo-leyenda">Actividades deportivas</p>
+          <SisdaiNomenclatura :variables="variables"></SisdaiNomenclatura>
+        </div>
 
         <p class="vis-fuente">
           Fuente: Los datos que se visualizan en este gráfico son hipotéticos

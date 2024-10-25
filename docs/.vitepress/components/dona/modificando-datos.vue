@@ -57,6 +57,7 @@ watch(contador, nv => {
     <SisdaiDona
       :datos="datos"
       :variables="variables"
+      :nombre_indice="'categoria'"
     />
   </SisdaiGraficas>
 </template>

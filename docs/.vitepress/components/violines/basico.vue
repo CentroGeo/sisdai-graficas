@@ -38,7 +38,7 @@ const losViolines = ref()
         nombre: 'Edad',
         color: '#2c7fb8',
       }"
-      :clave_categorias="'resistencia'"
+      :nombre_indice="'resistencia'"
     />
   </SisdaiGraficas>
 </template>

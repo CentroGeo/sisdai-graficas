@@ -15,7 +15,7 @@ Ejemplo de implementación:
     :datos="datos"
     :variables="variables"
     :formato_temporal="'%d/%m/%Y'"
-    :clave_fecha="'nombre_fecha'"
+    :nombre_indice="'nombre_fecha'"
   >
   </SisdaiAreasApiladasOrdenadas>
 </SisdaiGraficas>
@@ -74,7 +74,7 @@ Ejemplo de implementación:
 > </tr>
 > </tbody>
 > </table>
-> Cabe mencionar que el nombre de las claves en los objetos  (o de las columnas desde el punto de vista de la tabla) no necesariamente deben coincidir con los del ejemplo. Las propiedades `variables` y `clave_fecha` permiten especificar el nombre de las claves (o columnas).
+> Cabe mencionar que el nombre de las claves en los objetos  (o de las columnas desde el punto de vista de la tabla) no necesariamente deben coincidir con los del ejemplo. Las propiedades `variables` y `nombre_indice` permiten especificar el nombre de las claves (o columnas).
 
 - `variables`: Arreglo de objetos en donde cada uno contiene información de las variables o series de tiempo incluidas en el conjunto de datos.
 
@@ -105,7 +105,7 @@ Ejemplo de implementación:
 > - `nombre`: es un `String` que proporciona una descripción más detallada sobre el id y que puede ser útil para mostrar globos de información.
 > - `color`: es un `String` que define el color de cada categoría, en formato RGB, hexadecimal u otro formato reconocido por CSS.
 
-- `clave_fecha`: define la clave que se utiliza para la columna temporal.Por defecto es `"fecha"`, pero si los datos usan otro nombre, esta propiedad debe especificarse.
+- `nombre_indice`: define la clave que se utiliza para la columna temporal.Por defecto es `"fecha"`, pero si los datos usan otro nombre, esta propiedad debe especificarse.
   - Tipo: `String`
   - Valor predeterminado: `"fecha"`
   - Requerido: Sí

@@ -4,8 +4,9 @@ import { scaleBand, scaleLinear } from 'd3-scale'
 import { select } from 'd3-selection'
 import { stack } from 'd3-shape'
 import { transition } from 'd3-transition'
+import { idAleatorio } from '../../utils'
 
-import { onMounted, ref, shallowRef, toRefs, watch } from 'vue'
+import { onMounted, ref, shallowRef, toRefs, watch, onUnmounted } from 'vue'
 import {
   buscarIdContenedorHtmlSisdai,
   creaEjeHorizontal,
@@ -71,9 +72,9 @@ const props = defineProps({
       return validado
     },
   },
-  clave_categorias: {
+  nombre_indice: {
     type: String,
-    default: 'categoria',
+    require: true,
   },
   alineacion_eje_y: {
     type: String,
@@ -114,9 +115,9 @@ const props = defineProps({
   },
 })
 const datos_hover = ref()
-
+const idTabla = idAleatorio()
 const sisdaiBarras = shallowRef()
-const { datos, clave_categorias, variables } = toRefs(props)
+const { datos, nombre_indice, variables } = toRefs(props)
 transition
 const margenesSvg = ref({})
 
@@ -131,7 +132,7 @@ function calcularEscalas(grupoVis) {
   if (!grupoVis && grupoVis?.ancho === 0) return
 
   escalaBanda.value = scaleBand()
-    .domain(datos.value?.map(d => d[clave_categorias.value]))
+    .domain(datos.value?.map(d => d[nombre_indice.value]))
     .range([0, grupoVis?.ancho])
     .padding(props.separacion)
 
@@ -166,6 +167,12 @@ function creaBarras() {
     })
   }
   data_apilada.value = apilada
+  usarRegistroGraficas().grafica(idGrafica).agregarTabla(idTabla, {
+    datos: datos.value,
+    variables: variables.value,
+    nombre_indice: nombre_indice.value,
+    tipo: 'barras',
+  })
 
   grupoBarras.value = grupoContenedor.value
     .selectAll('g.subcategoria-barras')
@@ -188,8 +195,8 @@ function creaBarras() {
           .attr('y', usarRegistroGraficas().grafica(idGrafica)?.grupoVis?.alto)
           .attr('x', d => {
             return props.acomodo === 'apiladas'
-              ? escalaBanda.value(d.data[clave_categorias.value])
-              : escalaBanda.value(d.data[clave_categorias.value]) +
+              ? escalaBanda.value(d.data[nombre_indice.value])
+              : escalaBanda.value(d.data[nombre_indice.value]) +
                   escalaSubBanda.value(d.data.key)
           })
           .attr('height', 0)
@@ -236,8 +243,8 @@ function creaBarras() {
                 )
                 .attr('x', d =>
                   props.acomodo === 'apiladas'
-                    ? escalaBanda.value(d.data[clave_categorias.value])
-                    : escalaBanda.value(d.data[clave_categorias.value]) +
+                    ? escalaBanda.value(d.data[nombre_indice.value])
+                    : escalaBanda.value(d.data[nombre_indice.value]) +
                       escalaSubBanda.value(d.data.key)
                 )
                 .attr('height', 0)
@@ -277,8 +284,8 @@ function creaBarras() {
                 )
                 .attr('x', d =>
                   props.acomodo === 'apiladas'
-                    ? escalaBanda.value(d.data[clave_categorias.value])
-                    : escalaBanda.value(d.data[clave_categorias.value]) +
+                    ? escalaBanda.value(d.data[nombre_indice.value])
+                    : escalaBanda.value(d.data[nombre_indice.value]) +
                       escalaSubBanda.value(d.data.key)
                 )
                 .attr(
@@ -296,6 +303,9 @@ function creaBarras() {
       }
     )
 }
+onUnmounted(() => {
+  usarRegistroGraficas().grafica(idGrafica).quitarTabla(idTabla)
+})
 onMounted(() => {
   idGrafica = buscarIdContenedorHtmlSisdai('grafica', sisdaiBarras.value)
   grupoContenedor.value = select('#' + idGrafica + ' svg g.contenedor-barras')
@@ -341,7 +351,7 @@ onMounted(() => {
         indice === escalaBanda.value.domain().length ? indice - 1 : indice
       let categoria = escalaBanda.value.domain()[indice]
       datos_hover.value = data_apilada.value[0].filter(
-        dd => dd.data[clave_categorias.value] === categoria
+        dd => dd.data[nombre_indice.value] === categoria
       )[0].data
 
       grupoContenedor.value
@@ -355,8 +365,8 @@ onMounted(() => {
         .selectAll('rect.barra')
         .filter(
           d =>
-            d.data[clave_categorias.value] ===
-            datos_hover.value[clave_categorias.value]
+            d.data[nombre_indice.value] ===
+            datos_hover.value[nombre_indice.value]
         )
         .style('fill-opacity', '1')
     },

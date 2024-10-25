@@ -55,7 +55,7 @@ function alternaDatos() {
     <SisdaiCajasBigotes
       :datos="datos_dinamicos"
       :variables="variables_dinamicas"
-      :clave_categorias="base === 1 ? 'nombre_empresa' : 'nombre_categoria'"
+      :nombre_indice="base === 1 ? 'nombre_empresa' : 'nombre_categoria'"
     />
   </SisdaiGraficas>
 </template>

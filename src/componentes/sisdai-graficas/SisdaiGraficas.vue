@@ -62,8 +62,10 @@ const grupoFrente = ref()
 const grafica = () => {
   return usarRegistroGraficas().grafica(props.id)
 }
-
 const { margenes } = toRefs(props)
+const slots_default = ref([])
+const vistaActiva = ref('grafica')
+// Función para acceder a la ref expuesta por el hijo
 watch(margenes, nv => {
   grafica().margenes = nv
 })
@@ -71,11 +73,40 @@ onBeforeMount(() => {
   usarRegistroGraficas().registrarGrafica(props.id)
   grafica().margenes = margenes.value
 })
+const iniciaMutationObserver = () => {
+  const body = document.querySelector('body')
+
+  const observer = new MutationObserver(mutacion => {
+    mutacion.forEach(mutation => {
+      if (mutation.attributeName === 'class') {
+        // Cada vez que cambien las clases, actualiza `classList`
+        const clases = Array.from(body.classList)
+        vistaActiva.value = clases.includes('a11y-simplificada')
+          ? 'tabla'
+          : 'grafica'
+      }
+    })
+  })
+  // Iniciar la observación de los cambios de atributos (clases)
+  observer.observe(body, { attributes: true })
+
+  // Retorna el observador para poder desconectarlo más tarde
+  return observer
+}
+let observer
 onMounted(() => {
+  observer = iniciaMutationObserver()
+
+  vistaActiva.value = Array.from(
+    document.querySelector('body').classList
+  ).includes('a11y-simplificada')
+    ? 'tabla'
+    : 'grafica'
   obteniendoDimensiones()
   grupoFondo.value = select(`#${props.id}  g.grupo-fondo`)
   grupoFrente.value = select(`#${props.id}  g.grupo-frente`)
   window.addEventListener('resize', obteniendoDimensiones)
+  slots_default.value = slots.default ? slots.default() : []
   if ('globo-informacion' in slots) {
     siHayGlobo()
   }
@@ -103,8 +134,12 @@ defineExpose({
   grafica,
   grupoFondo,
   grupoFrente,
+  vistaActiva,
 })
 onUnmounted(() => {
+  if (observer) {
+    observer.disconnect()
+  }
   usarRegistroGraficas().borrarGrafica(props.id)
   window.removeEventListener('resize', obteniendoDimensiones)
 })
@@ -116,7 +151,7 @@ function siHayGlobo() {
   ).node()
 
   let ancho_globo = globo_nodo?.getBoundingClientRect()?.width
-  select(`#${props.id} svg.svg-vis`)
+  select(`#${props.id} .svg-vis`)
     .on('mousemove', e => {
       posicion_cursor.value = { x: e.layerX, y: e.layerY }
       ancho_globo = globo_nodo?.getBoundingClientRect()?.width
@@ -190,9 +225,11 @@ function panelesEnUso() {
       </div>
       <div
         class="contenido-vis"
+        :style="{ overflow: vistaActiva === 'grafica' ? 'initial' : 'hidden' }"
         ref="contenedorSisdaiGraficas"
       >
         <div
+          v-show="vistaActiva === 'grafica'"
           class="contenedor-svg-ejes-tooltip"
           :style="{
             height: !grafica()?.alto
@@ -251,7 +288,7 @@ function panelesEnUso() {
                   grafica()?.ancho - margenes.derecha
                 }, ${+margenes.arriba})`"
               />
-              <slot />
+              <slot ref="slotsDefaults" />
               <g
                 class="grupo-frente"
                 :transform="`translate(${margenes.izquierda}, ${margenes.arriba})`"
@@ -263,6 +300,46 @@ function panelesEnUso() {
               class="titulo-eje-x vis-titulo-ejes"
               v-html="titulo_eje_x"
             ></div>
+          </div>
+        </div>
+        <div v-show="vistaActiva === 'tabla'">
+          <div
+            class="contenedor-tabla"
+            v-for="(tabla, g) in grafica().tablas"
+            :key="g"
+          >
+            <table v-if="tabla.tipo != 'alluvial'">
+              <caption></caption>
+              <thead>
+                <tr>
+                  <th scope="col">{{ tabla.nombre_indice }}</th>
+                  <th
+                    scope="col"
+                    v-for="(variable, v) in tabla.variables"
+                    :key="v"
+                    :id="`${g}-col-${v}`"
+                  >
+                    {{ variable.nombre }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="(datum, d) in tabla.datos"
+                  :key="d"
+                  :id="`${g}-ren-${d}`"
+                >
+                  <th scope="row">{{ datum[tabla.nombre_indice] }}</th>
+                  <td
+                    v-for="(variable, v) in tabla.variables"
+                    :key="v"
+                    :headers="`${g}-ren-${d} ${g}-col-${v}`"
+                  >
+                    {{ datum[variable.id]?.toLocaleString('en') }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -278,3 +355,12 @@ function panelesEnUso() {
     <ContenedorVisAtribuciones />
   </div>
 </template>
+<style scoped lang="scss">
+.contenido-vis {
+  max-width: 100%;
+  .contenedor-tabla {
+    overflow: auto;
+    max-height: 500px;
+  }
+}
+</style>
