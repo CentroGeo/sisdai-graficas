@@ -5,7 +5,7 @@ Todos los cambios más importantes de este proyecto se documentan en este archiv
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/en/1.1.0)
 y este proyecto se adhiere al [Versionamiento semántico](https://semver.org/spec/v2.0.0.html).
 
-*Nota: Este Changelog se comenzó el 2024-10-28. Se documentaron hacia atrás los cambios más relevantes
+\*Nota: Este Changelog se comenzó el 2024-10-28. Se documentaron hacia atrás los cambios más relevantes
 de la biblioteca. Por lo tanto no se listan aquí todos los tags existentes.
 
 Al principio de cada entrada se lista la versión de la biblioteca de sisdai-css y
@@ -52,6 +52,14 @@ sisdai-css v1.2.4<br>sisdai-componentes v4.0.0-beta.11
 
 sisdai-css v1.0.7<br>sisdai-componentes v3.0.0
 
+### Cambiado (Changed)
+
+- Actualización de dependencias
+- Refactorización de documentación con nuevas dependencias
+
+### Agregado (Added)
+
+- Creación de globo de información generalizado
 
 ## [3.0.0] - 2024-03-22 - Release
 
@@ -85,8 +93,6 @@ sisdai-css v0.46.8<br>sisdai-componentes v2.4.2
 
 Publicación de la primera vesión de la biblioteca de gráficas
 
-
-
 [unreleased]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/-/tree/v6.0.0-beta.0
 [5.0.2]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v5.0.2...v5.0.0
 [5.0.0]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v5.0.0...v4.0.0
@@ -94,7 +100,3 @@ Publicación de la primera vesión de la biblioteca de gráficas
 [3.0.0]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v3.0.0...v2.0.0
 [2.0.0]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v2.0.0...v1.0.0
 [1.0.0]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/-/releases/v1.0.0
-
-
-
-
