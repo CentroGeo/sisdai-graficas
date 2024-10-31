@@ -16,6 +16,10 @@ import {
 
 var idGrafica
 const props = defineProps({
+  tabla_caption: {
+    type: String,
+    default: 'Tabla de datos de la gráfica de cajas y bigotes',
+  },
   datos: {
     type: Array,
     require: true,
@@ -160,6 +164,7 @@ function creaCajasBigotes() {
       ],
       nombre_indice: 'categoria',
       tipo: 'cajas-bigotes',
+      caption: props.tabla_caption,
     })
   grupoCajasBigotes.value = grupoContenedor.value
     .selectAll('g.grupo-caja')

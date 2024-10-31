@@ -16,6 +16,10 @@ import usarRegistroGraficas from './../../composables/usarRegistroGraficas'
 var idGrafica
 
 const props = defineProps({
+  tabla_caption: {
+    type: String,
+    default: 'Tabla de datos de la gráfica de barras',
+  },
   datos: {
     type: Array,
     require: true,
@@ -172,6 +176,7 @@ function creaBarras() {
     variables: variables.value,
     nombre_indice: nombre_indice.value,
     tipo: 'barras',
+    caption: props.tabla_caption,
   })
 
   grupoBarras.value = grupoContenedor.value
