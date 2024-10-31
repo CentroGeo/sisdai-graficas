@@ -12,7 +12,7 @@ Al principio de cada entrada se lista la versión de la biblioteca de sisdai-css
 sisdai-componentes con la que la versión indicada de sisdai-graficas es
 compatible y tiene instalada.
 
-## [Unreleased]
+## [6.0.0] - 2024-10-31
 
 sisdai-css v1.3.3<br>sisdai-componentes v4.1.5
 
@@ -22,7 +22,7 @@ sisdai-css v1.3.3<br>sisdai-componentes v4.1.5
 
 ### Agregado (Added)
 
-- Características de accesibilildad a la tabla como scope, id y headers
+- Características de accesibilildad a la tabla como scope, id, headers y `<caption>`
 
 ## [5.0.2] - 2024-10-07
 
