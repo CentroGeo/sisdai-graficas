@@ -136,6 +136,10 @@ Ejemplo de implementación:
   - Tipo: `String`
   - Valor predeterminado: `"var(--fondo)"`
   - Requerido: No
+- `tabla_caption`: es un texto que se inserta en el elemento `<caption>` de la tabla asociada a la gráfica.
+  - Tipo: `String`
+  - Valor predeterminado: `"Tabla de datos de la gráfica de dona"`
+  - Requerido: No
 
 ## Ejemplos
 

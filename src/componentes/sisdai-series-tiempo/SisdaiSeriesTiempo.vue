@@ -17,6 +17,10 @@ import {
 var idGrafica
 
 const props = defineProps({
+  tabla_caption: {
+    type: String,
+    default: 'Tabla de datos de la gráfica de series de tiempo',
+  },
   datos: {
     type: Array,
     require: true,
@@ -133,6 +137,7 @@ function creaSeries() {
     variables: variables.value,
     nombre_indice: nombre_indice.value,
     tipo: 'series-tiempo',
+    caption: props.tabla_caption,
   })
   grupoSeries.value = grupoContenedor.value.selectAll('g.serie-temporal')
 

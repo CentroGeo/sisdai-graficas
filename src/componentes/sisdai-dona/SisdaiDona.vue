@@ -8,6 +8,10 @@ import { onMounted, ref, shallowRef, toRefs, watch, onUnmounted } from 'vue'
 import usarRegistroGraficas from '../../composables/usarRegistroGraficas'
 import { buscarIdContenedorHtmlSisdai } from '../../utils'
 const props = defineProps({
+  tabla_caption: {
+    type: String,
+    default: 'Tabla de datos de la gráfica de dona',
+  },
   datos: {
     type: Array,
     require: true,
@@ -101,6 +105,7 @@ function creaDona() {
       variables: [{ id: clave_cantidad.value, nombre: clave_cantidad.value }],
       nombre_indice: nombre_indice.value,
       tipo: 'dona',
+      caption: props.tabla_caption,
     })
   donaCompleta.value = grupoContenedor.value
     .select('path.dona-completa-fondo')

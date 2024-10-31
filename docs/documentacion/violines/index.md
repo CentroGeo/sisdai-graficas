@@ -130,6 +130,10 @@ Ejemplo de implementación:
   - Tipo: `Number`
   - Valor predeterminado: `0`
   - Requerido: No
+- `tabla_caption`: es un texto que se inserta en el elemento `<caption>` de la tabla asociada a la gráfica.
+  - Tipo: `String`
+  - Valor predeterminado: `"Tabla de datos de la gráfica de violines"`
+  - Requerido: No
 
 ### Métodos
 

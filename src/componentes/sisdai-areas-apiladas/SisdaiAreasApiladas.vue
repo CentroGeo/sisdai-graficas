@@ -20,6 +20,10 @@ import {
 var idGrafica
 
 const props = defineProps({
+  tabla_caption: {
+    type: String,
+    default: 'Tabla de datos de la gráfica de áreas apiladas',
+  },
   datos: {
     type: Array,
     require: true,
@@ -145,6 +149,7 @@ function creaAreas() {
     variables: variables.value,
     nombre_indice: nombre_indice.value,
     tipo: 'areas-apiladas',
+    caption: props.tabla_caption,
   })
   grupoAreas.value = grupoContenedor.value
     .selectAll('path.area')
