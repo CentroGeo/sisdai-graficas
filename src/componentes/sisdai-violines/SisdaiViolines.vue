@@ -1,10 +1,12 @@
 <script setup>
+import { idAleatorio } from '../../utils'
+
 import { bin, extent, max, rollup, sum } from 'd3-array'
 import { scaleBand, scaleLinear } from 'd3-scale'
 import { select } from 'd3-selection'
 import { area, curveCatmullRom } from 'd3-shape'
 import { transition } from 'd3-transition'
-import { onMounted, ref, shallowRef, toRefs, watch } from 'vue'
+import { onMounted, ref, shallowRef, toRefs, watch, onUnmounted } from 'vue'
 import usarRegistroGraficas from '../../composables/usarRegistroGraficas'
 import {
   buscarIdContenedorHtmlSisdai,
@@ -15,6 +17,10 @@ import {
 var idGrafica
 
 const props = defineProps({
+  tabla_caption: {
+    type: String,
+    default: 'Tabla de datos de la gráfica de violines',
+  },
   datos: {
     type: Array,
     require: true,
@@ -32,9 +38,9 @@ const props = defineProps({
       return validado
     },
   },
-  clave_categorias: {
+  nombre_indice: {
     type: String,
-    default: 'categoria',
+    require: true,
   },
   alineacion_eje_y: {
     type: String,
@@ -81,7 +87,7 @@ const props = defineProps({
 const datos_hover = ref()
 
 const sisdaiViolines = shallowRef()
-const { datos, clave_categorias, variables } = toRefs(props)
+const { datos, nombre_indice, variables } = toRefs(props)
 transition
 const margenesSvg = ref({})
 const escalaBanda = ref(),
@@ -93,11 +99,14 @@ const grupoContenedor = ref(),
   histograma = ref(),
   grupoViolines = ref(),
   grupoMarcador = ref()
+
+const idTabla = idAleatorio()
+
 function calcularEscalas(grupoVis) {
   if (!grupoVis && grupoVis.ancho === 0) return
 
   escalaBanda.value = scaleBand()
-    .domain(datos.value?.map(d => d[clave_categorias.value]))
+    .domain(datos.value?.map(d => d[nombre_indice.value]))
     .range([0, grupoVis.ancho])
     .padding(0.05)
 
@@ -126,7 +135,7 @@ function calcularEscalas(grupoVis) {
 
       return bins
     },
-    d => d[props.clave_categorias]
+    d => d[props.nombre_indice]
   )
 
   let numero_maximo = 0
@@ -141,6 +150,23 @@ function calcularEscalas(grupoVis) {
     .domain([-numero_maximo, numero_maximo])
 }
 function creaViolines() {
+  usarRegistroGraficas()
+    .grafica(idGrafica)
+    .agregarTabla(idTabla, {
+      datos: Array.from(data_agrupada.value).map(d => ({
+        categoria: d[0],
+        ...Object.fromEntries(
+          d[1].map(dd => [dd.x0 + ' - ' + dd.x1, dd.length])
+        ),
+      })),
+      variables: Array.from(data_agrupada.value)[0][1].map(dd => ({
+        id: dd.x0 + ' - ' + dd.x1,
+        nombre: dd.x0 + ' - ' + dd.x1,
+      })),
+      nombre_indice: 'categoria',
+      tipo: 'violines',
+      caption: props.tabla_caption,
+    })
   grupoViolines.value = grupoContenedor.value
     .selectAll('g.grupo-violin')
     .data(data_agrupada.value)
@@ -260,11 +286,13 @@ onMounted(() => {
       }
       grupoMarcador.value
         .style('fill-opacity', 1)
+        .style('stroke-opacity', 1)
+
         .attr(
           'transform',
           `translate(${escalaBanda.value(datos_hover.value.categoria)},0)`
         )
-      if (!datos_hover.value.categoria) {
+      if (datos_hover.value.categoria) {
         grupoMarcador.value
           .select('path.triangulo-0')
           .attr(
@@ -299,10 +327,13 @@ onMounted(() => {
     () => usarRegistroGraficas().grafica(idGrafica).globo_visible,
     nv => {
       if (!nv) {
-        grupoMarcador.value.style('fill-opacity', 0)
+        grupoMarcador.value.style('fill-opacity', 0).style('stroke-opacity', 0)
       }
     }
   )
+})
+onUnmounted(() => {
+  usarRegistroGraficas().grafica(idGrafica).quitarTabla(idTabla)
 })
 defineExpose({
   escalaBanda,

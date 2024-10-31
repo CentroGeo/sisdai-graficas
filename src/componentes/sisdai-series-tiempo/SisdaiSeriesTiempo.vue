@@ -1,11 +1,13 @@
 <script setup>
+import { idAleatorio } from '../../utils'
+
 import { ascending, bisector, extent, max } from 'd3-array'
 import { scaleLinear, scaleTime } from 'd3-scale'
 import { select } from 'd3-selection'
 import { line } from 'd3-shape'
 import { timeParse } from 'd3-time-format'
 import { transition } from 'd3-transition'
-import { onMounted, ref, shallowRef, toRefs, watch } from 'vue'
+import { onMounted, ref, shallowRef, toRefs, watch, onUnmounted } from 'vue'
 import usarRegistroGraficas from '../../composables/usarRegistroGraficas'
 import {
   buscarIdContenedorHtmlSisdai,
@@ -15,6 +17,10 @@ import {
 var idGrafica
 
 const props = defineProps({
+  tabla_caption: {
+    type: String,
+    default: 'Tabla de datos de la gráfica de series de tiempo',
+  },
   datos: {
     type: Array,
     require: true,
@@ -34,9 +40,9 @@ const props = defineProps({
       return validado
     },
   },
-  clave_fecha: {
+  nombre_indice: {
     type: String,
-    default: 'fecha',
+    require: true,
   },
   alineacion_eje_y: {
     type: String,
@@ -83,7 +89,7 @@ const props = defineProps({
 const datos_hover = ref({})
 
 const sisdaiSeriesTiempo = shallowRef()
-const { datos, clave_fecha, variables } = toRefs(props)
+const { datos, nombre_indice, variables } = toRefs(props)
 transition
 const margenesSvg = ref({})
 
@@ -93,6 +99,8 @@ const escalaTemporal = ref(),
 const grupoContenedor = ref(),
   grupoSeries = ref()
 const circulo_marcador = ref()
+const idTabla = idAleatorio()
+
 function calcularEscalas(grupoVis) {
   if (!grupoVis && grupoVis.ancho === 0) return
   escalaTemporal.value = scaleTime()
@@ -122,8 +130,15 @@ function calcularEscalas(grupoVis) {
 }
 function creaSeries() {
   datos.value.forEach(
-    d => (d.la_fecha = conversionTemporal(d[clave_fecha.value]))
+    d => (d.la_fecha = conversionTemporal(d[nombre_indice.value]))
   )
+  usarRegistroGraficas().grafica(idGrafica).agregarTabla(idTabla, {
+    datos: datos.value,
+    variables: variables.value,
+    nombre_indice: nombre_indice.value,
+    tipo: 'series-tiempo',
+    caption: props.tabla_caption,
+  })
   grupoSeries.value = grupoContenedor.value.selectAll('g.serie-temporal')
 
   grupoSeries.value.data(variables.value).join(
@@ -220,7 +235,7 @@ onMounted(() => {
     nv => (margenesSvg.value = nv)
   )
   datos.value.forEach(
-    d => (d.la_fecha = conversionTemporal(d[clave_fecha.value]))
+    d => (d.la_fecha = conversionTemporal(d[nombre_indice.value]))
   )
   calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
   creaSeries()
@@ -236,7 +251,7 @@ onMounted(() => {
   )
   watch(datos, () => {
     datos.value.forEach(
-      d => (d.la_fecha = conversionTemporal(d[clave_fecha.value]))
+      d => (d.la_fecha = conversionTemporal(d[nombre_indice.value]))
     )
     calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
     creaSeries()
@@ -316,6 +331,9 @@ onMounted(() => {
     () => props.angulo_etiquetas_eje_x,
     () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
   )
+})
+onUnmounted(() => {
+  usarRegistroGraficas().grafica(idGrafica).quitarTabla(idTabla)
 })
 defineExpose({
   escalaTemporal,

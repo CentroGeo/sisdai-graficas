@@ -1,4 +1,6 @@
 <script setup>
+import { idAleatorio } from '../../utils'
+
 import { bisector, extent, max, sum } from 'd3-array'
 import { scaleLinear, scaleTime } from 'd3-scale'
 import { select } from 'd3-selection'
@@ -7,7 +9,7 @@ import { stack } from 'd3-shape'
 import { area } from 'd3-shape'
 import { timeParse } from 'd3-time-format'
 import { transition } from 'd3-transition'
-import { onMounted, ref, shallowRef, toRefs, watch } from 'vue'
+import { onMounted, ref, shallowRef, toRefs, watch, onUnmounted } from 'vue'
 import usarRegistroGraficas from '../../composables/usarRegistroGraficas'
 import {
   buscarIdContenedorHtmlSisdai,
@@ -18,6 +20,10 @@ import {
 var idGrafica
 
 const props = defineProps({
+  tabla_caption: {
+    type: String,
+    default: 'Tabla de datos de la gráfica de áreas apiladas',
+  },
   datos: {
     type: Array,
     require: true,
@@ -37,9 +43,9 @@ const props = defineProps({
       return validado
     },
   },
-  clave_fecha: {
+  nombre_indice: {
     type: String,
-    default: 'fecha',
+    require: true,
   },
   alineacion_eje_y: {
     type: String,
@@ -89,7 +95,7 @@ const props = defineProps({
 })
 
 const sisdaiAreasApiladas = shallowRef()
-const { datos, clave_fecha, variables } = toRefs(props)
+const { datos, nombre_indice, variables } = toRefs(props)
 transition
 const margenesSvg = ref({})
 const datos_apilados = ref([])
@@ -100,6 +106,7 @@ const grupoContenedor = ref(),
   grupoAreas = ref()
 
 const datos_hover = ref()
+const idTabla = idAleatorio()
 
 function calcularEscalas(grupoVis) {
   if (!grupoVis && grupoVis.ancho === 0) return
@@ -129,7 +136,7 @@ function calcularEscalas(grupoVis) {
 }
 function creaAreas() {
   datos.value.forEach(
-    d => (d.la_fecha = conversionTemporal(d[clave_fecha.value]))
+    d => (d.la_fecha = conversionTemporal(d[nombre_indice.value]))
   )
   datos_apilados.value = stack().keys(variables.value.map(d => d.id))(
     datos.value
@@ -137,7 +144,13 @@ function creaAreas() {
   if (props.reordenamientoTemporal) {
     datos_apilados.value = reordenamientoApilado(datos_apilados.value)
   }
-
+  usarRegistroGraficas().grafica(idGrafica).agregarTabla(idTabla, {
+    datos: datos.value,
+    variables: variables.value,
+    nombre_indice: nombre_indice.value,
+    tipo: 'areas-apiladas',
+    caption: props.tabla_caption,
+  })
   grupoAreas.value = grupoContenedor.value
     .selectAll('path.area')
     .data(datos_apilados.value)
@@ -183,39 +196,39 @@ onMounted(() => {
   idGrafica = buscarIdContenedorHtmlSisdai('grafica', sisdaiAreasApiladas.value)
   grupoContenedor.value = select('#' + idGrafica + ' svg g.contenedor-areas')
 
-  margenesSvg.value = usarRegistroGraficas().grafica(idGrafica).margenes
+  margenesSvg.value = usarRegistroGraficas().grafica(idGrafica)?.margenes
   watch(
-    () => usarRegistroGraficas().grafica(idGrafica).margenes,
+    () => usarRegistroGraficas().grafica(idGrafica)?.margenes,
     nv => (margenesSvg.value = nv)
   )
   datos.value.forEach(
-    d => (d.la_fecha = conversionTemporal(d[clave_fecha.value]))
+    d => (d.la_fecha = conversionTemporal(d[nombre_indice.value]))
   )
-  calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+  calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.grupoVis)
   creaAreas()
 
   watch(
-    () => usarRegistroGraficas().grafica(idGrafica).grupoVis,
+    () => usarRegistroGraficas().grafica(idGrafica)?.grupoVis,
     () => {
-      calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
-      if (usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho > 0) {
+      calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.grupoVis)
+      if (usarRegistroGraficas().grafica(idGrafica)?.grupoVis.ancho > 0) {
         creaAreas()
       }
     }
   )
   watch(datos, () => {
     datos.value.forEach(
-      d => (d.la_fecha = conversionTemporal(d[clave_fecha.value]))
+      d => (d.la_fecha = conversionTemporal(d[nombre_indice.value]))
     )
-    calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+    calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.grupoVis)
     creaAreas()
   })
   watch(variables, () => {
-    calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+    calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.grupoVis)
     creaAreas()
   })
   watch(
-    () => usarRegistroGraficas().grafica(idGrafica).posicion_cursor,
+    () => usarRegistroGraficas().grafica(idGrafica)?.posicion_cursor,
     nv => {
       let bisecetDate = bisector(d => d.la_fecha).left
 
@@ -233,12 +246,15 @@ onMounted(() => {
   )
   watch(
     () => props.angulo_etiquetas_eje_y,
-    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.grupoVis)
   )
   watch(
     () => props.angulo_etiquetas_eje_x,
-    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.grupoVis)
   )
+})
+onUnmounted(() => {
+  usarRegistroGraficas().grafica(idGrafica).quitarTabla(idTabla)
 })
 defineExpose({
   escalaTemporal,

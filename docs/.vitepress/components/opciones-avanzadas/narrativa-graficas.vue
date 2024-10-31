@@ -38,22 +38,6 @@ watch(
   <SisdaiNarrativa ref="miNarrativa">
     <template #contenido-fondo-sticky>
       <SisdaiGraficas class="p-t-10">
-        <template #globo-informacion>
-          <SisdaiGraficasGloboInfo :ancho="200">
-            <p>
-              <span
-                class="globo-informacion-punto-color"
-                :style="{
-                  background: variables.filter(
-                    d => d.id === laDona?.datos_hover?.categoria
-                  )[0]?.color,
-                }"
-              ></span>
-              {{ laDona?.datos_hover?.categoria }}:
-              {{ laDona?.datos_hover?.cantidad }}
-            </p>
-          </SisdaiGraficasGloboInfo>
-        </template>
         <SisdaiDona
           ref="laDona"
           :datos="[
@@ -64,6 +48,7 @@ watch(
           ]"
           :variables="variables"
           :variables_visibles="variables_visibles"
+          :nombre_indice="'categoria'"
         />
         <template
           #panel-pie-vis

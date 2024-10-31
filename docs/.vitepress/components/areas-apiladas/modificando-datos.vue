@@ -62,7 +62,7 @@ const variablesDinamicas = computed(() =>
       :datos="datos"
       :variables="variablesDinamicas"
       :angulo_etiquetas_eje_x="-45"
-      :clave_fecha="'fecha_2'"
+      :nombre_indice="'fecha_2'"
       :formato_temporal="'%d/%m/%Y'"
     />
     <template #panel-pie-vis>

@@ -68,7 +68,7 @@ Ejemplo de implementación:
 > </tbody>
 > </table>
 
-> Cabe mencionar que los nombres de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no necesariamente deben coincidir con los del ejemplo mostrado. Las propiedades `variables`, `clave_categoria` y `clave_cantidad` descritas a continuación nos permiten especificar el nombre de las claves (o columnas).
+> Cabe mencionar que los nombres de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no necesariamente deben coincidir con los del ejemplo mostrado. Las propiedades `variables`, `nombre_indice` y `clave_cantidad` descritas a continuación nos permiten especificar el nombre de las claves (o columnas).
 
 - `variables`: Arreglo de objetos que contienen información sobre las categorías, como un `id` que debe coincidir con los identificadores o nombres que se usan en `datos`para cada segmento . También tienen información sobre el color y un nombre que puede ser alternativo al que se usa en `datos`:
 
@@ -106,7 +106,7 @@ Ejemplo de implementación:
     > - `nombre`: su valor es un `String` que proporciona una descripción más detallada sobre el id y que puede ser empleado para globos de información
     > - `color`: es un `String` que define el color de cada categoría, en formato RGB, hexadecimal u otro formato reconocido por CSS.
 
-- `clave_categorias`: especifica la clave que se utiliza para las categorías principales. Por defecto es `"categoria"` pero si los datos usan otro nombre, esta propiedad debe especificarse.
+- `nombre_indice`: especifica la clave que se utiliza para las categorías principales. Por defecto es `"categoria"` pero si los datos usan otro nombre, esta propiedad debe especificarse.
   - Tipo: `String`
   - Valor predeterminado: `"categoria"`
   - Requerido: Sí
@@ -135,6 +135,10 @@ Ejemplo de implementación:
 - `color_dona_fondo`: Especifica el color de fondo de la dona para las áreas no asignadas a ningún segmento. Por defecto utiliza la variable de [sisdai-css](https://codigo.conahcyt.mx/sisdai/sisdai-css) `"var(--fondo)"`, pero se puede definir cualquier formato de color admitido por CSS.
   - Tipo: `String`
   - Valor predeterminado: `"var(--fondo)"`
+  - Requerido: No
+- `tabla_caption`: es un texto que se inserta en el elemento `<caption>` de la tabla asociada a la gráfica.
+  - Tipo: `String`
+  - Valor predeterminado: `"Tabla de datos de la gráfica de dona"`
   - Requerido: No
 
 ## Ejemplos

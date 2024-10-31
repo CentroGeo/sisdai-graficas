@@ -87,7 +87,7 @@ Ejemplo de implementación:
 > </tbody>
 > </table>
 >
-> En este ejemplo, **seguridad_social** indica las categorías con las que se agruparán los datos, mientras que **edad** es la variable numérica que se usará para calcular las los cuartiles y otros elementos de cada subconjunto de los datos. Cabe mencionar que los nombres de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no necesariamente deben coincidir con los del ejemplo mostrado. Las propiedades `variables` y `clave_categorias` descritas a continuación nos permiten especificar el nombre de las claves (o columnas).
+> En este ejemplo, **seguridad_social** indica las categorías con las que se agruparán los datos, mientras que **edad** es la variable numérica que se usará para calcular las los cuartiles y otros elementos de cada subconjunto de los datos. Cabe mencionar que los nombres de las claves en los diccionarios (o de las columnas desde el punto de vista de la tabla) no necesariamente deben coincidir con los del ejemplo mostrado. Las propiedades `variables` y `nombre_indice` descritas a continuación nos permiten especificar el nombre de las claves (o columnas).
 
 - `variables`: Arreglo de objetos que contienen información sobre el color y el nombre de la clave asociada a la variable numérica en `datos` Si consideramos el caso anterior de `datos`, un ejemplo de `variables` es:
   - Tipo: `Array`
@@ -108,7 +108,7 @@ Ejemplo de implementación:
 > - `nombre`: su valor es un string que da más información sobre el `id` y es un `String` que puede ser empleado para globos de información.
 > - `color`: Es un `String` que define el color de los diagramas, especificado en RGB, hexadecimal u otro formato reconocido por CSS.
 
-- `clave_categorias`: Especifica la clave empleada para las categorías que se usarán para agrupar al conjunto de datos.Por defecto es `"categoria"` y con el ejemplo anterior de `datos` tendría que especificarse como `"seguridad_social"`
+- `nombre_indice`: Especifica la clave empleada para las categorías que se usarán para agrupar al conjunto de datos.Por defecto es `"categoria"` y con el ejemplo anterior de `datos` tendría que especificarse como `"seguridad_social"`
   - Tipo: `String`
   - Valor predeterminado: `"categoria"`
   - Requerido: Sí
@@ -129,6 +129,10 @@ Ejemplo de implementación:
 - `angulo_etiquetas_eje_x`: es un valor numérico entre `-90` que indica el ángulo de rotación de las etiquetas eje horizontal.
   - Tipo: `Number`
   - Valor predeterminado: `0`
+  - Requerido: No
+- `tabla_caption`: es un texto que se inserta en el elemento `<caption>` de la tabla asociada a la gráfica.
+  - Tipo: `String`
+  - Valor predeterminado: `"Tabla de datos de la gráfica de violines"`
   - Requerido: No
 
 ### Métodos

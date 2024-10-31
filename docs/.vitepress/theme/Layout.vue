@@ -10,6 +10,7 @@ import { useData, useRoute } from 'vitepress'
 import { isActive } from 'vitepress/dist/client/shared'
 import { onMounted, ref, watch } from 'vue'
 import NavegacionPrincipal from './NavegacionPrincipal.vue'
+import pkg from '../../../package.json'
 
 // https://vitepress.dev/reference/runtime-api#usedata
 const { theme, page } = useData()
@@ -170,7 +171,7 @@ watch(route, () => {
     <SisdaiPiePaginaConahcyt />
     <SisdaiPiePaginaGobMx />
     <SisdaiInfoDeDespliegue
-      versionProyecto="-"
+      :versionProyecto="pkg.version"
       entornoProyecto="-"
       actualizacionProyecto="-"
     />
