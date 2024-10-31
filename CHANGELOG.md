@@ -93,7 +93,7 @@ sisdai-css v0.46.8<br>sisdai-componentes v2.4.2
 
 Publicación de la primera vesión de la biblioteca de gráficas
 
-[unreleased]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/-/tree/v6.0.0-beta.0
+[6.0.0]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v5.0.0...v6.0.0
 [5.0.2]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v5.0.2...v5.0.0
 [5.0.0]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v5.0.0...v4.0.0
 [4.0.0]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v4.0.0...v5.0.0
