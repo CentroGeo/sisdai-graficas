@@ -309,7 +309,11 @@ function panelesEnUso() {
             :key="g"
           >
             <table v-if="tabla.tipo != 'alluvial'">
-              <caption></caption>
+              <caption>
+                {{
+                  tabla.caption
+                }}
+              </caption>
               <thead>
                 <tr>
                   <th scope="col">{{ tabla.nombre_indice }}</th>

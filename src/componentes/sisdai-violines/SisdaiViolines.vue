@@ -17,6 +17,10 @@ import {
 var idGrafica
 
 const props = defineProps({
+  tabla_caption: {
+    type: String,
+    default: 'Tabla de datos de la gráfica de violines',
+  },
   datos: {
     type: Array,
     require: true,
@@ -161,6 +165,7 @@ function creaViolines() {
       })),
       nombre_indice: 'categoria',
       tipo: 'violines',
+      caption: props.tabla_caption,
     })
   grupoViolines.value = grupoContenedor.value
     .selectAll('g.grupo-violin')

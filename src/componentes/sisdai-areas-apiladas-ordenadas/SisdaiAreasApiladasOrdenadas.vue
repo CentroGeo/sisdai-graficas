@@ -18,6 +18,10 @@ import {
 var idGrafica
 
 const props = defineProps({
+  tabla_caption: {
+    type: String,
+    default: 'Tabla de datos de la gráfica de áreas apiladas ordenadas',
+  },
   datos: {
     type: Array,
     require: true,
@@ -159,6 +163,7 @@ function creaAreas() {
     variables: variables.value,
     nombre_indice: nombre_indice.value,
     tipo: 'areas-apiladas-ordenadas',
+    caption: props.tabla_caption,
   })
   let ancho_barra =
     escalaTemporal.value(
