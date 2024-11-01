@@ -10,7 +10,7 @@ const variables = {
   nombre: 'Acciones vendidas',
   color: '#2c7fb8',
 }
-const clave_categorias = 'nombre_empresa'
+const nombre_indice = 'nombre_empresa'
 describe('SisdaiGraficas con SisdaiCajasBigotes', () => {
   it('debe renderizar SisdaiCajasBigotes en el slot por defecto', () => {
     const wrapper = shallowMount(SisdaiGraficas, {
@@ -44,7 +44,7 @@ describe('SisdaiGraficas con SisdaiCajasBigotes', () => {
       expect(sisdaiCajasBigotes.props('datos')).toEqual(datos)
       expect(sisdaiCajasBigotes.props('variables')).toEqual(variables)
     })
-    it('Debe generar el mismo número rectángulos, lineas y puntos de promedio que de categorías únicas mediante clave_categorias', async () => {
+    it('Debe generar el mismo número rectángulos, lineas y puntos de promedio que de categorías únicas mediante nombre_indice', async () => {
       const wrapper = mount(SisdaiGraficas, {
         props: { id: 'test-id-graficas-barras', ancho: 500 },
         attachTo: document.body.appendChild(document.createElement('div')),
@@ -55,7 +55,7 @@ describe('SisdaiGraficas con SisdaiCajasBigotes', () => {
               return h(SisdaiCajasBigotes, {
                 datos,
                 variables,
-                clave_categorias,
+                nombre_indice,
               })
             },
           },
@@ -71,9 +71,8 @@ describe('SisdaiGraficas con SisdaiCajasBigotes', () => {
       const linea_media = svg.findAll('line.media')
       const circulo_promedio = svg.findAll('circle.promedio')
 
-      const categorias_unicas = [
-        ...new Set(datos.map(d => d[clave_categorias])),
-      ].length
+      const categorias_unicas = [...new Set(datos.map(d => d[nombre_indice]))]
+        .length
 
       expect(caja.length).toBe(categorias_unicas)
       expect(linea_min.length).toBe(categorias_unicas)

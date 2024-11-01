@@ -2,7 +2,6 @@ import { createRequire } from 'module'
 
 const require = createRequire(import.meta.url)
 const pkg = require('../../package.json')
-
 // https://vitepress.dev/reference/site-config
 export default {
   lang: 'es-mx',
@@ -12,15 +11,27 @@ export default {
   // appearance: false,
   lastUpdated: true,
 
-  // head: [
-  //   [
-  //     'link',
-  //     {
-  //       rel: 'stylesheet',
-  //       href: 'https://file.myfontastic.com/JS4TgqY9L4s8WsKQDkt5qA/icons.css',
-  //     },
-  //   ],
-  // ],
+  head: [
+    [
+      'link',
+      {
+        rel: 'stylesheet',
+        href: 'https://file.myfontastic.com/JS4TgqY9L4s8WsKQDkt5qA/icons.css',
+      },
+    ],
+    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
+    [
+      'link',
+      { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+    ],
+    [
+      'link',
+      {
+        href: 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap',
+        rel: 'stylesheet',
+      },
+    ],
+  ],
 
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config

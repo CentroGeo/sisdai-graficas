@@ -15,7 +15,7 @@ Ejemplo de implementación:
     :datos="datos"
     :variables="variables"
     :formato_temporal="'%d/%m/%Y'"
-    :clave_fecha="'nombre_fecha'"
+    :nombre_indice="'nombre_fecha'"
   >
   </SisdaiAreasApiladas>
 </SisdaiGraficas>
@@ -74,7 +74,7 @@ Ejemplo de implementación:
 > </tr>
 > </tbody>
 > </table>
-> Los nombres de las claves en los diccionarios (o  las columnas desde el punto de vista de la tabla) no necesariamente deben de coincidir con  el ejemplo mostrado. Las propiedades `variables` y `clave_fecha` permiten especificar los nombres de las claves (o columnas) correspondientes.
+> Los nombres de las claves en los diccionarios (o  las columnas desde el punto de vista de la tabla) no necesariamente deben de coincidir con  el ejemplo mostrado. Las propiedades `variables` y `nombre_indice` permiten especificar los nombres de las claves (o columnas) correspondientes.
 
 - `variables`: Arreglo de objetos que describen las variables o series de tiempo incluidas en el conjunto de datos.
 
@@ -107,7 +107,7 @@ Ejemplo de implementación:
 
 > - `color`: es un `String` que define el color de cada categoría, en formato RGB, hexadecimal u otro formato reconocido por CSS.
 
-- `clave_fecha`: define la clave empleada para identificar la columna temporal. Por defecto es `"fecha"` , pero si los datos usan otro nombre, esta propiedad debe especificarse.
+- `nombre_indice`: define la clave empleada para identificar la columna temporal. Por defecto es `"fecha"` , pero si los datos usan otro nombre, esta propiedad debe especificarse.
   - Tipo: `String`
   - Valor predeterminado: `"fecha"`
   - Requerido: Sí
@@ -126,6 +126,10 @@ Ejemplo de implementación:
 - `angulo_etiquetas_eje_x`: es un valor numérico entre `-90` que indica el ángulo de rotación de las etiquetas eje horizontal.
   - Tipo: `Number`
   - Valor predeterminado: `0`
+  - Requerido: No
+- `tabla_caption`: es un texto que se inserta en el elemento `<caption>` de la tabla asociada a la gráfica.
+  - Tipo: `String`
+  - Valor predeterminado: `"Tabla de datos de la gráfica de áreas apiladas"`
   - Requerido: No
 
 ### Métodos

@@ -1,40 +1,96 @@
 import * as valoresPorDefecto from './../valores/grafica'
 
 export default class SisdaiGrafica {
-  constructor({ dimensiones }) {
-    // console.log('class SisdaiGrafica', dimensiones)
-    this.dimensiones = new Dimensiones(dimensiones)
+  constructor() {
+    this._alto = 0
+    this._ancho = 0
+    this._margenes = new Margenes(valoresPorDefecto.margenes)
+    this._grupoVis = new GrupoVis({
+      alto: 0,
+      ancho: 0,
+    })
+    this._posicion_cursor = { x: 0, y: 0 }
+    this._globo_visible = false
+    this._tablas = {}
   }
-}
 
-class Dimensiones {
-  // constructor({ alto, ancho, margenes }) {
-  constructor(opciones) {
-    // console.log('margenes', opciones?.margenes)
-    this.alto = Number(opciones?.alto) | 0
-    this.ancho = Number(opciones?.ancho) | 0
+  set alto(v) {
+    this._alto = v
+    this.calcularGrupoVis()
+  }
 
-    // this._margenes = new Margenes({
-    //   ...valoresPorDefecto.margenes,
-    //   ...opciones?.margenes,
-    // })
+  get alto() {
+    return this._alto
+  }
 
-    this.margenes = {
-      ...valoresPorDefecto.margenes,
-      ...opciones?.margenes,
-    }
+  set ancho(v) {
+    this._ancho = v
+    this.calcularGrupoVis()
+  }
+
+  get ancho() {
+    return this._ancho
+  }
+
+  set posicion_cursor(v) {
+    this._posicion_cursor = v
+    //this.calcularGrupoVis()
+  }
+
+  get posicion_cursor() {
+    return this._posicion_cursor
+  }
+
+  set globo_visible(v) {
+    this._globo_visible = v
+    //this.calcularGrupoVis()
+  }
+
+  get globo_visible() {
+    return this._globo_visible
+  }
+
+  set margenes(opciones) {
+    this._margenes = new Margenes(opciones)
+    this.calcularGrupoVis()
   }
 
   get margenes() {
     return this._margenes
   }
+  set tablas(t) {
+    this._tablas = t
+  }
 
-  set margenes(opciones) {
-    // console.log('modificando margenes')
-    this._margenes = new Margenes({
-      ...this._margenes,
-      ...opciones,
-    })
+  get tablas() {
+    return this._tablas
+  }
+  agregarTabla(id, t) {
+    this._tablas[id] = t
+  }
+  quitarTabla(id) {
+    delete this._tablas[id]
+  }
+
+  set grupoVis(opciones) {
+    this._grupoVis = new GrupoVis(opciones)
+  }
+
+  get grupoVis() {
+    return this._grupoVis
+  }
+  calcularGrupoVis() {
+    this.grupoVis = {
+      alto: this._alto - this.margenes.vertical,
+      ancho: this._ancho - this.margenes.horizontal,
+    }
+  }
+}
+
+class GrupoVis {
+  constructor({ alto, ancho }) {
+    this.alto = alto
+    this.ancho = ancho
   }
 }
 

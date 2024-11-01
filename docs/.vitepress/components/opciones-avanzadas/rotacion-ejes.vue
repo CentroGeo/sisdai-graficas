@@ -54,7 +54,7 @@ const angulo_y = ref(0)
     <SisdaiCajasBigotes
       :datos="datos_dinamicos"
       :variables="variables_dinamicas"
-      :clave_categorias="'nombre_empresa'"
+      :nombre_indice="'nombre_empresa'"
       :angulo_etiquetas_eje_x="parseInt(angulo_x)"
       :angulo_etiquetas_eje_y="parseInt(angulo_y)"
       ref="cajasBigotes"

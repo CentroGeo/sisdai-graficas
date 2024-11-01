@@ -1,18 +1,24 @@
 <script setup>
+import { idAleatorio } from '../../utils'
+
 import { min, sum } from 'd3-array'
 import { select } from 'd3-selection'
 import { arc, pie } from 'd3-shape'
-import { onMounted, ref, shallowRef, toRefs, watch } from 'vue'
+import { onMounted, ref, shallowRef, toRefs, watch, onUnmounted } from 'vue'
 import usarRegistroGraficas from '../../composables/usarRegistroGraficas'
 import { buscarIdContenedorHtmlSisdai } from '../../utils'
 const props = defineProps({
+  tabla_caption: {
+    type: String,
+    default: 'Tabla de datos de la gráfica de dona',
+  },
   datos: {
     type: Array,
     require: true,
   },
-  clave_categoria: {
+  nombre_indice: {
     type: String,
-    default: 'categoria',
+    require: true,
   },
   clave_cantidad: {
     type: String,
@@ -54,13 +60,8 @@ const ancho = ref(0)
 var idGrafica
 const sisdaiDona = shallowRef()
 const datos_hover = ref()
-const {
-  datos,
-  clave_cantidad,
-  variables,
-  clave_categoria,
-  variables_visibles,
-} = toRefs(props)
+const { datos, clave_cantidad, variables, nombre_indice, variables_visibles } =
+  toRefs(props)
 
 const margenesSvg = ref({})
 const pay = ref(pie()),
@@ -71,6 +72,8 @@ const pay = ref(pie()),
 const grupoContenedor = ref(),
   grupoDona = ref(),
   donaCompleta = ref()
+
+const idTabla = idAleatorio()
 
 function calcularEscalas(grupoVis) {
   alto.value = grupoVis.alto
@@ -89,16 +92,26 @@ function calcularEscalas(grupoVis) {
     .outerRadius(props.radio_externo * limites + 4)
   data_pay.value = pay.value(
     datos.value.filter(d =>
-      variables.value.map(dd => dd.id).includes(d[clave_categoria.value])
+      variables.value.map(dd => dd.id).includes(d[nombre_indice.value])
     )
   )
 }
 
 function creaDona() {
+  usarRegistroGraficas()
+    .grafica(idGrafica)
+    .agregarTabla(idTabla, {
+      datos: datos.value,
+      variables: [{ id: clave_cantidad.value, nombre: clave_cantidad.value }],
+      nombre_indice: nombre_indice.value,
+      tipo: 'dona',
+      caption: props.tabla_caption,
+    })
   donaCompleta.value = grupoContenedor.value
     .select('path.dona-completa-fondo')
     .attr('d', arco_completo.value.startAngle(0).endAngle(2 * Math.PI))
     .style('fill', props.color_dona_fondo)
+
   grupoDona.value = grupoContenedor.value
     .selectAll('g.segmento')
     .data(data_pay.value)
@@ -111,15 +124,15 @@ function creaDona() {
         .attr('fill', d => {
           if (variables_visibles.value) {
             return variables_visibles.value.includes(
-              d.data[clave_categoria.value]
+              d.data[nombre_indice.value]
             )
               ? variables.value.filter(
-                  dd => dd.id === d.data[clave_categoria.value]
+                  dd => dd.id === d.data[nombre_indice.value]
                 )[0].color
               : 'none'
           } else {
             return variables.value.filter(
-              dd => dd.id === d.data[clave_categoria.value]
+              dd => dd.id === d.data[nombre_indice.value]
             )[0].color
           }
         })
@@ -162,7 +175,7 @@ function creaDona() {
         .style('fill', d => {
           if (variables_visibles.value) {
             return variables_visibles.value?.includes(
-              d.data[clave_categoria.value]
+              d.data[nombre_indice.value]
             )
               ? 'var(--texto-primario)'
               : 'none'
@@ -176,15 +189,15 @@ function creaDona() {
         update1.attr('fill', d => {
           if (variables_visibles.value) {
             return variables_visibles.value.includes(
-              d.data[clave_categoria.value]
+              d.data[nombre_indice.value]
             )
               ? variables.value.filter(
-                  dd => dd.id === d.data[clave_categoria.value]
+                  dd => dd.id === d.data[nombre_indice.value]
                 )[0].color
               : 'none'
           } else {
             return variables.value.filter(
-              dd => dd.id === d.data[clave_categoria.value]
+              dd => dd.id === d.data[nombre_indice.value]
             )[0].color
           }
         })
@@ -224,7 +237,7 @@ function creaDona() {
         .style('fill', d => {
           if (variables_visibles.value) {
             return variables_visibles.value.includes(
-              d.data[clave_categoria.value]
+              d.data[nombre_indice.value]
             )
               ? 'var(--texto-primario)'
               : 'none'
@@ -307,6 +320,9 @@ onMounted(() => {
       }
     }
   )
+})
+onUnmounted(() => {
+  usarRegistroGraficas().grafica(idGrafica).quitarTabla(idTabla)
 })
 defineExpose({ datos_hover })
 </script>

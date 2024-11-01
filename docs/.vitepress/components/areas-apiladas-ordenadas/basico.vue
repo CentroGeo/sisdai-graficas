@@ -36,6 +36,7 @@ const misAreasApiladasOrdenadas = ref()
           color: 'blue',
         },
       ]"
+      :nombre_indice="'fecha'"
       :angulo_etiquetas_eje_x="-45"
     />
   </SisdaiGraficas>

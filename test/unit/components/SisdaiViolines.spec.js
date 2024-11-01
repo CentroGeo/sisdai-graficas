@@ -10,7 +10,7 @@ const variables = {
   nombre: 'Acciones vendidas',
   color: '#2c7fb8',
 }
-const clave_categorias = 'nombre_empresa'
+const nombre_indice = 'nombre_empresa'
 describe('SisdaiGraficas con SisdaiViolines', () => {
   it('debe renderizar SisdaiViolines en el slot por defecto', () => {
     const wrapper = shallowMount(SisdaiGraficas, {
@@ -44,7 +44,7 @@ describe('SisdaiGraficas con SisdaiViolines', () => {
       expect(sisdaiViolines.props('datos')).toEqual(datos)
       expect(sisdaiViolines.props('variables')).toEqual(variables)
     })
-    it('Debe generar el mismo número violines que de categorías únicas mediante clave_categorias', async () => {
+    it('Debe generar el mismo número violines que de categorías únicas mediante nombre_indice', async () => {
       const wrapper = mount(SisdaiGraficas, {
         props: { id: 'test-id-graficas-barras', ancho: 500 },
         attachTo: document.body.appendChild(document.createElement('div')),
@@ -55,7 +55,7 @@ describe('SisdaiGraficas con SisdaiViolines', () => {
               return h(SisdaiViolines, {
                 datos,
                 variables,
-                clave_categorias,
+                nombre_indice,
               })
             },
           },
@@ -67,9 +67,8 @@ describe('SisdaiGraficas con SisdaiViolines', () => {
 
       const violines = svg.findAll('path.violin')
 
-      const categorias_unicas = [
-        ...new Set(datos.map(d => d[clave_categorias])),
-      ].length
+      const categorias_unicas = [...new Set(datos.map(d => d[nombre_indice]))]
+        .length
 
       expect(violines.length).toBe(categorias_unicas)
     })

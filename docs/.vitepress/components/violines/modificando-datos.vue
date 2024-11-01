@@ -57,7 +57,7 @@ function alternaDatos() {
     <SisdaiViolines
       :datos="datos_dinamicos"
       :variables="variables_dinamicas"
-      :clave_categorias="base === 1 ? 'resistencia' : 'seguridad_social'"
+      :nombre_indice="base === 1 ? 'resistencia' : 'seguridad_social'"
     />
   </SisdaiGraficas>
 </template>
