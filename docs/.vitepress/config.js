@@ -5,7 +5,7 @@ const pkg = require('../../package.json')
 // https://vitepress.dev/reference/site-config
 export default {
   lang: 'es-mx',
-  title: 'SISDAI-COMPONENTES',
+  title: 'sisdai-graficas',
   description: pkg.description,
 
   // appearance: false,
