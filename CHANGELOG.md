@@ -12,6 +12,18 @@ Al principio de cada entrada se lista la versión de la biblioteca de sisdai-css
 sisdai-componentes con la que la versión indicada de sisdai-graficas es
 compatible y tiene instalada.
 
+## [6.0.2] - 2024-11-04
+
+sisdai-css v1.3.3<br>sisdai-componentes v4.1.5
+
+### Agregado (Added)
+
+- Se agrega aviso de que la documentación se encuentra en construcción para poderla desplegar en una versión "beta"
+
+### Arreglado (Fixed)
+
+- La pestaña del navegador decía SISDAI-COMPONENTES. Se corrige a sisdai-graficas
+
 ## [6.0.0] - 2024-10-31
 
 sisdai-css v1.3.3<br>sisdai-componentes v4.1.5
