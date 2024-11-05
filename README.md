@@ -110,8 +110,8 @@ conocimientos básicos de lo anterior así como de desarrollo en [JavaScript](ht
 
 ### Dependencias
 
-- [node.js (^18)](https://nodejs.org/en/download/)
-- [npm (^9)](https://www.npmjs.com/get-npm)
+- [node.js (^22)](https://nodejs.org/en/download/)
+- [npm (^10)](https://www.npmjs.com/get-npm)
 - [Vue.js (3.4.36)](https://vuejs.org/)
 
 ### Instalación
@@ -126,7 +126,7 @@ git clone https://codigo.conahcyt.mx/sisdai/sisdai-graficas.git
 Establece la versión adecuada de npm y nvm (previamente instaladas).
 
 ```bash
-nvm use 18
+nvm use 22
 ```
 
 Instala las dependencias de la biblioteca.
@@ -147,7 +147,7 @@ npm run docs
 
 ### Testing
 
-Si deseas correr el testing puedes ejecutar el siguiente comando, el cual implementará la pruebas unitarias
+Si deseas correr el testing puedes ejecutar el siguiente comando, el cual implementará la pruebas unitarias.
 
 ```bash
 npm run test
@@ -158,6 +158,23 @@ Adicionalmente puedes ejecutar el siguiente comando para evaluar el porcentaje d
 ```bash
 npm run coverage
 ```
+
+Hasta la versión v6.0.1, las pruebas unitarias que se han implementado son en los siguientes componentes:
+
+Las pruebas realizadas en `SisdaiGraficas` son:
+
+- Renderizado del componente
+- Manejo de props
+- Renderizado de slots
+- Interacciones del usuario (movimiento de cursor)
+- Comportamiento condicional con el globo de información
+- Cálculo correcto de dimensiones
+
+Mientras que las pruebas realizadas en los componentes `SisdaiAlluvial`, `SisdaiAreasApiladas`, `SisdaiAreasApiladasOrdenadas`, `SisdaiBarras`, `SisdaiCajasBigotes`, `SisdaiDonas`, `SisdaiSeriesTiempo` y `SisdaiViolines` son:
+
+- Renderizado del componente
+- Manejo de props
+- Creación de elementos gráficos
 
 ## Licencia
 
