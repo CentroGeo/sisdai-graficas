@@ -30,7 +30,6 @@ sisdai-css v1.3.3<br>sisdai-componentes v4.1.5
 
 - Se quita aviso de documentación en construcción ya que no es relevante para las personas desarrolladoras usuarias de esta biblioteca
 
-
 ## [6.0.2] - 2024-11-05
 
 sisdai-css v1.3.3<br>sisdai-componentes v4.1.5
