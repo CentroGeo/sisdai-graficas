@@ -14,6 +14,16 @@ const navegacionPrincipal = ref(null)
     :nav-informacion="`Sección: <b>${page.title}</b>`"
     ref="navegacionPrincipal"
   >
+    <template #complementario>
+      <a
+        class="nav-hipervinculo"
+        href="https://sisdai.conahcyt.mx"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <b>IR A SISDAI</b>
+      </a>
+    </template>
     <ul class="nav-menu">
       <li
         v-for="nav in theme.nav"
