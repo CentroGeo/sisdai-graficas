@@ -1,6 +1,6 @@
 {
   "name": "sisdai-graficas",
-  "version": "6.0.0",
+  "version": "6.1.0",
   "description": "Biblioteca de gráficas de Vue y D3",
   "license": "LGPL-3.0-only",
   "main": "./src/index.js",
@@ -54,6 +54,7 @@
     "vitest": "^2.0.5",
     "volar-service-vetur": "^0.0.54",
     "vue": "^3.4.36",
+    "vue-matomo": "^4.2.0",
     "yorkie": "^2.0.0"
   },
   "gitHooks": {
