@@ -19,7 +19,7 @@ en su equipo a través del **protocolo HTTPS** o bien instalándola mediante [np
 
 ### Instala la biblioteca
 
-En la carpeta principal de tu proyecto Vue puedes instalar la última versión de sisdai-componentes mediante dos opciones:
+En la carpeta principal de tu proyecto Vue puedes instalar la última versión de sisdai-graficas mediante dos opciones:
 
 **Opción A.** Desde el repositorio del [sisdai-graficas en npm](https://www.npmjs.com/package/sisdai-graficas).
 
@@ -71,7 +71,7 @@ sin necesidad de volver a importarlo en el script. Por ejemplo:
 </template>
 ```
 
-_Para un uso avanzado revisa la documentación._
+_Para un uso avanzado revisa la [documentación](https://sisdai-graficas.conahcyt.mx)._
 
 ## Actualización de la biblioteca
 
