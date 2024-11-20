@@ -12,6 +12,12 @@ Al principio de cada entrada se lista la versión de la biblioteca de sisdai-css
 sisdai-componentes con la que la versión indicada de sisdai-graficas es
 compatible y tiene instalada.
 
+## [6.1.1] - 2024-11-19
+
+### Eliminado (Removed)
+
+- Componente de información de despliegue
+
 ## [6.1.0] - 2024-11-06
 
 ### Agregado (Added)
