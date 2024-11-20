@@ -3,8 +3,10 @@
 El proyecto sisdai-graficas es una biblioteca de visualización de datos que forma parte del Sistema de
 Diseño y Accesibilidad para la Investigación ([Sisdai](https://sisdai.conahcyt.mx)).
 
+Para leer la documentación de la biblioteca, puedes visitar el sitio [sisdai-graficas.conahcyt.mx](https://sisdai-graficas.conahcyt.mx/) ó levantar la documentación localmente siguiendo las instrucciones escritas en la sección [Uso local del proyecto](#uso-local-del-proyecto) de este documento.
+
 Cualquier persona puede hacer uso de esta biblioteca al clonarla e instalarla
-en su equipo a través del **protocolo HTTPS**.
+en su equipo a través del **protocolo HTTPS** o bien instalándola mediante [npm/sisdai](https://www.npmjs.com/~sisdai).
 
 ## Utilidades
 
@@ -17,19 +19,21 @@ en su equipo a través del **protocolo HTTPS**.
 
 ### Instala la biblioteca
 
-En la carpeta principal de tu proyecto Vue, instala la biblioteca en las dependencias de tu proyecto con:
+En la carpeta principal de tu proyecto Vue puedes instalar la última versión de sisdai-componentes mediante dos opciones:
 
+**Opción A.** Desde el repositorio del [sisdai-graficas en npm](https://www.npmjs.com/package/sisdai-graficas).
+
+En la línea de comando escribe
+```bash
+npm i sisdai-graficas
+```
+
+**Opción B.** Desde el repositorio de [sisdai-graficas en código.conahcyt.mx](https://codigo.conahcyt.mx/sisdai/sisdai-graficas).
+
+En la línea de comando escribe
 ```bash
 npm install git+https://codigo.conahcyt.mx/sisdai/sisdai-graficas
 ```
-
-Dependiendo de la versión de la biblioteca a instalar, la instrucción anterior puede cambiar a:
-
-```bash
-npm install git+https://codigo.conahcyt.mx/sisdai/sisdai-graficas#vN.N.N
-```
-
-donde N.N.N indica el número de versión, por ejemplo v1.0.0
 
 ### Importa la biblioteca
 
@@ -71,14 +75,25 @@ _Para un uso avanzado revisa la documentación._
 
 ## Actualización de la biblioteca
 
-Si actualmente utilizas la biblioteca y necesitas utilizar otra versión de las gráficas,
-en la carpeta del proyecto instala la versión que requieres nuevamente
+Si necesitas utilizar otra versión de las gráficas, ubícate en la carpeta del
+proyecto en donde necesitas la actualización e instala la versión que requieres
+nuevamente usando una de estas dos opciones
 
+**Opción A.** Para versiones publicadas en el repositorio de [sisdai-graficas en npm](https://www.npmjs.com/package/sisdai-graficas).
+
+```bash
+npm i sisdai-graficas@vN.N.N
+```
+
+**Opción B.** Para cualquier versión desde el repositorio de [sisdai-graficas en código.conahcyt.mx](https://codigo.conahcyt.mx/sisdai/sisdai-graficas).
 ```bash
 npm install git+https://codigo.conahcyt.mx/sisdai/sisdai-graficas#vN.N.N
 ```
 
 donde N.N.N indica el número de versión, por ejemplo v1.0.0
+
+Consulta el archivo `CHANGELOG.md` del repositorio de [sisdai-graficas en código.conahcyt.mx](https://codigo.conahcyt.mx/sisdai/sisdai-graficas) para conocer las nuevas características y cambios que sufre la biblioteca en cada una de sus versiones.
+
 
 ## Listado de gráficas
 
@@ -135,11 +150,7 @@ Instala las dependencias de la biblioteca.
 npm install
 ```
 
-### Documentación
-
-Este proyecto cuenta con una documentación más extensa que aún está
-en proceso de desarrollo. Es posible levantarla en un ambiente local con la
-instrucción:
+Opcionalmente levanta en local la documentación.
 
 ```bash
 npm run docs
