@@ -1,6 +1,5 @@
 <script setup>
 import SisdaiIndiceDeContenido from 'sisdai-componentes/src/componentes/indice-de-contenido/SisdaiIndiceDeContenido.vue'
-import SisdaiInfoDeDespliegue from 'sisdai-componentes/src/componentes/info-de-despliegue/SisdaiInfoDeDespliegue.vue'
 import SisdaiMenuAccesibilidad from 'sisdai-componentes/src/componentes/menu-accesibilidad/SisdaiMenuAccesibilidad.vue'
 import SisdaiMenuLateral from 'sisdai-componentes/src/componentes/menu-lateral/SisdaiMenuLateral.vue'
 import SisdaiNavegacionGobMx from 'sisdai-componentes/src/componentes/navegacion-gob-mx/SisdaiNavegacionGobMx.vue'
@@ -10,7 +9,6 @@ import { useData, useRoute } from 'vitepress'
 import { isActive } from 'vitepress/dist/client/shared'
 import { onMounted, ref, watch } from 'vue'
 import NavegacionPrincipal from './NavegacionPrincipal.vue'
-import pkg from '../../../package.json'
 
 // https://vitepress.dev/reference/runtime-api#usedata
 const { theme, page } = useData()
@@ -170,10 +168,5 @@ watch(route, () => {
 
     <SisdaiPiePaginaConahcyt />
     <SisdaiPiePaginaGobMx />
-    <SisdaiInfoDeDespliegue
-      :versionProyecto="pkg.version"
-      entornoProyecto="-"
-      actualizacionProyecto="-"
-    />
   </div>
 </template>
