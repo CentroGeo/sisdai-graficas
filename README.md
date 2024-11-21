@@ -1,12 +1,24 @@
 # sisdai-graficas
 
-El proyecto sisdai-graficas es una biblioteca de visualización de datos que forma parte del Sistema de
-Diseño y Accesibilidad para la Investigación ([Sisdai](https://sisdai.conahcyt.mx)).
+El proyecto sisdai-graficas es una biblioteca de visualización de datos que
+forma parte del Sistema de Diseño y Accesibilidad para la
+Investigación ([Sisdai](https://sisdai.conahcyt.mx/)). El Sisdai es un proyecto
+de investigación desarrollado por el
+Centro de Investigación en Ciencias de Información Geoespacial, A.C.
+([CentroGeo](https://www.centrogeo.org.mx/)) y coordinado por el Consejo
+Nacional de Humanidades, Ciencias y Tecnologías
+([Conahcyt](https://conahcyt.mx)) del Gobierno de México.
 
-Para leer la documentación de la biblioteca, puedes visitar el sitio [sisdai-graficas.conahcyt.mx](https://sisdai-graficas.conahcyt.mx/) ó levantar la documentación localmente siguiendo las instrucciones escritas en la sección [Uso local del proyecto](#uso-local-del-proyecto) de este documento.
+Para leer la documentación de la biblioteca, puedes visitar el sitio
+[sisdai-graficas.conahcyt.mx](https://sisdai-graficas.conahcyt.mx)
+o levantar la documentación localmente siguiendo las instrucciones escritas en
+la sección [Uso local del proyecto](#uso-local-del-proyecto) de este
+documento.
 
 Cualquier persona puede hacer uso de esta biblioteca al clonarla e instalarla
-en su equipo a través del **protocolo HTTPS** o bien instalándola mediante [npm/sisdai](https://www.npmjs.com/~sisdai).
+en su equipo a través del
+**protocolo HTTPS** o bien instalándola mediante
+[npm](https://www.npmjs.com/~centrogeomx).
 
 ## Utilidades
 
@@ -19,13 +31,13 @@ en su equipo a través del **protocolo HTTPS** o bien instalándola mediante [np
 
 ### Instala la biblioteca
 
-En la carpeta principal de tu proyecto Vue puedes instalar la última versión de sisdai-componentes mediante dos opciones:
+En la carpeta principal de tu proyecto Vue puedes instalar la última versión de sisdai-graficas mediante dos opciones:
 
-**Opción A.** Desde el repositorio del [sisdai-graficas en npm](https://www.npmjs.com/package/sisdai-graficas).
+**Opción A.** Desde el repositorio del [sisdai-graficas en npm](https://www.npmjs.com/package/@centrogeomx/sisdai-graficas).
 
 En la línea de comando escribe
 ```bash
-npm i sisdai-graficas
+npm i @centrogeomx/sisdai-graficas
 ```
 
 **Opción B.** Desde el repositorio de [sisdai-graficas en código.conahcyt.mx](https://codigo.conahcyt.mx/sisdai/sisdai-graficas).
@@ -71,7 +83,7 @@ sin necesidad de volver a importarlo en el script. Por ejemplo:
 </template>
 ```
 
-_Para un uso avanzado revisa la documentación._
+_Para un uso avanzado revisa la [documentación](https://sisdai-graficas.conahcyt.mx)._
 
 ## Actualización de la biblioteca
 
@@ -79,10 +91,10 @@ Si necesitas utilizar otra versión de las gráficas, ubícate en la carpeta del
 proyecto en donde necesitas la actualización e instala la versión que requieres
 nuevamente usando una de estas dos opciones
 
-**Opción A.** Para versiones publicadas en el repositorio de [sisdai-graficas en npm](https://www.npmjs.com/package/sisdai-graficas).
+**Opción A.** Para versiones publicadas en el repositorio de [sisdai-graficas en npm](https://www.npmjs.com/package/@centrogeomx/sisdai-graficas).
 
 ```bash
-npm i sisdai-graficas@vN.N.N
+npm i @centrogeomx/sisdai-graficas@vN.N.N
 ```
 
 **Opción B.** Para cualquier versión desde el repositorio de [sisdai-graficas en código.conahcyt.mx](https://codigo.conahcyt.mx/sisdai/sisdai-graficas).
