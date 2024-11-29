@@ -12,9 +12,19 @@ Al principio de cada entrada se lista la versión de la biblioteca de sisdai-css
 sisdai-componentes con la que la versión indicada de sisdai-graficas es
 compatible y tiene instalada.
 
+## [6.1.3] - 2024-11-29
+
+sisdai-css v1.4.2<br>sisdai-componentes v4.1.5
+
+### Cambiado (Changed)
+
+- Cambiamos algunas partes de la documentacion para especificar que la importacion debe ser de `@centrogeomx/sisdai-graficas` en lugar de `sisdai-graficas`.
+- Se actualizó la version de `sisdai-css` a la v1.4.2
+
 ## [6.1.2] - 2024-11-21
 
 ### Cambiado (Changed)
+
 - El nombre del proyecto en el `package.json` pasa a ser @centrogeomx/sisdai-graficas para su publicación en el repositorio de npm
 - Se ajusta documentación de acuerdo a lo anterior
 
@@ -147,6 +157,7 @@ sisdai-css v0.46.8<br>sisdai-componentes v2.4.2
 
 Publicación de la primera vesión de la biblioteca de gráficas
 
+[6.1.3]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.1.3...v6.1.2
 [6.1.2]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.1.2...v6.1.1
 [6.1.1]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.1.1...v6.1.0
 [6.1.0]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.1.0...v6.0.3

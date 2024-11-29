@@ -10,14 +10,20 @@ Se recomienda utilizar Vue **3.4.36** con el soporte para [Composition Api](http
 
 En la carpeta raíz de tu proyecto Vue, instala la biblioteca como una dependencia utilizando el siguiente comando npm:
 
+**Opción A.** Desde el repositorio del [sisdai-graficas en npm](https://www.npmjs.com/package/@centrogeomx/sisdai-graficas).
+
+En la línea de comando escribe
+
 ```bash
-npm install git+https://codigo.conahcyt.mx/sisdai/sisdai-graficas
+npm i @centrogeomx/sisdai-graficas
 ```
 
-Si necesitas instalar una versión específica de la biblioteca, reemplaza N.N.N con el número de versión deseado, por ejemplo v5.0.0:
+**Opción B.** Desde el repositorio de [sisdai-graficas en código.conahcyt.mx](https://codigo.conahcyt.mx/sisdai/sisdai-graficas).
+
+En la línea de comando escribe
 
 ```bash
-npm install git+https://codigo.conahcyt.mx/sisdai/sisdai-graficas#vN.N.N
+npm install git+https://codigo.conahcyt.mx/sisdai/sisdai-graficas
 ```
 
 ### Instalación de estilos
@@ -47,7 +53,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 const app = createApp(App)
 
-import { SisdaiGraficas, SisdaiDona } from 'sisdai-graficas/src/componentes'
+import { SisdaiGraficas, SisdaiDona } from '@centrogeomx/sisdai-graficas'
 
 app.use(SisdaiGraficas)
 app.use(SisdaiDona)
@@ -60,8 +66,8 @@ Por otra parte, si deseas usar estos componentes en un archivo, puedes importarl
 ```html
 
 <script setup>
-import SisdaiGraficas from 'sisdai-graficas/src/componentes/sisdai-graficas/SisdaiGraficas.vue'
-import SisdaiDona from 'sisdai-graficas/src/componentes/sisdai-dona/SisdaiDona.vue'
+import SisdaiGraficas from '@centrogeomx/sisdai-graficas/src/componentes/sisdai-graficas/SisdaiGraficas.vue'
+import SisdaiDona from '@centrogeomx/sisdai-graficas/src/componentes/sisdai-dona/SisdaiDona.vue'
 <script>
 
 <template>
@@ -79,7 +85,7 @@ Si planeas utilizar la mayoría o todos los componentes de la biblioteca, puedes
 2. Agrega la siguiente línea para registrar todos los componentes:
 
 ```js
-import SisdaiGraficas from 'sisdai-graficas'
+import SisdaiGraficas from '@centrogeomx/sisdai-graficas'
 
 Vue.use(SisdaiGraficas)
 ```
