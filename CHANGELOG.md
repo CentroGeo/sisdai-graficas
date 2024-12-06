@@ -12,6 +12,15 @@ Al principio de cada entrada se lista la versión de la biblioteca de sisdai-css
 sisdai-componentes con la que la versión indicada de sisdai-graficas es
 compatible y tiene instalada.
 
+## [6.1.4] - 2024-12-06
+
+sisdai-css v1.6.1<br>sisdai-componentes v4.1.5
+
+### Cambiado (Changed)
+
+- Agregamos a los componentes de gráficas de ejemplo en la documentación la propiedad `tabla_caption` de manera personalizada.
+- Se actualizó la version de `sisdai-css` a la v1.6.1
+
 ## [6.1.3] - 2024-11-29
 
 sisdai-css v1.4.2<br>sisdai-componentes v4.1.5
@@ -157,6 +166,7 @@ sisdai-css v0.46.8<br>sisdai-componentes v2.4.2
 
 Publicación de la primera vesión de la biblioteca de gráficas
 
+[6.1.4]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.1.4...v6.1.3
 [6.1.3]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.1.3...v6.1.2
 [6.1.2]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.1.2...v6.1.1
 [6.1.1]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.1.1...v6.1.0
