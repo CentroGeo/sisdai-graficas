@@ -46,6 +46,7 @@ const laSerie = ref()
       ]"
       :nombre_indice="'fecha'"
       :angulo_etiquetas_eje_x="-45"
+      :tabla_caption="'Datos de ejemplo de dos variables en diferentes años'"
     />
   </SisdaiGraficas>
 </template>

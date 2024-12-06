@@ -38,6 +38,7 @@ const misAreasApiladasOrdenadas = ref()
       ]"
       :nombre_indice="'fecha'"
       :angulo_etiquetas_eje_x="-45"
+      :tabla_caption="'Datos de muestra de fechas y una cantidad asociada a cada fecha'"
     />
   </SisdaiGraficas>
 </template>

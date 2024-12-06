@@ -58,6 +58,7 @@ watch(visualizando, nv => {
       :angulo_etiquetas_eje_x="-45"
       :nombre_indice="'anio_mes'"
       :formato_temporal="'%Y-%m'"
+      :tabla_caption="'Datos de ejemplo de una variable en el tiempo'"
     />
   </SisdaiGraficas>
 </template>

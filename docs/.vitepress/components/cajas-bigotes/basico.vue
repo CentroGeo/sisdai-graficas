@@ -37,6 +37,7 @@ const lasCajasBigotes = ref()
       :datos="datos_dinamicos"
       :variables="variables_dinamicas"
       :nombre_indice="'nombre_empresa'"
+      :tabla_caption="'Datos de ejemplo de caracterísitcas de la distribución de las acciones vendidas por tres empresas'"
     />
   </SisdaiGraficas>
 </template>

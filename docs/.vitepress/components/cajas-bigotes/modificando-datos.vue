@@ -55,6 +55,7 @@ function alternaDatos() {
     <SisdaiCajasBigotes
       :datos="datos_dinamicos"
       :variables="variables_dinamicas"
+      :tabla_caption="'Datos de ejemplo de caracterísitcas de la distribución de las acciones vendidas por empresas'"
       :nombre_indice="base === 1 ? 'nombre_empresa' : 'nombre_categoria'"
     />
   </SisdaiGraficas>

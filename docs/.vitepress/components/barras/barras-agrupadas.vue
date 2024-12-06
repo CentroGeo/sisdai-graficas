@@ -97,6 +97,7 @@ const variables = ref([
       :acomodo="'agrupadas'"
       :angulo_etiquetas_eje_x="-30"
       :nombre_indice="'categoria'"
+      :tabla_caption="'Datos de ejemplo de personas pertenecientes al SNI por nivel y grupo de edad'"
     />
     <template #panel-pie-vis>
       <div>

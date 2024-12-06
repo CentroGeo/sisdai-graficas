@@ -64,6 +64,7 @@ const variablesDinamicas = computed(() =>
       :angulo_etiquetas_eje_x="-45"
       :nombre_indice="'fecha_2'"
       :formato_temporal="'%d/%m/%Y'"
+      :tabla_caption="'Datos muestras de variantes del virus SARS-CoV-2 tomadas por semana epidemiológica'"
     />
     <template #panel-pie-vis>
       <div>
