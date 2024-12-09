@@ -127,7 +127,7 @@ Ejemplo de implementación:
   - Tipo: `Number`
   - Valor predeterminado: `0`
   - Requerido: No
-- `tabla_caption`: es un texto que se inserta en el elemento `<caption>` de la tabla asociada a la gráfica.
+- `tabla_caption`: es un texto que se inserta en el elemento `<caption>` de la tabla asociada a la gráfica. **Aunque esta propiedad no es obligatora, por accesibilidad y buenas prácticas de desarrollo es muy importante incluir un texto que describa correctamente la información de la tabla**.
   - Tipo: `String`
   - Valor predeterminado: `"Tabla de datos de la gráfica de áreas apiladas"`
   - Requerido: No
