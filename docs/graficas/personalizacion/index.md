@@ -4,7 +4,7 @@
 
 </script>
 
-# SisdaiGraficas
+# Personalización
 
 El componente de `<SisdaiGraficas>` actúa como un contenedor principal para visualizar distintos tipos de gráficas. Al utilizarlo, se crea un elemento SVG con un identificador único (id) donde se renderizan los subcomponentes gráficos como barras, series de tiempo, cajas, entre otros.
 

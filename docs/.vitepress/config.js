@@ -38,8 +38,10 @@ export default {
     nav: nav(),
 
     sidebar: {
-      '/': sidebarDocumentacion('documentacion'),
-      '/documentacion/': sidebarDocumentacion('documentacion'),
+      '/': sidebarGraficas(''),
+      '/comienza/': sidebarComienza('comienza'),
+
+      '/graficas/': sidebarGraficas('graficas'),
     },
 
     socialLinks: [
@@ -64,9 +66,19 @@ export default {
 function nav() {
   return [
     {
-      text: 'Documentación',
+      text: 'Inicio',
       link: '/',
-      activeMatch: '/',
+      activeMatch: '',
+    },
+    {
+      text: 'Comienza',
+      link: '/comienza/',
+      activeMatch: 'comienza',
+    },
+    {
+      text: 'Gráficas',
+      link: '/graficas/personalizacion/',
+      activeMatch: 'graficas',
     },
     {
       text: `v${pkg.version}`,
@@ -78,12 +90,12 @@ function nav() {
   ]
 }
 
-function sidebarDocumentacion(path) {
+function sidebarGraficas(path) {
   // Agrega aquí las rutas de los nuevos componentes
   return [
     {
-      text: 'Graficas',
-      link: `/${path}/graficas/`,
+      text: 'Personalización',
+      link: `/${path}/personalizacion/`,
     },
     {
       text: 'Alluvial',
@@ -117,9 +129,17 @@ function sidebarDocumentacion(path) {
       text: 'Violines',
       link: `/${path}/violines/`,
     },
+  ]
+}
+function sidebarComienza(path) {
+  return [
     {
-      text: 'Opciones avanzadas',
-      link: `/${path}/opciones-avanzadas/`,
+      text: 'Comienza',
+      link: `/${path}/`,
+    },
+    {
+      text: 'Instalación',
+      link: `/${path}/instalacion/`,
     },
   ]
 }

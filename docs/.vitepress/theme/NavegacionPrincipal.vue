@@ -1,7 +1,6 @@
 <script setup>
 import SisdaiNavegacionPrincipal from 'sisdai-componentes/src/componentes/navegacion-principal/SisdaiNavegacionPrincipal.vue'
 import { useData } from 'vitepress'
-import { isActive } from 'vitepress/dist/client/shared'
 import { ref } from 'vue'
 
 // https://vitepress.dev/reference/runtime-api#usedata
@@ -32,11 +31,9 @@ const navegacionPrincipal = ref(null)
         <a
           class="nav-hipervinculo"
           :class="{
-            'router-link-exact-active router-link-active': isActive(
-              page.relativePath,
-              nav.activeMatch || nav.link,
-              !!nav.activeMatch
-            ),
+            'router-link-exact-active router-link-active':
+              nav.activeMatch ==
+              page.relativePath.replace('index.md', '').split('/')[0],
           }"
           :href="nav.link"
           :target="nav.target"

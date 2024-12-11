@@ -5,17 +5,20 @@ import SisdaiMenuLateral from 'sisdai-componentes/src/componentes/menu-lateral/S
 import SisdaiNavegacionGobMx from 'sisdai-componentes/src/componentes/navegacion-gob-mx/SisdaiNavegacionGobMx.vue'
 import SisdaiPiePaginaConahcyt from 'sisdai-componentes/src/componentes/pie-pagina-conahcyt/SisdaiPiePaginaConahcyt.vue'
 import SisdaiPiePaginaGobMx from 'sisdai-componentes/src/componentes/pie-pagina-gob-mx/SisdaiPiePaginaGobMx.vue'
+import SisdaiColapsableNavegacion from 'sisdai-componentes/src/componentes/colapsable-navegacion/SisdaiColapsableNavegacion.vue'
+
 import { useData, useRoute } from 'vitepress'
 import { isActive } from 'vitepress/dist/client/shared'
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch, computed } from 'vue'
 import NavegacionPrincipal from './NavegacionPrincipal.vue'
 
 // https://vitepress.dev/reference/runtime-api#usedata
 const { theme, page } = useData()
 // https://router.vuejs.org/
 const route = useRoute()
-
-const lista_elementos = ref([])
+const esInicio = computed(() => route.path === '/')
+console.log(route.path)
+const lista_elementos = ref({})
 
 const componenteIndice = ref(null)
 const menuLateralAbierto = ref()
@@ -36,9 +39,11 @@ function actualizaContenidoIndice() {
    * Apuramos al componente para que su lista de elementos se actualice y
    * obtenemos las rutas
    */
-  componenteIndice.value.lista_elementos.value = lista_elementos.value
-  componenteIndice.value.seccion_visible = ''
-  componenteIndice.value.autoScrollSuave()
+  if (!esInicio.value) {
+    componenteIndice.value.lista_elementos.value = lista_elementos.value
+    componenteIndice.value.seccion_visible = ''
+    componenteIndice.value.autoScrollSuave()
+  }
 }
 
 if (typeof window !== 'undefined') {
@@ -50,9 +55,9 @@ function alAlternarMenuLateral(navSecundariaAbierta) {
 }
 
 function listaSidebar({ sidebar }, { relativePath }) {
-  return sidebar[
-    Object.keys(sidebar).find(side => isActive(relativePath, side, !!side))
-  ]
+  let ruta_inicial = `/${relativePath.split('/')[0]}/`
+  ruta_inicial = ruta_inicial || '/'
+  return sidebar[ruta_inicial]
 }
 
 onMounted(() => {
@@ -62,6 +67,32 @@ onMounted(() => {
 watch(route, () => {
   setTimeout(() => actualizaContenidoIndice(), 200)
 })
+const opciones_avanzadas = [
+  {
+    text: 'Casillas de verificación',
+    link: `/graficas/opciones-avanzadas/casilla-verificacion/`,
+  },
+  {
+    text: 'Combinación de gráficas',
+    link: `/graficas/opciones-avanzadas/combinacion-graficas/`,
+  },
+  {
+    text: 'Elementos de fondo y frente',
+    link: `/graficas/opciones-avanzadas/elementos-fondo-frente/`,
+  },
+  {
+    text: 'Globo de información',
+    link: `/graficas/opciones-avanzadas/globo-informacion/`,
+  },
+  {
+    text: 'Narrativa con scroll',
+    link: `/graficas/opciones-avanzadas/narrativa/`,
+  },
+  {
+    text: 'Nomenclatura',
+    link: `/graficas/opciones-avanzadas/nomenclatura/`,
+  },
+]
 </script>
 
 <template>
@@ -82,20 +113,13 @@ watch(route, () => {
       id="contenido-todo"
       class="flex"
     >
-      <div class="columna-4-esc columna-1-mov menu-lateral-fondo">
+      <div
+        class="columna-4-esc columna-1-mov menu-lateral-fondo"
+        v-if="!esInicio"
+      >
         <SisdaiMenuLateral @alAlternarMenu="alAlternarMenuLateral">
           <template #contenido-menu-lateral>
-            <ul>
-              <li>
-                <a
-                  href="/"
-                  exact
-                  :tabindex="menuLateralAbierto ? undefined : -1"
-                >
-                  <b>SisdaiGraficas</b>
-                </a>
-              </li>
-
+            <ul v-if="!route.path.includes('/graficas')">
               <li
                 v-for="item in listaSidebar(theme, page)"
                 :key="item.text"
@@ -119,16 +143,84 @@ watch(route, () => {
                 </a>
               </li>
             </ul>
+            <div v-else>
+              <SisdaiColapsableNavegacion :colapsado="true">
+                <template #encabezado>
+                  <span>Gráficas</span>
+                </template>
+                <template #contenido>
+                  <ul>
+                    <li
+                      v-for="item in listaSidebar(theme, page)"
+                      :key="item.text"
+                    >
+                      <a
+                        :href="item.link"
+                        :class="{
+                          'router-link-exact-active router-link-active':
+                            isActive(page.relativePath, item.link),
+                        }"
+                        :tabindex="menuLateralAbierto ? undefined : -1"
+                      >
+                        {{ item.text }}
+                        <span
+                          v-if="item.pre"
+                          class="etiqueta"
+                          >pre</span
+                        >
+                      </a>
+                    </li>
+                  </ul>
+                </template>
+              </SisdaiColapsableNavegacion>
+              <SisdaiColapsableNavegacion>
+                <template #encabezado>
+                  <span>Opciones avanzadas</span>
+                </template>
+                <template #contenido>
+                  <ul>
+                    <li
+                      v-for="item in opciones_avanzadas"
+                      :key="item.text"
+                    >
+                      <a
+                        :href="item.link"
+                        :class="{
+                          'router-link-exact-active router-link-active':
+                            isActive(page.relativePath, item.link),
+                        }"
+                        :tabindex="menuLateralAbierto ? undefined : -1"
+                      >
+                        {{ item.text }}
+                        <span
+                          v-if="item.pre"
+                          class="etiqueta"
+                          >pre</span
+                        >
+                      </a>
+                    </li>
+                  </ul>
+                </template>
+              </SisdaiColapsableNavegacion>
+            </div>
           </template>
         </SisdaiMenuLateral>
       </div>
 
-      <div class="columna-12-esc columna-7-mov">
+      <div
+        :class="{
+          'columna-12-esc columna-7-mov': !esInicio,
+          'columna-16-esc': esInicio,
+        }"
+      >
         <div
           id="contenido-documento"
           class="flex"
         >
-          <div class="columna-4-esc columna-8-mov columna-orden-3-esc">
+          <div
+            class="columna-4-esc columna-8-mov columna-orden-3-esc"
+            v-if="!esInicio"
+          >
             <SisdaiIndiceDeContenido
               :id_indice="'indice-template'"
               class="m-l-3-mov"
@@ -148,11 +240,16 @@ watch(route, () => {
           </div>
 
           <div
-            class="columna-12-esc columna-8-mov"
+            :class="{
+              'columna-12-esc columna-8-mov': !esInicio,
+              'columna-16-esc': esInicio,
+            }"
             tabindex="-1"
           >
             <div class="contenedor m-y-maximo-esc">
-              <div class="ancho-lectura">
+              <div
+                :class="{ 'ancho-lectura': !esInicio, 'ancho-fijo': esInicio }"
+              >
                 <main
                   role="main"
                   id="principal"
