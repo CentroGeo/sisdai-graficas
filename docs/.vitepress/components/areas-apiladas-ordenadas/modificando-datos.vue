@@ -28,7 +28,7 @@ const variablesDinamicas = computed(() =>
   <SisdaiGraficas
     :titulo_eje_y="'título del eje y'"
     :titulo_eje_x="'título del eje x'"
-    :margenes="{ arriba: 10, abajo: 40, derecha: 30, izquierda: 40 }"
+    :margenes="{ arriba: 10, abajo: 45, derecha: 30, izquierda: 40 }"
   >
     <template #globo-informacion>
       <SisdaiGraficasGloboInfo :ancho="200">

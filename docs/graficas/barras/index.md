@@ -22,6 +22,11 @@ Ejemplo de implementación:
 </SisdaiGraficas>
 ```
 
+## Vista general
+
+<Basico/>
+<<< @/.vitepress/components/barras/basico.vue
+
 ## API
 
 ### Propiedades
@@ -158,10 +163,7 @@ Ejemplo de implementación:
 - `escalaSubBanda`: Es la función de D3 `d3.scaleBand` que se emplea en el eje horizontal cuando la la propiedad `acomodo` toma el valor de `"agrupadas"`. Esta escala controla la separación entre las barras dentro de cada grupo, permitiendo que las subcategorías se visualicen de manera agrupada.
 - `escalaLineal`: Es la función de D3 `d3.scaleLinear` que se emplea en el eje vertical. Es útil cuando se desean agregar elementos al gráfico que dependan de esta escala.
 
-## Ejemplos
-
-<Basico/>
-<<< @/.vitepress/components/barras/basico.vue
+## Ejemplo
 
 <BarrasAgrupadas/>
 <<< @/.vitepress/components/barras/barras-agrupadas.vue

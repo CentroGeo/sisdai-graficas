@@ -1,36 +1,39 @@
 <script setup>
-    import Basico from "../../.vitepress/components/series-tiempo/basico.vue";
-    import ModificandoDatos from "../../.vitepress/components/series-tiempo/modificando-datos.vue";
-    import MultiplesLineas from "../../.vitepress/components/series-tiempo/multiples-lineas.vue";
+    import Basico from "../../.vitepress/components/areas-apiladas-ordenadas/basico.vue";
+    import ModificandoDatos from "../../.vitepress/components/areas-apiladas-ordenadas/modificando-datos.vue";
 </script>
 
-# SisdaiSeriesTiempo
+# SisdaiAreasApiladasOrdenadas
 
-El componente `<SisdaiSeriesTiempo/>` sirve para graficar datos temporales, permitiendo visualizar la evolución de valores a lo largo del tiempo. A continuación, se detalla su uso y configuración.
+El componente `<SisdaiAreasApiladasOrdenadas/>` se utiliza para graficar datos temporales de distintas categorías que conforman una totalidad y que, además, se ordenan de mayor a menor a lo largo del tiempo.
 
 Ejemplo de implementación:
 
 ```html
 <SisdaiGraficas>
-  <SisdaiSeriesTiempo
+  <SisdaiAreasApiladasOrdenadas
     :datos="datos"
     :variables="variables"
     :formato_temporal="'%d/%m/%Y'"
     :nombre_indice="'nombre_fecha'"
   >
-  </SisdaiSeriesTiempo>
+  </SisdaiAreasApiladasOrdenadas>
 </SisdaiGraficas>
 ```
+
+## Vista general
+
+<Basico/>
+<<< @/.vitepress/components/areas-apiladas-ordenadas/basico.vue
 
 ## API
 
 ### Propiedades
 
-- `datos`: Conjunto de datos a visualizar. Consiste en un arreglo de objetos en dónde cada objeto está asociado a una fecha y a los valores muestreados vinculados a dicha fecha.
-
-- Tipo: `Array`
-- Valor predeterminado: `undefined`
-- Requerido: Sí
+- `datos`: Conjunto de datos a visualizar. Es un arreglo de objetos en dónde cada objeto está asociado a una fecha y a los valores muestreados vinculados a dicha fecha.
+  - Tipo: `Array`
+  - Valor predeterminado: `undefined`
+  - Requerido: Sí
 
 > Ejemplo de `datos`:
 >
@@ -43,7 +46,7 @@ Ejemplo de implementación:
 > ]
 > ```
 >
-> El arreglo mostrado anteriormente puede ser el objeto resultante de la importación de datos mediante la biblioteca D3.js o utilizando algún complemento (plugin) como [plugin-dsv](https://www.npmjs.com/package/@rollup/plugin-dsv), para procesar un un archivo .csv con la siguiente estructura equivalente:
+> El arreglo anterior podría ser el resultado de importar un archivo .csv usando la biblioteca D3.js o algún plugin como [plugin-dsv](https://www.npmjs.com/package/@rollup/plugin-dsv) con la siguiente estructura:
 >
 > <table>
 > <thead>
@@ -76,16 +79,16 @@ Ejemplo de implementación:
 > </tr>
 > </tbody>
 > </table>
-> Cabe mencionar que los nombres de las claves en los objetos (o de las columnas desde el punto de vista de la tabla) no necesariamente deben coincidir con los del ejemplo mostrado. Las propiedades  `variables` y `nombre_indice` descritas a continuación nos permiten especificar el nombre de las claves (o columnas).
+> Cabe mencionar que el nombre de las claves en los objetos  (o de las columnas desde el punto de vista de la tabla) no necesariamente deben coincidir con los del ejemplo. Las propiedades `variables` y `nombre_indice` permiten especificar el nombre de las claves (o columnas).
 
-- `variables`: Arreglo de objetos que contienen la información de las series de tiempo representadas en los datos.
+- `variables`: Arreglo de objetos en donde cada uno contiene información de las variables o series de tiempo incluidas en el conjunto de datos.
 
   - Tipo: `Array`
   - Valor predeterminado: `undefined`
   - Requerido: Sí
 
 > En relación con el ejemplo empleado en `datos`, `variables` podría tener la siguiente estructura:
->
+
 > ```json
 > [
 >   {
@@ -103,17 +106,15 @@ Ejemplo de implementación:
 >
 > Esta propiedad incluye un validador para verificar que todos los objetos contengan las siguientes tres claves:
 >
-> - `id`: su valor es un `String` que debe coincidir con alguna subcategoría de `datos`, equivalente a uno de los nombres de las columnas que contienen información numérica.
-> - `nombre`: su valor es un `String` que proporciona una descriçión más detallada sobre el id y que puede ser empleado para globos de información.
-> - `color`: Es un `String` que define el color de la serie especificado en formatos RGB, hexadecimal u otro formato reconocido por CSS.
+> - `id`: su valor es un `String` que debe coincidir con alguna subcategoría de `datos`, equivalente a un nombre de las columnas con valores numéricos.
+> - `nombre`: es un `String` que proporciona una descripción más detallada sobre el id y que puede ser útil para mostrar globos de información.
+> - `color`: es un `String` que define el color de cada categoría, en formato RGB, hexadecimal u otro formato reconocido por CSS.
 
-- `nombre_indice`: Especifica la clave empleada para la columna temporal. Por defecto es `"fecha"` y con el ejemplo anterior de datos podría no especificarse esta propiedad, pero si `datos` emplea otra clave para la temporalidad, esta propiedad tendrá que especificarse.
-
+- `nombre_indice`: define la clave que se utiliza para la columna temporal.Por defecto es `"fecha"`, pero si los datos usan otro nombre, esta propiedad debe especificarse.
   - Tipo: `String`
   - Valor predeterminado: `"fecha"`
   - Requerido: Sí
-
-- `formato_temporal`: Especifica el formato de las fechas en los datos. Este formato es procesado por la función de D3 `d3.timeParse` y que sirve para transformar un formato de texto a un formato temporal dentro del contexto de JavaScript. En esta [documentación](https://d3-wiki.readthedocs.io/zh-cn/master/Time-Formatting/) se explica cómo especificar formatos para D3.
+- `formato_temporal`: Especifica el formato temporal de la variable de tiempo. Es un parámetro que se introduce a la función de D3 `d3.timeParse` y que sirve para transformar un formato de texto a un formato temporal dentro del contexto de javascript. En esta [documentación](https://d3-wiki.readthedocs.io/zh-cn/master/Time-Formatting/) se explica cómo especificar formatos para D3.
   - Tipo: `String`
   - Valor predeterminado: `"%d-%m-%Y"`
   - Requerido: Sí
@@ -129,29 +130,30 @@ Ejemplo de implementación:
   - Tipo: `Number`
   - Valor predeterminado: `0`
   - Requerido: No
+- `ancho_barra`: Valor entre 0 y 1 que especifica la fracción del espacio total que ocupan las barras. El valor predeterminado es 0.3. Sin embargo, si la fracción resulta en barras de más de 20px de ancho, el componente limitará el ancho a 20px para evitar visualizaciones desproporcionadas.
+  - Tipo: `Number`
+  - Valor predeterminado: `0.3`
+  - Requerido: No
 - `tabla_caption`: es un texto que se inserta en el elemento `<caption>` de la tabla asociada a la gráfica. **Aunque esta propiedad no es obligatora, por accesibilidad y buenas prácticas de desarrollo es muy importante incluir un texto que describa correctamente la información de la tabla**.
   - Tipo: `String`
-  - Valor predeterminado: `"Tabla de datos de la gráfica de series de tiempo"`
+  - Valor predeterminado: `"Tabla de datos de la gráfica de áreas  apiladas ordenadas"`
   - Requerido: No
 
 ### Métodos
 
-- `calcularEscalas`: Este método se ejecuta al montar el componente o cuando se detectan cambios en las propiedades`datos`, `variables` o en las dimensiones del componente contenedor `<SisdaiGraficas>`. Calcula escalas necesarias para graficar los datos.
-- `creaSeries`: Este método se ejecuta al montar el componente o cuando se detectan cambios en las propiedades `datos`, `variables` o en las dimensiones del componente contenedor `<SisdaiGraficas>` .Crea y actualiza el gráfico de series de tiempo.
+- `calcularEscalas`: Este método se ejecuta al montar el componente o cuando se detectan cambios en las propiedades `datos`, `variables` o en las dimensiones del componente contenedor `<SisdaiGraficas>`. Calcula escalas necesarias para graficar.
+
+- `creaAreas`: Este método se ejecuta al montar el componente o cuando se detectan cambios en las propiedades `datos`, `variables` o en las dimensiones del componente contenedor `<SisdaiGraficas>`. Crea y actualiza el gráfico de áreas apiladas ordenadas.
 
 ### Propiedades expuestas
 
 - `datos_hover`: propiedad reactiva que se actualiza según la posición del cursor cuando se usa el slot `globo-informacion`.Devuelve un `Object` con los datos asociados a la fecha más cercana indicada por el cursor. Generalmente se usa esta propiedad para llenar el componente de `SisdaiGraficasGloboInfo` con información.
+
 - `escalaTemporal`: Es la función de D3 `d3.scaleTime` que se emplea en el eje horizontal. Es útil cuando se desean agregar elementos al gráfico que se basen en la escala temporal.
 - `escalaLineal`: Es la función de D3 `d3.scaleLinear` que se emplea en el eje vertical. Es útil cuando se desean agregar elementos al gráfico que dependan de esta escala.
 - `conversionTemporal`: Es la función de D3 `d3.timeParse` que tiene como argumento el `formato_temporal` que se haya especificado en las propiedades. Puede ser útil cuando se desea agregar elementos usando la `escalaTemporal` y antes de ello los argumentos de dicha escala deben convertirse de `String` a un tipo de objeto `Date`.
 
-## Ejemplos
-
-<Basico/>
-<<< @/.vitepress/components/series-tiempo/basico.vue
+## Ejemplo
 
 <ModificandoDatos/>
-<<< @/.vitepress/components/series-tiempo/modificando-datos.vue
-<MultiplesLineas/>
-<<< @/.vitepress/components/series-tiempo/multiples-lineas.vue
+<<< @/.vitepress/components/areas-apiladas-ordenadas/modificando-datos.vue

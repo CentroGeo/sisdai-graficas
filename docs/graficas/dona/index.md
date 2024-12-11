@@ -19,6 +19,11 @@ Ejemplo de implementación:
 </SisdaiGraficas>
 ```
 
+## Vista general
+
+<Basico/>
+<<< @/.vitepress/components/dona/basico.vue
+
 ## API
 
 ### Propiedades
@@ -141,10 +146,7 @@ Ejemplo de implementación:
   - Valor predeterminado: `"Tabla de datos de la gráfica de dona"`
   - Requerido: No
 
-## Ejemplos
-
-<Basico/>
-<<< @/.vitepress/components/dona/basico.vue
+## Ejemplo
 
 <ModificandoDatos/>
 <<< @/.vitepress/components/dona/modificando-datos.vue
