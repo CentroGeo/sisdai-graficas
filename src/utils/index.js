@@ -193,7 +193,7 @@ export function multiFormat(date) {
   let formatDay = locale.format('%a %d')
   let formatWeek = locale.format('%b %d')
   //let formatMonth = locale.format('%b')
-  let formatMonthYear = locale.format('%Y')
+  let formatMonthYear = locale.format('%m/%Y')
   //let formatYear = locale.format('%Y')
   return (
     timeSecond(date) < date

@@ -22,6 +22,11 @@ Ejemplo de implementación:
 </SisdaiGraficas>
 ```
 
+## Vista general
+
+<Basico/>
+<<< @/.vitepress/components/series-tiempo/basico.vue
+
 ## API
 
 ### Propiedades
@@ -147,9 +152,6 @@ Ejemplo de implementación:
 - `conversionTemporal`: Es la función de D3 `d3.timeParse` que tiene como argumento el `formato_temporal` que se haya especificado en las propiedades. Puede ser útil cuando se desea agregar elementos usando la `escalaTemporal` y antes de ello los argumentos de dicha escala deben convertirse de `String` a un tipo de objeto `Date`.
 
 ## Ejemplos
-
-<Basico/>
-<<< @/.vitepress/components/series-tiempo/basico.vue
 
 <ModificandoDatos/>
 <<< @/.vitepress/components/series-tiempo/modificando-datos.vue

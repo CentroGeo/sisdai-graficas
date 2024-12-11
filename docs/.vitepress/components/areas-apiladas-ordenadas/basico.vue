@@ -33,7 +33,7 @@ const misAreasApiladasOrdenadas = ref()
         {
           id: 'cantidad_1',
           nombre: 'Cantidad 1',
-          color: 'blue',
+          color: '#CF99FF',
         },
       ]"
       :nombre_indice="'fecha'"

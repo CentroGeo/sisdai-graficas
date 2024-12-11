@@ -20,6 +20,11 @@ Ejemplo de implementación:
 </SisdaiGraficas>
 ```
 
+## Vista general
+
+<Basico/>
+<<< @/.vitepress/components/violines/basico.vue
+
 ## API
 
 ### Propiedades
@@ -155,9 +160,7 @@ Ejemplo de implementación:
 
 - `escalaLineal`: Es la función de D3 `d3.scaleLinear` que se emplea en el eje vertical. Es útil cuando se desean agregar elementos al gráfico que dependan de esta escala.
 
-## Ejemplos
+## Ejemplo
 
-<Basico/>
-<<< @/.vitepress/components/violines/basico.vue
 <ModificandoDatos/>
 <<< @/.vitepress/components/violines/modificando-datos.vue

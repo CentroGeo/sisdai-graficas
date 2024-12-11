@@ -19,6 +19,13 @@ Ejemplo de implementación:
 </SisdaiGraficas>
 ```
 
+## Vista general
+
+En este ejemplo se muestra cómo se escribe el componente `<SisdaiGraficas>` y se especifican algunas de sus propiedades. Al inspeccionar los elementos, se puede observar que este componente crea un `SVG` con algunos grupos en su interior.
+
+<Basico/>
+<<< @/.vitepress/components/graficas/basico.vue
+
 ## API
 
 ### Propiedades
@@ -76,16 +83,7 @@ Ejemplo de implementación:
 - `grupoFondo`: `Object` de tipo `Selection` de D3 asociada a un grupo `g.grupo-fondo` del `SVG`, ubicada detrás del grupo en el que se va a graficar, por lo tanto hereda todos los métodos de `Selection` de D3. Auxiliar para agregar elementos gráficos de fondo.
 - `grupoFrente`: `Object` de tipo `Selection` de d3 asociada a un grupo `g.grupo-frente` del `SVG`, ubicada en frente del grupo en el que se va a graficar, por lo tanto hereda todos los métodos de `Selection` de D3. Auxiliar para agregar elementos gráficos en el primer plano.
 
-## Ejemplos
-
-### Ejemplo básico de componente
-
-En este ejemplo se muestra cómo se escribe el componente `<SisdaiGraficas>` y se especifican algunas de sus propiedades. Al inspeccionar los elementos, se puede observar que este componente crea un `SVG` con algunos grupos en su interior.
-
-<Basico/>
-<<< @/.vitepress/components/graficas/basico.vue
-
-### Ejemplo con propiedades dinámicas
+## Ejemplo
 
 En este ejemplo se agrega un rectángulo en el interior del `SVG` para mostrar cómo se puede aplicar reactividad y ajustar sus dimensiones en función del ancho del contenedor del `SVG` y la manipulación de los márgenes. El área del rectángulo ilustra el espacio en el cual se dibujarán los gráficos, mientras que los márgenes pueden utilizarse como espacio reservado para los ejes.
 
