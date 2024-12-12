@@ -11,6 +11,7 @@ import { useData, useRoute } from 'vitepress'
 import { isActive } from 'vitepress/dist/client/shared'
 import { onMounted, ref, watch, computed } from 'vue'
 import NavegacionPrincipal from './NavegacionPrincipal.vue'
+import PaginaError404 from './PaginaError404.vue'
 
 // https://vitepress.dev/reference/runtime-api#usedata
 const { theme, page } = useData()
@@ -109,7 +110,10 @@ const opciones_avanzadas = [
 
     <SisdaiMenuAccesibilidad />
 
+    <PaginaError404 v-if="page.isNotFound" />
+
     <div
+      v-else
       id="contenido-todo"
       class="flex"
     >
