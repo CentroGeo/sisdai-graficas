@@ -40,7 +40,7 @@ function actualizaContenidoIndice() {
    * Apuramos al componente para que su lista de elementos se actualice y
    * obtenemos las rutas
    */
-  if (!esInicio.value) {
+  if (!esInicio.value && page.isNotFound) {
     componenteIndice.value.lista_elementos.value = lista_elementos.value
     componenteIndice.value.seccion_visible = ''
     componenteIndice.value.autoScrollSuave()
