@@ -2,6 +2,7 @@ import { createRequire } from 'module'
 
 const require = createRequire(import.meta.url)
 const pkg = require('../../package.json')
+
 // https://vitepress.dev/reference/site-config
 export default {
   lang: 'es-mx',
@@ -29,6 +30,25 @@ export default {
       {
         href: 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap',
         rel: 'stylesheet',
+      },
+    ],
+    ['meta', { property: 'og:title', content: 'sisdai-graficas' }],
+    ['meta', { property: 'og:description', content: '%VITE_DESCRIPCION%' }],
+    [
+      'meta',
+      {
+        property: 'og:image',
+        content: '%VITE_CDN_ARCHIVOS%redes/miniatura-sisdaigraficas.png',
+      },
+    ],
+    ['meta', { property: 'og:url', content: '%VITE_DOMINIO%%VITE_URL_BASE%' }],
+    ['meta', { name: 'twitter:title', content: 'sisdai-graficas' }],
+    ['meta', { name: 'twitter:description', content: '%VITE_DESCRIPCION%' }],
+    [
+      'meta',
+      {
+        name: 'twitter:image',
+        content: '%VITE_CDN_ARCHIVOS%redes/miniatura-sisdaigraficas.png',
       },
     ],
   ],
