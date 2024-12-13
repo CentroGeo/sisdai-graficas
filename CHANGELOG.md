@@ -12,7 +12,13 @@ Al principio de cada entrada se lista la versión de la biblioteca de sisdai-css
 sisdai-componentes con la que la versión indicada de sisdai-graficas es
 compatible y tiene instalada.
 
-## [6.2.2] - 2024-12-12
+## [6.4.0] - 2024-12-12
+
+### Agregado (Added)
+
+Se agregó la biblioteca @centrogeomx/sisdai-css. Se agregó el scss api modern en la configuracion del vite. Se ajustaron algunos erroes de estilo.
+
+## [6.3.0] - 2024-12-12
 
 ### Agregado (Added)
 
@@ -194,6 +200,7 @@ sisdai-css v0.46.8<br>sisdai-componentes v2.4.2
 
 Publicación de la primera vesión de la biblioteca de gráficas
 
+[6.4.0]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.4.0...v6.3.0
 [6.3.0]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.3.0...v6.2.1
 [6.2.1]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.2.1...v6.2.0
 [6.2.0]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.2.0...v6.1.5
