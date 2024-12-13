@@ -28,7 +28,7 @@ Sigue estos pasos:
 2. Agrega la siguiente línea de importación para cargar los estilos:
 
 ```js
-import 'sisdai-css/dist/sisdai.min.css'
+import '@centrogeomx/sisdai-css'
 ```
 
 ## Importación de componentes
