@@ -1,5 +1,5 @@
 <script setup>
-import SisdaiNavegacionPrincipal from 'sisdai-componentes/src/componentes/navegacion-principal/SisdaiNavegacionPrincipal.vue'
+import SisdaiNavegacionPrincipal from '@centrogeomx/sisdai-componentes/src/componentes/navegacion-principal/SisdaiNavegacionPrincipal.vue'
 import { useData } from 'vitepress'
 import { ref } from 'vue'
 import pkg from '../../../package.json'

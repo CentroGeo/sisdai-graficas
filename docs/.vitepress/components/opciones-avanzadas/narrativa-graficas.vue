@@ -1,5 +1,5 @@
 <script setup>
-import SisdaiNarrativa from 'sisdai-componentes/src/componentes/narrativa/SisdaiNarrativa.vue'
+import SisdaiNarrativa from '@centrogeomx/sisdai-componentes/src/componentes/narrativa/SisdaiNarrativa.vue'
 import { ref, watch } from 'vue'
 const laDona = ref()
 const variables_visibles = ref([])

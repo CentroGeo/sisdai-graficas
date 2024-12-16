@@ -3,7 +3,7 @@ title: Inicio
 ---
 
 <script setup>
-  import SisdaiEnlaceExterno from "sisdai-componentes/src/componentes/enlace-externo/SisdaiEnlaceExterno.vue";
+  import SisdaiEnlaceExterno from "@centrogeomx/sisdai-componentes/src/componentes/enlace-externo/SisdaiEnlaceExterno.vue";
   const cdn = import.meta.env.VITE_CDN_ARCHIVOS
 </script>
 

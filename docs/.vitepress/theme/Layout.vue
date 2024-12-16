@@ -1,11 +1,11 @@
 <script setup>
-import SisdaiIndiceDeContenido from 'sisdai-componentes/src/componentes/indice-de-contenido/SisdaiIndiceDeContenido.vue'
-import SisdaiMenuAccesibilidad from 'sisdai-componentes/src/componentes/menu-accesibilidad/SisdaiMenuAccesibilidad.vue'
-import SisdaiMenuLateral from 'sisdai-componentes/src/componentes/menu-lateral/SisdaiMenuLateral.vue'
-import SisdaiNavegacionGobMx from 'sisdai-componentes/src/componentes/navegacion-gob-mx/SisdaiNavegacionGobMx.vue'
-import SisdaiPiePaginaConahcyt from 'sisdai-componentes/src/componentes/pie-pagina-conahcyt/SisdaiPiePaginaConahcyt.vue'
-import SisdaiPiePaginaGobMx from 'sisdai-componentes/src/componentes/pie-pagina-gob-mx/SisdaiPiePaginaGobMx.vue'
-import SisdaiColapsableNavegacion from 'sisdai-componentes/src/componentes/colapsable-navegacion/SisdaiColapsableNavegacion.vue'
+import SisdaiIndiceDeContenido from '@centrogeomx/sisdai-componentes/src/componentes/indice-de-contenido/SisdaiIndiceDeContenido.vue'
+import SisdaiMenuAccesibilidad from '@centrogeomx/sisdai-componentes/src/componentes/menu-accesibilidad/SisdaiMenuAccesibilidad.vue'
+import SisdaiMenuLateral from '@centrogeomx/sisdai-componentes/src/componentes/menu-lateral/SisdaiMenuLateral.vue'
+import SisdaiNavegacionGobMx from '@centrogeomx/sisdai-componentes/src/componentes/navegacion-gob-mx/SisdaiNavegacionGobMx.vue'
+import SisdaiPiePaginaConahcyt from '@centrogeomx/sisdai-componentes/src/componentes/pie-pagina-conahcyt/SisdaiPiePaginaConahcyt.vue'
+import SisdaiPiePaginaGobMx from '@centrogeomx/sisdai-componentes/src/componentes/pie-pagina-gob-mx/SisdaiPiePaginaGobMx.vue'
+import SisdaiColapsableNavegacion from '@centrogeomx/sisdai-componentes/src/componentes/colapsable-navegacion/SisdaiColapsableNavegacion.vue'
 
 import { useData, useRoute } from 'vitepress'
 import { isActive } from 'vitepress/dist/client/shared'

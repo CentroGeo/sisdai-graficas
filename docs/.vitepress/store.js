@@ -1,1 +1,1 @@
-export { useAccesibilidadStore } from 'sisdai-componentes/src/stores'
+export { useAccesibilidadStore } from '@centrogeomx/sisdai-componentes/src/stores'
