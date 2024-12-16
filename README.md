@@ -36,6 +36,7 @@ En la carpeta principal de tu proyecto Vue puedes instalar la última versión d
 **Opción A.** Desde el repositorio del [sisdai-graficas en npm](https://www.npmjs.com/package/@centrogeomx/sisdai-graficas).
 
 En la línea de comando escribe
+
 ```bash
 npm i @centrogeomx/sisdai-graficas
 ```
@@ -43,6 +44,7 @@ npm i @centrogeomx/sisdai-graficas
 **Opción B.** Desde el repositorio de [sisdai-graficas en código.conahcyt.mx](https://codigo.conahcyt.mx/sisdai/sisdai-graficas).
 
 En la línea de comando escribe
+
 ```bash
 npm install git+https://codigo.conahcyt.mx/sisdai/sisdai-graficas
 ```
@@ -56,7 +58,7 @@ importando el componente de `SisdaiBarras` de esta biblioteca (que construye una
 ```javascript
 import Vue from 'Vue'
 import App from './App.Vue'
-import { SisdaiBarras } from 'sisdai-graficas'
+import { SisdaiBarras } from '@centrogeomx/sisdai-graficas'
 import 'sisdai-graficas/dist/sisdai-graficas.css'
 
 Vue.use(SisdaiBarras)
@@ -98,6 +100,7 @@ npm i @centrogeomx/sisdai-graficas@vN.N.N
 ```
 
 **Opción B.** Para cualquier versión desde el repositorio de [sisdai-graficas en código.conahcyt.mx](https://codigo.conahcyt.mx/sisdai/sisdai-graficas).
+
 ```bash
 npm install git+https://codigo.conahcyt.mx/sisdai/sisdai-graficas#vN.N.N
 ```
@@ -105,7 +108,6 @@ npm install git+https://codigo.conahcyt.mx/sisdai/sisdai-graficas#vN.N.N
 donde N.N.N indica el número de versión, por ejemplo v1.0.0
 
 Consulta el archivo `CHANGELOG.md` del repositorio de [sisdai-graficas en código.conahcyt.mx](https://codigo.conahcyt.mx/sisdai/sisdai-graficas) para conocer las nuevas características y cambios que sufre la biblioteca en cada una de sus versiones.
-
 
 ## Listado de gráficas
 

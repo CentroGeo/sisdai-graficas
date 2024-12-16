@@ -58,6 +58,7 @@ watch(
       :angulo_etiquetas_eje_x="-45"
       :nombre_indice="'fecha_toma'"
       :formato_temporal="'%Y-%m'"
+      :tabla_caption="'Datos de ejemplo de muestras de farmacoresistencia a distinto retrovirales'"
     />
   </SisdaiGraficas>
 </template>

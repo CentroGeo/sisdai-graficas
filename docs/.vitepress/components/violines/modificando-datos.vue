@@ -58,6 +58,7 @@ function alternaDatos() {
       :datos="datos_dinamicos"
       :variables="variables_dinamicas"
       :nombre_indice="base === 1 ? 'resistencia' : 'seguridad_social'"
+      :tabla_caption="'Datos de ejemplo de resistencia a antirretrovirales por grupos de edad o cobertura del seguro social'"
     />
   </SisdaiGraficas>
 </template>

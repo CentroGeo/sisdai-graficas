@@ -20,6 +20,11 @@ Ejemplo de implementación:
 </SisdaiGraficas>
 ```
 
+## Vista general
+
+<Basico/>
+<<< @/.vitepress/components/cajas-bigotes/basico.vue
+
 ## API
 
 ### Propiedades
@@ -125,7 +130,7 @@ Ejemplo de implementación:
   - Tipo: `Number`
   - Valor predeterminado: `0`
   - Requerido: No
-- `tabla_caption`: es un texto que se inserta en el elemento `<caption>` de la tabla asociada a la gráfica.
+- `tabla_caption`: es un texto que se inserta en el elemento `<caption>` de la tabla asociada a la gráfica. **Aunque esta propiedad no es obligatora, por accesibilidad y buenas prácticas de desarrollo es muy importante incluir un texto que describa correctamente la información de la tabla**.
   - Tipo: `String`
   - Valor predeterminado: `"Tabla de datos de la gráfica de cajas y bigotes"`
   - Requerido: No
@@ -143,10 +148,7 @@ Ejemplo de implementación:
 
 - `escalaLineal`: Es la función de D3 `d3.scaleLinear` que se emplea en el eje vertical. Es útil cuando se desean agregar elementos al gráfico que dependan de esta escala.
 
-## Ejemplos
-
-<Basico/>
-<<< @/.vitepress/components/cajas-bigotes/basico.vue
+## Ejemplo
 
 <ModificandoDatos/>
 <<< @/.vitepress/components/cajas-bigotes/modificando-datos.vue

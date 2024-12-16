@@ -36,16 +36,17 @@ const laSerie = ref()
         {
           id: 'cantidad_1',
           nombre: 'Cantidad 1',
-          color: 'blue',
+          color: '#CF99FF',
         },
         {
           id: 'cantidad_2',
           nombre: 'Cantidad 1',
-          color: 'red',
+          color: '#668BFF',
         },
       ]"
       :nombre_indice="'fecha'"
       :angulo_etiquetas_eje_x="-45"
+      :tabla_caption="'Datos de ejemplo de dos variables en diferentes años'"
     />
   </SisdaiGraficas>
 </template>

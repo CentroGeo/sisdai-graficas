@@ -1,5 +1,5 @@
 <template>
-  <div class="contenedor-vis-atribuciones borde-t borde-color-3">
+  <div class="contenedor-vis-atribuciones borde-t borde-color-secundario">
     <a
       class="logo-conacyt atribucion-conahcyt"
       href="https://conahcyt.mx/"

@@ -2,6 +2,7 @@ import { createRequire } from 'module'
 
 const require = createRequire(import.meta.url)
 const pkg = require('../../package.json')
+
 // https://vitepress.dev/reference/site-config
 export default {
   lang: 'es-mx',
@@ -31,6 +32,25 @@ export default {
         rel: 'stylesheet',
       },
     ],
+    ['meta', { property: 'og:title', content: 'sisdai-graficas' }],
+    ['meta', { property: 'og:description', content: '%VITE_DESCRIPCION%' }],
+    [
+      'meta',
+      {
+        property: 'og:image',
+        content: '%VITE_CDN_ARCHIVOS%redes/miniatura-sisdaigraficas.png',
+      },
+    ],
+    ['meta', { property: 'og:url', content: '%VITE_DOMINIO%%VITE_URL_BASE%' }],
+    ['meta', { name: 'twitter:title', content: 'sisdai-graficas' }],
+    ['meta', { name: 'twitter:description', content: '%VITE_DESCRIPCION%' }],
+    [
+      'meta',
+      {
+        name: 'twitter:image',
+        content: '%VITE_CDN_ARCHIVOS%redes/miniatura-sisdaigraficas.png',
+      },
+    ],
   ],
 
   themeConfig: {
@@ -38,8 +58,10 @@ export default {
     nav: nav(),
 
     sidebar: {
-      '/': sidebarDocumentacion('documentacion'),
-      '/documentacion/': sidebarDocumentacion('documentacion'),
+      '/': sidebarGraficas(''),
+      '/comienza/': sidebarComienza('comienza'),
+
+      '/graficas/': sidebarGraficas('graficas'),
     },
 
     socialLinks: [
@@ -64,26 +86,36 @@ export default {
 function nav() {
   return [
     {
-      text: 'Documentación',
+      text: 'Inicio',
       link: '/',
-      activeMatch: '/',
+      activeMatch: '',
     },
     {
-      text: `v${pkg.version}`,
-      link: pkg.repository.url,
-      rel: 'noopener noreferrer',
-      target: '_blank',
-      img: 'https://cdn.conahcyt.mx/sisdai-archivos/gitlab-logo-500.png',
+      text: 'Comienza',
+      link: '/comienza/',
+      activeMatch: 'comienza',
     },
+    {
+      text: 'Gráficas',
+      link: '/graficas/personalizacion/',
+      activeMatch: 'graficas',
+    },
+    // {
+    //   text: `v${pkg.version}`,
+    //   link: pkg.repository.url,
+    //   rel: 'noopener noreferrer',
+    //   target: '_blank',
+    //   img: 'https://cdn.conahcyt.mx/sisdai-archivos/gitlab-logo-500.png',
+    // },
   ]
 }
 
-function sidebarDocumentacion(path) {
+function sidebarGraficas(path) {
   // Agrega aquí las rutas de los nuevos componentes
   return [
     {
-      text: 'Graficas',
-      link: `/${path}/graficas/`,
+      text: 'Personalización',
+      link: `/${path}/personalizacion/`,
     },
     {
       text: 'Alluvial',
@@ -117,9 +149,17 @@ function sidebarDocumentacion(path) {
       text: 'Violines',
       link: `/${path}/violines/`,
     },
+  ]
+}
+function sidebarComienza(path) {
+  return [
     {
-      text: 'Opciones avanzadas',
-      link: `/${path}/opciones-avanzadas/`,
+      text: 'Comienza',
+      link: `/${path}/`,
+    },
+    {
+      text: 'Instalación',
+      link: `/${path}/instalacion/`,
     },
   ]
 }

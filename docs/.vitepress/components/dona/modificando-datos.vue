@@ -58,6 +58,7 @@ watch(contador, nv => {
       :datos="datos"
       :variables="variables"
       :nombre_indice="'categoria'"
+      :tabla_caption="'Datos de ejemplo '"
     />
   </SisdaiGraficas>
 </template>

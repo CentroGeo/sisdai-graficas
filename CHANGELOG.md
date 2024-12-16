@@ -12,9 +12,62 @@ Al principio de cada entrada se lista la versión de la biblioteca de sisdai-css
 sisdai-componentes con la que la versión indicada de sisdai-graficas es
 compatible y tiene instalada.
 
+## [6.4.0] - 2024-12-12
+
+### Agregado (Added)
+
+Se agregó la biblioteca @centrogeomx/sisdai-css. Se agregó el scss api modern en la configuracion del vite. Se ajustaron algunos erroes de estilo.
+
+## [6.3.0] - 2024-12-12
+
+### Agregado (Added)
+
+Se creó la página de error de página no encontrada. Se agregaron metadatos de información para compartir la página de documentación.
+
+## [6.2.1] - 2024-12-12
+
+### Cambiado (Changed)
+
+Se cambiaron imágenes, se agregó favicon y se corrigieron rutas.
+
+## [6.2.0] - 2024-12-11
+
+sisdai-css v1.6.1<br>sisdai-componentes v4.1.5
+
+### Cambiado (Changed)
+
+- Modificamos la estructura de navegación de la documentación y también el orden de algunos elementos en la sección de gráficas.
+
+## [6.1.5] - 2024-12-09
+
+sisdai-css v1.6.1<br>sisdai-componentes v4.1.5
+
+### Agregado (Added)
+
+- Se agregó un pequeño texto en la documentación de las gráficas para resaltar la importancia de incluir la propiedad `tabla_caption` de manera adecuada
+
+## [6.1.4] - 2024-12-06
+
+sisdai-css v1.6.1<br>sisdai-componentes v4.1.5
+
+### Cambiado (Changed)
+
+- Agregamos a los componentes de gráficas de ejemplo en la documentación la propiedad `tabla_caption` de manera personalizada.
+- Se actualizó la version de `sisdai-css` a la v1.6.1
+
+## [6.1.3] - 2024-11-29
+
+sisdai-css v1.4.2<br>sisdai-componentes v4.1.5
+
+### Cambiado (Changed)
+
+- Cambiamos algunas partes de la documentacion para especificar que la importacion debe ser de `@centrogeomx/sisdai-graficas` en lugar de `sisdai-graficas`.
+- Se actualizó la version de `sisdai-css` a la v1.4.2
+
 ## [6.1.2] - 2024-11-21
 
 ### Cambiado (Changed)
+
 - El nombre del proyecto en el `package.json` pasa a ser @centrogeomx/sisdai-graficas para su publicación en el repositorio de npm
 - Se ajusta documentación de acuerdo a lo anterior
 
@@ -147,6 +200,13 @@ sisdai-css v0.46.8<br>sisdai-componentes v2.4.2
 
 Publicación de la primera vesión de la biblioteca de gráficas
 
+[6.4.0]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.4.0...v6.3.0
+[6.3.0]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.3.0...v6.2.1
+[6.2.1]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.2.1...v6.2.0
+[6.2.0]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.2.0...v6.1.5
+[6.1.5]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.1.5...v6.1.4
+[6.1.4]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.1.4...v6.1.3
+[6.1.3]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.1.3...v6.1.2
 [6.1.2]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.1.2...v6.1.1
 [6.1.1]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.1.1...v6.1.0
 [6.1.0]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.1.0...v6.0.3

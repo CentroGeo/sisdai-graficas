@@ -19,6 +19,12 @@ Ejemplo de implementación:
 </SisdaiGraficas>
 ```
 
+## Vista general
+
+El siguiente ejemplo muestra el funcionamiento del componente con un conjunto de datos simples y un globo de información condicional:
+<Basico/>
+<<< @/.vitepress/components/alluvial/basico.vue
+
 ## API
 
 ### Propiedades
@@ -89,11 +95,7 @@ Ejemplo de implementación:
   - Si el cursor está sobre un enlace, devuelve un objeto con la clave `tipo: "enlace"`, junto con las claves `target`, `source` y `value` entre otros que asigna automáticamente D3.
   - Si el cursor está sobre un nodo, devuelve un objeto con la clave `tipo:"nodo"`, además de los datos `name`, `id` y `value` entre otros que asigna automáticamente D3.
 
-## Ejemplos
-
-El siguiente ejemplo muestra el funcionamiento del componente con un conjunto de datos simples y un globo de información condicional:
-<Basico/>
-<<< @/.vitepress/components/alluvial/basico.vue
+## Ejemplo
 
 Como se observa en el ejemplo anterior, cuando el cursor está dentro del gráfico en un área en blanco, el globo de información se queda sin contenido. Para evitar esto y mostrar el globo solo cuando el cursor está sobre un elemento visual, se puede usar la directiva `v-show` como se muestra en el siguiente ejemplo:
 <AlluvialComplejo/>

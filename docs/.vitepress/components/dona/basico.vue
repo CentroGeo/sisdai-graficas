@@ -58,6 +58,7 @@ const laGrafica = ref()
       ]"
       :variables="variables"
       :nombre_indice="'categoria'"
+      :tabla_caption="'Datos de ejemplo de cuantas personas prefieren cada tipo de deporte'"
     />
     <template #panel-pie-vis>
       <div>

@@ -1,6 +1,6 @@
 // import pageComponents from '@internal/page-components'
 
-import 'sisdai-css'
+import '@centrogeomx/sisdai-css'
 
 import 'vitepress/dist/client/theme-default/styles/components/vp-code.css'
 import 'vitepress/dist/client/theme-default/styles/icons.css'

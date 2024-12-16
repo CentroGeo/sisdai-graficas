@@ -1,12 +1,14 @@
 <script setup>
-import SisdaiNavegacionPrincipal from 'sisdai-componentes/src/componentes/navegacion-principal/SisdaiNavegacionPrincipal.vue'
+import SisdaiNavegacionPrincipal from '@centrogeomx/sisdai-componentes/src/componentes/navegacion-principal/SisdaiNavegacionPrincipal.vue'
 import { useData } from 'vitepress'
-import { isActive } from 'vitepress/dist/client/shared'
 import { ref } from 'vue'
+import pkg from '../../../package.json'
 
 // https://vitepress.dev/reference/runtime-api#usedata
 const { theme, page } = useData()
 const navegacionPrincipal = ref(null)
+
+const cdn = import.meta.env.VITE_CDN_ARCHIVOS
 </script>
 
 <template>
@@ -15,14 +17,28 @@ const navegacionPrincipal = ref(null)
     ref="navegacionPrincipal"
   >
     <template #complementario>
-      <a
-        class="nav-hipervinculo"
-        href="https://sisdai.conahcyt.mx"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <b>IR A SISDAI</b>
-      </a>
+      <div class="nav-menu-contenedor">
+        <a
+          class="nav-hipervinculo"
+          href="https://sisdai.conahcyt.mx"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <b>IR A SISDAI</b>
+        </a>
+        <a
+          class="nav-hipervinculo"
+          :href="pkg.repository.url"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            class="nav-logo"
+            :src="`${cdn}gitlab-logo-500.png`"
+            alt="Repositorio de código sisdai-mapas"
+          /><b> {{ `v${pkg.version}` }} </b>
+        </a>
+      </div>
     </template>
     <ul class="nav-menu">
       <li
@@ -32,11 +48,9 @@ const navegacionPrincipal = ref(null)
         <a
           class="nav-hipervinculo"
           :class="{
-            'router-link-exact-active router-link-active': isActive(
-              page.relativePath,
-              nav.activeMatch || nav.link,
-              !!nav.activeMatch
-            ),
+            'router-link-exact-active router-link-active':
+              nav.activeMatch ==
+              page.relativePath.replace('index.md', '').split('/')[0],
           }"
           :href="nav.link"
           :target="nav.target"

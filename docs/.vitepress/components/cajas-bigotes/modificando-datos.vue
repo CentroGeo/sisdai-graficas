@@ -7,7 +7,7 @@ const datos_dinamicos = ref(cajasbigotesejemplos1)
 const variables_dinamicas = ref({
   id: 'acciones_vendidas',
   nombre: 'Acciones vendidas',
-  color: 'red',
+  color: '#668BFF',
 })
 function alternaDatos() {
   if (base.value === 1) {
@@ -23,7 +23,7 @@ function alternaDatos() {
     variables_dinamicas.value = {
       id: 'acciones_vendidas',
       nombre: 'Acciones vendidas',
-      color: 'red',
+      color: '#668BFF',
     }
     datos_dinamicos.value = cajasbigotesejemplos1
 
@@ -55,6 +55,7 @@ function alternaDatos() {
     <SisdaiCajasBigotes
       :datos="datos_dinamicos"
       :variables="variables_dinamicas"
+      :tabla_caption="'Datos de ejemplo de caracterísitcas de la distribución de las acciones vendidas por empresas'"
       :nombre_indice="base === 1 ? 'nombre_empresa' : 'nombre_categoria'"
     />
   </SisdaiGraficas>

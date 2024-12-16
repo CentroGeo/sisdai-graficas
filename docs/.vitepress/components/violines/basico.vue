@@ -39,6 +39,7 @@ const losViolines = ref()
         color: '#2c7fb8',
       }"
       :nombre_indice="'resistencia'"
+      :tabla_caption="'Datos de ejemplo de resistencia a antirretrovirales por grupos de edad'"
     />
   </SisdaiGraficas>
 </template>
