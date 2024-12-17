@@ -29,9 +29,9 @@
     "d3-sankey": "^0.12.3"
   },
   "peerDependencies": {
-    "vue": "^3.5.13",
+    "@centrogeomx/sisdai-componentes": "^4.12.4",
     "@centrogeomx/sisdai-css": "^1.7.4",
-    "@centrogeomx/sisdai-componentes": "^4.12.4"
+    "vue": "^3.5.13"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.1.0",
@@ -45,11 +45,12 @@
     "@vitest/ui": "^2.0.5",
     "@vue/eslint-config-prettier": "^9.0.0",
     "@vue/test-utils": "^2.4.6",
+    "dotenv": "^16.4.7",
     "eslint": "^9.9.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-vue": "^9.27.0",
-    "happy-dom": "^14.12.3",
+    "happy-dom": "^15.11.7",
     "jsdom": "^25.0.0",
     "lint-staged": "^15.2.7",
     "open": "^10.1.0",
