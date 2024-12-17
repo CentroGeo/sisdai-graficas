@@ -4,7 +4,7 @@
 
 </script>
 
-# SisdaiViolines
+# Violines
 
 El componente `<SisdaiViolines/>` se utiliza para construir diagramas de violines, los cuales son útiles para visualizar distribuciones de datos. A continuación se detalla su uso y configuración.
 

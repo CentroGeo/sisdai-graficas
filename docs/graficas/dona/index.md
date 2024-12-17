@@ -3,7 +3,7 @@
     import ModificandoDatos from "../../.vitepress/components/dona/modificando-datos.vue";
 </script>
 
-# SisdaiDona
+# Dona
 
 El componente `<SisdaiDona/>` se utiliza para representar la distribución de una totalidad entre diferentes categorías mediante gráficos de dona o pastel. A continuación se detalla su uso y configuración.
 

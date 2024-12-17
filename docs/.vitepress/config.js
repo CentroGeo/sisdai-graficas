@@ -2,12 +2,19 @@ import { createRequire } from 'module'
 
 const require = createRequire(import.meta.url)
 const pkg = require('../../package.json')
+import * as dotenv from 'dotenv'
+
+const { VITE_CDN_ARCHIVOS, VITE_DOMINIO, VITE_URL_BASE, VITE_DESCRIPCION } =
+  dotenv.config({
+    path: 'docs/.env',
+  }).parsed
 
 // https://vitepress.dev/reference/site-config
 export default {
   lang: 'es-mx',
   title: 'sisdai-graficas',
   description: pkg.description,
+  base: VITE_URL_BASE,
 
   // appearance: false,
   lastUpdated: true,
@@ -23,6 +30,13 @@ export default {
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
     [
       'link',
+      {
+        rel: 'icon',
+        href: '/favicon.ico',
+      },
+    ],
+    [
+      'link',
       { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
     ],
     [
@@ -33,22 +47,25 @@ export default {
       },
     ],
     ['meta', { property: 'og:title', content: 'sisdai-graficas' }],
-    ['meta', { property: 'og:description', content: '%VITE_DESCRIPCION%' }],
+    ['meta', { property: 'og:description', content: `${VITE_DESCRIPCION}` }],
     [
       'meta',
       {
         property: 'og:image',
-        content: '%VITE_CDN_ARCHIVOS%redes/miniatura-sisdaigraficas.png',
+        content: `${VITE_CDN_ARCHIVOS}redes/miniatura-sisdaigraficas.png`,
       },
     ],
-    ['meta', { property: 'og:url', content: '%VITE_DOMINIO%%VITE_URL_BASE%' }],
+    [
+      'meta',
+      { property: 'og:url', content: `${VITE_DOMINIO}${VITE_URL_BASE}` },
+    ],
     ['meta', { name: 'twitter:title', content: 'sisdai-graficas' }],
-    ['meta', { name: 'twitter:description', content: '%VITE_DESCRIPCION%' }],
+    ['meta', { name: 'twitter:description', content: `${VITE_DESCRIPCION}` }],
     [
       'meta',
       {
         name: 'twitter:image',
-        content: '%VITE_CDN_ARCHIVOS%redes/miniatura-sisdaigraficas.png',
+        content: `${VITE_CDN_ARCHIVOS}redes/miniatura-sisdaigraficas.png`,
       },
     ],
   ],
@@ -134,7 +151,7 @@ function sidebarGraficas(path) {
       link: `/${path}/barras/`,
     },
     {
-      text: 'Cajas y bigotes',
+      text: 'Cajas y Bigotes',
       link: `/${path}/cajas-bigotes/`,
     },
     {
@@ -142,7 +159,7 @@ function sidebarGraficas(path) {
       link: `/${path}/dona/`,
     },
     {
-      text: 'Series de tiempo',
+      text: 'Series de Tiempo',
       link: `/${path}/series-tiempo/`,
     },
     {

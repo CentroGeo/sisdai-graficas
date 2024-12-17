@@ -3,7 +3,7 @@
   import ModificandoDatos from "../../.vitepress/components/areas-apiladas/modificando-datos.vue";
 </script>
 
-# SisdaiAreasApiladas
+# Áreas Apiladas
 
 El componente `<SisdaiAreasApiladas/>` permite graficar datos temporales que pertenecen a distintas categorías que, en conjunto, forman una totalidad. Este tipo de gráficas es conocido como “áreas apiladas” o _stream graphs_ en inglés.
 
