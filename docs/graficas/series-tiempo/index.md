@@ -4,7 +4,7 @@
     import MultiplesLineas from "../../.vitepress/components/series-tiempo/multiples-lineas.vue";
 </script>
 
-# SisdaiSeriesTiempo
+# Series de Tiempo
 
 El componente `<SisdaiSeriesTiempo/>` sirve para graficar datos temporales, permitiendo visualizar la evolución de valores a lo largo del tiempo. A continuación, se detalla su uso y configuración.
 

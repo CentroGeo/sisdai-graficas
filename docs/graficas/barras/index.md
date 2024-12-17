@@ -5,7 +5,7 @@
     import Basico from "../../.vitepress/components/barras/basico.vue";
 </script>
 
-# SisdaiBarras
+# Barras
 
 El componente `<SisdaiBarras/>` permite construir gráficos de barras. A continuación, se detalla su uso y configuración:
 

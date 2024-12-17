@@ -3,7 +3,7 @@
     import ModificandoDatos from "../../.vitepress/components/cajas-bigotes/modificando-datos.vue";
 </script>
 
-# SisdaiCajasBigotes
+# Cajas y Bigotes
 
 El componente `<SisdaiCajasBigotes/>` se utiliza para generar diagramas de cajas y bigotes que son útiles para visualizar distribuciones. A continuación se explica su uso.
 

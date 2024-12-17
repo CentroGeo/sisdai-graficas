@@ -3,7 +3,7 @@
     import ModificandoDatos from "../../.vitepress/components/areas-apiladas-ordenadas/modificando-datos.vue";
 </script>
 
-# SisdaiAreasApiladasOrdenadas
+# Áreas Apiladas Ordenadas
 
 El componente `<SisdaiAreasApiladasOrdenadas/>` se utiliza para graficar datos temporales de distintas categorías que conforman una totalidad y que, además, se ordenan de mayor a menor a lo largo del tiempo.
 

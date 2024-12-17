@@ -3,7 +3,7 @@
   import AlluvialComplejo from "../../.vitepress/components/alluvial/alluvial-complejo.vue";
 </script>
 
-# SisdaiAlluvial
+# Alluvial
 
 El componente `<SisdaiAlluvial/>`, permite generar diagramas de flujo de tipo Alluvial. Es ideal para representar flujo y/o conexiones entre diferentes datos.
 

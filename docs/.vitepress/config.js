@@ -134,7 +134,7 @@ function sidebarGraficas(path) {
       link: `/${path}/barras/`,
     },
     {
-      text: 'Cajas y bigotes',
+      text: 'Cajas y Bigotes',
       link: `/${path}/cajas-bigotes/`,
     },
     {
@@ -142,7 +142,7 @@ function sidebarGraficas(path) {
       link: `/${path}/dona/`,
     },
     {
-      text: 'Series de tiempo',
+      text: 'Series de Tiempo',
       link: `/${path}/series-tiempo/`,
     },
     {
