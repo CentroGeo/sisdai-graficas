@@ -32,8 +32,7 @@ export default {
       'link',
       {
         rel: 'icon',
-        href: `${VITE_URL_BASE}favicon.ico`,
-        type: 'image/x-icon',
+        href: '/favicon.ico',
       },
     ],
     [
