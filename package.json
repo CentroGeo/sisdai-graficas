@@ -25,7 +25,7 @@
     "coverage": "vitest run --coverage && open ./coverage/index.html"
   },
   "dependencies": {
-    "@centrogeomx/sisdai-componentes": "^4.12.1",
+    "@centrogeomx/sisdai-componentes": "^4.12.2",
     "@centrogeomx/sisdai-css": "^1.7.3",
     "d3": "^7.8.2",
     "d3-sankey": "^0.12.3"
