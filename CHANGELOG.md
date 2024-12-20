@@ -12,6 +12,12 @@ Al principio de cada entrada se lista la versión de la biblioteca de sisdai-css
 sisdai-componentes con la que la versión indicada de sisdai-graficas es
 compatible y tiene instalada.
 
+## [6.4.6] - 2024-12-20
+
+### Arreglado (Fixed)
+
+Ajustamos el componente SisdaiDona para resolver un bug al usar la narrativa.
+
 ## [6.4.5] - 2024-12-17
 
 ### Arreglado (Fixed)
@@ -212,6 +218,7 @@ sisdai-css v0.46.8<br>sisdai-componentes v2.4.2
 
 Publicación de la primera vesión de la biblioteca de gráficas
 
+[6.4.6]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.4.6...v6.4.5
 [6.4.5]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.4.5...v6.4.4
 [6.4.4]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.4.4...v6.4.3
 [6.4.0]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.4.0...v6.3.0
