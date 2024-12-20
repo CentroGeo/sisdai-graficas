@@ -283,6 +283,10 @@ onMounted(() => {
     calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
     creaDona()
   })
+  watch(variables_visibles, () => {
+    calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+    creaDona()
+  })
   watch(
     () => usarRegistroGraficas().grafica(idGrafica).posicion_cursor,
     nv => {

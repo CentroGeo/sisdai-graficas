@@ -35,7 +35,10 @@ watch(
 </script>
 
 <template>
-  <SisdaiNarrativa ref="miNarrativa">
+  <SisdaiNarrativa
+    ref="miNarrativa"
+    :id="'la-narrativa-dona'"
+  >
     <template #contenido-fondo-sticky>
       <SisdaiGraficas class="p-t-10">
         <SisdaiDona
@@ -50,12 +53,6 @@ watch(
           :variables_visibles="variables_visibles"
           :nombre_indice="'categoria'"
         />
-        <template
-          #panel-pie-vis
-          v-if="miNarrativa?.seccion_visible === 3"
-        >
-          <SisdaiNomenclatura :variables="variables"></SisdaiNomenclatura>
-        </template>
       </SisdaiGraficas>
     </template>
     <div class="vineta p-1 contenedor">
