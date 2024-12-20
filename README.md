@@ -41,12 +41,12 @@ En la línea de comando escribe
 npm i @centrogeomx/sisdai-graficas
 ```
 
-**Opción B.** Desde el repositorio de [sisdai-graficas en código.conahcyt.mx](https://codigo.conahcyt.mx/sisdai/sisdai-graficas).
+**Opción B.** Desde el repositorio de [sisdai-graficas en github.com](https://github.com/CentroGeo/sisdai-graficas).
 
 En la línea de comando escribe
 
 ```bash
-npm install git+https://codigo.conahcyt.mx/sisdai/sisdai-graficas
+npm install git+https://github.com/CentroGeo/sisdai-graficas
 ```
 
 ### Importa la biblioteca
@@ -99,15 +99,15 @@ nuevamente usando una de estas dos opciones
 npm i @centrogeomx/sisdai-graficas@vN.N.N
 ```
 
-**Opción B.** Para cualquier versión desde el repositorio de [sisdai-graficas en código.conahcyt.mx](https://codigo.conahcyt.mx/sisdai/sisdai-graficas).
+**Opción B.** Para cualquier versión desde el repositorio de [sisdai-graficas en github.com](https://github.com/CentroGeo/sisdai-graficas).
 
 ```bash
-npm install git+https://codigo.conahcyt.mx/sisdai/sisdai-graficas#vN.N.N
+npm install git+https://github.com/CentroGeo/sisdai-graficas#vN.N.N
 ```
 
 donde N.N.N indica el número de versión, por ejemplo v1.0.0
 
-Consulta el archivo `CHANGELOG.md` del repositorio de [sisdai-graficas en código.conahcyt.mx](https://codigo.conahcyt.mx/sisdai/sisdai-graficas) para conocer las nuevas características y cambios que sufre la biblioteca en cada una de sus versiones.
+Consulta el archivo `CHANGELOG.md` del repositorio de [sisdai-graficas en github.com](https://github.com/CentroGeo/sisdai-graficas) para conocer las nuevas características y cambios que sufre la biblioteca en cada una de sus versiones.
 
 ## Listado de gráficas
 
@@ -149,7 +149,7 @@ Se puede clonar e instalar este proyecto en tu equipo
 utilizando **solo el protocolo HTTPS**, es decir:
 
 ```bash
-git clone https://codigo.conahcyt.mx/sisdai/sisdai-graficas.git
+git clone https://github.com/CentroGeo/sisdai-graficas.git
 ```
 
 Establece la versión adecuada de npm y nvm (previamente instaladas).

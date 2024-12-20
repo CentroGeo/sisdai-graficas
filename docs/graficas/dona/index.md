@@ -137,7 +137,7 @@ Ejemplo de implementación:
   - Valor predeterminado: `undefined`
   - Requerido: No
 
-- `color_dona_fondo`: Especifica el color de fondo de la dona para las áreas no asignadas a ningún segmento. Por defecto utiliza la variable de [sisdai-css](https://codigo.conahcyt.mx/sisdai/sisdai-css) `"var(--fondo)"`, pero se puede definir cualquier formato de color admitido por CSS.
+- `color_dona_fondo`: Especifica el color de fondo de la dona para las áreas no asignadas a ningún segmento. Por defecto utiliza la variable de [sisdai-css](https://github.com/CentroGeo/sisdai-css) `"var(--fondo)"`, pero se puede definir cualquier formato de color admitido por CSS.
   - Tipo: `String`
   - Valor predeterminado: `"var(--fondo)"`
   - Requerido: No
