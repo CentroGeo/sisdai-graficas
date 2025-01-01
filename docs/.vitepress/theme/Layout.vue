@@ -18,7 +18,6 @@ const { theme, page } = useData()
 // https://router.vuejs.org/
 const route = useRoute()
 const esInicio = computed(() => route.path === '/')
-console.log(route.path)
 const lista_elementos = ref({})
 
 const componenteIndice = ref(null)
@@ -28,7 +27,6 @@ function actualizaContenidoIndice() {
   let elementos = []
   document.querySelectorAll('div h2').forEach(el => {
     if (el.id) {
-      console.log(el.id)
       elementos.push({
         id: el.id,
         texto: el.innerText,

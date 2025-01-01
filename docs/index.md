@@ -86,7 +86,7 @@ title: Inicio
                 aria-label="Ir a documentación de sisdai-css"/>
               <SisdaiEnlaceExterno
                 class="boton boton-secundario boton-chico"
-                enlace="https://codigo.conahcyt.mx/sisdai/sisdai-css"
+                enlace="https://github.com/CentroGeo/sisdai-css"
                 texto="Ir a repositorio"
                 aria-label="Ir a repositorio de sisdai-css"/>
           </div>
@@ -117,7 +117,7 @@ title: Inicio
                 aria-label="Ir a documentación de sisdai-componentes"/>
               <SisdaiEnlaceExterno
                 class="boton boton-secundario boton-chico"
-                enlace="https://codigo.conahcyt.mx/sisdai/sisdai-componentes"
+                enlace="https://github.com/CentroGeo/sisdai-componentes"
                 texto="Ir a repositorio"
                 aria-label="Ir a repositorio de sisdai-componentes"/>
           </div>
@@ -148,7 +148,7 @@ title: Inicio
                 aria-label="Ir a documentación de sisdai-mapas"/>
               <SisdaiEnlaceExterno
                 class="boton boton-secundario boton-chico"
-                enlace="https://codigo.conahcyt.mx/sisdai/sisdai-mapas"
+                enlace="https://github.com/CentroGeo/sisdai-mapas"
                 texto="Ir a repositorio"
                 aria-label="Ir a repositorio de sisdai-mapas"/>
           </div>

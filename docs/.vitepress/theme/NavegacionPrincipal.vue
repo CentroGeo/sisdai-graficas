@@ -7,8 +7,6 @@ import pkg from '../../../package.json'
 // https://vitepress.dev/reference/runtime-api#usedata
 const { theme, page } = useData()
 const navegacionPrincipal = ref(null)
-
-const cdn = import.meta.env.VITE_CDN_ARCHIVOS
 </script>
 
 <template>
@@ -29,14 +27,15 @@ const cdn = import.meta.env.VITE_CDN_ARCHIVOS
         <a
           class="nav-hipervinculo"
           :href="pkg.repository.url"
+          :aria-label="`Repositorio de código sisdai-graficas versión ${pkg.version}`"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img
-            class="nav-logo"
-            :src="`${cdn}gitlab-logo-500.png`"
-            alt="Repositorio de código sisdai-mapas"
-          /><b> {{ `v${pkg.version}` }} </b>
+          <span
+            class="pictograma-social-github m-r-1"
+            aria-hidden="true"
+          ></span>
+          <b> {{ `v${pkg.version}` }} </b>
         </a>
       </div>
     </template>

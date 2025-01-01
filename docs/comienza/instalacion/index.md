@@ -10,17 +10,17 @@ En la línea de comando escribe
 npm i @centrogeomx/sisdai-graficas
 ```
 
-**Opción B.** Desde el repositorio de [sisdai-graficas en código.conahcyt.mx](https://codigo.conahcyt.mx/sisdai/sisdai-graficas).
+**Opción B.** Desde el repositorio de [sisdai-graficas en github.com](https://github.com/CentroGeo/sisdai-graficas).
 
 En la línea de comando escribe
 
 ```bash
-npm install git+https://codigo.conahcyt.mx/sisdai/sisdai-graficas
+npm install git+https://github.com/CentroGeo/sisdai-graficas
 ```
 
 ## Instalación de estilos
 
-Dado que los componentes están ligados con el estilo visual de [Sisdai](https://sisdai.conahcyt.mx/), es necesario incluir los estilos correspondientes. Lo siguiente es dar de alta los estilos de [Sisdai Css](https://codigo.conahcyt.mx/sisdai/sisdai-css) en el archivo de inicialización del proyecto.
+Dado que los componentes están ligados con el estilo visual de [Sisdai](https://sisdai.conahcyt.mx/), es necesario incluir los estilos correspondientes. Lo siguiente es dar de alta los estilos de [Sisdai Css](https://github.com/CentroGeo/sisdai-css) en el archivo de inicialización del proyecto.
 
 Sigue estos pasos:
 
