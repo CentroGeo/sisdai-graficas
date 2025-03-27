@@ -4,10 +4,15 @@ const require = createRequire(import.meta.url)
 const pkg = require('../../package.json')
 import * as dotenv from 'dotenv'
 
-const { VITE_CDN_ARCHIVOS, VITE_DOMINIO, VITE_URL_BASE, VITE_DESCRIPCION } =
-  dotenv.config({
-    path: 'docs/.env',
-  }).parsed
+const {
+  VITE_CDN_ARCHIVOS,
+  VITE_DOMINIO,
+  VITE_URL_BASE,
+  VITE_DESCRIPCION,
+  VITE_GOOGLE_ANALYTICS_ID,
+} = dotenv.config({
+  path: 'docs/.env',
+}).parsed
 
 // https://vitepress.dev/reference/site-config
 export default {
@@ -67,6 +72,21 @@ export default {
         name: 'twitter:image',
         content: `${VITE_CDN_ARCHIVOS}redes/miniatura-sisdaigraficas.png`,
       },
+    ],
+    [
+      'script',
+      {
+        async: '',
+        src: `https://www.googletagmanager.com/gtag/js?id=${VITE_GOOGLE_ANALYTICS_ID}`,
+      },
+    ],
+    [
+      'script',
+      {},
+      `window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '${VITE_GOOGLE_ANALYTICS_ID}');`,
     ],
   ],
 

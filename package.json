@@ -39,8 +39,9 @@
     "format-lint": "npm run format && npm run lint",
     "lint": "eslint --fix --ignore-pattern .gitignore .",
     "preview": "vite preview",
-    "test": "vitest --no-ui",
-    "coverage": "vitest run --coverage && open ./coverage/index.html"
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+    "prepare": "husky install"
   },
   "dependencies": {
     "d3": "^7.8.2",
@@ -49,37 +50,27 @@
   "peerDependencies": {
     "@centrogeomx/sisdai-componentes": "^4.12.5",
     "@centrogeomx/sisdai-css": "^1.7.4",
+    "pinia": "^3.0.1",
     "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.1.0",
-    "@eslint/js": "^9.9.0",
-    "@html-eslint/eslint-plugin": "^0.25.0",
-    "@html-eslint/parser": "^0.25.0",
-    "@rushstack/eslint-patch": "^1.10.4",
-    "@testing-library/vue": "^8.1.0",
-    "@vitejs/plugin-vue": "^5.0.4",
-    "@vitest/coverage-v8": "^2.0.5",
-    "@vitest/ui": "^2.0.5",
-    "@vue/eslint-config-prettier": "^9.0.0",
+    "@eslint/js": "^9.21.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitest/coverage-v8": "^3.0.9",
+    "@vitest/eslint-plugin": "^1.1.36",
+    "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/test-utils": "^2.4.6",
     "dotenv": "^16.4.7",
-    "eslint": "^9.9.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-vue": "^9.27.0",
-    "happy-dom": "^15.11.7",
-    "jsdom": "^25.0.0",
-    "lint-staged": "^15.2.7",
-    "open": "^10.1.0",
-    "pinia": "^2.2.1",
-    "prettier": "^3.3.3",
-    "vite": "^5.3.3",
-    "vitepress": "^1.3.2",
-    "vitest": "^2.0.5",
-    "volar-service-vetur": "^0.0.54",
-    "vue-matomo": "^4.2.0",
-    "yorkie": "^2.0.0"
+    "eslint": "^9.21.0",
+    "eslint-plugin-vue": "~10.0.0",
+    "globals": "^16.0.0",
+    "husky": "^9.1.7",
+    "jsdom": "^26.0.0",
+    "lint-staged": "^15.2.10",
+    "prettier": "3.5.3",
+    "vite": "^6.2.2",
+    "vitepress": "^1.6.3",
+    "vitest": "^3.0.9"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -91,5 +82,9 @@
   "bugs": {
     "url": "https://github.com/CentroGeo/sisdai-graficas/issues"
   },
-  "homepage": "https://sisdai-graficas.conahcyt.mx"
+  "homepage": "https://sisdai-graficas.conahcyt.mx",
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.--write": "prettier --write"
+  }
 }
