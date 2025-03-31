@@ -1,19 +1,8 @@
-import pluginJs from '@eslint/js' // https://www.npmjs.com/package/@eslint/js
-import pluginVue from 'eslint-plugin-vue' // https://eslint.vuejs.org/
-import globals from 'globals' // https://www.npmjs.com/package/globals
-
-import html from '@html-eslint/eslint-plugin' // https://html-eslint.org/
-import eslintConfigPrettier from 'eslint-config-prettier' // https://github.com/vuejs/eslint-config-prettier
-
-import { FlatCompat } from '@eslint/eslintrc'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-// Imita variables CommonJS; no es necesario si se usa CommonJS
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-})
+import js from '@eslint/js'
+import pluginVue from 'eslint-plugin-vue'
+import globals from 'globals'
+import pluginVitest from '@vitest/eslint-plugin'
+import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
 
 /**
  * Propiedades que configuran el eslint de este proyecto
@@ -76,14 +65,17 @@ const compat = new FlatCompat({
  * - "error" o 2: activarla regla como error.
  */
 export default [
-  { files: ['**/*.{js,mjs,cjs,vue}'] },
   {
+    name: 'app/files-to-lint',
+    files: ['**/*.{js,mjs,jsx,vue}'],
+  },
+  {
+    name: 'app/files-to-ignore',
     ignores: [
       '**/node_modules',
       '**/package.json',
       '**/package-lock.json',
       '**/dist',
-      'docs/.vuepress/dist',
       'docs/.vitepress/dist',
       'docs/.vitepress/cache',
       '**/coverage',
@@ -91,39 +83,23 @@ export default [
       '**/deprecated',
     ],
   },
+
   {
     // @see https://eslint.org/docs/latest/use/configure/language-options
     languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module', // script, module, commonjs
       globals: {
-        ...globals.node, // node, browser
-        globalThis: 'readonly',
+        ...globals.browser,
       },
-    },
-
-    // @see https://eslint.org/docs/latest/use/configure/plugins
-    plugins: {
-      // @see https://html-eslint.org/
-      '@html-eslint': html,
     },
 
     // @see https://eslint.org/docs/latest/rules/
     // @see https://eslint.org/docs/latest/use/configure/rules
     // @see https://eslint.vuejs.org/rules/multi-word-component-names.html
     rules: {
-      // impide nuevos operadores fuera de asignaciones o comparaciones
       'no-new': 0,
-
-      // requiere el uso de === y !==
       eqeqeq: 'error',
-
       'no-console': 'off',
       'no-debugger': 'off',
-      // 'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-      // 'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-
-      // ignora los siguientes nombres
       'vue/multi-word-component-names': [
         'error',
         {
@@ -132,35 +108,14 @@ export default [
       ],
     },
   },
-  /**
-   * Usando configuración predefinida para Javascript que habilita las
-   * reglas que ESLint recomienda que todos utilicen para evitar posibles
-   * errores.
-   * @see https://www.npmjs.com/package/@eslint/js
-   */
-  pluginJs.configs.recommended,
 
-  /**
-   * Este complemento revisa el <template> y <script> de los archivos
-   * .vue con ESLint, así como el código Vue en los archivos .js
-   * - Encuentra errores de sintaxis
-   * - Encuentra el uso incorrecto de las directivas de Vue.js
-   * - Encuentra el incumplimiento de la guía de estilo de Vue.js
-   * @see https://eslint.vuejs.org/
-   */
+  js.configs.recommended,
   ...pluginVue.configs['flat/essential'],
 
-  // Imita extensiones de estilo ESLintRC
-  ...compat.extends(
-    'plugin:prettier/recommended',
-    '@vue/eslint-config-prettier/skip-formatting'
-  ),
-  // ...eslintPluginPrettier.configs['flat/recommended'],
-  // eslintPluginPrettierRecommended,
+  {
+    ...pluginVitest.configs.recommended,
+    files: ['src/**/__tests__/*'],
+  },
 
-  /**
-   * Usando configuración de eslint para prettier. Tiene que ir al final.
-   * @see https://github.com/vuejs/eslint-config-prettier
-   * */
-  eslintConfigPrettier,
+  skipFormatting,
 ]
