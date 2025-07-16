@@ -117,6 +117,26 @@ const props = defineProps({
       return validado
     },
   },
+  estilo_anotaciones: {
+    type: Object,
+    default: {
+      posicion_vertical: 'arriba',
+      angulo: 0,
+      alineacion_vertical: 'arriba',
+    },
+    validator(value) {
+      // debe tener: posicion_vertical, angulo, desplazamiento_vertical
+
+      const validado =
+        'posicion_vertical' in value &&
+        'angulo' in value &&
+        'desplazamiento_vertical' in value
+      if (!validado) {
+        console.error('El objeto no cumple con las especificaciones')
+      }
+      return validado
+    },
+  },
 })
 const datos_hover = ref()
 const idTabla = idAleatorio()
@@ -130,7 +150,8 @@ const escalaBanda = ref(),
   escalaSubBanda = ref()
 const grupoContenedor = ref(),
   data_apilada = ref(),
-  grupoBarras = ref()
+  grupoBarras = ref(),
+  grupoTextos = ref()
 
 function calcularEscalas(grupoVis) {
   if (!grupoVis && grupoVis?.ancho === 0) return
@@ -308,6 +329,164 @@ function creaBarras() {
       }
     )
 }
+function creaTextos() {
+  console.log(data_apilada.value)
+  grupoTextos.value = grupoContenedor.value
+    .selectAll('g.subcategoria-textos')
+    .data(data_apilada.value)
+    .join(
+      enter => {
+        let grupo = enter.append('g').attr('class', 'subcategoria-textos')
+
+        grupo
+          .selectAll('text.anotacion')
+          .data(d => d)
+          .enter()
+          .append('text')
+          .attr('class', d => `anotacion ${d.data.key}`)
+          .style('text-anchor', 'middle')
+          .style('dominant-baseline', 'middle')
+          .transition()
+          .duration(500)
+          .attr('transform', d => {
+            let angulo = -props.estilo_anotaciones.angulo
+            let y_base =
+              props.acomodo === 'apiladas'
+                ? escalaLineal.value(d[1])
+                : escalaLineal.value(d[1] - d[0])
+            let y_desplazada = 0
+            let y_alineacion =
+              props.estilo_anotaciones.alineacion_vertical === 'arriba'
+                ? -16
+                : 16
+            if (props.estilo_anotaciones.posicion_vertical === 'arriba') {
+              y_desplazada = 0
+            } else if (props.estilo_anotaciones.posicion_vertical === 'mitad') {
+              y_desplazada =
+                0.5 * (escalaLineal.value(d[0]) - escalaLineal.value(d[1]))
+            } else if (props.estilo_anotaciones.posicion_vertical === 'abajo') {
+              y_desplazada = escalaLineal.value(d[0]) - escalaLineal.value(d[1])
+            }
+            let y = y_base + y_desplazada + y_alineacion
+            let x =
+              props.acomodo === 'apiladas'
+                ? escalaBanda.value(d.data[nombre_indice.value]) +
+                  escalaBanda.value.bandwidth() * 0.5
+                : escalaBanda.value(d.data[nombre_indice.value]) +
+                  escalaSubBanda.value(d.data.key) +
+                  0.5 * escalaSubBanda.value.bandwidth()
+            return `translate(${x},${y}) rotate(${angulo})`
+          })
+          .text(d => (props.acomodo === 'agrupadas' ? d[1] : d[1] - d[0]))
+      },
+      update => {
+        let grupo = update.call(update1 => update1)
+        grupo
+          .selectAll('text.anotacion')
+          .data(d => d)
+          .join(
+            anotaciones_enter => {
+              anotaciones_enter
+                .append('text')
+                .attr('class', d => `anotacion ${d.data.key}`)
+
+                .style('text-anchor', 'middle')
+                .style('dominant-baseline', 'middle')
+                .transition()
+                .duration(500)
+                .attr('transform', d => {
+                  let angulo = -props.estilo_anotaciones.angulo
+                  let y_base =
+                    props.acomodo === 'apiladas'
+                      ? escalaLineal.value(d[1])
+                      : escalaLineal.value(d[1] - d[0])
+                  let y_desplazada = 0
+                  let y_alineacion =
+                    props.estilo_anotaciones.alineacion_vertical === 'arriba'
+                      ? -16
+                      : 16
+                  console.log(y_alineacion)
+                  if (props.estilo_anotaciones.posicion_vertical === 'arriba') {
+                    y_desplazada = 0
+                  } else if (
+                    props.estilo_anotaciones.posicion_vertical === 'mitad'
+                  ) {
+                    y_desplazada =
+                      0.5 *
+                      (escalaLineal.value(d[0]) - escalaLineal.value(d[1]))
+                  } else if (
+                    props.estilo_anotaciones.posicion_vertical === 'abajo'
+                  ) {
+                    y_desplazada =
+                      escalaLineal.value(d[0]) - escalaLineal.value(d[1])
+                  }
+                  let y = y_base + y_desplazada + y_alineacion
+                  let x =
+                    props.acomodo === 'apiladas'
+                      ? escalaBanda.value(d.data[nombre_indice.value]) +
+                        escalaBanda.value.bandwidth() * 0.5
+                      : escalaBanda.value(d.data[nombre_indice.value]) +
+                        escalaSubBanda.value(d.data.key) +
+                        0.5 * escalaSubBanda.value.bandwidth()
+                  return `translate(${x},${y}) rotate(${angulo})`
+                })
+                .style('text-anchor', 'middle')
+                .style('dominant-baseline', 'middle')
+                .text(d => (props.acomodo === 'agrupadas' ? d[1] : d[1] - d[0]))
+            },
+            anotaciones_update => {
+              anotaciones_update
+
+                .transition()
+                .duration(500)
+                .attr('transform', d => {
+                  let angulo = -props.estilo_anotaciones.angulo
+                  let y_base =
+                    props.acomodo === 'apiladas'
+                      ? escalaLineal.value(d[1])
+                      : escalaLineal.value(d[1] - d[0])
+                  let y_desplazada = 0
+                  let y_alineacion =
+                    props.estilo_anotaciones.alineacion_vertical === 'arriba'
+                      ? -16
+                      : 16
+                  console.log(y_alineacion)
+                  if (props.estilo_anotaciones.posicion_vertical === 'arriba') {
+                    y_desplazada = 0
+                  } else if (
+                    props.estilo_anotaciones.posicion_vertical === 'mitad'
+                  ) {
+                    y_desplazada =
+                      0.5 *
+                      (escalaLineal.value(d[0]) - escalaLineal.value(d[1]))
+                  } else if (
+                    props.estilo_anotaciones.posicion_vertical === 'abajo'
+                  ) {
+                    y_desplazada =
+                      escalaLineal.value(d[0]) - escalaLineal.value(d[1])
+                  }
+                  let y = y_base + y_desplazada + y_alineacion
+                  let x =
+                    props.acomodo === 'apiladas'
+                      ? escalaBanda.value(d.data[nombre_indice.value]) +
+                        escalaBanda.value.bandwidth() * 0.5
+                      : escalaBanda.value(d.data[nombre_indice.value]) +
+                        escalaSubBanda.value(d.data.key) +
+                        0.5 * escalaSubBanda.value.bandwidth()
+                  return `translate(${x},${y}) rotate(${angulo})`
+                })
+                .style('text-anchor', 'middle')
+                .style('dominant-baseline', 'middle')
+                .text(d => (props.acomodo === 'agrupadas' ? d[1] : d[1] - d[0]))
+            },
+            anotaciones_exit => anotaciones_exit.remove()
+          )
+      }, // no update function
+      exit => {
+        exit.remove()
+      }
+    )
+}
 onUnmounted(() => {
   usarRegistroGraficas().grafica(idGrafica).quitarTabla(idTabla)
 })
@@ -321,22 +500,26 @@ onMounted(() => {
   )
   calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.grupoVis)
   creaBarras()
+  creaTextos()
   watch(
     () => usarRegistroGraficas().grafica(idGrafica)?.grupoVis,
     () => {
       calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
       if (usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho > 0) {
         creaBarras()
+        creaTextos()
       }
     }
   )
   watch(datos, () => {
     calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
     creaBarras()
+    creaTextos()
   })
   watch(variables, () => {
     calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
     creaBarras()
+    creaTextos()
   })
 
   watch(
