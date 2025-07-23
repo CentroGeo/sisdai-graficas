@@ -5,8 +5,17 @@ import { select } from 'd3-selection'
 import { stack } from 'd3-shape'
 import { transition } from 'd3-transition'
 import { idAleatorio } from '../../utils'
+import { format } from 'd3-format'
 
-import { onMounted, ref, shallowRef, toRefs, watch, onUnmounted } from 'vue'
+import {
+  onMounted,
+  ref,
+  shallowRef,
+  toRefs,
+  watch,
+  onUnmounted,
+  computed,
+} from 'vue'
 import {
   buscarIdContenedorHtmlSisdai,
   creaEjeHorizontal,
@@ -117,6 +126,20 @@ const props = defineProps({
       return validado
     },
   },
+  anotaciones: {
+    type: Boolean,
+    default: false,
+  },
+  estilo_anotaciones: {
+    type: Object,
+    default: () => ({
+      posicion_vertical: 'arriba',
+      angulo: 0,
+      alineacion_vertical: 'arriba',
+      borde: false,
+      formato: ',.2r',
+    }),
+  },
 })
 const datos_hover = ref()
 const idTabla = idAleatorio()
@@ -130,8 +153,27 @@ const escalaBanda = ref(),
   escalaSubBanda = ref()
 const grupoContenedor = ref(),
   data_apilada = ref(),
-  grupoBarras = ref()
+  grupoBarras = ref(),
+  grupoTextos = ref()
+const estiloAnotacionesFinal = computed(() => {
+  const defaults = {
+    posicion_vertical: 'arriba',
+    angulo: 0,
+    alineacion_vertical: 'arriba',
+    borde: false,
+    formato: ',.2r',
+  }
 
+  return {
+    ...defaults,
+    ...props.estilo_anotaciones,
+  }
+})
+watch(estiloAnotacionesFinal, () => {
+  if (props.anotaciones) {
+    creaTextos()
+  }
+})
 function calcularEscalas(grupoVis) {
   if (!grupoVis && grupoVis?.ancho === 0) return
 
@@ -308,6 +350,250 @@ function creaBarras() {
       }
     )
 }
+function creaTextos() {
+  grupoTextos.value = grupoContenedor.value
+    .selectAll('g.subcategoria-textos')
+    .data(data_apilada.value)
+    .join(
+      enter => {
+        let grupo = enter.append('g').attr('class', 'subcategoria-textos')
+
+        grupo
+          .selectAll('text.anotacion')
+          .data(d => d)
+          .enter()
+          .append('text')
+
+          .style('stroke', () =>
+            estiloAnotacionesFinal.value.borde ? 'var(--fondo-neutro)' : null
+          )
+          .style('paint-order', 'stroke')
+          .style(
+            'stroke-width',
+            estiloAnotacionesFinal.value.borde ? '2px' : null
+          )
+
+          .attr('class', d => `anotacion ${d.data.key}`)
+          .style('text-anchor', () => {
+            if (estiloAnotacionesFinal.value.angulo === 0) {
+              return 'middle'
+            } else {
+              if (
+                estiloAnotacionesFinal.value.alineacion_vertical === 'arriba'
+              ) {
+                return 'start'
+              } else {
+                ;('end')
+              }
+            }
+          })
+          .style('dominant-baseline', 'middle')
+          .transition()
+          .duration(500)
+          .attr('transform', d => {
+            let angulo = -estiloAnotacionesFinal.value.angulo
+            let y_base =
+              props.acomodo === 'apiladas'
+                ? escalaLineal.value(d[1])
+                : escalaLineal.value(d[1] - d[0])
+            let y_desplazada = 0
+            let y_alineacion =
+              estiloAnotacionesFinal.value.angulo === 0
+                ? estiloAnotacionesFinal.value.alineacion_vertical === 'arriba'
+                  ? -9
+                  : 11
+                : -3
+            if (estiloAnotacionesFinal.value.posicion_vertical === 'arriba') {
+              y_desplazada = 0
+            } else if (
+              estiloAnotacionesFinal.value.posicion_vertical === 'mitad'
+            ) {
+              y_desplazada =
+                0.5 * (escalaLineal.value(d[0]) - escalaLineal.value(d[1]))
+            } else if (
+              estiloAnotacionesFinal.value.posicion_vertical === 'abajo'
+            ) {
+              y_desplazada = escalaLineal.value(d[0]) - escalaLineal.value(d[1])
+            }
+            let y = y_base + y_desplazada + y_alineacion
+            let x =
+              props.acomodo === 'apiladas'
+                ? escalaBanda.value(d.data[nombre_indice.value]) +
+                  escalaBanda.value.bandwidth() * 0.5
+                : escalaBanda.value(d.data[nombre_indice.value]) +
+                  escalaSubBanda.value(d.data.key) +
+                  0.5 * escalaSubBanda.value.bandwidth()
+            return `translate(${x},${y}) rotate(${angulo})`
+          })
+          .text(d =>
+            format(estiloAnotacionesFinal.value.formato)(
+              props.acomodo === 'agrupadas' ? d[1] : d[1] - d[0]
+            )
+          )
+      },
+      update => {
+        let grupo = update.call(update1 => update1)
+        grupo
+          .selectAll('text.anotacion')
+          .data(d => d)
+          .join(
+            anotaciones_enter => {
+              anotaciones_enter
+                .append('text')
+                .attr('class', d => `anotacion ${d.data.key}`)
+
+                .style('text-anchor', () => {
+                  if (estiloAnotacionesFinal.value.angulo === 0) {
+                    return 'middle'
+                  } else {
+                    if (
+                      estiloAnotacionesFinal.value.alineacion_vertical ===
+                      'arriba'
+                    ) {
+                      return 'start'
+                    } else {
+                      ;('end')
+                    }
+                  }
+                })
+                .style('dominant-baseline', 'middle')
+                .transition()
+                .duration(500)
+                .attr('transform', d => {
+                  let angulo = -estiloAnotacionesFinal.value.angulo
+                  let y_base =
+                    props.acomodo === 'apiladas'
+                      ? escalaLineal.value(d[1])
+                      : escalaLineal.value(d[1] - d[0])
+                  let y_desplazada = 0
+                  let y_alineacion =
+                    estiloAnotacionesFinal.value.angulo === 0
+                      ? estiloAnotacionesFinal.value.alineacion_vertical ===
+                        'arriba'
+                        ? -9
+                        : 11
+                      : -3
+                  if (
+                    estiloAnotacionesFinal.value.posicion_vertical === 'arriba'
+                  ) {
+                    y_desplazada = 0
+                  } else if (
+                    estiloAnotacionesFinal.value.posicion_vertical === 'mitad'
+                  ) {
+                    y_desplazada =
+                      0.5 *
+                      (escalaLineal.value(d[0]) - escalaLineal.value(d[1]))
+                  } else if (
+                    estiloAnotacionesFinal.value.posicion_vertical === 'abajo'
+                  ) {
+                    y_desplazada =
+                      escalaLineal.value(d[0]) - escalaLineal.value(d[1])
+                  }
+                  let y = y_base + y_desplazada + y_alineacion
+                  let x =
+                    props.acomodo === 'apiladas'
+                      ? escalaBanda.value(d.data[nombre_indice.value]) +
+                        escalaBanda.value.bandwidth() * 0.5
+                      : escalaBanda.value(d.data[nombre_indice.value]) +
+                        escalaSubBanda.value(d.data.key) +
+                        0.5 * escalaSubBanda.value.bandwidth()
+                  return `translate(${x},${y}) rotate(${angulo})`
+                })
+                .style('text-anchor', () => {
+                  if (estiloAnotacionesFinal.value.angulo === 0) {
+                    return 'middle'
+                  } else {
+                    if (
+                      estiloAnotacionesFinal.value.alineacion_vertical ===
+                      'arriba'
+                    ) {
+                      return 'start'
+                    } else {
+                      ;('end')
+                    }
+                  }
+                })
+                .style('dominant-baseline', 'middle')
+                .text(d =>
+                  format(estiloAnotacionesFinal.value.formato)(
+                    props.acomodo === 'agrupadas' ? d[1] : d[1] - d[0]
+                  )
+                )
+            },
+            anotaciones_update => {
+              anotaciones_update
+
+                .transition()
+                .duration(500)
+                .attr('transform', d => {
+                  let angulo = -estiloAnotacionesFinal.value.angulo
+                  let y_base =
+                    props.acomodo === 'apiladas'
+                      ? escalaLineal.value(d[1])
+                      : escalaLineal.value(d[1] - d[0])
+                  let y_desplazada = 0
+                  let y_alineacion =
+                    estiloAnotacionesFinal.value.angulo === 0
+                      ? estiloAnotacionesFinal.value.alineacion_vertical ===
+                        'arriba'
+                        ? -9
+                        : 11
+                      : -3
+                  if (
+                    estiloAnotacionesFinal.value.posicion_vertical === 'arriba'
+                  ) {
+                    y_desplazada = 0
+                  } else if (
+                    estiloAnotacionesFinal.value.posicion_vertical === 'mitad'
+                  ) {
+                    y_desplazada =
+                      0.5 *
+                      (escalaLineal.value(d[0]) - escalaLineal.value(d[1]))
+                  } else if (
+                    estiloAnotacionesFinal.value.posicion_vertical === 'abajo'
+                  ) {
+                    y_desplazada =
+                      escalaLineal.value(d[0]) - escalaLineal.value(d[1])
+                  }
+                  let y = y_base + y_desplazada + y_alineacion
+                  let x =
+                    props.acomodo === 'apiladas'
+                      ? escalaBanda.value(d.data[nombre_indice.value]) +
+                        escalaBanda.value.bandwidth() * 0.5
+                      : escalaBanda.value(d.data[nombre_indice.value]) +
+                        escalaSubBanda.value(d.data.key) +
+                        0.5 * escalaSubBanda.value.bandwidth()
+                  return `translate(${x},${y}) rotate(${angulo})`
+                })
+                .style('text-anchor', () => {
+                  if (estiloAnotacionesFinal.value.angulo === 0) {
+                    return 'middle'
+                  } else {
+                    if (
+                      estiloAnotacionesFinal.value.alineacion_vertical ===
+                      'arriba'
+                    ) {
+                      return 'start'
+                    } else {
+                      ;('end')
+                    }
+                  }
+                })
+                .style('dominant-baseline', 'middle')
+                .text(d =>
+                  format(estiloAnotacionesFinal.value.formato)(
+                    props.acomodo === 'agrupadas' ? d[1] : d[1] - d[0]
+                  )
+                )
+            },
+            anotaciones_exit => anotaciones_exit.remove()
+          )
+      }, // no update function
+      exit => {
+        exit.remove()
+      }
+    )
+}
 onUnmounted(() => {
   usarRegistroGraficas().grafica(idGrafica).quitarTabla(idTabla)
 })
@@ -321,22 +607,37 @@ onMounted(() => {
   )
   calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.grupoVis)
   creaBarras()
+  if (props.anotaciones) {
+    creaTextos()
+  }
   watch(
     () => usarRegistroGraficas().grafica(idGrafica)?.grupoVis,
     () => {
       calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
       if (usarRegistroGraficas().grafica(idGrafica).grupoVis.ancho > 0) {
         creaBarras()
+        creaBarras()
+        if (props.anotaciones) {
+          creaTextos()
+        }
       }
     }
   )
   watch(datos, () => {
     calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
     creaBarras()
+    creaBarras()
+    if (props.anotaciones) {
+      creaTextos()
+    }
   })
   watch(variables, () => {
     calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
     creaBarras()
+    creaBarras()
+    if (props.anotaciones) {
+      creaTextos()
+    }
   })
 
   watch(
@@ -366,8 +667,23 @@ onMounted(() => {
         .style('fill-opacity', '.2')
 
       grupoContenedor.value
+        .selectAll('g.subcategoria-textos')
+        .selectAll('text.anotacion')
+
+        .style('fill-opacity', '.2')
+
+      grupoContenedor.value
         .selectAll('g.subcategoria-barras')
         .selectAll('rect.barra')
+        .filter(
+          d =>
+            d.data[nombre_indice.value] ===
+            datos_hover.value[nombre_indice.value]
+        )
+        .style('fill-opacity', '1')
+      grupoContenedor.value
+        .selectAll('g.subcategoria-textos')
+        .selectAll('text.anotacion')
         .filter(
           d =>
             d.data[nombre_indice.value] ===
@@ -384,6 +700,10 @@ onMounted(() => {
         grupoContenedor.value
           .selectAll('g.subcategoria-barras')
           .selectAll('rect.barra')
+          .style('fill-opacity', '1')
+        grupoContenedor.value
+          .selectAll('g.subcategoria-textos')
+          .selectAll('text.anotacion')
           .style('fill-opacity', '1')
       }
     }
