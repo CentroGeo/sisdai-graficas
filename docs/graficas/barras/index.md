@@ -148,6 +148,31 @@ Ejemplo de implementación:
   - Tipo: `String`
   - Valor predeterminado: `"Tabla de datos de la gráfica de dona"`
   - Requerido: No
+- `anotaciones`: propiedad que especifica si se agregan cífras en las barras.
+  - Tipo: `Boolean`
+  - Valor predeterminado: `false`
+  - Requerido: No
+- `estilo_anotaciones`: Objeto que permite configurar los estilos de las cifras que se crean en las barras. Debe incluir al menos una de las siguientes claves:
+
+  - `posicion_vertical`: `String` que admite los valores `"arriba"` para posicionar la cifra arriba de la barra, `"mitad"` para posicionarla enmedio o `"abajo"` para posicionarla en la parte inferior de la barra.
+  - `angulo`: `Number` que toma un valor entre 0 y 90, permite rotar la cifra.
+  - `alineacion_vertical`: `String` que admite los mismos valores que `posicion_vertical`. La diferencia es que éste especifica una pequeña traslación hacia `"arriba"`, a la `"mitad"` o hacia `"abajo"`.
+  - `borde`: `Boolean` que especifica si el texto debe tener un borde que contraste con el color de relleno. Puede ser útil si no se logra el un buen contraste entre los textos y los colores de las barras.
+  - `formato`: `String` que indica el formato para las cifras. Se recomienda consultar la [documentacion de los formatos que maneja D3.](https://d3js.org/d3-format)
+  - Tipo: `Boolean`
+  - Valor predeterminado:
+
+  ```js
+  {
+      posicion_vertical: 'arriba',
+      angulo: 0,
+      alineacion_vertical: 'arriba',
+      borde: false,
+      formato: ',.2r',
+    }
+  ```
+
+  - Requerido: No
 
 ### Métodos
 

@@ -4,7 +4,7 @@ const lasBarras = ref()
 const variablesCheckeadas = ref()
 
 const variables = ref([
-  { id: 'predeterminado_1', nombre: 'Predeterminado 1', color: '#000565' },
+  { id: 'predeterminado_1', nombre: 'Predeterminado 1', color: '#96cf67' },
   { id: 'predeterminado_2', nombre: 'Predeterminado 2', color: '#4974F3' },
 ])
 </script>
@@ -12,7 +12,7 @@ const variables = ref([
   <SisdaiGraficas
     :titulo_eje_y="'Título de eje Y'"
     :titulo_eje_x="'Título de eje X'"
-    :margenes="{ arriba: 10, abajo: 20, derecha: 30, izquierda: 40 }"
+    :margenes="{ arriba: 60, abajo: 20, derecha: 30, izquierda: 40 }"
   >
     <template #panel-encabezado-vis>
       <div>
@@ -31,7 +31,7 @@ const variables = ref([
           <span
             class="globo-informacion-punto-color"
             :style="{
-              background: '#000565',
+              background: '#96cf67',
             }"
           ></span>
           <b> Predeterminado 1</b>:
