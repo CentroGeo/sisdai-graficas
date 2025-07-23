@@ -12,11 +12,28 @@ Al principio de cada entrada se lista la versión de la biblioteca de sisdai-css
 sisdai-componentes con la que la versión indicada de sisdai-graficas es
 compatible y tiene instalada.
 
+## [6.7.0] - 2025-07-23
+
+### Agregado (Added)
+
+- Agregamos una nueva funcionalidad a la gráfica de barras para que acepte anotaciones, es decir, las cífras sobre las barras.
+
+## [6.6.0] - 2025-05-28
+
+### Cambiado (Changed)
+
+- Se actualizaron las versiones y archivos de configuración de las bibliotecas requeridas tanto para el proyecto como para la documentación y pruebas.
+
+### Cambiado (Changed)
+
+- Se actualizaron las versiones y archivos de configuración de las bibliotecas requeridas tanto para el proyecto como para la documentación y pruebas.
+-
+
 ## [6.5.0] - 2025-03-27
 
 ### Cambiado (Changed)
 
-- Se actualizaron las versiones y archivos de configuración de las bibliotecas requeridas tanto para el proyecto como para la documentación y pruebas. 
+- Se actualizaron las versiones y archivos de configuración de las bibliotecas requeridas tanto para el proyecto como para la documentación y pruebas.
 
 ## [6.4.6] - 2024-12-20
 
@@ -223,7 +240,8 @@ sisdai-css v0.46.8<br>sisdai-componentes v2.4.2
 ## [1.0.0] - 2022-06-28 - Release
 
 Publicación de la primera vesión de la biblioteca de gráficas
-
+[6.7.0]: https://github.com/CentroGeo/sisdai-graficas/compare/v6.7.0...v6.6.0
+[6.6.0]: https://github.com/CentroGeo/sisdai-graficas/compare/v6.6.0...v6.5.0
 [6.5.0]: https://github.com/CentroGeo/sisdai-graficas/compare/v6.5.0...v6.4.6
 [6.4.6]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.4.6...v6.4.5
 [6.4.5]: https://codigo.conahcyt.mx/sisdai/sisdai-graficas/compare/v6.4.5...v6.4.4
