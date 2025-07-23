@@ -398,9 +398,11 @@ function creaTextos() {
                 : escalaLineal.value(d[1] - d[0])
             let y_desplazada = 0
             let y_alineacion =
-              estiloAnotacionesFinal.value.alineacion_vertical === 'arriba'
-                ? -9
-                : 11
+              estiloAnotacionesFinal.value.angulo === 0
+                ? estiloAnotacionesFinal.value.alineacion_vertical === 'arriba'
+                  ? -9
+                  : 11
+                : -3
             if (estiloAnotacionesFinal.value.posicion_vertical === 'arriba') {
               y_desplazada = 0
             } else if (
@@ -465,10 +467,12 @@ function creaTextos() {
                       : escalaLineal.value(d[1] - d[0])
                   let y_desplazada = 0
                   let y_alineacion =
-                    estiloAnotacionesFinal.value.alineacion_vertical ===
-                    'arriba'
-                      ? -9
-                      : 11
+                    estiloAnotacionesFinal.value.angulo === 0
+                      ? estiloAnotacionesFinal.value.alineacion_vertical ===
+                        'arriba'
+                        ? -9
+                        : 11
+                      : -3
                   if (
                     estiloAnotacionesFinal.value.posicion_vertical === 'arriba'
                   ) {
@@ -529,10 +533,12 @@ function creaTextos() {
                       : escalaLineal.value(d[1] - d[0])
                   let y_desplazada = 0
                   let y_alineacion =
-                    estiloAnotacionesFinal.value.alineacion_vertical ===
-                    'arriba'
-                      ? -9
-                      : 11
+                    estiloAnotacionesFinal.value.angulo === 0
+                      ? estiloAnotacionesFinal.value.alineacion_vertical ===
+                        'arriba'
+                        ? -9
+                        : 11
+                      : -3
                   if (
                     estiloAnotacionesFinal.value.posicion_vertical === 'arriba'
                   ) {
