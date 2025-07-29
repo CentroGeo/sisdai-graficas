@@ -1,6 +1,6 @@
 {
   "name": "@centrogeomx/sisdai-graficas",
-  "version": "6.6.0",
+  "version": "6.7.0",
   "publishConfig": {
     "access": "public"
   },
@@ -49,7 +49,7 @@
   },
   "peerDependencies": {
     "@centrogeomx/sisdai-componentes": "^4.12.5",
-    "@centrogeomx/sisdai-css": "^1.7.4",
+    "@centrogeomx/sisdai-css": "github:CentroGeo/sisdai-css#v1.9.1",
     "pinia": "^3.0.1",
     "vue": "^3.5.13"
   },

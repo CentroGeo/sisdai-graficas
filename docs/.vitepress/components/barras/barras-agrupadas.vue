@@ -1,8 +1,10 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 const lasBarras = ref()
 const variablesCheckeadas = ref()
-
+const estiloAnotaciones = reactive({
+  angulo: 90,
+})
 const variables = ref([
   { id: 'hasta_45', nombre: 'Hata 45 años', color: '#1BB584' },
   { id: 'de_46_60', nombre: 'De 46 a 60 años', color: '#409FFF' },
@@ -13,7 +15,7 @@ const variables = ref([
   <SisdaiGraficas
     :titulo_eje_y="'Título de eje Y'"
     :titulo_eje_x="'Título de eje X'"
-    :margenes="{ arriba: 10, abajo: 50, derecha: 30, izquierda: 45 }"
+    :margenes="{ arriba: 60, abajo: 50, derecha: 30, izquierda: 45 }"
   >
     <template #panel-encabezado-vis>
       <div>
@@ -23,6 +25,17 @@ const variables = ref([
           Descripción o texto instruccional. Pasa el cursor por encima de la
           gráfica para más información.
         </p>
+        <label for="rotacion"
+          >rotacion de etiquetas: {{ estiloAnotaciones.angulo }}</label
+        >
+
+        <input
+          id="rotacion"
+          type="number"
+          v-model="estiloAnotaciones.angulo"
+          min="0"
+          max="90"
+        />
       </div>
     </template>
     <template #globo-informacion>
@@ -98,6 +111,8 @@ const variables = ref([
       :angulo_etiquetas_eje_x="-30"
       :nombre_indice="'categoria'"
       :tabla_caption="'Datos de ejemplo de personas pertenecientes al SNI por nivel y grupo de edad'"
+      :anotaciones="true"
+      :estilo_anotaciones="estiloAnotaciones"
     />
     <template #panel-pie-vis>
       <div>
