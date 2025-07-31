@@ -390,6 +390,7 @@ function creaTextos() {
           .style('dominant-baseline', 'middle')
           .transition()
           .duration(500)
+          .style('fill', 'var(--texto-primario)')
           .attr('transform', d => {
             let angulo = -estiloAnotacionesFinal.value.angulo
             let y_base =
@@ -425,11 +426,7 @@ function creaTextos() {
                   0.5 * escalaSubBanda.value.bandwidth()
             return `translate(${x},${y}) rotate(${angulo})`
           })
-          .text(d =>
-            format(estiloAnotacionesFinal.value.formato)(
-              props.acomodo === 'agrupadas' ? d[1] : d[1] - d[0]
-            )
-          )
+          .text(d => format(estiloAnotacionesFinal.value.formato)(d[1] - d[0]))
       },
       update => {
         let grupo = update.call(update1 => update1)
@@ -459,6 +456,7 @@ function creaTextos() {
                 .style('dominant-baseline', 'middle')
                 .transition()
                 .duration(500)
+                .style('fill', 'var(--texto-primario)')
                 .attr('transform', d => {
                   let angulo = -estiloAnotacionesFinal.value.angulo
                   let y_base =
@@ -515,9 +513,7 @@ function creaTextos() {
                 })
                 .style('dominant-baseline', 'middle')
                 .text(d =>
-                  format(estiloAnotacionesFinal.value.formato)(
-                    props.acomodo === 'agrupadas' ? d[1] : d[1] - d[0]
-                  )
+                  format(estiloAnotacionesFinal.value.formato)(d[1] - d[0])
                 )
             },
             anotaciones_update => {
@@ -579,11 +575,10 @@ function creaTextos() {
                     }
                   }
                 })
+                .style('fill', 'var(--texto-primario)')
                 .style('dominant-baseline', 'middle')
                 .text(d =>
-                  format(estiloAnotacionesFinal.value.formato)(
-                    props.acomodo === 'agrupadas' ? d[1] : d[1] - d[0]
-                  )
+                  format(estiloAnotacionesFinal.value.formato)(d[1] - d[0])
                 )
             },
             anotaciones_exit => anotaciones_exit.remove()
