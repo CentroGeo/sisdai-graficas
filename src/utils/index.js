@@ -57,12 +57,30 @@ export function buscarIdContenedorHtmlSisdai(tipo, { parentElement }) {
  * @param {String} alineacion corresponde a la propiedad alineacion_eje_y con valor 'izquierda' o 'derecha'.
  * @param {Number} ancho es el ancho de la gráfica. Se utiliza para dar longitud correcta a las lineas punteadas.
  */
-export function creaEjeVertical(id, escala, angulo, alineacion, ancho) {
+export function creaEjeVertical(
+  id,
+  escala,
+  angulo,
+  alineacion,
+  ancho,
+  numero_marcas
+) {
   const eje_y = select(`div#${id} svg g.eje-y-${alineacion}`)
-  eje_y
-    .transition()
-    .duration(500)
-    .call(alineacion === 'izquierda' ? axisLeft(escala) : axisRight(escala))
+  if (numero_marcas) {
+    eje_y
+      .transition()
+      .duration(500)
+      .call(
+        alineacion === 'izquierda'
+          ? axisLeft(escala).ticks(numero_marcas)
+          : axisRight(escala).ticks(numero_marcas)
+      )
+  } else {
+    eje_y
+      .transition()
+      .duration(500)
+      .call(alineacion === 'izquierda' ? axisLeft(escala) : axisRight(escala))
+  }
   eje_y.selectAll('path').remove()
   eje_y
     .selectAll('text')
@@ -100,20 +118,43 @@ export function creaEjeVertical(id, escala, angulo, alineacion, ancho) {
  * @param {Function} escala funcion de d3 (scaleBand, scaleLinear, etc.) que se emplea para graficar y se asocia al eje vertical.
  * @param {Number} angulo es el ángulo que se rotan las etiquetas del eje.
  */
-export function creaEjeHorizontal(id, escala, angulo) {
+export function creaEjeHorizontal(
+  id,
+  escala,
+  angulo,
+  numero_marcas,
+  formato_temporal = null
+) {
   const eje_x = select(`div#${id} svg g.eje-x-abajo`)
-  eje_x
-    .transition()
-    .duration(500)
-    .call(
-      axisBottom(escala).tickFormat(d => {
-        if (d instanceof Date) {
-          return multiFormat(d)
-        } else {
-          return d
-        }
-      })
-    )
+  if (numero_marcas) {
+    eje_x
+      .transition()
+      .duration(500)
+      .call(
+        axisBottom(escala)
+          .ticks(numero_marcas)
+          .tickFormat(d => {
+            if (d instanceof Date) {
+              return multiFormat(d, formato_temporal)
+            } else {
+              return d
+            }
+          })
+      )
+  } else {
+    eje_x
+      .transition()
+      .duration(500)
+      .call(
+        axisBottom(escala).tickFormat(d => {
+          if (d instanceof Date) {
+            return multiFormat(d, formato_temporal)
+          } else {
+            return d
+          }
+        })
+      )
+  }
 
   eje_x.selectAll('path').remove()
   eje_x.selectAll('line').remove()
@@ -134,13 +175,13 @@ export function creaEjeHorizontal(id, escala, angulo) {
  * formatea eje temporal al espaniol
  * @param {Date} date el id asociado al componente SisdaiGraficas.
  */
-export function multiFormat(date) {
+export function multiFormat(date, formato) {
   /**
    * Método para traducir el formato de fecha
    */
   let locale = timeFormatLocale({
-    decimal: ',',
-    thousands: '.',
+    decimal: '.',
+    thousands: ',',
     grouping: [3],
     currency: ['€', ''],
     dateTime: '%A, %e %B %Y г. %X',
@@ -195,23 +236,29 @@ export function multiFormat(date) {
   //let formatMonth = locale.format('%b')
   let formatMonthYear = locale.format('%m/%Y')
   //let formatYear = locale.format('%Y')
-  return (
-    timeSecond(date) < date
-      ? formatMillisecond
-      : timeMinute(date) < date
-        ? formatSecond
-        : timeHour(date) < date
-          ? formatMinute
-          : timeDay(date) < date
-            ? formatHour
-            : timeMonth(date) < date
-              ? timeWeek(date) < date
-                ? formatDay
-                : formatWeek
-              : timeYear(date) < date
-                ? formatMonthYear
-                : formatMonthYear
-  )(date)
+  if (formato) {
+    const fmt = locale.format(formato)
+
+    return fmt(date)
+  } else {
+    return (
+      timeSecond(date) < date
+        ? formatMillisecond
+        : timeMinute(date) < date
+          ? formatSecond
+          : timeHour(date) < date
+            ? formatMinute
+            : timeDay(date) < date
+              ? formatHour
+              : timeMonth(date) < date
+                ? timeWeek(date) < date
+                  ? formatDay
+                  : formatWeek
+                : timeYear(date) < date
+                  ? formatMonthYear
+                  : formatMonthYear
+    )(date)
+  }
 }
 
 export function reordenamientoApilado(datos_apilados) {

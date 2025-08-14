@@ -12,6 +12,12 @@ Al principio de cada entrada se lista la versión de la biblioteca de sisdai-css
 sisdai-componentes con la que la versión indicada de sisdai-graficas es
 compatible y tiene instalada.
 
+## [6.8.0] - 2025-08-14
+
+### Agregado (Added)
+
+- Agregamos nuevas propiedades a las gráficas como `numero_etiquetas_x`, `numero_etiquetas_y`, y `formato_eje_temporal`,
+
 ## [6.7.1] - 2025-07-31
 
 ### Arreglado (Fixed)
@@ -246,7 +252,8 @@ sisdai-css v0.46.8<br>sisdai-componentes v2.4.2
 ## [1.0.0] - 2022-06-28 - Release
 
 Publicación de la primera vesión de la biblioteca de gráficas
-[6.7.1]: https://github.com/CentroGeo/sisdai-graficas/compare/v6.7.1...v7.0.0
+[6.8.0]: https://github.com/CentroGeo/sisdai-graficas/compare/v6.8.0...6.7.1
+[6.7.1]: https://github.com/CentroGeo/sisdai-graficas/compare/v6.7.1...v6.7.0
 [6.7.0]: https://github.com/CentroGeo/sisdai-graficas/compare/v6.7.0...v6.6.0
 [6.6.0]: https://github.com/CentroGeo/sisdai-graficas/compare/v6.6.0...v6.5.0
 [6.5.0]: https://github.com/CentroGeo/sisdai-graficas/compare/v6.5.0...v6.4.6

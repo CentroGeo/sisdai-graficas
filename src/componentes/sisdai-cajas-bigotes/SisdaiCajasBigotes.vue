@@ -78,6 +78,9 @@ const props = defineProps({
       return validado
     },
   },
+  numero_marcas_y: {
+    type: Number,
+  },
 })
 const datos_hover = ref()
 
@@ -106,14 +109,20 @@ function calcularEscalas(grupoVis) {
     .domain(extent(datos.value.map(d => d[variables.value.id])))
     .range([grupoVis.alto, 0])
 
-  creaEjeHorizontal(idGrafica, escalaBanda.value, props.angulo_etiquetas_eje_x)
+  creaEjeHorizontal(
+    idGrafica,
+    escalaBanda.value,
+    props.angulo_etiquetas_eje_x,
+    null
+  )
 
   creaEjeVertical(
     idGrafica,
     escalaLineal.value,
     props.angulo_etiquetas_eje_y,
     props.alineacion_eje_y,
-    grupoVis.ancho
+    grupoVis.ancho,
+    props.numero_marcas_y
   )
 }
 function creaCajasBigotes() {
@@ -553,6 +562,10 @@ onMounted(() => {
   watch(
     () => props.angulo_etiquetas_eje_x,
     () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+  )
+  watch(
+    () => props.numero_marcas_y,
+    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.grupoVis)
   )
 })
 onUnmounted(() => {
