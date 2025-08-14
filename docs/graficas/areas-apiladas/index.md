@@ -136,6 +136,18 @@ Ejemplo de implementación:
   - Tipo: `String`
   - Valor predeterminado: `"Tabla de datos de la gráfica de áreas apiladas"`
   - Requerido: No
+- `numero_marcas_x`: Valor númerico entero que especifica el número aproximado de marcas para el eje creado con d3 mediante el [método](https://d3js.org/d3-axis) `.ticks()` para el eje horizontal.
+  - Tipo: `Number`
+  - Valor predeterminado: -
+  - Requerido: No
+- `numero_marcas_y`: Valor númerico entero que especifica el número aproximado de marcas para el eje creado con d3 mediante el [método](https://d3js.org/d3-axis) `.ticks()` para el eje vertical.
+  - Tipo: `Number`
+  - Valor predeterminado: -
+  - Requerido: No
+- `formato_eje_temporal`: Especifica el formato temporal con el que se desear mostrar las marcas temporales en el eje vertical. En esta [documentación](https://d3-wiki.readthedocs.io/zh-cn/master/Time-Formatting/) se explica cómo especificar formatos para D3.
+  - Tipo: `String`
+  - Valor predeterminado: -
+  - Requerido: No
 
 ### Métodos
 

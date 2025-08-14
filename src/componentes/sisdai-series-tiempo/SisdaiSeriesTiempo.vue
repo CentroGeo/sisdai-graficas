@@ -85,6 +85,15 @@ const props = defineProps({
     default: '%d-%m-%Y',
     type: String,
   },
+  numero_marcas_x: {
+    type: Number,
+  },
+  numero_marcas_y: {
+    type: Number,
+  },
+  formato_eje_temporal: {
+    type: String,
+  },
 })
 const datos_hover = ref({})
 
@@ -117,7 +126,9 @@ function calcularEscalas(grupoVis) {
   creaEjeHorizontal(
     idGrafica,
     escalaTemporal.value,
-    props.angulo_etiquetas_eje_x
+    props.angulo_etiquetas_eje_x,
+    props.numero_marcas_x,
+    props.formato_eje_temporal
   )
 
   creaEjeVertical(
@@ -125,7 +136,8 @@ function calcularEscalas(grupoVis) {
     escalaLineal.value,
     props.angulo_etiquetas_eje_y,
     props.alineacion_eje_y,
-    grupoVis.ancho
+    grupoVis.ancho,
+    props.numero_marcas_y
   )
 }
 function creaSeries() {
@@ -330,6 +342,14 @@ onMounted(() => {
   watch(
     () => props.angulo_etiquetas_eje_x,
     () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+  )
+  watch(
+    () => props.numero_marcas_y,
+    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.grupoVis)
+  )
+  watch(
+    () => props.numero_marcas_x,
+    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.grupoVis)
   )
 })
 onUnmounted(() => {

@@ -83,6 +83,9 @@ const props = defineProps({
     type: Number,
     default: 10,
   },
+  numero_marcas_y: {
+    type: Number,
+  },
 })
 const datos_hover = ref()
 
@@ -114,14 +117,20 @@ function calcularEscalas(grupoVis) {
     .domain(extent(datos.value.map(d => d[variables.value.id])))
     .range([grupoVis.alto, 0])
 
-  creaEjeHorizontal(idGrafica, escalaBanda.value, props.angulo_etiquetas_eje_x)
+  creaEjeHorizontal(
+    idGrafica,
+    escalaBanda.value,
+    props.angulo_etiquetas_eje_x,
+    null
+  )
 
   creaEjeVertical(
     idGrafica,
     escalaLineal.value,
     props.angulo_etiquetas_eje_y,
     props.alineacion_eje_y,
-    grupoVis.ancho
+    grupoVis.ancho,
+    props.numero_marcas_y
   )
   histograma.value = bin()
     .domain(escalaLineal.value.domain())
@@ -255,6 +264,13 @@ onMounted(() => {
     calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
     creaViolines()
   })
+  watch(
+    () => props.numero_marcas_y,
+    () => {
+      calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+      creaViolines()
+    }
+  )
   watch(
     () => usarRegistroGraficas().grafica(idGrafica).posicion_cursor,
     nv => {

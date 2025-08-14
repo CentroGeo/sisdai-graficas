@@ -140,6 +140,9 @@ const props = defineProps({
       formato: ',.2r',
     }),
   },
+  numero_marcas_y: {
+    type: Number,
+  },
 })
 const datos_hover = ref()
 const idTabla = idAleatorio()
@@ -195,14 +198,20 @@ function calcularEscalas(grupoVis) {
     .range([0, escalaBanda.value.bandwidth()])
     .padding(props.separacion_agrupadas)
 
-  creaEjeHorizontal(idGrafica, escalaBanda.value, props.angulo_etiquetas_eje_x)
+  creaEjeHorizontal(
+    idGrafica,
+    escalaBanda.value,
+    props.angulo_etiquetas_eje_x,
+    null
+  )
 
   creaEjeVertical(
     idGrafica,
     escalaLineal.value,
     props.angulo_etiquetas_eje_y,
     props.alineacion_eje_y,
-    grupoVis?.ancho
+    grupoVis?.ancho,
+    props.numero_marcas_y
   )
 }
 function creaBarras() {
@@ -710,6 +719,10 @@ onMounted(() => {
   watch(
     () => props.angulo_etiquetas_eje_x,
     () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica).grupoVis)
+  )
+  watch(
+    () => props.numero_marcas_y,
+    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.grupoVis)
   )
 })
 defineExpose({

@@ -136,8 +136,14 @@ Ejemplo de implementación:
   - Valor predeterminado: `0`
   - Requerido: No
 - `tabla_caption`: es un texto que se inserta en el elemento `<caption>` de la tabla asociada a la gráfica. **Aunque esta propiedad no es obligatora, por accesibilidad y buenas prácticas de desarrollo es muy importante incluir un texto que describa correctamente la información de la tabla**.
+
   - Tipo: `String`
   - Valor predeterminado: `"Tabla de datos de la gráfica de violines"`
+  - Requerido: No
+
+- `numero_marcas_y`: Valor númerico entero que especifica el número aproximado de marcas para el eje creado con d3 mediante el [método](https://d3js.org/d3-axis) `.ticks()` para el eje vertical.
+  - Tipo: `Number`
+  - Valor predeterminado: -
   - Requerido: No
 
 ### Métodos

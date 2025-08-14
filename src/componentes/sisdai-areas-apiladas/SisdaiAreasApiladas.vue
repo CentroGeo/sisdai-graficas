@@ -84,6 +84,12 @@ const props = defineProps({
       return validado
     },
   },
+  numero_marcas_y: {
+    type: Number,
+  },
+  numero_marcas_x: {
+    type: Number,
+  },
   formato_temporal: {
     default: '%d-%m-%Y',
     type: String,
@@ -91,6 +97,9 @@ const props = defineProps({
   reordenamientoTemporal: {
     // Propiedad de prueba
     default: false,
+  },
+  formato_eje_temporal: {
+    type: String,
   },
 })
 
@@ -123,7 +132,9 @@ function calcularEscalas(grupoVis) {
   creaEjeHorizontal(
     idGrafica,
     escalaTemporal.value,
-    props.angulo_etiquetas_eje_x
+    props.angulo_etiquetas_eje_x,
+    props.numero_marcas_x,
+    props.formato_eje_temporal
   )
 
   creaEjeVertical(
@@ -131,7 +142,8 @@ function calcularEscalas(grupoVis) {
     escalaLineal.value,
     props.angulo_etiquetas_eje_y,
     props.alineacion_eje_y,
-    grupoVis.ancho
+    grupoVis.ancho,
+    props.numero_marcas_y
   )
 }
 function creaAreas() {
@@ -250,6 +262,14 @@ onMounted(() => {
   )
   watch(
     () => props.angulo_etiquetas_eje_x,
+    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.grupoVis)
+  )
+  watch(
+    () => props.numero_marcas_y,
+    () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.grupoVis)
+  )
+  watch(
+    () => props.numero_marcas_x,
     () => calcularEscalas(usarRegistroGraficas().grafica(idGrafica)?.grupoVis)
   )
 })

@@ -59,6 +59,9 @@ watch(
       :nombre_indice="'fecha_toma'"
       :formato_temporal="'%Y-%m'"
       :tabla_caption="'Datos de ejemplo de muestras de farmacoresistencia a distinto retrovirales'"
+      :numero_marcas_x="10"
+      :numero_marcas_y="5"
+      :formato_eje_temporal="'%b-%Y'"
     />
   </SisdaiGraficas>
 </template>
