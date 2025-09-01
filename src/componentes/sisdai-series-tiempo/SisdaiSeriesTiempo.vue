@@ -115,12 +115,22 @@ function calcularEscalas(grupoVis) {
   escalaTemporal.value = scaleTime()
     .domain(extent(datos.value?.map(d => d.la_fecha)))
     .range([0, grupoVis.ancho])
+  let minmax = extent(
+    datos.value?.map(d => extent(variables.value.map(dd => d[dd.id]))).flat()
+  )
+  let dominioLineal
+  if (minmax[0] === 0 && minmax[1] === 0) {
+    dominioLineal = [0, 1]
+  } else if (minmax[0] >= 0 && minmax[1] > 0) {
+    dominioLineal = [0, minmax[1]]
+  } else if (minmax[0] < 0) {
+    dominioLineal = minmax
+  } else {
+    dominioLineal = [0, minmax[1]]
+  }
+
   escalaLineal.value = scaleLinear()
-    .domain([
-      //min(datos.value?.map((d) => min(variables.value.map((dd) => d[dd.id])))),
-      0,
-      max(datos.value?.map(d => max(variables.value.map(dd => d[dd.id])))),
-    ])
+    .domain(dominioLineal)
     .range([grupoVis.alto, 0])
 
   creaEjeHorizontal(
