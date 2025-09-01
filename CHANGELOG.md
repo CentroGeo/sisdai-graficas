@@ -16,7 +16,7 @@ compatible y tiene instalada.
 
 ### Arreglado (Fixed)
 
-- Agregamos una condición en series de tiempo para que se grafique en un rango de 0-1 cuando todos los datos tienen el valor 0
+- Agregamos una condición en series de tiempo y en barras para que se grafique en un rango de 0-1 cuando todos los datos tienen el valor 0
 
 ## [6.8.0] - 2025-08-14
 
