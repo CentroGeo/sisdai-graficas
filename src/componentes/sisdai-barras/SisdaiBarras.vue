@@ -184,14 +184,14 @@ function calcularEscalas(grupoVis) {
     .domain(datos.value?.map(d => d[nombre_indice.value]))
     .range([0, grupoVis?.ancho])
     .padding(props.separacion)
-
+  let dominio = [
+    0,
+    props.acomodo === 'apiladas'
+      ? max(datos.value?.map(d => sum(variables.value.map(dd => d[dd.id]))))
+      : max(datos.value?.map(d => max(variables.value.map(dd => d[dd.id])))),
+  ]
   escalaLineal.value = scaleLinear()
-    .domain([
-      0,
-      props.acomodo === 'apiladas'
-        ? max(datos.value?.map(d => sum(variables.value.map(dd => d[dd.id]))))
-        : max(datos.value?.map(d => max(variables.value.map(dd => d[dd.id])))),
-    ])
+    .domain(dominio[0] === 0 && dominio[1] === 0 ? [0, 1] : dominio)
     .range([grupoVis?.alto, 0])
   escalaSubBanda.value = scaleBand()
     .domain(variables.value.map(d => d.id))

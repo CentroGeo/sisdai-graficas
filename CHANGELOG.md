@@ -12,6 +12,12 @@ Al principio de cada entrada se lista la versión de la biblioteca de sisdai-css
 sisdai-componentes con la que la versión indicada de sisdai-graficas es
 compatible y tiene instalada.
 
+## [6.8.1] - 2025-09-01
+
+### Arreglado (Fixed)
+
+- Agregamos una condición en series de tiempo y en barras para que se grafique en un rango de 0-1 cuando todos los datos tienen el valor 0
+
 ## [6.8.0] - 2025-08-14
 
 ### Agregado (Added)
@@ -252,6 +258,7 @@ sisdai-css v0.46.8<br>sisdai-componentes v2.4.2
 ## [1.0.0] - 2022-06-28 - Release
 
 Publicación de la primera vesión de la biblioteca de gráficas
+[6.8.1]: https://github.com/CentroGeo/sisdai-graficas/compare/v6.8.1...6.8.0
 [6.8.0]: https://github.com/CentroGeo/sisdai-graficas/compare/v6.8.0...6.7.1
 [6.7.1]: https://github.com/CentroGeo/sisdai-graficas/compare/v6.7.1...v6.7.0
 [6.7.0]: https://github.com/CentroGeo/sisdai-graficas/compare/v6.7.0...v6.6.0
