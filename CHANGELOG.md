@@ -12,6 +12,17 @@ Al principio de cada entrada se lista la versión de la biblioteca de sisdai-css
 sisdai-componentes con la que la versión indicada de sisdai-graficas es
 compatible y tiene instalada.
 
+## [6.8.2] - 2025-10-06
+
+### Cambiado (Changed)
+
+- Se corrige versión de sisdai-componentes a v4.14.1
+- Se corrige versión de sisdai-css a v1.10.2
+
+### Arreglado (Fixed)
+
+- Lo anterior arregla el conflicto en el árbol de dependencias de npm
+
 ## [6.8.1] - 2025-09-01
 
 ### Arreglado (Fixed)
